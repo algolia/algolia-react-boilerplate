@@ -1,4 +1,5 @@
-# React Boilerplate for Demo Engineer 
+# React Boilerplate for Demo Engineer
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">✍️ V2</h3>
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
@@ -9,13 +10,11 @@ To run this project locally, install the dependencies and run the local server:
 
 [GitFGlow](https://danielkummer.github.io/git-flow-cheatsheet/)
 
-
 On Mac 👇
+
 ```sh
 brew install git-flow-avh
 git flow init
 ```
 
 _This project was generated with [create-instantsearch-app](https://github.com/algolia/create-instantsearch-app) by [Algolia](https://algolia.com)._
-
-
