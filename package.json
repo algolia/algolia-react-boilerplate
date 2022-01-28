@@ -9,11 +9,6 @@
     "lint": "prettier --check .",
     "format": "prettier --write ."
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "echo \"[Husky] pre-commit\",
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/algolia/demo-engineer-react-boilerplateV2.git"
