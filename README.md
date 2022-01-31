@@ -17,4 +17,8 @@ brew install git-flow-avh
 git flow init
 ```
 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">💻 State Manager</h3>
+
+[Recoil](https://recoiljs.org/)
+
 _This project was generated with [create-instantsearch-app](https://github.com/algolia/create-instantsearch-app) by [Algolia](https://algolia.com)._
