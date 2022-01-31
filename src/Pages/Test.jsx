@@ -1,5 +1,8 @@
 import React from "react";
 
+// React router
+import { Link } from "react-router-dom";
+
 import { atom, useRecoilState, selector, useRecoilValue } from "recoil";
 
 const Test = () => {
@@ -7,6 +10,8 @@ const Test = () => {
     <div>
       <TextInput />
       <CharacterCount />
+      <br />
+      <Link to="/page2">Page2</Link>
     </div>
   );
 };

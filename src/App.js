@@ -1,5 +1,11 @@
 import React from "react";
-import Test from "./components/Test";
+
+// Import Pages
+import Test from "./Pages/Test";
+import Page2 from "./Pages/Page2";
+
+// React router
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // RecoilState Management
 // https://recoiljs.org/docs/introduction/getting-started
@@ -13,7 +19,12 @@ import "./scss/index.scss";
 const App = () => {
   return (
     <RecoilRoot>
-      <Test />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Test />}></Route>
+          <Route path="/page2" element={<Page2 />}></Route>
+        </Routes>
+      </Router>
     </RecoilRoot>
   );
 };
