@@ -5,7 +5,12 @@ import Test from "./Pages/Test";
 import Page2 from "./Pages/Page2";
 
 // React router
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  browserHistory,
+} from "react-router-dom";
 
 // RecoilState Management
 // https://recoiljs.org/docs/introduction/getting-started
@@ -19,7 +24,7 @@ import "./scss/index.scss";
 const App = () => {
   return (
     <RecoilRoot>
-      <Router>
+      <Router forceRefresh={true}>
         <Routes>
           <Route path="/" element={<Test />}></Route>
           <Route path="/page2" element={<Page2 />}></Route>
