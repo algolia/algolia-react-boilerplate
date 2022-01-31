@@ -8,7 +8,7 @@
     "build": "webpack",
     "lint": "prettier --check .",
     "format": "prettier --write .",
-    "test": "npm run format && git add -A ."
+    "test": "npm run lint && npm run format && git add -A ."
   },
   "repository": {
     "type": "git",
