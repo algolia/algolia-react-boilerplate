@@ -1,12 +1,6 @@
 import React from "react";
 
-import {
-  atom,
-  useRecoilState,
-  selector,
-  useRecoilValue,
-  RecoilRoot,
-} from "recoil";
+import { atom, useRecoilState, selector, useRecoilValue } from "recoil";
 
 const Test = () => {
   return (
