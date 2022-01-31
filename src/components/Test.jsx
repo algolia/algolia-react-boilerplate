@@ -38,10 +38,10 @@ function TextInput() {
   };
 
   return (
-    <div>
+    <div className="test-class">
       <input type="text" value={text} onChange={onChange} />
       <br />
-      Echo: {text}
+      <p className="test-p"> Echo: {text}</p>
     </div>
   );
 }

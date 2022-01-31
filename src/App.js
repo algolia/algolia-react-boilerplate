@@ -5,6 +5,9 @@ import Test from "./components/Test";
 // https://recoiljs.org/docs/introduction/getting-started
 import { RecoilRoot } from "recoil";
 
+// SCSS import
+import "./scss/index.scss";
+
 // Import Components
 
 const App = () => {
