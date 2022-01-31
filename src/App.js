@@ -24,7 +24,7 @@ import "./scss/index.scss";
 const App = () => {
   return (
     <RecoilRoot>
-      <Router forceRefresh={true}>
+      <Router>
         <Routes>
           <Route path="/" element={<Test />}></Route>
           <Route path="/page2" element={<Page2 />}></Route>
