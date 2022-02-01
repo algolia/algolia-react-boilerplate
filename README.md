@@ -36,3 +36,13 @@ with
 [BEM Naming](https://css-tricks.com/bem-101/)
 
 _This project was generated with [create-instantsearch-app](https://github.com/algolia/create-instantsearch-app) by [Algolia](https://algolia.com)._
+
+
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Config</h2>
+
+There are two places where application configuration is defined:
+
+- utils/env.js contains the env variables like the algolia app ID, index names etc.
+
+- config/config.js contains layout variables like the refinements, sorts etc.
+    - the config is exported via an object which is controlled by a state atom (see state section for more details)
