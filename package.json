@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/algolia/demo-engineer-react-boilerplateV2#readme",
   "dependencies": {
+    "@algolia/react-instantsearch-widget-color-refinement-list": "^1.4.5",
     "@vitejs/plugin-react": "^1.1.4",
     "css-loader": "^6.5.1",
     "react": "^17.0.2",
