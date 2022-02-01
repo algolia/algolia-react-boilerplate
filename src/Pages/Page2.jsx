@@ -4,8 +4,8 @@ import React from "react";
 import { atom, useRecoilState, selector, useRecoilValue } from "recoil";
 
 const Page2 = () => {
-  const [optionnal, setOptionnal] = useRecoilState(optionnalTest);
-  const thirdLevelValue = optionnal?.firstLevel?.secondLevel?.thirdLevel;
+  const [optional, setOptional] = useRecoilState(optionalTest);
+  const thirdLevelValue = optional?.firstLevel?.secondLevel?.thirdLevel;
   return (
     <div>
       <p>Page 2 // {thirdLevelValue}</p>
@@ -15,8 +15,8 @@ const Page2 = () => {
 
 export default Page2;
 
-const optionnalTest = atom({
-  key: "optionnalTest", // unique ID (with respect to other atoms/selectors)
+const optionalTest = atom({
+  key: "optionalTest", // unique ID (with respect to other atoms/selectors)
   default: {
     firstLevel: {
       secondLevel: {
