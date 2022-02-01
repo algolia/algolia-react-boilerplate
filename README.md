@@ -1,4 +1,5 @@
 # React Boilerplate for Demo Engineer
+
 ![Algolia](https://assets.codepen.io/707316/internal/avatars/users/default.png?fit=crop&format=auto&height=256&version=5&width=256)
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">✍️ V2</h3>
@@ -17,6 +18,7 @@ On Mac 👇
 brew install git-flow-avh
 git flow init
 ```
+
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">💻 State Manager</h3>
