@@ -5,12 +5,7 @@ import Test from "./Pages/Test";
 import Page2 from "./Pages/Page2";
 
 // React router
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  browserHistory,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // RecoilState Management
 // https://recoiljs.org/docs/introduction/getting-started
