@@ -17,6 +17,7 @@ On Mac 👇
 brew install git-flow-avh
 git flow init
 ```
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">💻 State Manager</h3>
 
