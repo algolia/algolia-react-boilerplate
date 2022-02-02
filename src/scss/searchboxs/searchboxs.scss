@@ -1,0 +1,16 @@
+// ------------------------------------------
+// SearchBox
+// ------------------------------------------
+@import "../mixin/abstracts/abstracts.scss";
+
+.searchbox-classical {
+  width: 100%;
+  .searchbox-classical__form {
+    width: 100%;
+    display: flex;
+    position: relative;
+    .searchbox-classical__form__input {
+      @include searchBoxClassical($grey-light-color-20, $main-color);
+    }
+  }
+}
