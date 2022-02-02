@@ -12,11 +12,46 @@
 // .btn--orange {}
 // .btn--big {}
 
-.test-class {
-  input {
-    background-color: red;
-  }
-  .test-p {
-    font-style: italic;
-  }
+// Main Styling
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+html {
+  // overflow-x: hidden !important;
+  overflow: auto;
+}
+body {
+  background-color: $background-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span {
+  font-family: $main-font;
+  color: $main-color;
+}
+
+p {
+  font-size: $one-rem-spaces;
+}
+
+a {
+  text-decoration: none;
+}
+
+li,
+ul {
+  list-style: none;
+  color: $main-color;
+  font-family: $main-font;
+}
+
+h3 {
+  text-transform: uppercase;
 }
