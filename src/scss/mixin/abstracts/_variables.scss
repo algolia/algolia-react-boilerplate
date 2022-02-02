@@ -1,0 +1,119 @@
+// Colors
+$main-color: rgb(0, 0, 0);
+$red-color: rgb(181, 31, 41);
+$grey-dark-color: rgb(102, 102, 102);
+$grey-light-color: rgb(119, 119, 119);
+$white-color: rgb(255, 255, 255);
+
+// Background Color:
+$background-color: rgb(249, 249, 249);
+
+// Colors Opacity
+// Main Color Opacity
+$main-color-80: rgba($main-color, 0.8);
+$main-color-60: rgba($main-color, 0.6);
+$main-color-40: rgba($main-color, 0.4);
+$main-color-20: rgba($main-color, 0.2);
+
+// Red Color Opacity
+$red-color-80: rgba($red-color, 0.8);
+$red-color-60: rgba($red-color, 0.6);
+$red-color-40: rgba($red-color, 0.4);
+$red-color-20: rgba($red-color, 0.2);
+
+// Grey Dark Color Opacity
+$grey-dark-color-80: rgba($grey-dark-color, 0.8);
+$grey-dark-color-60: rgba($grey-dark-color, 0.6);
+$grey-dark-color-40: rgba($grey-dark-color, 0.4);
+$grey-dark-color-20: rgba($grey-dark-color, 0.2);
+
+// Grey Light Color Opacity
+$grey-light-color-80: rgba($grey-light-color, 0.8);
+$grey-light-color-60: rgba($grey-light-color, 0.6);
+$grey-light-color-40: rgba($grey-light-color, 0.4);
+$grey-light-color-20: rgba($grey-light-color, 0.2);
+
+// Colors gradient
+// Main Color Gradient
+
+$main-color-80-gradient: (
+  background: linear-gradient(96.14deg, $main-color 53.12%, #ffffff 86.16%),
+);
+$main-color-60-gradient: (
+  background: linear-gradient(95.1deg, $main-color 35.92%, #ffffff 85.92%),
+);
+$main-color-40-gradient: (
+  background: linear-gradient(94.42deg, $main-color 16.03%, #ffffff 85.77%),
+);
+$main-color-20-gradient: (
+  background: linear-gradient(94.15deg, $main-color -8.18%, #ffffff 85.7%),
+);
+$main-color-10-gradient: (
+  background: linear-gradient(93.93deg, $main-color -40.44%, #ffffff 85.65%),
+);
+
+// red-color Gradient
+$red-color-80-gradient: (
+  background: linear-gradient(96.14deg, $red-color 53.12%, #ffffff 86.16%),
+);
+$red-color-60-gradient: (
+  background: linear-gradient(95.1deg, $red-color 35.92%, #ffffff 85.92%),
+);
+$red-color-40-gradient: (
+  background: linear-gradient(94.42deg, $red-color 16.03%, #ffffff 85.77%),
+);
+$red-color-20-gradient: (
+  background: linear-gradient(94.15deg, $red-color -8.18%, #ffffff 85.7%),
+);
+$red-color-10-gradient: (
+  background: linear-gradient(93.93deg, $red-color -40.44%, #ffffff 85.65%),
+);
+
+// grey-dark-color Gradient
+$grey-dark-color-80-gradient: (
+  background: linear-gradient(96.14deg, $grey-dark-color 53.12%, #ffffff 86.16%),
+);
+$grey-dark-color-60-gradient: (
+  background: linear-gradient(95.1deg, $grey-dark-color 35.92%, #ffffff 85.92%),
+);
+$grey-dark-color-40-gradient: (
+  background: linear-gradient(94.42deg, $grey-dark-color 16.03%, #ffffff 85.77%),
+);
+$grey-dark-color-20-gradient: (
+  background: linear-gradient(94.15deg, $grey-dark-color -8.18%, #ffffff 85.7%),
+);
+$grey-dark-color-10-gradient: (
+  background:
+    linear-gradient(93.93deg, $grey-dark-color -40.44%, #ffffff 85.65%),
+);
+
+// grey-light-color Gradient
+$grey-light-color-80-gradient: (
+  background:
+    linear-gradient(96.14deg, $grey-light-color 53.12%, #ffffff 86.16%),
+);
+$grey-light-color-60-gradient: (
+  background: linear-gradient(95.1deg, $grey-light-color 35.92%, #ffffff 85.92%),
+);
+$grey-light-color-40-gradient: (
+  background:
+    linear-gradient(94.42deg, $grey-light-color 16.03%, #ffffff 85.77%),
+);
+$grey-light-color-20-gradient: (
+  background: linear-gradient(94.15deg, $grey-light-color -8.18%, #ffffff 85.7%),
+);
+$grey-light-color-10-gradient: (
+  background:
+    linear-gradient(93.93deg, $grey-light-color -40.44%, #ffffff 85.65%),
+);
+
+// ------------------------------------------
+// Spaces
+$four-rem-spaces: 4rem;
+$three-half-rem-spaces: 3.5rem;
+$three-rem-spaces: 3rem;
+$two-half-rem-spaces: 2.5rem;
+$two-rem-spaces: 2rem;
+$one-half-rem-spaces: 1.5rem;
+$one-rem-spaces: 1rem;
+$half-rem-spaces: 0.5rem;
