@@ -8,11 +8,10 @@ import { atom, useRecoilState, selector, useRecoilValue } from "recoil";
 // application state from config file
 import { configAtom } from "../config/config";
 
-
 const Test = () => {
   // access config state and log for testing
   const [config] = useRecoilState(configAtom);
-  console.log(config)
+  console.log(config);
 
   return (
     <div>
