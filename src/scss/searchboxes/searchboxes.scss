@@ -7,10 +7,10 @@
 .search-box-container {
   width: 50%;
   margin: 0 auto;
-  // SearchBox Classical with glass on the right
-  .searchbox-classical {
+  // SearchBox Simple with glass on the right
+  .searchbox-simple {
     width: 100%;
-    .searchbox-classical__form {
+    .searchbox-simple__form {
       width: 100%;
       display: flex;
       position: relative;
@@ -24,13 +24,13 @@
           fill: $main-color;
         }
       }
-      .searchbox-classical__form__input {
-        @include searchBoxClassical($grey-light-color-20, $grey-light-color-80);
+      .searchbox-simple__form__input {
+        @include searchBoxSimple($grey-light-color-20, $grey-light-color-80);
       }
-      .searchbox-classical__form__input:focus {
+      .searchbox-simple__form__input:focus {
         outline: none;
       }
-      .searchbox-classical__form__input::-webkit-search-cancel-button {
+      .searchbox-simple__form__input::-webkit-search-cancel-button {
         // If you want display or not cross in searchbox
         -webkit-appearance: none;
         height: 1em;

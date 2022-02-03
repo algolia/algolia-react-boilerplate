@@ -2,7 +2,7 @@ import React from "react";
 
 // Recoil
 import { atom, useRecoilState, selector, useRecoilValue } from "recoil";
-import SearchBoxClassical from "../components/searchbox/SearchBoxClassical";
+import SearchBoxSimple from "../components/searchbox/SearchBoxSimple";
 
 const Page2 = () => {
   const [optional, setOptional] = useRecoilState(optionalTest);
@@ -11,7 +11,7 @@ const Page2 = () => {
     <div>
       <p>Page 2 // {thirdLevelValue}</p>
       <div className="search-box-container">
-        <SearchBoxClassical />
+        <SearchBoxSimple />
       </div>
     </div>
   );
