@@ -1,0 +1,46 @@
+// ------------------------------------------
+// SearchBox
+// ------------------------------------------
+@import "../mixin/abstracts/abstracts.scss";
+
+// A container to test the size
+.search-box-container {
+  width: 50%;
+  margin: 0 auto;
+  // SearchBox Classical with glass on the right
+  .searchbox-classical {
+    width: 100%;
+    .searchbox-classical__form {
+      width: 100%;
+      display: flex;
+      position: relative;
+      svg {
+        width: 30px;
+        left: 1rem;
+        top: 1.2rem;
+        position: absolute;
+
+        path {
+          fill: $main-color;
+        }
+      }
+      .searchbox-classical__form__input {
+        @include searchBoxClassical($grey-light-color-20, $grey-light-color-80);
+      }
+      .searchbox-classical__form__input:focus {
+        outline: none;
+      }
+      .searchbox-classical__form__input::-webkit-search-cancel-button {
+        // If you want display or not cross in searchbox
+        -webkit-appearance: none;
+        height: 1em;
+        width: 1em;
+        border-radius: 50em;
+        background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+          no-repeat 50% 50%;
+        background-size: contain;
+        cursor: pointer;
+      }
+    }
+  }
+}

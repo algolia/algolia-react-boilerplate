@@ -10,7 +10,9 @@ const Page2 = () => {
   return (
     <div>
       <p>Page 2 // {thirdLevelValue}</p>
-      <SearchBoxClassical />
+      <div className="search-box-container">
+        <SearchBoxClassical />
+      </div>
     </div>
   );
 };
