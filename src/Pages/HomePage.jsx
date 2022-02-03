@@ -4,6 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { atom, useRecoilState, selector, useRecoilValue } from "recoil";
+import Header from "../components/header/Header";
 
 // application state from config file
 import { configAtom } from "../config/config";
@@ -11,10 +12,14 @@ import { configAtom } from "../config/config";
 const Test = () => {
   // access config state and log for testing
   const [config] = useRecoilState(configAtom);
-  console.log(config);
 
   return (
-    <div>
+    <div className="homepage">
+      <Header />
+      <img
+        src="https://images.unsplash.com/photo-1518893494013-481c1d8ed3fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+        alt=""
+      />
       <TextInput />
       <CharacterCount />
       <br />

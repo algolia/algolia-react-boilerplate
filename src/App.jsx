@@ -1,7 +1,7 @@
 import React from "react";
 
 // Import Pages
-import Test from "./Pages/Test";
+import HomePage from "./Pages/HomePage";
 import Page2 from "./Pages/Page2";
 
 // React router
@@ -21,7 +21,7 @@ const App = () => {
     <RecoilRoot>
       <Router>
         <Routes>
-          <Route path="/" element={<Test />}></Route>
+          <Route path="/" element={<HomePage />}></Route>
           <Route path="/page2" element={<Page2 />}></Route>
         </Routes>
       </Router>
