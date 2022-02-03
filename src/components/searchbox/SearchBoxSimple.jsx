@@ -6,13 +6,15 @@ import React, { useEffect } from "react";
 // Import Recoil
 // &&
 // application state from config file
-import { queryAtom, placeholderAtom } from "../../config/searchbox";
+import { queryAtom, simplePlaceholderAtom } from "../../config/searchbox";
 import { useRecoilState } from "recoil";
 
 export default function SearchBoxSimple() {
   // State for the SearchBox
   const [query, setQueryState] = useRecoilState(queryAtom);
-  const [placeholder, setPlaceholderState] = useRecoilState(placeholderAtom);
+  const [simplePlaceholder, setSimplePlaceholderState] = useRecoilState(
+    simplePlaceholderAtom
+  );
 
   return (
     <div className="searchbox-simple">
@@ -32,7 +34,7 @@ export default function SearchBoxSimple() {
           onChange={(event) => {
             setQueryState(event.target.value);
           }}
-          placeholder={placeholder}
+          placeholder={simplePlaceholder}
         />
         <svg
           viewBox="0 0 897 897"

@@ -2,6 +2,7 @@ import React from "react";
 
 // Recoil
 import { atom, useRecoilState, selector, useRecoilValue } from "recoil";
+import SearchBoxCategory from "../components/searchbox/SearchBoxCategory";
 import SearchBoxSimple from "../components/searchbox/SearchBoxSimple";
 
 const Page2 = () => {
@@ -12,6 +13,7 @@ const Page2 = () => {
       <p>Page 2 // {thirdLevelValue}</p>
       <div className="search-box-container">
         <SearchBoxSimple />
+        <SearchBoxCategory />
       </div>
     </div>
   );

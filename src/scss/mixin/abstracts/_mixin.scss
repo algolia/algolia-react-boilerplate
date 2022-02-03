@@ -57,6 +57,17 @@
   transition: 0.2s ease-in-out;
 }
 
+@mixin searchBoxCustom($background, $border-color, $text-color) {
+  width: 100%;
+  margin: 1rem auto;
+  border-radius: 2px;
+  border: 1px solid $border-color;
+  padding: 0.6rem;
+  background-color: $background;
+  transition: 0.2s ease-in-out;
+  color: $text-color;
+}
+
 // ------------------------------------------
 // Fonts, Title, p,....
 // ------------------------------------------
