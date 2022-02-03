@@ -1,18 +1,18 @@
 // This SearchBox is with a glass inside
 // but classical
 
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react'
 
 // Import Recoil
 // &&
 // application state from config file
-import { searchBoxAtom } from "../../config/searchbox";
-import { useRecoilState } from "recoil";
+import { queryAtom, placeholderAtom } from '../../config/searchbox'
+import { useRecoilState } from 'recoil'
 
-const SearchBoxClassical = () => {
-  const [query, setQuery] = useRecoilState(searchBoxAtom);
-  const [{ placeholder }] = useRecoilState(searchBoxAtom);
-  console.log(placeholder, "Placeholder");
+export default function SearchBoxClassical() {
+  const [query, setQueryState] = useRecoilState(queryAtom)
+  const [placeholder, setPlaceholderState] = useRecoilState(placeholderAtom)
+  console.log(query, placeholder, 'Placeholder')
 
   return (
     <div className="searchbox-classical">
@@ -21,8 +21,8 @@ const SearchBoxClassical = () => {
         action=""
         role="search"
         onSubmit={(event) => {
-          event.preventDefault();
-          setQuery(event.target.value);
+          event.preventDefault()
+          setQueryState(event.target.value)
         }}
         autoComplete="off"
       >
@@ -30,7 +30,7 @@ const SearchBoxClassical = () => {
           className="searchbox-classical__form__input"
           type="search"
           onChange={(event) => {
-            setQuery(event.target.value);
+            setQueryState(event.target.value)
           }}
           placeholder={placeholder}
         />
@@ -50,7 +50,5 @@ const SearchBoxClassical = () => {
         </svg>
       </form>
     </div>
-  );
-};
-
-export default SearchBoxClassical;
+  )
+}
