@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 
+// Reqct Router
+import { Link } from "react-router-dom";
+
 // Import Hook
 import useStickyHeader from "../../hooks/useStickyHeader";
 
@@ -21,10 +24,12 @@ const Header = () => {
         <div className="container">
           <div className="container__header-top">
             <div className="container__logo">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
-                alt=""
-              />
+              <Link to="/">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
+                  alt=""
+                />
+              </Link>
             </div>
             <SearchBoxSimple />
             <div className="container__title">
@@ -36,7 +41,7 @@ const Header = () => {
               {links.map((link, i) => {
                 return (
                   <li key={i}>
-                    <a href={link.url}>{link.link}</a>
+                    <Link to={link.url}>{link.link}</Link>
                   </li>
                 );
               })}
