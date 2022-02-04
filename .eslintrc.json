@@ -10,10 +10,12 @@
   "parser": "babel-eslint",
   "rules": {
     // this is where we can turn on and off specific rules
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
     "react/prop-types": 0, // this is a very weak type checking what React can do for you, this is not too useful if you write typescript, so we turn it off
     "no-console": 1 // console.log() will be a warning if this equals 1
   },
-  "plugins": ["react", "import", "jsx-a11y"], // here we include the plugins as well, this is like new abilities for ESLint
+  "plugins": ["react", "import", "jsx-a11y", "react-hooks"], // here we include the plugins as well, this is like new abilities for ESLint
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
