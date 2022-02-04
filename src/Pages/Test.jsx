@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // React router
 import { Link } from "react-router-dom";
@@ -62,4 +62,10 @@ function CharacterCount() {
   const count = useRecoilValue(charCountState);
 
   return <>Character Count: {count}</>;
+}
+
+function BadFunction() {
+  useEffect(() => {
+    console.log("bad");
+  });
 }
