@@ -121,6 +121,8 @@ const url = {
   debouncing: 1500, // in ms
 };
 
+//
+
 const config = {
   refinements,
   sorts,
