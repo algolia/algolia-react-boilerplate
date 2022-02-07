@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // React router
 import { Link } from "react-router-dom";
@@ -11,7 +11,8 @@ import { configAtom } from "../config/config";
 const Test = () => {
   // access config state and log for testing
   const [config] = useRecoilState(configAtom);
-  console.log(config);
+  const { refinements } = config;
+  console.log(refinements[0]);
 
   return (
     <div>
@@ -62,4 +63,10 @@ function CharacterCount() {
   const count = useRecoilValue(charCountState);
 
   return <>Character Count: {count}</>;
+}
+
+function BadFunction() {
+  useEffect(() => {
+    console.log("bad");
+  });
 }
