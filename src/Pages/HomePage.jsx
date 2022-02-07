@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // React router
 import { Link } from "react-router-dom";
@@ -9,9 +9,8 @@ import Header from "../components/header/Header";
 // application state from config file
 import { configAtom } from "../config/config";
 
-const Test = () => {
-  // access config state and log for testing
-  const [config] = useRecoilState(configAtom);
+const HomePage = () => {
+
 
   return (
     <div className="homepage">
@@ -28,7 +27,7 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default HomePage;
 
 // An atom represents a piece of state. Atoms can be read from and written to from any component.
 // Components that read the value of an atom are implicitly subscribed to that atom, so any atom updates will result in a re-render of all components subscribed to that atom:
@@ -67,4 +66,10 @@ function CharacterCount() {
   const count = useRecoilValue(charCountState);
 
   return <>Character Count: {count}</>;
+}
+
+function BadFunction() {
+  useEffect(() => {
+    console.log("bad");
+  });
 }
