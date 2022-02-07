@@ -1,11 +1,20 @@
-import React from "react";
-import TestC from "./TestC";
-
+import React from 'react';
 // Recoil
-import { atom, useRecoilState, selector, useRecoilValue } from "recoil";
+import { atom, useRecoilState } from 'recoil';
+
+const optionalTest = atom({
+  key: 'optionalTest', // unique ID (with respect to other atoms/selectors)
+  default: {
+    firstLevel: {
+      secondLevel: {
+        thirdLevel: 'value',
+      },
+    },
+  }, // default value (aka initial value)
+});
 
 const Page2 = () => {
-  const [optional, setOptional] = useRecoilState(optionalTest);
+  const [optional] = useRecoilState(optionalTest);
   const thirdLevelValue = optional?.firstLevel?.secondLevel?.thirdLevel;
   return (
     <div>
@@ -15,14 +24,3 @@ const Page2 = () => {
 };
 
 export default Page2;
-
-const optionalTest = atom({
-  key: "optionalTest", // unique ID (with respect to other atoms/selectors)
-  default: {
-    firstLevel: {
-      secondLevel: {
-        thirdLevel: "value",
-      },
-    },
-  }, // default value (aka initial value)
-});

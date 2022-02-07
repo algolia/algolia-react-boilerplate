@@ -54,14 +54,14 @@
       padding: 0 2rem;
       display: flex;
       justify-content: space-between;
-      .container__logo {
+      &__logo {
         width: 20%;
         text-align: start;
         img {
           width: 80%;
         }
       }
-      .container__title {
+      &__title {
         h1 {
           font-size: 0.8rem;
 
@@ -73,7 +73,7 @@
       }
     }
     .container__header-bottom {
-      .container__header-bottom__links {
+      &__links {
         display: flex;
         justify-content: center;
         li {
