@@ -36,7 +36,9 @@ h2,
 h3,
 h4,
 p,
-span {
+span,
+input,
+input::placeholder {
   font-family: $main-font;
   color: $main-color;
 }
