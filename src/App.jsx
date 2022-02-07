@@ -1,8 +1,8 @@
 import React from "react";
 
 // Import Pages
-import Test from "./Pages/Test";
-import Page2 from "./Pages/Page2";
+import Test from "./pages/Test";
+import Page2 from "./pages/Page2";
 
 // React router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

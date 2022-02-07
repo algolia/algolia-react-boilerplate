@@ -11,7 +11,8 @@ import { configAtom } from "../config/config";
 const Test = () => {
   // access config state and log for testing
   const [config] = useRecoilState(configAtom);
-  console.log(config);
+  const { refinements } = config;
+  console.log(refinements[0]);
 
   return (
     <div>
