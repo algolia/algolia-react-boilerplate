@@ -21,6 +21,8 @@
 // Button
 // ------------------------------------------
 @mixin btn($background, $text-color, $border-color) {
+  font-family: $main-font;
+  font-weight: 700;
   border: 1px solid $border-color;
   text-decoration: none;
   color: $text-color;
