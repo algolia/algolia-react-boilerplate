@@ -35,8 +35,6 @@ git flow init
 with
 [BEM Naming](https://css-tricks.com/bem-101/)
 
-_This project was generated with [create-instantsearch-app](https://github.com/algolia/create-instantsearch-app) by [Algolia](https://algolia.com)._
-
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Config</h2>
 
 There are two places where application configuration is defined:
