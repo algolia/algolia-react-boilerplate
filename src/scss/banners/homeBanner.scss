@@ -17,19 +17,19 @@
     justify-content: center;
     flex-direction: column;
     height: 100%;
-    h1{
+    h1 {
       color: $white-color;
       font-weight: 800;
       font-size: 4rem;
     }
-    h2{
+    h2 {
       color: $orange-color;
       font-weight: 600;
       font-size: 2rem;
     }
   }
   &__image-one {
-    img{
+    img {
       width: 20%;
       position: absolute;
       bottom: 3rem;
@@ -37,7 +37,7 @@
     }
   }
   &__image-two {
-    img{
+    img {
       width: 20%;
       position: absolute;
       right: 1rem;
@@ -53,9 +53,12 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    a{
+    a {
       @include btn($white-color, $main-color, $white-color);
       margin-left: 1rem;
+    }
+    :hover {
+      @include btn-hover($orange-color, $white-color);
     }
   }
 }
