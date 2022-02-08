@@ -3,8 +3,6 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { atom, useRecoilState, selector, useRecoilValue } from 'recoil';
 
-import HomeBanner from '../components/Banners.jsx/HomeBanner';
-import HomeBanner2 from '../components/Banners.jsx/HomeBanner2';
 // application state from config file
 import { configAtom } from '../config/config';
 
@@ -20,8 +18,6 @@ const Test = () => {
       <CharacterCount />
       <br />
       <Link to="/page2">Page2</Link>
-      <HomeBanner2 />
-      <HomeBanner />
     </div>
   );
 };
