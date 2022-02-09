@@ -1,0 +1,113 @@
+// ------------------------------------------
+// Header
+// ------------------------------------------
+@import "../mixin/abstracts/abstracts.scss";
+
+// ------------------------------------------
+// Header Sticky process
+// ------------------------------------------
+
+.header {
+  text-align: center;
+  box-shadow: 0 0 20px $white-color;
+  padding: 40px 0;
+  background: $grey-light-color;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  animation: slide 0.7s;
+  box-shadow: 0 20px 30px rgba(#000, 0.2);
+  background: $grey-light-color;
+
+  label {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+@keyframes slide {
+  0% {
+    opacity: 1;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ------------------------------------------
+// ------------------------------------------
+
+// ------------------------------------------
+//Inside Header
+// ------------------------------------------
+.header {
+  .container {
+    .container__header-top {
+      align-items: center;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      &__logo {
+        width: 20%;
+        text-align: start;
+        img {
+          width: 80%;
+        }
+      }
+      &__title {
+        h1 {
+          font-size: 0.8rem;
+
+          line-height: 0;
+          text-transform: uppercase;
+          font-weight: bold;
+          letter-spacing: 2px;
+        }
+      }
+    }
+    .container__header-bottom {
+      &__links {
+        display: flex;
+        justify-content: center;
+        li {
+          margin-left: $two-rem-spaces;
+          cursor: pointer;
+        }
+      }
+    }
+    nav ul li a,
+    nav ul li a:after,
+    nav ul li a:before {
+      transition: all 0.5s;
+      color: $blue-algolia;
+    }
+    nav ul li a:hover {
+      color: $grey-dark-color;
+    }
+    nav.container__header-bottom ul li a {
+      position: relative;
+    }
+    nav.container__header-bottom ul li a:after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 0%;
+      content: ".";
+      color: transparent;
+      background: #aaa;
+      height: 1px;
+    }
+    nav.container__header-bottom ul li a:hover:after {
+      width: 100%;
+    }
+  }
+}

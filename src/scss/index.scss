@@ -5,7 +5,8 @@
 @import './banners/homeBanner2.scss';
 
 // Import components
-@import "./searchboxes/searchboxes.scss";
+@import './searchboxes/searchboxes.scss';
+@import './header/header.scss';
 
 // Use BEM, to naming class
 // https://css-tricks.com/bem-101/
@@ -33,9 +34,10 @@ h2,
 h3,
 h4,
 p,
+span,
+input,
+input::placeholder, 
 span {
-
-  
   font-family: $main-font;
   color: $main-color;
 }
@@ -58,4 +60,3 @@ ul {
 h3 {
   text-transform: uppercase;
 }
-

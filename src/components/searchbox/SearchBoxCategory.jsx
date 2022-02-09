@@ -5,12 +5,14 @@ import React from 'react';
 // Import Recoil
 import { useRecoilState } from 'recoil';
 
-// Import Config for recoil from file as a component and the new placeholder
+// Import Config for recoil from file as a component and the new
+import { Glass } from '../../assets/svg/SvgIndex';
 import {
   queryAtom,
   simplePlaceholderAtom,
   customPlaceholderAtom,
 } from '../../config/searchbox';
+// Import SVG from file as a component
 
 const SearchBoxCategory = () => {
   // State for the SearchBox
@@ -40,7 +42,7 @@ const SearchBoxCategory = () => {
         />
         <div className="searchbox-custom__placeholder">
           <p>{customPlaceholder}</p>
-          <img src={`../assets/svg/glass.svg`} alt="" />
+          <Glass />
         </div>
       </form>
     </div>
