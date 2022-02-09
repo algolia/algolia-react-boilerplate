@@ -4,7 +4,16 @@ import {
 } from '@algolia/react-instantsearch-widget-color-refinement-list';
 import { atom } from 'recoil';
 
-import { indexName } from '../utils/env';
+// import { indexName } from "../utils/env";
+
+export const searchClient = {
+  APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
+  appID: '853MYZ81KY',
+};
+
+export const indexName = {
+  index: 'flagship_fashion',
+};
 
 const refinements = [
   {
@@ -86,7 +95,7 @@ const sorts = [
   { value: indexName, label: 'Most popular', isDefault: true },
   {
     value: `${indexName}_asc_price`,
-    label: 'Price Low to High (Traditional Sort',
+    label: 'Price Low to High (Traditional Sort)',
   },
   {
     value: `${indexName}_asc_price_virtual_replica`,
@@ -120,8 +129,6 @@ const url = {
   debouncing: 1500, // in ms
 };
 
-//
-
 const config = {
   refinements,
   sorts,
@@ -129,6 +136,8 @@ const config = {
   searchParameters,
   autocomplete,
   url,
+  indexName,
+  searchClient,
 };
 
 export const configAtom = atom({
