@@ -1,24 +1,20 @@
-import React from "react";
-
+import React from 'react';
 // Import Recoil
 // &&
 // application state from config file
+import { useRecoilState } from 'recoil';
+
 import {
   queryAtom,
   simplePlaceholderAtom,
   customPlaceholderAtom,
-} from "../../config/searchbox";
-import { useRecoilState } from "recoil";
+} from '../../config/searchbox';
 
 const SearchBoxCategory = () => {
   // State for the SearchBox
-  const [query, setQueryState] = useRecoilState(queryAtom);
-  const [simplePlaceholder, setSimplePlaceholderState] = useRecoilState(
-    simplePlaceholderAtom
-  );
-  const [customPlaceholder, setCustomPlaceholderState] = useRecoilState(
-    customPlaceholderAtom
-  );
+  const [setQueryState] = useRecoilState(queryAtom);
+  const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
+  const [customPlaceholder] = useRecoilState(customPlaceholderAtom);
 
   return (
     <div className="searchbox-custom">
@@ -26,19 +22,19 @@ const SearchBoxCategory = () => {
         className="searchbox-custom__form"
         action=""
         role="search"
+        autoComplete="off"
         onSubmit={(event) => {
           event.preventDefault();
           setQueryState(event.target.value);
         }}
-        autoComplete="off"
       >
         <input
           className="searchbox-custom__form__input"
           type="search"
+          placeholder={simplePlaceholder}
           onChange={(event) => {
             setQueryState(event.target.value);
           }}
-          placeholder={simplePlaceholder}
         />
         <div className="searchbox-custom__placeholder">
           <p>{customPlaceholder}</p>
