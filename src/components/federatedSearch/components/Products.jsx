@@ -32,4 +32,4 @@ const Hits = ({ hits }) => {
 
 const Products = connectHits(Hits);
 
-export default Products;
+export default React.memo(Products);

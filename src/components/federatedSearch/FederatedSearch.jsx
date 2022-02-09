@@ -15,7 +15,7 @@ import Category from "./components/Category";
 import Products from "./components/Products";
 import Articles from "./components/BlogPost";
 
-const FederatedSearch = () => {
+const FederatedSearch = React.memo(() => {
   console.log("Federated called");
   // Recoil & States
   const [config] = useRecoilState(configAtom);
@@ -78,6 +78,6 @@ const FederatedSearch = () => {
       </div>
     </div>
   );
-};
+});
 
 export default FederatedSearch;

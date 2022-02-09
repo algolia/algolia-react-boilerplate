@@ -29,4 +29,4 @@ const Suggestions = ({ hits }) => {
 
 const QuerySuggestions = connectHits(Suggestions);
 
-export default QuerySuggestions;
+export default React.memo(QuerySuggestions);

@@ -25,4 +25,4 @@ const CategoryItems = ({ items, refine }) => {
 
 const Category = connectRefinementList(CategoryItems);
 
-export default Category;
+export default React.memo(Category);

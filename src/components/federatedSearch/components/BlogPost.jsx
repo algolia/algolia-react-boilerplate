@@ -26,4 +26,4 @@ const ArticlesItems = ({ hits }) => {
 };
 
 const Articles = connectHits(ArticlesItems);
-export default Articles;
+export default React.memo(Articles);

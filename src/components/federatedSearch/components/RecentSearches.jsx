@@ -1,6 +1,6 @@
 import React from "react";
 
-const RecentSearches = () => {
+const RecentSearches = React.memo(() => {
   console.log("RecentSearches called");
   const getSearches = localStorage.getItem("recentSearches");
   const cleanSearches = JSON.parse(getSearches);
@@ -26,6 +26,6 @@ const RecentSearches = () => {
   } else {
     return "";
   }
-};
+});
 
 export default RecentSearches;
