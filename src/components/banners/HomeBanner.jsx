@@ -1,36 +1,78 @@
 import React from 'react';
 import { connectQueryRules } from 'react-instantsearch-dom';
 
+// Imports from router
+import { Link } from 'react-router-dom';
+
 const HomeBanner = ({ items }) => {
-  return items.map(({ title, subtitle, button }, index) => {
-    if (!title) {
-      return null;
-    }
-    return (
-      <div className="home-banner-container" key={index}>
-        <div className="home-banner-container__infos">
-          <h1>{title}</h1>
-          <h2>{subtitle}</h2>
-        </div>
-        <div className="home-banner-container__image-one">
-          <img
-            src="https://images.unsplash.com/photo-1609587312208-cea54be969e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-            alt=""
-          />
-        </div>
-        <div className="home-banner-container__image-two">
-          <img
-            src="https://images.unsplash.com/photo-1532039956299-1614b86a6d2f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-            alt=""
-          />
-          <div className="home-banner-container__buttons">
-            <a href="#">{button}</a>
-            <a href="#">See our Blog</a>
+  return items.map(
+    (
+      {
+        type,
+        title,
+        subtitle,
+        button1,
+        LinkButton1,
+        button2,
+        LinkButton2,
+        imgUrl1,
+        imgUrl2,
+        imgUrl3,
+      },
+      index
+    ) => {
+      if (type === 'HomeBannerTwo') {
+        return (
+          <div
+            className="home-banner2-container"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.45)), url(${imgUrl1})`,
+            }}
+            key={index}
+          >
+            <div className="home-banner2-container__infos">
+              <h1>{title}</h1>
+              <h2>{subtitle}</h2>
+            </div>
+            <div className="home-banner2-container__buttons">
+              <div className="home-banner2-container__buttons__circles">
+                <div className="home-banner2-container__buttons__circles__circles2">
+                  <div className="home-banner2-container__buttons__circles__circles2__circles3">
+                    <Link to={LinkButton1}>{button1}</Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    );
-  });
+        );
+      }
+      if (type === 'HomeBannerOne')
+        return (
+          <div
+            className="home-banner-container"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.45)), url(${imgUrl1})`,
+            }}
+            key={index}
+          >
+            <div className="home-banner-container__infos">
+              <h1>{title}</h1>
+              <h2>{subtitle}</h2>
+            </div>
+            <div className="home-banner-container__image-one">
+              <img src={imgUrl2} alt="" />
+            </div>
+            <div className="home-banner-container__image-two">
+              <img src={imgUrl3} alt="" />
+              <div className="home-banner-container__buttons">
+                <Link to={LinkButton1}>{button1}</Link>
+                <Link to={LinkButton2}>{button2}</Link>
+              </div>
+            </div>
+          </div>
+        );
+    }
+  );
 };
 
 const CustomHomeBanner = connectQueryRules(HomeBanner);

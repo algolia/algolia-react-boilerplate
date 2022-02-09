@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-// Reqct Router
+// React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
 import { useRecoilState } from 'recoil';
