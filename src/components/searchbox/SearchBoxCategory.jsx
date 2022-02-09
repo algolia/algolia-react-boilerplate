@@ -1,10 +1,11 @@
 // This SearchBox more complex than the simple
-// they have like classic one glass etc... but with another filed as an other placeholder
-// you can personalize and display for exaple category
+// they have like classic one glass etc... but with another field => an other placeholder
+// you can personalise and display for example category
 import React from 'react';
 // Import Recoil
 import { useRecoilState } from 'recoil';
 
+// Import Config for recoil from file as a component and the new placeholder
 import {
   queryAtom,
   simplePlaceholderAtom,
