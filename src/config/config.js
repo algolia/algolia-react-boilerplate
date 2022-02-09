@@ -139,7 +139,11 @@ const url = {
 
 const federatedSearchConfig = {
   isRecentSearch: true,
-  isQuerySuggestions: true
+  isQuerySuggestions: true,
+  isCategory: true,
+  isProduct: true,
+  isBlogPosts: true
+
 }
 
 const config = {

@@ -4,6 +4,7 @@ import React from "react";
 import { connectHits, Highlight } from "react-instantsearch-dom";
 
 const Suggestions = ({ hits }) => {
+  console.log("Suggestions called");
   return (
     <div className="suggestions">
       <h3 className="suggestions__title">SUGGESTIONS</h3>

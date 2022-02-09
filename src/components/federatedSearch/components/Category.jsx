@@ -4,14 +4,22 @@ import React from "react";
 import { connectRefinementList } from "react-instantsearch-dom";
 
 const CategoryItems = ({ items, refine }) => {
+  console.log("CategoryItems called");
   return (
-    <ul>
-      {items.map((hit) => (
-        <li key={hit.label} onClick={() => {}}>
-          <p>{hit.label.split(">").pop()}</p>
-        </li>
-      ))}
-    </ul>
+    <div className="categories">
+      <h3 className="categories__title">Categories</h3>
+      <div className="categories__wrapper">
+        <div className="categories__item">
+          <ul>
+            {items.map((hit) => (
+              <li key={hit.label} onClick={() => {}}>
+                <p>{hit.label.split(">").pop()}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 };
 

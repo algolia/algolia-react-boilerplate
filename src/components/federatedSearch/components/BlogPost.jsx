@@ -2,7 +2,7 @@ import React from "react";
 import { connectHits } from "react-instantsearch-dom";
 
 const ArticlesItems = ({ hits }) => {
-  console.log(hits);
+  console.log("ArticlesItems called");
   return (
     <div className="articles__wrapper">
       <h3 className="articles__title">ARTICLES</h3>

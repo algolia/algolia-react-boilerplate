@@ -16,11 +16,18 @@ import Products from "./components/Products";
 import Articles from "./components/BlogPost";
 
 const FederatedSearch = () => {
+  console.log("Federated called");
   // Recoil & States
   const [config] = useRecoilState(configAtom);
   const containerFederated = useRef("");
   // Configuration for federated search
-  const { isRecentSearch, isQuerySuggestions } = config.federatedSearchConfig;
+  const {
+    isRecentSearch,
+    isQuerySuggestions,
+    isCategory,
+    isBlogPosts,
+    isProduct,
+  } = config.federatedSearchConfig;
   // Algolia searchclient
   const search = algoliasearch(
     config.searchClient.appID,
@@ -40,38 +47,34 @@ const FederatedSearch = () => {
               <QuerySuggestions />
             </InstantSearch>
           )}
-
-          <div className="categories">
-            <h3 className="federatedSearch__title">Categories</h3>
-            <div className="categories__wrapper">
-              <div className="categories__item">
-                <Category
-                  attribute={config.federatedCategory.categoryInFederated}
-                />
-              </div>
-            </div>
+          {isCategory && (
+            <Category
+              attribute={config.federatedCategory.categoryInFederated}
+            />
+          )}
+        </div>
+        {isProduct && (
+          <div className="federatedSearch__middle">
+            <Configure
+              filters=""
+              hitsPerPage={6}
+              // enablePersonalization={true}
+              // userToken={getPersona}
+            />
+            <Products />
           </div>
-        </div>
-
-        <div className="federatedSearch__middle">
-          <Configure
-            filters=""
-            hitsPerPage={6}
-            // enablePersonalization={true}
-            // userToken={getPersona}
-          />
-          <Products />
-        </div>
-
-        <div className="articles federatedSearch__right">
-          <InstantSearch
-            searchClient={search}
-            indexName={config.indexName.indexBlog}
-          >
-            <Configure hitsPerPage={1} />
-            <Articles />
-          </InstantSearch>
-        </div>
+        )}
+        {isBlogPosts && (
+          <div className="articles federatedSearch__right">
+            <InstantSearch
+              searchClient={search}
+              indexName={config.indexName.indexBlog}
+            >
+              <Configure hitsPerPage={1} />
+              <Articles />
+            </InstantSearch>
+          </div>
+        )}
       </div>
     </div>
   );

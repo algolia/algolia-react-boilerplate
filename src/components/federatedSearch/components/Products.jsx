@@ -4,6 +4,7 @@ import React from "react";
 import { connectHits } from "react-instantsearch-dom";
 
 const Hits = ({ hits }) => {
+  console.log("Hits called");
   return (
     <div className="products">
       <div className="products__header">

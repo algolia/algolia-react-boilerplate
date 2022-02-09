@@ -1,6 +1,7 @@
 import React from "react";
 
 const RecentSearches = () => {
+  console.log("RecentSearches called");
   const getSearches = localStorage.getItem("recentSearches");
   const cleanSearches = JSON.parse(getSearches);
 
