@@ -2,6 +2,11 @@
 
 Describe the problem and what is to be achieved with this pull request...
 
+What:
+Why:
+How: 
+Usage:
+
 ## Type
 
 - [ ] Bug Fix
