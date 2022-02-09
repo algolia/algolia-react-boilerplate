@@ -4,7 +4,7 @@ import { connectQueryRules } from 'react-instantsearch-dom';
 // Imports from router
 import { Link } from 'react-router-dom';
 
-const HomeBanner = ({ items }) => {
+const HomeBanners = ({ items }) => {
   return items.map(
     (
       {
@@ -75,6 +75,6 @@ const HomeBanner = ({ items }) => {
   );
 };
 
-const CustomHomeBanner = connectQueryRules(HomeBanner);
+const CustomHomeBanners = connectQueryRules(HomeBanners);
 
-export default CustomHomeBanner;
+export default CustomHomeBanners;
