@@ -2,8 +2,11 @@
 $main-color: rgb(0, 0, 0);
 $red-color: rgb(181, 31, 41);
 $grey-dark-color: rgb(102, 102, 102);
-$grey-light-color: rgb(119, 119, 119);
+$grey-light-color: rgb(221, 221, 221);
 $white-color: rgb(255, 255, 255);
+$blue-algolia: rgb(28, 128, 239);
+
+$orange-color: rgb(216, 123, 51);
 
 // Background Color:
 $background-color: rgb(249, 249, 249);
@@ -32,6 +35,12 @@ $grey-light-color-80: rgba($grey-light-color, 0.8);
 $grey-light-color-60: rgba($grey-light-color, 0.6);
 $grey-light-color-40: rgba($grey-light-color, 0.4);
 $grey-light-color-20: rgba($grey-light-color, 0.2);
+
+// Blue Algolia
+$blue-algolia-80: rgba($blue-algolia, 0.8);
+$blue-algolia-60: rgba($blue-algolia, 0.6);
+$blue-algolia-40: rgba($blue-algolia, 0.4);
+$blue-algolia-20: rgba($blue-algolia, 0.2);
 
 // Colors gradient
 // Main Color Gradient
@@ -105,6 +114,23 @@ $grey-light-color-20-gradient: (
 $grey-light-color-10-gradient: (
   background:
     linear-gradient(93.93deg, $grey-light-color -40.44%, #ffffff 85.65%),
+);
+
+// White-color Gradient
+$white-color-80-gradient: (
+  background: linear-gradient(96.14deg, $white-color 53.12%, #ffffff 86.16%),
+);
+$white-color-60-gradient: (
+  background: linear-gradient(95.1deg, $white-color 35.92%, #ffffff 85.92%),
+);
+$white-color-40-gradient: (
+  background: linear-gradient(94.42deg, $white-color 16.03%, #ffffff 85.77%),
+);
+$white-color-20-gradient: (
+  background: linear-gradient(94.15deg, $white-color -8.18%, #ffffff 85.7%),
+);
+$white-color-10-gradient: (
+  background: linear-gradient(93.93deg, $white-color -40.44%, #ffffff 85.65%),
 );
 
 // ------------------------------------------

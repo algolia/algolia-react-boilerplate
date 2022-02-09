@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 // React router
+<<<<<<< HEAD:src/pages/Test.jsx
 
 import { Link } from "react-router-dom";
 import { atom, useRecoilState, selector, useRecoilValue } from "recoil";
@@ -24,8 +25,28 @@ const Test = () => {
     </div>
   );
 };
+=======
+import { Link } from 'react-router-dom';
+import { atom, useRecoilState, selector, useRecoilValue } from 'recoil';
 
-export default Test;
+import Header from '../components/header/Header';
+
+const HomePage = () => (
+  <div className="homepage">
+    <Header />
+    <img
+      src="https://images.unsplash.com/photo-1518893494013-481c1d8ed3fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+      alt=""
+    />
+    <TextInput />
+    <CharacterCount />
+    <br />
+    <Link to="/page2">Page2</Link>
+  </div>
+);
+>>>>>>> f295631d9e5ebf1cb3b23c015739ed4c7bb31fda:src/pages/HomePage.jsx
+
+export default HomePage;
 
 // An atom represents a piece of state. Atoms can be read from and written to from any component.
 // Components that read the value of an atom are implicitly subscribed to that atom, so any atom updates will result in a re-render of all components subscribed to that atom:
