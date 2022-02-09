@@ -1,6 +1,8 @@
 // This SearchBox is with a glass inside
 // but simple it means with only a glass simple effect
 import React from 'react';
+// Algolia Import
+import { connectSearchBox } from 'react-instantsearch-dom';
 // Import Recoil
 import { useRecoilState } from 'recoil';
 
@@ -9,11 +11,10 @@ import { Glass } from '../../assets/svg/SvgIndex';
 // Import Config for recoil from file as a component
 import { queryAtom, simplePlaceholderAtom } from '../../config/searchbox';
 
-const SearchBoxSimple = () => {
+const SearchBoxSimple = ({ refine }) => {
   // State for the SearchBox
-  const [setQueryState] = useRecoilState(queryAtom);
+  const [queryState, setQueryState] = useRecoilState(queryAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
-
   return (
     <div className="searchbox-simple">
       <form
@@ -32,6 +33,7 @@ const SearchBoxSimple = () => {
           placeholder={simplePlaceholder}
           onChange={(event) => {
             setQueryState(event.target.value);
+            refine(event.currentTarget.value);
           }}
         />
         <Glass />
@@ -40,4 +42,6 @@ const SearchBoxSimple = () => {
   );
 };
 
-export default SearchBoxSimple;
+const CustomSearchBoxSimple = connectSearchBox(SearchBoxSimple);
+
+export default CustomSearchBoxSimple;

@@ -8,8 +8,9 @@ import { useRecoilState } from 'recoil';
 import { linksHeader } from '../../config/header';
 // Import Hook
 import useStickyHeader from '../../hooks/useStickyHeader';
+import CustomSearchBoxCategory from '../searchbox/SearchBoxCategory';
 // Import SearchBox
-import SearchBoxSimple from '../searchbox/SearchBoxSimple';
+import CustomSearchBoxSimple from '../searchbox/SearchBoxSimple';
 
 const Header = () => {
   const elementRef = useRef();
@@ -32,7 +33,8 @@ const Header = () => {
             </div>
             {/* For a search box Simple center */}
             <div className="searchbox-container">
-              <SearchBoxSimple />
+              <CustomSearchBoxSimple />
+              {/* <CustomSearchBoxCategory /> */}
             </div>
             <div className="container__header-top__title">
               <h1>Demo BoilerPlate</h1>

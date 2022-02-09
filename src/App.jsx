@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 // Import Pages
+import Header from './components/header/Header';
 import HomePage from './pages/HomePage';
 import Page2 from './pages/Page2';
 
@@ -27,6 +28,7 @@ const App = () => {
     <RecoilRoot>
       <InstantSearch searchClient={search} indexName={indexName.index}>
         <Router>
+          <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/page2" element={<Page2 />} />
