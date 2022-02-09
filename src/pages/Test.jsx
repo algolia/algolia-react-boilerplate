@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 // React router
 import { Link } from "react-router-dom";
+import { SearchBox } from "react-instantsearch-dom";
 
 import { atom, useRecoilState, selector, useRecoilValue } from "recoil";
 

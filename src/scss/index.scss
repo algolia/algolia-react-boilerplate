@@ -12,6 +12,7 @@
 // .btn--orange {}
 // .btn--big {}
 
+
 // Main Styling
 * {
   padding: 0;
@@ -33,6 +34,8 @@ h3,
 h4,
 p,
 span {
+
+  
   font-family: $main-font;
   color: $main-color;
 }
@@ -55,3 +58,4 @@ ul {
 h3 {
   text-transform: uppercase;
 }
+
