@@ -1,6 +1,7 @@
 import React from 'react';
 
-const HomeBanner2 = () => {
+const HomeBanner2 = ({items}) => {
+  console.log(items);
   return (
     <div className="home-banner2-container">
       <div className="home-banner2-container__infos">
