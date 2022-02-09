@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 
-function useStickyHeader({ elementRef }) {
-  console.log(elementRef);
+function useStickyHeader(elementRef) {
   const [sticky, setsticky] = useState(false);
   useEffect(() => {
-    const header = elementRef;
+    const header = elementRef.current;
     const sticky = header.offsetTop;
     const scrollCallBack = window.addEventListener('scroll', () => {
       if (window.pageYOffset > sticky) {
@@ -22,7 +21,7 @@ function useStickyHeader({ elementRef }) {
     return () => {
       window.removeEventListener('scroll', scrollCallBack);
     };
-  }, []);
+  }, [elementRef]);
   return sticky;
 }
 

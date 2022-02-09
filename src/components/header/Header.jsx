@@ -13,16 +13,9 @@ import SearchBoxSimple from '../searchbox/SearchBoxSimple';
 
 const Header = () => {
   const elementRef = useRef();
-  const [currentHeader, setCurrentHeader] = useState(null);
   const [links] = useRecoilState(linksHeader);
   const sticky = useStickyHeader(elementRef);
   const headerClasses = `header ${sticky ? 'sticky' : ''}`;
-
-  useEffect(() => {
-    const divElement = elementRef.current;
-    setCurrentHeader(divElement);
-    console.log(currentHeader);
-  }, [currentHeader]);
 
   return (
     <div>
