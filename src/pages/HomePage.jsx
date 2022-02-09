@@ -1,35 +1,9 @@
 import React, { useEffect } from "react";
 // React router
-<<<<<<< HEAD:src/pages/Test.jsx
-
 import { Link } from "react-router-dom";
 import { atom, useRecoilState, selector, useRecoilValue } from "recoil";
-import FederatedSearch from "../components/federatedSearch/FederatedSearch";
 
-// application state from config file
-import { configAtom } from "../config/config";
-
-const Test = () => {
-  // access config state and log for testing
-  const [config] = useRecoilState(configAtom);
-  const { refinements } = config;
-  console.log(refinements[0]);
-
-  return (
-    <div>
-      <TextInput />
-      <CharacterCount />
-      <FederatedSearch />
-      <br />
-      <Link to="/page2">Page2</Link>
-    </div>
-  );
-};
-=======
-import { Link } from 'react-router-dom';
-import { atom, useRecoilState, selector, useRecoilValue } from 'recoil';
-
-import Header from '../components/header/Header';
+import Header from "../components/header/Header";
 
 const HomePage = () => (
   <div className="homepage">
@@ -44,7 +18,6 @@ const HomePage = () => (
     <Link to="/page2">Page2</Link>
   </div>
 );
->>>>>>> f295631d9e5ebf1cb3b23c015739ed4c7bb31fda:src/pages/HomePage.jsx
 
 export default HomePage;
 
