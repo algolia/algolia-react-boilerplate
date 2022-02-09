@@ -1,0 +1,64 @@
+@import '../mixin/abstracts/abstracts.scss';
+
+// SCSS for the Home Banner
+// Big image and 2 little images
+.home-banner-container {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.45)),
+    url('https://images.unsplash.com/photo-1482844094451-940bfe898765?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 70vh;
+  position: relative;
+  &__infos {
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    h1 {
+      color: $white-color;
+      font-weight: 800;
+      font-size: 4rem;
+    }
+    h2 {
+      color: $orange-color;
+      font-weight: 600;
+      font-size: 2rem;
+    }
+  }
+  &__image-one {
+    img {
+      width: 20%;
+      position: absolute;
+      bottom: 3rem;
+      left: 1rem;
+    }
+  }
+  &__image-two {
+    img {
+      width: 20%;
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+    }
+  }
+  &__buttons {
+    display: flex;
+    position: absolute;
+    width: 20%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    a {
+      @include btn($white-color, $main-color, $white-color);
+      margin-left: 1rem;
+    }
+    :hover {
+      @include btn-hover($orange-color, $white-color);
+    }
+  }
+}
