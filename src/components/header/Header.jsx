@@ -33,8 +33,8 @@ const Header = () => {
             </div>
             {/* For a search box Simple center */}
             <div className="searchbox-container">
-              <CustomSearchBoxSimple />
-              {/* <CustomSearchBoxCategory /> */}
+              {/* <CustomSearchBoxSimple /> */}
+              <CustomSearchBoxCategory />
             </div>
             <div className="container__header-top__title">
               <h1>Demo BoilerPlate</h1>

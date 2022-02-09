@@ -18,7 +18,7 @@ import {
 
 const SearchBoxCategory = ({ refine }) => {
   // State for the SearchBox
-  const [setQueryState] = useRecoilState(queryAtom);
+  const [queryState, setQueryState] = useRecoilState(queryAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const [customPlaceholder] = useRecoilState(customPlaceholderAtom);
 
