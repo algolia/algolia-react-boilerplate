@@ -1,7 +1,8 @@
+// This SearchBox more complex than the simple
+// they have like classic one glass etc... but with another filed as an other placeholder
+// you can personalize and display for exaple category
 import React from 'react';
 // Import Recoil
-// &&
-// application state from config file
 import { useRecoilState } from 'recoil';
 
 import {

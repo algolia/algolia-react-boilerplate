@@ -1,23 +1,18 @@
 // This SearchBox is with a glass inside
-// but simple
-
-import React, { useEffect } from 'react';
-
+// but simple it means with only a glass simple effect
+import React from 'react';
 // Import Recoil
-// &&
-// application state from config file
-import { queryAtom, simplePlaceholderAtom } from '../../config/searchbox';
 import { useRecoilState } from 'recoil';
 
-// Import SVG
+// Import SVG from file as a component
 import Glass from '../../assets/svg/Glass';
+// Import Config for recoil from file as a component
+import { queryAtom, simplePlaceholderAtom } from '../../config/searchbox';
 
-export default function SearchBoxSimple() {
+const SearchBoxSimple = () => {
   // State for the SearchBox
-  const [query, setQueryState] = useRecoilState(queryAtom);
-  const [simplePlaceholder, setSimplePlaceholderState] = useRecoilState(
-    simplePlaceholderAtom
-  );
+  const [setQueryState] = useRecoilState(queryAtom);
+  const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
 
   return (
     <div className="searchbox-simple">
@@ -25,22 +20,24 @@ export default function SearchBoxSimple() {
         className="searchbox-simple__form"
         action=""
         role="search"
+        autoComplete="off"
         onSubmit={(event) => {
           event.preventDefault();
           setQueryState(event.target.value);
         }}
-        autoComplete="off"
       >
         <input
           className="searchbox-simple__form__input"
           type="search"
+          placeholder={simplePlaceholder}
           onChange={(event) => {
             setQueryState(event.target.value);
           }}
-          placeholder={simplePlaceholder}
         />
         <Glass />
       </form>
     </div>
   );
-}
+};
+
+export default SearchBoxSimple;
