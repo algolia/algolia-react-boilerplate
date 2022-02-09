@@ -1,26 +1,26 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-function useStickyHeader() {
+function useStickyHeader({ elementRef }) {
+  console.log(elementRef);
   const [sticky, setsticky] = useState(false);
   useEffect(() => {
-    const header = document.getElementById("myHeader");
+    const header = elementRef;
     const sticky = header.offsetTop;
-    const scrollCallBack = window.addEventListener("scroll", () => {
+    const scrollCallBack = window.addEventListener('scroll', () => {
       if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-        if (sticky !== true) {
+        header.classList.add('sticky');
+        if (!sticky) {
           setsticky(true);
         }
       } else {
-        header.classList.remove("sticky");
-        if (sticky !== false) {
+        header.classList.remove('sticky');
+        if (sticky) {
           setsticky(false);
         }
       }
     });
     return () => {
-      window.removeEventListener("scroll", scrollCallBack);
+      window.removeEventListener('scroll', scrollCallBack);
     };
   }, []);
   return sticky;

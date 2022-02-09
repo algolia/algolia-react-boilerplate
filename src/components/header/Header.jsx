@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 // Reqct Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
@@ -12,13 +12,21 @@ import useStickyHeader from '../../hooks/useStickyHeader';
 import SearchBoxSimple from '../searchbox/SearchBoxSimple';
 
 const Header = () => {
-  const sticky = useStickyHeader();
-  const headerClasses = `header ${sticky ? 'sticky' : ''}`;
+  const elementRef = useRef();
+  const [currentHeader, setCurrentHeader] = useState(null);
   const [links] = useRecoilState(linksHeader);
+  const sticky = useStickyHeader(elementRef);
+  const headerClasses = `header ${sticky ? 'sticky' : ''}`;
+
+  useEffect(() => {
+    const divElement = elementRef.current;
+    setCurrentHeader(divElement);
+    console.log(currentHeader);
+  }, [currentHeader]);
 
   return (
     <div>
-      <header id="myHeader" className={headerClasses}>
+      <header ref={elementRef} className={headerClasses}>
         <div className="container">
           <div className="container__header-top">
             <div className="container__header-top__logo">
