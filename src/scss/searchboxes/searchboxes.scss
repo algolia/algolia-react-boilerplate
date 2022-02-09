@@ -1,0 +1,96 @@
+// ------------------------------------------
+// SearchBox
+// ------------------------------------------
+@import "../mixin/abstracts/abstracts.scss";
+
+// A container to test the size
+.search-box-container {
+  width: 50%;
+  margin: 0 auto;
+  // SearchBox Simple with glass on the right
+  .searchbox-simple {
+    width: 100%;
+    &__form {
+      width: 100%;
+      display: flex;
+      position: relative;
+      svg {
+        width: 30px;
+        left: 1rem;
+        top: 1.2rem;
+        position: absolute;
+
+        path {
+          fill: $main-color;
+        }
+      }
+      &__form__input {
+        @include searchBoxSimple($grey-light-color-20, $grey-light-color-80);
+      }
+      &__form__input:focus {
+        outline: none;
+      }
+      &__form__input::-webkit-search-cancel-button {
+        // If you want display or not cross in searchbox
+        -webkit-appearance: none;
+        height: 1em;
+        width: 1em;
+        border-radius: 50em;
+        background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+          no-repeat 50% 50%;
+        background-size: contain;
+        cursor: pointer;
+      }
+    }
+  }
+  .searchbox-custom {
+    width: 100%;
+    &__form {
+      width: 100%;
+      display: flex;
+      position: relative;
+      background-color: initial;
+      &__form__input {
+        @include searchBoxCustom(
+          $grey-light-color-20,
+          $grey-light-color-80,
+          $white-color
+        );
+      }
+      &__form__input:focus {
+        outline: none;
+      }
+      &__form__input::-webkit-search-cancel-button {
+        // If you want display or not cross in searchbox
+        -webkit-appearance: none;
+        height: 1em;
+        width: 1em;
+        border-radius: 50em;
+        background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+          no-repeat 50% 50%;
+        background-size: contain;
+        cursor: pointer;
+      }
+    }
+    &__placeholder {
+      position: absolute;
+      top: 1rem;
+      right: 0;
+      background-color: $white-color;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-align-items: center;
+      align-items: center;
+      padding: 0.2rem 0.5rem;
+      min-width: 30%;
+      p {
+        font-weight: 700;
+        font-size: 0.6rem;
+        color: $main-color;
+      }
+      svg {
+        width: 30px;
+      }
+    }
+  }
+}
