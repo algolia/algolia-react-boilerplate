@@ -1,21 +1,18 @@
-@import "./mixin/abstracts/abstracts.scss";
+@import './mixin/abstracts/abstracts.scss';
+
+// Import Banners for the Home
+@import './banners/homeBanner.scss';
+@import './banners/homeBanner2.scss';
 
 // Import components
 @import "./searchboxes/searchboxes.scss";
 
 // Use BEM, to naming class
 // https://css-tricks.com/bem-101/
-/* Block component */
-// .btn {}
-
-/* Element that depends upon the block */
-// .btn__price {}
-
-/* Modifier that changes the style of the block */
-// .btn--orange {}
+/* Block component */ // .btn {}
+/* Element that depends upon the block */ // .btn__price {}
+/* Modifier that changes the style of the block */ // .btn--orange {}
 // .btn--big {}
-
-
 // Main Styling
 * {
   padding: 0;
