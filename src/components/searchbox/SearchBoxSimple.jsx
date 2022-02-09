@@ -5,7 +5,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 
 // Import SVG from file as a component
-import Glass from '../../assets/svg/SvgIndex';
+import { Glass } from '../../assets/svg/SvgIndex';
 // Import Config for recoil from file as a component
 import { queryAtom, simplePlaceholderAtom } from '../../config/searchbox';
 

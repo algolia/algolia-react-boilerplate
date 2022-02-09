@@ -1,8 +1,8 @@
-@import "./mixin/abstracts/abstracts.scss";
+@import './mixin/abstracts/abstracts.scss';
 
 // Import components
-@import "./searchboxes/searchboxes.scss";
-@import "./header/header.scss";
+@import './searchboxes/searchboxes.scss';
+@import './header/header.scss';
 
 // Use BEM, to naming class
 // https://css-tricks.com/bem-101/
@@ -38,7 +38,8 @@ h4,
 p,
 span,
 input,
-input::placeholder {
+input::placeholder, 
+span {
   font-family: $main-font;
   color: $main-color;
 }
@@ -60,13 +61,4 @@ ul {
 
 h3 {
   text-transform: uppercase;
-}
-
-// TO REMOVE
-.homepage {
-  height: 100%;
-  width: 100%;
-  img {
-    width: 100%;
-  }
 }

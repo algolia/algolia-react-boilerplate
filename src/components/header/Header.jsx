@@ -31,7 +31,9 @@ const Header = () => {
               </Link>
             </div>
             {/* For a search box Simple center */}
-            <SearchBoxSimple />
+            <div className="searchbox-container">
+              <SearchBoxSimple />
+            </div>
             <div className="container__header-top__title">
               <h1>Demo BoilerPlate</h1>
             </div>
