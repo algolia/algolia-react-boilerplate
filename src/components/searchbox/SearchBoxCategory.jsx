@@ -5,7 +5,7 @@ import React from 'react';
 // Import Recoil
 import { useRecoilState } from 'recoil';
 
-// Import Config for recoil from file as a component and the new placeholder
+// Import Config for recoil from file as a component and the new
 import {
   queryAtom,
   simplePlaceholderAtom,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Glass = () => {
+export const Glass = () => {
   return (
     <svg viewBox="0 0 897 897" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -14,5 +14,3 @@ const Glass = () => {
     </svg>
   );
 };
-
-export default Glass;
