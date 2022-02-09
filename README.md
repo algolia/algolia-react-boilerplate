@@ -43,3 +43,17 @@ There are two places where application configuration is defined:
 
 - config/config.js contains layout variables like the refinements, sorts etc.
   - the config is exported via an object which is controlled by a state atom (see state section for more details)
+
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
+
+[Banner](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/add-banners/)
+
+How Configure it 👇
+
+- In rules Section on the Dashboard, you have 2 rules without query conditions.
+- You can edit or create one, and personalise the diferents fields:
+  - Images (For the background, or for the thumbnails)
+  - Link or Text for the buttons
+  - Titles and Subtitles
+-In the code you have a condition, actually they are called together, but you can keep by type :
+  - HomeBannerOne or HomeBannerTwo
