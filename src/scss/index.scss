@@ -1,5 +1,8 @@
 @import "./mixin/abstracts/abstracts.scss";
 
+// Import components
+@import "./searchboxes/searchboxes.scss";
+
 // Use BEM, to naming class
 // https://css-tricks.com/bem-101/
 /* Block component */
