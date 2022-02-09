@@ -1,6 +1,10 @@
 ## Objective
 
 Describe the problem and what is to be achieved with this pull request...
+- What is it?
+- Why is it needed?
+- How is it implemented?
+- How is it customised?
 
 What:
 Why:
@@ -28,3 +32,9 @@ Add screenshots or a representation of the desired effect or output achieved...
 ## Tested
 
 Outline the approach you've taken to test the change
+
+
+## Documented
+
+- [ ] Have you documented in changed file using comments
+- [ ] Have you added instructions to the README if needed?
