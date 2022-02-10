@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
-// Reqct Router
+import React, { useRef } from 'react';
+// React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
 import { useRecoilState } from 'recoil';
@@ -8,9 +8,9 @@ import { useRecoilState } from 'recoil';
 import { linksHeader } from '../../config/header';
 // Import Hook
 import useStickyHeader from '../../hooks/useStickyHeader';
-import CustomSearchBoxCategory from '../searchbox/SearchBoxCategory';
 // Import SearchBox
 import CustomSearchBoxSimple from '../searchbox/SearchBoxSimple';
+
 
 const Header = () => {
   const elementRef = useRef();
@@ -33,8 +33,7 @@ const Header = () => {
             </div>
             {/* For a search box Simple center */}
             <div className="searchbox-container">
-              {/* <CustomSearchBoxSimple /> */}
-              <CustomSearchBoxCategory />
+              <CustomSearchBoxSimple />
             </div>
             <div className="container__header-top__title">
               <h1>Demo BoilerPlate</h1>
