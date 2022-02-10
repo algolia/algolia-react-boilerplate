@@ -18,6 +18,12 @@ On Mac 👇
 brew install git-flow-avh
 git flow init
 ```
+[Husky](https://typicode.github.io/husky/#/)
+
+```sh
+npx husky install
+```
+🐶
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
 
