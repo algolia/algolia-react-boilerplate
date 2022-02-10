@@ -50,10 +50,10 @@ There are two places where application configuration is defined:
 
 How Configure it 👇
 
-- In rules Section on the Dashboard, you have 2 rules without query conditions.
-- You can edit or create one, and personalise the diferents fields:
+- In rules Section in the Dashboard, you have 2 rules without query conditions.
+- You can edit or create one, and personalise the differrent fields:
   - Images (For the background, or for the thumbnails)
   - Link or Text for the buttons
   - Titles and Subtitles
--In the code you have a condition, actually they are called together, but you can keep by type :
+- In the code you have a condition, actually they are called together, but you can keep by type :
   - HomeBannerOne or HomeBannerTwo
