@@ -1,6 +1,6 @@
 // Mixins
-@import "./variables.scss";
-@import "./fonts";
+@import './variables.scss';
+@import './fonts';
 
 // ------------------------------------------
 // How use mixins
@@ -98,4 +98,37 @@
 // Hits
 // ------------------------------------------
 
-// ....
+// ------------------------------------------
+// Facets
+// ------------------------------------------
+@mixin facetsFilter($background, $text-color, $p-color, $span-color) {
+  text-decoration: none;
+  width: 100%;
+  justify-content: center;
+  margin: 0.5rem 0;
+  padding: 0.8em;
+  font-size: 0.7rem;
+  transition: all 0.4s ease-in-out;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: rgba($text-color, 0.8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  background-color: initial;
+  p {
+    color: $p-color;
+    font-size: 0.9rem;
+    font-weight: 100;
+    text-align: left;
+  }
+  span {
+    color: $span-color;
+    font-size: 0.7rem;
+  }
+}
+
+@mixin facetsFilterHover($background) {
+  background-color: $background;
+}

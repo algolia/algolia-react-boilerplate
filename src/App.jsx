@@ -11,8 +11,7 @@ import { RecoilRoot } from 'recoil';
 // Import Pages
 import Header from './components/header/Header';
 import HomePage from './pages/HomePage';
-import Page2 from './pages/Page2';
-
+import SearchResultsPage from './pages/SearchResultsPage';
 // SCSS import
 import './scss/index.scss';
 
@@ -31,7 +30,7 @@ const App = () => {
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/page2" element={<Page2 />} />
+            <Route path="/search" element={<SearchResultsPage />} />
           </Routes>
         </Router>
       </InstantSearch>

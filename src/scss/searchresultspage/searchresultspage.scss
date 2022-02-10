@@ -1,0 +1,26 @@
+// ------------------------------------------
+// Search Results Page
+// ------------------------------------------
+@import '../mixin/abstracts/abstracts.scss';
+@import './facets.scss';
+
+// ------------------------------------------
+// Container
+// ------------------------------------------
+
+.srp-container {
+  width: 95%;
+  margin: 1rem auto;
+  display: flex;
+  &__facets {
+    width: 20%;
+    will-change: width;
+    flex-shrink: 0;
+    overflow: visible;
+    display: inline-block;
+  }
+  &__hits {
+    width: 75%;
+    background-color: yellow;
+  }
+}

@@ -1,7 +1,3 @@
-import {
-  Layout,
-  Shape,
-} from '@algolia/react-instantsearch-widget-color-refinement-list';
 import { atom } from 'recoil';
 
 // import { indexName } from "../utils/env";
@@ -24,13 +20,9 @@ const refinements = [
     type: 'hierarchical',
     header: 'Categories',
     label: 'Category',
-    isExpanded: true,
     options: {
-      attributes: [
-        'hierarchical_categories.lvl0',
-        'hierarchical_categories.lvl1',
-        'hierarchical_categories.lvl2',
-      ],
+      attribute: 'categories',
+      searchable: true,
     },
   },
   {
@@ -38,7 +30,7 @@ const refinements = [
     header: 'Price',
     label: 'Price',
     options: {
-      attribute: 'price.value',
+      attribute: 'unformated_price',
     },
   },
   {
@@ -52,12 +44,10 @@ const refinements = [
   },
   {
     type: 'color',
-    layout: Layout.Grid,
-    shape: Shape.Circle,
     header: 'Color',
     label: 'Color',
     options: {
-      attribute: 'color.filter_group',
+      attribute: 'colour',
     },
   },
   {
@@ -65,7 +55,7 @@ const refinements = [
     header: 'Gender',
     label: 'Gender',
     options: {
-      attribute: 'gender',
+      attribute: 'genderFilter',
     },
   },
   {
@@ -73,24 +63,8 @@ const refinements = [
     header: 'Sizes',
     label: 'Size',
     options: {
-      attribute: 'available_sizes',
+      attribute: 'sizeFilter',
       limit: 8,
-    },
-  },
-  {
-    type: 'rating',
-    header: 'Rating',
-    label: 'Rating',
-    options: {
-      attribute: 'reviews.rating',
-    },
-  },
-  {
-    type: 'list',
-    header: 'On Sale',
-    label: 'On Sale',
-    options: {
-      attribute: 'price.on_sales',
     },
   },
 ];

@@ -5,6 +5,8 @@ import debounce from 'lodash.debounce';
 import React, { useCallback } from 'react';
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
+// Router Navigation
+import { useNavigate } from 'react-router-dom';
 // Import Recoil
 import { useRecoilState } from 'recoil';
 
@@ -24,6 +26,7 @@ const SearchBoxSimple = ({ refine }) => {
   // Debounce during search if you want to change the reactivity change number 250
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedRefine = useCallback(debounce(refineFunction, 250), []);
+  const navigate = useNavigate();
   return (
     <div className="searchbox-simple">
       <form
@@ -34,6 +37,7 @@ const SearchBoxSimple = ({ refine }) => {
         onSubmit={(event) => {
           event.preventDefault();
           setQueryState(event.target.value);
+          navigate('/search/');
         }}
       >
         <input
