@@ -11,9 +11,8 @@ import useStickyHeader from '../../hooks/useStickyHeader';
 // Import SearchBox
 import CustomSearchBoxSimple from '../searchbox/SearchBoxSimple';
 
-
 const Header = () => {
-  const elementRef = useRef();
+  const elementRef = useRef('');
   const [links] = useRecoilState(linksHeader);
   const sticky = useStickyHeader(elementRef);
   const headerClasses = `header ${sticky ? 'sticky' : ''}`;
