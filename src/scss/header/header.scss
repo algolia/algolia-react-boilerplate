@@ -1,7 +1,7 @@
 // ------------------------------------------
 // Header
 // ------------------------------------------
-@import "../mixin/abstracts/abstracts.scss";
+@import '../mixin/abstracts/abstracts.scss';
 
 // ------------------------------------------
 // Header Sticky process
@@ -12,16 +12,18 @@
   box-shadow: 0 0 20px $white-color;
   padding: 40px 0;
   background: $grey-light-color;
+  height: 12rem;
 }
 
 .sticky {
   position: fixed;
+  z-index: 1000;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 20px 0;
-  animation: slide 0.7s;
+  padding: 40px 0;
   box-shadow: 0 20px 30px rgba(#000, 0.2);
+  animation: slide 0.3s forwards ease-in-out;
   background: $grey-light-color;
 
   label {
@@ -33,11 +35,11 @@
 @keyframes slide {
   0% {
     opacity: 1;
-    transform: translateY(-50px);
+    height: 12rem;
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    height: 10rem;
   }
 }
 
@@ -101,7 +103,7 @@
       right: 0;
       margin: auto;
       width: 0%;
-      content: ".";
+      content: '.';
       color: transparent;
       background: #aaa;
       height: 1px;
