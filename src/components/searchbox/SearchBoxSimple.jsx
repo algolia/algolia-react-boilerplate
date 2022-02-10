@@ -1,8 +1,8 @@
 // This SearchBox is with a glass inside
 // but simple it means with only a glass simple effect
+// Import Debounce
 import debounce from 'lodash.debounce';
 import React, { useCallback } from 'react';
-// Import Debounce
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
 // Import Recoil
@@ -19,7 +19,6 @@ const SearchBoxSimple = ({ refine }) => {
     setQueryState(event);
     refine(event);
   };
-  // State for the SearchBox
 
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   // Debounce during search if you want to change the reactivity change number 250
@@ -31,7 +30,6 @@ const SearchBoxSimple = ({ refine }) => {
         className="searchbox-simple__form"
         action=""
         role="search"
-        value={queryState}
         autoComplete="off"
         onSubmit={(event) => {
           event.preventDefault();
@@ -41,6 +39,7 @@ const SearchBoxSimple = ({ refine }) => {
         <input
           className="searchbox-simple__form__input"
           type="search"
+          value={queryState}
           placeholder={simplePlaceholder}
           onChange={(event) => {
             debouncedRefine(event.currentTarget.value);

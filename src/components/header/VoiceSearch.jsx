@@ -1,61 +1,22 @@
 import React from 'react';
 // Algolia Import
+import { VoiceSearch } from 'react-instantsearch-dom';
 
-import {
-  connectSearchBox,
-  createVoiceSearchHelper,
-} from 'react-instantsearch-dom';
+// Import Recoil
+import { useRecoilState } from 'recoil';
 
-class VoiceSearchComponent extends React.Component {
-  componentDidMount() {
-    const { refine } = this.props;
-    this.voiceSearchHelper = createVoiceSearchHelper({
-      searchAsYouSpeak: false,
-      onQueryChange: (query) => refine(query),
-      onStateChange: () => {
-        this.setState(this.voiceSearchHelper.getState());
-      },
-    });
-    this.setState(this.voiceSearchHelper.getState());
-  }
+// Import Config for recoil from file as a component
+import { queryAtom } from '../../config/searchbox';
 
-  componentWillUnmount() {
-    if (this.voiceSearchHelper) {
-      this.voiceSearchHelper.dispose();
-    }
-  }
+const VoiceSearchComponent = () => {
+  const [queryState, setQueryState] = useRecoilState(queryAtom);
+  return <VoiceSearch statusComponent={Status} />;
+};
 
-  render() {
-    if (!this.voiceSearchHelper) {
-      return null;
-    }
+export default VoiceSearchComponent;
 
-    const { status, transcript, isSpeechFinal, errorCode } = this.state;
-    const { isBrowserSupported, isListening, toggleListening } =
-      this.voiceSearchHelper;
-
-    return (
-      <div>
-        <button
-          type="button"
-          title="Voice Search"
-          onClick={toggleListening}
-          disabled={!isBrowserSupported()}
-        >
-          {isListening() ? 'Stop' : 'Start'}
-        </button>
-        <div>
-          <p>status: {status}</p>
-          <p>transcript: {transcript}</p>
-          <p>isSpeechFinal: {isSpeechFinal ? 'true' : 'false'}</p>
-          <p>errorCode: {errorCode}</p>
-          <p>isListening: {isListening() ? 'true' : 'false'}</p>
-          <p>isBrowserSupported: {isBrowserSupported() ? 'true' : 'false'}</p>
-        </div>
-      </div>
-    );
-  }
-}
-const CustomVoiceSearchComponent = connectSearchBox(VoiceSearchComponent);
-
-export default CustomVoiceSearchComponent;
+const Status = ({ transcript }) => {
+  const [queryState, setQueryState] = useRecoilState(queryAtom);
+  setQueryState(transcript);
+  return null;
+};
