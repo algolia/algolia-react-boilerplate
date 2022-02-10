@@ -11,6 +11,9 @@ import useStickyHeader from '../../hooks/useStickyHeader';
 // Import SearchBox
 import CustomSearchBoxSimple from '../searchbox/SearchBoxSimple';
 
+// Import VoiceSearchComponent
+import CustomVoiceSearchComponent from './VoiceSearch';
+
 const Header = () => {
   const elementRef = useRef('');
   const [links] = useRecoilState(linksHeader);
@@ -33,6 +36,7 @@ const Header = () => {
             {/* For a search box Simple center */}
             <div className="searchbox-container">
               <CustomSearchBoxSimple />
+              <CustomVoiceSearchComponent />
             </div>
             <div className="container__header-top__title">
               <h1>Demo BoilerPlate</h1>
