@@ -1,17 +1,21 @@
 import React from 'react';
-// Recoil
+
+// Recoil state to directly access results
 import { useRecoilState } from 'recoil';
 import { hitsAtom } from '../config/results';
 
+// Import the default hits widget from IS
 import { Hits } from 'react-instantsearch-dom';
 
 const ResultsPage = () => {
-  const [hitsState] = useRecoilState(hitsAtom);
 
+  // If we need to, we can directly access hits from here
+  const [hitsState] = useRecoilState(hitsAtom);
   console.log(hitsState)
+
   return (
     <div>
-      <p>Results Page //</p>
+      // Hits Uses IS state, not our own, to render widgets
       <Hits />
     </div>
   );
