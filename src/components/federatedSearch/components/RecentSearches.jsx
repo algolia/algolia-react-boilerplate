@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 const RecentSearches = React.memo(() => {
-  console.log("RecentSearches called");
-  const getSearches = localStorage.getItem("recentSearches");
+  console.log('RecentSearches called');
+  const getSearches = localStorage.getItem('recentSearches');
   const cleanSearches = JSON.parse(getSearches);
 
   if (cleanSearches && cleanSearches.length !== 0) {
@@ -24,7 +24,7 @@ const RecentSearches = React.memo(() => {
       </div>
     );
   } else {
-    return "";
+    return '';
   }
 });
 

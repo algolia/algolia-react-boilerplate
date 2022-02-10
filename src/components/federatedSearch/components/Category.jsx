@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 // Algolia's imports
-import { connectRefinementList } from "react-instantsearch-dom";
+import { connectRefinementList } from 'react-instantsearch-dom';
 
 const CategoryItems = ({ items, refine }) => {
-  console.log("CategoryItems called");
+  console.log('CategoryItems called');
   return (
     <div className="categories">
       <h3 className="categories__title">Categories</h3>
@@ -13,7 +13,7 @@ const CategoryItems = ({ items, refine }) => {
           <ul>
             {items.map((hit) => (
               <li key={hit.label} onClick={() => {}}>
-                <p>{hit.label.split(">").pop()}</p>
+                <p>{hit.label.split('>').pop()}</p>
               </li>
             ))}
           </ul>

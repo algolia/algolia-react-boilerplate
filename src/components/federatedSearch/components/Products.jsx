@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 // Algolia's imports
-import { connectHits } from "react-instantsearch-dom";
+import { connectHits } from 'react-instantsearch-dom';
 
 const Hits = ({ hits }) => {
-  console.log("Hits called");
+  console.log('Hits called');
   return (
     <div className="products">
       <div className="products__header">

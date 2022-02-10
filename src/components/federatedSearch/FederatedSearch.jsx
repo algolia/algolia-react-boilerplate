@@ -1,25 +1,33 @@
-import React, { useRef } from "react";
+import React, { useRef } from 'react';
 
 // Algolias's import
-import algoliasearch from "algoliasearch/lite";
-import { InstantSearch, Configure } from "react-instantsearch-dom";
+import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch, Configure } from 'react-instantsearch-dom';
 
 // import from Recoil
-import { useRecoilState } from "recoil";
-import { configAtom } from "../../config/config";
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { configAtom, isFederatedAtom } from '../../config/config';
+
+// hook import
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 // Components imports
-import RecentSearches from "./components/RecentSearches";
-import QuerySuggestions from "./components/QuerySuggestions";
-import Category from "./components/Category";
-import Products from "./components/Products";
-import Articles from "./components/BlogPost";
+import RecentSearches from './components/RecentSearches';
+import QuerySuggestions from './components/QuerySuggestions';
+import Category from './components/Category';
+import Products from './components/Products';
+import Articles from './components/BlogPost';
 
 const FederatedSearch = React.memo(() => {
-  console.log("Federated called");
+  console.log('Federated called');
   // Recoil & States
   const [config] = useRecoilState(configAtom);
-  const containerFederated = useRef("");
+  const [isFederated, setIsFederated] = useRecoilState(isFederatedAtom);
+  // const isFederated = useRecoilValue(isFederatedAtom);
+  const containerFederated = useRef('');
+  useOutsideClick(containerFederated, () => {
+    if (isFederated) setIsFederated(false);
+  });
   // Configuration for federated search
   const {
     isRecentSearch,

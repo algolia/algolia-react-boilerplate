@@ -1,8 +1,8 @@
-import React from "react";
-import { connectHits } from "react-instantsearch-dom";
+import React from 'react';
+import { connectHits } from 'react-instantsearch-dom';
 
 const ArticlesItems = ({ hits }) => {
-  console.log("ArticlesItems called");
+  console.log('ArticlesItems called');
   return (
     <div className="articles__wrapper">
       <h3 className="articles__title">ARTICLES</h3>
@@ -10,7 +10,7 @@ const ArticlesItems = ({ hits }) => {
         return (
           <div key={index} className="articles__item">
             <div className="image-wrapper">
-              <img src={hit["Image Link"]} alt="" />
+              <img src={hit['Image Link']} alt="" />
               <p className="title">{hit.Title}</p>
               <div className="overlay"></div>
             </div>

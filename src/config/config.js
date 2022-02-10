@@ -14,7 +14,7 @@ export const searchClient = {
 export const indexName = {
   index: 'flagship_fashion',
   indexSuggestion: 'flagship_fashion_query_suggestions',
-  indexBlog: 'canda_customDemo_articles'
+  indexBlog: 'canda_customDemo_articles',
 };
 
 const refinements = [
@@ -112,9 +112,9 @@ const breadcrumbAttributes = [
   'hierarchical_categories.lvl2',
 ];
 
-const federatedCategory= {
-  categoryInFederated: "hierarchicalCategories.lvl2"
-}
+const federatedCategory = {
+  categoryInFederated: 'hierarchicalCategories.lvl2',
+};
 
 const searchParameters = {
   hitsPerPage: 10,
@@ -142,9 +142,13 @@ const federatedSearchConfig = {
   isQuerySuggestions: true,
   isCategory: true,
   isProduct: true,
-  isBlogPosts: true
+  isBlogPosts: true,
+};
 
-}
+export const isFederatedAtom = atom({
+  key: 'isFederatedVisible', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
 
 const config = {
   refinements,
@@ -156,7 +160,7 @@ const config = {
   indexName,
   searchClient,
   federatedSearchConfig,
-  federatedCategory
+  federatedCategory,
 };
 
 export const configAtom = atom({
