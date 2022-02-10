@@ -15,8 +15,6 @@ const Status = ({ transcript }) => {
   return null;
 };
 
-const VoiceSearchComponent = () => {
-  return <VoiceSearch statusComponent={Status} />;
-};
+const VoiceSearchComponent = () => <VoiceSearch statusComponent={Status} />;
 
 export default VoiceSearchComponent;
