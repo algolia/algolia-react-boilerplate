@@ -56,9 +56,3 @@ function CharacterCount() {
 
   return <>Character Count: {count}</>;
 }
-
-function BadFunction() {
-  useEffect(() => {
-    console.log('bad');
-  });
-}
