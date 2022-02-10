@@ -14,11 +14,13 @@ import { Glass } from '../../assets/svg/SvgIndex';
 import { queryAtom, simplePlaceholderAtom } from '../../config/searchbox';
 
 const SearchBoxSimple = ({ refine }) => {
+  const [queryState, setQueryState] = useRecoilState(queryAtom);
   const refineFunction = (event) => {
+    setQueryState(event);
     refine(event);
   };
   // State for the SearchBox
-  const [queryState, setQueryState] = useRecoilState(queryAtom);
+
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   // Debounce during search if you want to change the reactivity change number 250
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -29,6 +31,7 @@ const SearchBoxSimple = ({ refine }) => {
         className="searchbox-simple__form"
         action=""
         role="search"
+        value={queryState}
         autoComplete="off"
         onSubmit={(event) => {
           event.preventDefault();
@@ -40,7 +43,6 @@ const SearchBoxSimple = ({ refine }) => {
           type="search"
           placeholder={simplePlaceholder}
           onChange={(event) => {
-            setQueryState(event.target.value);
             debouncedRefine(event.currentTarget.value);
           }}
         />

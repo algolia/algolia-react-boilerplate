@@ -43,3 +43,10 @@ There are two places where application configuration is defined:
 
 - config/config.js contains layout variables like the refinements, sorts etc.
   - the config is exported via an object which is controlled by a state atom (see state section for more details)
+
+  <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Debounce</h3>
+
+[Debounce Lodash](https://www.npmjs.com/package/lodash.debounce)
+
+The Utility of this package is to wait before action, for example on the SearchBox, onChange wait some time before send query.
+
