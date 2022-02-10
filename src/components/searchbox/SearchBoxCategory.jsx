@@ -29,6 +29,7 @@ const SearchBoxCategory = ({ refine }) => {
         action=""
         role="search"
         autoComplete="off"
+        value={queryState}
         onSubmit={(event) => {
           event.preventDefault();
           setQueryState(event.target.value);
