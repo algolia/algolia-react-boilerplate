@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 // Algolias's import
 import algoliasearch from 'algoliasearch/lite';
@@ -25,10 +25,14 @@ const FederatedSearch = React.memo(() => {
   const [isFederated, setIsFederated] = useRecoilState(isFederatedAtom);
   // const isFederated = useRecoilValue(isFederatedAtom);
   const containerFederated = useRef('');
+  console.log(isFederated);
+
   useOutsideClick(containerFederated, () => {
-    if (isFederated) setIsFederated(false);
+    console.log('in hooks');
+    etIsFederated(false);
   });
-  // Configuration for federated search
+
+  // Federated search configuration
   const {
     isRecentSearch,
     isQuerySuggestions,
@@ -41,6 +45,7 @@ const FederatedSearch = React.memo(() => {
     config.searchClient.appID,
     config.searchClient.APIKey
   );
+
   return (
     <div className="federatedSearch" ref={containerFederated}>
       <div className="federatedSearch__wrapper">

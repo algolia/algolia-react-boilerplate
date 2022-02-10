@@ -17,6 +17,10 @@ export const indexName = {
   indexBlog: 'canda_customDemo_articles',
 };
 
+const voiceSearch = {
+  value: true,
+};
+
 const refinements = [
   {
     type: 'hierarchical',
@@ -161,6 +165,7 @@ const config = {
   searchClient,
   federatedSearchConfig,
   federatedCategory,
+  voiceSearch,
 };
 
 export const configAtom = atom({

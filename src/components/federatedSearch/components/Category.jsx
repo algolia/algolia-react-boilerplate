@@ -4,7 +4,6 @@ import React from 'react';
 import { connectRefinementList } from 'react-instantsearch-dom';
 
 const CategoryItems = ({ items, refine }) => {
-  console.log('CategoryItems called');
   return (
     <div className="categories">
       <h3 className="categories__title">Categories</h3>

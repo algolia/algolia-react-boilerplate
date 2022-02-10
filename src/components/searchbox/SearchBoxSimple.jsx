@@ -1,6 +1,10 @@
 // This SearchBox is with a glass inside
 // but simple it means with only a glass simple effect
-import React from 'react';
+// Import Debounce
+import debounce from 'lodash.debounce';
+import React, { useCallback } from 'react';
+// Algolia Import
+import { connectSearchBox } from 'react-instantsearch-dom';
 // Import Recoil
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
@@ -11,12 +15,18 @@ import { queryAtom, simplePlaceholderAtom } from '../../config/searchbox';
 
 import { isFederatedAtom } from '../../config/config';
 
-const SearchBoxSimple = () => {
-  // State for the SearchBox
-  const [setQueryState] = useRecoilState(queryAtom);
+const SearchBoxSimple = ({ refine }) => {
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederated = useSetRecoilState(isFederatedAtom);
+  const [queryState, setQueryState] = useRecoilState(queryAtom);
+  const refineFunction = (event) => {
+    setQueryState(event);
+    refine(event);
+  };
 
+  // Debounce during search if you want to change the reactivity change number 250
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedRefine = useCallback(debounce(refineFunction, 250), []);
   return (
     <div className="searchbox-simple">
       <form
@@ -32,10 +42,11 @@ const SearchBoxSimple = () => {
         <input
           className="searchbox-simple__form__input"
           type="search"
+          value={queryState ? queryState : ''}
           placeholder={simplePlaceholder}
           onClick={() => setIsFederated(true)}
           onChange={(event) => {
-            setQueryState(event.target.value);
+            debouncedRefine(event.currentTarget.value);
           }}
         />
         <Glass />
@@ -44,4 +55,6 @@ const SearchBoxSimple = () => {
   );
 };
 
-export default SearchBoxSimple;
+const CustomSearchBoxSimple = connectSearchBox(SearchBoxSimple);
+
+export default CustomSearchBoxSimple;

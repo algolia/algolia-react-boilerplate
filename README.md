@@ -18,6 +18,12 @@ On Mac 👇
 brew install git-flow-avh
 git flow init
 ```
+[Husky](https://typicode.github.io/husky/#/)
+
+```sh
+npx husky install
+```
+🐶
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
 
@@ -43,3 +49,23 @@ There are two places where application configuration is defined:
 
 - config/config.js contains layout variables like the refinements, sorts etc.
   - the config is exported via an object which is controlled by a state atom (see state section for more details)
+
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
+
+[Banner](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/add-banners/)
+
+How Configure it 👇
+
+- In rules Section in the Dashboard, you have 2 rules without query conditions.
+- You can edit or create one, and personalise the differrent fields:
+  - Images (For the background, or for the thumbnails)
+  - Link or Text for the buttons
+  - Titles and Subtitles
+- In the code you have a condition, actually they are called together, but you can keep by type :
+  - HomeBannerOne or HomeBannerTwo
+
+  <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Debounce</h3>
+
+[Debounce Lodash](https://www.npmjs.com/package/lodash.debounce)
+
+The Utility of this package is to wait before action, for example on the SearchBox, onChange wait some time before send query.
