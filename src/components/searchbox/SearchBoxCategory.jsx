@@ -2,6 +2,8 @@
 // they have like classic one glass etc... but with another field => an other placeholder
 // you can personalise and display for example category
 import React from 'react';
+// Algolia Import
+import { connectSearchBox } from 'react-instantsearch-dom';
 // Import Recoil
 import { useRecoilState } from 'recoil';
 
@@ -14,9 +16,9 @@ import {
 } from '../../config/searchbox';
 // Import SVG from file as a component
 
-const SearchBoxCategory = () => {
+const SearchBoxCategory = ({ refine }) => {
   // State for the SearchBox
-  const [setQueryState] = useRecoilState(queryAtom);
+  const [queryState, setQueryState] = useRecoilState(queryAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const [customPlaceholder] = useRecoilState(customPlaceholderAtom);
 
@@ -27,6 +29,7 @@ const SearchBoxCategory = () => {
         action=""
         role="search"
         autoComplete="off"
+        value={queryState}
         onSubmit={(event) => {
           event.preventDefault();
           setQueryState(event.target.value);
@@ -38,6 +41,7 @@ const SearchBoxCategory = () => {
           placeholder={simplePlaceholder}
           onChange={(event) => {
             setQueryState(event.target.value);
+            refine(event.currentTarget.value);
           }}
         />
         <div className="searchbox-custom__placeholder">
@@ -49,4 +53,6 @@ const SearchBoxCategory = () => {
   );
 };
 
-export default SearchBoxCategory;
+const CustomSearchBoxCategory = connectSearchBox(SearchBoxCategory);
+
+export default CustomSearchBoxCategory;

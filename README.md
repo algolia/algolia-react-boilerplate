@@ -57,3 +57,9 @@ How Configure it 👇
   - Titles and Subtitles
 - In the code you have a condition, actually they are called together, but you can keep by type :
   - HomeBannerOne or HomeBannerTwo
+
+  <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Debounce</h3>
+
+[Debounce Lodash](https://www.npmjs.com/package/lodash.debounce)
+
+The Utility of this package is to wait before action, for example on the SearchBox, onChange wait some time before send query.

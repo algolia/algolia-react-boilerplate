@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 // React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
@@ -9,10 +9,10 @@ import { linksHeader } from '../../config/header';
 // Import Hook
 import useStickyHeader from '../../hooks/useStickyHeader';
 // Import SearchBox
-import SearchBoxSimple from '../searchbox/SearchBoxSimple';
+import CustomSearchBoxSimple from '../searchbox/SearchBoxSimple';
 
 const Header = () => {
-  const elementRef = useRef();
+  const elementRef = useRef('');
   const [links] = useRecoilState(linksHeader);
   const sticky = useStickyHeader(elementRef);
   const headerClasses = `header ${sticky ? 'sticky' : ''}`;
@@ -32,7 +32,7 @@ const Header = () => {
             </div>
             {/* For a search box Simple center */}
             <div className="searchbox-container">
-              <SearchBoxSimple />
+              <CustomSearchBoxSimple />
             </div>
             <div className="container__header-top__title">
               <h1>Demo BoilerPlate</h1>
