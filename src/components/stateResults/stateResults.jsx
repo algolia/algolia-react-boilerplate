@@ -1,3 +1,4 @@
+import {useEffect} from 'react'
 import { connectStateResults } from 'react-instantsearch-dom'
 
 import { useRecoilState } from 'recoil';
@@ -10,8 +11,10 @@ const areArraysEqual = (a, b) =>
   a.every((v, i) => v === b[i]);
 
 
-const StateResults = ({ searchResults }) => {
-    const [hitsState, setHitsState] = useRecoilState(hitsAtom);
+function StateResults({searchResults }) {
+  const [hitsState, setHitsState] = useRecoilState(hitsAtom);
+
+  useEffect(() => {
     if(searchResults?.hits) {
         // array of algolia hits
         let results = searchResults?.hits
@@ -22,6 +25,7 @@ const StateResults = ({ searchResults }) => {
             setHitsState(searchResults.hits)
         }
     }
+  }, [searchResults]);
     return null
   };
   

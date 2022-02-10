@@ -11,7 +11,7 @@ const ResultsPage = () => {
   console.log(hitsState)
   return (
     <div>
-      <p>Results Page // {hitsState}</p>
+      <p>Results Page //</p>
       <Hits />
     </div>
   );
