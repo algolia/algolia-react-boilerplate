@@ -15,6 +15,10 @@ export const indexName = {
   index: 'flagship_fashion',
 };
 
+const voiceSearch = {
+  value: true,
+};
+
 const refinements = [
   {
     type: 'hierarchical',
@@ -138,6 +142,7 @@ const config = {
   url,
   indexName,
   searchClient,
+  voiceSearch,
 };
 
 export const configAtom = atom({

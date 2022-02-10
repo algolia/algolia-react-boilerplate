@@ -39,7 +39,7 @@ const SearchBoxSimple = ({ refine }) => {
         <input
           className="searchbox-simple__form__input"
           type="search"
-          value={queryState}
+          value={queryState ? queryState : ''}
           placeholder={simplePlaceholder}
           onChange={(event) => {
             debouncedRefine(event.currentTarget.value);
