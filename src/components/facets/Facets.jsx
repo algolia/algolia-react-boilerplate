@@ -79,22 +79,24 @@ const Facets = () => {
   const refinementParams = config.refinements;
   return (
     <DynamicWidgets>
-      {refinementParams.map((e, i) => {
-        const refinementType = e.type;
-        if (refinementType !== 'price') {
-          return (
-            <GenericRefinementList
-              searchable={e.options?.searchable}
-              key={i}
-              limit={e.options?.limit}
-              attribute={e.options.attribute}
-              title={e.label}
-              options={e.options}
-            />
-          );
-        }
-        return '';
-      })}
+      {refinementParams
+        .map((e, i) => {
+          const refinementType = e.type;
+          if (refinementType !== 'price') {
+            return (
+              <GenericRefinementList
+                searchable={e.options?.searchable}
+                key={i}
+                limit={e.options?.limit}
+                attribute={e.options.attribute}
+                title={e.label}
+                options={e.options}
+              />
+            );
+          }
+          return null;
+        })
+        .filter(Boolean)}
     </DynamicWidgets>
   );
 };
