@@ -6,10 +6,10 @@ import { DynamicWidgets, connectRefinementList } from 'react-instantsearch-dom';
 // import config file for state of facets
 import { useRecoilState } from 'recoil';
 
-import { configAtom } from '../../config/config';
-
 // Import components
 import { Glass } from '../../assets/svg/SvgIndex';
+// Import Config
+import { configAtom } from '../../config/config';
 
 // expects an attribute which is an array of items
 const RefinementList = ({ title, items, refine, searchForItems, options }) => {
