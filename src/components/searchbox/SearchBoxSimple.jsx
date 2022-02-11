@@ -8,7 +8,7 @@ import { connectSearchBox } from 'react-instantsearch-dom';
 // Router Navigation
 import { useNavigate } from 'react-router-dom';
 // Import Recoil
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 // Import SVG from file as a component
 import { Glass } from '../../assets/svg/SvgIndex';
@@ -16,7 +16,7 @@ import { Glass } from '../../assets/svg/SvgIndex';
 import { queryAtom, simplePlaceholderAtom } from '../../config/searchbox';
 
 const SearchBoxSimple = ({ refine }) => {
-  const setQueryState = useSetRecoilState(queryAtom);
+  const [queryState,setQueryState] = useRecoilState(queryAtom);
   const refineFunction = (event) => {
     setQueryState(event);
     refine(event);
@@ -43,6 +43,7 @@ const SearchBoxSimple = ({ refine }) => {
         <input
           className="searchbox-simple__form__input"
           type="search"
+          value={queryState}
           placeholder={simplePlaceholder}
           onChange={(event) => {
             debouncedRefine(event.currentTarget.value);
