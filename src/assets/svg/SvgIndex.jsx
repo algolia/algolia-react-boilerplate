@@ -14,3 +14,27 @@ export const Glass = () => {
     </svg>
   );
 };
+
+export const Heart = () => {
+  return (
+    <svg
+      width="36"
+      height="31"
+      viewBox="0 0 36 31"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g clipPath="url(#clip0_766_14)">
+        <path
+          d="M26.3 2C30.5 2 34 5.4 34 9.7C34 11.9 33 14 31.4 15.5H31.3L18 28.7L4.7 15.5H4.6C3 14 2 11.9 2 9.7C2 5.4 5.5 2 9.7 2C12.4 2 14.9 3.4 16.3 5.7L18 8.4L19.7 5.6C21.1 3.4 23.6 2 26.3 2ZM26.3 0C22.8 0 19.7 1.9 18 4.6C16.3 1.9 13.2 0 9.7 0C4.4 0 0 4.3 0 9.7C0 12.6 1.3 15.2 3.3 17L17.1 30.7C17.3 30.9 17.7 31.1 18 31.1C18.3 31.1 18.7 31 18.9 30.7L32.7 17C34.7 15.2 36 12.6 36 9.7C36 4.3 31.6 0 26.3 0Z"
+          fill="black"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_766_14">
+          <rect width="36" height="31" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};

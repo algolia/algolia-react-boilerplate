@@ -97,6 +97,66 @@
 // ------------------------------------------
 // Hits
 // ------------------------------------------
+@mixin hits-individual($title-color, $price-color, $higlight-color, $shadow) {
+  width: 100%;
+  display: block;
+  &__list {
+    &__img {
+      position: relative;
+      img {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      &__heart {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        svg {
+          cursor: pointer;
+          width: 20px;
+        }
+      }
+    }
+    :hover {
+      box-shadow: 0 0rem 5rem rgba($shadow, 0.2);
+    }
+    &__infos {
+      align-items: flex-start;
+      height: 100%;
+      width: 100%;
+      margin: 1rem 0;
+      h3 {
+        font-weight: 300;
+        font-size: 0.8rem;
+        text-align: center;
+        margin: 0 auto;
+        .ais-Highlight-nonHighlighted {
+          color: $title-color;
+        }
+        .ais-Highlight-highlighted {
+          @include highlight($higlight-color);
+        }
+      }
+      &__down {
+        margin: 0 auto;
+        text-align: center;
+        p {
+          color: $price-color;
+          font-weight: 400;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@mixin highlight($higlight-color) {
+  color: $higlight-color;
+  font-style: normal;
+  font-weight: 600;
+}
 
 // ------------------------------------------
 // Facets
