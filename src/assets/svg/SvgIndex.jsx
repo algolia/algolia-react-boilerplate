@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const Glass = () => (
   <svg viewBox="0 0 897 897" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -15,6 +15,7 @@ export const Glass = () => (
 
 export const ChevronRight = () => (
   <svg
+    className="chevronRight"
     width="16"
     height="25"
     viewBox="0 0 16 25"

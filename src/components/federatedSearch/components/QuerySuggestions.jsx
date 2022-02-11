@@ -3,6 +3,8 @@ import React from 'react';
 // Algolia's imports
 import { connectHits, Highlight } from 'react-instantsearch-dom';
 
+// components import
+import { ChevronRight } from '../../../assets/svg/SvgIndex';
 const Suggestions = ({ hits }) => {
   return (
     <div className="suggestions">
@@ -15,6 +17,7 @@ const Suggestions = ({ hits }) => {
               className="suggestions__item"
               onClick={(e) => {}}
             >
+              <ChevronRight />
               <p>
                 <Highlight hit={hit} attribute="query" />
               </p>

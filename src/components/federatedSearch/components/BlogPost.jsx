@@ -10,12 +10,13 @@ const ArticlesItems = ({ hits }) => {
           <div key={index} className="articles__item">
             <div className="image-wrapper">
               <img src={hit['Image Link']} alt="" />
-              <p className="title">{hit.Title}</p>
+
+              <p className="date">{hit.Date}</p>
               <div className="overlay"></div>
             </div>
             <div className="infos">
-              <p className="date">{hit.Date}</p>
-              <p>{hit.Subtitle}</p>
+              <p className="title">{hit.Title}</p>
+              <p className="subtitle">{hit.Subtitle}</p>
             </div>
           </div>
         );

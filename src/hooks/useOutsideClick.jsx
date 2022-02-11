@@ -1,9 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-const useOutsideClick = (ref, callback) => {
+const useOutsideClick = (ref, optionalParameter, callback) => {
+  optionalParameter = optionalParameter || null;
+
   const handleClick = (e) => {
-    console.log(e);
-    if (ref.current && !ref.current.contains(e.target)) {
+    if (
+      ref.current &&
+      !ref.current.contains(e.target) &&
+      !optionalParameter.contains(e.target)
+    ) {
       callback();
     }
   };

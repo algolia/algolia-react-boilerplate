@@ -1,5 +1,8 @@
 import React from 'react';
 
+// components import
+import { ChevronRight } from '../../../assets/svg/SvgIndex';
+
 const RecentSearches = React.memo(() => {
   const getSearches = localStorage.getItem('recentSearches');
   const cleanSearches = JSON.parse(getSearches);
@@ -15,6 +18,7 @@ const RecentSearches = React.memo(() => {
             .map((search, index) => {
               return (
                 <li onClick={(e) => {}} key={index}>
+                  <ChevronRight />
                   <p>{search}</p>
                 </li>
               );

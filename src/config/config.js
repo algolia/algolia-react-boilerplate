@@ -150,8 +150,12 @@ const federatedSearchConfig = {
 };
 
 export const isFederatedAtom = atom({
-  key: 'isFederatedVisible', // unique ID (with respect to other atoms/selectors)
+  key: 'isFederatedAtom', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
+});
+export const searchBoxAtom = atom({
+  key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
 });
 
 const config = {

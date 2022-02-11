@@ -10,6 +10,7 @@ import { useRecoilValue } from 'recoil';
 
 const HomePage = () => {
   const isFederated = useRecoilValue(isFederatedAtom);
+
   return (
     <div className="homepage">
       {isFederated && <FederatedSearch />}

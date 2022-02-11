@@ -3,6 +3,9 @@ import React from 'react';
 // Algolia's imports
 import { connectHits } from 'react-instantsearch-dom';
 
+// Component import
+import { ChevronRight } from '../../../assets/svg/SvgIndex';
+
 const Hits = ({ hits }) => {
   return (
     <div className="products">
@@ -17,12 +20,20 @@ const Hits = ({ hits }) => {
               className="products__item"
               onClick={(e) => {}}
             >
-              <p>{hit.name}</p>
+              <div className="image-wrapper">
+                <img src={hit.full_url_image} alt="" />
+              </div>
+              <div className="infos">
+                <p className="brand">{hit.brand}</p>
+                <p className="name">{hit.name}</p>
+                <p className="price">{hit.price}</p>
+              </div>
             </li>
           );
         })}
       </ul>
       <div className="products__btn" onClick={() => {}}>
+        <ChevronRight />
         <p>SHOW ALL PRODUCTS</p>
       </div>
     </div>

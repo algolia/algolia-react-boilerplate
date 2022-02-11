@@ -5,8 +5,12 @@ import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, Configure } from 'react-instantsearch-dom';
 
 // import from Recoil
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { configAtom, isFederatedAtom } from '../../config/config';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import {
+  configAtom,
+  isFederatedAtom,
+  searchBoxAtom,
+} from '../../config/config';
 
 // hook import
 import useOutsideClick from '../../hooks/useOutsideClick';
@@ -18,20 +22,16 @@ import Category from './components/Category';
 import Products from './components/Products';
 import Articles from './components/BlogPost';
 
-const FederatedSearch = React.memo(() => {
-  console.log('Federated called');
+const FederatedSearch = () => {
   // Recoil & States
   const [config] = useRecoilState(configAtom);
-  const [isFederated, setIsFederated] = useRecoilState(isFederatedAtom);
-  // const isFederated = useRecoilValue(isFederatedAtom);
+  const setIsFederated = useSetRecoilState(isFederatedAtom);
+  const searchboxRef = useRecoilValue(searchBoxAtom);
   const containerFederated = useRef('');
-  console.log(isFederated);
-
-  useOutsideClick(containerFederated, () => {
-    console.log('in hooks');
-    etIsFederated(false);
-  });
-
+  //hook
+  useOutsideClick(containerFederated, searchboxRef, () =>
+    setIsFederated(false)
+  );
   // Federated search configuration
   const {
     isRecentSearch,
@@ -91,6 +91,6 @@ const FederatedSearch = React.memo(() => {
       </div>
     </div>
   );
-});
+};
 
 export default FederatedSearch;

@@ -2,7 +2,7 @@
 // but simple it means with only a glass simple effect
 // Import Debounce
 import debounce from 'lodash.debounce';
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
 // Import Recoil
@@ -13,12 +13,14 @@ import { Glass } from '../../assets/svg/SvgIndex';
 // Import Config for recoil from file as a component
 import { queryAtom, simplePlaceholderAtom } from '../../config/searchbox';
 
-import { isFederatedAtom } from '../../config/config';
+import { isFederatedAtom, searchBoxAtom } from '../../config/config';
 
 const SearchBoxSimple = ({ refine }) => {
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederated = useSetRecoilState(isFederatedAtom);
   const [queryState, setQueryState] = useRecoilState(queryAtom);
+  const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
+
   const refineFunction = (event) => {
     setQueryState(event);
     refine(event);
@@ -41,11 +43,13 @@ const SearchBoxSimple = ({ refine }) => {
       >
         <input
           className="searchbox-simple__form__input"
+          ref={setSearchBoxRef}
           type="search"
           value={queryState ? queryState : ''}
           placeholder={simplePlaceholder}
           onClick={() => setIsFederated(true)}
           onChange={(event) => {
+            // setIsFederated(true);
             debouncedRefine(event.currentTarget.value);
           }}
         />
