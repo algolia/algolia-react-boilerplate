@@ -20,7 +20,8 @@
     display: inline-block;
   }
   &__hits {
-    width: 75%;
-    background-color: yellow;
+    width: 85%;
+    position: relative;
+    flex-grow: 2;
   }
 }
