@@ -20,7 +20,6 @@ const SearchResultPage = () => {
         <InjectedInfiniteHits
           hitComponent={Hit}
           slots={({ resultsByIndex }) => {
-            console.log(resultsByIndex);
             const { noCta, nikeCard } = customDataByType(
               resultsByIndex?.flagship_fashion?.userData
             );
