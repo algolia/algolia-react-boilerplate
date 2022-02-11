@@ -18,11 +18,13 @@ On Mac 👇
 brew install git-flow-avh
 git flow init
 ```
+
 [Husky](https://typicode.github.io/husky/#/)
 
 ```sh
 npx husky install
 ```
+
 🐶
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
@@ -62,7 +64,20 @@ How Configure it 👇
   - Link or Text for the buttons
   - Titles and Subtitles
 - In the code you have a condition, actually they are called together, but you can keep by type :
+
   - HomeBannerOne or HomeBannerTwo
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 FacetDisplay</h3>
+
+[Facet Display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react/)
+
+The ability to control the facets to display and their order works by sending a dedicated.
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 💉 InjectedContent</h3>
+
+[Magazine Layout](https://github.com/algolia/magazine-layout)
+
+Thanks to the work from the 'Front End Team', we customized their injected content about 2 rules, on for free returns always display, and the 2nd for 'Nike Products'. All its rules are modifiable in [Dashboard](https://www.algolia.com/apps/853MYZ81KY/rules/flagship_fashion).
 
   <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Debounce</h3>
 
