@@ -47,15 +47,15 @@
           $orange-color
         );
       }
-      :hover {
-        @include facetsFilterHover($orange-color);
-      }
       :hover > p {
         color: $white-color;
       }
       :hover > span {
         color: $white-color;
       }
+    }
+    :hover {
+      @include facetsFilterHover($orange-color);
     }
   }
   .refined-filter {
