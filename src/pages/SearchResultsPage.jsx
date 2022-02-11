@@ -6,7 +6,7 @@ import GenericRefinementList from '../components/facets/Facets';
 import GiftCard from '../components/hits/GiftCard';
 import { Hit } from '../components/hits/Hits';
 import InfluencerCard from '../components/hits/InfluencerCard';
-import SalesCard from '../components/hits/SalesCard';
+import NikeCard from '../components/hits/SalesCard';
 import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hits';
 import { customDataByType } from '../utils';
 
@@ -20,7 +20,8 @@ const SearchResultPage = () => {
         <InjectedInfiniteHits
           hitComponent={Hit}
           slots={({ resultsByIndex }) => {
-            const { noCta, salesCard } = customDataByType(
+            console.log(resultsByIndex);
+            const { noCta, nikeCard } = customDataByType(
               resultsByIndex?.flagship_fashion?.userData
             );
             return [
@@ -30,9 +31,9 @@ const SearchResultPage = () => {
                 slotComponent: GiftCard,
               },
               {
-                getHits: () => [salesCard],
-                injectAt: salesCard ? salesCard.position : null,
-                slotComponent: SalesCard,
+                getHits: () => [nikeCard],
+                injectAt: nikeCard ? nikeCard.position : null,
+                slotComponent: NikeCard,
               },
               {
                 injectAt: ({ position }) => position === 2,

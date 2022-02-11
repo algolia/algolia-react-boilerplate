@@ -109,6 +109,9 @@
         overflow: hidden;
         cursor: pointer;
       }
+      :hover {
+        box-shadow: 0 0rem 5rem rgba($shadow, 0.2);
+      }
       &__heart {
         position: absolute;
         top: 1rem;
@@ -118,9 +121,6 @@
           width: 20px;
         }
       }
-    }
-    :hover {
-      box-shadow: 0 0rem 5rem rgba($shadow, 0.2);
     }
     &__infos {
       align-items: flex-start;
@@ -156,6 +156,26 @@
   color: $higlight-color;
   font-style: normal;
   font-weight: 600;
+}
+
+@mixin salesCard($text-color) {
+  position: relative;
+  &__infos {
+    position: absolute;
+    padding: 0 0.6rem;
+    bottom: 3rem;
+    p {
+      color: $text-color;
+      font-size: 0.7rem;
+      font-weight: 800;
+    }
+    h3 {
+      color: $text-color;
+      font-weight: 900;
+      font-size: 1.9rem;
+      margin-top: 1rem;
+    }
+  }
 }
 
 // ------------------------------------------

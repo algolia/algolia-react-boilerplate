@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 
 // SALES CARD
-const SalesCard = ({ hit }) => {
+const NikeCard = ({ hit }) => {
   const listItem = {
     hidden: { opacity: 0, y: 100 },
     show: {
@@ -24,7 +24,7 @@ const SalesCard = ({ hit }) => {
         backgroundSize: 'cover',
       }}
     >
-      <div className="infos">
+      <div className="image-wrapper-sales__infos">
         <p>{hit.coupon}</p>
         <h3>{hit.title}</h3>
       </div>
@@ -32,4 +32,4 @@ const SalesCard = ({ hit }) => {
   );
 };
 
-export default SalesCard;
+export default NikeCard;
