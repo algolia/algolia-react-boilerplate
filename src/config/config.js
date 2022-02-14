@@ -16,6 +16,9 @@ export const indexName = {
 const voiceSearch = {
   value: true,
 };
+const stats = {
+  value: true,
+};
 
 const refinements = [
   {
@@ -156,6 +159,7 @@ const config = {
   federatedSearchConfig,
   federatedCategory,
   voiceSearch,
+  stats,
 };
 
 export const configAtom = atom({
