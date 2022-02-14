@@ -2,9 +2,10 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 import { Highlight } from 'react-instantsearch-dom';
-// Router Navigation
-// import { useNavigate } from 'react-router-dom';
+
 import { Heart } from '../../assets/svg/SvgIndex';
+
+// import { useNavigate } from 'react-router-dom';
 
 const Hit = ({ hit, index }) => {
   const listItem = {

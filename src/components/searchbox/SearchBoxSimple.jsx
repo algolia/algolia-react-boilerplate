@@ -5,7 +5,7 @@ import debounce from 'lodash.debounce';
 import React, { useCallback } from 'react';
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
-// Router Navigation
+// Import navigate function to route to results page on search submit
 import { useNavigate } from 'react-router-dom';
 // Import Recoil
 import { useRecoilState } from 'recoil';
@@ -16,7 +16,10 @@ import { Glass } from '../../assets/svg/SvgIndex';
 import { queryAtom, simplePlaceholderAtom } from '../../config/searchbox';
 
 const SearchBoxSimple = ({ refine }) => {
-  const [queryState,setQueryState] = useRecoilState(queryAtom);
+  // router hook to navigate using a function
+  const navigate = useNavigate();
+
+  const [queryState, setQueryState] = useRecoilState(queryAtom);
   const refineFunction = (event) => {
     setQueryState(event);
     refine(event);
@@ -26,7 +29,6 @@ const SearchBoxSimple = ({ refine }) => {
   // Debounce during search if you want to change the reactivity change number 250
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedRefine = useCallback(debounce(refineFunction, 50), []);
-  const navigate = useNavigate();
   return (
     <div className="searchbox-simple">
       <form
@@ -43,7 +45,7 @@ const SearchBoxSimple = ({ refine }) => {
         <input
           className="searchbox-simple__form__input"
           type="search"
-          value={queryState}
+          value={queryState ? queryState : ''}
           placeholder={simplePlaceholder}
           onChange={(event) => {
             debouncedRefine(event.currentTarget.value);
