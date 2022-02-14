@@ -13,6 +13,9 @@ import { RecoilRoot } from 'recoil';
 import Header from './components/header/Header';
 import HomePage from './pages/HomePage';
 import Page2 from './pages/Page2';
+import ResultsPage from './pages/ResultsPage';
+
+import CustomStateResults from './components/stateResults/stateResults'
 
 // SCSS import
 import './scss/index.scss';
@@ -28,11 +31,13 @@ const App = () => {
   return (
     <RecoilRoot>
       <InstantSearch searchClient={search} indexName={indexName.index}>
+        <CustomStateResults />
         <Router>
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/page2" element={<Page2 />} />
+            <Route path="/results" element={<ResultsPage />} />
           </Routes>
         </Router>
       </InstantSearch>
