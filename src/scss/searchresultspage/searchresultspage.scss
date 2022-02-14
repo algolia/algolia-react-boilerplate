@@ -26,3 +26,19 @@
     padding: 0 1rem;
   }
 }
+
+// ------------------------------------------
+// Stats
+// ------------------------------------------
+.stats-infos {
+  @include stats($blue-algolia);
+}
+
+// ------------------------------------------
+// Pagination
+// ------------------------------------------
+.ais-Pagination {
+  display: flex;
+  justify-content: center;
+  @include pagination($blue-algolia);
+}

@@ -59,7 +59,7 @@
           $white-color,
           $main-color,
           $main-color,
-          $orange-color
+          $blue-algolia
         );
       }
       :hover > p {
@@ -70,11 +70,11 @@
       }
     }
     :hover {
-      @include facetsFilterHover($orange-color);
+      @include facetsFilterHover($blue-algolia);
     }
   }
   .refined-filter {
-    @include btn-hover($orange-color, $white-color);
+    @include btn-hover($blue-algolia, $white-color);
     p,
     span {
       color: $white-color;
