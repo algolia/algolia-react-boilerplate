@@ -7,7 +7,7 @@ import { Heart } from '../../assets/svg/SvgIndex';
 
 // import { useNavigate } from 'react-router-dom';
 
-const Hit = ({ hit, index }) => {
+const Hit = ({ hit }) => {
   const listItem = {
     hidden: { opacity: 0, y: 100 },
     show: {
