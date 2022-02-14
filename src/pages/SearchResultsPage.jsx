@@ -21,7 +21,6 @@ import { customDataByType } from '../utils';
 const SearchResultPage = () => {
   const [config] = useRecoilState(configAtom);
   const [injected, setInjected] = useState(false);
-  console.log(injected);
 
   // Define Stat Const
   const stats = config.stats.value;
