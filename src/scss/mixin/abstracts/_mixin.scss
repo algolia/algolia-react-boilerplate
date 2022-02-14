@@ -73,11 +73,10 @@
 // ------------------------------------------
 // Fonts, Title, p,....
 // ------------------------------------------
-@mixin title ($text-color){
-font-size: 1.2rem;
-font-weight: bold;
-margin-bottom: 0.5rem;
-
+@mixin title($text-color) {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 // ------------------------------------------
 // HomePage
@@ -98,6 +97,39 @@ margin-bottom: 0.5rem;
 // ------------------------------------------
 // SearchResult Page
 // ------------------------------------------
+
+@mixin stats($span-color) {
+  display: flex;
+  margin-bottom: 1rem;
+  &__list {
+    display: flex;
+    span {
+      color: $span-color;
+      font-weight: 600;
+    }
+    p {
+      margin-left: 0.5rem;
+    }
+  }
+}
+@mixin pagination($back-color) {
+  .ais-Pagination-list {
+    margin-top: 2rem;
+    display: flex;
+    .ais-Pagination-item {
+      border: 1px solid $back-color;
+      padding: 0.8rem;
+      border-radius: 0.5rem;
+      margin-right: 1rem;
+      background-color: $back-color;
+      color: white;
+    }
+    .ais-Pagination-item--selected{
+      color: $back-color;
+      background-color: white;
+    }
+  }
+}
 
 // ------------------------------------------
 // Hits

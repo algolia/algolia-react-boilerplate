@@ -16,6 +16,9 @@ export const indexName = {
 const voiceSearch = {
   value: true,
 };
+const stats = {
+  value: true,
+};
 
 const refinements = [
   {
@@ -83,6 +86,11 @@ const sorts = [
   },
   { value: `${indexName}_desc_price`, label: 'Price High to Low' },
 ];
+
+const hitsPerPage = {
+  numberNotInjected: 15,
+  numberInjected: 14,
+};
 
 const breadcrumbAttributes = [
   'hierarchical_categories.lvl0',
@@ -156,6 +164,8 @@ const config = {
   federatedSearchConfig,
   federatedCategory,
   voiceSearch,
+  stats,
+  hitsPerPage,
 };
 
 export const configAtom = atom({
