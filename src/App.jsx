@@ -12,6 +12,7 @@ import { RecoilRoot } from 'recoil';
 
 import Header from './components/header/Header';
 import HomePage from './pages/HomePage';
+import SearchResultsPage from './pages/SearchResultsPage';
 import Page2 from './pages/Page2';
 import ResultsPage from './pages/ResultsPage';
 
@@ -36,6 +37,7 @@ const App = () => {
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/search" element={<SearchResultsPage />} />
             <Route path="/page2" element={<Page2 />} />
             <Route path="/results" element={<ResultsPage />} />
           </Routes>

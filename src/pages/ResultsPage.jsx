@@ -8,10 +8,9 @@ import { hitsAtom } from '../config/results';
 import { Hits } from 'react-instantsearch-dom';
 
 const ResultsPage = () => {
-
   // If we need to, we can directly access hits from here
   const [hitsState] = useRecoilState(hitsAtom);
-  console.log(hitsState)
+  console.log(hitsState);
 
   return (
     <div>

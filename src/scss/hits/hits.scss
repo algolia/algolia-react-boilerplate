@@ -1,0 +1,28 @@
+// ------------------------------------------
+// Hits
+// ------------------------------------------
+@import '../mixin/abstracts/abstracts.scss';
+
+.ais-InfiniteHits {
+  .ais-InfiniteHits-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    .hits-srp {
+      @include hits-individual(
+        $main-color,
+        $orange-color,
+        $orange-color,
+        $orange-color
+      );
+    }
+  }
+}
+
+// ------------------------------------------
+// SalesCard
+// ------------------------------------------
+.image-wrapper-sales {
+  @include salesCard($white-color);
+}

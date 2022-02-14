@@ -1,6 +1,6 @@
 // Mixins
-@import "./variables.scss";
-@import "./fonts";
+@import './variables.scss';
+@import './fonts';
 
 // ------------------------------------------
 // How use mixins
@@ -102,5 +102,118 @@ margin-bottom: 0.5rem;
 // ------------------------------------------
 // Hits
 // ------------------------------------------
+@mixin hits-individual($title-color, $price-color, $higlight-color, $shadow) {
+  width: 100%;
+  display: block;
+  &__list {
+    &__img {
+      position: relative;
+      img {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      :hover {
+        box-shadow: 0 0rem 5rem rgba($shadow, 0.2);
+      }
+      &__heart {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        svg {
+          cursor: pointer;
+          width: 20px;
+        }
+      }
+    }
+    &__infos {
+      align-items: flex-start;
+      height: 100%;
+      width: 100%;
+      margin: 1rem 0;
+      h3 {
+        font-weight: 300;
+        font-size: 0.8rem;
+        text-align: center;
+        margin: 0 auto;
+        .ais-Highlight-nonHighlighted {
+          color: $title-color;
+        }
+        .ais-Highlight-highlighted {
+          @include highlight($higlight-color);
+        }
+      }
+      &__down {
+        margin: 0 auto;
+        text-align: center;
+        p {
+          color: $price-color;
+          font-weight: 400;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
 
-// ....
+@mixin highlight($higlight-color) {
+  color: $higlight-color;
+  font-style: normal;
+  font-weight: 600;
+}
+
+@mixin salesCard($text-color) {
+  position: relative;
+  &__infos {
+    position: absolute;
+    padding: 0 0.6rem;
+    bottom: 3rem;
+    p {
+      color: $text-color;
+      font-size: 0.7rem;
+      font-weight: 800;
+    }
+    h3 {
+      color: $text-color;
+      font-weight: 900;
+      font-size: 1.9rem;
+      margin-top: 1rem;
+    }
+  }
+}
+
+// ------------------------------------------
+// Facets
+// ------------------------------------------
+@mixin facetsFilter($background, $text-color, $p-color, $span-color) {
+  text-decoration: none;
+  width: 100%;
+  justify-content: center;
+  margin: 0.5rem 0;
+  padding: 0.8em;
+  font-size: 0.7rem;
+  transition: all 0.4s ease-in-out;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: rgba($text-color, 0.8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  background-color: initial;
+  p {
+    color: $p-color;
+    font-size: 0.9rem;
+    font-weight: 100;
+    text-align: left;
+  }
+  span {
+    color: $span-color;
+    font-size: 0.7rem;
+  }
+}
+
+@mixin facetsFilterHover($background) {
+  background-color: $background;
+}

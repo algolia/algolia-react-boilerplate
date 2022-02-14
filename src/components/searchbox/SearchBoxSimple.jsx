@@ -2,31 +2,27 @@
 // but simple it means with only a glass simple effect
 // Import Debounce
 import debounce from 'lodash.debounce';
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback } from 'react';
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
+// Import navigate function to route to results page on search submit
+import { useNavigate } from 'react-router-dom';
 // Import Recoil
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
-// Import navigate function to route to results page on search submit
-import { useNavigate } from "react-router-dom";
-
 // Import SVG from file as a component
+// eslint-disable-next-line import/namespace
 import { Glass } from '../../assets/svg/SvgIndex';
 // Import Config for recoil from file as a component
+import { isFederatedAtom, searchBoxAtom } from '../../config/config';
 import { queryAtom, simplePlaceholderAtom } from '../../config/searchbox';
 
-import { isFederatedAtom, searchBoxAtom } from '../../config/config';
 
 const SearchBoxSimple = ({ refine }) => {
-
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederated = useSetRecoilState(isFederatedAtom);
-
-
   // router hook to navigate using a function
-  let navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   const [queryState, setQueryState] = useRecoilState(queryAtom);
   const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
@@ -49,7 +45,7 @@ const SearchBoxSimple = ({ refine }) => {
         onSubmit={(event) => {
           event.preventDefault();
           setQueryState(event.target.value);
-          navigate("/results");
+          navigate('/search/');
         }}
       >
         <input
