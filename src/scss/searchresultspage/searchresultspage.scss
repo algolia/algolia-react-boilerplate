@@ -31,7 +31,7 @@
 // Stats
 // ------------------------------------------
 .stats-infos {
-  @include stats($orange-color);
+  @include stats($blue-algolia);
 }
 
 // ------------------------------------------
@@ -40,5 +40,5 @@
 .ais-Pagination {
   display: flex;
   justify-content: center;
-  @include pagination($orange-color);
+  @include pagination($blue-algolia);
 }

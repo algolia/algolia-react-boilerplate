@@ -12,9 +12,9 @@
     .hits-srp {
       @include hits-individual(
         $main-color,
-        $orange-color,
-        $orange-color,
-        $orange-color
+        $blue-algolia,
+        $blue-algolia,
+        $blue-algolia
       );
     }
   }
