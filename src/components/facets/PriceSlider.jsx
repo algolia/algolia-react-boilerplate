@@ -9,6 +9,7 @@ import { connectRange } from 'react-instantsearch-dom';
 
 const RangeSlider = ({ min, max, currentRefinement, refine, title }) => {
   const refineFunction = () => {
+    console.log('refineFunction');
     refine({ minSlider, maxSlider });
   };
 
@@ -28,6 +29,9 @@ const RangeSlider = ({ min, max, currentRefinement, refine, title }) => {
           <p>{maxSlider}</p>
         </div>
         <Range
+          min={min}
+          max={max}
+          defaultValue={[currentRefinement.min, currentRefinement.max]}
           onChange={(e) => {
             setMinSlider(e[0]);
             setMaxSlider(e[1]);
@@ -35,12 +39,10 @@ const RangeSlider = ({ min, max, currentRefinement, refine, title }) => {
               currentRefinement.min !== minSlider ||
               currentRefinement.max !== maxSlider
             ) {
+              console.log('IF');
               debouncedRefine();
             }
           }}
-          min={min}
-          max={max}
-          defaultValue={[currentRefinement.min, currentRefinement.max]}
         />
       </div>
     </div>

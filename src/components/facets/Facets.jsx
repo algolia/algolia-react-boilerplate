@@ -80,30 +80,28 @@ const Facets = () => {
   const refinementParams = config.refinements;
   return (
     <DynamicWidgets>
-      {refinementParams
-        .map((e, i) => {
-          const refinementType = e.type;
-          if (refinementType !== 'price') {
-            return (
-              <GenericRefinementList
-                searchable={e.options?.searchable}
-                key={i}
-                limit={e.options?.limit}
-                attribute={e.options.attribute}
-                title={e.label}
-                options={e.options}
-              />
-            );
-          }
+      {refinementParams.map((e, i) => {
+        const refinementType = e.type;
+        if (refinementType !== 'price') {
           return (
-            <PriceSlider
+            <GenericRefinementList
+              searchable={e.options?.searchable}
+              key={i}
+              limit={e.options?.limit}
               attribute={e.options.attribute}
               title={e.label}
-              key={i}
+              options={e.options}
             />
           );
-        })
-        .filter(Boolean)}
+        }
+        return (
+          <PriceSlider
+            attribute={e.options.attribute}
+            title={e.label}
+            key={i}
+          />
+        );
+      })}
     </DynamicWidgets>
   );
 };
