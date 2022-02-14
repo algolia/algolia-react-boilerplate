@@ -13,6 +13,8 @@ export const searchClient = {
 
 export const indexName = {
   index: 'flagship_fashion',
+  indexSuggestion: 'flagship_fashion_query_suggestions',
+  indexBlog: 'canda_customDemo_articles',
 };
 
 const voiceSearch = {
@@ -114,6 +116,10 @@ const breadcrumbAttributes = [
   'hierarchical_categories.lvl2',
 ];
 
+const federatedCategory = {
+  categoryInFederated: 'hierarchicalCategories.lvl2',
+};
+
 const searchParameters = {
   hitsPerPage: 10,
   maxValuesPerFacet: 50,
@@ -133,6 +139,25 @@ const url = {
   debouncing: 1500, // in ms
 };
 
+// FEDERATED SEARCHES
+
+const federatedSearchConfig = {
+  isRecentSearch: true,
+  isQuerySuggestions: true,
+  isCategory: true,
+  isProduct: true,
+  isBlogPosts: true,
+};
+
+export const isFederatedAtom = atom({
+  key: 'isFederatedAtom', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
+export const searchBoxAtom = atom({
+  key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
 const config = {
   refinements,
   sorts,
@@ -142,6 +167,8 @@ const config = {
   url,
   indexName,
   searchClient,
+  federatedSearchConfig,
+  federatedCategory,
   voiceSearch,
 };
 

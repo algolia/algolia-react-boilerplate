@@ -2,11 +2,11 @@
 // but simple it means with only a glass simple effect
 // Import Debounce
 import debounce from 'lodash.debounce';
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
 // Import Recoil
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 // Import navigate function to route to results page on search submit
 import { useNavigate } from "react-router-dom";
@@ -16,18 +16,26 @@ import { Glass } from '../../assets/svg/SvgIndex';
 // Import Config for recoil from file as a component
 import { queryAtom, simplePlaceholderAtom } from '../../config/searchbox';
 
+import { isFederatedAtom, searchBoxAtom } from '../../config/config';
+
 const SearchBoxSimple = ({ refine }) => {
+
+  const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
+  const setIsFederated = useSetRecoilState(isFederatedAtom);
+
 
   // router hook to navigate using a function
   let navigate = useNavigate();
 
+
   const [queryState, setQueryState] = useRecoilState(queryAtom);
+  const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
+
   const refineFunction = (event) => {
     setQueryState(event);
     refine(event);
   };
 
-  const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   // Debounce during search if you want to change the reactivity change number 250
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedRefine = useCallback(debounce(refineFunction, 50), []);
@@ -46,10 +54,13 @@ const SearchBoxSimple = ({ refine }) => {
       >
         <input
           className="searchbox-simple__form__input"
+          ref={setSearchBoxRef}
           type="search"
           value={queryState ? queryState : ''}
           placeholder={simplePlaceholder}
+          onClick={() => setIsFederated(true)}
           onChange={(event) => {
+            // setIsFederated(true);
             debouncedRefine(event.currentTarget.value);
           }}
         />
