@@ -8,6 +8,7 @@ import { Hit } from '../components/hits/Hits';
 import InfluencerCard from '../components/hits/InfluencerCard';
 import NikeCard from '../components/hits/SalesCard';
 import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hits';
+import { indexName } from '../config/config';
 import { customDataByType } from '../utils';
 
 const SearchResultPage = () => {
@@ -20,8 +21,9 @@ const SearchResultPage = () => {
         <InjectedInfiniteHits
           hitComponent={Hit}
           slots={({ resultsByIndex }) => {
+            const indexValue = indexName.index;
             const { noCta, nikeCard } = customDataByType(
-              resultsByIndex?.flagship_fashion?.userData
+              resultsByIndex?.[indexValue]?.userData
             );
             return [
               {
