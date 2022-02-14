@@ -1,6 +1,6 @@
-import algoliasearch from 'algoliasearch/lite';
 import React from 'react';
 // Algolia import
+import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch } from 'react-instantsearch-dom';
 // React router
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 // Import Pages
+
 import Header from './components/header/Header';
 import HomePage from './pages/HomePage';
 import SearchResultsPage from './pages/SearchResultsPage';
