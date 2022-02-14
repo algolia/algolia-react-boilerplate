@@ -3,9 +3,19 @@ import React from 'react';
 // components import
 import { ChevronRight } from '../../../assets/svg/SvgIndex';
 
+import { useNavigate, createSearchParams } from 'react-router-dom';
+
+// recoil import
+import { useSetRecoilState } from 'recoil';
+import { queryAtom } from '../../../config/searchbox';
+
 const RecentSearches = React.memo(() => {
   const getSearches = localStorage.getItem('recentSearches');
   const cleanSearches = JSON.parse(getSearches);
+  // router hook to navigate using a function
+  const navigate = useNavigate();
+  // update query in searchBar
+  const setQueryState = useSetRecoilState(queryAtom);
 
   if (cleanSearches && cleanSearches.length !== 0) {
     return (
@@ -17,7 +27,16 @@ const RecentSearches = React.memo(() => {
             .splice(0, 3)
             .map((search, index) => {
               return (
-                <li onClick={(e) => {}} key={index}>
+                <li
+                  onClick={() => {
+                    navigate({
+                      pathname: '/search',
+                      search: `?${createSearchParams({ query: search })}`,
+                    });
+                    setQueryState(search);
+                  }}
+                  key={index}
+                >
                   <ChevronRight />
                   <p>{search}</p>
                 </li>

@@ -22,7 +22,10 @@ import {
   SearchInCategoryConfig,
 } from '../../config/searchbox';
 
-const SearchBoxSimple = ({ refine }) => {
+// Custom Hooks
+import useStoreQueryToLocalStorage from '../../hooks/useStoreStringToLocalStorage';
+
+const SearchBoxSimple = ({ refine, currentRefinement }) => {
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederated = useSetRecoilState(isFederatedAtom);
   // router hook to navigate using a function
@@ -50,7 +53,8 @@ const SearchBoxSimple = ({ refine }) => {
         autoComplete="off"
         onSubmit={(event) => {
           event.preventDefault();
-          setQueryState(event.target.value);
+          setQueryState(currentRefinement);
+          useStoreQueryToLocalStorage(currentRefinement);
           navigate('/search/');
         }}
       >
