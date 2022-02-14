@@ -2,11 +2,12 @@ import React, { useRef } from 'react';
 // React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 // Import Config for the header
 import { linksHeader } from '../../config/header';
 import { configAtom } from '../../config/config';
+import { queryAtom } from '../../config/searchbox';
 // Import Hook
 import useStickyHeader from '../../hooks/useStickyHeader';
 // Import SearchBox
@@ -18,6 +19,7 @@ import CustomVoiceSearchComponent from '../voicesearch/VoiceSearch';
 const Header = () => {
   const elementRef = useRef('');
   const [links] = useRecoilState(linksHeader);
+  const setQueryState = useSetRecoilState(queryAtom);
   // Import state from the voice search
   const [value] = useRecoilState(configAtom);
   const sticky = useStickyHeader(elementRef);
@@ -28,11 +30,10 @@ const Header = () => {
   return (
     <div>
       <header ref={elementRef} className={headerClasses}>
-        
         <div className="container">
           <div className="container__header-top">
             <div className="container__header-top__logo">
-              <Link to="/">
+              <Link to="/" onClick={() => setQueryState('')}>
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
                   alt=""
