@@ -17,6 +17,21 @@
       cursor: pointer;
     }
   }
+  &__pricecontainer {
+    width: 80%;
+    margin: 1rem auto;
+    &__prices {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      p {
+        font-family: $main-font;
+        color: $blue-algolia;
+        font-weight: 600;
+      }
+    }
+  }
+
   &__list {
     margin: 0.8rem 0;
     &__search-facet__hidden {
@@ -64,5 +79,9 @@
     span {
       color: $white-color;
     }
+  }
+  // Personalisation Slider price
+  .rc-slider {
+    @include priceSlider($blue-algolia);
   }
 }

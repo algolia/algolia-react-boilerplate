@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 
 // Import components
 import { Glass } from '../../assets/svg/SvgIndex';
+import PriceSlider from './PriceSlider';
 // Import Config
 import { configAtom } from '../../config/config';
 
@@ -94,7 +95,13 @@ const Facets = () => {
               />
             );
           }
-          return null;
+          return (
+            <PriceSlider
+              attribute={e.options.attribute}
+              title={e.label}
+              key={i}
+            />
+          );
         })
         .filter(Boolean)}
     </DynamicWidgets>

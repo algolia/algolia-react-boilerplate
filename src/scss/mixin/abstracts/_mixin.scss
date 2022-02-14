@@ -73,11 +73,10 @@
 // ------------------------------------------
 // Fonts, Title, p,....
 // ------------------------------------------
-@mixin title ($text-color){
-font-size: 1.2rem;
-font-weight: bold;
-margin-bottom: 0.5rem;
-
+@mixin title($text-color) {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 // ------------------------------------------
 // HomePage
@@ -216,4 +215,25 @@ margin-bottom: 0.5rem;
 
 @mixin facetsFilterHover($background) {
   background-color: $background;
+}
+
+// Price Slider
+@mixin priceSlider($color-slider) {
+  .rc-slider-rail {
+  }
+  .rc-slider-track,
+  .rc-slider-track-1 {
+    background-color: $color-slider;
+  }
+  .rc-slider-step {
+  }
+  .rc-slider-handle-1 {
+    border: solid 1px $color-slider;
+  }
+  .rc-slider-handle-2 {
+    border: solid 1px $color-slider;
+  }
+  .rc-slider-handle-dragging {
+    box-shadow: (0 0 0 3px $color-slider);
+  }
 }
