@@ -14,3 +14,7 @@ export const queryAtom = atom({
   key: 'queryAtom', // unique ID (with respect to other atoms/selectors)
   default: null, // default value (aka initial value)
 });
+
+export const SearchInCategoryConfig = {
+  isSearchInCategory: true,
+};

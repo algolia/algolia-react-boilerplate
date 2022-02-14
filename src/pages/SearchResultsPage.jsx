@@ -18,6 +18,9 @@ import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hi
 import { configAtom, indexName } from '../config/config';
 import { customDataByType } from '../utils';
 
+// React router import
+import { useLocation, useSearchParams } from 'react-router-dom';
+
 const SearchResultPage = () => {
   const [config] = useRecoilState(configAtom);
   const [injected, setInjected] = useState(false);
@@ -26,6 +29,11 @@ const SearchResultPage = () => {
   const stats = config.stats.value;
   const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = config.hitsPerPage.numberInjected;
+
+  // Get states of React Router
+  const { state } = useLocation();
+  const [searchParams] = useSearchParams();
+  const queryFromUrl = searchParams.get('query');
 
   return (
     <div className="srp-container">
@@ -39,6 +47,8 @@ const SearchResultPage = () => {
           hitsPerPage={injected ? hitsPerPageInjected : hitsPerPageNotInjected}
           analytics={false}
           enablePersonalization={true}
+          filters={state ? state : ''}
+          query={queryFromUrl ? queryFromUrl : ''}
         />
         <InjectedInfiniteHits
           hitComponent={Hit}
