@@ -7,14 +7,22 @@ import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { connectRange } from 'react-instantsearch-dom';
 
-const RangeSlider = ({ min, max, currentRefinement, refine, title }) => {
+const RangeSlider = ({
+  min,
+  max,
+  canRefine,
+  currentRefinement,
+  refine,
+  title,
+}) => {
   const [minSlider, setMinSlider] = useState(min);
   const [maxSlider, setMaxSlider] = useState(max);
   useEffect(() => {
-    setMaxSlider(max);
-    setMinSlider(min);
-    return () => '';
-  }, [min, max]);
+    if (canRefine) {
+      setMinSlider(currentRefinement.min);
+      setMaxSlider(currentRefinement.max);
+    }
+  }, [currentRefinement.min, currentRefinement.max]);
 
   const refineFunction = (minValue, maxValue) => {
     console.log('refineFunction', minValue, maxValue);
