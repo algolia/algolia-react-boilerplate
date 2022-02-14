@@ -1,18 +1,11 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 
+// Import config framer Motion
+import { listItem } from '../../config/config';
+
 // SALES CARD
 const NikeCard = ({ hit }) => {
-  const listItem = {
-    hidden: { opacity: 0, y: 100 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.2,
-      },
-    },
-  };
   return (
     <motion.li
       variants={listItem}

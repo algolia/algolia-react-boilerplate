@@ -1,18 +1,10 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 import React from 'react';
 
+// Import config framer Motion
+import { listItem } from '../../config/config';
 // GIFT CARD
 const GiftCard = ({ hit }) => {
-  const listItem = {
-    hidden: { opacity: 0, y: 100 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.2,
-      },
-    },
-  };
   return (
     <motion.li
       variants={listItem}
