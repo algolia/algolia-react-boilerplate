@@ -20,7 +20,7 @@ const RangeSlider = ({ min, max, currentRefinement, refine, title }) => {
     console.log('refineFunction', minValue, maxValue);
     setMinSlider(minValue);
     setMaxSlider(maxValue);
-    refine(minSlider, maxSlider);
+    refine({ minSlider, maxSlider });
   };
 
   const debouncedRefine = useCallback(debounce(refineFunction, 100), []);
