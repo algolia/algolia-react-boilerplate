@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+// Import Debounce
+import debounce from 'lodash.debounce';
+import React, { useState, useCallback } from 'react';
 // https://www.npmjs.com/package/rc-slider
 // rc-slider
-import Slider, { Range } from 'rc-slider';
+import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { connectRange } from 'react-instantsearch-dom';
 
 const RangeSlider = ({ min, max, currentRefinement, refine, title }) => {
+  const refineFunction = () => {
+    console.log('Je vais refine', refine);
+    refine({ minSlider, maxSlider });
+  };
+
+  const debouncedRefine = useCallback(debounce(refineFunction, 100), []);
+
   const [minSlider, setMinSlider] = useState(min);
   const [maxSlider, setMaxSlider] = useState(max);
+
   return (
     <div className="filters-container">
       <div className="filters-container__title">
@@ -26,12 +36,12 @@ const RangeSlider = ({ min, max, currentRefinement, refine, title }) => {
               currentRefinement.min !== minSlider ||
               currentRefinement.max !== maxSlider
             ) {
-              console.log('je suis dans le if', minSlider, maxSlider);
-              refine({ minSlider, maxSlider });
+              debouncedRefine();
             }
           }}
           min={min}
           max={max}
+          defaultValue={[currentRefinement.min, currentRefinement.max]}
         />
       </div>
     </div>
