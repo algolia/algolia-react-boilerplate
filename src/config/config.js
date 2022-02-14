@@ -87,6 +87,11 @@ const sorts = [
   { value: `${indexName}_desc_price`, label: 'Price High to Low' },
 ];
 
+const hitsPerPage = {
+  numberNotInjected: 15,
+  numberInjected: 14,
+};
+
 const breadcrumbAttributes = [
   'hierarchical_categories.lvl0',
   'hierarchical_categories.lvl1',
@@ -160,6 +165,7 @@ const config = {
   federatedCategory,
   voiceSearch,
   stats,
+  hitsPerPage,
 };
 
 export const configAtom = atom({

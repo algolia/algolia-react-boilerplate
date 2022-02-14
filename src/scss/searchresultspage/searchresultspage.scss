@@ -33,3 +33,12 @@
 .stats-infos {
   @include stats($orange-color);
 }
+
+// ------------------------------------------
+// Pagination
+// ------------------------------------------
+.ais-Pagination {
+  display: flex;
+  justify-content: center;
+  @include pagination($orange-color);
+}

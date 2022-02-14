@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Pagination, Configure } from 'react-instantsearch-dom';
+
+// Recoil state to directly access results
+import { useRecoilState } from 'recoil';
 
 // Import other components
 import GenericRefinementList from '../components/facets/Facets';
-// Recoil state to directly access results
-import { useRecoilState } from 'recoil';
-// Import Config File
-import { configAtom } from '../config/config';
 // Import Components
 import GiftCard from '../components/hits/GiftCard';
 import { Hit } from '../components/hits/Hits';
@@ -14,13 +14,20 @@ import InfluencerCard from '../components/hits/InfluencerCard';
 import NikeCard from '../components/hits/SalesCard';
 import { CustomStats } from '../components/searchresultpage/Stats';
 import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hits';
-import { indexName } from '../config/config';
+// Import Config File
+import { configAtom, indexName } from '../config/config';
 import { customDataByType } from '../utils';
 
 const SearchResultPage = () => {
   const [config] = useRecoilState(configAtom);
+  const [injected, setInjected] = useState(false);
+  console.log(injected);
+
   // Define Stat Const
   const stats = config.stats.value;
+  const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
+  const hitsPerPageInjected = config.hitsPerPage.numberInjected;
+
   return (
     <div className="srp-container">
       <div className="srp-container__facets">
@@ -28,6 +35,12 @@ const SearchResultPage = () => {
       </div>
       <div className="srp-container__hits">
         <div>{stats && <CustomStats />}</div>
+
+        <Configure
+          hitsPerPage={injected ? hitsPerPageInjected : hitsPerPageNotInjected}
+          analytics={false}
+          enablePersonalization={true}
+        />
         <InjectedInfiniteHits
           hitComponent={Hit}
           slots={({ resultsByIndex }) => {
@@ -35,6 +48,11 @@ const SearchResultPage = () => {
             const { noCta, nikeCard } = customDataByType(
               resultsByIndex?.[indexValue]?.userData
             );
+            // eslint-disable-next-line no-lone-blocks
+            {
+              // eslint-disable-next-line no-unused-expressions
+              nikeCard && setInjected(true);
+            }
             return [
               {
                 getHits: () => [noCta],
@@ -58,6 +76,7 @@ const SearchResultPage = () => {
             ];
           }}
         />
+        <Pagination />
       </div>
     </div>
   );

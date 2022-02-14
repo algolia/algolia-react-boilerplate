@@ -112,6 +112,24 @@
     }
   }
 }
+@mixin pagination($back-color) {
+  .ais-Pagination-list {
+    margin-top: 2rem;
+    display: flex;
+    .ais-Pagination-item {
+      border: 1px solid $back-color;
+      padding: 0.8rem;
+      border-radius: 0.5rem;
+      margin-right: 1rem;
+      background-color: $back-color;
+      color: white;
+    }
+    .ais-Pagination-item--selected{
+      color: $back-color;
+      background-color: white;
+    }
+  }
+}
 
 // ------------------------------------------
 // Hits
