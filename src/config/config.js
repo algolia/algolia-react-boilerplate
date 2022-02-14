@@ -132,6 +132,18 @@ export const searchBoxAtom = atom({
   default: '', // default value (aka initial value)
 });
 
+// Hits and Framer Motion
+export const listItem = {
+  hidden: { opacity: 0, y: 100 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.2,
+    },
+  },
+};
+
 const config = {
   refinements,
   sorts,

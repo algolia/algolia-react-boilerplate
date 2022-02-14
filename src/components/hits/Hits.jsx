@@ -4,20 +4,11 @@ import React from 'react';
 import { Highlight } from 'react-instantsearch-dom';
 
 import { Heart } from '../../assets/svg/SvgIndex';
+import { listItem } from '../../config/config';
 
 // import { useNavigate } from 'react-router-dom';
 
 const Hit = ({ hit }) => {
-  const listItem = {
-    hidden: { opacity: 0, y: 100 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.2,
-      },
-    },
-  };
   return (
     <div className="hits-srp">
       <motion.li
