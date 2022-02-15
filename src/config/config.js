@@ -26,13 +26,19 @@ const refinements = [
     header: 'Categories',
     label: 'Category',
     options: {
-      attribute: 'categories',
+      attribute: [
+        'hierarchicalCategories.lvl0',
+        'hierarchicalCategories.lvl1',
+        'hierarchicalCategories.lvl2',
+        'hierarchicalCategories.lvl3',
+      ],
       searchable: true,
     },
   },
   {
     type: 'price',
     header: 'Price',
+    currency: '$',
     label: 'Price',
     options: {
       attribute: 'unformated_price',
