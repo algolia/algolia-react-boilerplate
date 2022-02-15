@@ -92,6 +92,11 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    > *{
+    &:empty{
+      display: none;
+    }
+  }
     h3 {
       font-size: 1rem;
       font-weight: 600;
@@ -117,6 +122,9 @@
           $main-color,
           $blue-algolia
         );
+        &:hover{
+          @include facetsHierarchicalHover($blue-algolia);
+        }
       }
       :hover > p {
         color: $white-color;
@@ -124,8 +132,15 @@
       :hover > span {
         color: $white-color;
       }
-      .deploy {
-        :hover > button {
+      &-isOpened {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        .filters-container-hierarchical{
+         
+          width: 97%;
+        }
+        &:hover > button {
           @include facetsHierarchicalHover($blue-algolia);
         }
       }

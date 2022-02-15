@@ -31,7 +31,7 @@ const Hierarchical = ({ items, refine, createURL, title }) => {
               </span>
             </button>
             {item.items && (
-              <div className="deploy">
+              <div className="filters-container-hierarchical__content__list-isOpened">
                 <Hierarchical
                   items={item.items}
                   refine={refine}
