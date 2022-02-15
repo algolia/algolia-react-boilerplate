@@ -8,9 +8,17 @@
     display: flex;
     font-weight: 700;
     margin-right: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     a {
+      display: flex;
+      justify-content: center;
+      text-align: center;
       background-color: $blue-algolia;
-      padding: 0.8rem;
+      height: 100%;
+      padding: 0.5rem;
+      align-items: center;
       border-radius: 1rem;
       color: $white-color;
     }

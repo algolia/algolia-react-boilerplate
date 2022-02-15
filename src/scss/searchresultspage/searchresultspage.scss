@@ -64,3 +64,45 @@
   background-position: center;
   @include bannerSrp($white-color);
 }
+// ------------------------------------------
+// No Results
+// ------------------------------------------
+.no-results {
+  background-image: url('https://weekendmarket.lk/assets/wm/image/no-result.png');
+  background-position: center;
+  background-size: cover;
+  width: 80%;
+  height: 80vh;
+  margin: 0 auto;
+  padding: 2rem 2rem;
+  &__titles {
+    margin-bottom: 2rem;
+    &__span {
+    }
+    &__span-query {
+      color: $blue-algolia;
+      font-weight: 900;
+    }
+  }
+  &__infos {
+    &__span {
+      color: $blue-algolia;
+    }
+    .query-suggestion {
+      margin-top: 2rem;
+      .suggestions {
+        .suggestions__title {
+        }
+        .suggestions__items {
+          display: flex;
+          .suggestions__item {
+            margin-right: 2rem;
+            svg {
+              width: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
