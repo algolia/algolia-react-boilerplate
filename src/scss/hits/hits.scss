@@ -26,3 +26,8 @@
 .image-wrapper-sales {
   @include salesCard($white-color);
 }
+.image-wrapper-sales {
+  .infos_influencer {
+    @include influencerCard($white-color);
+  }
+}

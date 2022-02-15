@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // eslint-disable-next-line import/order
-import { Pagination, Configure } from 'react-instantsearch-dom';
+import { Pagination, Configure, Index } from 'react-instantsearch-dom';
 
 // Recoil state to directly access results
 import { useLocation, useSearchParams } from 'react-router-dom';
@@ -18,7 +18,7 @@ import Banner from '../components/searchresultpage/Banner';
 import { CustomStats } from '../components/searchresultpage/Stats';
 import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hits';
 // Import Config File
-import { configAtom, indexName } from '../config/config';
+import { configAtom, indexName, indexInfluencer } from '../config/config';
 import { queryAtom } from '../config/searchbox';
 import { customDataByType } from '../utils';
 
@@ -40,7 +40,7 @@ const SearchResultPage = () => {
   const queryFromUrl = searchParams.get('query');
 
   return (
-    <div>
+    <>
       {bannerDisplay && <Banner />}
       <div className="srp-container">
         <div className="srp-container__facets">
@@ -48,7 +48,6 @@ const SearchResultPage = () => {
         </div>
         <div className="srp-container__hits">
           <div>{stats && <CustomStats />}</div>
-
           <Configure
             hitsPerPage={
               injected ? hitsPerPageInjected : hitsPerPageNotInjected
@@ -58,10 +57,14 @@ const SearchResultPage = () => {
             filters={state ? state : ''}
             query={queryFromUrl ? queryFromUrl : queryState}
           />
+          <Index indexName={indexInfluencer.index}>
+            <Configure hitsPerPage={1} page={0} />
+          </Index>
           <InjectedInfiniteHits
             hitComponent={Hit}
             slots={({ resultsByIndex }) => {
               const indexValue = indexName.index;
+              const indexInfluencerValue = indexInfluencer.index;
               const { noCta, nikeCard } = customDataByType(
                 resultsByIndex?.[indexValue]?.userData
               );
@@ -83,11 +86,12 @@ const SearchResultPage = () => {
                 },
                 {
                   injectAt: ({ position }) => position === 2,
-                  getHits: ({ resultsByIndex }) =>
-                    resultsByIndex['customDemo_hugoBoss_influencers']
-                      ? resultsByIndex['customDemo_hugoBoss_influencers']
-                          .hits || []
-                      : [],
+                  getHits: ({ resultsByIndex }) => {
+                    setInjected(true);
+                    return resultsByIndex[indexInfluencerValue]
+                      ? resultsByIndex[indexInfluencerValue].hits || []
+                      : [];
+                  },
                   slotComponent: InfluencerCard,
                 },
               ];
@@ -96,7 +100,7 @@ const SearchResultPage = () => {
           <Pagination />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
