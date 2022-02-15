@@ -5,14 +5,17 @@ export const linksHeader = atom({
   default: [
     {
       link: 'All',
+      filter: '',
       url: '/search',
     },
     {
       link: 'Mens',
+      filter: 'Mens',
       url: '/mens',
     },
     {
       link: 'Womens',
+      filter: 'Womens',
       url: '/womens',
     },
     // {

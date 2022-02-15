@@ -98,7 +98,7 @@ const breadcrumbAttributes = [
   'hierarchical_categories.lvl2',
 ];
 
-// Used for Category pages
+// This export is used for Category pages. It will create a filters in a Configure widget in SRP to filter out the right products
 export const hierarchicalFacet = {
   hierarchicalLvl0: 'hierarchicalCategories.lvl0',
 };
@@ -127,7 +127,6 @@ const url = {
 };
 
 // FEDERATED SEARCHES
-
 const federatedSearchConfig = {
   isRecentSearch: true,
   isQuerySuggestions: true,

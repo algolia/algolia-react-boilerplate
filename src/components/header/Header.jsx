@@ -58,9 +58,14 @@ const Header = () => {
                   <li
                     key={link.url}
                     onClick={() => {
-                      navigate(`/search`, {
-                        state: `${hierarchicalFacet.hierarchicalLvl0}:'${link.link}'`,
-                      });
+                      // Hierarchical are extracted from config.js
+                      if (link.link !== 'All') {
+                        navigate(`/search`, {
+                          state: `${hierarchicalFacet.hierarchicalLvl0}:'${link.filter}'`,
+                        });
+                      } else {
+                        navigate('/search');
+                      }
                     }}
                   >
                     <p>{link.link}</p>
