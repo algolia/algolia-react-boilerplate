@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Pagination, Configure } from 'react-instantsearch-dom';
 
 // Recoil state to directly access results
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Import other components
 import GenericRefinementList from '../components/facets/Facets';
@@ -16,6 +16,7 @@ import { CustomStats } from '../components/searchresultpage/Stats';
 import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hits';
 // Import Config File
 import { configAtom, indexName } from '../config/config';
+import { queryAtom } from '../config/searchbox';
 import { customDataByType } from '../utils';
 
 // React router import
@@ -25,6 +26,7 @@ const SearchResultPage = () => {
   // Recoil & React states
   const [config] = useRecoilState(configAtom);
   const [injected, setInjected] = useState(false);
+  const queryState = useRecoilValue(queryAtom);
 
   // Define Stat Const
   const stats = config.stats.value;
@@ -49,7 +51,7 @@ const SearchResultPage = () => {
           analytics={false}
           enablePersonalization={true}
           filters={state ? state : ''}
-          query={queryFromUrl ? queryFromUrl : ''}
+          query={queryFromUrl ? queryFromUrl : queryState}
         />
         <InjectedInfiniteHits
           hitComponent={Hit}

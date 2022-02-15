@@ -12,7 +12,7 @@ import { queryAtom } from '../../config/searchbox';
 // Import Hook
 import useStickyHeader from '../../hooks/useStickyHeader';
 // Import SearchBox
-import CustomSearchBoxSimple from '../searchbox/SearchBoxSimple';
+import CustomSearchBoxSimple from '../searchBox/SearchBox';
 
 // Import VoiceSearchComponent
 import CustomVoiceSearchComponent from '../voicesearch/VoiceSearch';
