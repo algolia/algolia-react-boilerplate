@@ -5,14 +5,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 // Import Config for the header
-import { linksHeader } from '../../config/header';
 import { configAtom, hierarchicalFacet } from '../../config/config';
+import { linksHeader } from '../../config/header';
+// eslint-disable-next-line import/order
 import { queryAtom } from '../../config/searchbox';
 
 // Import Hook
 import useStickyHeader from '../../hooks/useStickyHeader';
 // Import SearchBox
-import CustomSearchBoxSimple from '../searchbox/SearchBoxSimple';
+// eslint-disable-next-line import/order
+import CustomSearchBoxSimple from '../searchbox/SearchBox';
 
 // Import VoiceSearchComponent
 import CustomVoiceSearchComponent from '../voicesearch/VoiceSearch';
