@@ -5,7 +5,6 @@ import { connectCurrentRefinements } from 'react-instantsearch-dom';
 const CurrentRefinements = ({ items, refine, createURL }) => (
   <ul className="refinement-container__refinements">
     {items.map((item) => {
-      console.log(item);
       if (item.attribute.includes('price')) {
         return (
           <li key={item.label}>
