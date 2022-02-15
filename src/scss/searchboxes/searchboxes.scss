@@ -5,10 +5,15 @@
 
 // SearchBox Simple with glass on the right
 .searchbox-container {
-  width: 33%;
+  width: 40%;
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   .searchbox-simple {
-    .searchbox-simple__form {
+    width: 90%;
+    &__form {
+      margin: 1rem auto;
       width: 100%;
       display: flex;
       position: relative;
@@ -22,27 +27,17 @@
           fill: $main-color;
         }
       }
-      &__form {
-        width: 100%;
-        display: flex;
-        position: relative;
-        svg {
-          width: 30px;
-          left: 1rem;
-          top: 1.2rem;
-          position: absolute;
 
-          path {
-            fill: $main-color;
-          }
+      &__input {
+        @include searchBoxSimple($white-color, $grey-light-color-80);
+        
+        &::placeholder{
+          color: $grey-dark-color;
         }
-        &__form__input {
-          @include searchBoxSimple($grey-light-color-20, $grey-light-color-80);
-        }
-        &__form__input:focus {
+        &:focus {
           outline: none;
         }
-        &__form__input::-webkit-search-cancel-button {
+        &::-webkit-search-cancel-button {
           // If you want display or not cross in searchbox
           -webkit-appearance: none;
           height: 1em;
@@ -53,27 +48,34 @@
           background-size: contain;
           cursor: pointer;
         }
+       
       }
-      .searchbox-simple__form__input {
-        @include searchBoxSimple($white-color, $grey-light-color-80);
-      }
-      .searchbox-simple__form__input:focus {
-        outline: none;
-      }
-      .searchbox-simple__form__input::-webkit-search-cancel-button {
-        // If you want display or not cross in searchbox
-        -webkit-appearance: none;
-        height: 1em;
-        width: 1em;
-        border-radius: 50em;
-        background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
-          no-repeat 50% 50%;
-        background-size: contain;
-        cursor: pointer;
-      }
+
     }
+          &__category{
+            position: absolute;
+            max-width:50%;
+            height: 100%;
+            top: 0;
+            right:0rem;
+            border-radius: 0 8px 8px 0;
+            padding: 0.5rem;
+            background: $blue-algolia-custom-gradient;
+            display: flex;
+            align-items: center;
+      
+           p{
+             font-size: 0.8rem;
+             color: $grey-dark-color;
+           }
+
+           
+        }
   }
+       
 }
+
+
 // SearchBox Custom with 2ble placeholder one you can use to display categ for example
 .searchbox-custom {
   width: 100%;
