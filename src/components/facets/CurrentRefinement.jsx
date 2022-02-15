@@ -36,6 +36,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
                   refine(item.value);
                 }}
               >
+                {if()}
                 {item.label.replace(item.attribute, "Between")}
               </a>
             )}
