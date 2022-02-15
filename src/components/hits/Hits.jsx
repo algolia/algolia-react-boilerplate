@@ -6,9 +6,16 @@ import { Highlight } from 'react-instantsearch-dom';
 import { Heart } from '../../assets/svg/SvgIndex';
 import { listItem } from '../../config/config';
 
-// import { useNavigate } from 'react-router-dom';
+// Recoil import
+import { hitAtom } from '../../config/results';
+import { useSetRecoilState } from 'recoil';
+
+// React-router import
+import { useNavigate } from 'react-router-dom';
 
 const Hit = ({ hit }) => {
+  const navigate = useNavigate();
+  const hitState = useSetRecoilState(hitAtom);
   return (
     <div className="hits-srp">
       <motion.li
@@ -16,6 +23,10 @@ const Hit = ({ hit }) => {
         initial="hidden"
         animate="show"
         className="hits-srp__list"
+        onClick={() => {
+          hitState(hit);
+          navigate(`/search/${hit.objectID}`);
+        }}
       >
         <div className="hits-srp__list__img">
           <img src={hit.full_url_image} alt={hit.category} />
