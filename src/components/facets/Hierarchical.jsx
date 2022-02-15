@@ -31,11 +31,13 @@ const Hierarchical = ({ items, refine, createURL, title }) => {
               </span>
             </button>
             {item.items && (
-              <Hierarchical
-                items={item.items}
-                refine={refine}
-                createURL={createURL}
-              />
+              <div className="deploy">
+                <Hierarchical
+                  items={item.items}
+                  refine={refine}
+                  createURL={createURL}
+                />
+              </div>
             )}
           </li>
         ))}

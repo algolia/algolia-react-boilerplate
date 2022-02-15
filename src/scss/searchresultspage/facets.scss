@@ -124,13 +124,21 @@
       :hover > span {
         color: $white-color;
       }
+      .deploy {
+        :hover > button {
+          @include facetsHierarchicalHover($blue-algolia);
+        }
+      }
     }
-    .filters-container-hierarchical__content__list__button-filter  {
-    }
-    :hover {
-      @include facetsHierarchicalHover($blue-algolia);
+    .filters-container-hierarchical__content__list__button-filter {
+      // :hover {
+      //   @include facetsHierarchicalHover($blue-algolia);
+      // }
     }
   }
+  // :hover > li {
+  //   @include facetsHierarchicalHover($blue-algolia);
+  // }
   .refined-filter {
     @include btn-hover($blue-algolia, $white-color);
     p,
