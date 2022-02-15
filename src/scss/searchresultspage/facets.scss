@@ -137,7 +137,6 @@
         flex-direction: column;
         align-items: flex-end;
         .filters-container-hierarchical{
-         
           width: 97%;
         }
         &:hover > button {
@@ -145,15 +144,7 @@
         }
       }
     }
-    .filters-container-hierarchical__content__list__button-filter {
-      // :hover {
-      //   @include facetsHierarchicalHover($blue-algolia);
-      // }
-    }
   }
-  // :hover > li {
-  //   @include facetsHierarchicalHover($blue-algolia);
-  // }
   .refined-filter {
     @include btn-hover($blue-algolia, $white-color);
     p,
