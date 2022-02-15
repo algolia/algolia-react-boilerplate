@@ -21,6 +21,8 @@ import { customDataByType } from '../utils';
 
 // React router import
 import { useLocation, useSearchParams } from 'react-router-dom';
+import CustomClearRefinements from '../components/facets/ClearRefinement';
+import CustomCurrentRefinements from '../components/facets/CurrentRefinement';
 
 const SearchResultPage = () => {
   // Recoil & React states
@@ -45,7 +47,10 @@ const SearchResultPage = () => {
       </div>
       <div className="srp-container__hits">
         <div>{stats && <CustomStats />}</div>
-
+        <div className="refinement-container">
+          <CustomCurrentRefinements />
+          <CustomClearRefinements />
+        </div>
         <Configure
           hitsPerPage={injected ? hitsPerPageInjected : hitsPerPageNotInjected}
           analytics={false}

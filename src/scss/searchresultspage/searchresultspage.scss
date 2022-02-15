@@ -42,3 +42,16 @@
   justify-content: center;
   @include pagination($blue-algolia);
 }
+
+.refinement-container {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.button-clear-refinement {
+  background-color: $blue-algolia;
+  color: $white-color;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  font-weight: 400;
+}
