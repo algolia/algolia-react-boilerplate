@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 
 // Import components
 import { Glass } from '../../assets/svg/SvgIndex';
+import PriceSlider from './PriceSlider';
 // Import Config
 import { configAtom } from '../../config/config';
 
@@ -79,24 +80,28 @@ const Facets = () => {
   const refinementParams = config.refinements;
   return (
     <DynamicWidgets>
-      {refinementParams
-        .map((e, i) => {
-          const refinementType = e.type;
-          if (refinementType !== 'price') {
-            return (
-              <GenericRefinementList
-                searchable={e.options?.searchable}
-                key={i}
-                limit={e.options?.limit}
-                attribute={e.options.attribute}
-                title={e.label}
-                options={e.options}
-              />
-            );
-          }
-          return null;
-        })
-        .filter(Boolean)}
+      {refinementParams.map((e, i) => {
+        const refinementType = e.type;
+        if (refinementType !== 'price') {
+          return (
+            <GenericRefinementList
+              searchable={e.options?.searchable}
+              key={i}
+              limit={e.options?.limit}
+              attribute={e.options.attribute}
+              title={e.label}
+              options={e.options}
+            />
+          );
+        }
+        return (
+          <PriceSlider
+            attribute={e.options.attribute}
+            title={e.label}
+            key={i}
+          />
+        );
+      })}
     </DynamicWidgets>
   );
 };
