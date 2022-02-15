@@ -100,12 +100,12 @@ const Facets = () => {
             <PriceSlider
               attribute={e.options.attribute}
               title={e.label}
+              currency={e.currency}
               key={i}
             />
           );
         }
         if (refinementType === 'hierarchical') {
-          console.log(e.options.attribute);
           return (
             <CustomHierarchicalMenu
               attributes={e.options.attribute}

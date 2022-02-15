@@ -2,7 +2,6 @@ import React from 'react';
 import { connectHierarchicalMenu } from 'react-instantsearch-dom';
 
 const Hierarchical = ({ items, refine, createURL, title }) => {
-  console.log(items);
   return (
     <div className="filters-container-hierarchical">
       <div className="filters-container-hierarchical__title">

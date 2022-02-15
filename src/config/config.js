@@ -38,6 +38,7 @@ const refinements = [
   {
     type: 'price',
     header: 'Price',
+    currency: '$',
     label: 'Price',
     options: {
       attribute: 'unformated_price',
