@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { Pagination, Configure } from 'react-instantsearch-dom';
+// eslint-disable-next-line import/order
+import { Pagination, Configure, Index } from 'react-instantsearch-dom';
 
+// React router import
+import { useLocation, useSearchParams } from 'react-router-dom';
 // Recoil state to directly access results
 import { useRecoilState, useRecoilValue } from 'recoil';
 
@@ -12,15 +15,14 @@ import { Hit } from '../components/hits/Hits';
 // Import Components
 import InfluencerCard from '../components/hits/InfluencerCard';
 import NikeCard from '../components/hits/SalesCard';
+import Banner from '../components/searchresultpage/Banner';
 import { CustomStats } from '../components/searchresultpage/Stats';
 import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hits';
 // Import Config File
-import { configAtom, indexName } from '../config/config';
+import { configAtom, indexName, indexInfluencer } from '../config/config';
 import { queryAtom } from '../config/searchbox';
 import { customDataByType } from '../utils';
 
-// React router import
-import { useLocation, useSearchParams } from 'react-router-dom';
 import CustomClearRefinements from '../components/facets/ClearRefinement';
 import CustomCurrentRefinements from '../components/facets/CurrentRefinement';
 
@@ -34,6 +36,7 @@ const SearchResultPage = () => {
   const stats = config.stats.value;
   const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = config.hitsPerPage.numberInjected;
+  const bannerDisplay = config.bannerSrp.value;
 
   // Get states of React Router
   const { state } = useLocation();
@@ -41,61 +44,71 @@ const SearchResultPage = () => {
   const queryFromUrl = searchParams.get('query');
 
   return (
-    <div className="srp-container">
-      <div className="srp-container__facets">
-        <GenericRefinementList />
-      </div>
-      <div className="srp-container__hits">
-        <div>{stats && <CustomStats />}</div>
-        <div className="refinement-container">
-          <CustomCurrentRefinements />
-          <CustomClearRefinements />
+    <>
+      {bannerDisplay && <Banner />}
+      <div className="srp-container">
+        <div className="srp-container__facets">
+          <GenericRefinementList />
         </div>
-        <Configure
-          hitsPerPage={injected ? hitsPerPageInjected : hitsPerPageNotInjected}
-          analytics={false}
-          enablePersonalization={true}
-          filters={state ? state : ''}
-          query={queryFromUrl ? queryFromUrl : queryState}
-        />
-        <InjectedInfiniteHits
-          hitComponent={Hit}
-          slots={({ resultsByIndex }) => {
-            const indexValue = indexName.index;
-            const { noCta, nikeCard } = customDataByType(
-              resultsByIndex?.[indexValue]?.userData
-            );
-            // eslint-disable-next-line no-lone-blocks
-            {
-              // eslint-disable-next-line no-unused-expressions
-              nikeCard && setInjected(true);
+        <div className="srp-container__hits">
+          <div>{stats && <CustomStats />}</div>
+          <div className="refinement-container">
+            <CustomCurrentRefinements />
+            <CustomClearRefinements />
+          </div>
+          <Configure
+            hitsPerPage={
+              injected ? hitsPerPageInjected : hitsPerPageNotInjected
             }
-            return [
+            analytics={false}
+            enablePersonalization={true}
+            filters={state ? state : ''}
+            query={queryFromUrl ? queryFromUrl : queryState}
+          />
+          <Index indexName={indexInfluencer.index}>
+            <Configure hitsPerPage={1} page={0} />
+          </Index>
+          <InjectedInfiniteHits
+            hitComponent={Hit}
+            slots={({ resultsByIndex }) => {
+              const indexValue = indexName.index;
+              const indexInfluencerValue = indexInfluencer.index;
+              const { noCta, nikeCard } = customDataByType(
+                resultsByIndex?.[indexValue]?.userData
+              );
+              // eslint-disable-next-line no-lone-blocks
               {
-                getHits: () => [noCta],
-                injectAt: noCta ? noCta.position : null,
-                slotComponent: GiftCard,
-              },
-              {
-                getHits: () => [nikeCard],
-                injectAt: nikeCard ? nikeCard.position : null,
-                slotComponent: NikeCard,
-              },
-              {
-                injectAt: ({ position }) => position === 2,
-                getHits: ({ resultsByIndex }) =>
-                  resultsByIndex['customDemo_hugoBoss_influencers']
-                    ? resultsByIndex['customDemo_hugoBoss_influencers'].hits ||
-                      []
-                    : [],
-                slotComponent: InfluencerCard,
-              },
-            ];
-          }}
-        />
-        <Pagination />
+                // eslint-disable-next-line no-unused-expressions
+                nikeCard && setInjected(true);
+              }
+              return [
+                {
+                  getHits: () => [noCta],
+                  injectAt: noCta ? noCta.position : null,
+                  slotComponent: GiftCard,
+                },
+                {
+                  getHits: () => [nikeCard],
+                  injectAt: nikeCard ? nikeCard.position : null,
+                  slotComponent: NikeCard,
+                },
+                {
+                  injectAt: ({ position }) => position === 2,
+                  getHits: ({ resultsByIndex }) => {
+                    setInjected(true);
+                    return resultsByIndex[indexInfluencerValue]
+                      ? resultsByIndex[indexInfluencerValue].hits || []
+                      : [];
+                  },
+                  slotComponent: InfluencerCard,
+                },
+              ];
+            }}
+          />
+          <Pagination />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

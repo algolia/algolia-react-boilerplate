@@ -13,10 +13,17 @@ export const indexName = {
   indexBlog: 'canda_customDemo_articles',
 };
 
+export const indexInfluencer = {
+  index: 'flagship_fashion_influencers',
+};
+
 const voiceSearch = {
   value: true,
 };
 const stats = {
+  value: true,
+};
+const bannerSrp = {
   value: true,
 };
 
@@ -177,6 +184,7 @@ const config = {
   voiceSearch,
   stats,
   hitsPerPage,
+  bannerSrp,
 };
 
 export const configAtom = atom({

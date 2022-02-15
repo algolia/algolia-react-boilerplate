@@ -1,8 +1,16 @@
 import { motion } from 'framer-motion';
 import React from 'react';
+// eslint-disable-next-line no-unused-vars
+import { connectStateResults } from 'react-instantsearch-dom';
 
 // Import config framer Motion
 import { listItem } from '../../config/config';
+
+const QueryAndHitsOnly = connectStateResults(
+  ({ searchState, searchResults, children, includedRefinements }) => {
+    return searchState.query && searchResults.nbHits !== 0 ? children : null;
+  }
+);
 
 // INFLUENCER CARD
 const InfluencerCard = ({ hit }) => {
@@ -18,9 +26,10 @@ const InfluencerCard = ({ hit }) => {
           backgroundSize: 'cover',
         }}
       >
-        <div className="infos">
-          <p>{hit.influencer.name}</p>
-          <h3>{hit.category}</h3>
+        <div className="infos_influencer">
+          <p>#{hit.name}</p>
+          <h3>{hit.influencer.name}</h3>
+          <h4>{hit.category}</h4>
         </div>
       </motion.li>
     </QueryAndHitsOnly>

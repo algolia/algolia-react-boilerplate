@@ -7,7 +7,6 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
     {items.map((item) => {
       console.log(item);
       if (item.attribute.includes('price')) {
-        console.log('first');
         return (
           <li key={item.label}>
             {item.items ? (
@@ -36,8 +35,8 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
                   refine(item.value);
                 }}
               >
-                {if()}
-                {item.label.replace(item.attribute, "Between")}
+                {/* {item.label.replace(item.attribute, 'Between')} */}
+                {displayPrice(item)}
               </a>
             )}
           </li>
@@ -80,6 +79,21 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
     })}
   </ul>
 );
+const displayPrice = (i) => {
+  if (
+    i.label.includes(i.currentRefinement.max) &&
+    !i.label.includes(i.currentRefinement.min)
+  ) {
+    return i.label.replace(i.attribute, 'Inferior');
+  }
+  if (
+    i.label.includes(i.currentRefinement.min) &&
+    !i.label.includes(i.currentRefinement.max)
+  ) {
+    return i.label.replace(i.attribute, 'Superior');
+  }
+  return i.label.replace(i.attribute, 'Between');
+};
 
 const CustomCurrentRefinements = connectCurrentRefinements(CurrentRefinements);
 
