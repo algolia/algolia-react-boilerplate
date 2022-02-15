@@ -124,7 +124,7 @@
       background-color: $back-color;
       color: white;
     }
-    .ais-Pagination-item--selected{
+    .ais-Pagination-item--selected {
       color: $back-color;
       background-color: white;
     }
@@ -247,6 +247,10 @@
 }
 
 @mixin facetsFilterHover($background) {
+  background-color: $background;
+}
+
+@mixin facetsHierarchicalHover($background) {
   background-color: $background;
 }
 
