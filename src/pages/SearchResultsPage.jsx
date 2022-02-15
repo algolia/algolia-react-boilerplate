@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pagination, Configure } from 'react-instantsearch-dom';
+import { Pagination, Configure, Index } from 'react-instantsearch-dom';
 
 // Recoil state to directly access results
 import { useRecoilState } from 'recoil';
@@ -15,7 +15,7 @@ import NikeCard from '../components/hits/SalesCard';
 import { CustomStats } from '../components/searchresultpage/Stats';
 import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hits';
 // Import Config File
-import { configAtom, indexName } from '../config/config';
+import { configAtom, indexName, indexInfluencer } from '../config/config';
 import { customDataByType } from '../utils';
 
 const SearchResultPage = () => {
@@ -40,10 +40,14 @@ const SearchResultPage = () => {
           analytics={false}
           enablePersonalization={true}
         />
+        <Index indexName={indexInfluencer.index}>
+          <Configure hitsPerPage={1} page={0} />
+        </Index>
         <InjectedInfiniteHits
           hitComponent={Hit}
           slots={({ resultsByIndex }) => {
             const indexValue = indexName.index;
+            const indexInfluencerValue = indexInfluencer.index;
             const { noCta, nikeCard } = customDataByType(
               resultsByIndex?.[indexValue]?.userData
             );
@@ -65,11 +69,12 @@ const SearchResultPage = () => {
               },
               {
                 injectAt: ({ position }) => position === 2,
-                getHits: ({ resultsByIndex }) =>
-                  resultsByIndex['customDemo_hugoBoss_influencers']
-                    ? resultsByIndex['customDemo_hugoBoss_influencers'].hits ||
-                      []
-                    : [],
+                getHits: ({ resultsByIndex }) => {
+                  setInjected(true);
+                  return resultsByIndex[indexInfluencerValue]
+                    ? resultsByIndex[indexInfluencerValue].hits || []
+                    : [];
+                },
                 slotComponent: InfluencerCard,
               },
             ];

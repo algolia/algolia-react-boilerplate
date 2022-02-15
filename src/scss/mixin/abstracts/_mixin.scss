@@ -124,7 +124,7 @@
       background-color: $back-color;
       color: white;
     }
-    .ais-Pagination-item--selected{
+    .ais-Pagination-item--selected {
       color: $back-color;
       background-color: white;
     }
@@ -212,6 +212,26 @@
       font-size: 1.9rem;
       margin-top: 1rem;
     }
+  }
+}
+
+@mixin influencerCard($text-color) {
+  position: absolute;
+  bottom: 0;
+  p {
+    color: $text-color;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  h4 {
+    color: $text-color;
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+  h3 {
+    color: $text-color;
+    font-weight: 800;
+    font-size: 2rem;
   }
 }
 

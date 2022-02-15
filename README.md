@@ -90,6 +90,7 @@ The ability to control the facets to display and their order works by sending a 
 [Magazine Layout](https://github.com/algolia/magazine-layout)
 
 Thanks to the work from the 'Front End Team', we customized their injected content about 2 rules, on for free returns always display, and the 2nd for 'Nike Products'. All its rules are modifiable in [Dashboard](https://www.algolia.com/apps/853MYZ81KY/rules/flagship_fashion).
+You can modify, too an other index called 'flagship_fashion_influencers', it contains 2 influencers searchable, like the main index.
 
   <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Debounce</h3>
 
