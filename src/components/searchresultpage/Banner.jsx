@@ -6,8 +6,22 @@ const Banner = () => {
     <QueryRuleCustomData>
       {({ items }) =>
         items.map((item) => {
-          console.log(item.type);
-          return item.type === 'bannerSrp' ? <p>{item.title}</p> : '';
+          console.log(item);
+          return item.type === 'bannerSrp' ? (
+            <div
+              className="banner-srp"
+              style={{
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.45)), url(${item.banner})`,
+              }}
+            >
+              <div className="banner-srp__infos">
+                <h3>{item.title}</h3>
+                <p>{item.content}</p>
+              </div>
+            </div>
+          ) : (
+            ''
+          );
         })
       }
     </QueryRuleCustomData>

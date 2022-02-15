@@ -132,6 +132,27 @@
   }
 }
 
+@mixin bannerSrp($text-color) {
+  &__infos {
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+    height: 100%;
+    flex-direction: column;
+    margin-right: 1rem;
+    h3 {
+      color: $white-color;
+      font-weight: 800;
+      font-size: 2rem;
+    }
+    p {
+      color: $white-color;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+  }
+}
+
 // ------------------------------------------
 // Hits
 // ------------------------------------------
