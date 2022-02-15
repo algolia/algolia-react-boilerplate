@@ -22,6 +22,7 @@ import { customDataByType } from '../utils';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 const SearchResultPage = () => {
+  // Recoil & React states
   const [config] = useRecoilState(configAtom);
   const [injected, setInjected] = useState(false);
 

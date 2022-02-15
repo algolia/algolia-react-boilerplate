@@ -1,5 +1,6 @@
+// Custom hook to store recent searches into local storage
+
 const useStoreQueryToLocalStorage = (query) => {
-  console.log(query);
   const oldSearchArray = localStorage.getItem('recentSearches');
   const parsedArray = oldSearchArray ? JSON.parse(oldSearchArray) : [];
   const allSearches = [...parsedArray, query];

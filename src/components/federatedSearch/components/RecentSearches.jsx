@@ -46,7 +46,7 @@ const RecentSearches = React.memo(() => {
       </div>
     );
   } else {
-    return '';
+    return null;
   }
 });
 

@@ -98,6 +98,11 @@ const breadcrumbAttributes = [
   'hierarchical_categories.lvl2',
 ];
 
+// Used for Category pages
+export const hierarchicalFacet = {
+  hierarchicalLvl0: 'hierarchicalCategories.lvl0',
+};
+
 const federatedCategory = {
   categoryInFederated: 'hierarchicalCategories.lvl2',
 };

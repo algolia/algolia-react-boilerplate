@@ -15,9 +15,9 @@ export const linksHeader = atom({
       link: 'Womens',
       url: '/womens',
     },
-    {
-      link: 'Kids',
-      url: '/kids',
-    },
+    // {
+    //   link: 'Kids',
+    //   url: '/kids',
+    // },
   ], // default value (aka initial value)
 });

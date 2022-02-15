@@ -6,16 +6,17 @@ import { connectHits, Highlight } from 'react-instantsearch-dom';
 // components import
 import { ChevronRight } from '../../../assets/svg/SvgIndex';
 
+// Router import
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
-// recoil import
+// Recoil import
 import { useSetRecoilState } from 'recoil';
 import { queryAtom } from '../../../config/searchbox';
 
 const Suggestions = ({ hits }) => {
   // router hook to navigate using a function
   const navigate = useNavigate();
-  // update query in searchBar
+  // Recoil State - update query in searchBar
   const setQueryState = useSetRecoilState(queryAtom);
   return (
     <div className="suggestions">

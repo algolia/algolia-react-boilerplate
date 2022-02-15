@@ -26,15 +26,15 @@ import {
 import useStoreQueryToLocalStorage from '../../hooks/useStoreStringToLocalStorage';
 
 const SearchBoxSimple = ({ refine, currentRefinement }) => {
+  // Recoil State
+  const [queryState, setQueryState] = useRecoilState(queryAtom);
+  const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederated = useSetRecoilState(isFederatedAtom);
   // router hook to navigate using a function
   const navigate = useNavigate();
   // Get states of React Router
   const { state } = useLocation();
-
-  const [queryState, setQueryState] = useRecoilState(queryAtom);
-  const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
 
   const refineFunction = (event) => {
     setQueryState(event);
@@ -55,7 +55,7 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
           event.preventDefault();
           setQueryState(currentRefinement);
           useStoreQueryToLocalStorage(currentRefinement);
-          navigate('/search/');
+          navigate('/search');
         }}
       >
         <input
@@ -66,14 +66,12 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
           placeholder={simplePlaceholder}
           onClick={() => setIsFederated(true)}
           onChange={(event) => {
-            // setIsFederated(true);
             debouncedRefine(event.currentTarget.value);
           }}
         />
         {state && SearchInCategoryConfig.isSearchInCategory && (
           <SearchInCategory state={state} />
         )}
-
         <Glass />
       </form>
     </div>
