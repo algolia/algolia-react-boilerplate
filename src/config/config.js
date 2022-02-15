@@ -26,6 +26,9 @@ const stats = {
 const bannerSrp = {
   value: true,
 };
+const currency = {
+  value: '$',
+};
 
 const refinements = [
   {
@@ -185,6 +188,7 @@ const config = {
   stats,
   hitsPerPage,
   bannerSrp,
+  currency,
 };
 
 export const configAtom = atom({

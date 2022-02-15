@@ -1,4 +1,8 @@
 import React from 'react';
+// Recoil State
+import { configAtom } from '../../config/config';
+// import config file for state of facets
+import { useRecoilState } from 'recoil';
 
 import { connectCurrentRefinements } from 'react-instantsearch-dom';
 
@@ -79,19 +83,43 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
   </ul>
 );
 const displayPrice = (i) => {
+  const [config] = useRecoilState(configAtom);
+  const currency = config.currency.value;
   if (
     i.label.includes(i.currentRefinement.max) &&
     !i.label.includes(i.currentRefinement.min)
   ) {
-    return i.label.replace(i.attribute, 'Inferior');
+    return (
+      'Less than' +
+      ' ' +
+      i.label.replace(`<= ${i.attribute}`, '').split(' ')[2] +
+      ' ' +
+      currency
+    );
   }
   if (
     i.label.includes(i.currentRefinement.min) &&
     !i.label.includes(i.currentRefinement.max)
   ) {
-    return i.label.replace(i.attribute, 'Superior');
+    return (
+      'More than' +
+      ' ' +
+      i.label.replace(`<= ${i.attribute}`, '').split(' ')[0] +
+      ' ' +
+      currency
+    );
   }
-  return i.label.replace(i.attribute, 'Between');
+  return (
+    i.label.replace(`<= ${i.attribute}`, '').split(' ')[0] +
+    ' ' +
+    currency +
+    ' ' +
+    '-' +
+    ' ' +
+    i.label.replace(`<= ${i.attribute}`, '').split(' ')[3] +
+    ' ' +
+    currency
+  );
 };
 
 const CustomCurrentRefinements = connectCurrentRefinements(CurrentRefinements);
