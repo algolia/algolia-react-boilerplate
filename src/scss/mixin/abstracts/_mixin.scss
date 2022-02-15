@@ -217,6 +217,7 @@
 
 @mixin influencerCard($text-color) {
   position: absolute;
+  padding: 1rem 1rem;
   bottom: 0;
   p {
     color: $text-color;
