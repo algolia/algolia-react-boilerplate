@@ -1,23 +1,29 @@
 import React, { useRef } from 'react';
 // React Router
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // Recoil Header State
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 // Import Config for the header
+import { configAtom, hierarchicalFacet } from '../../config/config';
 import { linksHeader } from '../../config/header';
-import { configAtom } from '../../config/config';
+// eslint-disable-next-line import/order
+import { queryAtom } from '../../config/searchbox';
+
 // Import Hook
 import useStickyHeader from '../../hooks/useStickyHeader';
 // Import SearchBox
-import CustomSearchBoxSimple from '../searchbox/SearchBoxSimple';
+// eslint-disable-next-line import/order
+import CustomSearchBoxSimple from '../searchbox/SearchBox';
 
 // Import VoiceSearchComponent
 import CustomVoiceSearchComponent from '../voicesearch/VoiceSearch';
 
 const Header = () => {
   const elementRef = useRef('');
+  const navigate = useNavigate();
   const [links] = useRecoilState(linksHeader);
+  const setQueryState = useSetRecoilState(queryAtom);
   // Import state from the voice search
   const [value] = useRecoilState(configAtom);
   const sticky = useStickyHeader(elementRef);
@@ -28,11 +34,10 @@ const Header = () => {
   return (
     <div>
       <header ref={elementRef} className={headerClasses}>
-        
         <div className="container">
           <div className="container__header-top">
             <div className="container__header-top__logo">
-              <Link to="/">
+              <Link to="/" onClick={() => setQueryState('')}>
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
                   alt=""
@@ -52,8 +57,20 @@ const Header = () => {
             <ul className="container__header-bottom__links">
               {links.map((link) => {
                 return (
-                  <li key={link.url}>
-                    <Link to={link.url}>{link.link}</Link>
+                  <li
+                    key={link.url}
+                    onClick={() => {
+                      // Hierarchical are extracted from config.js
+                      if (link.link !== 'All') {
+                        navigate(`/search`, {
+                          state: `${hierarchicalFacet.hierarchicalLvl0}:'${link.filter}'`,
+                        });
+                      } else {
+                        navigate('/search');
+                      }
+                    }}
+                  >
+                    <p>{link.link}</p>
                   </li>
                 );
               })}

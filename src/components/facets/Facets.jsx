@@ -8,8 +8,10 @@ import { useRecoilState } from 'recoil';
 
 // Import components
 import { Glass } from '../../assets/svg/SvgIndex';
+import PriceSlider from './PriceSlider';
 // Import Config
 import { configAtom } from '../../config/config';
+import CustomHierarchicalMenu from './Hierarchical';
 
 // expects an attribute which is an array of items
 const RefinementList = ({ title, items, refine, searchForItems, options }) => {
@@ -79,24 +81,40 @@ const Facets = () => {
   const refinementParams = config.refinements;
   return (
     <DynamicWidgets>
-      {refinementParams
-        .map((e, i) => {
-          const refinementType = e.type;
-          if (refinementType !== 'price') {
-            return (
-              <GenericRefinementList
-                searchable={e.options?.searchable}
-                key={i}
-                limit={e.options?.limit}
-                attribute={e.options.attribute}
-                title={e.label}
-                options={e.options}
-              />
-            );
-          }
-          return null;
-        })
-        .filter(Boolean)}
+      {refinementParams.map((e, i) => {
+        const refinementType = e.type;
+        if (refinementType !== 'price' && refinementType !== 'hierarchical') {
+          return (
+            <GenericRefinementList
+              searchable={e.options?.searchable}
+              key={i}
+              limit={e.options?.limit}
+              attribute={e.options.attribute}
+              title={e.label}
+              options={e.options}
+            />
+          );
+        }
+        if (refinementType === 'price') {
+          return (
+            <PriceSlider
+              attribute={e.options.attribute}
+              title={e.label}
+              currency={e.currency}
+              key={i}
+            />
+          );
+        }
+        if (refinementType === 'hierarchical') {
+          return (
+            <CustomHierarchicalMenu
+              attributes={e.options.attribute}
+              title={e.label}
+              key={i}
+            />
+          );
+        }
+      })}
     </DynamicWidgets>
   );
 };

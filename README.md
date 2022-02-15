@@ -37,6 +37,10 @@ npx husky install
 
 [React Router](https://v5.reactrouter.com/web/guides/quick-start)
 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎚 Slider</h3>
+
+[Slider](https://slider-react-component.vercel.app/)
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎨 Style</h3>
 
 [SCSS](https://sass-lang.com/)
@@ -84,6 +88,12 @@ How Configure it 👇
 [Facet Display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react/)
 
 The ability to control the facets to display and their order works by sending a dedicated.
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Category Pages</h3>
+
+[Category Pages]
+
+In order to configure Category Pages (Add or Remove) go in config > header.js. From there you can add some link in the Navigation tab
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 💉 InjectedContent</h3>
 

@@ -132,6 +132,26 @@ $white-color-20-gradient: (
 $white-color-10-gradient: (
   background: linear-gradient(93.93deg, $white-color -40.44%, #ffffff 85.65%),
 );
+// Blue Algolia Gradient
+$blue-algolia-80-gradient: (
+  background: linear-gradient(96.14deg, $blue-algolia 53.12%, #ffffff 86.16%),
+);
+$blue-algolia-60-gradient: (
+  background: linear-gradient(95.1deg, $blue-algolia 35.92%, #ffffff 85.92%),
+);
+$blue-algolia-40-gradient: (
+  background: linear-gradient(94.42deg, $blue-algolia 16.03%, #ffffff 85.77%),
+);
+$blue-algolia-20-gradient: (
+  background: linear-gradient(94.15deg, $blue-algolia -8.18%, #ffffff 85.7%),
+);
+$blue-algolia-10-gradient: (
+  background: linear-gradient(93.93deg, $blue-algolia -40.44%, #ffffff 85.65%),
+);
+
+$blue-algolia-custom-gradient: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(84,104,255,1) 100%, rgba(0,212,255,1) 100%);
+
+
 
 // ------------------------------------------
 // Spaces

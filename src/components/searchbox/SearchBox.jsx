@@ -6,26 +6,35 @@ import React, { useCallback } from 'react';
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
 // Import navigate function to route to results page on search submit
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 // Import Recoil
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 // Import SVG from file as a component
 // eslint-disable-next-line import/namespace
 import { Glass } from '../../assets/svg/SvgIndex';
+import SearchInCategory from './components/SearchInCategory';
 // Import Config for recoil from file as a component
 import { isFederatedAtom, searchBoxAtom } from '../../config/config';
-import { queryAtom, simplePlaceholderAtom } from '../../config/searchbox';
+import {
+  queryAtom,
+  simplePlaceholderAtom,
+  SearchInCategoryConfig,
+} from '../../config/searchbox';
 
+// Custom Hooks
+import useStoreQueryToLocalStorage from '../../hooks/useStoreStringToLocalStorage';
 
-const SearchBoxSimple = ({ refine }) => {
+const SearchBoxSimple = ({ refine, currentRefinement }) => {
+  // Recoil State
+  const [queryState, setQueryState] = useRecoilState(queryAtom);
+  const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederated = useSetRecoilState(isFederatedAtom);
   // router hook to navigate using a function
   const navigate = useNavigate();
-
-  const [queryState, setQueryState] = useRecoilState(queryAtom);
-  const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
+  // Get states of React Router
+  const { state } = useLocation();
 
   const refineFunction = (event) => {
     setQueryState(event);
@@ -36,30 +45,33 @@ const SearchBoxSimple = ({ refine }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedRefine = useCallback(debounce(refineFunction, 50), []);
   return (
-    <div className="searchbox-simple">
+    <div className="searchbox">
       <form
-        className="searchbox-simple__form"
+        className="searchbox__form"
         action=""
         role="search"
         autoComplete="off"
         onSubmit={(event) => {
           event.preventDefault();
-          setQueryState(event.target.value);
-          navigate('/search/');
+          setQueryState(currentRefinement);
+          useStoreQueryToLocalStorage(currentRefinement);
+          navigate('/search');
         }}
       >
         <input
-          className="searchbox-simple__form__input"
+          className="searchbox__form__input"
           ref={setSearchBoxRef}
           type="search"
           value={queryState ? queryState : ''}
           placeholder={simplePlaceholder}
           onClick={() => setIsFederated(true)}
           onChange={(event) => {
-            // setIsFederated(true);
             debouncedRefine(event.currentTarget.value);
           }}
         />
+        {state && SearchInCategoryConfig.isSearchInCategory && (
+          <SearchInCategory state={state} />
+        )}
         <Glass />
       </form>
     </div>
