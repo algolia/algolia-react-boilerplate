@@ -56,6 +56,13 @@
 // No Results
 // ------------------------------------------
 .no-results {
+  background-image: url('https://weekendmarket.lk/assets/wm/image/no-result.png');
+  background-position: center;
+  background-size: cover;
+  width: 80%;
+  height: 70vh;
+  margin: 0 auto;
+  padding: 2rem 2rem;
   &__titles {
     margin-bottom: 2rem;
     &__span {

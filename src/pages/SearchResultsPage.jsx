@@ -51,12 +51,13 @@ const SearchResultPage = () => {
   return (
     <>
       {bannerDisplay && <Banner />}
-      <div className="srp-container">
-        <div className="srp-container__facets">
-          <GenericRefinementList />
-        </div>
-        <div className="srp-container__hits">
-          <NoResultsHandler>
+
+      <NoResultsHandler>
+        <div className="srp-container">
+          <div className="srp-container__facets">
+            <GenericRefinementList />
+          </div>
+          <div className="srp-container__hits">
             <div>{stats && <CustomStats />}</div>
             <Configure
               hitsPerPage={
@@ -108,9 +109,9 @@ const SearchResultPage = () => {
               }}
             />
             <Pagination />
-          </NoResultsHandler>
+          </div>
         </div>
-      </div>
+      </NoResultsHandler>
     </>
   );
 };
