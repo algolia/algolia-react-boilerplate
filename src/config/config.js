@@ -98,6 +98,11 @@ const breadcrumbAttributes = [
   'hierarchical_categories.lvl2',
 ];
 
+// This export is used for Category pages. It will create a filters in a Configure widget in SRP to filter out the right products
+export const hierarchicalFacet = {
+  hierarchicalLvl0: 'hierarchicalCategories.lvl0',
+};
+
 const federatedCategory = {
   categoryInFederated: 'hierarchicalCategories.lvl2',
 };
@@ -122,7 +127,6 @@ const url = {
 };
 
 // FEDERATED SEARCHES
-
 const federatedSearchConfig = {
   isRecentSearch: true,
   isQuerySuggestions: true,
@@ -135,6 +139,7 @@ export const isFederatedAtom = atom({
   key: 'isFederatedAtom', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
 });
+
 export const searchBoxAtom = atom({
   key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
   default: '', // default value (aka initial value)

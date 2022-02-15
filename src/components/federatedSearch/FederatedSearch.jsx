@@ -28,7 +28,7 @@ const FederatedSearch = () => {
   const setIsFederated = useSetRecoilState(isFederatedAtom);
   const searchboxRef = useRecoilValue(searchBoxAtom);
   const containerFederated = useRef('');
-  //hook
+  // Custom hook
   useOutsideClick(containerFederated, searchboxRef, () =>
     setIsFederated(false)
   );
