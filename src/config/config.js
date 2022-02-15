@@ -19,6 +19,9 @@ const voiceSearch = {
 const stats = {
   value: true,
 };
+const bannerSrp = {
+  value: true,
+};
 
 const refinements = [
   {
@@ -171,6 +174,7 @@ const config = {
   voiceSearch,
   stats,
   hitsPerPage,
+  bannerSrp,
 };
 
 export const configAtom = atom({

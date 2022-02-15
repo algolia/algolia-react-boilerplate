@@ -20,6 +20,7 @@ import { customDataByType } from '../utils';
 
 // React router import
 import { useLocation, useSearchParams } from 'react-router-dom';
+import Banner from '../components/searchresultpage/Banner';
 
 const SearchResultPage = () => {
   // Recoil & React states
@@ -30,6 +31,7 @@ const SearchResultPage = () => {
   const stats = config.stats.value;
   const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = config.hitsPerPage.numberInjected;
+  const bannerDisplay = config.bannerSrp.value;
 
   // Get states of React Router
   const { state } = useLocation();
@@ -38,6 +40,7 @@ const SearchResultPage = () => {
 
   return (
     <div className="srp-container">
+      {bannerDisplay && <Banner />}
       <div className="srp-container__facets">
         <GenericRefinementList />
       </div>
