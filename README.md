@@ -37,6 +37,10 @@ npx husky install
 
 [React Router](https://v5.reactrouter.com/web/guides/quick-start)
 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎚 Slider</h3>
+
+[Slider](https://slider-react-component.vercel.app/)
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎨 Style</h3>
 
 [SCSS](https://sass-lang.com/)
