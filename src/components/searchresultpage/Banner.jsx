@@ -6,7 +6,6 @@ const Banner = () => {
     <QueryRuleCustomData>
       {({ items }) =>
         items.map((item) => {
-          console.log(item);
           return item.type === 'bannerSrp' ? (
             <div
               className="banner-srp"
