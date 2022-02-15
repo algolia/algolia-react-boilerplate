@@ -42,3 +42,13 @@
   justify-content: center;
   @include pagination($blue-algolia);
 }
+
+// ------------------------------------------
+// Pagination
+// ------------------------------------------
+.banner-srp {
+  width: 100%;
+  height: 30vh;
+  background-position: center;
+  @include bannerSrp($white-color);
+}
