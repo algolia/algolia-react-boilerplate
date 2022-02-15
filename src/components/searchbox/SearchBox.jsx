@@ -45,9 +45,9 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedRefine = useCallback(debounce(refineFunction, 50), []);
   return (
-    <div className="searchbox-simple">
+    <div className="searchbox">
       <form
-        className="searchbox-simple__form"
+        className="searchbox__form"
         action=""
         role="search"
         autoComplete="off"
@@ -59,7 +59,7 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
         }}
       >
         <input
-          className="searchbox-simple__form__input"
+          className="searchbox__form__input"
           ref={setSearchBoxRef}
           type="search"
           value={queryState ? queryState : ''}
