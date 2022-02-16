@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
-export const HitsConfig = atom({
-  key: 'HitsConfig', // unique ID (with respect to other atoms/selectors)
+export const hitsConfig = atom({
+  key: 'hitsConfig', // unique ID (with respect to other atoms/selectors)
   default: {
     objectID: 'objectID',
     productName: 'name',
@@ -15,7 +15,7 @@ export const HitsConfig = atom({
     hierarchicalCategories: 'hierarchicalCategories',
     sizeFilter: 'sizeFilter',
     price: 'price',
-    image: 'image',
+    image: 'full_url_image',
     hierarchicalCategoriesLvl0: 'hierarchicalCategories.lvl0',
     hierarchicalCategoriesLvl1: 'hierarchicalCategories.lvl1',
     hierarchicalCategoriesLvl2: 'hierarchicalCategories.lvl2',
