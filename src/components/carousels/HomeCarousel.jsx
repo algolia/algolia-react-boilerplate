@@ -6,7 +6,7 @@ import { connectHits, Configure, InstantSearch } from 'react-instantsearch-dom';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { hitsConfig } from '../../config/Hits';
+import { hitsConfig } from '../../config/hits';
 import { indexName, searchClient } from '../../config/config';
 import { hitAtom } from '../../config/results';
 
