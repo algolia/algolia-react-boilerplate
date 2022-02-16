@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import Select from 'react-select';
 
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { personaConfig, personaSelected } from '../../../config/header';
 
 const SelectPersona = () => {
   const persona = useRecoilValue(personaConfig);
-  const [personaSelect, setPersonaSelect] = useRecoilState(personaSelected);
+  // const [personaSelect, setPersonaSelect] = useRecoilState(personaSelected);
+  const setPersonaSelect = useSetRecoilState(personaSelected);
   return (
     <div className="select-component">
       <Select

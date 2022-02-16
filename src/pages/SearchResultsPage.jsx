@@ -57,6 +57,7 @@ const SearchResultPage = () => {
   const personaSelect = useRecoilValue(personaSelected);
   // Persona
   const userToken = personaSelect.value;
+  console.log(userToken);
 
   return (
     <>

@@ -37,6 +37,7 @@ const FederatedSearch = () => {
   );
   // Persona
   const userToken = personaSelect.value;
+  console.log(userToken);
   // Federated search configuration
   const {
     isRecentSearch,
