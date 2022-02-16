@@ -6,12 +6,12 @@ import { personaConfig, personaSelected } from '../../../config/header';
 
 const SelectPersona = () => {
   const persona = useRecoilValue(personaConfig);
-  // const [personaSelect, setPersonaSelect] = useRecoilState(personaSelected);
+  const personaSelect = useRecoilValue(personaSelected);
   const setPersonaSelect = useSetRecoilState(personaSelected);
   return (
     <div className="select-component">
       <Select
-        defaultValue={setPersonaSelect}
+        defaultValue={personaSelect}
         options={persona}
         placeholder="Persona"
         onChange={setPersonaSelect}
