@@ -1,0 +1,107 @@
+// ------------------------------------------
+// PDP
+// ------------------------------------------
+@import '../mixin/abstracts/abstracts.scss';
+
+.pdp{
+    height: 78vh;
+    position: relative;
+    &__wrapper{
+        display: flex;
+        align-items: center;
+        height: 100%;
+        
+    }
+    &__left{
+        width: 60%;
+        height: 100%;
+        background: $blue-algolia-custom-reverse-gradient;
+        display: flex;
+        align-items: center;
+       
+
+        .imageWrapper{
+            width: 60%;
+            height: 90%;
+            margin: 0 auto;
+            img{
+                width:100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center;
+            }
+        }
+        
+    }
+    &__backBtn{
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        svg{
+            width: 8px;
+        }
+    }
+    &__right{
+        width: 40%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        &__infos{
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            // gap: 1rem;
+            .brand{
+            color: $grey-dark-color;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-transform: capitalize;
+            }
+            .name{
+                text-transform: capitalize;
+            }
+            .color{
+                margin-top: 1rem;
+                text-transform: capitalize;
+                font-style: italic;
+            }
+            .price{
+                color: $blue-algolia;
+                font-weight: bold;
+                font-size: 2rem;
+                margin-top: 5rem;
+                align-self: flex-end;
+            }
+
+            .sizes{
+                font-weight: bold;
+                width: 100%;
+                margin-top: 5rem;
+               .sizeList{
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                width: 100%;
+                flex-wrap: wrap;
+               }
+                .size{
+                    border: 1px solid $grey-dark-color-20;
+                    margin-top: 1rem;
+                    padding: 0.3rem 1rem;
+                    min-width: 20%;
+                    flex-wrap: wrap;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}
