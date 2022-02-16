@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Select from 'react-select';
 
 import { useSetRecoilState, useRecoilValue } from 'recoil';
+
 import { personaConfig, personaSelected } from '../../../config/header';
 
 const SelectPersona = () => {
