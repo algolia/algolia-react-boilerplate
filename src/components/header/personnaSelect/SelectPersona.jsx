@@ -7,10 +7,6 @@ import { personaConfig, personaSelected } from '../../../config/header';
 const SelectPersona = () => {
   const persona = useRecoilValue(personaConfig);
   const [personaSelect, setPersonaSelect] = useRecoilState(personaSelected);
-  useEffect(() => {
-    return personaSelect;
-  }, [personaSelect]);
-
   return (
     <div className="select-component">
       <Select
