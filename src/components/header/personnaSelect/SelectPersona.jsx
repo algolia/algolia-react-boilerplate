@@ -8,7 +8,7 @@ const SelectPersona = () => {
   const persona = useRecoilValue(personaConfig);
   const [personaSelect, setPersonaSelect] = useRecoilState(personaSelected);
   useEffect(() => {
-    console.log(personaSelect);
+    return personaSelect;
   }, [personaSelect]);
 
   return (
