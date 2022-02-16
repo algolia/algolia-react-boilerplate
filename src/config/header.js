@@ -24,3 +24,17 @@ export const linksHeader = atom({
     // },
   ], // default value (aka initial value)
 });
+
+export const personaConfig = atom({
+  key: 'personaConfig', // unique ID (with respect to other atoms/selectors)
+  default: [
+    { value: '', label: 'All' },
+    { value: 'stephen_james', label: 'Stephen James' },
+    { value: 'elizabeth_aniston', label: 'Elizabeth Aniston' },
+  ],
+});
+
+export const personaSelected = atom({
+  key: 'personaSelected', // unique ID (with respect to other atoms/selectors)
+  default: null, // default value (aka initial value)
+});

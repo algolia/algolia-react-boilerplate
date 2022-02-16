@@ -18,6 +18,7 @@ import CustomSearchBoxSimple from '../searchbox/SearchBox';
 
 // Import VoiceSearchComponent
 import CustomVoiceSearchComponent from '../voicesearch/VoiceSearch';
+import SelectPersona from './personnaSelect/SelectPersona';
 
 const Header = () => {
   const elementRef = useRef('');
@@ -76,6 +77,9 @@ const Header = () => {
               })}
             </ul>
           </nav>
+          <div>
+            <SelectPersona />
+          </div>
         </div>
       </header>
     </div>

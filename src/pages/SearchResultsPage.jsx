@@ -14,6 +14,8 @@ import algoliasearch from 'algoliasearch/lite';
 import { useLocation, useSearchParams } from 'react-router-dom';
 // Recoil state to directly access results
 import { useRecoilState, useRecoilValue } from 'recoil';
+// Import Persona State from recoil
+import { personaSelected } from '../config/header';
 
 // Import other components
 import GenericRefinementList from '../components/facets/Facets';
@@ -51,6 +53,10 @@ const SearchResultPage = () => {
   const { state } = useLocation();
   const [searchParams] = useSearchParams();
   const queryFromUrl = searchParams.get('query');
+  // persona
+  const personaSelect = useRecoilValue(personaSelected);
+  // Persona
+  const userToken = personaSelect.value;
 
   return (
     <>
@@ -72,6 +78,7 @@ const SearchResultPage = () => {
                 injected ? hitsPerPageInjected : hitsPerPageNotInjected
               }
               analytics={false}
+              userToken={userToken}
               enablePersonalization={true}
               filters={state ? state : ''}
               query={queryFromUrl ? queryFromUrl : queryState}
