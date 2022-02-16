@@ -17,6 +17,8 @@ import { useNavigate } from 'react-router-dom';
 const Hits = ({ hits }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
+
+  // Get hit attribute from config file
   const { price, objectID, image, productName, brand } =
     useRecoilValue(hitsConfig);
   return (

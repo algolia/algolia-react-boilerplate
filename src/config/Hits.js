@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 
+// Change string attribute here with the attribute of your index
 export const hitsConfig = atom({
   key: 'hitsConfig', // unique ID (with respect to other atoms/selectors)
   default: {
