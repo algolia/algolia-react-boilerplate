@@ -1,0 +1,36 @@
+@import '../mixin/abstracts/abstracts.scss';
+@import './facets.scss';
+
+.refinement-container__refinements {
+  margin-right: 0.5rem;
+  display: flex;
+  li {
+    display: flex;
+    font-weight: 700;
+    margin-right: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    a {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      background-color: $blue-algolia;
+      height: 100%;
+      padding: 0.5rem;
+      align-items: center;
+      border-radius: 1rem;
+      color: $white-color;
+    }
+  }
+  ul {
+    display: flex;
+    text-transform: capitalize;
+    li {
+      background-color: $blue-algolia;
+      padding: 0.8rem;
+      border-radius: 1rem;
+      color: $white-color;
+    }
+  }
+}
