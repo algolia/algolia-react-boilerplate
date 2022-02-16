@@ -7,6 +7,7 @@ import { isFederatedAtom } from '../config/config';
 
 //recoil import
 import { useRecoilValue } from 'recoil';
+import HomeCarousel from '../components/carousels/HomeCarousel';
 
 const HomePage = () => {
   const isFederated = useRecoilValue(isFederatedAtom);
@@ -16,6 +17,11 @@ const HomePage = () => {
       {isFederated && <FederatedSearch />}
       {/* Here it's the custom banners */}
       <CustomHomeBanners />
+      <HomeCarousel
+        attribute={"brand:'polo ralph lauren'"}
+        title={'Ralph Lauren Products'}
+      />
+      <HomeCarousel attribute={"category:'pullover'"} title={'Our PullOver'} />
     </div>
   );
 };
