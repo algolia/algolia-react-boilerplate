@@ -8,7 +8,8 @@ import { listItem } from '../../config/config';
 
 // Recoil import
 import { hitAtom } from '../../config/results';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { HitsConfig } from '../../config/Hits';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +17,9 @@ import { useNavigate } from 'react-router-dom';
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
+  const item = useRecoilValue(HitsConfig);
+  console.log('cc', item);
+  console.log('tt');
   return (
     <div className="hits-srp">
       <motion.li
