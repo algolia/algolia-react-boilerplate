@@ -43,6 +43,7 @@ const Carousel = ({ hits, title }) => {
         <motion.div
           drag="x"
           dragConstraints={{ right: 0, left: -width }}
+          dragTransition={{ bounceStiffness: 450, bounceDamping: 30 }}
           className="inner-carousel"
         >
           {hits.map((hit, i) => {
