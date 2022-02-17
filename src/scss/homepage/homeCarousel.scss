@@ -1,0 +1,55 @@
+// ------------------------------------------
+// Home Carousel
+// ------------------------------------------
+@import '../mixin/abstracts/abstracts.scss';
+
+.home-carousel {
+  margin: 10% 10%;
+  h3 {
+    color: $blue-algolia;
+    font-size: 2rem;
+    font-weight: 800;
+  }
+  .carousel {
+    cursor: grab;
+    overflow: scroll;
+    .inner-carousel {
+      display: flex;
+      .item {
+        min-height: 20rem;
+        min-width: 20rem;
+        padding: 40px;
+        position: relative;
+        img {
+          width: 100%;
+          height: 70%;
+          pointer-events: none;
+        }
+      }
+      .item__infos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.8rem;
+        cursor: pointer;
+      }
+      p {
+        color: $orange-color;
+        font-weight: 400;
+        text-align: center;
+        margin-top: 0.5rem;
+      }
+      span {
+        color: $blue-algolia;
+        font-size: 1.2rem;
+        font-weight: 600;
+        position: absolute;
+        bottom: 6rem;
+      }
+    }
+  }
+}
+.carousel::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
