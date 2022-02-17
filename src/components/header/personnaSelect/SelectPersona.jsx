@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Select from 'react-select';
 
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { personaConfig, personaSelected } from '../../../config/header';
+import { selectButtonAtom } from '../../../config/config';
+
+// hook import
+import useOutsideClick from '../../../hooks/useOutsideClick';
 
 const colorStyles = {
   placeholder: (defaultStyles) => {
@@ -18,11 +22,18 @@ const colorStyles = {
 };
 
 const SelectPersona = () => {
+  const select = useRef('');
+  const setSelectRef = useSetRecoilState(selectButtonAtom);
+  const selectRef = useRecoilValue(selectButtonAtom);
   const persona = useRecoilValue(personaConfig);
   const personaSelect = useRecoilValue(personaSelected);
   const setPersonaSelect = useSetRecoilState(personaSelected);
+  useEffect(() => {
+    setSelectRef(select);
+  }, [selectRef, setSelectRef]);
+
   return (
-    <div className="select-component">
+    <div className="select-component" ref={select}>
       <Select
         defaultValue={personaSelect}
         options={persona}

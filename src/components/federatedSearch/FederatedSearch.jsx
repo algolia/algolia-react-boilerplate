@@ -10,6 +10,7 @@ import {
   configAtom,
   isFederatedAtom,
   searchBoxAtom,
+  selectButtonAtom,
 } from '../../config/config';
 // Import Persona State from recoil
 import { personaSelected } from '../../config/header';
@@ -30,9 +31,10 @@ const FederatedSearch = () => {
   const personaSelect = useRecoilValue(personaSelected);
   const setIsFederated = useSetRecoilState(isFederatedAtom);
   const searchboxRef = useRecoilValue(searchBoxAtom);
+  const selectRef = useRecoilValue(selectButtonAtom);
   const containerFederated = useRef('');
   // Custom hook
-  useOutsideClick(containerFederated, searchboxRef, () =>
+  useOutsideClick(containerFederated, searchboxRef, selectRef, () =>
     setIsFederated(false)
   );
   // Persona
