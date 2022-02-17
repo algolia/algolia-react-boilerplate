@@ -19,6 +19,10 @@ const colorStyles = {
     ...provided,
     fontFamily: "'Raleway', sans-serif",
   }),
+  singleValue: (provided) => ({
+    ...provided,
+    fontFamily: "'Raleway', sans-serif",
+  }),
 };
 
 const SelectPersona = () => {
