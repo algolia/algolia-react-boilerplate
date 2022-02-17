@@ -12,7 +12,7 @@
   box-shadow: 0 0 20px $white-color;
   padding: 40px 0;
   background: $grey-light-color;
-  height: 12rem;
+  height: 13rem;
 }
 
 .sticky {
@@ -35,11 +35,11 @@
 @keyframes slide {
   0% {
     opacity: 1;
-    height: 12rem;
+    height: 13rem;
   }
   100% {
     opacity: 1;
-    height: 10rem;
+    height: 11rem;
   }
 }
 
