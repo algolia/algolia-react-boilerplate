@@ -80,35 +80,34 @@
         justify-content: center;
         li {
           margin-left: $two-rem-spaces;
-          cursor: pointer; 
-          p{
+          cursor: pointer;
+          p {
             position: relative;
             transition: 0.2 ease-in-out;
-           &:before{
-            content: "";
-            position: absolute;
-            background-color: $grey-dark-color;
-            height: 1px;
-            width: 100%;
-            bottom: -0.5rem;
-            transform-origin: center center;
-            transform: scaleX(0);
-            transition: transform 0.4s;
-           }
-          &:hover::before{
-            transition: 0.2 ease-in-out;
-            transform-origin: center center;
-            transform: scaleX(1);
-          }
+            &:before {
+              content: '';
+              position: absolute;
+              background-color: $grey-dark-color;
+              height: 1px;
+              width: 100%;
+              bottom: -0.5rem;
+              transform-origin: center center;
+              transform: scaleX(0);
+              transition: transform 0.4s;
+            }
+            &:hover::before {
+              transition: 0.2 ease-in-out;
+              transform-origin: center center;
+              transform: scaleX(1);
+            }
           }
         }
       }
     }
-
   }
 }
 
-.select-component{
+.select-component {
   width: 20%;
   margin: 0 0.5rem 0 auto;
 }
