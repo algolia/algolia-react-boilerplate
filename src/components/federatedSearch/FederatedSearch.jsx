@@ -16,7 +16,7 @@ import {
 import { personaSelected } from '../../config/header';
 
 // hook import
-import useOutsideClick from '../../hooks/useOutsideClick';
+import useOutsideClickConditional from '../../hooks/useOutsideClickConditional';
 
 // Components imports
 import RecentSearches from './components/RecentSearches';
@@ -34,7 +34,7 @@ const FederatedSearch = () => {
   const selectRef = useRecoilValue(selectButtonAtom);
   const containerFederated = useRef('');
   // Custom hook
-  useOutsideClick(containerFederated, searchboxRef, selectRef, () =>
+  useOutsideClickConditional(containerFederated, searchboxRef, selectRef, () =>
     setIsFederated(false)
   );
   // Persona

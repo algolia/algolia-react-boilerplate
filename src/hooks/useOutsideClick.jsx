@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { isPersonaMenuOpen } from '../config/header';
 
-const useOutsideClick = (ref, optionalParameter, callback) => {
-  optionalParameter = optionalParameter || null;
-
+const useOutsideClick = (ref, callback) => {
   const handleClick = (e) => {
-    if (
-      ref.current &&
-      !ref.current.contains(e.target) &&
-      !optionalParameter.contains(e.target)
-    ) {
+    if (ref.current && !ref.current.contains(e.target)) {
       callback();
     }
   };

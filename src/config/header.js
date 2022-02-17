@@ -38,3 +38,8 @@ export const personaSelected = atom({
   key: 'personaSelected', // unique ID (with respect to other atoms/selectors)
   default: null, // default value (aka initial value)
 });
+
+export const isPersonaMenuOpen = atom({
+  key: 'isPersonaMenuOpen', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
