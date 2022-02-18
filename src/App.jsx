@@ -16,6 +16,7 @@ import SearchResultsPage from './pages/SearchResultsPage';
 import Page2 from './pages/Page2';
 import ResultsPage from './pages/ResultsPage';
 import ProductDetails from './pages/ProductDetails';
+import Footer from './components/footer/Footer';
 
 import CustomStateResults from './components/stateResults/stateResults';
 
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="/page2" element={<Page2 />} />
             <Route path="/results" element={<ResultsPage />} />
           </Routes>
+          <Footer />
         </Router>
       </InstantSearch>
     </RecoilRoot>

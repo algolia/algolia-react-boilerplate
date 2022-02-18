@@ -3,6 +3,7 @@
 // Import Banners for the Home
 @import './banners/homeBanner.scss';
 @import './banners/homeBanner2.scss';
+@import './banners/homeBanner3.scss';
 
 // Import components
 @import './searchBox/searchBox.scss';
@@ -14,6 +15,7 @@
 @import './productDetailsPage/productDetails.scss';
 @import './searchresultspage/currentRefinement.scss';
 @import './homepage/homeCarousel.scss';
+@import './footer/footer.scss';
 
 // Use BEM, to naming class
 // https://css-tricks.com/bem-101/
@@ -47,10 +49,6 @@ input::placeholder,
 span {
   font-family: $main-font;
   color: $main-color;
-}
-
-p {
-  font-size: $one-rem-spaces;
 }
 
 a {

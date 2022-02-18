@@ -5,6 +5,7 @@ import { connectQueryRules } from 'react-instantsearch-dom';
 import { Link } from 'react-router-dom';
 
 const HomeBanners = ({ items }) => {
+  console.log(items);
   return items.map(
     (
       {
@@ -46,6 +47,19 @@ const HomeBanners = ({ items }) => {
           </div>
         );
       }
+      if (type === 'HomeBannerThree') {
+        return (
+          <React.Fragment key={index}>
+            <BannerThree
+              imgUrl1={imgUrl1}
+              title={title}
+              subtitle={subtitle}
+              LinkButton1={LinkButton1}
+              button1={button1}
+            />
+          </React.Fragment>
+        );
+      }
       if (type === 'HomeBannerOne')
         return (
           <div
@@ -72,6 +86,30 @@ const HomeBanners = ({ items }) => {
           </div>
         );
     }
+  );
+};
+
+const BannerThree = ({ imgUrl1, title, subtitle, LinkButton1, button1 }) => {
+  return (
+    <div className="home-banner3-container">
+      <div className="home-banner3-container__image">
+        <img src={imgUrl1} alt="" />
+        <div className="overlay"></div>
+      </div>
+      <div className="home-banner3-container__infos">
+        <h1>{title}</h1>
+        <h2>{subtitle}</h2>
+      </div>
+      <div className="home-banner3-container__buttons">
+        <div className="home-banner3-container__buttons__circles">
+          <div className="home-banner3-container__buttons__circles__circles2">
+            <div className="home-banner3-container__buttons__circles__circles2__circles3">
+              <Link to={LinkButton1}>{button1}</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
