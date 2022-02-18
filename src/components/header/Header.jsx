@@ -33,56 +33,52 @@ const Header = () => {
   const displayVoiceSearch = value.voiceSearch.value;
 
   return (
-    <div>
-      <header ref={elementRef} className={headerClasses}>
-        <div className="container">
-          <div className="container__header-top">
-            <div className="container__header-top__logo">
-              <Link to="/" onClick={() => setQueryState('')}>
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
-                  alt=""
-                />
-              </Link>
-            </div>
-            {/* For a search box Simple center */}
-            <div className="searchbox-container">
-              <CustomSearchBoxSimple />
-              {displayVoiceSearch && <CustomVoiceSearchComponent />}
-            </div>
-            <div className="container__header-top__title">
-              <h1>Demo BoilerPlate</h1>
-            </div>
+    <header ref={elementRef} className={headerClasses}>
+      <div className="container">
+        <div className="container__header-top">
+          <div className="container__header-top__logo">
+            <Link to="/" onClick={() => setQueryState('')}>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
+                alt=""
+              />
+            </Link>
           </div>
-          <nav className="container__header-bottom">
-            <ul className="container__header-bottom__links">
-              {links.map((link) => {
-                return (
-                  <li
-                    key={link.url}
-                    onClick={() => {
-                      // Hierarchical are extracted from config.js
-                      if (link.link !== 'All') {
-                        navigate(`/search`, {
-                          state: `${hierarchicalFacet.hierarchicalLvl0}:'${link.filter}'`,
-                        });
-                      } else {
-                        navigate('/search');
-                      }
-                    }}
-                  >
-                    <p>{link.link}</p>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-          <div>
-            <SelectPersona />
+          {/* For a search box Simple center */}
+          <div className="searchbox-container">
+            <CustomSearchBoxSimple />
+            {displayVoiceSearch && <CustomVoiceSearchComponent />}
+          </div>
+          <div className="container__header-top__title">
+            <h1>Demo BoilerPlate</h1>
           </div>
         </div>
-      </header>
-    </div>
+        <nav className="container__header-bottom">
+          <ul className="container__header-bottom__links">
+            {links.map((link) => {
+              return (
+                <li
+                  key={link.url}
+                  onClick={() => {
+                    // Hierarchical are extracted from config.js
+                    if (link.link !== 'All') {
+                      navigate(`/search`, {
+                        state: `${hierarchicalFacet.hierarchicalLvl0}:'${link.filter}'`,
+                      });
+                    } else {
+                      navigate('/search');
+                    }
+                  }}
+                >
+                  <p>{link.link}</p>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+        <SelectPersona />
+      </div>
+    </header>
   );
 };
 
