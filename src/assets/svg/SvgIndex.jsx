@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-export const Glass = () => (
+export const Glass = memo(() => (
   <svg viewBox="0 0 897 897" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M357.982 142.492C236.887 142.492 138.404 241.174 138.404 362.265C138.404 483.356 236.887 581.843 357.982 581.843C479.077 581.843 577.755 483.356 577.755 362.265C577.755 241.174 479.077 142.492 357.982 142.492ZM357.982 182.008C457.701 182.008 538.239 262.551 538.239 362.265C538.239 461.977 457.701 542.327 357.982 542.327C258.264 542.327 177.921 461.977 177.921 362.265C177.921 262.551 258.264 182.008 357.982 182.008Z"
@@ -11,9 +11,9 @@ export const Glass = () => (
       fill="#030A2B"
     />
   </svg>
-);
+));
 
-export const Heart = () => (
+export const Heart = memo(() => (
   <svg
     width="36"
     height="31"
@@ -33,9 +33,9 @@ export const Heart = () => (
       </clipPath>
     </defs>
   </svg>
-);
+));
 
-export const ChevronRight = () => (
+export const ChevronRight = memo(() => (
   <svg
     className="chevronRight"
     width="16"
@@ -49,8 +49,8 @@ export const ChevronRight = () => (
       fill="black"
     />
   </svg>
-);
-export const ChevronLeft = () => (
+));
+export const ChevronLeft = memo(() => (
   <svg
     width="16"
     height="25"
@@ -63,4 +63,4 @@ export const ChevronLeft = () => (
       fill="black"
     />
   </svg>
-);
+));
