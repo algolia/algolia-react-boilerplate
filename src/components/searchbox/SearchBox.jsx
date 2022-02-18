@@ -2,7 +2,7 @@
 // but simple it means with only a glass simple effect
 // Import Debounce
 import debounce from 'lodash.debounce';
-import React, { useCallback, memo } from 'react';
+import React, { useCallback, memo, useMemo, useEffect } from 'react';
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
 // Import navigate function to route to results page on search submit
@@ -26,7 +26,6 @@ import {
 import useStoreQueryToLocalStorage from '../../hooks/useStoreStringToLocalStorage';
 
 const SearchBoxSimple = ({ refine, currentRefinement }) => {
-  console.log('searchbox render');
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
   const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
@@ -37,14 +36,25 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   // Get states of React Router
   const { state } = useLocation();
 
-  const refineFunction = (event) => {
-    setQueryState(event);
-    refine(event);
+  const refineFunction = (query) => {
+    console.log(query);
+    setQueryState(query);
+    refine(query);
   };
+
+  useEffect(() => {
+    return () => {
+      // Remove side effect
+      debouncedRefine.cancel();
+    };
+  });
 
   // Debounce during search if you want to change the reactivity change number 250
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedRefine = useCallback(debounce(refineFunction, 50), []);
+  // const debouncedRefine = useCallback(debounce(refineFunction, 50), []);
+  const debouncedRefine = useMemo(() => {
+    return debounce(refineFunction, 50);
+  }, []);
   return (
     <div className="searchbox">
       <form

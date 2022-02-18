@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 // Algolia Import
 import { VoiceSearch } from 'react-instantsearch-dom';
 // Import Recoil
@@ -17,4 +17,4 @@ const Status = ({ transcript }) => {
 
 const VoiceSearchComponent = () => <VoiceSearch statusComponent={Status} />;
 
-export default VoiceSearchComponent;
+export default memo(VoiceSearchComponent);
