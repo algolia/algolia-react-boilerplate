@@ -16,37 +16,37 @@
     .inner-carousel {
       display: flex;
       .item {
-        min-height: 20rem;
-        min-width: 20rem;
-        padding: 40px;
+        min-width: 30%;
+        padding: 1rem;
         position: relative;
         img {
           width: 100%;
           height: 70%;
           pointer-events: none;
         }
-      }
-      .item__infos {
+
+        &__infos{   
         display: flex;
+        position: relative;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        margin-bottom: 0.8rem;
+        justify-content: space-between;
         cursor: pointer;
+        height: 7rem;
+        .name {
+          color: $orange-color;
+          font-weight: 400;
+          text-align: center;
+          margin-top: 0.5rem;
+        }
+        .price {
+          color: $blue-algolia;
+          font-size: 1.2rem;
+          font-weight: 600;   
+        }
       }
-      p {
-        color: $orange-color;
-        font-weight: 400;
-        text-align: center;
-        margin-top: 0.5rem;
       }
-      span {
-        color: $blue-algolia;
-        font-size: 1.2rem;
-        font-weight: 600;
-        position: absolute;
-        bottom: 6rem;
-      }
+
     }
   }
 }

@@ -57,8 +57,8 @@ const Carousel = ({ hits, title }) => {
                     navigate(`/search/${hit[objectID]}`);
                   }}
                 >
-                  <p>{hit[productName]}</p>
-                  <span>{hit[price]}</span>
+                  <p className="name">{hit[productName]}</p>
+                  <p className="price">{hit[price]}</p>
                 </div>
               </motion.div>
             );
