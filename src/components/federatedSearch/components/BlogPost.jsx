@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { connectHits } from 'react-instantsearch-dom';
 
 const ArticlesItems = ({ hits }) => {
@@ -26,4 +26,4 @@ const ArticlesItems = ({ hits }) => {
 };
 
 const Articles = connectHits(ArticlesItems);
-export default React.memo(Articles);
+export default memo(Articles);

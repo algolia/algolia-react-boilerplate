@@ -2,7 +2,7 @@
 // but simple it means with only a glass simple effect
 // Import Debounce
 import debounce from 'lodash.debounce';
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
 // Import navigate function to route to results page on search submit
@@ -26,6 +26,7 @@ import {
 import useStoreQueryToLocalStorage from '../../hooks/useStoreStringToLocalStorage';
 
 const SearchBoxSimple = ({ refine, currentRefinement }) => {
+  console.log('searchbox render');
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
   const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
@@ -80,4 +81,4 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
 
 const CustomSearchBoxSimple = connectSearchBox(SearchBoxSimple);
 
-export default CustomSearchBoxSimple;
+export default memo(CustomSearchBoxSimple);

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, memo } from 'react';
 
 // Algolias's import
 import algoliasearch from 'algoliasearch/lite';
@@ -100,4 +100,4 @@ const FederatedSearch = () => {
   );
 };
 
-export default FederatedSearch;
+export default memo(FederatedSearch);
