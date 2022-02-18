@@ -171,7 +171,7 @@ export const listItem = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
   animate: { opacity: 1 },
-  transition: { duration: 0.5, delay: 0.2 },
+  transition: { duration: 0.5, delay: 0.3 },
 };
 
 const config = {
