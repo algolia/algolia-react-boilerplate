@@ -23,7 +23,8 @@
   width: 100%;
   padding: 40px 0;
   box-shadow: 0 20px 30px rgba(#000, 0.2);
-  animation: slide 0.3s forwards ease-in-out;
+  height: 12rem;
+  animation: slide-down 0.7s;
   background: $grey-light-color;
 
   label {
@@ -32,15 +33,15 @@
   }
 }
 
-@keyframes slide {
+@keyframes slide-down {
   0% {
-    opacity: 1;
-    height: 13rem;
-  }
+      opacity: 0.7;
+      transform: translateY(-100%);
+  } 
   100% {
-    opacity: 1;
-    height: 12rem;
-  }
+      opacity: 1;
+      transform: translateY(0);
+  } 
 }
 
 // ------------------------------------------
