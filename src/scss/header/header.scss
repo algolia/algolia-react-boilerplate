@@ -9,39 +9,47 @@
 
 .header {
   text-align: center;
+  position: fixed;
+  z-index: 1000;
   box-shadow: 0 0 20px $white-color;
   padding: 40px 0;
   background: $grey-light-color;
   height: 13rem;
-}
-
-.sticky {
-  position: fixed;
-  z-index: 1000;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 40px 0;
-  box-shadow: 0 20px 30px rgba(#000, 0.2);
-  animation: slide 0.3s forwards ease-in-out;
-  background: $grey-light-color;
-
-  label {
-    font-weight: bold;
-    text-transform: uppercase;
-  }
 }
 
-@keyframes slide {
-  0% {
-    opacity: 1;
-    height: 13rem;
-  }
-  100% {
-    opacity: 1;
-    height: 12rem;
-  }
-}
+
+// If Animation on Header
+// .sticky {
+//   position: fixed;
+//   z-index: 1000;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   padding: 40px 0;
+//   box-shadow: 0 20px 30px rgba(#000, 0.2);
+//   height: 12rem;
+//   animation: slide-down 0.7s;
+//   background: $grey-light-color;
+
+//   label {
+//     font-weight: bold;
+//     text-transform: uppercase;
+//   }
+// }
+
+// @keyframes slide-down {
+//   0% {
+//       opacity: 0.7;
+//       transform: translateY(-100%);
+//   }
+//   100% {
+//       opacity: 1;
+//       transform: translateY(0);
+//   }
+// }
 
 // ------------------------------------------
 // ------------------------------------------
