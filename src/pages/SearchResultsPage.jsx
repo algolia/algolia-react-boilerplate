@@ -28,7 +28,8 @@ import InfluencerCard from '../components/hits/InfluencerCard';
 import NikeCard from '../components/hits/SalesCard';
 import Banner from '../components/searchresultpage/Banner';
 import { CustomStats } from '../components/searchresultpage/Stats';
-import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hits';
+// import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hits';
+import { InjectedHits } from '../components/searchresultpage/injected-hits';
 // Import Config File
 import { configAtom, indexName, indexInfluencer } from '../config/config';
 import { queryAtom } from '../config/searchbox';
@@ -51,8 +52,8 @@ const SearchResultPage = () => {
 
   // Get states of React Router
   const { state } = useLocation();
-  const [searchParams] = useSearchParams();
-  const queryFromUrl = searchParams.get('query');
+  // const [searchParams] = useSearchParams();
+  // const queryFromUrl = searchParams.get('query');
   // persona
   const personaSelect = useRecoilValue(personaSelected);
   // Persona
@@ -81,12 +82,12 @@ const SearchResultPage = () => {
               userToken={userToken}
               enablePersonalization={true}
               filters={state ? state : ''}
-              query={queryFromUrl ? queryFromUrl : queryState}
+              query={queryState && queryState}
             />
             <Index indexName={indexInfluencer.index}>
               <Configure hitsPerPage={1} page={0} />
             </Index>
-            <InjectedInfiniteHits
+            <InjectedHits
               hitComponent={Hit}
               slots={({ resultsByIndex }) => {
                 const indexValue = indexName.index;

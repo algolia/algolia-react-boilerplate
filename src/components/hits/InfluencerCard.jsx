@@ -17,9 +17,12 @@ const InfluencerCard = ({ hit }) => {
   return (
     <QueryAndHitsOnly>
       <motion.li
+        layout
         variants={listItem}
-        initial="hidden"
-        animate="show"
+        initial={listItem.initial}
+        exit={listItem.exit}
+        animate={listItem.animate}
+        transition={listItem.transition}
         className="image-wrapper-sales"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(${hit.influencer.image}`,

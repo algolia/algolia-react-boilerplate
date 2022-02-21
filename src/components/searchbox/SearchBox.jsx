@@ -6,7 +6,7 @@ import React, { useCallback } from 'react';
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
 // Import navigate function to route to results page on search submit
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 // Import Recoil
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
@@ -66,7 +66,7 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
           placeholder={simplePlaceholder}
           onClick={() => setIsFederated(true)}
           onChange={(event) => {
-            debouncedRefine(event.currentTarget.value);
+            refineFunction(event.currentTarget.value);
           }}
         />
         {state && SearchInCategoryConfig.isSearchInCategory && (

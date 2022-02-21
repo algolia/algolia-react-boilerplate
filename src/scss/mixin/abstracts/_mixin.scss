@@ -163,7 +163,6 @@
 @mixin hits-individual($title-color, $price-color, $higlight-color, $shadow) {
   width: 100%;
   display: block;
-  &__list {
     &__img {
       position: relative;
       img {
@@ -219,7 +218,7 @@
         }
       }
     }
-  }
+  
 }
 
 @mixin highlight($higlight-color) {
