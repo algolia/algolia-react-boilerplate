@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 // React Router import
 import { useNavigate } from 'react-router-dom';
@@ -45,4 +45,4 @@ const CategoryItems = ({ items }) => {
 
 const Category = connectRefinementList(CategoryItems);
 
-export default React.memo(Category);
+export default memo(Category);

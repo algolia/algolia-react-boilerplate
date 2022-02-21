@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, memo } from 'react';
 import Select from 'react-select';
 
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
@@ -63,4 +63,4 @@ const SelectPersona = () => {
   );
 };
 
-export default SelectPersona;
+export default memo(SelectPersona);
