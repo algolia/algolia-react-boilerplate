@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 // components import
 import { ChevronRight } from '../../../assets/svg/SvgIndex';
@@ -9,7 +9,7 @@ import { useNavigate, createSearchParams } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { queryAtom } from '../../../config/searchbox';
 
-const RecentSearches = React.memo(() => {
+const RecentSearches = memo(() => {
   const getSearches = localStorage.getItem('recentSearches');
   const cleanSearches = JSON.parse(getSearches);
   // router hook to navigate using a function

@@ -102,14 +102,18 @@
 @mixin stats($span-color) {
   display: flex;
   margin-bottom: 1rem;
+  font-size: 0.8rem;
+  font-style: italic;
   &__list {
     display: flex;
     span {
       color: $span-color;
       font-weight: 600;
+      font-size: 0.8rem;
     }
     p {
       margin-left: 0.5rem;
+      font-size: 0.8rem;
     }
   }
 }
@@ -159,7 +163,6 @@
 @mixin hits-individual($title-color, $price-color, $higlight-color, $shadow) {
   width: 100%;
   display: block;
-  &__list {
     &__img {
       position: relative;
       img {
@@ -177,13 +180,19 @@
         right: 1rem;
         svg {
           cursor: pointer;
-          width: 20px;
+          width: 12px;
+          path{
+            fill: $grey-dark-color;
+          }
         }
       }
     }
     &__infos {
+      display: flex;
+      flex-direction: column;
       align-items: flex-start;
-      height: 100%;
+      justify-content: space-between;
+      height: 5rem;
       width: 100%;
       margin: 1rem 0;
       h3 {
@@ -191,6 +200,7 @@
         font-size: 0.8rem;
         text-align: center;
         margin: 0 auto;
+        text-transform: capitalize;
         .ais-Highlight-nonHighlighted {
           color: $title-color;
         }
@@ -208,7 +218,7 @@
         }
       }
     }
-  }
+  
 }
 
 @mixin highlight($higlight-color) {
@@ -269,7 +279,7 @@
   padding: 0.8em;
   font-size: 0.7rem;
   transition: all 0.4s ease-in-out;
-  text-transform: uppercase;
+  text-transform: capitalize;
   cursor: pointer;
   color: rgba($text-color, 0.8);
   display: flex;

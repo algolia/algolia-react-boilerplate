@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 // Algolia's imports
 import { connectHits, Highlight } from 'react-instantsearch-dom';
@@ -49,4 +49,4 @@ const Suggestions = ({ hits }) => {
 
 const QuerySuggestions = connectHits(Suggestions);
 
-export default React.memo(QuerySuggestions);
+export default memo(QuerySuggestions);

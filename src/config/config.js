@@ -161,16 +161,17 @@ export const searchBoxAtom = atom({
   default: '', // default value (aka initial value)
 });
 
+export const selectButtonAtom = atom({
+  key: 'selectButtonAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
 // Hits and Framer Motion
 export const listItem = {
-  hidden: { opacity: 0, y: 100 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 0.2,
-    },
-  },
+  initial: { opacity: 0 },
+  exit: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 0.5, delay: 0.3 },
 };
 
 const config = {

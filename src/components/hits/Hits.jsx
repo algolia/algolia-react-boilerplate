@@ -8,7 +8,8 @@ import { listItem } from '../../config/config';
 
 // Recoil import
 import { hitAtom } from '../../config/results';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { hitsConfig } from '../../config/hits';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
@@ -16,34 +17,40 @@ import { useNavigate } from 'react-router-dom';
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
+
+  // Get hit attribute from config file
+  const { price, objectID, image, category, productName } =
+    useRecoilValue(hitsConfig);
+
   return (
-    <div className="hits-srp">
-      <motion.li
-        variants={listItem}
-        initial="hidden"
-        animate="show"
-        className="hits-srp__list"
-        onClick={() => {
-          hitState(hit);
-          navigate(`/search/${hit.objectID}`);
-        }}
-      >
-        <div className="hits-srp__list__img">
-          <img src={hit.full_url_image} alt={hit.category} />
-          <div className="hits-srp__list__img__heart">
-            <Heart />
-          </div>
+    <motion.li
+      layout
+      variants={listItem}
+      initial={listItem.initial}
+      exit={listItem.exit}
+      animate={listItem.animate}
+      transition={listItem.transition}
+      className="srpItem"
+      onClick={() => {
+        hitState(hit);
+        navigate(`/search/${hit[objectID]}`);
+      }}
+    >
+      <div className="srpItem__img">
+        <img src={hit[image]} alt={hit[category]} />
+        <div className="srpItem__img__heart">
+          <Heart />
         </div>
-        <div className="hits-srp__list__infos">
-          <h3>
-            <Highlight hit={hit} attribute="name" />
-          </h3>
-          <div className="hits-srp__list__infos__down">
-            <p className="hits-srp__list__infos__down__price">{hit.price}</p>
-          </div>
+      </div>
+      <div className="srpItem__infos">
+        <h3>
+          <Highlight hit={hit} attribute={productName} />
+        </h3>
+        <div className="srpItem__infos__down">
+          <p className="srpItem__infos__down__price">{hit[price]}</p>
         </div>
-      </motion.li>
-    </div>
+      </div>
+    </motion.li>
   );
 };
 

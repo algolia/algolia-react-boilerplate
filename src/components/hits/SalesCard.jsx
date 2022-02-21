@@ -8,9 +8,12 @@ import { listItem } from '../../config/config';
 const NikeCard = ({ hit }) => {
   return (
     <motion.li
+      layout
       variants={listItem}
-      initial="hidden"
-      animate="show"
+      initial={listItem.initial}
+      exit={listItem.exit}
+      animate={listItem.animate}
+      transition={listItem.transition}
       className="image-wrapper-sales"
       style={{
         backgroundImage: `url(${hit.image.desktop_url})`,

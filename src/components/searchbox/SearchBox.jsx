@@ -2,11 +2,11 @@
 // but simple it means with only a glass simple effect
 // Import Debounce
 import debounce from 'lodash.debounce';
-import React, { useCallback } from 'react';
+import React, { useCallback, memo, useMemo, useEffect } from 'react';
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
 // Import navigate function to route to results page on search submit
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 // Import Recoil
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
@@ -36,14 +36,25 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   // Get states of React Router
   const { state } = useLocation();
 
-  const refineFunction = (event) => {
-    setQueryState(event);
-    refine(event);
+  const refineFunction = (query) => {
+    console.log(query);
+    setQueryState(query);
+    refine(query);
   };
+
+  useEffect(() => {
+    return () => {
+      // Remove side effect
+      debouncedRefine.cancel();
+    };
+  });
 
   // Debounce during search if you want to change the reactivity change number 250
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedRefine = useCallback(debounce(refineFunction, 50), []);
+  // const debouncedRefine = useCallback(debounce(refineFunction, 50), []);
+  const debouncedRefine = useMemo(() => {
+    return debounce(refineFunction, 50);
+  }, []);
   return (
     <div className="searchbox">
       <form
@@ -66,7 +77,7 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
           placeholder={simplePlaceholder}
           onClick={() => setIsFederated(true)}
           onChange={(event) => {
-            debouncedRefine(event.currentTarget.value);
+            refineFunction(event.currentTarget.value);
           }}
         />
         {state && SearchInCategoryConfig.isSearchInCategory && (
@@ -80,4 +91,4 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
 
 const CustomSearchBoxSimple = connectSearchBox(SearchBoxSimple);
 
-export default CustomSearchBoxSimple;
+export default memo(CustomSearchBoxSimple);

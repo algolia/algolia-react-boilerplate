@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 // Algolia's imports
 import { connectHits } from 'react-instantsearch-dom';
@@ -8,7 +8,8 @@ import { ChevronRight } from '../../../assets/svg/SvgIndex';
 
 // Recoil import
 import { hitAtom } from '../../../config/results';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { hitsConfig } from '../../../config/hits';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +17,10 @@ import { useNavigate } from 'react-router-dom';
 const Hits = ({ hits }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
+
+  // Get hit attribute from config file
+  const { price, objectID, image, productName, brand } =
+    useRecoilValue(hitsConfig);
   return (
     <div className="products">
       <div className="products__header">
@@ -25,20 +30,20 @@ const Hits = ({ hits }) => {
         {hits.map((hit) => {
           return (
             <li
-              key={hit.objectID}
+              key={hit[objectID]}
               className="products__item"
               onClick={() => {
                 hitState(hit);
-                navigate(`/search/${hit.objectID}`);
+                navigate(`/search/${hit[objectID]}`);
               }}
             >
               <div className="image-wrapper">
-                <img src={hit.full_url_image} alt="" />
+                <img src={hit[image]} alt="" />
               </div>
               <div className="infos">
-                <p className="brand">{hit.brand}</p>
-                <p className="name">{hit.name}</p>
-                <p className="price">{hit.price}</p>
+                <p className="brand">{hit[brand]}</p>
+                <p className="name">{hit[productName]}</p>
+                <p className="price">{hit[price]}</p>
               </div>
             </li>
           );
@@ -54,4 +59,4 @@ const Hits = ({ hits }) => {
 
 const Products = connectHits(Hits);
 
-export default React.memo(Products);
+export default memo(Products);
