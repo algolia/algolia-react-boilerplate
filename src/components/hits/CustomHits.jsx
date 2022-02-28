@@ -15,7 +15,6 @@ import { hitsConfig } from '../../config/hits';
 import { useNavigate } from 'react-router-dom';
 
 const CustomHits = ({ hits }) => {
-  console.log('HIT', hits);
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
 
@@ -27,7 +26,6 @@ const CustomHits = ({ hits }) => {
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
         {hits.map((hit) => {
-          console.log(hit);
           return (
             // eslint-disable-next-line react/jsx-key
             <motion.li
