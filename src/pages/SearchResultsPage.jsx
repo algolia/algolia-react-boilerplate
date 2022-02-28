@@ -1,3 +1,4 @@
+import algoliasearch from 'algoliasearch/lite';
 import React, { useState, memo } from 'react';
 // eslint-disable-next-line import/order
 import {
@@ -8,35 +9,32 @@ import {
   InstantSearch,
 } from 'react-instantsearch-dom';
 
-import algoliasearch from 'algoliasearch/lite';
-
 // React router import
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 // Recoil state to directly access results
 import { useRecoilState, useRecoilValue } from 'recoil';
-// Import Persona State from recoil
-import { personaSelected } from '../config/header';
 
-// Import other components
+// Import Components
+import CustomClearRefinements from '../components/facets/ClearRefinement';
+import CustomCurrentRefinements from '../components/facets/CurrentRefinement';
 import GenericRefinementList from '../components/facets/Facets';
 // Import Components
+import QuerySuggestions from '../components/federatedSearch/components/QuerySuggestions';
 import GiftCard from '../components/hits/GiftCard';
 import { Hit } from '../components/hits/Hits';
-// Import Components
-import QuerySuggestions from '../components/federatedSearch/components/QuerySuggestions';
 import InfluencerCard from '../components/hits/InfluencerCard';
 import NikeCard from '../components/hits/SalesCard';
 import Banner from '../components/searchresultpage/Banner';
 import { CustomStats } from '../components/searchresultpage/Stats';
+// Import Persona State from recoil
+import { personaSelected } from '../config/header';
 // import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hits';
 import { InjectedHits } from '../components/searchresultpage/injected-hits';
 // Import Config File
 import { configAtom, indexName, indexInfluencer } from '../config/config';
 import { queryAtom } from '../config/searchbox';
 import { customDataByType } from '../utils';
-
-import CustomClearRefinements from '../components/facets/ClearRefinement';
-import CustomCurrentRefinements from '../components/facets/CurrentRefinement';
+import CustomHitsComponent from '../components/hits/CustomHits';
 
 const SearchResultPage = () => {
   // Recoil & React states
@@ -49,6 +47,7 @@ const SearchResultPage = () => {
   const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = config.hitsPerPage.numberInjected;
   const bannerDisplay = config.bannerSrp.value;
+  const injectedValue = config.injectedHits.value;
 
   // Get states of React Router
   const { state } = useLocation();
@@ -87,43 +86,48 @@ const SearchResultPage = () => {
             <Index indexName={indexInfluencer.index}>
               <Configure hitsPerPage={1} page={0} />
             </Index>
-            <InjectedHits
-              hitComponent={Hit}
-              slots={({ resultsByIndex }) => {
-                const indexValue = indexName.index;
-                const indexInfluencerValue = indexInfluencer.index;
-                const { noCta, nikeCard } = customDataByType(
-                  resultsByIndex?.[indexValue]?.userData
-                );
-                // eslint-disable-next-line no-lone-blocks
-                {
-                  // eslint-disable-next-line no-unused-expressions
-                  nikeCard && setInjected(true);
-                }
-                return [
+            {injectedValue ? (
+              <InjectedHits
+                hitComponent={Hit}
+                slots={({ resultsByIndex }) => {
+                  const indexValue = indexName.index;
+                  const indexInfluencerValue = indexInfluencer.index;
+                  const { noCta, nikeCard } = customDataByType(
+                    resultsByIndex?.[indexValue]?.userData
+                  );
+                  // eslint-disable-next-line no-lone-blocks
                   {
-                    getHits: () => [noCta],
-                    injectAt: noCta ? noCta.position : null,
-                    slotComponent: GiftCard,
-                  },
-                  {
-                    getHits: () => [nikeCard],
-                    injectAt: nikeCard ? nikeCard.position : null,
-                    slotComponent: NikeCard,
-                  },
-                  {
-                    injectAt: ({ position }) => position === 2,
-                    getHits: ({ resultsByIndex }) => {
-                      setInjected(true);
-                      return resultsByIndex[indexInfluencerValue]
-                        ? resultsByIndex[indexInfluencerValue].hits || []
-                        : [];
+                    // eslint-disable-next-line no-unused-expressions
+                    nikeCard && setInjected(true);
+                  }
+                  return [
+                    {
+                      getHits: () => [noCta],
+                      injectAt: noCta ? noCta.position : null,
+                      slotComponent: GiftCard,
                     },
-                    slotComponent: InfluencerCard,
-                  },
-                ];
-              }}
-            />
+                    {
+                      getHits: () => [nikeCard],
+                      injectAt: nikeCard ? nikeCard.position : null,
+                      slotComponent: NikeCard,
+                    },
+                    {
+                      injectAt: ({ position }) => position === 2,
+                      // eslint-disable-next-line no-shadow
+                      getHits: ({ resultsByIndex }) => {
+                        setInjected(true);
+                        return resultsByIndex[indexInfluencerValue]
+                          ? resultsByIndex[indexInfluencerValue].hits || []
+                          : [];
+                      },
+                      slotComponent: InfluencerCard,
+                    },
+                  ];
+                }}
+              />
+            ) : (
+              <CustomHitsComponent />
+            )}
             <Pagination />
           </div>
         </div>

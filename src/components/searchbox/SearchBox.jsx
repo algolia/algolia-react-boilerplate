@@ -37,7 +37,6 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   const { state } = useLocation();
 
   const refineFunction = (query) => {
-    console.log(query);
     setQueryState(query);
     refine(query);
   };

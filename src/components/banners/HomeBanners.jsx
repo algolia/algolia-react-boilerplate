@@ -5,7 +5,6 @@ import { connectQueryRules } from 'react-instantsearch-dom';
 import { Link } from 'react-router-dom';
 
 const HomeBanners = ({ items }) => {
-  console.log(items);
   return items.map(
     (
       {
