@@ -108,6 +108,10 @@ const hitsPerPage = {
   numberInjected: 14,
 };
 
+const injectedHits = {
+  value: true,
+};
+
 const breadcrumbAttributes = [
   'hierarchical_categories.lvl0',
   'hierarchical_categories.lvl1',
@@ -190,6 +194,7 @@ const config = {
   hitsPerPage,
   bannerSrp,
   currency,
+  injectedHits,
 };
 
 export const configAtom = atom({
