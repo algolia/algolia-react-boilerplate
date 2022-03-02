@@ -26,11 +26,6 @@ const HomePage = () => {
           />
         );
       })}
-      {/* <HomeCarousel
-        attribute={"brand:'polo ralph lauren'"}
-        title={'Ralph Lauren Products'}
-      />
-      <HomeCarousel attribute={"category:'pullover'"} title={'Our PullOver'} /> */}
     </div>
   );
 };
