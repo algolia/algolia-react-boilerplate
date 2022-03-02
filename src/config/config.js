@@ -14,6 +14,12 @@ export const indexName = {
   indexBlog: 'canda_customDemo_articles',
 };
 
+// Ignore this, generated from indexConfig
+export const indexNameAtom = atom({
+  key: 'indexName',
+  default: 'flagship_fashion',
+});
+
 export const indexInfluencer = {
   index: 'flagship_fashion_influencers',
 };
@@ -33,6 +39,30 @@ const bannerSrp = {
 const currency = {
   value: '$',
 };
+
+const injectedHits = {
+  value: true,
+};
+
+export const isFederatedAtom = atom({
+  key: 'isFederatedAtom', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
+
+export const searchBoxAtom = atom({
+  key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+export const selectButtonAtom = atom({
+  key: 'selectButtonAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+export const selectSortByIndex = atom({
+  key: 'selectSortByIndexAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
 
 // ------------------------------------------
 // Refinements
@@ -98,33 +128,23 @@ const refinements = [
   },
 ];
 
-const sorts = [
-  { value: indexName, label: 'Most popular', isDefault: true },
-  {
-    value: `${indexName}_asc_price`,
-    label: 'Price Low to High (Traditional Sort)',
-  },
-  {
-    value: `${indexName}_asc_price_virtual_replica`,
-    label: 'Price Low to High (Relevant Sort)',
-  },
-  { value: `${indexName}_desc_price`, label: 'Price High to Low' },
-];
-
 const hitsPerPage = {
   numberNotInjected: 15,
   numberInjected: 14,
 };
 
-const injectedHits = {
-  value: true,
-};
+// ------------------------------------------
+// Sort By
+// ------------------------------------------
 
-const breadcrumbAttributes = [
-  'hierarchical_categories.lvl0',
-  'hierarchical_categories.lvl1',
-  'hierarchical_categories.lvl2',
-];
+const sortBy = {
+  value: true,
+  labelIndex: [
+    { value: indexName.index, label: 'All' },
+    { value: `${indexName.index}_price_desc`, label: 'Price Desc' },
+    { value: `${indexName.index}_price_asc`, label: 'Price Asc' },
+  ],
+};
 
 // This export is used for Category pages. It will create a filters in a Configure widget in SRP to filter out the right products
 export const hierarchicalFacet = {
@@ -133,25 +153,6 @@ export const hierarchicalFacet = {
 
 const federatedCategory = {
   categoryInFederated: 'hierarchicalCategories.lvl2',
-};
-
-const searchParameters = {
-  hitsPerPage: 10,
-  maxValuesPerFacet: 50,
-  attributesToSnippet: ['description:30'],
-  snippetEllipsisText: '…',
-  analytics: true,
-  clickAnalytics: true,
-};
-
-const autocomplete = {
-  placeholders: ['products', 'articles', 'faq'],
-  debouncing: 800, // in ms
-  detachedMediaQuery: '(max-width: 1439px)',
-};
-
-const url = {
-  debouncing: 1500, // in ms
 };
 
 // FEDERATED SEARCHES
@@ -163,22 +164,9 @@ const federatedSearchConfig = {
   isBlogPosts: true,
 };
 
-export const isFederatedAtom = atom({
-  key: 'isFederatedAtom', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
-});
-
-export const searchBoxAtom = atom({
-  key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
-});
-
-export const selectButtonAtom = atom({
-  key: 'selectButtonAtom', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
-});
-
+// ------------------------------------------
 // Hits and Framer Motion
+// ------------------------------------------
 export const listItem = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
@@ -188,11 +176,6 @@ export const listItem = {
 
 const config = {
   refinements,
-  sorts,
-  breadcrumbAttributes,
-  searchParameters,
-  autocomplete,
-  url,
   indexName,
   searchClient,
   federatedSearchConfig,
@@ -203,6 +186,7 @@ const config = {
   bannerSrp,
   currency,
   injectedHits,
+  sortBy,
 };
 
 export const configAtom = atom({

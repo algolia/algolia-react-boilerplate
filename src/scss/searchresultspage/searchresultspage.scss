@@ -31,8 +31,17 @@
 // ------------------------------------------
 // Stats
 // ------------------------------------------
-.stats-infos {
-  @include stats($blue-algolia);
+
+.srp-container__stats-sort {
+  display: flex;
+  justify-content: space-between;
+  .stats-infos {
+    @include stats($blue-algolia);
+  }
+  select{
+    font-size: 0.9rem;
+    font-family: $main-font;
+  }
 }
 
 // ------------------------------------------
