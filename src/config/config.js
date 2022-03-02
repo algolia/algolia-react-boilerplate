@@ -1,7 +1,8 @@
 import { atom } from 'recoil';
 
-// import { indexName } from "../utils/env";
-
+// ------------------------------------------
+// Config Index and Search Client
+// ------------------------------------------
 export const searchClient = {
   APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
   appID: '853MYZ81KY',
@@ -17,6 +18,9 @@ export const indexInfluencer = {
   index: 'flagship_fashion_influencers',
 };
 
+// ------------------------------------------
+// Config feature, change by true or false to remove them or change the value
+// ------------------------------------------
 const voiceSearch = {
   value: true,
 };
@@ -29,6 +33,10 @@ const bannerSrp = {
 const currency = {
   value: '$',
 };
+
+// ------------------------------------------
+// Refinements
+// ------------------------------------------
 
 const refinements = [
   {
