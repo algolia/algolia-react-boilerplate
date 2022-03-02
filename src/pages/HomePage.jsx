@@ -3,7 +3,7 @@ import React from 'react';
 import CustomHomeBanners from '../components/banners/HomeBanners';
 import Header from '../components/header/Header';
 import FederatedSearch from '../components/federatedSearch/FederatedSearch';
-import { isFederatedAtom } from '../config/config';
+import { isFederatedAtom, carouselConfig } from '../config/config';
 
 //recoil import
 import { useRecoilValue } from 'recoil';
@@ -17,11 +17,20 @@ const HomePage = () => {
       {isFederated && <FederatedSearch />}
       {/* Here it's the custom banners */}
       <CustomHomeBanners />
-      <HomeCarousel
+      {carouselConfig.map((carousel, i) => {
+        return (
+          <HomeCarousel
+            key={i}
+            attribute={carousel.attribute}
+            title={carousel.title}
+          />
+        );
+      })}
+      {/* <HomeCarousel
         attribute={"brand:'polo ralph lauren'"}
         title={'Ralph Lauren Products'}
       />
-      <HomeCarousel attribute={"category:'pullover'"} title={'Our PullOver'} />
+      <HomeCarousel attribute={"category:'pullover'"} title={'Our PullOver'} /> */}
     </div>
   );
 };

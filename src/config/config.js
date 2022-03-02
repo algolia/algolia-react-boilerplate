@@ -134,6 +134,21 @@ const hitsPerPage = {
 };
 
 // ------------------------------------------
+// Carousel Config
+// ------------------------------------------
+
+export const carouselConfig = [
+  {
+    attribute: "brand:'polo ralph lauren'",
+    title: 'Ralph Lauren Products',
+  },
+  {
+    attribute: "category:'pullover'",
+    title: 'Our PullOver',
+  },
+];
+
+// ------------------------------------------
 // Sort By
 // ------------------------------------------
 
