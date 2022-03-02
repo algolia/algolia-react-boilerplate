@@ -25,10 +25,10 @@ const CustomHits = ({ hits }) => {
   return (
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
-        {hits.map((hit) => {
+        {hits.map((hit, i) => {
           return (
-            // eslint-disable-next-line react/jsx-key
             <motion.li
+              key={i}
               layout={true}
               variants={listItem}
               initial={listItem.initial}

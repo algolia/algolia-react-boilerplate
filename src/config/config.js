@@ -13,6 +13,12 @@ export const indexName = {
   indexBlog: 'canda_customDemo_articles',
 };
 
+// Ignore this, generated from indexConfig
+export const indexNameAtom = atom({
+  key: 'indexName',
+  default: 'flagship_fashion',
+});
+
 export const indexInfluencer = {
   index: 'flagship_fashion_influencers',
 };
@@ -28,6 +34,14 @@ const bannerSrp = {
 };
 const currency = {
   value: '$',
+};
+const sortBy = {
+  value: true,
+  labelIndex: [
+    { value: indexName.index, label: 'All' },
+    { value: `${indexName.index}_price_desc`, label: 'Price Desc' },
+    { value: `${indexName.index}_price_asc`, label: 'Price Asc' },
+  ],
 };
 
 const refinements = [
@@ -88,19 +102,6 @@ const refinements = [
       limit: 8,
     },
   },
-];
-
-const sorts = [
-  { value: indexName, label: 'Most popular', isDefault: true },
-  {
-    value: `${indexName}_asc_price`,
-    label: 'Price Low to High (Traditional Sort)',
-  },
-  {
-    value: `${indexName}_asc_price_virtual_replica`,
-    label: 'Price Low to High (Relevant Sort)',
-  },
-  { value: `${indexName}_desc_price`, label: 'Price High to Low' },
 ];
 
 const hitsPerPage = {
@@ -170,6 +171,11 @@ export const selectButtonAtom = atom({
   default: '', // default value (aka initial value)
 });
 
+export const selectSortByIndex = atom({
+  key: 'selectSortByIndexAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
 // Hits and Framer Motion
 export const listItem = {
   initial: { opacity: 0 },
@@ -180,7 +186,6 @@ export const listItem = {
 
 const config = {
   refinements,
-  sorts,
   breadcrumbAttributes,
   searchParameters,
   autocomplete,
@@ -195,6 +200,7 @@ const config = {
   bannerSrp,
   currency,
   injectedHits,
+  sortBy,
 };
 
 export const configAtom = atom({
