@@ -42,7 +42,6 @@ const sortBy = {
     { value: `${indexName.index}_price_desc`, label: 'Price Desc' },
     { value: `${indexName.index}_price_asc`, label: 'Price Asc' },
   ],
-  sortBySelected: '',
 };
 
 const refinements = [
