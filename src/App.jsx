@@ -8,9 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // https://recoiljs.org/docs/introduction/getting-started
 import { RecoilRoot } from 'recoil';
 
-
 import CustomStateResults from './components/stateResults/stateResults';
-
 
 // SCSS import
 import './scss/index.scss';
@@ -20,7 +18,7 @@ import './scss/index.scss';
 import { searchClient, indexName } from './config/config';
 
 // Import Components
-import { Main } from './main.jsx';
+import { Main } from './Main.jsx';
 
 const App = () => {
   const search = algoliasearch(searchClient.appID, searchClient.APIKey);
