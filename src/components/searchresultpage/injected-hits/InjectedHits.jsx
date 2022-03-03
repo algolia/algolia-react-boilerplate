@@ -2,23 +2,27 @@ import React from 'react';
 import { createClassNames, connectHits } from 'react-instantsearch-dom';
 import { connectInjectedHits } from './connectInjectedHits';
 import { motion, AnimatePresence } from 'framer-motion';
+import { pageItem } from '../../../config/config';
 
 const cx = createClassNames('InfiniteHits');
 
 export const InjectedHits = connectHits(
   connectInjectedHits(({ injectedHits }) => (
-    <div className={cx('')}>
+    <motion.div
+      className={cx('')}
+      variants={pageItem}
+      initial={pageItem.initial}
+      animate={pageItem.animate}
+      exit={pageItem.exit}
+      transition={pageItem.transition}
+    >
       <motion.ul className={cx('list')} layout>
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           {injectedHits.map(({ props, type, Hit }, index) => {
-            return (
-              // <li key={index} className={cx(type)}>
-              <Hit {...props} index={index} key={index} />
-              // </li>
-            );
+            return <Hit {...props} index={index} key={index} />;
           })}
         </AnimatePresence>
       </motion.ul>
-    </div>
+    </motion.div>
   ))
 );

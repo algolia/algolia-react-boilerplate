@@ -3,6 +3,9 @@
 .federatedSearch{
     width: 100%;
     padding: 2rem;
+    position: absolute;
+    background-color: $background-color;
+    z-index: 999;
 
    
     &__wrapper{
