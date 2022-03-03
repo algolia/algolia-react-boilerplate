@@ -1,7 +1,8 @@
 import { atom } from 'recoil';
 
-// import { indexName } from "../utils/env";
-
+// ------------------------------------------
+// Config Index and Search Client
+// ------------------------------------------
 export const searchClient = {
   APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
   appID: '853MYZ81KY',
@@ -13,10 +14,19 @@ export const indexName = {
   indexBlog: 'canda_customDemo_articles',
 };
 
+// Ignore this, generated from indexConfig
+export const indexNameAtom = atom({
+  key: 'indexName',
+  default: 'flagship_fashion',
+});
+
 export const indexInfluencer = {
   index: 'flagship_fashion_influencers',
 };
 
+// ------------------------------------------
+// Config feature, change by true or false to remove them or change the value
+// ------------------------------------------
 const voiceSearch = {
   value: true,
 };
@@ -29,6 +39,34 @@ const bannerSrp = {
 const currency = {
   value: '$',
 };
+
+const injectedHits = {
+  value: true,
+};
+
+export const isFederatedAtom = atom({
+  key: 'isFederatedAtom', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
+
+export const searchBoxAtom = atom({
+  key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+export const selectButtonAtom = atom({
+  key: 'selectButtonAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+export const selectSortByIndex = atom({
+  key: 'selectSortByIndexAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+// ------------------------------------------
+// Refinements
+// ------------------------------------------
 
 const refinements = [
   {
@@ -90,33 +128,38 @@ const refinements = [
   },
 ];
 
-const sorts = [
-  { value: indexName, label: 'Most popular', isDefault: true },
-  {
-    value: `${indexName}_asc_price`,
-    label: 'Price Low to High (Traditional Sort)',
-  },
-  {
-    value: `${indexName}_asc_price_virtual_replica`,
-    label: 'Price Low to High (Relevant Sort)',
-  },
-  { value: `${indexName}_desc_price`, label: 'Price High to Low' },
-];
-
 const hitsPerPage = {
   numberNotInjected: 15,
   numberInjected: 14,
 };
 
-const injectedHits = {
-  value: true,
-};
+// ------------------------------------------
+// Carousel Config
+// ------------------------------------------
 
-const breadcrumbAttributes = [
-  'hierarchical_categories.lvl0',
-  'hierarchical_categories.lvl1',
-  'hierarchical_categories.lvl2',
+export const carouselConfig = [
+  {
+    attribute: "brand:'polo ralph lauren'",
+    title: 'Ralph Lauren Products',
+  },
+  {
+    attribute: "category:'pullover'",
+    title: 'Our PullOver',
+  },
 ];
+
+// ------------------------------------------
+// Sort By
+// ------------------------------------------
+
+const sortBy = {
+  value: true,
+  labelIndex: [
+    { value: indexName.index, label: 'All' },
+    { value: `${indexName.index}_price_desc`, label: 'Price Desc' },
+    { value: `${indexName.index}_price_asc`, label: 'Price Asc' },
+  ],
+};
 
 // This export is used for Category pages. It will create a filters in a Configure widget in SRP to filter out the right products
 export const hierarchicalFacet = {
@@ -125,25 +168,6 @@ export const hierarchicalFacet = {
 
 const federatedCategory = {
   categoryInFederated: 'hierarchicalCategories.lvl2',
-};
-
-const searchParameters = {
-  hitsPerPage: 10,
-  maxValuesPerFacet: 50,
-  attributesToSnippet: ['description:30'],
-  snippetEllipsisText: '…',
-  analytics: true,
-  clickAnalytics: true,
-};
-
-const autocomplete = {
-  placeholders: ['products', 'articles', 'faq'],
-  debouncing: 800, // in ms
-  detachedMediaQuery: '(max-width: 1439px)',
-};
-
-const url = {
-  debouncing: 1500, // in ms
 };
 
 // FEDERATED SEARCHES
@@ -155,22 +179,9 @@ const federatedSearchConfig = {
   isBlogPosts: true,
 };
 
-export const isFederatedAtom = atom({
-  key: 'isFederatedAtom', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
-});
-
-export const searchBoxAtom = atom({
-  key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
-});
-
-export const selectButtonAtom = atom({
-  key: 'selectButtonAtom', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
-});
-
+// ------------------------------------------
 // Hits and Framer Motion
+// ------------------------------------------
 export const listItem = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
@@ -202,11 +213,6 @@ export const facetItem = {
 
 const config = {
   refinements,
-  sorts,
-  breadcrumbAttributes,
-  searchParameters,
-  autocomplete,
-  url,
   indexName,
   searchClient,
   federatedSearchConfig,
@@ -217,6 +223,7 @@ const config = {
   bannerSrp,
   currency,
   injectedHits,
+  sortBy,
 };
 
 export const configAtom = atom({

@@ -7,7 +7,7 @@ import { pageItem } from '../config/config';
 import CustomHomeBanners from '../components/banners/HomeBanners';
 import Header from '../components/header/Header';
 import FederatedSearch from '../components/federatedSearch/FederatedSearch';
-import { isFederatedAtom } from '../config/config';
+import { isFederatedAtom, carouselConfig } from '../config/config';
 
 //recoil import
 import { useRecoilValue } from 'recoil';
@@ -27,11 +27,15 @@ const HomePage = () => {
       <AnimatePresence>{isFederated && <FederatedSearch />}</AnimatePresence>
       {/* Here it's the custom banners */}
       <CustomHomeBanners />
-      <HomeCarousel
-        attribute={"brand:'polo ralph lauren'"}
-        title={'Ralph Lauren Products'}
-      />
-      <HomeCarousel attribute={"category:'pullover'"} title={'Our PullOver'} />
+      {carouselConfig.map((carousel, i) => {
+        return (
+          <HomeCarousel
+            key={i}
+            attribute={carousel.attribute}
+            title={carousel.title}
+          />
+        );
+      })}
     </motion.div>
   );
 };

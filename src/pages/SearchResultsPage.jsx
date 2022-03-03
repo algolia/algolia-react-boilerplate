@@ -24,21 +24,21 @@ import CustomCurrentRefinements from '../components/facets/CurrentRefinement';
 import GenericRefinementList from '../components/facets/Facets';
 // Import Components
 import QuerySuggestions from '../components/federatedSearch/components/QuerySuggestions';
+import CustomHitsComponent from '../components/hits/CustomHits';
 import GiftCard from '../components/hits/GiftCard';
 import { Hit } from '../components/hits/Hits';
 import InfluencerCard from '../components/hits/InfluencerCard';
 import NikeCard from '../components/hits/SalesCard';
 import Banner from '../components/searchresultpage/Banner';
+import CustomSortBy from '../components/searchresultpage/SortBy';
 import { CustomStats } from '../components/searchresultpage/Stats';
-// Import Persona State from recoil
-import { personaSelected } from '../config/header';
-// import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hits';
 import { InjectedHits } from '../components/searchresultpage/injected-hits';
-// Import Config File
+// Import Persona State from recoil
 import { configAtom, indexName, indexInfluencer } from '../config/config';
+import { personaSelected } from '../config/header';
+// Import Config File
 import { queryAtom } from '../config/searchbox';
 import { customDataByType } from '../utils';
-import CustomHitsComponent from '../components/hits/CustomHits';
 
 const SearchResultPage = () => {
   // Recoil & React states
@@ -53,11 +53,12 @@ const SearchResultPage = () => {
   const bannerDisplay = config.bannerSrp.value;
   const injectedValue = config.injectedHits.value;
 
+  // Define Price Sort By Const
+  const priceSortBy = config.sortBy.value;
+  const labelItems = config.sortBy.labelIndex;
+
   // Get states of React Router
   const { state } = useLocation();
-  // const [searchParams] = useSearchParams();
-  // const queryFromUrl = searchParams.get('query');
-  // persona
   const personaSelect = useRecoilValue(personaSelected);
   // Persona
   const userToken = personaSelect?.value;
@@ -75,6 +76,7 @@ const SearchResultPage = () => {
             className="srp-container__facets"
           >
             <GenericRefinementList />
+
           </motion.div>
           <motion.div
             className="srp-container__hits"
@@ -84,7 +86,16 @@ const SearchResultPage = () => {
             exit={pageItem.exit}
             transition={pageItem.transition}
           >
-            <div>{stats && <CustomStats />}</div>
+            <div className="srp-container__stats-sort">
+              {stats && <CustomStats />}
+              {priceSortBy && (
+                <CustomSortBy
+                  items={labelItems}
+                  defaultRefinement={indexName.index}
+                />
+              )}
+            </div>
+
             <div className="refinement-container">
               <CustomCurrentRefinements />
               <CustomClearRefinements />
