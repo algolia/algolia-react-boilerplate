@@ -4,6 +4,10 @@ import React, { useRef, memo } from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, Configure } from 'react-instantsearch-dom';
 
+// framer motion
+import { motion } from 'framer-motion';
+import { federatedItem } from '../../config/config';
+
 // import from Recoil
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import {
@@ -54,7 +58,15 @@ const FederatedSearch = () => {
   );
 
   return (
-    <div className="federatedSearch" ref={containerFederated}>
+    <motion.div
+      className="federatedSearch"
+      ref={containerFederated}
+      variants={federatedItem}
+      initial={federatedItem.initial}
+      animate={federatedItem.animate}
+      exit={federatedItem.exit}
+      transition={federatedItem.transition}
+    >
       <div className="federatedSearch__wrapper">
         <div className="federatedSearch__left">
           {isRecentSearch && <RecentSearches />}
@@ -96,7 +108,7 @@ const FederatedSearch = () => {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

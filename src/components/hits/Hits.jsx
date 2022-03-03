@@ -4,7 +4,7 @@ import React from 'react';
 import { Highlight } from 'react-instantsearch-dom';
 
 import { Heart } from '../../assets/svg/SvgIndex';
-import { listItem } from '../../config/config';
+import { mainTransition, listItem } from '../../config/config';
 
 // Recoil import
 import { hitAtom } from '../../config/results';
@@ -36,12 +36,17 @@ const Hit = ({ hit }) => {
         navigate(`/search/${hit[objectID]}`);
       }}
     >
-      <div className="srpItem__img">
-        <img src={hit[image]} alt={hit[category]} />
+      <motion.div className="srpItem__img">
+        <motion.img
+          whileHover={{ scale: 1.1 }}
+          transition={mainTransition}
+          src={hit[image]}
+          alt={hit[category]}
+        />
         <div className="srpItem__img__heart">
           <Heart />
         </div>
-      </div>
+      </motion.div>
       <div className="srpItem__infos">
         <h3>
           <Highlight hit={hit} attribute={productName} />

@@ -8,15 +8,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // https://recoiljs.org/docs/introduction/getting-started
 import { RecoilRoot } from 'recoil';
 
-// Import Pages
-
-import Header from './components/header/Header';
-import HomePage from './pages/HomePage';
-import SearchResultsPage from './pages/SearchResultsPage';
-import ResultsPage from './pages/ResultsPage';
-import ProductDetails from './pages/ProductDetails';
-import Footer from './components/footer/Footer';
-
 import CustomStateResults from './components/stateResults/stateResults';
 
 // SCSS import
@@ -27,22 +18,17 @@ import './scss/index.scss';
 import { indexName, searchClient } from './config/config';
 
 // Import Components
+import { Main } from './main.jsx';
 
 const App = () => {
   const search = algoliasearch(searchClient.appID, searchClient.APIKey);
+
   return (
     <RecoilRoot>
       <InstantSearch searchClient={search} indexName={indexName.index}>
         <CustomStateResults />
         <Router>
-          <Header />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/search" element={<SearchResultsPage />} />
-            <Route path="/search/:objectID" element={<ProductDetails />} />
-            <Route path="/results" element={<ResultsPage />} />
-          </Routes>
-          <Footer />
+          <Main />
         </Router>
       </InstantSearch>
     </RecoilRoot>

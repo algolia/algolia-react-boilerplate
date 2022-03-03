@@ -10,6 +10,9 @@ import { linksHeader } from '../../config/header';
 // eslint-disable-next-line import/order
 import { queryAtom } from '../../config/searchbox';
 
+//Import config for federatedSearch
+import { isFederatedAtom } from '../../config/config';
+
 // Import Hook
 import useStickyHeader from '../../hooks/useStickyHeader';
 // Import SearchBox
@@ -25,6 +28,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [links] = useRecoilState(linksHeader);
   const setQueryState = useSetRecoilState(queryAtom);
+  const federated = useSetRecoilState(isFederatedAtom);
   // Import state from the voice search
   const [value] = useRecoilState(configAtom);
   const sticky = useStickyHeader(elementRef);
@@ -37,7 +41,13 @@ const Header = () => {
       <div className="container">
         <div className="container__header-top">
           <div className="container__header-top__logo">
-            <Link to="/" onClick={() => setQueryState('')}>
+            <Link
+              to="/"
+              onClick={() => {
+                setQueryState('');
+                federated(false);
+              }}
+            >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
                 alt=""

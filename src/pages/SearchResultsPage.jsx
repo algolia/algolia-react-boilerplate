@@ -14,6 +14,10 @@ import { useLocation } from 'react-router-dom';
 // Recoil state to directly access results
 import { useRecoilState, useRecoilValue } from 'recoil';
 
+// import framer motion
+import { motion } from 'framer-motion';
+import { pageItem, facetItem } from '../config/config';
+
 // Import Components
 import CustomClearRefinements from '../components/facets/ClearRefinement';
 import CustomCurrentRefinements from '../components/facets/CurrentRefinement';
@@ -57,17 +61,29 @@ const SearchResultPage = () => {
   const personaSelect = useRecoilValue(personaSelected);
   // Persona
   const userToken = personaSelect?.value;
-
   return (
     <>
       {bannerDisplay && <Banner />}
-
       <NoResultsHandler>
         <div className="srp-container">
-          <div className="srp-container__facets">
+          <motion.div
+            variants={facetItem}
+            initial={facetItem.initial}
+            animate={facetItem.animate}
+            exit={facetItem.exit}
+            transition={facetItem.transition}
+            className="srp-container__facets"
+          >
             <GenericRefinementList />
-          </div>
-          <div className="srp-container__hits">
+          </motion.div>
+          <motion.div
+            className="srp-container__hits"
+            variants={pageItem}
+            initial={pageItem.initial}
+            animate={pageItem.animate}
+            exit={pageItem.exit}
+            transition={pageItem.transition}
+          >
             <div>{stats && <CustomStats />}</div>
             <div className="refinement-container">
               <CustomCurrentRefinements />
@@ -129,7 +145,7 @@ const SearchResultPage = () => {
               <CustomHitsComponent />
             )}
             <Pagination />
-          </div>
+          </motion.div>
         </div>
       </NoResultsHandler>
     </>

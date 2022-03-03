@@ -175,8 +175,30 @@ export const listItem = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
   animate: { opacity: 1 },
-  transition: { duration: 0.5, delay: 0.3 },
+  transition: { duration: 0.5, delay: 0.3, ease: [0.43, 0.13, 0.23, 0.96] },
 };
+
+export const mainTransition = { delay: 0.1, duration: 0.6,  ease: [0.43, 0.13, 0.23, 0.96] }
+
+export const pageItem = {
+  initial: { opacity: 0 },
+  exit: { opacity: 0 },
+  animate: { opacity: 1, },
+  transition: { duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
+}
+
+export const federatedItem = {
+  initial: { y: '-100%', opacity: 0 },
+  exit: { y: "-100%", opacity: 0 },
+  animate: { y:0, opacity: 1 },
+  transition: {  duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] },
+}
+export const facetItem = {
+  initial: { opacity: 0 },
+  exit: { opacity: 0 },
+  animate: { opacity: 1, },
+  transition: { delay: 0.2, duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
+}
 
 const config = {
   refinements,
