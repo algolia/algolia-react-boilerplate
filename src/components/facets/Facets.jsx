@@ -12,6 +12,11 @@ import PriceSlider from './PriceSlider';
 // Import Config
 import { configAtom } from '../../config/config';
 import CustomHierarchicalMenu from './Hierarchical';
+import {
+  ColorRefinementList,
+  Layout,
+  Shape,
+} from '@algolia/react-instantsearch-widget-color-refinement-list';
 
 // expects an attribute which is an array of items
 const RefinementList = ({ title, items, refine, searchForItems, options }) => {
@@ -83,7 +88,11 @@ const Facets = () => {
     <DynamicWidgets>
       {refinementParams.map((e, i) => {
         const refinementType = e.type;
-        if (refinementType !== 'price' && refinementType !== 'hierarchical') {
+        if (
+          refinementType !== 'price' &&
+          refinementType !== 'hierarchical' &&
+          refinementType !== 'color'
+        ) {
           return (
             <GenericRefinementList
               searchable={e.options?.searchable}
@@ -102,6 +111,18 @@ const Facets = () => {
               title={e.label}
               currency={e.currency}
               key={i}
+            />
+          );
+        }
+        if (refinementType === 'color') {
+          console.log(e.options.attribute);
+          return (
+            <ColorRefinementList
+              key={i}
+              attribute="colour"
+              separator=";"
+              layout={Layout.Grid}
+              shape={Shape.Circle}
             />
           );
         }
