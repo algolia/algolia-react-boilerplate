@@ -95,6 +95,7 @@ const CustomColorRefinement = ({
     <div className="color-refinement">
       <h3>{title}</h3>
       <ColorRefinementList
+        limit={16}
         attribute={attribute}
         separator={separator}
         layout={layout}
