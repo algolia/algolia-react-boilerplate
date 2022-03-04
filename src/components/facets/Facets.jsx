@@ -18,6 +18,9 @@ import {
   Shape,
 } from '@algolia/react-instantsearch-widget-color-refinement-list';
 
+// // Import default styles
+// import '@algolia/react-instantsearch-widget-color-refinement-list/dist/style.css';
+
 // expects an attribute which is an array of items
 const RefinementList = ({ title, items, refine, searchForItems, options }) => {
   const [showfacet, setshowfacet] = useState(false);
@@ -81,6 +84,27 @@ const RefinementList = ({ title, items, refine, searchForItems, options }) => {
 
 const GenericRefinementList = connectRefinementList(RefinementList);
 
+const CustomColorRefinement = ({
+  title,
+  attribute,
+  separator,
+  layout,
+  shape,
+}) => {
+  return (
+    <div className="color-refinement">
+      <h3>{title}</h3>
+      <ColorRefinementList
+        attribute={attribute}
+        separator={separator}
+        layout={layout}
+        shape={shape}
+      />
+      ;
+    </div>
+  );
+};
+
 const Facets = () => {
   const [config] = useRecoilState(configAtom);
   const refinementParams = config.refinements;
@@ -91,7 +115,7 @@ const Facets = () => {
         if (
           refinementType !== 'price' &&
           refinementType !== 'hierarchical' &&
-          refinementType !== 'color'
+          refinementType !== 'colour'
         ) {
           return (
             <GenericRefinementList
@@ -114,12 +138,12 @@ const Facets = () => {
             />
           );
         }
-        if (refinementType === 'color') {
-          console.log(e.options.attribute);
+        if (refinementType === 'colour') {
           return (
-            <ColorRefinementList
+            <CustomColorRefinement
               key={i}
-              attribute="colour"
+              title={e.label}
+              attribute="colour_hexa_v3"
               separator=";"
               layout={Layout.Grid}
               shape={Shape.Circle}
