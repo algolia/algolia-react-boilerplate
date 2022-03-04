@@ -101,7 +101,6 @@ const CustomColorRefinement = ({
         layout={layout}
         shape={shape}
       />
-      ;
     </div>
   );
 };
