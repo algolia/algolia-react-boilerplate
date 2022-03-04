@@ -143,7 +143,7 @@ const Facets = () => {
             <CustomColorRefinement
               key={i}
               title={e.label}
-              attribute="colour_hexa_v3"
+              attribute={e.options.attribute}
               separator=";"
               layout={Layout.Grid}
               shape={Shape.Circle}

@@ -106,7 +106,7 @@ const refinements = [
     header: 'Colour',
     label: 'Colour',
     options: {
-      attribute: 'colour_hexa_v3',
+      attribute: 'colour_hexa_v6',
     },
   },
   {
