@@ -1,7 +1,10 @@
 import React from 'react';
 
 //RECOMMEND
-import { RelatedProducts } from '@algolia/recommend-react';
+import {
+  RelatedProducts,
+  FrequentlyBoughtTogether,
+} from '@algolia/recommend-react';
 import algoliarecommend from '@algolia/recommend';
 
 // framer-motion
@@ -14,7 +17,7 @@ import HomeCarousel from '../components/carousels/HomeCarousel';
 import RelatedItem from '../components/recommend/RelatedProducts';
 
 // Algolia search client
-import { searchClient } from '../config/config';
+import { searchClient, indexName } from '../config/config';
 
 // React router import
 import { useNavigate } from 'react-router-dom';
@@ -122,7 +125,14 @@ const ProductDetails = () => {
       <div className="recommend">
         <RelatedProducts
           recommendClient={recommendClient}
-          indexName="flagship_fashion"
+          indexName={indexName.index}
+          objectIDs={[hit.objectID]}
+          itemComponent={RelatedItem}
+          maxRecommendations={5}
+        />
+        <FrequentlyBoughtTogether
+          recommendClient={recommendClient}
+          indexName={indexName.index}
           objectIDs={[hit.objectID]}
           itemComponent={RelatedItem}
           maxRecommendations={5}
