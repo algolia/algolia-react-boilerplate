@@ -102,11 +102,11 @@ const refinements = [
     },
   },
   {
-    type: 'color',
-    header: 'Color',
-    label: 'Color',
+    type: 'colour',
+    header: 'Colour',
+    label: 'Colour',
     options: {
-      attribute: 'colour',
+      attribute: 'colour_hexa_v6',
     },
   },
   {

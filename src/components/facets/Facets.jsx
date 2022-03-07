@@ -12,6 +12,14 @@ import PriceSlider from './PriceSlider';
 // Import Config
 import { configAtom } from '../../config/config';
 import CustomHierarchicalMenu from './Hierarchical';
+import {
+  ColorRefinementList,
+  Layout,
+  Shape,
+} from '@algolia/react-instantsearch-widget-color-refinement-list';
+
+// // Import default styles
+// import '@algolia/react-instantsearch-widget-color-refinement-list/dist/style.css';
 
 // expects an attribute which is an array of items
 const RefinementList = ({ title, items, refine, searchForItems, options }) => {
@@ -76,6 +84,27 @@ const RefinementList = ({ title, items, refine, searchForItems, options }) => {
 
 const GenericRefinementList = connectRefinementList(RefinementList);
 
+const CustomColorRefinement = ({
+  title,
+  attribute,
+  separator,
+  layout,
+  shape,
+}) => {
+  return (
+    <div className="color-refinement">
+      <h3>{title}</h3>
+      <ColorRefinementList
+        limit={16}
+        attribute={attribute}
+        separator={separator}
+        layout={layout}
+        shape={shape}
+      />
+    </div>
+  );
+};
+
 const Facets = () => {
   const [config] = useRecoilState(configAtom);
   const refinementParams = config.refinements;
@@ -83,7 +112,11 @@ const Facets = () => {
     <DynamicWidgets>
       {refinementParams.map((e, i) => {
         const refinementType = e.type;
-        if (refinementType !== 'price' && refinementType !== 'hierarchical') {
+        if (
+          refinementType !== 'price' &&
+          refinementType !== 'hierarchical' &&
+          refinementType !== 'colour'
+        ) {
           return (
             <GenericRefinementList
               searchable={e.options?.searchable}
@@ -102,6 +135,18 @@ const Facets = () => {
               title={e.label}
               currency={e.currency}
               key={i}
+            />
+          );
+        }
+        if (refinementType === 'colour') {
+          return (
+            <CustomColorRefinement
+              key={i}
+              title={e.label}
+              attribute={e.options.attribute}
+              separator=";"
+              layout={Layout.Grid}
+              shape={Shape.Circle}
             />
           );
         }
