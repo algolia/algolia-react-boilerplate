@@ -1,11 +1,23 @@
 import React from 'react';
 
+//RECOMMEND
+import {
+  RelatedProducts,
+  FrequentlyBoughtTogether,
+} from '@algolia/recommend-react';
+import algoliarecommend from '@algolia/recommend';
+
 // framer-motion
 import { motion } from 'framer-motion';
 import { pageItem, mainTransition } from '../config/config';
 
 // Import components
 import { ChevronLeft } from '../assets/svg/SvgIndex';
+import HomeCarousel from '../components/carousels/HomeCarousel';
+import RelatedItem from '../components/recommend/RelatedProducts';
+
+// Algolia search client
+import { searchClient, indexName } from '../config/config';
 
 // React router import
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +29,11 @@ import { hitAtom } from '../config/results';
 const ProductDetails = () => {
   const hit = useRecoilValue(hitAtom);
   const navigate = useNavigate();
+
+  const recommendClient = algoliarecommend(
+    searchClient.appID,
+    searchClient.APIKey
+  );
 
   return (
     <div
@@ -45,8 +62,6 @@ const ProductDetails = () => {
           <motion.div
             className="container"
             initial={{
-              // x: '-50%',
-              // width: '30%',
               height: '100%',
               opacity: 0,
             }}
@@ -71,14 +86,10 @@ const ProductDetails = () => {
           <motion.div
             className="pdp__right__infos"
             initial={{
-              // x: '-50%',
-              // width: '30%',
-              // height: '100%',
               opacity: 0,
             }}
             animate={{
               x: 0,
-              // width: '100%',
               opacity: 1,
               transition: { delay: 0.5, mainTransition },
             }}
@@ -110,6 +121,22 @@ const ProductDetails = () => {
             </motion.p>
           </motion.div>
         </div>
+      </div>
+      <div className="recommend">
+        <RelatedProducts
+          recommendClient={recommendClient}
+          indexName={indexName.index}
+          objectIDs={[hit.objectID]}
+          itemComponent={RelatedItem}
+          maxRecommendations={5}
+        />
+        <FrequentlyBoughtTogether
+          recommendClient={recommendClient}
+          indexName={indexName.index}
+          objectIDs={[hit.objectID]}
+          itemComponent={RelatedItem}
+          maxRecommendations={5}
+        />
       </div>
     </div>
   );
