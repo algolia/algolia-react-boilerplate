@@ -59,7 +59,7 @@ const HeaderLaptop = () => {
       </div>
       <div className="container__header-bottom">
         <Navigation />
-        <SelectPersona />
+        {/* <SelectPersona /> */}
       </div>
     </div>
   );

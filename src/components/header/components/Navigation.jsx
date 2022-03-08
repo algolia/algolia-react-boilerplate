@@ -9,11 +9,17 @@ import { hierarchicalFacet } from '../../../config/config';
 import { linksHeader } from '../../../config/header';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
-const Navigation = () => {
+const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
   const navigate = useNavigate();
   const [links] = useRecoilState(linksHeader);
   return (
-    <ul className="container__header-bottom__links">
+    <ul
+      className={`${
+        isMenuOpen
+          ? 'container-mobile__navList-items'
+          : 'container__header-bottom__links'
+      } `}
+    >
       {links.map((link) => {
         return (
           <li
@@ -27,12 +33,16 @@ const Navigation = () => {
               } else {
                 navigate('/search');
               }
+              setIsMenuOpen(false);
             }}
           >
             <p>{link.link}</p>
           </li>
         );
       })}
+      <li>
+        <SelectPersona />
+      </li>
     </ul>
   );
 };

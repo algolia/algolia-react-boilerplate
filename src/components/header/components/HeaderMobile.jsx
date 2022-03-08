@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
@@ -14,8 +14,10 @@ import { queryAtom } from '../../../config/searchbox';
 import { isFederatedAtom } from '../../../config/config';
 
 // Import Hook
-
 import useScreenSize from '../../../hooks/useScreenSize';
+
+// import framer motion
+import { motion, AnimatePresence } from 'framer-motion';
 // Import SearchBox
 // eslint-disable-next-line import/order
 import CustomSearchBoxSimple from '../../searchbox/SearchBox';
@@ -28,6 +30,7 @@ import SelectPersona from '../personnaSelect/SelectPersona';
 const HeaderMobile = () => {
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(isFederatedAtom);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   // Import state from the voice search
   const [value] = useRecoilState(configAtom);
   // Define value to display voiceSearch
@@ -38,6 +41,18 @@ const HeaderMobile = () => {
   return (
     <div className="container container-mobile">
       <div className="container__header-top">
+        <div
+          className={`${
+            isMenuOpen ? 'hamburger-active' : 'hamburger-inactive'
+          } hamburger`}
+          onClick={() => {
+            setIsMenuOpen(!isMenuOpen);
+          }}
+        >
+          <span className="hamburger__line"></span>
+          <span className="hamburger__line"></span>
+          <span className="hamburger__line"></span>
+        </div>
         <div className="container__header-top__logo">
           <Link
             to="/"
@@ -63,8 +78,28 @@ const HeaderMobile = () => {
         <CustomSearchBoxSimple />
         {displayVoiceSearch && <CustomVoiceSearchComponent />}
       </div>
-      <SelectPersona />
+      <AnimatePresence>
+        {isMenuOpen && (
+          <CategoriesMobile
+            isMenuOpen={isMenuOpen}
+            setIsMenuOpen={setIsMenuOpen}
+          />
+        )}
+      </AnimatePresence>
     </div>
+  );
+};
+
+const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen }) => {
+  return (
+    <motion.div
+      className="container-mobile__navList"
+      initial={{ opacity: 0, x: -100 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -200 }}
+    >
+      <Navigation isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+    </motion.div>
   );
 };
 
