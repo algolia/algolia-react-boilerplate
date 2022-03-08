@@ -7,6 +7,7 @@
 // Header Sticky process
 // ------------------------------------------
 
+
 .header {
   text-align: center;
   position: fixed;
@@ -18,46 +19,6 @@
   top: 0;
   left: 0;
   width: 100%;
-}
-
-
-// If Animation on Header
-// .sticky {
-//   position: fixed;
-//   z-index: 1000;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   padding: 40px 0;
-//   box-shadow: 0 20px 30px rgba(#000, 0.2);
-//   height: 12rem;
-//   animation: slide-down 0.7s;
-//   background: $grey-light-color;
-
-//   label {
-//     font-weight: bold;
-//     text-transform: uppercase;
-//   }
-// }
-
-// @keyframes slide-down {
-//   0% {
-//       opacity: 0.7;
-//       transform: translateY(-100%);
-//   }
-//   100% {
-//       opacity: 1;
-//       transform: translateY(0);
-//   }
-// }
-
-// ------------------------------------------
-// ------------------------------------------
-
-// ------------------------------------------
-//Inside Header
-// ------------------------------------------
-.header {
   .container {
     .container__header-top {
       align-items: center;
@@ -83,6 +44,9 @@
       }
     }
     .container__header-bottom {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
       &__links {
         display: flex;
         justify-content: center;
@@ -92,6 +56,7 @@
           p {
             position: relative;
             transition: 0.2 ease-in-out;
+            
             &:before {
               content: '';
               position: absolute;

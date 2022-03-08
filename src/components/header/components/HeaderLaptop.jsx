@@ -57,9 +57,10 @@ const HeaderLaptop = () => {
           <h1>Demo BoilerPlate</h1>
         </div>
       </div>
-
-      <Navigation />
-      <SelectPersona />
+      <div className="container__header-bottom">
+        <Navigation />
+        <SelectPersona />
+      </div>
     </div>
   );
 };
