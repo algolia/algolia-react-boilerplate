@@ -4,7 +4,7 @@ import React from 'react';
 import { Highlight } from 'react-instantsearch-dom';
 
 import { Heart } from '../../assets/svg/SvgIndex';
-import { mainTransition, listItem } from '../../config/config';
+import { framerMotionTransition, framerMotionHits } from '../../config/config';
 
 // Recoil import
 import { hitAtom } from '../../config/results';
@@ -25,11 +25,11 @@ const Hit = ({ hit }) => {
   return (
     <motion.li
       layout
-      variants={listItem}
-      initial={listItem.initial}
-      exit={listItem.exit}
-      animate={listItem.animate}
-      transition={listItem.transition}
+      variants={framerMotionHits}
+      initial={framerMotionHits.initial}
+      exit={framerMotionHits.exit}
+      animate={framerMotionHits.animate}
+      transition={framerMotionHits.transition}
       className="srpItem"
       onClick={() => {
         hitState(hit);
@@ -39,7 +39,7 @@ const Hit = ({ hit }) => {
       <motion.div className="srpItem__img">
         <motion.img
           whileHover={{ scale: 1.1 }}
-          transition={mainTransition}
+          transition={framerMotionTransition}
           src={hit[image]}
           alt={hit[category]}
         />

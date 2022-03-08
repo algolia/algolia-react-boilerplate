@@ -16,7 +16,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 
 // import framer motion
 import { motion } from 'framer-motion';
-import { pageItem, facetItem } from '../config/config';
+import { framerMotionPage, framerMotionFacet } from '../config/config';
 
 // Import Components
 import CustomClearRefinements from '../components/facets/ClearRefinement';
@@ -68,22 +68,22 @@ const SearchResultPage = () => {
       <NoResultsHandler>
         <div className="srp-container">
           <motion.div
-            variants={facetItem}
-            initial={facetItem.initial}
-            animate={facetItem.animate}
-            exit={facetItem.exit}
-            transition={facetItem.transition}
+            variants={framerMotionFacet}
+            initial={framerMotionFacet.initial}
+            animate={framerMotionFacet.animate}
+            exit={framerMotionFacet.exit}
+            transition={framerMotionFacet.transition}
             className="srp-container__facets"
           >
             <GenericRefinementList />
           </motion.div>
           <motion.div
             className="srp-container__hits"
-            variants={pageItem}
-            initial={pageItem.initial}
-            animate={pageItem.animate}
-            exit={pageItem.exit}
-            transition={pageItem.transition}
+            variants={framerMotionPage}
+            initial={framerMotionPage.initial}
+            animate={framerMotionPage.animate}
+            exit={framerMotionPage.exit}
+            transition={framerMotionPage.transition}
           >
             <div className="srp-container__stats-sort">
               {stats && <CustomStats />}

@@ -4,7 +4,7 @@ import React from 'react';
 import { connectStateResults } from 'react-instantsearch-dom';
 
 // Import config framer Motion
-import { listItem } from '../../config/config';
+import { framerMotionHits } from '../../config/config';
 
 const QueryAndHitsOnly = connectStateResults(
   ({ searchState, searchResults, children, includedRefinements }) => {
@@ -18,11 +18,11 @@ const InfluencerCard = ({ hit }) => {
     <QueryAndHitsOnly>
       <motion.li
         layout
-        variants={listItem}
-        initial={listItem.initial}
-        exit={listItem.exit}
-        animate={listItem.animate}
-        transition={listItem.transition}
+        variants={framerMotionHits}
+        initial={framerMotionHits.initial}
+        exit={framerMotionHits.exit}
+        animate={framerMotionHits.animate}
+        transition={framerMotionHits.transition}
         className="image-wrapper-sales"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(${hit.influencer.image}`,

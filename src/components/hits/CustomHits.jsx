@@ -4,7 +4,7 @@ import React from 'react';
 import { connectHits, Highlight } from 'react-instantsearch-dom';
 
 import { Heart } from '../../assets/svg/SvgIndex';
-import { listItem } from '../../config/config';
+import { framerMotionHits } from '../../config/config';
 
 // Recoil import
 import { hitAtom } from '../../config/results';
@@ -30,11 +30,11 @@ const CustomHits = ({ hits }) => {
             <motion.li
               key={i}
               layout={true}
-              variants={listItem}
-              initial={listItem.initial}
-              exit={listItem.exit}
-              animate={listItem.animate}
-              transition={listItem.transition}
+              variants={framerMotionHits}
+              initial={framerMotionHits.initial}
+              exit={framerMotionHits.exit}
+              animate={framerMotionHits.animate}
+              transition={framerMotionHits.transition}
               className="srpItem"
               onClick={() => {
                 hitState(hit);

@@ -6,7 +6,7 @@ import { InstantSearch, Configure } from 'react-instantsearch-dom';
 
 // framer motion
 import { motion } from 'framer-motion';
-import { federatedItem } from '../../config/config';
+import { framerMotionFederatedContainer } from '../../config/config';
 
 // import from Recoil
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
@@ -62,11 +62,11 @@ const FederatedSearch = () => {
     <motion.div
       className="federatedSearch"
       ref={containerFederated}
-      variants={federatedItem}
-      initial={federatedItem.initial}
-      animate={federatedItem.animate}
-      exit={federatedItem.exit}
-      transition={federatedItem.transition}
+      variants={framerMotionFederatedContainer}
+      initial={framerMotionFederatedContainer.initial}
+      animate={framerMotionFederatedContainer.animate}
+      exit={framerMotionFederatedContainer.exit}
+      transition={framerMotionFederatedContainer.transition}
     >
       <div className="federatedSearch__wrapper">
         <div className="federatedSearch__left">
