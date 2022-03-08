@@ -43,25 +43,25 @@ const SelectPersona = () => {
   // }, [selectRef, setSelectRef]);
 
   return (
-    <div
-      className="select-component"
-      // ref={select}
-      // onClick={(e) => {
-      //   setIsMenuOpen(true);
-      // }}
-    >
-      <Select
-        defaultValue={personaConfig}
-        options={personaConfig}
-        styles={colorStyles}
-        // menuIsOpen={isMenuOpen}
-        placeholder="Persona"
-        onChange={(e) => {
-          console.log(e.value);
-          setPersonaSelect(e.value);
-        }}
-      />
-    </div>
+    // <div
+    //   className="select-component"
+    //   // ref={select}
+    //   // onClick={(e) => {
+    //   //   setIsMenuOpen(true);
+    //   // }}
+    // >
+    <Select
+      defaultValue={personaConfig}
+      options={personaConfig}
+      styles={colorStyles}
+      // menuIsOpen={isMenuOpen}
+      placeholder="Persona"
+      onChange={(e) => {
+        console.log(e.value);
+        setPersonaSelect(e.value);
+      }}
+    />
+    // </div>
   );
 };
 

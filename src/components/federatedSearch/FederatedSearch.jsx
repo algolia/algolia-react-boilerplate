@@ -38,7 +38,7 @@ const FederatedSearch = () => {
   const selectRef = useRecoilValue(selectButtonAtom);
   const containerFederated = useRef('');
   // Custom hook
-  useOutsideClickConditional(containerFederated, searchboxRef, selectRef, () =>
+  useOutsideClickConditional(containerFederated, searchboxRef, () =>
     setIsFederated(false)
   );
   // Persona
