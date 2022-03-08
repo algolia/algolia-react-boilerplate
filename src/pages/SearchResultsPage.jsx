@@ -35,7 +35,7 @@ import { CustomStats } from '../components/searchresultpage/Stats';
 import { InjectedHits } from '../components/searchresultpage/injected-hits';
 // Import Persona State from recoil
 import { configAtom, indexName, indexInfluencer } from '../config/config';
-import { personaSelected } from '../config/header';
+import { personaSelectedAtom } from '../config/header';
 // Import Config File
 import { queryAtom } from '../config/searchbox';
 import { customDataByType } from '../utils';
@@ -59,9 +59,9 @@ const SearchResultPage = () => {
 
   // Get states of React Router
   const { state } = useLocation();
-  const personaSelect = useRecoilValue(personaSelected);
+  const personaSelect = useRecoilValue(personaSelectedAtom);
   // Persona
-  const userToken = personaSelect?.value;
+  const userToken = personaSelect;
   return (
     <>
       {bannerDisplay && <Banner />}
@@ -76,7 +76,6 @@ const SearchResultPage = () => {
             className="srp-container__facets"
           >
             <GenericRefinementList />
-
           </motion.div>
           <motion.div
             className="srp-container__hits"

@@ -9,7 +9,6 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/header/Header';
 import HomePage from './pages/HomePage';
 import SearchResultsPage from './pages/SearchResultsPage';
-import ResultsPage from './pages/ResultsPage';
 import ProductDetails from './pages/ProductDetails';
 import Footer from './components/footer/Footer';
 
@@ -23,7 +22,6 @@ export const Main = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/search" element={<SearchResultsPage />} />
           <Route path="/search/:objectID" element={<ProductDetails />} />
-          <Route path="/results" element={<ResultsPage />} />
         </Routes>
       </AnimatePresence>
       <Footer />

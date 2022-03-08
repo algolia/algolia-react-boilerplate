@@ -17,7 +17,7 @@ import {
   selectButtonAtom,
 } from '../../config/config';
 // Import Persona State from recoil
-import { personaSelected } from '../../config/header';
+import { personaSelectedAtom } from '../../config/header';
 
 // hook import
 import useOutsideClickConditional from '../../hooks/useOutsideClickConditional';
@@ -32,7 +32,7 @@ import Articles from './components/BlogPost';
 const FederatedSearch = () => {
   // Recoil & States
   const [config] = useRecoilState(configAtom);
-  const personaSelect = useRecoilValue(personaSelected);
+  const personaSelect = useRecoilValue(personaSelectedAtom);
   const setIsFederated = useSetRecoilState(isFederatedAtom);
   const searchboxRef = useRecoilValue(searchBoxAtom);
   const selectRef = useRecoilValue(selectButtonAtom);
@@ -42,7 +42,8 @@ const FederatedSearch = () => {
     setIsFederated(false)
   );
   // Persona
-  const userToken = personaSelect?.value;
+  const userToken = personaSelect;
+
   // Federated search configuration
   const {
     isRecentSearch,

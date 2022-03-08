@@ -2,7 +2,7 @@ import React, { useEffect, useRef, memo } from 'react';
 import Select from 'react-select';
 
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
-import { personaConfig, personaSelected } from '../../../config/header';
+import { personaConfig, personaSelectedAtom } from '../../../config/header';
 import { selectButtonAtom } from '../../../config/config';
 import { isPersonaMenuOpen } from '../../../config/header';
 import { isFederatedAtom } from '../../../config/config';
@@ -28,36 +28,38 @@ const colorStyles = {
 };
 
 const SelectPersona = () => {
-  const select = useRef('');
-  const setSelectRef = useSetRecoilState(selectButtonAtom);
-  const setIsFederated = useSetRecoilState(isFederatedAtom);
-  const selectRef = useRecoilValue(selectButtonAtom);
-  const persona = useRecoilValue(personaConfig);
-  const personaSelect = useRecoilValue(personaSelected);
-  const setPersonaSelect = useSetRecoilState(personaSelected);
-  const [isMenuOpen, setIsMenuOpen] = useRecoilState(isPersonaMenuOpen);
-  useOutsideClick(select, () => {
-    setIsMenuOpen(false);
-  });
-  useEffect(() => {
-    setSelectRef(select);
-  }, [selectRef, setSelectRef]);
+  // const select = useRef('');
+  // const setSelectRef = useSetRecoilState(selectButtonAtom);
+  // const selectRef = useRecoilValue(selectButtonAtom);
+  // const persona = useRecoilValue(personaConfig);
+  // const personaSelect = useRecoilValue(personaSelected);
+  const setPersonaSelect = useSetRecoilState(personaSelectedAtom);
+  // const [isMenuOpen, setIsMenuOpen] = useRecoilState(isPersonaMenuOpen);
+  // useOutsideClick(select, () => {
+  //   setIsMenuOpen(false);
+  // });
+  // useEffect(() => {
+  //   setSelectRef(select);
+  // }, [selectRef, setSelectRef]);
 
   return (
     <div
       className="select-component"
-      ref={select}
-      onClick={(e) => {
-        setIsMenuOpen(true);
-      }}
+      // ref={select}
+      // onClick={(e) => {
+      //   setIsMenuOpen(true);
+      // }}
     >
       <Select
-        defaultValue={personaSelect}
-        options={persona}
+        defaultValue={personaConfig}
+        options={personaConfig}
         styles={colorStyles}
-        menuIsOpen={isMenuOpen}
+        // menuIsOpen={isMenuOpen}
         placeholder="Persona"
-        onChange={setPersonaSelect}
+        onChange={(e) => {
+          console.log(e.value);
+          setPersonaSelect(e.value);
+        }}
       />
     </div>
   );

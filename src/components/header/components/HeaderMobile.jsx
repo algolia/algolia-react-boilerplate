@@ -23,6 +23,7 @@ import CustomSearchBoxSimple from '../../searchbox/SearchBox';
 // Import VoiceSearchComponent
 import CustomVoiceSearchComponent from '../../voicesearch/VoiceSearch';
 import Navigation from './Navigation';
+import SelectPersona from '../personnaSelect/SelectPersona';
 
 const HeaderMobile = () => {
   const setQueryState = useSetRecoilState(queryAtom);
@@ -57,12 +58,12 @@ const HeaderMobile = () => {
           <h1>Demo BoilerPlate</h1>
         </div>
       </div>
-      {(tablet || mobile) && (
-        <div className="searchbox-container searchbox-container-mobile">
-          <CustomSearchBoxSimple />
-          {displayVoiceSearch && <CustomVoiceSearchComponent />}
-        </div>
-      )}
+
+      <div className="searchbox-container searchbox-container-mobile">
+        <CustomSearchBoxSimple />
+        {displayVoiceSearch && <CustomVoiceSearchComponent />}
+      </div>
+      <SelectPersona />
     </div>
   );
 };

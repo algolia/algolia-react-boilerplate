@@ -59,7 +59,7 @@ const HeaderLaptop = () => {
       </div>
 
       <Navigation />
-      {/* <SelectPersona /> */}
+      <SelectPersona />
     </div>
   );
 };
