@@ -68,7 +68,7 @@
         width: 20%;
         text-align: start;
         img {
-          width: 80%;
+          width: 100%;
         }
       }
       &__title {
@@ -118,4 +118,24 @@
 .select-component {
   width: 20%;
   margin: 0 0.5rem 1rem auto;
+}
+
+
+// MOBILE & TABLET
+
+.container-mobile{
+  .container__header-top__logo{
+    width: 35% !important;
+  }
+  .searchbox-container-mobile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+
+    .ais-VoiceSearch{
+      right: 8%;
+    }
+  }
 }
