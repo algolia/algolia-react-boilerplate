@@ -1,5 +1,8 @@
+// import Algolia
 import algoliasearch from 'algoliasearch/lite';
-import React, { useState, memo } from 'react';
+
+// import React functionality
+import { useState, memo } from 'react';
 // eslint-disable-next-line import/order
 import {
   Pagination,
@@ -11,6 +14,7 @@ import {
 
 // React router import
 import { useLocation } from 'react-router-dom';
+
 // Recoil state to directly access results
 import { useRecoilState, useRecoilValue } from 'recoil';
 
@@ -18,24 +22,39 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { motion } from 'framer-motion';
 import { pageItem, facetItem } from '../config/config';
 
-// Import Components
+// Import Refinement Components
 import CustomClearRefinements from '../components/facets/ClearRefinement';
 import CustomCurrentRefinements from '../components/facets/CurrentRefinement';
 import GenericRefinementList from '../components/facets/Facets';
-// Import Components
+
+// Query Suggestions, used when there are no search results
 import QuerySuggestions from '../components/federatedSearch/components/QuerySuggestions';
+
+// Renders the search results when there is no injected content
 import CustomHitsComponent from '../components/hits/CustomHits';
-import GiftCard from '../components/hits/GiftCard';
+
+// Renders an individual search result when there is injected content
 import { Hit } from '../components/hits/Hits';
+
+// Render cards when there is injected content
+import GiftCard from '../components/hits/GiftCard';
 import InfluencerCard from '../components/hits/InfluencerCard';
 import NikeCard from '../components/hits/SalesCard';
+
+// Render a banner
 import Banner from '../components/searchresultpage/Banner';
+
+// Render SortBy component when there are results
 import CustomSortBy from '../components/searchresultpage/SortBy';
+// Render Stats component when there are results
 import { CustomStats } from '../components/searchresultpage/Stats';
+// Component for rendering injected hits
 import { InjectedHits } from '../components/searchresultpage/injected-hits';
+
 // Import Persona State from recoil
 import { configAtom, indexName, indexInfluencer } from '../config/config';
 import { personaSelected } from '../config/header';
+
 // Import Config File
 import { queryAtom } from '../config/searchbox';
 import { customDataByType } from '../utils';
@@ -64,6 +83,7 @@ const SearchResultPage = () => {
   const userToken = personaSelect?.value;
   return (
     <>
+      {/* Display the banner if the bannerSrp config is set to: true */}
       {bannerDisplay && <Banner />}
       <NoResultsHandler>
         <div className="srp-container">
@@ -76,7 +96,6 @@ const SearchResultPage = () => {
             className="srp-container__facets"
           >
             <GenericRefinementList />
-
           </motion.div>
           <motion.div
             className="srp-container__hits"
@@ -87,6 +106,7 @@ const SearchResultPage = () => {
             transition={pageItem.transition}
           >
             <div className="srp-container__stats-sort">
+              {/* Display the stats if the statsSrp config is set to: true */}
               {stats && <CustomStats />}
               {priceSortBy && (
                 <CustomSortBy
