@@ -21,6 +21,7 @@ import { personaSelectedAtom } from '../../config/header';
 
 // hook import
 import useOutsideClickConditional from '../../hooks/useOutsideClickConditional';
+import useScreenSize from '../../hooks/useScreenSize';
 
 // Components imports
 import RecentSearches from './components/RecentSearches';
@@ -41,6 +42,7 @@ const FederatedSearch = () => {
   useOutsideClickConditional(containerFederated, searchboxRef, () =>
     setIsFederated(false)
   );
+  const { mobile, tablet } = useScreenSize();
   // Persona
   const userToken = personaSelect;
 
@@ -68,9 +70,15 @@ const FederatedSearch = () => {
       exit={framerMotionFederatedContainer.exit}
       transition={framerMotionFederatedContainer.transition}
     >
-      <div className="federatedSearch__wrapper">
+      <div
+        className={`${
+          mobile || tablet
+            ? 'federatedSearch__wrapper-mobile'
+            : 'federatedSearch__wrapper'
+        }`}
+      >
         <div className="federatedSearch__left">
-          {isRecentSearch && <RecentSearches />}
+          {isRecentSearch && !mobile && !tablet && <RecentSearches />}
           {isQuerySuggestions && (
             <InstantSearch
               searchClient={search}
@@ -80,7 +88,7 @@ const FederatedSearch = () => {
               <QuerySuggestions />
             </InstantSearch>
           )}
-          {isCategory && (
+          {isCategory && !mobile && !tablet && (
             <Category
               attribute={config.federatedCategory.categoryInFederated}
             />
@@ -97,7 +105,7 @@ const FederatedSearch = () => {
             <Products />
           </div>
         )}
-        {isBlogPosts && (
+        {isBlogPosts && !mobile && !tablet && (
           <div className="articles federatedSearch__right">
             <InstantSearch
               searchClient={search}
