@@ -14,11 +14,6 @@ import { useLocation } from 'react-router-dom';
 // Recoil state to directly access results
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-
-// I am a useless comment
-
-// I am a useful comment
-
 // import framer motion
 import { motion } from 'framer-motion';
 import { pageItem, facetItem } from '../config/config';
