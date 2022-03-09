@@ -27,6 +27,34 @@ npx husky install
 
 🐶
 
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Structure</h2>
+
+Index.jsx
+- entry point to the application
+- renders App.js into #root element in DOM
+- #root is defined in index.html
+
+App.jsx
+- called by Index.jsx
+- wraps child components with key functionality including:
+  - [React router](https://reactrouter.com/docs/en/v6/getting-started/overview)
+  - [Algolia instantsearch](https://github.com/algolia/react-instantsearch)
+  - [Recoil state management](https://recoiljs.org/)
+- calls Main.jsx
+
+Main.jsx
+- contains static elements like header and footer (found in `./components`)
+- contains routes for each page (found in `./pages`)
+- wraps pages in AnimatePresence from [Framer Motion](https://www.framer.com/docs/animate-presence/), which helps animate loading of pages
+- it loads a single route (page), depending on the current URL
+
+Homepage.jsx
+- if federated search is true in configuration, loads federated search
+- loads a banners component from `./components`
+- maps over carousels from configuration and renders each carousel
+- wraps all components in animations from framer-motion
+
+
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">💻 State Manager</h3>
