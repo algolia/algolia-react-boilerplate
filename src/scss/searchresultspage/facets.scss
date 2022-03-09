@@ -264,3 +264,20 @@
       opacity var(--transition-duration) linear 0s, visibility 0s linear 0s;
   }
 }
+
+
+// Mobile & tablet 
+
+.srp-container__facets-mobile{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50vh;
+  background-color: $background-color;
+  z-index: 998;
+  padding: 2rem;
+
+  .filters-container{
+    margin-top: 2rem;
+  }
+}

@@ -26,6 +26,9 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { hitAtom } from '../config/results';
 
+// Custom hooks
+import useScreenSize from '../hooks/useScreenSize';
+
 const ProductDetails = () => {
   const hit = useRecoilValue(hitAtom);
   const navigate = useNavigate();
@@ -35,17 +38,22 @@ const ProductDetails = () => {
     searchClient.APIKey
   );
 
+  const { tablet, mobile } = useScreenSize();
+
   return (
     <div
-      className="pdp"
+      className={`${mobile || tablet ? 'pdp-mobile' : ''} pdp`}
       variants={framerMotionPage}
       initial={framerMotionPage.initial}
       animate={framerMotionPage.animate}
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-      <div className="pdp__wrapper">
-        <div className="pdp__backBtn" onClick={() => navigate(-1)}>
+      <div className="pdp__wrapper pdp-mobile__wrapper">
+        <div
+          className="pdp__backBtn pdp-mobile__backBtn "
+          onClick={() => navigate(-1)}
+        >
           <ChevronLeft />
           <p>Back to search</p>
         </div>
@@ -57,7 +65,7 @@ const ProductDetails = () => {
             opacity: 1,
             transition: { framerMotionTransition },
           }}
-          className="pdp__left"
+          className="pdp__left pdp-mobile__left"
         >
           <motion.div
             className="container"
@@ -82,7 +90,7 @@ const ProductDetails = () => {
             </motion.div>
           </motion.div>
         </motion.div>
-        <div className="pdp__right">
+        <div className="pdp__right pdp-mobile__right">
           <motion.div
             className="pdp__right__infos"
             initial={{
