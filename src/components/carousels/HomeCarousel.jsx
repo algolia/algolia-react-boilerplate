@@ -10,6 +10,8 @@ import { hitsConfig } from '../../config/hits';
 import { indexName, searchClient } from '../../config/config';
 import { hitAtom } from '../../config/results';
 
+import { framerMotionTransition } from '../../config/config';
+
 const HomeCarousel = ({ attribute, title }) => {
   const search = algoliasearch(searchClient.appID, searchClient.APIKey);
 
@@ -43,7 +45,17 @@ const Carousel = ({ hits, title }) => {
         <motion.div
           drag="x"
           dragConstraints={{ right: 0, left: -width }}
-          dragTransition={{ bounceStiffness: 450, bounceDamping: 30 }}
+          dragTransition={
+            ({
+              min: 0,
+              max: 100,
+              velocity: 0,
+              power: 1,
+              bounceStiffness: 10,
+              bounceDamping: 1,
+            },
+            framerMotionTransition)
+          }
           className="inner-carousel"
         >
           {hits.map((hit, i) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { createClassNames, connectHits } from 'react-instantsearch-dom';
 import { connectInjectedHits } from './connectInjectedHits';
 import { motion, AnimatePresence } from 'framer-motion';
-import { pageItem } from '../../../config/config';
+import { framerMotionPage } from '../../../config/config';
 
 const cx = createClassNames('InfiniteHits');
 
@@ -10,11 +10,11 @@ export const InjectedHits = connectHits(
   connectInjectedHits(({ injectedHits }) => (
     <motion.div
       className={cx('')}
-      variants={pageItem}
-      initial={pageItem.initial}
-      animate={pageItem.animate}
-      exit={pageItem.exit}
-      transition={pageItem.transition}
+      variants={framerMotionPage}
+      initial={framerMotionPage.initial}
+      animate={framerMotionPage.animate}
+      exit={framerMotionPage.exit}
+      transition={framerMotionPage.transition}
     >
       <motion.ul className={cx('list')} layout>
         <AnimatePresence initial={false}>

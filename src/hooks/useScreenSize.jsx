@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 const useScreenSize = () => {
   const [windowSize, setWindowSize] = useState({
     laptop: undefined,
+    laptopXS: undefined,
     tablet: undefined,
     mobile: undefined,
   });
@@ -12,9 +13,9 @@ const useScreenSize = () => {
       setWindowSize({
         laptop: window.innerWidth >= 1440 ? true : false,
         laptopXS:
-          window.innerWidth >= 768 && window.innerWidth < 1440 ? true : false,
+          window.innerWidth > 768 && window.innerWidth < 1440 ? true : false,
         tablet:
-          window.innerWidth >= 480 && window.innerWidth < 768 ? true : false,
+          window.innerWidth >= 480 && window.innerWidth <= 768 ? true : false,
         mobile: window.innerWidth < 480 ? true : false,
       });
     };

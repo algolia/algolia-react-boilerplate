@@ -6,7 +6,7 @@ import { InstantSearch, Configure } from 'react-instantsearch-dom';
 
 // framer motion
 import { motion } from 'framer-motion';
-import { federatedItem } from '../../config/config';
+import { framerMotionFederatedContainer } from '../../config/config';
 
 // import from Recoil
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
@@ -17,10 +17,11 @@ import {
   selectButtonAtom,
 } from '../../config/config';
 // Import Persona State from recoil
-import { personaSelected } from '../../config/header';
+import { personaSelectedAtom } from '../../config/header';
 
 // hook import
 import useOutsideClickConditional from '../../hooks/useOutsideClickConditional';
+import useScreenSize from '../../hooks/useScreenSize';
 
 // Components imports
 import RecentSearches from './components/RecentSearches';
@@ -32,17 +33,19 @@ import Articles from './components/BlogPost';
 const FederatedSearch = () => {
   // Recoil & States
   const [config] = useRecoilState(configAtom);
-  const personaSelect = useRecoilValue(personaSelected);
+  const personaSelect = useRecoilValue(personaSelectedAtom);
   const setIsFederated = useSetRecoilState(isFederatedAtom);
   const searchboxRef = useRecoilValue(searchBoxAtom);
   const selectRef = useRecoilValue(selectButtonAtom);
   const containerFederated = useRef('');
   // Custom hook
-  useOutsideClickConditional(containerFederated, searchboxRef, selectRef, () =>
+  useOutsideClickConditional(containerFederated, searchboxRef, () =>
     setIsFederated(false)
   );
+  const { mobile, tablet } = useScreenSize();
   // Persona
-  const userToken = personaSelect?.value;
+  const userToken = personaSelect;
+
   // Federated search configuration
   const {
     isRecentSearch,
@@ -61,15 +64,21 @@ const FederatedSearch = () => {
     <motion.div
       className="federatedSearch"
       ref={containerFederated}
-      variants={federatedItem}
-      initial={federatedItem.initial}
-      animate={federatedItem.animate}
-      exit={federatedItem.exit}
-      transition={federatedItem.transition}
+      variants={framerMotionFederatedContainer}
+      initial={framerMotionFederatedContainer.initial}
+      animate={framerMotionFederatedContainer.animate}
+      exit={framerMotionFederatedContainer.exit}
+      transition={framerMotionFederatedContainer.transition}
     >
-      <div className="federatedSearch__wrapper">
+      <div
+        className={`${
+          mobile || tablet
+            ? 'federatedSearch__wrapper-mobile'
+            : 'federatedSearch__wrapper'
+        }`}
+      >
         <div className="federatedSearch__left">
-          {isRecentSearch && <RecentSearches />}
+          {isRecentSearch && !mobile && !tablet && <RecentSearches />}
           {isQuerySuggestions && (
             <InstantSearch
               searchClient={search}
@@ -79,7 +88,7 @@ const FederatedSearch = () => {
               <QuerySuggestions />
             </InstantSearch>
           )}
-          {isCategory && (
+          {isCategory && !mobile && !tablet && (
             <Category
               attribute={config.federatedCategory.categoryInFederated}
             />
@@ -96,7 +105,7 @@ const FederatedSearch = () => {
             <Products />
           </div>
         )}
-        {isBlogPosts && (
+        {isBlogPosts && !mobile && !tablet && (
           <div className="articles federatedSearch__right">
             <InstantSearch
               searchClient={search}
