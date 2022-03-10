@@ -17,7 +17,7 @@ import HomeCarousel from '../components/carousels/HomeCarousel';
 import RelatedItem from '../components/recommend/RelatedProducts';
 
 // Algolia search client
-import { searchClient, indexName } from '../config/config';
+import { searchClient, indexName } from '../config/appConfig';
 
 // React router import
 import { useNavigate } from 'react-router-dom';
@@ -25,12 +25,15 @@ import { useNavigate } from 'react-router-dom';
 // Recoil import
 import { useRecoilValue } from 'recoil';
 import { hitAtom } from '../config/results';
+import { isRelativeProducts, isFbtProducts } from '../config/config';
 
 // Custom hooks
 import useScreenSize from '../hooks/useScreenSize';
 
 const ProductDetails = () => {
   const hit = useRecoilValue(hitAtom);
+  const isRelativeProductsValue = useRecoilValue(isRelativeProducts);
+  const isFbtProductsValue = useRecoilValue(isFbtProducts);
   const navigate = useNavigate();
 
   const recommendClient = algoliarecommend(
@@ -108,8 +111,8 @@ const ProductDetails = () => {
             <div className="sizes">
               <p>Available size(s):</p>
               <motion.div className="sizeList">
-                {hit.sizeFilter.map((size) => (
-                  <motion.div className="size">
+                {hit.sizeFilter.map((size, i) => (
+                  <motion.div className="size" key={i}>
                     <p>{size}</p>
                   </motion.div>
                 ))}
@@ -131,20 +134,24 @@ const ProductDetails = () => {
         </div>
       </div>
       <div className="recommend">
-        <RelatedProducts
-          recommendClient={recommendClient}
-          indexName={indexName.index}
-          objectIDs={[hit.objectID]}
-          itemComponent={RelatedItem}
-          maxRecommendations={5}
-        />
-        <FrequentlyBoughtTogether
-          recommendClient={recommendClient}
-          indexName={indexName.index}
-          objectIDs={[hit.objectID]}
-          itemComponent={RelatedItem}
-          maxRecommendations={5}
-        />
+        {isRelativeProductsValue && (
+          <RelatedProducts
+            recommendClient={recommendClient}
+            indexName={indexName.index}
+            objectIDs={[hit.objectID]}
+            itemComponent={RelatedItem}
+            maxRecommendations={5}
+          />
+        )}
+        {isFbtProductsValue && (
+          <FrequentlyBoughtTogether
+            recommendClient={recommendClient}
+            indexName={indexName.index}
+            objectIDs={[hit.objectID]}
+            itemComponent={RelatedItem}
+            maxRecommendations={5}
+          />
+        )}
       </div>
     </div>
   );

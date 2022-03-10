@@ -1,53 +1,52 @@
 import { atom } from 'recoil';
 
-// ------------------------------------------
-// Config Index and Search Client
-// ------------------------------------------
-export const searchClient = {
-  APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
-  appID: '853MYZ81KY',
-};
-
-export const indexName = {
-  index: 'flagship_fashion',
-  indexSuggestion: 'flagship_fashion_query_suggestions',
-  indexBlog: 'canda_customDemo_articles',
-};
-
-// Ignore this, generated from indexConfig
-export const indexNameAtom = atom({
-  key: 'indexName',
-  default: 'flagship_fashion',
-});
-
-export const indexInfluencer = {
-  index: 'flagship_fashion_influencers',
-};
+import { indexName } from './appConfig';
 
 // ------------------------------------------
 // Config feature, change by true or false to remove them or change the value
 // ------------------------------------------
-const voiceSearch = {
-  value: true,
-};
-const stats = {
-  value: true,
-};
-const bannerSrp = {
-  value: true,
-};
-const currency = {
-  value: '$',
-};
+export const isVoiceSearch = atom({
+  key: 'voiceSearch',
+  default: true,
+});
 
-const injectedHits = {
-  value: true,
-};
+export const isStats = atom({
+  key: 'stats',
+  default: true,
+});
+export const isBannerSrp = atom({
+  key: 'bannerSrp',
+  default: true,
+});
+
+export const isInjectedHits = atom({
+  key: 'injectedHits',
+  default: true,
+});
 
 export const isFederatedAtom = atom({
   key: 'isFederatedAtom', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
 });
+
+export const isRelativeProducts = atom({
+  key: 'isRelativeProductsAtom', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+});
+
+export const isFbtProducts = atom({
+  key: 'isFbtProductsAtom', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+});
+
+export const currency = atom({
+  key: 'isFbtProductsAtom', // unique ID (with respect to other atoms/selectors)
+  default: '£', // default value (aka initial value)
+});
+
+// ------------------------------------------
+// Federated Search Atoms
+// ------------------------------------------
 
 export const searchBoxAtom = atom({
   key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
@@ -65,7 +64,7 @@ export const selectSortByIndex = atom({
 });
 
 // ------------------------------------------
-// Refinements
+// Refinements Config
 // ------------------------------------------
 
 const refinements = [
@@ -149,7 +148,7 @@ export const carouselConfig = [
 ];
 
 // ------------------------------------------
-// Sort By
+// Sort By Config
 // ------------------------------------------
 
 const sortBy = {
@@ -161,24 +160,14 @@ const sortBy = {
   ],
 };
 
+// ------------------------------------------
+// Category Pages
+// ------------------------------------------
+
 // This export is used for Category pages. It will create a filters in a Configure widget in SRP to filter out the right products
 export const hierarchicalFacet = {
   hierarchicalLvl0: 'hierarchicalCategories.lvl0',
 };
-
-const federatedCategory = {
-  categoryInFederated: 'hierarchicalCategories.lvl2',
-};
-
-// FEDERATED SEARCHES
-const federatedSearchConfig = {
-  isRecentSearch: true,
-  isQuerySuggestions: true,
-  isCategory: true,
-  isProduct: true,
-  isBlogPosts: true,
-};
-
 // ------------------------------------------
 // Hits and Framer Motion
 // ------------------------------------------
@@ -189,40 +178,35 @@ export const framerMotionHits = {
   transition: { duration: 0.5, delay: 0.3, ease: [0.43, 0.13, 0.23, 0.96] },
 };
 
-export const framerMotionTransition = { delay: 0.1, duration: 0.6,  ease: [0.43, 0.13, 0.23, 0.96] }
+export const framerMotionTransition = {
+  delay: 0.1,
+  duration: 0.6,
+  ease: [0.43, 0.13, 0.23, 0.96],
+};
 
 export const framerMotionPage = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
-  animate: { opacity: 1, },
+  animate: { opacity: 1 },
   transition: { duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
-}
+};
 
 export const framerMotionFederatedContainer = {
   initial: { y: '-100%', opacity: 0 },
-  exit: { y: "-100%", opacity: 0 },
-  animate: { y:0, opacity: 1 },
-  transition: {  duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] },
-}
+  exit: { y: '-100%', opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  transition: { duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] },
+};
 export const framerMotionFacet = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
-  animate: { opacity: 1, },
+  animate: { opacity: 1 },
   transition: { delay: 0.2, duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
-}
+};
 
 const config = {
   refinements,
-  indexName,
-  searchClient,
-  federatedSearchConfig,
-  federatedCategory,
-  voiceSearch,
-  stats,
   hitsPerPage,
-  bannerSrp,
-  currency,
-  injectedHits,
   sortBy,
 };
 

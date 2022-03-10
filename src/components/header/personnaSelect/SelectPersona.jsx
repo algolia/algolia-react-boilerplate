@@ -18,7 +18,6 @@ const SelectPersona = () => {
       styles={styles}
       placeholder="Persona"
       onChange={(e) => {
-        console.log(e.value);
         setPersonaSelect(e.value);
       }}
     />

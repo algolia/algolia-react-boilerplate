@@ -1,8 +1,8 @@
 import React from 'react';
 // Recoil State
-import { configAtom } from '../../config/config';
+import { currency } from '../../config/config';
 // import config file for state of facets
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import { connectCurrentRefinements } from 'react-instantsearch-dom';
 
@@ -83,8 +83,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
   </ul>
 );
 const displayPrice = (i) => {
-  const [config] = useRecoilState(configAtom);
-  const currency = config.currency.value;
+  const currencyValue = useRecoilValue(currency);
   if (
     i.label.includes(i.currentRefinement.max) &&
     !i.label.includes(i.currentRefinement.min)
@@ -94,7 +93,7 @@ const displayPrice = (i) => {
       ' ' +
       i.label.replace(`<= ${i.attribute}`, '').split(' ')[2] +
       ' ' +
-      currency
+      currencyValue
     );
   }
   if (
@@ -106,19 +105,19 @@ const displayPrice = (i) => {
       ' ' +
       i.label.replace(`<= ${i.attribute}`, '').split(' ')[0] +
       ' ' +
-      currency
+      currencyValue
     );
   }
   return (
     i.label.replace(`<= ${i.attribute}`, '').split(' ')[0] +
     ' ' +
-    currency +
+    currencyValue +
     ' ' +
     '-' +
     ' ' +
     i.label.replace(`<= ${i.attribute}`, '').split(' ')[3] +
     ' ' +
-    currency
+    currencyValue
   );
 };
 
