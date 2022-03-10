@@ -8,7 +8,7 @@ import {
 } from 'react-instantsearch-dom';
 
 // Recoil state to directly access results
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Import custom Hooks
 import useScreenSize from '../hooks/useScreenSize';
@@ -18,17 +18,16 @@ import QuerySuggestions from '../components/federatedSearch/components/QuerySugg
 import Banner from '../components/searchresultpage/Banner';
 
 // Import Persona State from recoil
-import { configAtom } from '../config/config';
+import { isBannerSrp } from '../config/config';
+import { searchClient, indexName } from '../config/appConfig';
 
 import SrpLaptop from '../components/searchresultpage/srpLaptop/SrpLaptop';
 import SrpMobile from '../components/searchresultpage/srpMobile/SrpMobile';
 
 const SearchResultPage = () => {
   // Recoil & React states
-  const [config] = useRecoilState(configAtom);
-
   // Handle Banner
-  const bannerDisplay = config.bannerSrp.value;
+  const bannerDisplay = useRecoilValue(isBannerSrp);
   // Handle screen resize
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
   return (
@@ -43,11 +42,7 @@ const SearchResultPage = () => {
 };
 
 const NoResults = memo(function NoResults({ query }) {
-  const [config] = useRecoilState(configAtom);
-  const search = algoliasearch(
-    config.searchClient.appID,
-    config.searchClient.APIKey
-  );
+  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
   return (
     <div className="no-results">
       <h4 className="no-results__titles">
@@ -70,7 +65,7 @@ const NoResults = memo(function NoResults({ query }) {
         <div className="query-suggestion">
           <InstantSearch
             searchClient={search}
-            indexName={config.indexName.indexSuggestion}
+            indexName={indexName.indexSuggestion}
           >
             <Configure hitsPerPage={3} />
             <QuerySuggestions />

@@ -20,7 +20,6 @@ import { searchClient, indexName } from './config/appConfig';
 import { Main } from './Main.jsx';
 
 const App = () => {
-  console.log(searchClient);
   const search = algoliasearch(searchClient.appID, searchClient.APIKey);
   return (
     <RecoilRoot>

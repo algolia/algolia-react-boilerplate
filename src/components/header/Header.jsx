@@ -29,8 +29,6 @@ import SelectPersona from './personnaSelect/SelectPersona';
 const Header = () => {
   // Handle screen sizing & responsive
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
-
-  console.log('render');
   // Handle sticky Header
   const elementRef = useRef(null);
   const sticky = useStickyHeader(elementRef);

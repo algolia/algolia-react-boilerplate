@@ -32,6 +32,20 @@ export const isFederatedAtom = atom({
   default: false, // default value (aka initial value)
 });
 
+export const isRelativeProducts = atom({
+  key: 'isRelativeProductsAtom', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+});
+
+export const isFbtProducts = atom({
+  key: 'isFbtProductsAtom', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+});
+
+// ------------------------------------------
+// Federated Search Atoms
+// ------------------------------------------
+
 export const searchBoxAtom = atom({
   key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
   default: '', // default value (aka initial value)
@@ -48,7 +62,7 @@ export const selectSortByIndex = atom({
 });
 
 // ------------------------------------------
-// Refinements
+// Refinements Config
 // ------------------------------------------
 
 const refinements = [
@@ -132,7 +146,7 @@ export const carouselConfig = [
 ];
 
 // ------------------------------------------
-// Sort By
+// Sort By Config
 // ------------------------------------------
 
 const sortBy = {
@@ -203,6 +217,7 @@ const config = {
   federatedSearchConfig,
   federatedCategory,
   hitsPerPage,
+  sortBy,
 };
 
 export const configAtom = atom({
