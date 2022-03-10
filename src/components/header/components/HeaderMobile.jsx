@@ -11,7 +11,7 @@ import { configAtom } from '../../../config/config';
 import { queryAtom } from '../../../config/searchbox';
 
 //Import config for federatedSearch
-import { isFederatedAtom } from '../../../config/config';
+import { isFederatedAtom, isVoiceSearch } from '../../../config/config';
 
 // Import Hook
 import useScreenSize from '../../../hooks/useScreenSize';
@@ -31,10 +31,8 @@ const HeaderMobile = () => {
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(isFederatedAtom);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // Import state from the voice search
-  const [value] = useRecoilState(configAtom);
   // Define value to display voiceSearch
-  const displayVoiceSearch = value.voiceSearch.value;
+  const displayVoiceSearch = useSetRecoilState(isVoiceSearch);
   // Handle screen sizing & responsive
   const { laptop, laptopXS, tablet, mobile } = useScreenSize();
 

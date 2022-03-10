@@ -14,8 +14,7 @@ import CustomStateResults from './components/stateResults/stateResults';
 import './scss/index.scss';
 
 // application state from config file
-// eslint-disable-next-line import/order
-import { searchClient, indexName } from './config/config';
+import { searchClient, indexName } from './config/appConfig';
 
 // Import Components
 import { Main } from './Main.jsx';

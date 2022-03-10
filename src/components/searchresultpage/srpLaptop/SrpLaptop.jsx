@@ -11,7 +11,7 @@ import { framerMotionPage, framerMotionFacet } from '../../../config/config';
 // Recoil state to directly access results
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { configAtom } from '../../../config/config';
+import { configAtom, isStats, isInjectedHits } from '../../../config/config';
 import { queryAtom } from '../../../config/searchbox';
 
 // Import Persona State from recoil
@@ -30,7 +30,7 @@ import CustomSortBy from '../../../components/searchresultpage/SortBy';
 import { CustomStats } from '../../../components/searchresultpage/Stats';
 import { InjectedHits } from '../../../components/searchresultpage/injected-hits';
 
-import { indexName, indexInfluencer } from '../../../config/config';
+import { indexName, indexInfluencer } from '../../../config/appConfig';
 
 // Import Config File
 import { customDataByType } from '../../../utils';
@@ -38,15 +38,14 @@ import { customDataByType } from '../../../utils';
 const SrpLaptop = () => {
   // Recoil & React states
   const [config] = useRecoilState(configAtom);
+  const stats = useRecoilValue(isStats);
+  const injectedValue = useRecoilValue(isInjectedHits);
   const [injected, setInjected] = useState(false);
   const queryState = useRecoilValue(queryAtom);
 
   // Define Stat Const
-  const stats = config.stats.value;
   const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = config.hitsPerPage.numberInjected;
-  const bannerDisplay = config.bannerSrp.value;
-  const injectedValue = config.injectedHits.value;
 
   // Define Price Sort By Const
   const priceSortBy = config.sortBy.value;

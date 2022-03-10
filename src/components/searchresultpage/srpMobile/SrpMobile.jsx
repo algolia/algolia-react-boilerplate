@@ -31,7 +31,7 @@ import { InjectedHits } from '../../../components/searchresultpage/injected-hits
 import FacetsMobile from '../../facets/facetsMobile/FacetsMobile';
 import { ChevronRight, ChevronLeft } from '../../../assets/svg/SvgIndex';
 
-import { indexName, indexInfluencer } from '../../../config/config';
+import { indexName, indexInfluencer } from '../../../config/appConfig';
 
 // Import Config File
 import { customDataByType } from '../../../utils';
