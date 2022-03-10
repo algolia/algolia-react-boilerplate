@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Recoil state to directly access results
 import { useRecoilState } from 'recoil';
 import { hitsAtom } from '../config/results';
@@ -13,7 +11,8 @@ const ResultsPage = () => {
 
   return (
     <div>
-      // Hits Uses IS state, not our own, to render widgets
+      {/* Hits Uses IS state, not our own, to render widgets */}
+      {/* Render the hits component */}
       <Hits />
     </div>
   );

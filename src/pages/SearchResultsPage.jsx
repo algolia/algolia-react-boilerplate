@@ -85,6 +85,7 @@ const SearchResultPage = () => {
     <>
       {/* Display the banner if the bannerSrp config is set to: true */}
       {bannerDisplay && <Banner />}
+      {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
       <NoResultsHandler>
         <div className="srp-container">
           <motion.div
@@ -106,7 +107,7 @@ const SearchResultPage = () => {
             transition={pageItem.transition}
           >
             <div className="srp-container__stats-sort">
-              {/* Display the stats if the statsSrp config is set to: true */}
+              {/* Display the stats if the 'statsSrp' config is set to: true */}
               {stats && <CustomStats />}
               {priceSortBy && (
                 <CustomSortBy
@@ -115,11 +116,12 @@ const SearchResultPage = () => {
                 />
               )}
             </div>
-
+            {/* Render the current refinements (if any), and a button to clear the refinements */}
             <div className="refinement-container">
               <CustomCurrentRefinements />
               <CustomClearRefinements />
             </div>
+            {/* TODO: What is this configure widget for? */}
             <Configure
               hitsPerPage={
                 injected ? hitsPerPageInjected : hitsPerPageNotInjected
@@ -130,9 +132,12 @@ const SearchResultPage = () => {
               filters={state ? state : ''}
               query={queryState && queryState}
             />
+            {/* Define the index for the index for injecting content from influencers */}
             <Index indexName={indexInfluencer.index}>
               <Configure hitsPerPage={1} page={0} />
             </Index>
+            {/* Render injected hits */}
+            {/* TODO: I need to unpack this */}
             {injectedValue ? (
               <InjectedHits
                 hitComponent={Hit}
@@ -183,6 +188,7 @@ const SearchResultPage = () => {
   );
 };
 
+// This is rendered when there are no results to display
 const NoResults = memo(function NoResults({ query }) {
   const [config] = useRecoilState(configAtom);
   const search = algoliasearch(
@@ -208,6 +214,7 @@ const NoResults = memo(function NoResults({ query }) {
             Or check our suggestions bellow 👇
           </span>
         </li>
+        {/* Render Query Suggestions, to offer searches and retain the customer's interest */}
         <div className="query-suggestion">
           <InstantSearch
             searchClient={search}
@@ -222,16 +229,18 @@ const NoResults = memo(function NoResults({ query }) {
   );
 });
 
+// This wrapper decides when to render the NoResults component
 const NoResultsHandlerComponent = ({
   children,
   searchState,
   searchResults,
   searching,
 }) => {
+  // If there is a search, but there are no results to display, render NoResults component
   if (searchState?.query && searchResults?.nbHits === 0) {
     return <NoResults query={searchState.query} isSearching={searching} />;
   }
-
+  // Otherwise, just return the search results
   return <>{children}</>;
 };
 

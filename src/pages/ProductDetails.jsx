@@ -1,6 +1,4 @@
-import React from 'react';
-
-//RECOMMEND
+// Recommend
 import {
   RelatedProducts,
   FrequentlyBoughtTogether,
@@ -27,15 +25,19 @@ import { useRecoilValue } from 'recoil';
 import { hitAtom } from '../config/results';
 
 const ProductDetails = () => {
+  // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
+  // navigate is used by react router
   const navigate = useNavigate();
 
+  // define the client for using Recommend
   const recommendClient = algoliarecommend(
     searchClient.appID,
     searchClient.APIKey
   );
 
   return (
+    // Product Display Page parent container, including attributes for framer motion
     <div
       className="pdp"
       variants={pageItem}
@@ -122,6 +124,7 @@ const ProductDetails = () => {
           </motion.div>
         </div>
       </div>
+      {/* Render both Recommend components- Related Products and Frequently Bought Together */}
       <div className="recommend">
         <RelatedProducts
           recommendClient={recommendClient}
