@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 
 // import config file for state of facets
 import { currency, configAtom } from '../../config/config';
+import { hitsConfig } from '../../config/hits';
 
 const displayPrice = (i, currencyValue, refinementPrice) => {
   const moreThanValue = refinementPrice.moreThan;
@@ -30,9 +31,15 @@ const displayPrice = (i, currencyValue, refinementPrice) => {
   );
 };
 
+const displayColor = (i) => {
+  const newColorRefinement = i.split(';')[0];
+  return newColorRefinement;
+};
+
 const CurrentRefinements = ({ items, refine, createURL }) => {
   const currencyValue = useRecoilValue(currency);
   const { refinementPrice } = useRecoilValue(configAtom);
+  const { colourHexa } = useRecoilValue(hitsConfig);
   return (
     <ul className="refinement-container__refinements">
       {items.map((item) => {
@@ -66,6 +73,41 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
                   }}
                 >
                   {displayPrice(item, currencyValue, refinementPrice)}
+                </a>
+              )}
+            </li>
+          );
+        }
+        if (item.attribute.includes(colourHexa)) {
+          return (
+            <li key={item.label}>
+              {item.items ? (
+                <>
+                  <ul>
+                    {item.items.map((nested) => (
+                      <li key={nested.label}>
+                        <a
+                          href={createURL(nested.value)}
+                          onClick={(event) => {
+                            event.preventDefault();
+                            refine(nested.value);
+                          }}
+                        >
+                          {displayColor(nested.label)}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a
+                  href={createURL(item.value)}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    refine(item.value);
+                  }}
+                >
+                  {displayColor(item)}
                 </a>
               )}
             </li>
