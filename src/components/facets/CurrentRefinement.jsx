@@ -1,9 +1,11 @@
-import React from 'react';
+// TODO: not sure exactly how this works
+// Component that renders the Current Refinements (icons above the products)
+
 // Recoil State
 import { configAtom } from '../../config/config';
-// import config file for state of facets
 import { useRecoilState } from 'recoil';
 
+// Algolia functionality
 import { connectCurrentRefinements } from 'react-instantsearch-dom';
 
 const CurrentRefinements = ({ items, refine, createURL }) => (
@@ -12,8 +14,9 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
       if (item.attribute.includes('price')) {
         return (
           <li key={item.label}>
+            {/* If there are nested items, render them into the component */}
             {item.items ? (
-              <React.Fragment>
+              <>
                 <ul>
                   {item.items.map((nested) => (
                     <li key={nested.label}>
@@ -29,8 +32,9 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
                     </li>
                   ))}
                 </ul>
-              </React.Fragment>
+              </>
             ) : (
+              // Otherwise, just render the items
               <a
                 href={createURL(item.value)}
                 onClick={(event) => {
@@ -48,7 +52,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
         return (
           <li key={item.label}>
             {item.items ? (
-              <React.Fragment>
+              <>
                 <ul>
                   {item.items.map((nested) => (
                     <li key={nested.label}>
@@ -64,7 +68,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
                     </li>
                   ))}
                 </ul>
-              </React.Fragment>
+              </>
             ) : (
               <a
                 href={createURL(item.value)}
@@ -82,6 +86,8 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
     })}
   </ul>
 );
+
+// Component to render price slider
 const displayPrice = (i) => {
   const [config] = useRecoilState(configAtom);
   const currency = config.currency.value;

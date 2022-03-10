@@ -39,6 +39,7 @@ const SearchResultPage = () => {
     <>
       {/* Display the banner if the bannerSrp config is set to: true */}
       {bannerDisplay && <Banner />}
+      {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
       <NoResultsHandler>
         {(laptop || laptopXS) && <SrpLaptop />}
         {(tablet || mobile) && <SrpMobile />}
@@ -47,6 +48,7 @@ const SearchResultPage = () => {
   );
 };
 
+// This is rendered when there are no results to display
 const NoResults = memo(function NoResults({ query }) {
   const [config] = useRecoilState(configAtom);
   const search = algoliasearch(
@@ -72,6 +74,7 @@ const NoResults = memo(function NoResults({ query }) {
             Or check our suggestions bellow 👇
           </span>
         </li>
+        {/* Render Query Suggestions, to offer searches and retain the customer's interest */}
         <div className="query-suggestion">
           <InstantSearch
             searchClient={search}
@@ -86,16 +89,18 @@ const NoResults = memo(function NoResults({ query }) {
   );
 });
 
+// This wrapper decides when to render the NoResults component
 const NoResultsHandlerComponent = ({
   children,
   searchState,
   searchResults,
   searching,
 }) => {
+  // If there is a search, but there are no results to display, render NoResults component
   if (searchState?.query && searchResults?.nbHits === 0) {
     return <NoResults query={searchState.query} isSearching={searching} />;
   }
-
+  // Otherwise, just return the search results
   return <>{children}</>;
 };
 
