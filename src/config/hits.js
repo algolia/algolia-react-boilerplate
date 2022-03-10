@@ -21,5 +21,6 @@ export const hitsConfig = atom({
     hierarchicalCategoriesLvl1: 'hierarchicalCategories.lvl1',
     hierarchicalCategoriesLvl2: 'hierarchicalCategories.lvl2',
     hierarchicalCategoriesLvl3: 'hierarchicalCategories.lvl3',
+    colourHexa: 'colour_hexa_v6',
   }, // default value (aka initial value)
 });

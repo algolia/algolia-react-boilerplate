@@ -1,19 +1,122 @@
 import React from 'react';
 // Recoil State
-import { currency } from '../../config/config';
-// import config file for state of facets
+import { connectCurrentRefinements } from 'react-instantsearch-dom';
 import { useRecoilValue } from 'recoil';
 
-import { connectCurrentRefinements } from 'react-instantsearch-dom';
+// import config file for state of facets
+import { currency, configAtom } from '../../config/config';
+import { hitsConfig } from '../../config/hits';
 
-const CurrentRefinements = ({ items, refine, createURL }) => (
-  <ul className="refinement-container__refinements">
-    {items.map((item) => {
-      if (item.attribute.includes('price')) {
+const displayPrice = (i, currencyValue, refinementPrice) => {
+  const moreThanValue = refinementPrice.moreThan;
+  const lessThanValue = refinementPrice.lessThan;
+  // Split the label into an array to work on split
+  const arraySplitLabel = i.label.replace(`<= ${i.attribute}`, '').split(' ');
+  if (
+    i.label.includes(i.currentRefinement.max) &&
+    !i.label.includes(i.currentRefinement.min)
+  ) {
+    return `${lessThanValue} ${arraySplitLabel[2]} ${currencyValue}`;
+  }
+  if (
+    i.label.includes(i.currentRefinement.min) &&
+    !i.label.includes(i.currentRefinement.max)
+  ) {
+    return `${moreThanValue} ${arraySplitLabel[0]} ${currencyValue}`;
+  }
+  return (
+    `${arraySplitLabel[0]} ${currencyValue} ` +
+    `-` +
+    ` ${arraySplitLabel[3]} ${currencyValue}`
+  );
+};
+
+const displayColor = (i) => {
+  const newColorRefinement = i.split(';')[0];
+  return newColorRefinement;
+};
+
+const CurrentRefinements = ({ items, refine, createURL }) => {
+  const currencyValue = useRecoilValue(currency);
+  const { refinementPrice } = useRecoilValue(configAtom);
+  const { colourHexa } = useRecoilValue(hitsConfig);
+  return (
+    <ul className="refinement-container__refinements">
+      {items.map((item) => {
+        if (item.attribute.includes('price')) {
+          return (
+            <li key={item.label}>
+              {item.items ? (
+                <>
+                  <ul>
+                    {item.items.map((nested) => (
+                      <li key={nested.label}>
+                        <a
+                          href={createURL(nested.value)}
+                          onClick={(event) => {
+                            event.preventDefault();
+                            refine(nested.value);
+                          }}
+                        >
+                          {nested.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a
+                  href={createURL(item.value)}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    refine(item.value);
+                  }}
+                >
+                  {displayPrice(item, currencyValue, refinementPrice)}
+                </a>
+              )}
+            </li>
+          );
+        }
+        if (item.attribute.includes(colourHexa)) {
+          return (
+            <li key={item.label}>
+              {item.items ? (
+                <>
+                  <ul>
+                    {item.items.map((nested) => (
+                      <li key={nested.label}>
+                        <a
+                          href={createURL(nested.value)}
+                          onClick={(event) => {
+                            event.preventDefault();
+                            refine(nested.value);
+                          }}
+                        >
+                          {displayColor(nested.label)}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a
+                  href={createURL(item.value)}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    refine(item.value);
+                  }}
+                >
+                  {displayColor(item)}
+                </a>
+              )}
+            </li>
+          );
+        }
         return (
           <li key={item.label}>
             {item.items ? (
-              <React.Fragment>
+              <>
                 <ul>
                   {item.items.map((nested) => (
                     <li key={nested.label}>
@@ -29,42 +132,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
                     </li>
                   ))}
                 </ul>
-              </React.Fragment>
-            ) : (
-              <a
-                href={createURL(item.value)}
-                onClick={(event) => {
-                  event.preventDefault();
-                  refine(item.value);
-                }}
-              >
-                {/* {item.label.replace(item.attribute, 'Between')} */}
-                {displayPrice(item)}
-              </a>
-            )}
-          </li>
-        );
-      } else {
-        return (
-          <li key={item.label}>
-            {item.items ? (
-              <React.Fragment>
-                <ul>
-                  {item.items.map((nested) => (
-                    <li key={nested.label}>
-                      <a
-                        href={createURL(nested.value)}
-                        onClick={(event) => {
-                          event.preventDefault();
-                          refine(nested.value);
-                        }}
-                      >
-                        {nested.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </React.Fragment>
+              </>
             ) : (
               <a
                 href={createURL(item.value)}
@@ -78,46 +146,8 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
             )}
           </li>
         );
-      }
-    })}
-  </ul>
-);
-const displayPrice = (i) => {
-  const currencyValue = useRecoilValue(currency);
-  if (
-    i.label.includes(i.currentRefinement.max) &&
-    !i.label.includes(i.currentRefinement.min)
-  ) {
-    return (
-      'Less than' +
-      ' ' +
-      i.label.replace(`<= ${i.attribute}`, '').split(' ')[2] +
-      ' ' +
-      currencyValue
-    );
-  }
-  if (
-    i.label.includes(i.currentRefinement.min) &&
-    !i.label.includes(i.currentRefinement.max)
-  ) {
-    return (
-      'More than' +
-      ' ' +
-      i.label.replace(`<= ${i.attribute}`, '').split(' ')[0] +
-      ' ' +
-      currencyValue
-    );
-  }
-  return (
-    i.label.replace(`<= ${i.attribute}`, '').split(' ')[0] +
-    ' ' +
-    currencyValue +
-    ' ' +
-    '-' +
-    ' ' +
-    i.label.replace(`<= ${i.attribute}`, '').split(' ')[3] +
-    ' ' +
-    currencyValue
+      })}
+    </ul>
   );
 };
 

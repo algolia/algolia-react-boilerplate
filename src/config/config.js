@@ -132,6 +132,11 @@ const hitsPerPage = {
   numberInjected: 14,
 };
 
+const refinementPrice = {
+  moreThan: 'More than',
+  lessThan: 'Less than',
+};
+
 // ------------------------------------------
 // Carousel Config
 // ------------------------------------------
@@ -208,6 +213,7 @@ const config = {
   refinements,
   hitsPerPage,
   sortBy,
+  refinementPrice,
 };
 
 export const configAtom = atom({
