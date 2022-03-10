@@ -1,48 +1,31 @@
 import { atom } from 'recoil';
-
-// ------------------------------------------
-// Config Index and Search Client
-// ------------------------------------------
-export const searchClient = {
-  APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
-  appID: '853MYZ81KY',
-};
-
-export const indexName = {
-  index: 'flagship_fashion',
-  indexSuggestion: 'flagship_fashion_query_suggestions',
-  indexBlog: 'canda_customDemo_articles',
-};
-
-// Ignore this, generated from indexConfig
-export const indexNameAtom = atom({
-  key: 'indexName',
-  default: 'flagship_fashion',
-});
-
-export const indexInfluencer = {
-  index: 'flagship_fashion_influencers',
-};
+import { indexName } from './appConfig';
 
 // ------------------------------------------
 // Config feature, change by true or false to remove them or change the value
 // ------------------------------------------
-const voiceSearch = {
-  value: true,
-};
-const stats = {
-  value: true,
-};
-const bannerSrp = {
-  value: true,
-};
-const currency = {
-  value: '$',
-};
+export const isVoiceSearch = atom({
+  key: 'voiceSearch',
+  default: true,
+});
 
-const injectedHits = {
-  value: true,
-};
+export const isStats = atom({
+  key: 'stats',
+  default: true,
+});
+export const isBannerSrp = atom({
+  key: 'bannerSrp',
+  default: true,
+});
+export const isCurrency = atom({
+  key: 'currency',
+  default: '$',
+});
+
+export const isInjectedHits = atom({
+  key: 'injectedHits',
+  default: true,
+});
 
 export const isFederatedAtom = atom({
   key: 'isFederatedAtom', // unique ID (with respect to other atoms/selectors)
@@ -189,41 +172,37 @@ export const framerMotionHits = {
   transition: { duration: 0.5, delay: 0.3, ease: [0.43, 0.13, 0.23, 0.96] },
 };
 
-export const framerMotionTransition = { delay: 0.1, duration: 0.6,  ease: [0.43, 0.13, 0.23, 0.96] }
+export const framerMotionTransition = {
+  delay: 0.1,
+  duration: 0.6,
+  ease: [0.43, 0.13, 0.23, 0.96],
+};
 
 export const framerMotionPage = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
-  animate: { opacity: 1, },
+  animate: { opacity: 1 },
   transition: { duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
-}
+};
 
 export const framerMotionFederatedContainer = {
   initial: { y: '-100%', opacity: 0 },
-  exit: { y: "-100%", opacity: 0 },
-  animate: { y:0, opacity: 1 },
-  transition: {  duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] },
-}
+  exit: { y: '-100%', opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  transition: { duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] },
+};
 export const framerMotionFacet = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
-  animate: { opacity: 1, },
+  animate: { opacity: 1 },
   transition: { delay: 0.2, duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
-}
+};
 
 const config = {
   refinements,
-  indexName,
-  searchClient,
   federatedSearchConfig,
   federatedCategory,
-  voiceSearch,
-  stats,
   hitsPerPage,
-  bannerSrp,
-  currency,
-  injectedHits,
-  sortBy,
 };
 
 export const configAtom = atom({

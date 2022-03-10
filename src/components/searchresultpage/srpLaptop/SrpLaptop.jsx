@@ -30,7 +30,7 @@ import CustomSortBy from '../../../components/searchresultpage/SortBy';
 import { CustomStats } from '../../../components/searchresultpage/Stats';
 import { InjectedHits } from '../../../components/searchresultpage/injected-hits';
 
-import { indexName, indexInfluencer } from '../../../config/config';
+import { indexName, indexInfluencer } from '../../../config/appConfig';
 
 // Import Config File
 import { customDataByType } from '../../../utils';

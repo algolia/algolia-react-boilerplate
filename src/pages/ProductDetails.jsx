@@ -17,7 +17,7 @@ import HomeCarousel from '../components/carousels/HomeCarousel';
 import RelatedItem from '../components/recommend/RelatedProducts';
 
 // Algolia search client
-import { searchClient, indexName } from '../config/config';
+import { searchClient, indexName } from '../config/appConfig';
 
 // React router import
 import { useNavigate } from 'react-router-dom';

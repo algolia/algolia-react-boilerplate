@@ -16,6 +16,7 @@ import {
   searchBoxAtom,
   selectButtonAtom,
 } from '../../config/config';
+import { indexName, searchClient } from '../../config/appConfig';
 // Import Persona State from recoil
 import { personaSelectedAtom } from '../../config/header';
 
@@ -55,10 +56,7 @@ const FederatedSearch = () => {
     isProduct,
   } = config.federatedSearchConfig;
   // Algolia searchclient
-  const search = algoliasearch(
-    config.searchClient.appID,
-    config.searchClient.APIKey
-  );
+  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
 
   return (
     <motion.div
@@ -82,7 +80,7 @@ const FederatedSearch = () => {
           {isQuerySuggestions && (
             <InstantSearch
               searchClient={search}
-              indexName={config.indexName.indexSuggestion}
+              indexName={indexName.indexSuggestion}
             >
               <Configure hitsPerPage={3} />
               <QuerySuggestions />
@@ -109,7 +107,7 @@ const FederatedSearch = () => {
           <div className="articles federatedSearch__right">
             <InstantSearch
               searchClient={search}
-              indexName={config.indexName.indexBlog}
+              indexName={indexName.indexBlog}
             >
               <Configure hitsPerPage={1} />
               <Articles />
