@@ -182,29 +182,29 @@ const federatedSearchConfig = {
 // ------------------------------------------
 // Hits and Framer Motion
 // ------------------------------------------
-export const listItem = {
+export const framerMotionHits = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
   animate: { opacity: 1 },
   transition: { duration: 0.5, delay: 0.3, ease: [0.43, 0.13, 0.23, 0.96] },
 };
 
-export const mainTransition = { delay: 0.1, duration: 0.6,  ease: [0.43, 0.13, 0.23, 0.96] }
+export const framerMotionTransition = { delay: 0.1, duration: 0.6,  ease: [0.43, 0.13, 0.23, 0.96] }
 
-export const pageItem = {
+export const framerMotionPage = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
   animate: { opacity: 1, },
   transition: { duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
 }
 
-export const federatedItem = {
+export const framerMotionFederatedContainer = {
   initial: { y: '-100%', opacity: 0 },
   exit: { y: "-100%", opacity: 0 },
   animate: { y:0, opacity: 1 },
   transition: {  duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] },
 }
-export const facetItem = {
+export const framerMotionFacet = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
   animate: { opacity: 1, },

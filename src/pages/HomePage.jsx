@@ -1,6 +1,6 @@
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
-import { pageItem } from '../config/config';
+import { framerMotionPage } from '../config/config';
 
 // recoil import
 import { useRecoilValue } from 'recoil';
@@ -24,11 +24,11 @@ const HomePage = () => {
     // Framer motion wrapper
     <motion.div
       className="homepage"
-      initial={pageItem.initial}
-      animate={pageItem.animate}
-      variants={pageItem}
-      exit={pageItem.exit}
-      transition={pageItem.transition}
+      initial={framerMotionPage.initial}
+      animate={framerMotionPage.animate}
+      variants={framerMotionPage}
+      exit={framerMotionPage.exit}
+      transition={framerMotionPage.transition}
     >
 
       <AnimatePresence>

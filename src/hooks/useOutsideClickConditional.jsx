@@ -5,11 +5,11 @@ import { isPersonaMenuOpen } from '../config/header';
 const useOutsideClickConditional = (
   ref,
   optionalParameter1,
-  optionalParameter2,
+  // optionalParameter2,
   callback
 ) => {
   optionalParameter1 = optionalParameter1 || null;
-  optionalParameter2 = optionalParameter2.current || null;
+  // optionalParameter2 = optionalParameter2.current || null;
   const isPersonaOpen = useRecoilValue(isPersonaMenuOpen);
 
   const handleClick = (e) => {
@@ -17,7 +17,7 @@ const useOutsideClickConditional = (
       ref.current &&
       !ref.current.contains(e.target) &&
       !optionalParameter1.contains(e.target) &&
-      !optionalParameter2.contains(e.target) &&
+      // !optionalParameter2.contains(e.target) &&
       isPersonaOpen === false
     ) {
       callback();
