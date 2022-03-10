@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+
 import { indexName } from './appConfig';
 
 // ------------------------------------------
@@ -16,10 +17,6 @@ export const isStats = atom({
 export const isBannerSrp = atom({
   key: 'bannerSrp',
   default: true,
-});
-export const isCurrency = atom({
-  key: 'currency',
-  default: '$',
 });
 
 export const isInjectedHits = atom({
@@ -158,24 +155,14 @@ const sortBy = {
   ],
 };
 
+// ------------------------------------------
+// Category Pages
+// ------------------------------------------
+
 // This export is used for Category pages. It will create a filters in a Configure widget in SRP to filter out the right products
 export const hierarchicalFacet = {
   hierarchicalLvl0: 'hierarchicalCategories.lvl0',
 };
-
-const federatedCategory = {
-  categoryInFederated: 'hierarchicalCategories.lvl2',
-};
-
-// FEDERATED SEARCHES
-const federatedSearchConfig = {
-  isRecentSearch: true,
-  isQuerySuggestions: true,
-  isCategory: true,
-  isProduct: true,
-  isBlogPosts: true,
-};
-
 // ------------------------------------------
 // Hits and Framer Motion
 // ------------------------------------------
@@ -214,8 +201,6 @@ export const framerMotionFacet = {
 
 const config = {
   refinements,
-  federatedSearchConfig,
-  federatedCategory,
   hitsPerPage,
   sortBy,
 };
