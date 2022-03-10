@@ -20,9 +20,6 @@ import PriceSlider from './PriceSlider';
 import { configAtom } from '../../config/config';
 import CustomHierarchicalMenu from './Hierarchical';
 
-// // Import default styles
-// import '@algolia/react-instantsearch-widget-color-refinement-list/dist/style.css';
-
 // expects an attribute which is an array of items
 const RefinementList = ({ title, items, refine, searchForItems, options }) => {
   const [showFacet, setShowFacet] = useState(false);

@@ -9,8 +9,8 @@ import { connectQueryRules } from 'react-instantsearch-dom';
 // Imports from router
 import { Link } from 'react-router-dom';
 
-// TODO: this is supposed to receive items in props, but isn't called with anything on Homepage.jsx?
 // This component renders a different banner based on the props passed to it
+// This component will be wrapped in connectQueryRules (https://www.algolia.com/doc/api-reference/widgets/query-rule-custom-data/react/#connector)
 const HomeBanners = ({ items }) => {
   return items.map(
     (

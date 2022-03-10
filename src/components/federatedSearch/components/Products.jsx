@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 // Algolia's imports
 import { connectHits } from 'react-instantsearch-dom';

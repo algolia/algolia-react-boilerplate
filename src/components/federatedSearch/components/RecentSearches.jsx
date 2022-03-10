@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 // components import
 import { ChevronRight } from '../../../assets/svg/SvgIndex';

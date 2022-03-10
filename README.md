@@ -62,16 +62,19 @@ SearchResultsPage.jsx
 
 - called by Main.jsx for route `/search`
 - loads components related to results
-  - Hits
-  - Refinements
-  - Stats
-  - Sorts
-  - Current Refinements
-  - Configures
-  - Personalisation
-  - Content Injection
-  - Pagination
-  - No Results
+
+ProductDetails.jsx
+
+- Display attributes of an individual product
+  - Image
+  - Brand
+  - Name
+  - Colour
+  - Size
+  - Price
+- Recommend components
+  - Related Products
+  - Frequently Bought Together
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
 

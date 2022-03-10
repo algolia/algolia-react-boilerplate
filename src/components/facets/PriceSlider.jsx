@@ -1,6 +1,7 @@
+// Render the Price Slider used in the Refinement List
 // Import Debounce
 import debounce from 'lodash.debounce';
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 // https://www.npmjs.com/package/rc-slider
 // rc-slider
 import { Range } from 'rc-slider';

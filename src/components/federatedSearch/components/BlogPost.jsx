@@ -1,4 +1,7 @@
-import React, { memo } from 'react';
+// Render the blog post in federated search
+import { memo } from 'react';
+
+// Algolia
 import { connectHits } from 'react-instantsearch-dom';
 
 const ArticlesItems = ({ hits }) => {

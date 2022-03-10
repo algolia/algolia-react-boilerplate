@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+// Render the Header component in Main.jsx, for small screen sizes
+
+import { useState } from 'react';
+
 // React Router
 import { Link } from 'react-router-dom';
+
 // Recoil Header State
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
@@ -10,14 +14,15 @@ import { configAtom } from '../../../config/config';
 // eslint-disable-next-line import/order
 import { queryAtom } from '../../../config/searchbox';
 
-//Import config for federatedSearch
+// Import config for federatedSearch
 import { isFederatedAtom } from '../../../config/config';
 
-// Import Hook
+// Import Screen Size Determining Hook
 import useScreenSize from '../../../hooks/useScreenSize';
 
-// import framer motion
+// Import framer motion
 import { motion, AnimatePresence } from 'framer-motion';
+
 // Import SearchBox
 // eslint-disable-next-line import/order
 import CustomSearchBoxSimple from '../../searchbox/SearchBox';
@@ -25,22 +30,25 @@ import CustomSearchBoxSimple from '../../searchbox/SearchBox';
 // Import VoiceSearchComponent
 import CustomVoiceSearchComponent from '../../voicesearch/VoiceSearch';
 import Navigation from './Navigation';
-import SelectPersona from '../personnaSelect/SelectPersona';
+// import SelectPersona from '../personnaSelect/SelectPersona';
 
 const HeaderMobile = () => {
+  // Import configuration from Recoil
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(isFederatedAtom);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   // Import state from the voice search
   const [value] = useRecoilState(configAtom);
+
   // Define value to display voiceSearch
   const displayVoiceSearch = value.voiceSearch.value;
-  // Handle screen sizing & responsive
-  const { laptop, laptopXS, tablet, mobile } = useScreenSize();
 
   return (
     <div className="container container-mobile">
       <div className="container__header-top">
+        {/* Hamburger button to open or close the menu dropdown */}
         <div
           className={`${
             isMenuOpen ? 'hamburger-active' : 'hamburger-inactive'
@@ -53,6 +61,7 @@ const HeaderMobile = () => {
           <span className="hamburger__line"></span>
           <span className="hamburger__line"></span>
         </div>
+        {/* Logo, which returns to the homepage on click */}
         <div className="container__header-top__logo">
           <Link
             to="/"
@@ -68,7 +77,6 @@ const HeaderMobile = () => {
           </Link>
         </div>
         {/* For a search box Simple center */}
-
         <div className="container__header-top__title">
           <h1>Demo BoilerPlate</h1>
         </div>
@@ -76,6 +84,7 @@ const HeaderMobile = () => {
 
       <div className="searchbox-container searchbox-container-mobile">
         <CustomSearchBoxSimple />
+        {/* Display voicesearch if the  displayVoiceSearch config is set to true */}
         {displayVoiceSearch && <CustomVoiceSearchComponent />}
       </div>
       <AnimatePresence>

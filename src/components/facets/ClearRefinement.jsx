@@ -1,24 +1,17 @@
-// TODO: can this component be refined? I think I could improve it, possibly
 // Component for clearing the selected refinements on Search Results
 import { connectCurrentRefinements } from 'react-instantsearch-dom';
 
-const ClearRefinements = ({ items, refine }) => {
-  const number = items.length;
+const ClearRefinements = ({ items, refine }) =>
   // if there are refinements, show the button
-  if (number) {
-    return (
-      <button
-        className="button-clear-refinement"
-        onClick={() => refine(items)}
-        disabled={!items.length}
-      >
-        Clear all refinements
-      </button>
-    );
-  } else {
-    return '';
-  }
-};
+  items.length ? (
+    <button
+      className="button-clear-refinement"
+      onClick={() => refine(items)}
+      disabled={!items.length}
+    >
+      Clear all refinements
+    </button>
+  ) : null;
 
 const CustomClearRefinements = connectCurrentRefinements(ClearRefinements);
 
