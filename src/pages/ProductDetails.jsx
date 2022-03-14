@@ -52,9 +52,15 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-      <div className="pdp__wrapper pdp-mobile__wrapper">
+      <div
+        className={`${
+          mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
+        }`}
+      >
         <div
-          className="pdp__backBtn pdp-mobile__backBtn "
+          className={`${
+            mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+          }`}
           onClick={() => navigate(-1)}
         >
           <ChevronLeft />
@@ -68,7 +74,7 @@ const ProductDetails = () => {
             opacity: 1,
             transition: { framerMotionTransition },
           }}
-          className="pdp__left pdp-mobile__left"
+          className={`${mobile || tablet ? 'pdp-mobile__left' : 'pdp__left'}`}
         >
           <motion.div
             className="container"
@@ -93,7 +99,9 @@ const ProductDetails = () => {
             </motion.div>
           </motion.div>
         </motion.div>
-        <div className="pdp__right pdp-mobile__right">
+        <div
+          className={`${mobile || tablet ? 'pdp-mobile__right' : 'pdp__right'}`}
+        >
           <motion.div
             className="pdp__right__infos"
             initial={{
