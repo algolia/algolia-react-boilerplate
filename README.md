@@ -104,7 +104,7 @@ In order to configure Category Pages (Add or Remove) go in config > header.js. F
 [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/)
 
 The user stories : 
-    - Younger male 'Stephen James', likes Basketball and he lives in NYC.
+   - Younger male 'Stephen James', likes Basketball and he lives in NYC.
       -Likes **Sneakers**, size 24, also likes **tracksuit**
 
    - Older female: 'Elizabeth Aniston', likes fashion and she lives in Paris.
