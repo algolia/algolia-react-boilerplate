@@ -107,7 +107,7 @@ The user stories :
     - Younger male 'Stephen James', likes Basketball and he lives in NYC.
       -Likes **Sneakers**, size 24, also likes **tracksuit**
 
-    - Older female: 'Elizabeth Aniston', likes fashion and she lives in Paris.
+   - Older female: 'Elizabeth Aniston', likes fashion and she lives in Paris.
       -Likes **black** dresses, size M, also likes blue jeans
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 💉 InjectedContent</h3>
