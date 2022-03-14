@@ -1,9 +1,10 @@
+// Component to render injected content from the Algolia dashboard, eg 'Free return Policy'
 import { motion } from 'framer-motion';
-import React from 'react';
 
-// Import config framer Motion
+// Import framer Motion config
 import { framerMotionHits } from '../../config/config';
-// GIFT CARD
+
+// Display an image, within a framer-motion wrapper
 const GiftCard = ({ hit }) => {
   return (
     <motion.li

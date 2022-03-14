@@ -1,9 +1,13 @@
+// For displaying injected content in the Search Results
+
+// Import framer motion
 import { motion } from 'framer-motion';
-import React from 'react';
+
+// Import functionality from InstantSearch
 // eslint-disable-next-line no-unused-vars
 import { connectStateResults } from 'react-instantsearch-dom';
 
-// Import config framer Motion
+// Import framer Motion config
 import { framerMotionHits } from '../../config/config';
 
 const QueryAndHitsOnly = connectStateResults(
@@ -12,7 +16,7 @@ const QueryAndHitsOnly = connectStateResults(
   }
 );
 
-// INFLUENCER CARD
+// Display the name, the category and the background image, wrapped in a framer motion div
 const InfluencerCard = ({ hit }) => {
   return (
     <QueryAndHitsOnly>
