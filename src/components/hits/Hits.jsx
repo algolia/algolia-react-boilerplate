@@ -21,7 +21,6 @@ const Hit = ({ hit }) => {
   // Get hit attribute from config file
   const { price, objectID, image, category, productName } =
     useRecoilValue(hitsConfig);
-  console.log('image', hit[image]);
 
   return (
     <motion.li
