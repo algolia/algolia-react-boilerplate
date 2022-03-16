@@ -1,4 +1,4 @@
-// This SearchBox is with a glass inside
+// This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
 // Import Debounce
 import debounce from 'lodash.debounce';

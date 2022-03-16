@@ -1,4 +1,4 @@
-import React from 'react';
+// Component for the searchbox being used when a category is selected eg. 'Mens'
 
 const SearchInCategory = ({ state }) => (
   <div className="searchbox__category">
