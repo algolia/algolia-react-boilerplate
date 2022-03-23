@@ -25,14 +25,14 @@ import { useNavigate } from 'react-router-dom';
 // Recoil import
 import { useRecoilValue } from 'recoil';
 import { hitAtom } from '../config/results';
-import { isRelativeProducts, isFbtProducts } from '../config/config';
+import { isRelatedProducts, isFbtProducts } from '../config/config';
 
 // Custom hooks
 import useScreenSize from '../hooks/useScreenSize';
 
 const ProductDetails = () => {
   const hit = useRecoilValue(hitAtom);
-  const isRelativeProductsValue = useRecoilValue(isRelativeProducts);
+  const isRelatedProductsValue = useRecoilValue(isRelatedProducts);
   const isFbtProductsValue = useRecoilValue(isFbtProducts);
   const navigate = useNavigate();
 
@@ -142,7 +142,7 @@ const ProductDetails = () => {
         </div>
       </div>
       <div className="recommend">
-        {isRelativeProductsValue && (
+        {isRelatedProductsValue && (
           <RelatedProducts
             recommendClient={recommendClient}
             indexName={indexName.index}
