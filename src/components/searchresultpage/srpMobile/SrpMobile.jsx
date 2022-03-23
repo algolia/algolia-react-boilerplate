@@ -14,7 +14,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 // Import Persona State from recoil
 import { personaSelectedAtom } from '../../../config/header';
 
-import { configAtom } from '../../../config/config';
+import { configAtom, isStats, isInjectedHits } from '../../../config/config';
 import { queryAtom } from '../../../config/searchbox';
 
 // Import Components
@@ -44,11 +44,10 @@ const SrpMobile = () => {
   const queryState = useRecoilValue(queryAtom);
 
   // Define Stat Const
-  const stats = config.stats.value;
+  const stats = useRecoilValue(isStats);
   const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = config.hitsPerPage.numberInjected;
-  const bannerDisplay = config.bannerSrp.value;
-  const injectedValue = config.injectedHits.value;
+  const injectedValue = useRecoilValue(isInjectedHits);
 
   // Define Price Sort By Const
   const priceSortBy = config.sortBy.value;
