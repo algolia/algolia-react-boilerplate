@@ -112,22 +112,6 @@ const Facets = () => {
     <DynamicWidgets>
       {refinementParams.map((e, i) => {
         const refinementType = e.type;
-        if (
-          refinementType !== 'price' &&
-          refinementType !== 'hierarchical' &&
-          refinementType !== 'colour'
-        ) {
-          return (
-            <GenericRefinementList
-              searchable={e.options?.searchable}
-              key={i}
-              limit={e.options?.limit}
-              attribute={e.options.attribute}
-              title={e.label}
-              options={e.options}
-            />
-          );
-        }
         if (refinementType === 'price') {
           return (
             <PriceSlider
@@ -156,6 +140,22 @@ const Facets = () => {
               attributes={e.options.attribute}
               title={e.label}
               key={i}
+            />
+          );
+        }
+        if (
+          refinementType !== 'price' &&
+          refinementType !== 'hierarchical' &&
+          refinementType !== 'colour'
+        ) {
+          return (
+            <GenericRefinementList
+              searchable={e.options?.searchable}
+              key={i}
+              limit={e.options?.limit}
+              attribute={e.options.attribute}
+              title={e.label}
+              options={e.options}
             />
           );
         }
