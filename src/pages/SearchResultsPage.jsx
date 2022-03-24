@@ -45,33 +45,34 @@ const NoResults = memo(function NoResults({ query }) {
   const search = algoliasearch(searchClient.appID, searchClient.APIKey);
   return (
     <div className="no-results">
-      <h4 className="no-results__titles">
-        <span className="no-results__titles__span">
-          Sorry, we found no results for{' '}
-        </span>
-        <span className="no-results__titles__span-query">“{query}”</span>
-      </h4>
-
-      <p>Try the following:</p>
-      <ul className="no-results__infos">
-        <li>
-          <span className="no-results__infos__span">Check your spelling</span>
-        </li>
-        <li>
-          <span className="no-results__infos__span">
-            Or check our suggestions bellow 👇
+      <div className="no-results__infos">
+        <h4 className="no-results__titles">
+          <span className="no-results__titles__span">
+            Sorry, we found no results for{' '}
           </span>
-        </li>
-        <div className="query-suggestion">
-          <InstantSearch
-            searchClient={search}
-            indexName={indexName.indexSuggestion}
-          >
-            <Configure hitsPerPage={3} />
-            <QuerySuggestions />
-          </InstantSearch>
-        </div>
-      </ul>
+          <span className="no-results__titles__span-query">“{query}”</span>
+        </h4>
+        <p>Try the following:</p>
+        <ul className="no-results__infos">
+          <li>
+            <span className="no-results__infos__span">Check your spelling</span>
+          </li>
+          <li>
+            <span className="no-results__infos__span">
+              Or check our suggestions bellow 👇
+            </span>
+          </li>
+          <div className="query-suggestion">
+            <InstantSearch
+              searchClient={search}
+              indexName={indexName.indexSuggestion}
+            >
+              <Configure hitsPerPage={3} />
+              <QuerySuggestions />
+            </InstantSearch>
+          </div>
+        </ul>
+      </div>
     </div>
   );
 });
