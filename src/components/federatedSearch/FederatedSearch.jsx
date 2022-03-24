@@ -21,6 +21,7 @@ import {
   federatedSearchConfig,
   federatedCategory,
 } from '../../config/federatedConfig';
+import { queryAtom } from '../../config/searchbox';
 // Import Persona State from recoil
 import { personaSelectedAtom } from '../../config/header';
 
@@ -48,6 +49,9 @@ const FederatedSearch = () => {
   const { mobile, tablet } = useScreenSize();
   // Persona
   const userToken = personaSelect;
+
+  //query
+  const query = useRecoilValue(queryAtom);
 
   // Federated search configuration
   const {
@@ -84,7 +88,7 @@ const FederatedSearch = () => {
               searchClient={search}
               indexName={indexName.indexSuggestion}
             >
-              <Configure hitsPerPage={3} />
+              <Configure hitsPerPage={3} query={query} />
               <QuerySuggestions />
             </InstantSearch>
           )}
@@ -109,7 +113,7 @@ const FederatedSearch = () => {
               searchClient={search}
               indexName={indexName.indexBlog}
             >
-              <Configure hitsPerPage={1} />
+              <Configure hitsPerPage={1} query={query} />
               <Articles />
             </InstantSearch>
           </div>
