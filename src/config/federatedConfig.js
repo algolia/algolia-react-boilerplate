@@ -1,6 +1,7 @@
-export const federatedCategory = {
-  categoryInFederated: 'hierarchicalCategories.lvl2',
+export const categories = {
+  attribute: 'hierarchicalCategories.lvl2',
 };
+
 
 // FEDERATED SEARCHES
 export const federatedSearchConfig = {

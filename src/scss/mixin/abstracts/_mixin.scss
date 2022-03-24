@@ -163,7 +163,7 @@
 @mixin hits-individual($title-color, $price-color, $higlight-color, $shadow) {
   width: 100%;
   display: block;
-    &__img {
+    &__imgWrapper {
       position: relative;
       overflow: hidden;
       img {

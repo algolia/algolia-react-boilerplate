@@ -19,7 +19,7 @@ import {
 import { indexName, searchClient } from '../../config/appConfig';
 import {
   federatedSearchConfig,
-  federatedCategory,
+  categories,
 } from '../../config/federatedConfig';
 import { queryAtom } from '../../config/searchbox';
 // Import Persona State from recoil
@@ -93,7 +93,7 @@ const FederatedSearch = () => {
             </InstantSearch>
           )}
           {isCategory && !mobile && !tablet && (
-            <Category attribute={federatedCategory.categoryInFederated} />
+            <Category attribute={categories.attribute} />
           )}
         </div>
         {isProduct && (

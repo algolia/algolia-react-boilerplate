@@ -7,7 +7,11 @@ import { framerMotionPage } from '../config/config';
 import CustomHomeBanners from '../components/banners/HomeBanners';
 import Header from '../components/header/Header';
 import FederatedSearch from '../components/federatedSearch/FederatedSearch';
-import { isFederatedAtom, carouselConfig } from '../config/config';
+import {
+  isFederatedAtom,
+  carouselConfig,
+  isCarouselAtom,
+} from '../config/config';
 
 //recoil import
 import { useRecoilValue } from 'recoil';
@@ -15,6 +19,8 @@ import HomeCarousel from '../components/carousels/HomeCarousel';
 
 const HomePage = () => {
   const isFederated = useRecoilValue(isFederatedAtom);
+  const isCarousel = useRecoilValue(isCarouselAtom);
+
   return (
     <motion.div
       className="homepage"
@@ -27,15 +33,16 @@ const HomePage = () => {
       <AnimatePresence>{isFederated && <FederatedSearch />}</AnimatePresence>
       {/* Here it's the custom banners */}
       <CustomHomeBanners />
-      {carouselConfig.map((carousel, i) => {
-        return (
-          <HomeCarousel
-            key={i}
-            attribute={carousel.attribute}
-            title={carousel.title}
-          />
-        );
-      })}
+      {isCarousel &&
+        carouselConfig.map((carousel, i) => {
+          return (
+            <HomeCarousel
+              key={i}
+              attribute={carousel.attribute}
+              title={carousel.title}
+            />
+          );
+        })}
     </motion.div>
   );
 };

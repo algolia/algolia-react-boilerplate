@@ -41,9 +41,9 @@ const CustomHits = ({ hits }) => {
                 navigate(`/search/${hit[objectID]}`);
               }}
             >
-              <div className="srpItem__img">
+              <div className="srpItem__imgWrapper">
                 <img src={hit[image]} alt={hit[category]} />
-                <div className="srpItem__img__heart">
+                <div className="srpItem__imgWrapper__heart">
                   <Heart />
                 </div>
               </div>
