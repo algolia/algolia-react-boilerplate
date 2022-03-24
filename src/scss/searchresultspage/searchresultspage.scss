@@ -83,9 +83,13 @@
   background-position: center;
   background-size: cover;
   width: 80%;
-  height: 80vh;
-  margin: 0 auto;
+  height: 70vh;
+  margin: 13rem auto;
   padding: 2rem 2rem;
+  &__infos {
+    position: absolute;
+    left: 1rem;
+  }
   &__titles {
     margin-bottom: 2rem;
     &__span {
