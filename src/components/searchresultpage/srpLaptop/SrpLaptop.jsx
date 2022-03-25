@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+// This is the Search Results Page that you'll see on a normal computer screen
+
+import { useState } from 'react';
 // eslint-disable-next-line import/order
 import { Pagination, Configure, Index } from 'react-instantsearch-dom';
 
@@ -41,11 +43,12 @@ const SrpLaptop = () => {
   const [injected, setInjected] = useState(false);
   const queryState = useRecoilValue(queryAtom);
 
-  // Define Stat Const
+  // config for the Algolia search stats
   const stats = config.stats.value;
+
+  // config for the injected cards
   const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = config.hitsPerPage.numberInjected;
-  const bannerDisplay = config.bannerSrp.value;
   const injectedValue = config.injectedHits.value;
 
   // Define Price Sort By Const
@@ -77,6 +80,7 @@ const SrpLaptop = () => {
         exit={framerMotionPage.exit}
         transition={framerMotionPage.transition}
       >
+        {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
         <div className="srp-container__stats-sort">
           {stats && <CustomStats />}
           {priceSortBy && (
@@ -86,7 +90,7 @@ const SrpLaptop = () => {
             />
           )}
         </div>
-
+        {/* Refinements, to the left of the items, including a list of currently selected refinements */}
         <div className="refinement-container">
           <CustomCurrentRefinements />
           <CustomClearRefinements />
@@ -102,6 +106,7 @@ const SrpLaptop = () => {
         <Index indexName={indexInfluencer.index}>
           <Configure hitsPerPage={1} page={0} />
         </Index>
+        {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
         {injectedValue ? (
           <InjectedHits
             hitComponent={Hit}

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+// This is the Search Results Page that you'll see on a phone screen
+
+import { useState } from 'react';
 // eslint-disable-next-line import/order
-import { Pagination, Configure, Index } from 'react-instantsearch-dom';
+import { Configure, Index } from 'react-instantsearch-dom';
 
 import { useLocation } from 'react-router-dom';
 
@@ -45,18 +47,21 @@ const SrpMobile = () => {
 
   // Define Stat Const
   const stats = config.stats.value;
+
+  // Import config for injected content eg. Sales card
   const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = config.hitsPerPage.numberInjected;
   const bannerDisplay = config.bannerSrp.value;
   const injectedValue = config.injectedHits.value;
 
-  // Define Price Sort By Const
+  // Define Price Sort By
   const priceSortBy = config.sortBy.value;
   const labelItems = config.sortBy.labelIndex;
 
   // Get states of React Router
   const { state } = useLocation();
   const personaSelect = useRecoilValue(personaSelectedAtom);
+
   // Persona
   const userToken = personaSelect;
   return (
@@ -69,11 +74,6 @@ const SrpMobile = () => {
           setIsMenuOpen(!isMenuOpen);
         }}
       >
-        {/* <div>
-          <span className="hamburger__line"></span>
-          <span className="hamburger__line"></span>
-          <span className="hamburger__line"></span>
-        </div> */}
         {isMenuOpen ? <ChevronRight /> : <ChevronLeft />}
         <p>Filters</p>
       </div>

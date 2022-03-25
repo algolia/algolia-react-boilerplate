@@ -1,12 +1,17 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
+
 // Import Debounce
 import debounce from 'lodash.debounce';
-import React, { useCallback, memo, useMemo, useEffect } from 'react';
+
+import { memo, useMemo, useEffect } from 'react';
+
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
+
 // Import navigate function to route to results page on search submit
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+
 // Import Recoil
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
