@@ -24,3 +24,21 @@ export const hitsConfig = atom({
     colourHexa: 'colour_hexa_v6',
   }, // default value (aka initial value)
 });
+
+
+
+//Content blog & articles
+
+// Change string attribute here with the attribute of your index
+export const contentArticlesConfig = atom({
+  key: 'contentArticlesConfig', // unique ID (with respect to other atoms/selectors)
+  default: {
+    objectID: 'objectID',
+    title: 'Title',
+    headings: 'Subtitle',
+    content: 'content',
+    date: 'Date',
+    description: 'description',
+    image:'Image Link',
+  }, // default value (aka initial value)
+});

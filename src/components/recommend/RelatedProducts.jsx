@@ -8,9 +8,9 @@ const RelatedItem = ({ item }) => {
   const { price, image, category, productName } = useRecoilValue(hitsConfig);
   return (
     <div className="relatedItem">
-      <div className="relatedItem__img">
+      <div className="relatedItem__imgWrapper">
         <img src={item[image]} alt={item[category]} />
-        <div className="relatedItem__img__heart">
+        <div className="relatedItem__imgWrapper__heart">
           <Heart />
         </div>
       </div>

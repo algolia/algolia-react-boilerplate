@@ -26,6 +26,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { hitAtom } from '../config/results';
 import { isRelatedProducts, isFbtProducts } from '../config/config';
+import { hitsConfig } from '../config/hits';
 
 // Custom hooks
 import useScreenSize from '../hooks/useScreenSize';
@@ -42,6 +43,9 @@ const ProductDetails = () => {
   );
 
   const { tablet, mobile } = useScreenSize();
+
+  // Get hit attribute from config file
+  const { price, objectID, image, productName } = useRecoilValue(hitsConfig);
 
   return (
     <div
@@ -93,7 +97,7 @@ const ProductDetails = () => {
               <motion.img
                 whileHover={{ scale: 1.05 }}
                 transition={framerMotionTransition}
-                src={hit.full_url_image}
+                src={hit[image]}
                 alt=""
               />
             </motion.div>
@@ -113,13 +117,13 @@ const ProductDetails = () => {
               transition: { delay: 0.5, framerMotionTransition },
             }}
           >
-            <p className="brand">{hit.brand}</p>
-            <p className="name">{hit.name}</p>
-            <p className="color">{hit.colour}</p>
+            <p className="brand">{hit[brand]}</p>
+            <p className="name">{hit[productName]}</p>
+            <p className="color">{hit[colour]}</p>
             <div className="sizes">
               <p>Available size(s):</p>
               <motion.div className="sizeList">
-                {hit.sizeFilter.map((size, i) => (
+                {hit[sizeFilter].map((size, i) => (
                   <motion.div className="size" key={i}>
                     <p>{size}</p>
                   </motion.div>
@@ -136,7 +140,7 @@ const ProductDetails = () => {
               }}
               className="price"
             >
-              {hit.price}
+              {hit[price]}
             </motion.p>
           </motion.div>
         </div>
@@ -146,7 +150,7 @@ const ProductDetails = () => {
           <RelatedProducts
             recommendClient={recommendClient}
             indexName={indexName.index}
-            objectIDs={[hit.objectID]}
+            objectIDs={[hit[objectID]]}
             itemComponent={RelatedItem}
             maxRecommendations={5}
           />
@@ -155,7 +159,7 @@ const ProductDetails = () => {
           <FrequentlyBoughtTogether
             recommendClient={recommendClient}
             indexName={indexName.index}
-            objectIDs={[hit.objectID]}
+            objectIDs={[hit[objectID]]}
             itemComponent={RelatedItem}
             maxRecommendations={5}
           />

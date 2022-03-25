@@ -36,14 +36,14 @@ const Hit = ({ hit }) => {
         navigate(`/search/${hit[objectID]}`);
       }}
     >
-      <motion.div className="srpItem__img">
+      <motion.div className="srpItem__imgWrapper">
         <motion.img
           whileHover={{ scale: 1.1 }}
           transition={framerMotionTransition}
           src={hit[image]}
           alt={hit[category]}
         />
-        <div className="srpItem__img__heart">
+        <div className="srpItem__imgWrapper__heart">
           <Heart />
         </div>
       </motion.div>
