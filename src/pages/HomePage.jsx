@@ -1,3 +1,6 @@
+// This is the homepage, which you see when you first visit the site.
+// By default it contains some banners and carousels
+
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
 import { framerMotionPage } from '../config/config';
@@ -30,7 +33,6 @@ const HomePage = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-
       <AnimatePresence>
         {/* Loads federated search if isFederated is true */}
         {isFederated && <FederatedSearch />}

@@ -1,4 +1,4 @@
-import React from 'react';
+// This is for building the stats info that is displayed above the items in the search results page
 
 import { connectStats } from 'react-instantsearch-dom';
 
@@ -24,8 +24,3 @@ const Stats = ({ processingTimeMS, nbHits, nbSortedHits, areHitsSorted }) => (
 );
 
 export const CustomStats = connectStats(Stats);
-
-// nbSortedHits.toLocaleString
-// nbHits.toLocaleString()
-// processingTimeMS.toLocaleString()
-//

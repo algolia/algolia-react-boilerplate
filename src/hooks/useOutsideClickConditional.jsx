@@ -1,15 +1,12 @@
-import { useEffect, useState } from 'react';
+// This is for closing federated search window when clicking outside of the modal
+
+import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { isPersonaMenuOpen } from '../config/header';
 
-const useOutsideClickConditional = (
-  ref,
-  optionalParameter1,
-  // optionalParameter2,
-  callback
-) => {
-  optionalParameter1 = optionalParameter1 || null;
-  // optionalParameter2 = optionalParameter2.current || null;
+const useOutsideClickConditional = (ref, optionalParameter1, callback) => {
+  optionalParameter1 ||= null;
+
   const isPersonaOpen = useRecoilValue(isPersonaMenuOpen);
 
   const handleClick = (e) => {

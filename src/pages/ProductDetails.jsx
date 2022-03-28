@@ -1,3 +1,6 @@
+// Page for Product details, after clicking on an item from search
+// It contains both Recommend components
+
 // Recommend
 import {
   RelatedProducts,
@@ -11,7 +14,6 @@ import { framerMotionPage, framerMotionTransition } from '../config/config';
 
 // Import components
 import { ChevronLeft } from '../assets/svg/SvgIndex';
-import HomeCarousel from '../components/carousels/HomeCarousel';
 import RelatedItem from '../components/recommend/RelatedProducts';
 
 // Algolia search client

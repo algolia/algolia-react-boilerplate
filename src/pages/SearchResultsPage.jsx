@@ -1,3 +1,7 @@
+// Page for displaying search results
+// Includes functionality for banners, query suggestions, noresults
+// It also renders different search results components depending on screen size
+
 // import Algolia
 import algoliasearch from 'algoliasearch/lite';
 

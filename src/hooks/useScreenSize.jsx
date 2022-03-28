@@ -1,3 +1,5 @@
+// This is for defining the size of the window, for responsive design
+
 import { useState, useEffect } from 'react';
 
 const useScreenSize = () => {
