@@ -28,15 +28,13 @@ const Loader = () => {
               y2="-0.407625"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0.00782583" stop-color="#00AEFF" />
-              <stop offset="0.953125" stop-color="#AD00FF" />
+              <stop offset="0.00782583" stopColor="#00AEFF" />
+              <stop offset="0.953125" stopColor="#AD00FF" />
             </linearGradient>
           </defs>
         </svg>
       </div>
-      <div className="loader__bar">
-        <div className="loader__bar-loading"></div>
-      </div>
+      <div className="loader__bar"></div>
     </div>
   );
 };

@@ -75,3 +75,11 @@ h3 {
 .srp-container, .srp-container-mobile {
   margin-top: 14rem;
 }
+
+.hidden{
+  @include hidden;
+}
+
+.visible{
+  @include visible
+}

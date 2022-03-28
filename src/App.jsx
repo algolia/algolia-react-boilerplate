@@ -36,7 +36,8 @@ const App = () => {
       <InstantSearch searchClient={search} indexName={indexName.index}>
         <CustomStateResults />
         <Router>
-          {isLoaded ? <Main setIsLoaded={setIsLoaded} /> : <Loader />}
+          {isLoaded === false && <Loader isLoaded={isLoaded} />}
+          <Main isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
         </Router>
       </InstantSearch>
     </RecoilRoot>

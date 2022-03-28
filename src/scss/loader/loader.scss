@@ -4,14 +4,19 @@
 display: flex;
 justify-content: center;
 align-items: center;
-height: 100vh;
-width: 20%;
+height: 100%;
+width: 100%;
 margin: 0 auto;
 flex-direction: column;
 gap: 1rem;
+position: absolute;
+top: 0;
+left: 0;
+z-index: 999;
 
-.loader__svgWp{
-
+&__svgWp{
+    max-width: 20%;
+    margin: 0 auto;
     svg{
         width: 100%;
         animation:  3s ease-in-out 0s forwards fadeOut; 
@@ -19,7 +24,7 @@ gap: 1rem;
 }
 
     &__bar{
-        width: 100%;
+        width: 30%;
         margin: 0 auto;
         height: 3px;
         border-radius: 1rem;
@@ -33,12 +38,15 @@ gap: 1rem;
     0%{
  
         transform: scaleX(0);
+        opacity: 1;
 
     }
+    95%{
+        opacity: 1;
+    }
     100%{
-   
-        transform: scaleX(100%);
-        
+        transform: scaleX(100%); 
+        opacity: 0;
     }
     
 }

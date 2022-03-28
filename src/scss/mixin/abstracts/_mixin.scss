@@ -392,3 +392,17 @@
     transition: 0.3s ease-in-out;
   }
 }
+
+@mixin visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    // display: block;
+}
+
+@mixin hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+    // display: none;
+}

@@ -15,17 +15,11 @@ import SearchResultsPage from './pages/SearchResultsPage';
 import ProductDetails from './pages/ProductDetails';
 import Footer from './components/footer/Footer';
 
-export const Main = ({ setIsLoaded }) => {
+export const Main = ({ isLoaded, setIsLoaded }) => {
   const location = useLocation();
 
-  //check is component is mounted
-  const isMounted = useIsMounted();
-  if (isMounted()) {
-    setIsLoaded(true);
-  }
-
   return (
-    <>
+    <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
       <Header />
       <AnimatePresence initial={true} exitBeforeEnter>
         <Routes key={location.pathname} location={location}>
@@ -35,6 +29,6 @@ export const Main = ({ setIsLoaded }) => {
         </Routes>
       </AnimatePresence>
       <Footer />
-    </>
+    </div>
   );
 };
