@@ -16,7 +16,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 // Import Persona State from recoil
 import { personaSelectedAtom } from '../../../config/header';
 
-import { configAtom } from '../../../config/config';
+import { configAtom, isStats, isInjectedHits } from '../../../config/config';
 import { queryAtom } from '../../../config/searchbox';
 
 // Import Components
@@ -33,7 +33,7 @@ import { InjectedHits } from '../../../components/searchresultpage/injected-hits
 import FacetsMobile from '../../facets/facetsMobile/FacetsMobile';
 import { ChevronRight, ChevronLeft } from '../../../assets/svg/SvgIndex';
 
-import { indexName, indexInfluencer } from '../../../config/config';
+import { indexName, indexInfluencer } from '../../../config/appConfig';
 
 // Import Config File
 import { customDataByType } from '../../../utils';
@@ -46,13 +46,10 @@ const SrpMobile = () => {
   const queryState = useRecoilValue(queryAtom);
 
   // Define Stat Const
-  const stats = config.stats.value;
-
-  // Import config for injected content eg. Sales card
+  const stats = useRecoilValue(isStats);
   const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = config.hitsPerPage.numberInjected;
-  const bannerDisplay = config.bannerSrp.value;
-  const injectedValue = config.injectedHits.value;
+  const injectedValue = useRecoilValue(isInjectedHits);
 
   // Define Price Sort By
   const priceSortBy = config.sortBy.value;

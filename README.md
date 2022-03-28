@@ -152,10 +152,16 @@ In order to configure Category Pages (Add or Remove) go in config > header.js. F
 
 [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/)
 
+<<<<<<< HEAD
 The user stories : - Younger male 'Stephen James', likes Basketball and he lives in NYC.
 -Likes **Sneakers**, size 24, also likes **tracksuit**
+=======
+The user stories : 
+   - Younger male 'Stephen James', likes Basketball and he lives in NYC.
+      -Likes **Sneakers**, size 24, also likes **tracksuit**
+>>>>>>> a6155f80477fcf220c463bdb9746b76cbe482c49
 
-    - Older female: 'Elizabeth Aniston', likes fashion and she lives in Paris.
+   - Older female: 'Elizabeth Aniston', likes fashion and she lives in Paris.
       -Likes **black** dresses, size M, also likes blue jeans
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 💉 InjectedContent</h3>

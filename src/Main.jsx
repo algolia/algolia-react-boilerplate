@@ -11,12 +11,11 @@ import SearchResultsPage from './pages/SearchResultsPage';
 import ProductDetails from './pages/ProductDetails';
 import Footer from './components/footer/Footer';
 
-export const Main = () => {
-  // hook to help describe the current location for routing
+export const Main = ({ isLoaded }) => {
   const location = useLocation();
 
   return (
-    <>
+    <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
       <Header />
       <AnimatePresence initial={true} exitBeforeEnter>
         <Routes key={location.pathname} location={location}>
@@ -27,6 +26,6 @@ export const Main = () => {
         </Routes>
       </AnimatePresence>
       <Footer />
-    </>
+    </div>
   );
 };

@@ -12,8 +12,6 @@ import HeaderMobile from './components/HeaderMobile';
 const Header = () => {
   // Handle screen sizing & responsiveness with this hook
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
-
-  console.log('render');
   // Handle sticky Header
   const elementRef = useRef(null);
   const sticky = useStickyHeader(elementRef);

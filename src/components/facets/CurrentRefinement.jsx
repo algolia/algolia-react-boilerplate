@@ -2,53 +2,120 @@
 // Component that renders the Current Refinements (icons above the products)
 
 // Recoil State
-import { configAtom } from '../../config/config';
-import { useRecoilState } from 'recoil';
-
-// Algolia functionality
 import { connectCurrentRefinements } from 'react-instantsearch-dom';
+import { useRecoilValue } from 'recoil';
 
-const CurrentRefinements = ({ items, refine, createURL }) => (
-  <ul className="refinement-container__refinements">
-    {items.map((item) => {
-      if (item.attribute.includes('price')) {
-        return (
-          <li key={item.label}>
-            {/* If there are nested items, render them into the component */}
-            {item.items ? (
-              <>
-                <ul>
-                  {item.items.map((nested) => (
-                    <li key={nested.label}>
-                      <a
-                        href={createURL(nested.value)}
-                        onClick={(event) => {
-                          event.preventDefault();
-                          refine(nested.value);
-                        }}
-                      >
-                        {nested.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            ) : (
-              // Otherwise, just render the items
-              <a
-                href={createURL(item.value)}
-                onClick={(event) => {
-                  event.preventDefault();
-                  refine(item.value);
-                }}
-              >
-                {/* {item.label.replace(item.attribute, 'Between')} */}
-                {displayPrice(item)}
-              </a>
-            )}
-          </li>
-        );
-      } else {
+// import config file for state of facets
+import { currency, configAtom } from '../../config/config';
+import { hitsConfig } from '../../config/hits';
+
+const displayPrice = (i, currencyValue, refinementPrice) => {
+  const moreThanValue = refinementPrice.moreThan;
+  const lessThanValue = refinementPrice.lessThan;
+  // Split the label into an array to work on split
+  const arraySplitLabel = i.label.replace(`<= ${i.attribute}`, '').split(' ');
+  if (
+    i.label.includes(i.currentRefinement.max) &&
+    !i.label.includes(i.currentRefinement.min)
+  ) {
+    return `${lessThanValue} ${arraySplitLabel[2]} ${currencyValue}`;
+  }
+  if (
+    i.label.includes(i.currentRefinement.min) &&
+    !i.label.includes(i.currentRefinement.max)
+  ) {
+    return `${moreThanValue} ${arraySplitLabel[0]} ${currencyValue}`;
+  }
+  return (
+    `${arraySplitLabel[0]} ${currencyValue} ` +
+    `-` +
+    ` ${arraySplitLabel[3]} ${currencyValue}`
+  );
+};
+
+const displayColor = (i) => {
+  const newColorRefinement = i.split(';')[0];
+  return newColorRefinement;
+};
+
+const CurrentRefinements = ({ items, refine, createURL }) => {
+  const currencyValue = useRecoilValue(currency);
+  const { refinementPrice } = useRecoilValue(configAtom);
+  const { colourHexa } = useRecoilValue(hitsConfig);
+  return (
+    <ul className="refinement-container__refinements">
+      {items.map((item) => {
+        if (item.attribute.includes('price')) {
+          return (
+            <li key={item.label}>
+              {item.items ? (
+                <>
+                  <ul>
+                    {item.items.map((nested) => (
+                      <li key={nested.label}>
+                        <a
+                          href={createURL(nested.value)}
+                          onClick={(event) => {
+                            event.preventDefault();
+                            refine(nested.value);
+                          }}
+                        >
+                          {nested.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a
+                  href={createURL(item.value)}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    refine(item.value);
+                  }}
+                >
+                  {displayPrice(item, currencyValue, refinementPrice)}
+                </a>
+              )}
+            </li>
+          );
+        }
+        if (item.attribute.includes(colourHexa)) {
+          return (
+            <li key={item.label}>
+              {item.items ? (
+                <>
+                  <ul>
+                    {item.items.map((nested) => (
+                      <li key={nested.label}>
+                        <a
+                          href={createURL(nested.value)}
+                          onClick={(event) => {
+                            event.preventDefault();
+                            refine(nested.value);
+                          }}
+                        >
+                          {displayColor(nested.label)}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a
+                  href={createURL(item.value)}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    refine(item.value);
+                  }}
+                >
+                  {displayColor(item)}
+                </a>
+              )}
+            </li>
+          );
+        }
+
         return (
           <li key={item.label}>
             {item.items ? (
@@ -82,49 +149,8 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
             )}
           </li>
         );
-      }
-    })}
-  </ul>
-);
-
-// Component to render price slider
-const displayPrice = (i) => {
-  const [config] = useRecoilState(configAtom);
-  const currency = config.currency.value;
-  if (
-    i.label.includes(i.currentRefinement.max) &&
-    !i.label.includes(i.currentRefinement.min)
-  ) {
-    return (
-      'Less than' +
-      ' ' +
-      i.label.replace(`<= ${i.attribute}`, '').split(' ')[2] +
-      ' ' +
-      currency
-    );
-  }
-  if (
-    i.label.includes(i.currentRefinement.min) &&
-    !i.label.includes(i.currentRefinement.max)
-  ) {
-    return (
-      'More than' +
-      ' ' +
-      i.label.replace(`<= ${i.attribute}`, '').split(' ')[0] +
-      ' ' +
-      currency
-    );
-  }
-  return (
-    i.label.replace(`<= ${i.attribute}`, '').split(' ')[0] +
-    ' ' +
-    currency +
-    ' ' +
-    '-' +
-    ' ' +
-    i.label.replace(`<= ${i.attribute}`, '').split(' ')[3] +
-    ' ' +
-    currency
+      })}
+    </ul>
   );
 };
 

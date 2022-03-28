@@ -1,4 +1,6 @@
-// Algolia related imports
+import { useState, useEffect } from 'react';
+
+// Algolia import
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch } from 'react-instantsearch-dom';
 
@@ -12,26 +14,32 @@ import { RecoilRoot } from 'recoil';
 import './scss/index.scss';
 
 // application state from config file
-// eslint-disable-next-line import/order
-import { searchClient, indexName } from './config/config';
+import { searchClient, indexName } from './config/appConfig';
 
 // Import Components
+import Loader from './components/loader/Loader';
 import { Main } from './Main.jsx';
 
 // Allows logging and manipulation of algolia results etc.
 import CustomStateResults from './components/stateResults/stateResults';
 
 const App = () => {
-
-  // instantiate the algolia API client
+  const [isLoaded, setIsLoaded] = useState(false);
   const search = algoliasearch(searchClient.appID, searchClient.APIKey);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 3000);
+  }, []);
 
   return (
     <RecoilRoot>
       <InstantSearch searchClient={search} indexName={indexName.index}>
         <CustomStateResults />
         <Router>
-          <Main />
+          {isLoaded === false && <Loader isLoaded={isLoaded} />}
+          <Main isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
         </Router>
       </InstantSearch>
     </RecoilRoot>

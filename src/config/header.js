@@ -25,19 +25,17 @@ export const linksHeader = atom({
   ], // default value (aka initial value)
 });
 
-
 export const personaConfig = [
-  
-  { value: "", label: 'Neutral'},
+  { value: '', label: 'Neutral' },
   {
-    value: "stephen_james",
+    value: 'stephen_james',
     label: 'Stephen',
   },
   {
-    value: "elizabeth_aniston",
-    label: "Elizabeth",
+    value: 'elizabeth_aniston',
+    label: 'Elizabeth',
   },
-]
+];
 
 // Styles for dropdwon
 export const styles = {
@@ -112,7 +110,6 @@ export const styles = {
     color: 'black',
   }),
 };
-
 
 export const personaSelectedAtom = atom({
   key: 'personaSelected', // unique ID (with respect to other atoms/selectors)

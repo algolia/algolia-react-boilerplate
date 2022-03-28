@@ -29,7 +29,7 @@ const CategoryItems = ({ items }) => {
               key={hit.label}
               onClick={() => {
                 navigate('/search', {
-                  state: `${config.federatedCategory.categoryInFederated}:"${hit.label}"`,
+                  state: `${config.categories.attribute}:"${hit.label}"`,
                 });
               }}
             >

@@ -11,17 +11,21 @@ import { useRecoilValue } from 'recoil';
 // components import
 import CustomHomeBanners from '../components/banners/HomeBanners';
 import FederatedSearch from '../components/federatedSearch/FederatedSearch';
+
+// should federated search & carousel be shown or not
+import {
+  isFederatedAtom,
+  carouselConfig,
+  isCarouselAtom,
+} from '../config/config';
+
 import HomeCarousel from '../components/carousels/HomeCarousel';
-
-// should federated search be shown or not
-import { isFederatedAtom } from '../config/config';
-
-// carousels to show on the homepage
-import { carouselConfig } from '../config/config';
 
 const HomePage = () => {
   // Boolean value which determines if federated search is shown or not, default is false
   const isFederated = useRecoilValue(isFederatedAtom);
+
+  const isCarousel = useRecoilValue(isCarouselAtom);
 
   return (
     // Framer motion wrapper
@@ -41,17 +45,16 @@ const HomePage = () => {
       {/* Load custom banners */}
       <CustomHomeBanners />
 
-      {/* Loops over carousels defined in config */}
-      {carouselConfig.map((carousel, i) => {
-        return (
-          // Loads a carousel given a refinement attributes and a title to display
-          <HomeCarousel
-            key={i}
-            attribute={carousel.attribute}
-            title={carousel.title}
-          />
-        );
-      })}
+      {isCarousel &&
+        carouselConfig.map((carousel, i) => {
+          return (
+            <HomeCarousel
+              key={i}
+              attribute={carousel.attribute}
+              title={carousel.title}
+            />
+          );
+        })}
     </motion.div>
   );
 };

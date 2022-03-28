@@ -12,7 +12,7 @@ import { configAtom } from '../../../config/config';
 import { queryAtom } from '../../../config/searchbox';
 
 //Import config for federatedSearch
-import { isFederatedAtom } from '../../../config/config';
+import { isFederatedAtom, isVoiceSearch } from '../../../config/config';
 
 // Import SearchBox
 // eslint-disable-next-line import/order
@@ -26,11 +26,8 @@ import Navigation from './Navigation';
 const HeaderLaptop = () => {
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(isFederatedAtom);
-  // Import state from the voice search
-  const [value] = useRecoilState(configAtom);
-
   // Define value to display voiceSearch
-  const displayVoiceSearch = value.voiceSearch.value;
+  const displayVoiceSearch = useSetRecoilState(isVoiceSearch);
 
   return (
     <div className="container">

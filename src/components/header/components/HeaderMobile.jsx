@@ -6,16 +6,16 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Recoil Header State
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import Config for the header
-import { configAtom } from '../../../config/config';
+// import { configAtom } from '../../../config/config';
 
 // eslint-disable-next-line import/order
 import { queryAtom } from '../../../config/searchbox';
 
-// Import config for federatedSearch
-import { isFederatedAtom } from '../../../config/config';
+//Import config for federatedSearch
+import { isFederatedAtom, isVoiceSearch } from '../../../config/config';
 
 // Import Screen Size Determining Hook
 import useScreenSize from '../../../hooks/useScreenSize';
@@ -39,11 +39,8 @@ const HeaderMobile = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Import state from the voice search
-  const [value] = useRecoilState(configAtom);
-
   // Define value to display voiceSearch
-  const displayVoiceSearch = value.voiceSearch.value;
+  const displayVoiceSearch = useRecoilValue(isVoiceSearch);
 
   return (
     <div className="container container-mobile">

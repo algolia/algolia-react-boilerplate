@@ -17,7 +17,7 @@ import { ChevronLeft } from '../assets/svg/SvgIndex';
 import RelatedItem from '../components/recommend/RelatedProducts';
 
 // Algolia search client
-import { searchClient, indexName } from '../config/config';
+import { searchClient, indexName } from '../config/appConfig';
 
 // React router import
 import { useNavigate } from 'react-router-dom';
@@ -25,6 +25,8 @@ import { useNavigate } from 'react-router-dom';
 // Recoil import
 import { useRecoilValue } from 'recoil';
 import { hitAtom } from '../config/results';
+import { isRelatedProducts, isFbtProducts } from '../config/config';
+import { hitsConfig } from '../config/hits';
 
 // Custom hooks
 import useScreenSize from '../hooks/useScreenSize';
@@ -32,6 +34,10 @@ import useScreenSize from '../hooks/useScreenSize';
 const ProductDetails = () => {
   // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
+
+  const isRelatedProductsValue = useRecoilValue(isRelatedProducts);
+  const isFbtProductsValue = useRecoilValue(isFbtProducts);
+
   // navigate is used by react router
   const navigate = useNavigate();
 
@@ -43,6 +49,9 @@ const ProductDetails = () => {
 
   const { tablet, mobile } = useScreenSize();
 
+  // Get hit attribute from config file
+  const { price, objectID, image, productName } = useRecoilValue(hitsConfig);
+
   return (
     // Product Display Page parent container, including attributes for framer motion
     <div
@@ -53,9 +62,15 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-      <div className="pdp__wrapper pdp-mobile__wrapper">
+      <div
+        className={`${
+          mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
+        }`}
+      >
         <div
-          className="pdp__backBtn pdp-mobile__backBtn "
+          className={`${
+            mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+          }`}
           onClick={() => navigate(-1)}
         >
           <ChevronLeft />
@@ -69,7 +84,7 @@ const ProductDetails = () => {
             opacity: 1,
             transition: { framerMotionTransition },
           }}
-          className="pdp__left pdp-mobile__left"
+          className={`${mobile || tablet ? 'pdp-mobile__left' : 'pdp__left'}`}
         >
           <motion.div
             className="container"
@@ -88,13 +103,15 @@ const ProductDetails = () => {
               <motion.img
                 whileHover={{ scale: 1.05 }}
                 transition={framerMotionTransition}
-                src={hit.full_url_image}
+                src={hit[image]}
                 alt=""
               />
             </motion.div>
           </motion.div>
         </motion.div>
-        <div className="pdp__right pdp-mobile__right">
+        <div
+          className={`${mobile || tablet ? 'pdp-mobile__right' : 'pdp__right'}`}
+        >
           <motion.div
             className="pdp__right__infos"
             initial={{
@@ -106,14 +123,14 @@ const ProductDetails = () => {
               transition: { delay: 0.5, framerMotionTransition },
             }}
           >
-            <p className="brand">{hit.brand}</p>
-            <p className="name">{hit.name}</p>
-            <p className="color">{hit.colour}</p>
+            <p className="brand">{hit[brand]}</p>
+            <p className="name">{hit[productName]}</p>
+            <p className="color">{hit[colour]}</p>
             <div className="sizes">
               <p>Available size(s):</p>
               <motion.div className="sizeList">
-                {hit.sizeFilter.map((size) => (
-                  <motion.div className="size">
+                {hit[sizeFilter].map((size, i) => (
+                  <motion.div className="size" key={i}>
                     <p>{size}</p>
                   </motion.div>
                 ))}
@@ -129,27 +146,31 @@ const ProductDetails = () => {
               }}
               className="price"
             >
-              {hit.price}
+              {hit[price]}
             </motion.p>
           </motion.div>
         </div>
       </div>
       {/* Render both Recommend components- Related Products and Frequently Bought Together */}
       <div className="recommend">
-        <RelatedProducts
-          recommendClient={recommendClient}
-          indexName={indexName.index}
-          objectIDs={[hit.objectID]}
-          itemComponent={RelatedItem}
-          maxRecommendations={5}
-        />
-        <FrequentlyBoughtTogether
-          recommendClient={recommendClient}
-          indexName={indexName.index}
-          objectIDs={[hit.objectID]}
-          itemComponent={RelatedItem}
-          maxRecommendations={5}
-        />
+        {isRelatedProductsValue && (
+          <RelatedProducts
+            recommendClient={recommendClient}
+            indexName={indexName.index}
+            objectIDs={[hit[objectID]]}
+            itemComponent={RelatedItem}
+            maxRecommendations={5}
+          />
+        )}
+        {isFbtProductsValue && (
+          <FrequentlyBoughtTogether
+            recommendClient={recommendClient}
+            indexName={indexName.index}
+            objectIDs={[hit[objectID]]}
+            itemComponent={RelatedItem}
+            maxRecommendations={5}
+          />
+        )}
       </div>
     </div>
   );
