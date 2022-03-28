@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 // Framer-Motion
 import { AnimatePresence } from 'framer-motion';
 
 // React router
 import { Routes, Route, useLocation } from 'react-router-dom';
-
-//Import custom Hook
-import useIsMounted from './hooks/useIsMounted';
 
 // Import Pages
 import Header from './components/header/Header';
@@ -15,9 +12,8 @@ import SearchResultsPage from './pages/SearchResultsPage';
 import ProductDetails from './pages/ProductDetails';
 import Footer from './components/footer/Footer';
 
-export const Main = ({ isLoaded, setIsLoaded }) => {
+export const Main = ({ isLoaded }) => {
   const location = useLocation();
-
   return (
     <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
       <Header />

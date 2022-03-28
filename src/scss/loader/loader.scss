@@ -36,10 +36,8 @@ z-index: 999;
 
 @keyframes scale {
     0%{
- 
         transform: scaleX(0);
         opacity: 1;
-
     }
     95%{
         opacity: 1;
@@ -60,6 +58,5 @@ z-index: 999;
     100%{
         opacity: 0;
         
-    }
-    
+    }    
 }
