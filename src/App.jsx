@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 // Algolia import
 import algoliasearch from 'algoliasearch/lite';
 import React from 'react';
@@ -17,16 +18,26 @@ import './scss/index.scss';
 import { searchClient, indexName } from './config/appConfig';
 
 // Import Components
+import Loader from './components/loader/Loader';
 import { Main } from './Main.jsx';
 
 const App = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const search = algoliasearch(searchClient.appID, searchClient.APIKey);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 3000);
+  }, []);
+
   return (
     <RecoilRoot>
       <InstantSearch searchClient={search} indexName={indexName.index}>
         <CustomStateResults />
         <Router>
-          <Main />
+          {isLoaded === false && <Loader isLoaded={isLoaded} />}
+          <Main isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
         </Router>
       </InstantSearch>
     </RecoilRoot>
