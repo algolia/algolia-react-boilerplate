@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <header className="header">
       {(laptop || laptopXS) && <HeaderLaptop />}
-      {(tablet || mobile) && <HeaderMobile />}
+      {(tablet || mobile) && <HeaderMobile tablet={tablet} mobile={mobile} />}
     </header>
   );
 };
