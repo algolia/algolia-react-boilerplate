@@ -28,7 +28,7 @@ export const linksHeader = atom({
 
 // Create a new file for persona config
 export const personaConfig = [
-  { value: '', label: 'Neutral' },
+  { value: '', label: 'Persona' },
   {
     value: 'stephen_james',
     label: 'Stephen',
@@ -50,7 +50,7 @@ export const styles = {
     border: 'none',
     display: 'flex',
     alignItems: 'center',
-    gap: '1rem',
+    gap: '0.5rem',
     width: '6rem',
     cursor: 'pointer',
   }),
@@ -110,6 +110,8 @@ export const styles = {
   }),
   dropdownIndicator: () => ({
     color: 'black',
+    display: 'flex',
+    alignItems: 'center'
   }),
 };
 
