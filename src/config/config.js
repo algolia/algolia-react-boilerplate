@@ -161,6 +161,8 @@ export const hierarchicalFacet = {
 // ------------------------------------------
 // Hits and Framer Motion
 // ------------------------------------------
+
+// MOVE THAT TO NEW FILE ABOUT ANIMATION IN CONFIF
 export const framerMotionHits = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
