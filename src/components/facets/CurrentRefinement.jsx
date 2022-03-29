@@ -50,7 +50,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
             <li key={item.label}>
               {item.items ? (
                 <>
-                  <ul>
+                  <ul className="refinement-container__refinementsInner">
                     {item.items.map((nested) => (
                       <li key={nested.label}>
                         <a
@@ -85,7 +85,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
             <li key={item.label}>
               {item.items ? (
                 <>
-                  <ul>
+                  <ul className="refinement-container__refinementsInner">
                     {item.items.map((nested) => (
                       <li key={nested.label}>
                         <a
@@ -120,7 +120,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
           <li key={item.label}>
             {item.items ? (
               <>
-                <ul>
+                <ul className="refinement-container__refinementsInner">
                   {item.items.map((nested) => (
                     <li key={nested.label}>
                       <a
