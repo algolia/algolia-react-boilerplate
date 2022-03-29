@@ -1,22 +1,18 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
 
-// Import Debounce
-import debounce from 'lodash.debounce';
-
-import { memo, useMemo, useEffect } from 'react';
+import { memo } from 'react';
 
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
 
 // Import navigate function to route to results page on search submit
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 // Import Recoil
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 // Import SVG from file as a component
-// eslint-disable-next-line import/namespace
 import { Glass } from '../../assets/svg/SvgIndex';
 import SearchInCategory from './components/SearchInCategory';
 // Import Config for recoil from file as a component
@@ -24,7 +20,7 @@ import { isFederatedAtom, searchBoxAtom } from '../../config/config';
 import {
   queryAtom,
   simplePlaceholderAtom,
-  SearchInCategoryConfig,
+  isSearchInCategory,
 } from '../../config/searchbox';
 
 // Custom Hooks
@@ -46,19 +42,6 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
     refine(query);
   };
 
-  useEffect(() => {
-    return () => {
-      // Remove side effect
-      debouncedRefine.cancel();
-    };
-  });
-
-  // Debounce during search if you want to change the reactivity change number 250
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // const debouncedRefine = useCallback(debounce(refineFunction, 50), []);
-  const debouncedRefine = useMemo(() => {
-    return debounce(refineFunction, 50);
-  }, []);
   return (
     <div className="searchbox">
       <form
@@ -84,9 +67,7 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
             refineFunction(event.currentTarget.value);
           }}
         />
-        {state && SearchInCategoryConfig.isSearchInCategory && (
-          <SearchInCategory state={state} />
-        )}
+        {state && isSearchInCategory && <SearchInCategory state={state} />}
         <Glass />
       </form>
     </div>

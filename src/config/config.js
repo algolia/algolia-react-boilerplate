@@ -138,26 +138,6 @@ const refinementPrice = {
 };
 
 // ------------------------------------------
-// Carousel Config
-// ------------------------------------------
-
-export const isCarouselAtom = atom({
-  key: 'isCarouselAtom', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
-});
-
-export const carouselConfig = [
-  {
-    attribute: "brand:'polo ralph lauren'",
-    title: 'Ralph Lauren Products',
-  },
-  {
-    attribute: "category:'pullover'",
-    title: 'Our PullOver',
-  },
-];
-
-// ------------------------------------------
 // Sort By Config
 // ------------------------------------------
 
@@ -181,6 +161,8 @@ export const hierarchicalFacet = {
 // ------------------------------------------
 // Hits and Framer Motion
 // ------------------------------------------
+
+// MOVE THAT TO NEW FILE ABOUT ANIMATION IN CONFIF
 export const framerMotionHits = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },

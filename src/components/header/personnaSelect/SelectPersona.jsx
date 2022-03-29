@@ -1,12 +1,14 @@
 // For displaying the select widget for choosing a persona in personalisation
 
+// Check and try to create a popup or something else
+
 import { memo } from 'react';
 
 // Import the Select widget (https://react-select.com/home)
 import Select from 'react-select';
 
 // Import Recoil for state management
-import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 // Import configuration
 import {
