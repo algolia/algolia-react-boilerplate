@@ -15,15 +15,13 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import configuration
 import { hitsConfig } from '../../config/hits';
-import { searchClient, indexName } from '../../config/appConfig';
+import { indexName } from '../../config/appConfig';
 import { hitAtom } from '../../config/results';
 
 import { framerMotionTransition } from '../../config/config';
 
 // Build the Carousel for use on the Homepage
-const HomeCarousel = ({ attribute, title }) => {
-  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
-
+const HomeCarousel = ({ attribute, title, search }) => {
   return (
     <div className="home-carousel">
       <InstantSearch indexName={indexName.index} searchClient={search}>
@@ -36,7 +34,9 @@ const HomeCarousel = ({ attribute, title }) => {
 
 // This carousel is used inside of HomeCarousel
 const Carousel = ({ hits, title }) => {
+  // Handle carousel effects when grabbing it
   const [width, setWidth] = useState(0);
+
   // Navigate is used by React Router
   const navigate = useNavigate();
 
@@ -44,7 +44,7 @@ const Carousel = ({ hits, title }) => {
   const hitState = useSetRecoilState(hitAtom);
   const { price, objectID, image, productName } = useRecoilValue(hitsConfig);
 
-  // For use by Framer Motion
+  // Used by Framer Motion
   const carousel = useRef();
   useEffect(() => {
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
@@ -60,6 +60,7 @@ const Carousel = ({ hits, title }) => {
       >
         {/* This div declares the parameters for the carousel dragging effect */}
         <motion.div
+          // ADD THAT TO NEW FILE ABOUT ANIMATION IN CONFIG
           drag="x"
           dragConstraints={{ right: 0, left: -width }}
           dragTransition={
@@ -79,12 +80,10 @@ const Carousel = ({ hits, title }) => {
           {hits.map((hit, i) => {
             return (
               <motion.div key={i} className="item">
-                <img src={hit[image]} alt={hit[objectID]} />
+                <img src={hit[image]} alt={hit[productName]} />
                 <div
                   className="item__infos"
                   onClick={() => {
-                    // set the global state for 'hit'
-                    hitState(hit);
                     // navigate to the product show page
                     navigate(`/search/${hit[objectID]}`);
                   }}

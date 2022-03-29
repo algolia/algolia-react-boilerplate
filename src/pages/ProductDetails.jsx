@@ -50,7 +50,8 @@ const ProductDetails = () => {
   const { tablet, mobile } = useScreenSize();
 
   // Get hit attribute from config file
-  const { price, objectID, image, productName, colour, sizeFilter, brand } =
+
+  const { price, objectID, image, productName, brand, sizeFilter, colour } =
     useRecoilValue(hitsConfig);
 
   return (

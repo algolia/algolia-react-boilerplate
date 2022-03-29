@@ -1,9 +1,14 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
 
+//Algolia's import
+import algoliasearch from 'algoliasearch/lite';
+
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
+
 import { framerMotionPage } from '../config/config';
+// change to import from '../config/animationConfig;
 
 // recoil import
 import { useRecoilValue } from 'recoil';
@@ -11,50 +16,57 @@ import { useRecoilValue } from 'recoil';
 // components import
 import CustomHomeBanners from '../components/banners/HomeBanners';
 import FederatedSearch from '../components/federatedSearch/FederatedSearch';
-
-// should federated search & carousel be shown or not
-import {
-  isFederatedAtom,
-  carouselConfig,
-  isCarouselAtom,
-} from '../config/config';
-
 import HomeCarousel from '../components/carousels/HomeCarousel';
+
+// should carousel be shown or not and config for carousel
+import { isCarouselAtom, carouselConfig } from '../config/carouselConfig';
+
+//  should federated search be shown or not
+import { isFederatedAtom } from '../config/config';
+import { searchClient } from '../config/appConfig';
 
 const HomePage = () => {
   // Boolean value which determines if federated search is shown or not, default is false
   const isFederated = useRecoilValue(isFederatedAtom);
-
   const isCarousel = useRecoilValue(isCarouselAtom);
+
+  // Used for carousel as props
+  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
 
   return (
     // Framer motion wrapper
     <motion.div
       className="homepage"
+      // initial state
       initial={framerMotionPage.initial}
+      // actual animation
       animate={framerMotionPage.animate}
+      // everything the animation needs to function
       variants={framerMotionPage}
+      // what to do when unmounted
       exit={framerMotionPage.exit}
+      // duration, smoothness etc.
       transition={framerMotionPage.transition}
     >
-      <AnimatePresence>
-        {/* Loads federated search if isFederated is true */}
-        {isFederated && <FederatedSearch />}
-      </AnimatePresence>
+      {isFederated && (
+        <AnimatePresence>
+          {/* Loads federated search if isFederated is true */}
+          <FederatedSearch />
+        </AnimatePresence>
+      )}
 
       {/* Load custom banners */}
       <CustomHomeBanners />
 
       {isCarousel &&
-        carouselConfig.map((carousel, i) => {
-          return (
-            <HomeCarousel
-              key={i}
-              attribute={carousel.attribute}
-              title={carousel.title}
-            />
-          );
-        })}
+        carouselConfig.map((carousel, i) => (
+          <HomeCarousel
+            key={i}
+            attribute={carousel.attribute}
+            title={carousel.title}
+            search={search}
+          />
+        ))}
     </motion.div>
   );
 };

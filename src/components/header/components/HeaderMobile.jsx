@@ -17,9 +17,6 @@ import { queryAtom } from '../../../config/searchbox';
 //Import config for federatedSearch
 import { isFederatedAtom, isVoiceSearch } from '../../../config/config';
 
-// Import Screen Size Determining Hook
-import useScreenSize from '../../../hooks/useScreenSize';
-
 // Import framer motion
 import { motion, AnimatePresence } from 'framer-motion';
 

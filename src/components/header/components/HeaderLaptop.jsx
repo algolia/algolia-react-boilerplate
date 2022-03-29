@@ -3,24 +3,18 @@
 // React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
-import { useRecoilState, useSetRecoilState } from 'recoil';
-
-// Import Config for the header
-import { configAtom } from '../../../config/config';
-
-// eslint-disable-next-line import/order
+import { useSetRecoilState } from 'recoil';
 import { queryAtom } from '../../../config/searchbox';
 
 //Import config for federatedSearch
 import { isFederatedAtom, isVoiceSearch } from '../../../config/config';
 
 // Import SearchBox
-// eslint-disable-next-line import/order
+// Rename customSearchbox
 import CustomSearchBoxSimple from '../../searchbox/SearchBox';
 
 // Import VoiceSearchComponent
 import CustomVoiceSearchComponent from '../../voicesearch/VoiceSearch';
-import SelectPersona from '../personnaSelect/SelectPersona';
 import Navigation from './Navigation';
 
 const HeaderLaptop = () => {
@@ -40,6 +34,7 @@ const HeaderLaptop = () => {
               federated(false);
             }}
           >
+            {/* Add possibility to change the Logo */}
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
               alt=""
