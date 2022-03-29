@@ -28,7 +28,7 @@ import {
 import { queryAtom } from '../../config/searchbox';
 
 // Import Persona State from recoil
-import { personaSelectedAtom } from '../../config/header';
+import { personaSelectedAtom } from '../../config/personaConfig';
 
 // hook import
 // Check if user is clecking outside an element

@@ -15,7 +15,7 @@ import {
   personaConfig,
   personaSelectedAtom,
   styles,
-} from '../../../config/header';
+} from '../../../config/personaConfig';
 
 const SelectPersona = () => {
   const setPersonaSelect = useSetRecoilState(personaSelectedAtom);

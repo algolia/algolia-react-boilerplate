@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { isPersonaMenuOpen } from '../config/header';
+import { isPersonaMenuOpen } from '../config/personaConfig';
 
 const useOutsideClickConditional = (ref, optionalParameter1, callback) => {
   optionalParameter1 ||= null;
