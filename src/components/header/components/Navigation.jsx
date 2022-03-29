@@ -24,26 +24,25 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
           : 'container__header-bottom__links'
       } `}
     >
-      {links.map((link) => {
-        return (
-          <li
-            key={link.url}
-            onClick={() => {
-              // Open the sub-menu if the link is hierarchical, otherwise run a search
-              if (link.link !== 'All') {
-                navigate(`/search`, {
-                  state: `${hierarchicalFacet.hierarchicalLvl0}:'${link.filter}'`,
-                });
-              } else {
-                navigate('/search');
-              }
-              setIsMenuOpen(false);
-            }}
-          >
-            <p>{link.link}</p>
-          </li>
-        );
-      })}
+      {links.map((link) => (
+        <li
+          key={link.url}
+          onClick={() => {
+            // Open the sub-menu if the link is hierarchical, otherwise run a search
+            if (link.name !== 'All') {
+              navigate(`/search`, {
+                state: `${hierarchicalFacet.hierarchicalLvl0}:'${link.filter}'`,
+              });
+            } else {
+              navigate('/search');
+            }
+            // Only used for Mobile view
+            setIsMenuOpen(false);
+          }}
+        >
+          <p>{link.name}</p>
+        </li>
+      ))}
       {/* Display the persona selection component */}
       <li>
         <SelectPersona />

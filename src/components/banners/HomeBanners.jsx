@@ -3,14 +3,15 @@
 // This page builds the various banners that are used on the Homepage
 
 // NB: we need React declared for the Fragments used here
-import React from 'react';
+import { Fragment } from 'react';
+// This component will be wrapped in connectQueryRules (https://www.algolia.com/doc/api-reference/widgets/query-rule-custom-data/react/#connector)
 import { connectQueryRules } from 'react-instantsearch-dom';
 
 // Imports from router
 import { Link } from 'react-router-dom';
 
-// This component renders a different banner based on the props passed to it
-// This component will be wrapped in connectQueryRules (https://www.algolia.com/doc/api-reference/widgets/query-rule-custom-data/react/#connector)
+// This component renders a different banner based on the props passed to it.
+//The props are passed through the Dashboard in rules section.
 const HomeBanners = ({ items }) => {
   return items.map(
     (
@@ -55,7 +56,7 @@ const HomeBanners = ({ items }) => {
       }
       if (type === 'HomeBannerThree') {
         return (
-          <React.Fragment key={index}>
+          <Fragment key={index}>
             <BannerThree
               imgUrl1={imgUrl1}
               title={title}
@@ -63,10 +64,10 @@ const HomeBanners = ({ items }) => {
               LinkButton1={LinkButton1}
               button1={button1}
             />
-          </React.Fragment>
+          </Fragment>
         );
       }
-      if (type === 'HomeBannerOne')
+      if (type === 'HomeBannerOne') {
         return (
           <div
             className="home-banner-container"
@@ -91,6 +92,7 @@ const HomeBanners = ({ items }) => {
             </div>
           </div>
         );
+      }
     }
   );
 };

@@ -2,6 +2,8 @@
 // Config Index and Search Client
 // ------------------------------------------
 
+// RENAME THAT FILE ALGOLIA CONFIG
+
 // Without Atom
 export const searchClient = {
   APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',

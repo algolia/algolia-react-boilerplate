@@ -11,6 +11,4 @@ export const queryAtom = atom({
 });
 
 // This remove the "Search in [CATEGORY]" from the searchbox
-export const SearchInCategoryConfig = {
-  isSearchInCategory: true,
-};
+export const isSearchInCategory = true;
