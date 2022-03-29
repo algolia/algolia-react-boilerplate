@@ -1,10 +1,12 @@
+// TODO: why is this NOT export default?
+
 // Import framer-motion for animation on hits
 import { motion } from 'framer-motion';
-import React from 'react';
+
 import { Highlight } from 'react-instantsearch-dom';
 
 import { Heart } from '../../assets/svg/SvgIndex';
-import { listItem } from '../../config/config';
+import { framerMotionTransition, framerMotionHits } from '../../config/config';
 
 // Recoil import
 import { hitAtom } from '../../config/results';
@@ -25,23 +27,28 @@ const Hit = ({ hit }) => {
   return (
     <motion.li
       layout
-      variants={listItem}
-      initial={listItem.initial}
-      exit={listItem.exit}
-      animate={listItem.animate}
-      transition={listItem.transition}
+      variants={framerMotionHits}
+      initial={framerMotionHits.initial}
+      exit={framerMotionHits.exit}
+      animate={framerMotionHits.animate}
+      transition={framerMotionHits.transition}
       className="srpItem"
       onClick={() => {
         hitState(hit);
         navigate(`/search/${hit[objectID]}`);
       }}
     >
-      <div className="srpItem__img">
-        <img src={hit[image]} alt={hit[category]} />
-        <div className="srpItem__img__heart">
+      <motion.div className="srpItem__imgWrapper">
+        <motion.img
+          whileHover={{ scale: 1.1 }}
+          transition={framerMotionTransition}
+          src={hit[image]}
+          alt={hit[category]}
+        />
+        <div className="srpItem__imgWrapper__heart">
           <Heart />
         </div>
-      </div>
+      </motion.div>
       <div className="srpItem__infos">
         <h3>
           <Highlight hit={hit} attribute={productName} />

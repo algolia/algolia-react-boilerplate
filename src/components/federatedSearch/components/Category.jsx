@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 // React Router import
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +29,7 @@ const CategoryItems = ({ items }) => {
               key={hit.label}
               onClick={() => {
                 navigate('/search', {
-                  state: `${config.federatedCategory.categoryInFederated}:"${hit.label}"`,
+                  state: `${config.categories.attribute}:"${hit.label}"`,
                 });
               }}
             >

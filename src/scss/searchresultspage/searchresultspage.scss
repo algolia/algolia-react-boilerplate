@@ -31,8 +31,17 @@
 // ------------------------------------------
 // Stats
 // ------------------------------------------
-.stats-infos {
-  @include stats($blue-algolia);
+
+.srp-container__stats-sort {
+  display: flex;
+  justify-content: space-between;
+  .stats-infos {
+    @include stats($blue-algolia);
+  }
+  select {
+    font-size: 0.9rem;
+    font-family: $main-font;
+  }
 }
 
 // ------------------------------------------
@@ -52,9 +61,10 @@
 .button-clear-refinement {
   background-color: $blue-algolia;
   color: $white-color;
-  padding: 0.5rem;
-  border-radius: 1rem;
   font-weight: 400;
+  padding: 0.3rem;
+  font-size: 0.8rem;
+  font-family: $main-font;
 }
 // ------------------------------------------
 // Pagination
@@ -73,9 +83,13 @@
   background-position: center;
   background-size: cover;
   width: 80%;
-  height: 80vh;
-  margin: 0 auto;
+  height: 70vh;
+  margin: 13rem auto;
   padding: 2rem 2rem;
+  &__infos {
+    position: absolute;
+    left: 1rem;
+  }
   &__titles {
     margin-bottom: 2rem;
     &__span {
@@ -105,5 +119,57 @@
         }
       }
     }
+  }
+}
+
+// ------------------------------------------
+// SRP Container Mobile & tablet
+// ------------------------------------------
+
+.srp-container-mobile {
+  width: 95%;
+  margin: 1rem auto;
+  display: flex;
+  gap: 3rem;
+  position: relative;
+
+  .srp-container__stats-sort {
+    margin: 1rem 0;
+  }
+
+  .srp-container__hits {
+    .ais-InfiniteHits {
+      .ais-InfiniteHits-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+
+  .facets-slider {
+    left: 1rem;
+    top: 3rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    display: flex;
+    position: absolute;
+    height: fit-content;
+    z-index: 999;
+    transition: 0.2s ease-in-out;
+
+    p {
+      font-size: 0.8rem;
+    }
+    svg {
+      // margin-top: 0.5rem;
+      width: 8px;
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+  .facets-slider-active {
+  }
+  .facets-slider-inactive {
   }
 }

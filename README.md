@@ -27,6 +27,55 @@ npx husky install
 
 🐶
 
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Structure</h2>
+
+Index.jsx
+
+- entry point to the application
+- renders App.js into #root element in DOM
+- #root is defined in index.html
+
+App.jsx
+
+- called by Index.jsx
+- wraps child components with key functionality including:
+  - [React router](https://reactrouter.com/docs/en/v6/getting-started/overview)
+  - [Algolia instantsearch](https://github.com/algolia/react-instantsearch)
+  - [Recoil state management](https://recoiljs.org/)
+- calls Main.jsx
+
+Main.jsx
+
+- contains static elements like header and footer (found in `./components`)
+- contains routes for each page (found in `./pages`)
+- wraps pages in AnimatePresence from [Framer Motion](https://www.framer.com/docs/animate-presence/), which helps animate loading of pages
+- it loads a single route (page), depending on the current URL
+
+Homepage.jsx
+
+- if federated search is true in configuration, loads federated search
+- loads a banners component from `./components`
+- maps over carousels from configuration and renders each carousel
+- wraps all components in animations from framer-motion
+
+SearchResultsPage.jsx
+
+- called by Main.jsx for route `/search`
+- loads components related to results
+
+ProductDetails.jsx
+
+- Display attributes of an individual product
+  - Image
+  - Brand
+  - Name
+  - Colour
+  - Size
+  - Price
+- Recommend components
+  - Related Products
+  - Frequently Bought Together
+
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">💻 State Manager</h3>
@@ -103,18 +152,24 @@ In order to configure Category Pages (Add or Remove) go in config > header.js. F
 
 [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/)
 
+<<<<<<< HEAD
+The user stories : - Younger male 'Stephen James', likes Basketball and he lives in NYC.
+-Likes **Sneakers**, size 24, also likes **tracksuit**
+=======
 The user stories : 
-    - Younger male 'Stephen James', likes Basketball and he lives in NYC.
+   - Younger male 'Stephen James', likes Basketball and he lives in NYC.
       -Likes **Sneakers**, size 24, also likes **tracksuit**
+>>>>>>> a6155f80477fcf220c463bdb9746b76cbe482c49
 
-    - Older female: 'Elizabeth Aniston', likes fashion and she lives in Paris.
+   - Older female: 'Elizabeth Aniston', likes fashion and she lives in Paris.
       -Likes **black** dresses, size M, also likes blue jeans
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 💉 InjectedContent</h3>
 
 [Magazine Layout](https://github.com/algolia/magazine-layout)
 
-Thanks to the work from the 'Front End Team', we customized their injected content about 2 rules, on for free returns always display, and the 2nd for 'Nike Products'. All its rules are modifiable in [Dashboard](https://www.algolia.com/apps/853MYZ81KY/rules/flagship_fashion).
+Thanks to the work from the 'Front End Team', we customized their injected content about 2 rules, one for free returns always display, and the 2nd for 'Nike Products'.
+All these rules are modifiable in [Dashboard](https://www.algolia.com/apps/853MYZ81KY/rules/flagship_fashion).
 You can modify, too an other index called 'flagship_fashion_influencers', it contains 2 influencers searchable, like the main index.
 
   <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Debounce</h3>

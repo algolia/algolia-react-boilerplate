@@ -163,8 +163,9 @@
 @mixin hits-individual($title-color, $price-color, $higlight-color, $shadow) {
   width: 100%;
   display: block;
-    &__img {
+    &__imgWrapper {
       position: relative;
+      overflow: hidden;
       img {
         width: 100%;
         position: relative;
@@ -326,4 +327,82 @@
   .rc-slider-handle-dragging {
     box-shadow: (0 0 0 3px $color-slider);
   }
+}
+
+
+// Hamburger menu
+@mixin hamburger-menu{
+  display: flex;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  height: fit-content;
+  flex-direction: column;
+  z-index: 999;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+  :nth-child(1){
+    transform: translateY(-0.2rem);
+  }
+  :nth-child(3){
+    transform: translateY(0.2rem);
+  }
+
+  &__line{
+    background-color: $blue-algolia;
+    height: 2px;
+    width: 1rem;
+  }
+}
+
+@mixin hamburger-menu-inactive{
+  transition: 0.3s ease-in-out;
+  :nth-child(1){
+    transform: rotateZ(0deg);
+    transform: translateY(-0.2rem);
+    transform-origin: center center;
+    transition: 0.3s ease-in-out;
+  }
+  :nth-child(2){
+    transform: rotateZ(0deg);
+    transform-origin: center center;
+    transition: 0.3s ease-in-out;
+  }
+  :nth-child(3){
+    opacity: 1;
+    transform: translateY(0.2rem);
+    transition: 0.3s ease-in-out;
+  }
+}
+
+@mixin hamburger-menu-active{
+  transition: 0.3s ease-in-out;
+  :nth-child(1){
+    transform: rotateZ(45deg) translateX(1px);
+    transform-origin: center center;
+    transition: 0.3s ease-in-out;
+  }
+  :nth-child(2){
+    transform: rotateZ(-45deg) translateX(1px);
+    transform-origin: center center;
+    transition: 0.3s ease-in-out;
+  }
+  :nth-child(3){
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+  }
+}
+
+@mixin visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    // display: block;
+}
+
+@mixin hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+    // display: none;
 }

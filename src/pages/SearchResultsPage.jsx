@@ -1,186 +1,105 @@
-import React, { useState, memo } from 'react';
+// Page for displaying search results
+// Includes functionality for banners, query suggestions, noresults
+// It also renders different search results components depending on screen size
+
+// import Algolia
+import algoliasearch from 'algoliasearch/lite';
+
+// import React functionality
+import { memo } from 'react';
+
 // eslint-disable-next-line import/order
 import {
-  Pagination,
   Configure,
-  Index,
   connectStateResults,
   InstantSearch,
 } from 'react-instantsearch-dom';
 
-import algoliasearch from 'algoliasearch/lite';
-
-// React router import
-import { useLocation, useSearchParams } from 'react-router-dom';
 // Recoil state to directly access results
-import { useRecoilState, useRecoilValue } from 'recoil';
-// Import Persona State from recoil
-import { personaSelected } from '../config/header';
+import { useRecoilValue } from 'recoil';
 
-// Import other components
-import GenericRefinementList from '../components/facets/Facets';
-// Import Components
-import GiftCard from '../components/hits/GiftCard';
-import { Hit } from '../components/hits/Hits';
+// Import custom Hooks
+import useScreenSize from '../hooks/useScreenSize';
+
 // Import Components
 import QuerySuggestions from '../components/federatedSearch/components/QuerySuggestions';
-import InfluencerCard from '../components/hits/InfluencerCard';
-import NikeCard from '../components/hits/SalesCard';
 import Banner from '../components/searchresultpage/Banner';
-import { CustomStats } from '../components/searchresultpage/Stats';
-// import { InjectedInfiniteHits } from '../components/searchresultpage/injected-hits';
-import { InjectedHits } from '../components/searchresultpage/injected-hits';
-// Import Config File
-import { configAtom, indexName, indexInfluencer } from '../config/config';
-import { queryAtom } from '../config/searchbox';
-import { customDataByType } from '../utils';
 
-import CustomClearRefinements from '../components/facets/ClearRefinement';
-import CustomCurrentRefinements from '../components/facets/CurrentRefinement';
+// Import Persona State from recoil
+import { isBannerSrp } from '../config/config';
+import { searchClient, indexName } from '../config/appConfig';
+
+import SrpLaptop from '../components/searchresultpage/srpLaptop/SrpLaptop';
+import SrpMobile from '../components/searchresultpage/srpMobile/SrpMobile';
 
 const SearchResultPage = () => {
   // Recoil & React states
-  const [config] = useRecoilState(configAtom);
-  const [injected, setInjected] = useState(false);
-  const queryState = useRecoilValue(queryAtom);
-
-  // Define Stat Const
-  const stats = config.stats.value;
-  const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
-  const hitsPerPageInjected = config.hitsPerPage.numberInjected;
-  const bannerDisplay = config.bannerSrp.value;
-
-  // Get states of React Router
-  const { state } = useLocation();
-  // const [searchParams] = useSearchParams();
-  // const queryFromUrl = searchParams.get('query');
-  // persona
-  const personaSelect = useRecoilValue(personaSelected);
-  // Persona
-  const userToken = personaSelect?.value;
-
+  // Handle Banner
+  const bannerDisplay = useRecoilValue(isBannerSrp);
+  // Handle screen resize
+  const { mobile, tablet, laptopXS, laptop } = useScreenSize();
   return (
     <>
+      {/* Display the banner if the bannerSrp config is set to: true */}
       {bannerDisplay && <Banner />}
-
+      {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
       <NoResultsHandler>
-        <div className="srp-container">
-          <div className="srp-container__facets">
-            <GenericRefinementList />
-          </div>
-          <div className="srp-container__hits">
-            <div>{stats && <CustomStats />}</div>
-            <div className="refinement-container">
-              <CustomCurrentRefinements />
-              <CustomClearRefinements />
-            </div>
-            <Configure
-              hitsPerPage={
-                injected ? hitsPerPageInjected : hitsPerPageNotInjected
-              }
-              analytics={false}
-              userToken={userToken}
-              enablePersonalization={true}
-              filters={state ? state : ''}
-              query={queryState && queryState}
-            />
-            <Index indexName={indexInfluencer.index}>
-              <Configure hitsPerPage={1} page={0} />
-            </Index>
-            <InjectedHits
-              hitComponent={Hit}
-              slots={({ resultsByIndex }) => {
-                const indexValue = indexName.index;
-                const indexInfluencerValue = indexInfluencer.index;
-                const { noCta, nikeCard } = customDataByType(
-                  resultsByIndex?.[indexValue]?.userData
-                );
-                // eslint-disable-next-line no-lone-blocks
-                {
-                  // eslint-disable-next-line no-unused-expressions
-                  nikeCard && setInjected(true);
-                }
-                return [
-                  {
-                    getHits: () => [noCta],
-                    injectAt: noCta ? noCta.position : null,
-                    slotComponent: GiftCard,
-                  },
-                  {
-                    getHits: () => [nikeCard],
-                    injectAt: nikeCard ? nikeCard.position : null,
-                    slotComponent: NikeCard,
-                  },
-                  {
-                    injectAt: ({ position }) => position === 2,
-                    getHits: ({ resultsByIndex }) => {
-                      setInjected(true);
-                      return resultsByIndex[indexInfluencerValue]
-                        ? resultsByIndex[indexInfluencerValue].hits || []
-                        : [];
-                    },
-                    slotComponent: InfluencerCard,
-                  },
-                ];
-              }}
-            />
-            <Pagination />
-          </div>
-        </div>
+        {(laptop || laptopXS) && <SrpLaptop />}
+        {(tablet || mobile) && <SrpMobile />}
       </NoResultsHandler>
     </>
   );
 };
 
+// This is rendered when there are no results to display
 const NoResults = memo(function NoResults({ query }) {
-  const [config] = useRecoilState(configAtom);
-  const search = algoliasearch(
-    config.searchClient.appID,
-    config.searchClient.APIKey
-  );
+  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
   return (
     <div className="no-results">
-      <h4 className="no-results__titles">
-        <span className="no-results__titles__span">
-          Sorry, we found no results for{' '}
-        </span>
-        <span className="no-results__titles__span-query">“{query}”</span>
-      </h4>
-
-      <p>Try the following:</p>
-      <ul className="no-results__infos">
-        <li>
-          <span className="no-results__infos__span">Check your spelling</span>
-        </li>
-        <li>
-          <span className="no-results__infos__span">
-            Or check our suggestions bellow 👇
+      <div className="no-results__infos">
+        <h4 className="no-results__titles">
+          <span className="no-results__titles__span">
+            Sorry, we found no results for{' '}
           </span>
-        </li>
-        <div className="query-suggestion">
-          <InstantSearch
-            searchClient={search}
-            indexName={config.indexName.indexSuggestion}
-          >
-            <Configure hitsPerPage={3} />
-            <QuerySuggestions />
-          </InstantSearch>
-        </div>
-      </ul>
+          <span className="no-results__titles__span-query">“{query}”</span>
+        </h4>
+        <p>Try the following:</p>
+        <ul className="no-results__infos">
+          <li>
+            <span className="no-results__infos__span">Check your spelling</span>
+          </li>
+          <li>
+            <span className="no-results__infos__span">
+              Or check our suggestions bellow 👇
+            </span>
+          </li>
+          <div className="query-suggestion">
+            <InstantSearch
+              searchClient={search}
+              indexName={indexName.indexSuggestion}
+            >
+              <Configure hitsPerPage={3} />
+              <QuerySuggestions />
+            </InstantSearch>
+          </div>
+        </ul>
+      </div>
     </div>
   );
 });
 
+// This wrapper decides when to render the NoResults component
 const NoResultsHandlerComponent = ({
   children,
   searchState,
   searchResults,
   searching,
 }) => {
+  // If there is a search, but there are no results to display, render NoResults component
   if (searchState?.query && searchResults?.nbHits === 0) {
     return <NoResults query={searchState.query} isSearching={searching} />;
   }
-
+  // Otherwise, just return the search results
   return <>{children}</>;
 };
 

@@ -1,3 +1,7 @@
+// This component is used in the creation of injected hits,
+// ...eg a Sales Card in the Search Results
+
+// import connector tool from Algolia
 import { createConnector } from 'react-instantsearch-core';
 
 export const connectInjectedHits = createConnector({
@@ -20,7 +24,9 @@ export const connectInjectedHits = createConnector({
           };
         }, {});
 
-    const mainIndexHits = resultsByIndex[mainTargetedIndex] ? resultsByIndex[mainTargetedIndex].hits || [] : [];
+    const mainIndexHits = resultsByIndex[mainTargetedIndex]
+      ? resultsByIndex[mainTargetedIndex].hits || []
+      : [];
 
     const injectedHits = mainIndexHits
       .map((hit, position) => {
@@ -52,7 +58,7 @@ export const connectInjectedHits = createConnector({
               });
 
               return [
-                ...hitsFromSlotIndex.map(hitFromSlotIndex => ({
+                ...hitsFromSlotIndex.map((hitFromSlotIndex) => ({
                   type: 'injected',
                   props: {
                     ...slotScopeProps,

@@ -1,34 +1,71 @@
 import { atom } from 'recoil';
 
-// import { indexName } from "../utils/env";
+import { indexName } from './appConfig';
 
-export const searchClient = {
-  APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
-  appID: '853MYZ81KY',
-};
+// ------------------------------------------
+// Config feature, change by true or false to remove them or change the value
+// ------------------------------------------
+export const isVoiceSearch = atom({
+  key: 'voiceSearch',
+  default: true,
+});
 
-export const indexName = {
-  index: 'flagship_fashion',
-  indexSuggestion: 'flagship_fashion_query_suggestions',
-  indexBlog: 'canda_customDemo_articles',
-};
+export const isStats = atom({
+  key: 'stats',
+  default: true,
+});
+export const isBannerSrp = atom({
+  key: 'bannerSrp',
+  default: true,
+});
 
-export const indexInfluencer = {
-  index: 'flagship_fashion_influencers',
-};
+export const isInjectedHits = atom({
+  key: 'injectedHits',
+  default: true,
+});
 
-const voiceSearch = {
-  value: true,
-};
-const stats = {
-  value: true,
-};
-const bannerSrp = {
-  value: true,
-};
-const currency = {
-  value: '$',
-};
+export const isFederatedAtom = atom({
+  key: 'isFederatedAtom', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
+
+export const isRelatedProducts = atom({
+  key: 'isRelatedProductsAtom', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+});
+
+export const isFbtProducts = atom({
+  key: 'isFbtProductsAtom', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+});
+
+export const currency = atom({
+  key: 'currencyAtom', // unique ID (with respect to other atoms/selectors)
+  default: '£', // default value (aka initial value)
+});
+
+// ------------------------------------------
+// Federated Search Atoms
+// ------------------------------------------
+
+export const searchBoxAtom = atom({
+  key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+export const selectButtonAtom = atom({
+  key: 'selectButtonAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+export const selectSortByIndex = atom({
+  key: 'selectSortByIndexAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+// ------------------------------------------
+// Refinements Config
+// ------------------------------------------
 
 const refinements = [
   {
@@ -64,11 +101,11 @@ const refinements = [
     },
   },
   {
-    type: 'color',
-    header: 'Color',
-    label: 'Color',
+    type: 'colour',
+    header: 'Colour',
+    label: 'Colour',
     options: {
-      attribute: 'colour',
+      attribute: 'colour_hexa_v6',
     },
   },
   {
@@ -90,106 +127,98 @@ const refinements = [
   },
 ];
 
-const sorts = [
-  { value: indexName, label: 'Most popular', isDefault: true },
-  {
-    value: `${indexName}_asc_price`,
-    label: 'Price Low to High (Traditional Sort)',
-  },
-  {
-    value: `${indexName}_asc_price_virtual_replica`,
-    label: 'Price Low to High (Relevant Sort)',
-  },
-  { value: `${indexName}_desc_price`, label: 'Price High to Low' },
-];
-
 const hitsPerPage = {
   numberNotInjected: 15,
   numberInjected: 14,
 };
 
-const breadcrumbAttributes = [
-  'hierarchical_categories.lvl0',
-  'hierarchical_categories.lvl1',
-  'hierarchical_categories.lvl2',
+const refinementPrice = {
+  moreThan: 'More than',
+  lessThan: 'Less than',
+};
+
+// ------------------------------------------
+// Carousel Config
+// ------------------------------------------
+
+export const isCarouselAtom = atom({
+  key: 'isCarouselAtom', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+});
+
+export const carouselConfig = [
+  {
+    attribute: "brand:'polo ralph lauren'",
+    title: 'Ralph Lauren Products',
+  },
+  {
+    attribute: "category:'pullover'",
+    title: 'Our PullOver',
+  },
 ];
+
+// ------------------------------------------
+// Sort By Config
+// ------------------------------------------
+
+const sortBy = {
+  value: true,
+  labelIndex: [
+    { value: indexName.index, label: 'All' },
+    { value: `${indexName.index}_price_desc`, label: 'Price Desc' },
+    { value: `${indexName.index}_price_asc`, label: 'Price Asc' },
+  ],
+};
+
+// ------------------------------------------
+// Category Pages
+// ------------------------------------------
 
 // This export is used for Category pages. It will create a filters in a Configure widget in SRP to filter out the right products
 export const hierarchicalFacet = {
   hierarchicalLvl0: 'hierarchicalCategories.lvl0',
 };
-
-const federatedCategory = {
-  categoryInFederated: 'hierarchicalCategories.lvl2',
-};
-
-const searchParameters = {
-  hitsPerPage: 10,
-  maxValuesPerFacet: 50,
-  attributesToSnippet: ['description:30'],
-  snippetEllipsisText: '…',
-  analytics: true,
-  clickAnalytics: true,
-};
-
-const autocomplete = {
-  placeholders: ['products', 'articles', 'faq'],
-  debouncing: 800, // in ms
-  detachedMediaQuery: '(max-width: 1439px)',
-};
-
-const url = {
-  debouncing: 1500, // in ms
-};
-
-// FEDERATED SEARCHES
-const federatedSearchConfig = {
-  isRecentSearch: true,
-  isQuerySuggestions: true,
-  isCategory: true,
-  isProduct: true,
-  isBlogPosts: true,
-};
-
-export const isFederatedAtom = atom({
-  key: 'isFederatedAtom', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
-});
-
-export const searchBoxAtom = atom({
-  key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
-});
-
-export const selectButtonAtom = atom({
-  key: 'selectButtonAtom', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
-});
-
+// ------------------------------------------
 // Hits and Framer Motion
-export const listItem = {
+// ------------------------------------------
+export const framerMotionHits = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
   animate: { opacity: 1 },
-  transition: { duration: 0.5, delay: 0.3 },
+  transition: { duration: 0.5, delay: 0.3, ease: [0.43, 0.13, 0.23, 0.96] },
+};
+
+export const framerMotionTransition = {
+  delay: 0.1,
+  duration: 0.6,
+  ease: [0.43, 0.13, 0.23, 0.96],
+};
+
+export const framerMotionPage = {
+  initial: { opacity: 0 },
+  exit: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
+};
+
+export const framerMotionFederatedContainer = {
+  initial: { y: '-100%', opacity: 0 },
+  exit: { y: '-100%', opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  transition: { duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] },
+};
+export const framerMotionFacet = {
+  initial: { opacity: 0 },
+  exit: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { delay: 0.2, duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
 };
 
 const config = {
   refinements,
-  sorts,
-  breadcrumbAttributes,
-  searchParameters,
-  autocomplete,
-  url,
-  indexName,
-  searchClient,
-  federatedSearchConfig,
-  federatedCategory,
-  voiceSearch,
-  stats,
   hitsPerPage,
-  bannerSrp,
-  currency,
+  sortBy,
+  refinementPrice,
 };
 
 export const configAtom = atom({

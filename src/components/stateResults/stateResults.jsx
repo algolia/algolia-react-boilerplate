@@ -1,3 +1,5 @@
+// This is for controlling the hits in Recoil state
+
 import { useEffect } from 'react';
 import { connectStateResults } from 'react-instantsearch-dom';
 
@@ -5,9 +7,11 @@ import { useRecoilState } from 'recoil';
 
 import { hitsAtom } from '../../config/results';
 
+// Check that the arrays of hits are identical
 const areArraysEqual = (a, b) =>
   a.length === b.length && a.every((v, i) => v === b[i]);
 
+// Update the state if there's new results
 function StateResults({ searchResults }) {
   const [hitsState, setHitsState] = useRecoilState(hitsAtom);
 

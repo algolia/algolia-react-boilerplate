@@ -1,0 +1,50 @@
+// ------------------------------------------
+// RECOMMEND
+// ------------------------------------------
+@import '../mixin/abstracts/abstracts.scss';
+
+
+// ------------------------------------------
+// RELATED PRODUCT
+// ------------------------------------------
+
+.recommend{
+        padding: 2rem;
+    .auc-Recommend-list{
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        // display: -webkit-box;
+        padding: 1rem 0rem;
+        list-style-type: none;
+        align-items: center;
+        justify-content: center
+    }
+
+   
+    .auc-Recommend-title{
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    .auc-Recommend-item{
+        width: 15%
+    }
+
+    .relatedItem{
+            @include hits-individual(
+              $main-color,
+              $blue-algolia,
+              $blue-algolia,
+              $blue-algolia
+            );
+      
+    }
+}
+
+
+
+
+// ------------------------------------------
+// FBT
+// ------------------------------------------

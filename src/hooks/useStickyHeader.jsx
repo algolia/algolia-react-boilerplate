@@ -1,7 +1,9 @@
+// This is for defining whether the Header component should be sticky, depending on your scrolling
+
 import { useEffect, useState } from 'react';
 
 function useStickyHeader(elementRef) {
-  const [sticky, setsticky] = useState(false);
+  const [sticky, setSticky] = useState(false);
   useEffect(() => {
     const header = elementRef.current;
     const sticky = header.offsetTop;
@@ -9,12 +11,12 @@ function useStickyHeader(elementRef) {
       if (window.pageYOffset > sticky) {
         header.classList.add('sticky');
         if (!sticky) {
-          setsticky(true);
+          setSticky(true);
         }
       } else {
         header.classList.remove('sticky');
         if (sticky) {
-          setsticky(false);
+          setSticky(false);
         }
       }
     });

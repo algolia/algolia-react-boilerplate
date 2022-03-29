@@ -1,11 +1,17 @@
+// TODO: 1. homepagebannerthree is declared as its own component, but also in HomeBanners?
+//       2. Why is the order of banners wrong?
+// This page builds the various banners that are used on the Homepage
+
+// NB: we need React declared for the Fragments used here
 import React from 'react';
 import { connectQueryRules } from 'react-instantsearch-dom';
 
 // Imports from router
 import { Link } from 'react-router-dom';
 
+// This component renders a different banner based on the props passed to it
+// This component will be wrapped in connectQueryRules (https://www.algolia.com/doc/api-reference/widgets/query-rule-custom-data/react/#connector)
 const HomeBanners = ({ items }) => {
-  console.log(items);
   return items.map(
     (
       {

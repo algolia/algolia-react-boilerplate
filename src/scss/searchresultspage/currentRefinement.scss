@@ -6,7 +6,8 @@
   display: flex;
   li {
     display: flex;
-    font-weight: 700;
+    font-weight: 500;
+    font-size: 0.7rem;
     margin-right: 0.5rem;
     justify-content: center;
     align-items: center;
@@ -17,9 +18,8 @@
       text-align: center;
       background-color: $blue-algolia;
       height: 100%;
-      padding: 0.5rem;
+      padding: 0.3rem;
       align-items: center;
-      border-radius: 1rem;
       color: $white-color;
     }
   }
@@ -28,7 +28,6 @@
     text-transform: capitalize;
     li {
       background-color: $blue-algolia;
-      padding: 0.8rem;
       border-radius: 1rem;
       color: $white-color;
     }

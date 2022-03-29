@@ -16,6 +16,8 @@
 @import './searchresultspage/currentRefinement.scss';
 @import './homepage/homeCarousel.scss';
 @import './footer/footer.scss';
+@import './recommend/recommend.scss';
+@import './loader/loader.scss';
 
 // Use BEM, to naming class
 // https://css-tricks.com/bem-101/
@@ -64,4 +66,20 @@ ul {
 
 h3 {
   text-transform: uppercase;
+}
+
+.homepage {
+  margin-top: 13rem;
+}
+
+.srp-container, .srp-container-mobile {
+  margin-top: 14rem;
+}
+
+.hidden{
+  @include hidden;
+}
+
+.visible{
+  @include visible
 }

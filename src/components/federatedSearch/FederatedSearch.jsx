@@ -4,6 +4,10 @@ import React, { useRef, memo } from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, Configure } from 'react-instantsearch-dom';
 
+// framer motion
+import { motion } from 'framer-motion';
+import { framerMotionFederatedContainer } from '../../config/config';
+
 // import from Recoil
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import {
@@ -12,11 +16,18 @@ import {
   searchBoxAtom,
   selectButtonAtom,
 } from '../../config/config';
+import { indexName, searchClient } from '../../config/appConfig';
+import {
+  federatedSearchConfig,
+  categories,
+} from '../../config/federatedConfig';
+import { queryAtom } from '../../config/searchbox';
 // Import Persona State from recoil
-import { personaSelected } from '../../config/header';
+import { personaSelectedAtom } from '../../config/header';
 
 // hook import
 import useOutsideClickConditional from '../../hooks/useOutsideClickConditional';
+import useScreenSize from '../../hooks/useScreenSize';
 
 // Components imports
 import RecentSearches from './components/RecentSearches';
@@ -27,18 +38,21 @@ import Articles from './components/BlogPost';
 
 const FederatedSearch = () => {
   // Recoil & States
-  const [config] = useRecoilState(configAtom);
-  const personaSelect = useRecoilValue(personaSelected);
+  const personaSelect = useRecoilValue(personaSelectedAtom);
   const setIsFederated = useSetRecoilState(isFederatedAtom);
   const searchboxRef = useRecoilValue(searchBoxAtom);
-  const selectRef = useRecoilValue(selectButtonAtom);
   const containerFederated = useRef('');
   // Custom hook
-  useOutsideClickConditional(containerFederated, searchboxRef, selectRef, () =>
+  useOutsideClickConditional(containerFederated, searchboxRef, () =>
     setIsFederated(false)
   );
+  const { mobile, tablet } = useScreenSize();
   // Persona
-  const userToken = personaSelect?.value;
+  const userToken = personaSelect;
+
+  //query
+  const query = useRecoilValue(queryAtom);
+
   // Federated search configuration
   const {
     isRecentSearch,
@@ -46,31 +60,40 @@ const FederatedSearch = () => {
     isCategory,
     isBlogPosts,
     isProduct,
-  } = config.federatedSearchConfig;
+  } = federatedSearchConfig;
   // Algolia searchclient
-  const search = algoliasearch(
-    config.searchClient.appID,
-    config.searchClient.APIKey
-  );
+  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
 
   return (
-    <div className="federatedSearch" ref={containerFederated}>
-      <div className="federatedSearch__wrapper">
+    <motion.div
+      className="federatedSearch"
+      ref={containerFederated}
+      variants={framerMotionFederatedContainer}
+      initial={framerMotionFederatedContainer.initial}
+      animate={framerMotionFederatedContainer.animate}
+      exit={framerMotionFederatedContainer.exit}
+      transition={framerMotionFederatedContainer.transition}
+    >
+      <div
+        className={`${
+          mobile || tablet
+            ? 'federatedSearch__wrapper-mobile'
+            : 'federatedSearch__wrapper'
+        }`}
+      >
         <div className="federatedSearch__left">
-          {isRecentSearch && <RecentSearches />}
+          {isRecentSearch && !mobile && !tablet && <RecentSearches />}
           {isQuerySuggestions && (
             <InstantSearch
               searchClient={search}
-              indexName={config.indexName.indexSuggestion}
+              indexName={indexName.indexSuggestion}
             >
-              <Configure hitsPerPage={3} />
+              <Configure hitsPerPage={3} query={query} />
               <QuerySuggestions />
             </InstantSearch>
           )}
-          {isCategory && (
-            <Category
-              attribute={config.federatedCategory.categoryInFederated}
-            />
+          {isCategory && !mobile && !tablet && (
+            <Category attribute={categories.attribute} />
           )}
         </div>
         {isProduct && (
@@ -84,19 +107,19 @@ const FederatedSearch = () => {
             <Products />
           </div>
         )}
-        {isBlogPosts && (
+        {isBlogPosts && !mobile && !tablet && (
           <div className="articles federatedSearch__right">
             <InstantSearch
               searchClient={search}
-              indexName={config.indexName.indexBlog}
+              indexName={indexName.indexBlog}
             >
-              <Configure hitsPerPage={1} />
+              <Configure hitsPerPage={1} query={query} />
               <Articles />
             </InstantSearch>
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

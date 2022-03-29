@@ -1,6 +1,8 @@
-import React from 'react';
+// Renders the Hierarchical facets
 import { connectHierarchicalMenu } from 'react-instantsearch-dom';
 
+// This component is recursive, to allow subcategories to be displayed
+// eg. Categories > Mens > Clothing > Jackets
 const Hierarchical = ({ items, refine, createURL, title }) => {
   return (
     <div className="filters-container-hierarchical">
@@ -29,6 +31,7 @@ const Hierarchical = ({ items, refine, createURL, title }) => {
                 {item.count}
               </span>
             </button>
+            {/* If there are items within the 'item' object, then display them */}
             {item.items && (
               <div className="filters-container-hierarchical__content__list-isOpened">
                 <Hierarchical

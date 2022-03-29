@@ -5,8 +5,10 @@ display: flex;
 align-items: center;
 justify-content: center;
 height: 15rem;
-margin-top: 2rem;
+margin-top: 0.5rem;
 background: $blue-algolia-custom-reverse-gradient;
+transform: translateY(13rem);
+
 
 p{
     font-weight: bold;
