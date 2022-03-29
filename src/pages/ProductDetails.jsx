@@ -50,7 +50,8 @@ const ProductDetails = () => {
   const { tablet, mobile } = useScreenSize();
 
   // Get hit attribute from config file
-  const { price, objectID, image, productName } = useRecoilValue(hitsConfig);
+  const { price, objectID, image, productName, colour, sizeFilter, brand } =
+    useRecoilValue(hitsConfig);
 
   return (
     // Product Display Page parent container, including attributes for framer motion
