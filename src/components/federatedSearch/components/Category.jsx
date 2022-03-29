@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 // React Router import
 import { useNavigate } from 'react-router-dom';

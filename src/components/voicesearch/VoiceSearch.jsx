@@ -1,4 +1,6 @@
-import React, { useEffect, memo } from 'react';
+// This is for showing the voicesearch feature in the search bar
+
+import { useEffect, memo } from 'react';
 // Algolia Import
 import { VoiceSearch } from 'react-instantsearch-dom';
 // Import Recoil

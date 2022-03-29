@@ -1,12 +1,11 @@
-import React from 'react';
+// Renders Facets component for mobile viewport
 // import framer motion
 import { motion } from 'framer-motion';
-import { framerMotionFacet } from '../../../config/config';
 import { framerMotionTransition } from '../../../config/config';
 
 import GenericRefinementList from '../../../components/facets/Facets';
 
-const FacetsMobile = ({ isMenuOpen, setIsMenuOpen }) => {
+const FacetsMobile = ({ isMenuOpen, setMenuIsOpen }) => {
   return (
     <motion.div
       animate={isMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: '-100%' }}

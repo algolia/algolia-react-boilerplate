@@ -1,4 +1,5 @@
-import React from 'react';
+// Render the navigation menu in the header
+
 // React Router
 import { useNavigate } from 'react-router-dom';
 // Recoil Header State
@@ -10,7 +11,10 @@ import { linksHeader } from '../../../config/header';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
+  // navigate is used by React Router
   const navigate = useNavigate();
+
+  // Import the navigation links, as defined in the config
   const [links] = useRecoilState(linksHeader);
   return (
     <ul
@@ -25,7 +29,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
           <li
             key={link.url}
             onClick={() => {
-              // Hierarchical are extracted from config.js
+              // Open the sub-menu if the link is hierarchical, otherwise run a search
               if (link.link !== 'All') {
                 navigate(`/search`, {
                   state: `${hierarchicalFacet.hierarchicalLvl0}:'${link.filter}'`,
@@ -40,6 +44,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
           </li>
         );
       })}
+      {/* Display the persona selection component */}
       <li>
         <SelectPersona />
       </li>

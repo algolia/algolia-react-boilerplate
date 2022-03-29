@@ -1,6 +1,8 @@
+// TODO: why is this NOT export default?
+
 // Import framer-motion for animation on hits
 import { motion } from 'framer-motion';
-import React from 'react';
+
 import { Highlight } from 'react-instantsearch-dom';
 
 import { Heart } from '../../assets/svg/SvgIndex';

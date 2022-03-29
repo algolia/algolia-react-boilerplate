@@ -1,3 +1,5 @@
+// This is for displaying the SortBy widget, eg Price asc/desc
+
 import { connectSortBy } from 'react-instantsearch-dom';
 
 const SortBy = ({ refine, items }) => {

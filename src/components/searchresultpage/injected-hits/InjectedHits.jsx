@@ -1,4 +1,5 @@
-import React from 'react';
+// This builds the injected hits component
+
 import { createClassNames, connectHits } from 'react-instantsearch-dom';
 import { connectInjectedHits } from './connectInjectedHits';
 import { motion, AnimatePresence } from 'framer-motion';

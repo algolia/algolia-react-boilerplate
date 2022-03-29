@@ -1,6 +1,7 @@
-import React from 'react';
+// Page for Product details, after clicking on an item from search
+// It contains both Recommend components
 
-//RECOMMEND
+// Recommend
 import {
   RelatedProducts,
   FrequentlyBoughtTogether,
@@ -13,7 +14,6 @@ import { framerMotionPage, framerMotionTransition } from '../config/config';
 
 // Import components
 import { ChevronLeft } from '../assets/svg/SvgIndex';
-import HomeCarousel from '../components/carousels/HomeCarousel';
 import RelatedItem from '../components/recommend/RelatedProducts';
 
 // Algolia search client
@@ -32,11 +32,16 @@ import { hitsConfig } from '../config/hits';
 import useScreenSize from '../hooks/useScreenSize';
 
 const ProductDetails = () => {
+  // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
+
   const isRelatedProductsValue = useRecoilValue(isRelatedProducts);
   const isFbtProductsValue = useRecoilValue(isFbtProducts);
+
+  // navigate is used by react router
   const navigate = useNavigate();
 
+  // define the client for using Recommend
   const recommendClient = algoliarecommend(
     searchClient.appID,
     searchClient.APIKey
@@ -48,6 +53,7 @@ const ProductDetails = () => {
   const { price, objectID, image, productName } = useRecoilValue(hitsConfig);
 
   return (
+    // Product Display Page parent container, including attributes for framer motion
     <div
       className={`${mobile || tablet ? 'pdp-mobile' : ''} pdp`}
       variants={framerMotionPage}
@@ -145,6 +151,7 @@ const ProductDetails = () => {
           </motion.div>
         </div>
       </div>
+      {/* Render both Recommend components- Related Products and Frequently Bought Together */}
       <div className="recommend">
         {isRelatedProductsValue && (
           <RelatedProducts

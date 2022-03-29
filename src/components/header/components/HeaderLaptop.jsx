@@ -1,4 +1,5 @@
-import React from 'react';
+// Render the Header component in Main.jsx, for large screen sizes
+
 // React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State

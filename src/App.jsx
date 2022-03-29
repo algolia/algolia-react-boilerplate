@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
+
 // Algolia import
 import algoliasearch from 'algoliasearch/lite';
-import React from 'react';
 import { InstantSearch } from 'react-instantsearch-dom';
-// React router
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// RecoilState Management
-// https://recoiljs.org/docs/introduction/getting-started
-import { RecoilRoot } from 'recoil';
 
-import CustomStateResults from './components/stateResults/stateResults';
+// React router
+import { BrowserRouter as Router } from 'react-router-dom';
+
+// Recoil State Management
+import { RecoilRoot } from 'recoil';
 
 // SCSS import
 import './scss/index.scss';
@@ -20,6 +19,9 @@ import { searchClient, indexName } from './config/appConfig';
 // Import Components
 import Loader from './components/loader/Loader';
 import { Main } from './Main.jsx';
+
+// Allows logging and manipulation of algolia results etc.
+import CustomStateResults from './components/stateResults/stateResults';
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);

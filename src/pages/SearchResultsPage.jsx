@@ -1,5 +1,13 @@
+// Page for displaying search results
+// Includes functionality for banners, query suggestions, noresults
+// It also renders different search results components depending on screen size
+
+// import Algolia
 import algoliasearch from 'algoliasearch/lite';
-import React, { memo } from 'react';
+
+// import React functionality
+import { memo } from 'react';
+
 // eslint-disable-next-line import/order
 import {
   Configure,
@@ -8,7 +16,7 @@ import {
 } from 'react-instantsearch-dom';
 
 // Recoil state to directly access results
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 // Import custom Hooks
 import useScreenSize from '../hooks/useScreenSize';
@@ -32,7 +40,9 @@ const SearchResultPage = () => {
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
   return (
     <>
+      {/* Display the banner if the bannerSrp config is set to: true */}
       {bannerDisplay && <Banner />}
+      {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
       <NoResultsHandler>
         {(laptop || laptopXS) && <SrpLaptop />}
         {(tablet || mobile) && <SrpMobile />}
@@ -41,6 +51,7 @@ const SearchResultPage = () => {
   );
 };
 
+// This is rendered when there are no results to display
 const NoResults = memo(function NoResults({ query }) {
   const search = algoliasearch(searchClient.appID, searchClient.APIKey);
   return (
@@ -77,16 +88,18 @@ const NoResults = memo(function NoResults({ query }) {
   );
 });
 
+// This wrapper decides when to render the NoResults component
 const NoResultsHandlerComponent = ({
   children,
   searchState,
   searchResults,
   searching,
 }) => {
+  // If there is a search, but there are no results to display, render NoResults component
   if (searchState?.query && searchResults?.nbHits === 0) {
     return <NoResults query={searchState.query} isSearching={searching} />;
   }
-
+  // Otherwise, just return the search results
   return <>{children}</>;
 };
 

@@ -1,12 +1,16 @@
+// This is in the Search Results Page for both laptop and mobile windows
+
 // Import framer-motion for animation on hits
 import { motion } from 'framer-motion';
-import React from 'react';
+
+// Import InstantSearch Functionality
 import { connectHits, Highlight } from 'react-instantsearch-dom';
 
+// Import heart icon
 import { Heart } from '../../assets/svg/SvgIndex';
 import { framerMotionHits } from '../../config/config';
 
-// Recoil import
+// Recoil configuration
 import { hitAtom } from '../../config/results';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { hitsConfig } from '../../config/hits';
@@ -15,7 +19,10 @@ import { hitsConfig } from '../../config/hits';
 import { useNavigate } from 'react-router-dom';
 
 const CustomHits = ({ hits }) => {
+  // Navigate is used by the router
   const navigate = useNavigate();
+
+  // Get the global hit component
   const hitState = useSetRecoilState(hitAtom);
 
   // Get hit attribute from config file
@@ -26,6 +33,7 @@ const CustomHits = ({ hits }) => {
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
         {hits.map((hit, i) => {
+          // Wrap the hit info in an animation, and click functionality to view the product
           return (
             <motion.li
               key={i}

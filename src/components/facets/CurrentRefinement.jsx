@@ -1,4 +1,6 @@
-import React from 'react';
+// TODO: not sure exactly how this works
+// Component that renders the Current Refinements (icons above the products)
+
 // Recoil State
 import { connectCurrentRefinements } from 'react-instantsearch-dom';
 import { useRecoilValue } from 'recoil';
@@ -113,6 +115,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
             </li>
           );
         }
+
         return (
           <li key={item.label}>
             {item.items ? (

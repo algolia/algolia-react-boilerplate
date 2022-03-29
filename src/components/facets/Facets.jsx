@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
-// ALGOLIA'S IMPORT
+import { useState } from 'react';
+
+// Import Algolia
 // eslint-disable-next-line import/order
 import { DynamicWidgets, connectRefinementList } from 'react-instantsearch-dom';
-
-// import config file for state of facets
-import { useRecoilState } from 'recoil';
-
-// Import components
-import { Glass } from '../../assets/svg/SvgIndex';
-import PriceSlider from './PriceSlider';
-// Import Config
-import { configAtom } from '../../config/config';
-import CustomHierarchicalMenu from './Hierarchical';
 import {
   ColorRefinementList,
   Layout,
   Shape,
 } from '@algolia/react-instantsearch-widget-color-refinement-list';
 
-// // Import default styles
-// import '@algolia/react-instantsearch-widget-color-refinement-list/dist/style.css';
+// import config file for state of facets
+import { useRecoilState } from 'recoil';
+
+// Import magnifying glass svg, and price slider component
+import { Glass } from '../../assets/svg/SvgIndex';
+import PriceSlider from './PriceSlider';
+
+// Import Config
+import { configAtom } from '../../config/config';
+import CustomHierarchicalMenu from './Hierarchical';
 
 // expects an attribute which is an array of items
 const RefinementList = ({ title, items, refine, searchForItems, options }) => {
-  const [showfacet, setshowfacet] = useState(false);
+  const [showFacet, setShowFacet] = useState(false);
   const [searchInput, setSearchInput] = useState(false);
   return (
     <div className="filters-container">
       <div className="filters-container__title">
         <h3>{title}</h3>
+        {/* If the facet is searchable, show the magnifying glass which will open or close the search input */}
         {options.searchable && (
           // eslint-disable-next-line jsx-a11y/no-static-element-interactions
           <div
@@ -44,7 +44,7 @@ const RefinementList = ({ title, items, refine, searchForItems, options }) => {
         {searchInput && (
           <input
             className={`${
-              showfacet
+              showFacet
                 ? 'filters-container__list__search-facet'
                 : 'filters-container__list__search-facet__hidden'
             }`}
