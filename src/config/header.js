@@ -4,27 +4,29 @@ export const linksHeader = atom({
   key: 'linksHeader', // unique ID (with respect to other atoms/selectors)
   default: [
     {
-      link: 'All',
+      name: 'All',
       filter: '',
       url: '/search',
     },
     {
-      link: 'Mens',
+      name: 'Mens',
       filter: 'Mens',
       url: '/mens',
     },
     {
-      link: 'Womens',
+      name: 'Womens',
       filter: 'Womens',
       url: '/womens',
     },
     // {
-    //   link: 'Kids',
+    //   name: 'Kids',
     //   url: '/kids',
     // },
   ], // default value (aka initial value)
 });
 
+
+// Create a new file for persona config
 export const personaConfig = [
   { value: '', label: 'Neutral' },
   {
