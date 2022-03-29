@@ -16,7 +16,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 // Import configuration
 import { hitsConfig } from '../../config/hits';
 import { indexName } from '../../config/appConfig';
-import { hitAtom } from '../../config/results';
+import { hitAtom, hitsAtom } from '../../config/results';
 
 import { framerMotionTransition } from '../../config/config';
 
@@ -84,6 +84,7 @@ const Carousel = ({ hits, title }) => {
                 <div
                   className="item__infos"
                   onClick={() => {
+                    hitState(hit);
                     // navigate to the product show page
                     navigate(`/search/${hit[objectID]}`);
                   }}

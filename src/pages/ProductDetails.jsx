@@ -50,7 +50,6 @@ const ProductDetails = () => {
   const { tablet, mobile } = useScreenSize();
 
   // Get hit attribute from config file
-
   const { price, objectID, image, productName, brand, sizeFilter, colour } =
     useRecoilValue(hitsConfig);
 
@@ -128,16 +127,19 @@ const ProductDetails = () => {
             <p className="brand">{hit[brand]}</p>
             <p className="name">{hit[productName]}</p>
             <p className="color">{hit[colour]}</p>
-            <div className="sizes">
-              <p>Available size(s):</p>
-              <motion.div className="sizeList">
-                {hit[sizeFilter].map((size, i) => (
-                  <motion.div className="size" key={i}>
-                    <p>{size}</p>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
+            {hit[sizeFilter].length > 0 && (
+              <div className="sizes">
+                <p>Available size(s):</p>
+                <motion.div className="sizeList">
+                  {hit[sizeFilter].map((size, i) => (
+                    <motion.div className="size" key={i}>
+                      <p>{size}</p>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+            )}
+
             <motion.p
               initial={{
                 opacity: 0,
