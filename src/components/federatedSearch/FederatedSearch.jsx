@@ -23,7 +23,7 @@ import {
 } from '../../config/federatedConfig';
 import { queryAtom } from '../../config/searchbox';
 // Import Persona State from recoil
-import { personaSelectedAtom } from '../../config/header';
+import { personaSelectedAtom } from '../../config/personaConfig';
 
 // hook import
 import useOutsideClickConditional from '../../hooks/useOutsideClickConditional';

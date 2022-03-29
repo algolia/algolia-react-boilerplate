@@ -17,7 +17,7 @@ import { configAtom, isStats, isInjectedHits } from '../../../config/config';
 import { queryAtom } from '../../../config/searchbox';
 
 // Import Persona State from recoil
-import { personaSelectedAtom } from '../../../config/header';
+import { personaSelectedAtom } from '../../../config/personaConfig';
 
 // Import Components
 import CustomClearRefinements from '../../../components/facets/ClearRefinement';
