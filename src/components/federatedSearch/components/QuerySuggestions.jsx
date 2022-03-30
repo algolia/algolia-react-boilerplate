@@ -22,10 +22,10 @@ const Suggestions = ({ hits }) => {
     <div className="suggestions">
       <h3 className="suggestions__title">SUGGESTIONS</h3>
       <ul className="suggestions__items">
-        {hits.map((hit) => {
+        {hits.map((hit, index) => {
           return (
             <li
-              key={hit.query}
+              key={index}
               className="suggestions__item"
               onClick={() => {
                 navigate({
