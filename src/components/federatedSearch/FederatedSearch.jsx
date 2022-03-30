@@ -2,7 +2,7 @@ import { useRef, memo } from 'react';
 
 // Algolias's import
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, Configure, Index } from 'react-instantsearch-dom';
+import { Configure, Index } from 'react-instantsearch-dom';
 
 // framer motion
 import { motion } from 'framer-motion';
@@ -91,10 +91,7 @@ const FederatedSearch = () => {
           {isRecentSearch && !mobile && !tablet && <RecentSearches />}
           {/* If don't want this sections go into config file  */}
           {isQuerySuggestions && (
-            <InstantSearch
-              searchClient={search}
-              indexName={indexName.indexSuggestion}
-            >
+            <Index searchClient={search} indexName={indexName.indexSuggestion}>
               <Configure
                 hitsPerPage={3}
                 query={query}
@@ -102,7 +99,7 @@ const FederatedSearch = () => {
                 enablePersonalization={true}
               />
               <QuerySuggestions />
-            </InstantSearch>
+            </Index>
           )}
           {/* If don't want this sections go into config file  */}
           {isCategory && !mobile && !tablet && (

@@ -5,7 +5,7 @@ import { framerMotionTransition } from '../../../config/animationConfig';
 
 import GenericRefinementList from '../../../components/facets/Facets';
 
-const FacetsMobile = ({ isMenuOpen, setMenuIsOpen }) => {
+const FacetsMobile = ({ isMenuOpen }) => {
   return (
     <motion.div
       animate={isMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: '-100%' }}

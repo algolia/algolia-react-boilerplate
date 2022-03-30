@@ -10,7 +10,7 @@ import { hierarchicalFacet } from '../../../config/config';
 import { linksHeader } from '../../../config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
-const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
+const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // navigate is used by React Router
   const navigate = useNavigate();
 
@@ -37,7 +37,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
               navigate('/search');
             }
             // Only used for Mobile view
-            setIsMenuOpen(false);
+            if (tablet || mobile) {
+              setIsMenuOpen(false);
+            }
           }}
         >
           <p>{link.name}</p>

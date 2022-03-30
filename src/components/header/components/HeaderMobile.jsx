@@ -29,7 +29,7 @@ import CustomVoiceSearchComponent from '../../voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 // import SelectPersona from '../personnaSelect/SelectPersona';
 
-const HeaderMobile = () => {
+const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(isFederatedAtom);
@@ -86,6 +86,8 @@ const HeaderMobile = () => {
           <CategoriesMobile
             isMenuOpen={isMenuOpen}
             setIsMenuOpen={setIsMenuOpen}
+            mobile={mobile}
+            tablet={tablet}
           />
         )}
       </AnimatePresence>
@@ -93,7 +95,7 @@ const HeaderMobile = () => {
   );
 };
 
-const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen }) => {
+const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   return (
     <motion.div
       className="container-mobile__navList"
@@ -101,7 +103,12 @@ const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen }) => {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -200 }}
     >
-      <Navigation isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <Navigation
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        mobile={mobile}
+        tablet={tablet}
+      />
     </motion.div>
   );
 };
