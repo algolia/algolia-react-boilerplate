@@ -9,12 +9,11 @@ import {
   Shape,
 } from '@algolia/react-instantsearch-widget-color-refinement-list';
 
-
 // Import magnifying glass svg, and price slider component
 import { Glass } from '../../assets/svg/SvgIndex';
 import PriceSlider from './PriceSlider';
 
-import { refinements } from '../../config/refinementsConfig'
+import { refinements } from '../../config/refinementsConfig';
 
 // Import Config
 import CustomHierarchicalMenu from './Hierarchical';
@@ -108,53 +107,51 @@ const Facets = () => {
   return (
     <DynamicWidgets>
       {refinements.map((e, i) => {
-        const refinementType = e.type;
-        if (refinementType === 'price') {
-          return (
-            <PriceSlider
-              attribute={e.options.attribute}
-              title={e.label}
-              currency={e.currency}
-              key={i}
-            />
-          );
-        }
-        if (refinementType === 'colour') {
-          return (
-            <CustomColorRefinement
-              key={i}
-              title={e.label}
-              attribute={e.options.attribute}
-              separator=";"
-              layout={Layout.Grid}
-              shape={Shape.Circle}
-            />
-          );
-        }
-        if (refinementType === 'hierarchical') {
-          return (
-            <CustomHierarchicalMenu
-              attributes={e.options.attribute}
-              title={e.label}
-              key={i}
-            />
-          );
-        }
-        if (
-          refinementType !== 'price' &&
-          refinementType !== 'hierarchical' &&
-          refinementType !== 'colour'
-        ) {
-          return (
-            <GenericRefinementList
-              searchable={e.options?.searchable}
-              key={i}
-              limit={e.options?.limit}
-              attribute={e.options.attribute}
-              title={e.label}
-              options={e.options}
-            />
-          );
+        const { type, currency, label, options } = e;
+        switch (type) {
+          case 'price':
+            return (
+              <PriceSlider
+                attribute={options.attribute}
+                title={label}
+                currency={currency}
+                key={i}
+              />
+            );
+            break;
+          case 'colour':
+            return (
+              <CustomColorRefinement
+                key={i}
+                title={label}
+                attribute={options.attribute}
+                separator=";"
+                layout={Layout.Grid}
+                shape={Shape.Circle}
+              />
+            );
+            break;
+          case 'hierarchical':
+            return (
+              <CustomHierarchicalMenu
+                attributes={options.attribute}
+                title={label}
+                key={i}
+              />
+            );
+            break;
+          default:
+            return (
+              <GenericRefinementList
+                searchable={options?.searchable}
+                key={i}
+                limit={options?.limit}
+                attribute={options.attribute}
+                title={label}
+                options={options}
+              />
+            );
+            break;
         }
       })}
     </DynamicWidgets>
