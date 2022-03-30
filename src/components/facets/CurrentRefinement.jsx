@@ -134,21 +134,3 @@ const CurrentRefinementGeneral = ({ item, colourHexa }) => {
 const CustomCurrentRefinements = connectCurrentRefinements(CurrentRefinements);
 
 export default CustomCurrentRefinements;
-
-{
-  /* <ul className="refinement-container__refinementsInner">
-{item.items.map((nested) => (
-  <li key={nested.label}>
-    <a
-      href={createURL(nested.value)}
-      onClick={(event) => {
-        event.preventDefault();
-        refine(nested.value);
-      }}
-    >
-      {displayColor(nested.label)}
-    </a>
-  </li>
-))}
-</ul> */
-}
