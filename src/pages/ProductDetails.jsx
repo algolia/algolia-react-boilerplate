@@ -10,7 +10,10 @@ import algoliarecommend from '@algolia/recommend';
 
 // framer-motion
 import { motion } from 'framer-motion';
-import { framerMotionPage, framerMotionTransition } from '../config/animationConfig';
+import {
+  framerMotionPage,
+  framerMotionTransition,
+} from '../config/animationConfig';
 
 // Import components
 import { ChevronLeft } from '../assets/svg/SvgIndex';
@@ -50,8 +53,18 @@ const ProductDetails = () => {
   const { tablet, mobile } = useScreenSize();
 
   // Get hit attribute from config file
-  const { price, objectID, image, productName, brand, sizeFilter, colour } =
-    useRecoilValue(hitsConfig);
+  const {
+    price,
+    objectID,
+    image,
+    productName,
+    brand,
+    sizeFilter,
+    colour,
+    colourHexa,
+  } = useRecoilValue(hitsConfig);
+
+  const hexaCode = hit[colourHexa].split(';')[1];
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -126,7 +139,17 @@ const ProductDetails = () => {
           >
             <p className="brand">{hit[brand]}</p>
             <p className="name">{hit[productName]}</p>
-            <p className="color">{hit[colour]}</p>
+            <div className="color">
+              <div
+                style={{
+                  backgroundColor: hexaCode,
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: '50%',
+                }}
+              ></div>
+              <p>{hit[colour]}</p>
+            </div>
             {hit[sizeFilter].length > 0 && (
               <div className="sizes">
                 <p>Available size(s):</p>
