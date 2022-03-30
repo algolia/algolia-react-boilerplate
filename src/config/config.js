@@ -62,10 +62,6 @@ export const selectSortByIndex = atom({
   default: '', // default value (aka initial value)
 });
 
-const hitsPerPage = {
-  numberNotInjected: 15,
-  numberInjected: 14,
-};
 
 // ------------------------------------------
 // Category Pages
@@ -76,11 +72,4 @@ export const hierarchicalFacet = {
   hierarchicalLvl0: 'hierarchicalCategories.lvl0',
 };
 
-const config = {
-  hitsPerPage,
-};
 
-export const configAtom = atom({
-  key: 'configAtom', // unique ID (with respect to other atoms/selectors)
-  default: config, // default value (aka initial value)
-});

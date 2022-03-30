@@ -42,3 +42,10 @@ export const contentArticlesConfig = atom({
     image:'Image Link',
   }, // default value (aka initial value)
 });
+
+
+// Choose number of hit the app should display.
+export const hitsPerPage = {
+  numberNotInjected: 15,
+  numberInjected: 14,
+};

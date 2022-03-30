@@ -9,13 +9,9 @@ import { connectRefinementList } from 'react-instantsearch-dom';
 // component import
 import { ChevronRight } from '../../../assets/svg/SvgIndex';
 
-// Recoil state management imports
-import { useRecoilState } from 'recoil';
-import { configAtom } from '../../../config/config';
+import { categories } from '../../../config/federatedConfig';
 
 const CategoryItems = ({ items }) => {
-  // Recoil & States
-  const [config] = useRecoilState(configAtom);
   // router hook to navigate using a function
   const navigate = useNavigate();
 
@@ -29,7 +25,7 @@ const CategoryItems = ({ items }) => {
               key={hit.label}
               onClick={() => {
                 navigate('/search', {
-                  state: `${config.categories.attribute}:"${hit.label}"`,
+                  state: `${categories.attribute}:"${hit.label}"`,
                 });
               }}
             >

@@ -11,13 +11,13 @@ import { motion } from 'framer-motion';
 import { framerMotionPage } from '../../../config/animationConfig';
 
 // Recoil state to directly access results
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 // Import Persona State from recoil
 import { personaSelectedAtom } from '../../../config/personaConfig';
 
-import { configAtom, isStats, isInjectedHits } from '../../../config/config';
-import { sortBy } from '../../../config/sortByConfig'
+import { isStats, isInjectedHits } from '../../../config/config';
+import { sortBy } from '../../../config/sortByConfig';
 import { queryAtom } from '../../../config/searchbox';
 
 // Import Components
@@ -34,26 +34,30 @@ import { InjectedHits } from '../../../components/searchresultpage/injected-hits
 import FacetsMobile from '../../facets/facetsMobile/FacetsMobile';
 import { ChevronRight, ChevronLeft } from '../../../assets/svg/SvgIndex';
 
-import { indexName, injectedContentIndex } from '../../../config/algoliaEnvConfig';
+import {
+  indexName,
+  injectedContentIndex,
+} from '../../../config/algoliaEnvConfig';
+
+import { hitsPerPage } from '../../../config/hits';
 
 // Import Config File
 import { customDataByType } from '../../../utils';
 
 const SrpMobile = () => {
   // Recoil & React states
-  const [config] = useRecoilState(configAtom);
   const [injected, setInjected] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const queryState = useRecoilValue(queryAtom);
 
   // Define Stat Const
   const stats = useRecoilValue(isStats);
-  const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
-  const hitsPerPageInjected = config.hitsPerPage.numberInjected;
+  const hitsPerPageNotInjected = hitsPerPage.numberNotInjected;
+  const hitsPerPageInjected = hitsPerPage.numberInjected;
   const shouldInjectContent = useRecoilValue(isInjectedHits);
 
   // Define Price Sort By
-  const {value: priceSortBy, labelIndex: labelItems} = sortBy;
+  const { value: priceSortBy, labelIndex: labelItems } = sortBy;
 
   // Get states of React Router
   const { state } = useLocation();

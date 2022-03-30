@@ -11,21 +11,21 @@ import { refinementPrice } from '../../config/refinementsConfig';
 import { hitsConfig } from '../../config/hits';
 
 const displayPrice = (i, currencyValue, refinementPrice) => {
-  const moreThanValue = refinementPrice.moreThan;
-  const lessThanValue = refinementPrice.lessThan;
+  const { moreThan, lessThan } = refinementPrice;
+
   // Split the label into an array to work on split
   const arraySplitLabel = i.label.replace(`<= ${i.attribute}`, '').split(' ');
   if (
     i.label.includes(i.currentRefinement.max) &&
     !i.label.includes(i.currentRefinement.min)
   ) {
-    return `${lessThanValue} ${arraySplitLabel[2]} ${currencyValue}`;
+    return `${lessThan} ${arraySplitLabel[2]} ${currencyValue}`;
   }
   if (
     i.label.includes(i.currentRefinement.min) &&
     !i.label.includes(i.currentRefinement.max)
   ) {
-    return `${moreThanValue} ${arraySplitLabel[0]} ${currencyValue}`;
+    return `${moreThan} ${arraySplitLabel[0]} ${currencyValue}`;
   }
   return (
     `${arraySplitLabel[0]} ${currencyValue} ` +

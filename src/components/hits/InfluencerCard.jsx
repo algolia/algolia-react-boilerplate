@@ -11,7 +11,7 @@ import { connectStateResults } from 'react-instantsearch-dom';
 import { framerMotionHits } from '../../config/animationConfig';
 
 const QueryAndHitsOnly = connectStateResults(
-  ({ searchState, searchResults, children, includedRefinements }) => {
+  ({ searchState, searchResults, children }) => {
     return searchState.query && searchResults.nbHits !== 0 ? children : null;
   }
 );

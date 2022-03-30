@@ -8,13 +8,16 @@ import { useLocation } from 'react-router-dom';
 
 // import framer motion
 import { motion } from 'framer-motion';
-import { framerMotionPage, framerMotionFacet } from '../../../config/animationConfig';
+import {
+  framerMotionPage,
+  framerMotionFacet,
+} from '../../../config/animationConfig';
 
 // Recoil state to directly access results
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
-import { configAtom, isStats, isInjectedHits } from '../../../config/config';
-import { sortBy } from '../../../config/sortByConfig'
+import { isStats, isInjectedHits } from '../../../config/config';
+import { sortBy } from '../../../config/sortByConfig';
 import { queryAtom } from '../../../config/searchbox';
 
 // Import Persona State from recoil
@@ -33,14 +36,19 @@ import CustomSortBy from '../../../components/searchresultpage/SortBy';
 import { CustomStats } from '../../../components/searchresultpage/Stats';
 import { InjectedHits } from '../../../components/searchresultpage/injected-hits';
 
-import { indexName, injectedContentIndex } from '../../../config/algoliaEnvConfig';
+import {
+  indexName,
+  injectedContentIndex,
+} from '../../../config/algoliaEnvConfig';
+
+// Handle the number of hits per page
+import { hitsPerPage } from '../../../config/hits';
 
 // Import Config File
 import { customDataByType } from '../../../utils';
 
 const SrpLaptop = () => {
   // Recoil & React states
-  const [config] = useRecoilState(configAtom);
 
   const stats = useRecoilValue(isStats);
   const shouldInjectContent = useRecoilValue(isInjectedHits);
@@ -48,7 +56,7 @@ const SrpLaptop = () => {
   const [injected, setInjected] = useState(false);
 
   // Define Stat Const
-  const { hitsPerPageNotInjected, hitsPerPageInjected } = config.hitsPerPage;
+  const { hitsPerPageNotInjected, hitsPerPageInjected } = hitsPerPage;
 
   // Define Price Sort By Const
   const { value: priceSortBy, labelIndex: labelItems } = sortBy;
@@ -56,7 +64,7 @@ const SrpLaptop = () => {
   // Get states of React Router
   const { state } = useLocation();
 
-    // Persona
+  // Persona
   const userToken = useRecoilValue(personaSelectedAtom);
 
   return (
