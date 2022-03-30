@@ -1,6 +1,7 @@
 // ------------------------------------------
 // Config Index and Search Client
 // ------------------------------------------
+import algoliasearch from 'algoliasearch/lite';
 
 // RENAME THAT FILE ALGOLIA CONFIG
 
@@ -17,3 +18,5 @@ export const indexName = {
 };
 
 export const injectedContentIndex = 'flagship_fashion_influencers';
+
+export const search = algoliasearch(searchClient.appID, searchClient.APIKey);
