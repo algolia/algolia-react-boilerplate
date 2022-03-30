@@ -29,35 +29,27 @@ const HomeBanners = ({ items }) => {
       },
       index
     ) => {
-      if (type === 'HomeBannerTwo') {
-        return (
-          <div
-            className="home-banner2-container"
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.45)), url(${imgUrl1})`,
-            }}
-            key={index}
-          >
-            <div className="home-banner2-container__infos">
-              <h1>{title}</h1>
-              <h2>{subtitle}</h2>
-            </div>
-            <div className="home-banner2-container__buttons">
-              <div className="home-banner2-container__buttons__circles">
-                <div className="home-banner2-container__buttons__circles__circles2">
-                  <div className="home-banner2-container__buttons__circles__circles2__circles3">
-                    <Link to={LinkButton1}>{button1}</Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      }
-      if (type === 'HomeBannerThree') {
+      if (type === 'HomeBannerOne') {
         return (
           <Fragment key={index}>
-            <BannerThree
+            <BannerOne
+              imgUrl1={imgUrl1}
+              title={title}
+              subtitle={subtitle}
+              LinkButton1={LinkButton1}
+              button1={button1}
+              imgUrl2={imgUrl2}
+              imgUrl3={imgUrl3}
+              LinkButton2={LinkButton2}
+              button2={button2}
+            />
+          </Fragment>
+        );
+      }
+      if (type === 'HomeBannerTwo') {
+        return (
+          <Fragment key={index}>
+            <BannerTwo
               imgUrl1={imgUrl1}
               title={title}
               subtitle={subtitle}
@@ -67,37 +59,11 @@ const HomeBanners = ({ items }) => {
           </Fragment>
         );
       }
-      if (type === 'HomeBannerOne') {
-        return (
-          <div
-            className="home-banner-container"
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.45)), url(${imgUrl1})`,
-            }}
-            key={index}
-          >
-            <div className="home-banner-container__infos">
-              <h1>{title}</h1>
-              <h2>{subtitle}</h2>
-            </div>
-            <div className="home-banner-container__image-one">
-              <img src={imgUrl2} alt="" />
-            </div>
-            <div className="home-banner-container__image-two">
-              <img src={imgUrl3} alt="" />
-              <div className="home-banner-container__buttons">
-                <Link to={LinkButton1}>{button1}</Link>
-                <Link to={LinkButton2}>{button2}</Link>
-              </div>
-            </div>
-          </div>
-        );
-      }
     }
   );
 };
 
-const BannerThree = ({ imgUrl1, title, subtitle, LinkButton1, button1 }) => {
+const BannerTwo = ({ imgUrl1, title, subtitle, LinkButton1, button1 }) => {
   return (
     <div className="home-banner3-container">
       <div className="home-banner3-container__image">
@@ -115,6 +81,41 @@ const BannerThree = ({ imgUrl1, title, subtitle, LinkButton1, button1 }) => {
               <Link to={LinkButton1}>{button1}</Link>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+const BannerOne = ({
+  imgUrl1,
+  title,
+  subtitle,
+  LinkButton1,
+  button1,
+  imgUrl2,
+  imgUrl3,
+  LinkButton2,
+  button2,
+}) => {
+  return (
+    <div
+      className="home-banner-container"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.45)), url(${imgUrl1})`,
+      }}
+    >
+      <div className="home-banner-container__infos">
+        <h1>{title}</h1>
+        <h2>{subtitle}</h2>
+      </div>
+      <div className="home-banner-container__image-one">
+        <img src={imgUrl2} alt="" />
+      </div>
+      <div className="home-banner-container__image-two">
+        <img src={imgUrl3} alt="" />
+        <div className="home-banner-container__buttons">
+          <Link to={LinkButton1}>{button1}</Link>
+          <Link to={LinkButton2}>{button2}</Link>
         </div>
       </div>
     </div>
