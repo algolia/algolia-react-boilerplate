@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 
 // import framer motion
 import { motion } from 'framer-motion';
-import { framerMotionPage, framerMotionFacet } from '../../../config/animationConfig';
+import { framerMotionPage } from '../../../config/animationConfig';
 
 // Recoil state to directly access results
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -17,6 +17,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { personaSelectedAtom } from '../../../config/personaConfig';
 
 import { configAtom, isStats, isInjectedHits } from '../../../config/config';
+import { sortBy } from '../../../config/sortByConfig'
 import { queryAtom } from '../../../config/searchbox';
 
 // Import Components
@@ -33,7 +34,7 @@ import { InjectedHits } from '../../../components/searchresultpage/injected-hits
 import FacetsMobile from '../../facets/facetsMobile/FacetsMobile';
 import { ChevronRight, ChevronLeft } from '../../../assets/svg/SvgIndex';
 
-import { indexName, indexInfluencer } from '../../../config/algoliaEnvConfig';
+import { indexName, injectedContentIndex } from '../../../config/algoliaEnvConfig';
 
 // Import Config File
 import { customDataByType } from '../../../utils';
@@ -49,18 +50,17 @@ const SrpMobile = () => {
   const stats = useRecoilValue(isStats);
   const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = config.hitsPerPage.numberInjected;
-  const injectedValue = useRecoilValue(isInjectedHits);
+  const shouldInjectContent = useRecoilValue(isInjectedHits);
 
   // Define Price Sort By
-  const priceSortBy = config.sortBy.value;
-  const labelItems = config.sortBy.labelIndex;
+  const {value: priceSortBy, labelIndex: labelItems} = sortBy;
 
   // Get states of React Router
   const { state } = useLocation();
-  const personaSelect = useRecoilValue(personaSelectedAtom);
 
   // Persona
-  const userToken = personaSelect;
+  const userToken = useRecoilValue(personaSelectedAtom);
+
   return (
     <div className="srp-container-mobile">
       <div
@@ -105,15 +105,14 @@ const SrpMobile = () => {
           filters={state ? state : ''}
           query={queryState && queryState}
         />
-        <Index indexName={indexInfluencer.index}>
+        <Index indexName={injectedContentIndex}>
           <Configure hitsPerPage={1} page={0} />
         </Index>
-        {injectedValue ? (
+        {shouldInjectContent ? (
           <InjectedHits
             hitComponent={Hit}
             slots={({ resultsByIndex }) => {
               const indexValue = indexName.index;
-              const indexInfluencerValue = indexInfluencer.index;
               const { noCta, nikeCard } = customDataByType(
                 resultsByIndex?.[indexValue]?.userData
               );
@@ -138,8 +137,8 @@ const SrpMobile = () => {
                   // eslint-disable-next-line no-shadow
                   getHits: ({ resultsByIndex }) => {
                     setInjected(true);
-                    return resultsByIndex[indexInfluencerValue]
-                      ? resultsByIndex[indexInfluencerValue].hits || []
+                    return resultsByIndex[injectedContentIndex]
+                      ? resultsByIndex[injectedContentIndex].hits || []
                       : [];
                   },
                   slotComponent: InfluencerCard,

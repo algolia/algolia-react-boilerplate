@@ -12,6 +12,7 @@ const Banner = () => {
           return (
             item.type === 'bannerSrp' && (
               <div
+                key={item.title}
                 className="banner-srp"
                 // NB Inline style is necessary here due to how background images work
                 style={{
