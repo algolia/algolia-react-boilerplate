@@ -4,7 +4,6 @@
 @import '../mixin/abstracts/abstracts.scss';
 
 .pdp{
-    top: 13rem;
     position: relative;
     height: 100%;
     &__wrapper{
@@ -16,7 +15,7 @@
 
     &__left{
         width: 50%;
-        background: $blue-algolia-custom-reverse-gradient;
+        background: $blue-algolia-custom-gradient;
         display: flex;
         align-items: center;
        margin: 0;

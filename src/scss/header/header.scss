@@ -10,14 +10,11 @@
 
 .header {
   text-align: center;
-  position: fixed;
-  z-index: 1000;
-  box-shadow: 0 0 20px $white-color;
+  position: relative;
+  box-shadow: 0 0 5px $white-color;
   padding: 40px 0;
   background: $grey-light-color;
   height: 13rem;
-  top: 0;
-  left: 0;
   width: 100%;
   .container {
     .container__header-top {
