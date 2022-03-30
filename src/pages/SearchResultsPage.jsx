@@ -56,7 +56,6 @@ const SearchResultPage = () => {
 // This is rendered when there are no results to display
 const NoResults = memo(({ query }) => {
   const getQueryState = useRecoilValue(queryAtom);
-  console.log(query);
   return (
     <div className="no-results">
       <div className="no-results__infos">
@@ -84,6 +83,7 @@ const NoResults = memo(({ query }) => {
               <Configure hitsPerPage={3} query="" />
               <QuerySuggestions />
             </Index>
+            {/* Add this searchBox Invisible to refine when we click on a suggestion */}
             <CustomSearchBox query={getQueryState} />
           </div>
         </ul>
@@ -112,9 +112,8 @@ const NoResultsHandlerComponent = ({
 
 const NoResultsHandler = connectStateResults(NoResultsHandlerComponent);
 
+// Add this searchBox Invisible to refine when we click on a suggestion
 const SearchBox = ({ refine, query }) => {
-  console.log(query);
-
   const refineFunction = (queryValue) => {
     refine(queryValue);
   };
