@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-import { indexName } from './appConfig';
+import { indexName } from './algoliaEnvConfig';
 
 // ------------------------------------------
 // Config feature, change by true or false to remove them or change the value
@@ -157,43 +157,6 @@ const sortBy = {
 // This export is used for Category pages. It will create a filters in a Configure widget in SRP to filter out the right products
 export const hierarchicalFacet = {
   hierarchicalLvl0: 'hierarchicalCategories.lvl0',
-};
-// ------------------------------------------
-// Hits and Framer Motion
-// ------------------------------------------
-
-// MOVE THAT TO NEW FILE ABOUT ANIMATION IN CONFIF
-export const framerMotionHits = {
-  initial: { opacity: 0 },
-  exit: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { duration: 0.5, delay: 0.3, ease: [0.43, 0.13, 0.23, 0.96] },
-};
-
-export const framerMotionTransition = {
-  delay: 0.1,
-  duration: 0.6,
-  ease: [0.43, 0.13, 0.23, 0.96],
-};
-
-export const framerMotionPage = {
-  initial: { opacity: 0 },
-  exit: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
-};
-
-export const framerMotionFederatedContainer = {
-  initial: { y: '-100%', opacity: 0 },
-  exit: { y: '-100%', opacity: 0 },
-  animate: { y: 0, opacity: 1 },
-  transition: { duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] },
-};
-export const framerMotionFacet = {
-  initial: { opacity: 0 },
-  exit: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { delay: 0.2, duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
 };
 
 const config = {

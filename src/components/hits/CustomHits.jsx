@@ -8,7 +8,7 @@ import { connectHits, Highlight } from 'react-instantsearch-dom';
 
 // Import heart icon
 import { Heart } from '../../assets/svg/SvgIndex';
-import { framerMotionHits } from '../../config/config';
+import { framerMotionHits } from '../../config/animationConfig';
 
 // Recoil configuration
 import { hitAtom } from '../../config/results';

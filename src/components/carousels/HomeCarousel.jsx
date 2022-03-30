@@ -15,10 +15,10 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import configuration
 import { hitsConfig } from '../../config/hits';
-import { indexName } from '../../config/appConfig';
+import { indexName } from '../../config/algoliaEnvConfig';
 import { hitAtom, hitsAtom } from '../../config/results';
 
-import { framerMotionTransition } from '../../config/config';
+import { framerMotionTransition } from '../../config/animationConfig';
 
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ attribute, title, search }) => {

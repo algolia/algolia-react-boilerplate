@@ -7,7 +7,7 @@ import algoliasearch from 'algoliasearch/lite';
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { framerMotionPage } from '../config/config';
+import { framerMotionPage } from '../config/animationConfig';
 // change to import from '../config/animationConfig;
 
 // recoil import
@@ -23,7 +23,7 @@ import { isCarouselAtom, carouselConfig } from '../config/carouselConfig';
 
 //  should federated search be shown or not
 import { isFederatedAtom } from '../config/config';
-import { searchClient } from '../config/appConfig';
+import { searchClient } from '../config/algoliaEnvConfig';
 
 const HomePage = () => {
   // Boolean value which determines if federated search is shown or not, default is false
