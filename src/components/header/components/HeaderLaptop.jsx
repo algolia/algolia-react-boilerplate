@@ -13,7 +13,7 @@ import { logoUrl } from '../../../config/headerConfig';
 
 // Import SearchBox
 // Rename customSearchbox
-import CustomSearchBoxSimple from '../../searchbox/SearchBox';
+import CustomSearchBox from '../../searchbox/SearchBox';
 
 // Import VoiceSearchComponent
 import CustomVoiceSearchComponent from '../../voicesearch/VoiceSearch';
@@ -45,7 +45,7 @@ const HeaderLaptop = () => {
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container">
-          <CustomSearchBoxSimple />
+          <CustomSearchBox />
           {displayVoiceSearch && <CustomVoiceSearchComponent />}
         </div>
         <div className="container__header-top__title">

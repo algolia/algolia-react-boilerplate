@@ -22,7 +22,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Import SearchBox
 // eslint-disable-next-line import/order
-import CustomSearchBoxSimple from '../../searchbox/SearchBox';
+import CustomSearchBox from '../../searchbox/SearchBox';
 
 // Import VoiceSearchComponent
 import CustomVoiceSearchComponent from '../../voicesearch/VoiceSearch';
@@ -77,7 +77,7 @@ const HeaderMobile = () => {
       </div>
 
       <div className="searchbox-container searchbox-container-mobile">
-        <CustomSearchBoxSimple />
+        <CustomSearchBox />
         {/* Display voicesearch if the  displayVoiceSearch config is set to true */}
         {displayVoiceSearch && <CustomVoiceSearchComponent />}
       </div>
