@@ -79,6 +79,11 @@
                 margin-top: 1rem;
                 text-transform: capitalize;
                 font-style: italic;
+                display: flex;
+                align-items: center;
+                p{
+                    margin-left: 1rem;
+                }
             }
             .price{
                 color: $blue-algolia;
