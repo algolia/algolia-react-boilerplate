@@ -45,26 +45,13 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
   return (
     <ul className="refinement-container__refinements">
       {items.map((item) => {
+        console.log('ITEMS', item.items);
         if (item.attribute.includes('price')) {
           return (
             <li key={item.label}>
               {item.items ? (
                 <>
-                  <ul className="refinement-container__refinementsInner">
-                    {item.items.map((nested) => (
-                      <li key={nested.label}>
-                        <a
-                          href={createURL(nested.value)}
-                          onClick={(event) => {
-                            event.preventDefault();
-                            refine(nested.value);
-                          }}
-                        >
-                          {nested.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                  <CurrentRefinementGeneral item={item} />
                 </>
               ) : (
                 <a
@@ -85,21 +72,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
             <li key={item.label}>
               {item.items ? (
                 <>
-                  <ul className="refinement-container__refinementsInner">
-                    {item.items.map((nested) => (
-                      <li key={nested.label}>
-                        <a
-                          href={createURL(nested.value)}
-                          onClick={(event) => {
-                            event.preventDefault();
-                            refine(nested.value);
-                          }}
-                        >
-                          {displayColor(nested.label)}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                  <CurrentRefinementGeneral item={item} colourHexa={true} />
                 </>
               ) : (
                 <a
@@ -120,21 +93,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
           <li key={item.label}>
             {item.items ? (
               <>
-                <ul className="refinement-container__refinementsInner">
-                  {item.items.map((nested) => (
-                    <li key={nested.label}>
-                      <a
-                        href={createURL(nested.value)}
-                        onClick={(event) => {
-                          event.preventDefault();
-                          refine(nested.value);
-                        }}
-                      >
-                        {nested.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                <CurrentRefinementGeneral item={item} />
               </>
             ) : (
               <a
@@ -154,6 +113,43 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
   );
 };
 
+const CurrentRefinementGeneral = ({ item, colourHexa }) => {
+  return (
+    <ul className="refinement-container__refinementsInner">
+      {item.items.map((nested) => (
+        <li key={nested.label}>
+          <a
+            onClick={(event) => {
+              event.preventDefault();
+              refine(nested.value);
+            }}
+          >
+            {colourHexa ? displayColor(nested.label) : nested.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
 const CustomCurrentRefinements = connectCurrentRefinements(CurrentRefinements);
 
 export default CustomCurrentRefinements;
+
+{
+  /* <ul className="refinement-container__refinementsInner">
+{item.items.map((nested) => (
+  <li key={nested.label}>
+    <a
+      href={createURL(nested.value)}
+      onClick={(event) => {
+        event.preventDefault();
+        refine(nested.value);
+      }}
+    >
+      {displayColor(nested.label)}
+    </a>
+  </li>
+))}
+</ul> */
+}
