@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 // Import Config for the header
 import { hierarchicalFacet } from '../../../config/config';
 import { linksHeader } from '../../../config/header';
+import PersonaBox from '../PersonaBox';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
@@ -49,6 +50,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
       <li>
         <SelectPersona />
       </li>
+      <PersonaBox />
     </ul>
   );
 };

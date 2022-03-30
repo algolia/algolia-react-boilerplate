@@ -7,7 +7,6 @@
 // Header Sticky process
 // ------------------------------------------
 
-
 .header {
   text-align: center;
   position: fixed;
@@ -56,7 +55,7 @@
           p {
             position: relative;
             transition: 0.2 ease-in-out;
-            
+
             &:before {
               content: '';
               position: absolute;
@@ -85,26 +84,25 @@
   margin: 0 0.5rem 1rem auto;
 }
 
-
 // MOBILE & TABLET
 
-.container-mobile{
-  .container__header-top__logo{
+.container-mobile {
+  .container__header-top__logo {
     width: 35% !important;
   }
-  .searchbox-container-mobile{
+  .searchbox-container-mobile {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     margin: 0 auto;
 
-    .ais-VoiceSearch{
+    .ais-VoiceSearch {
       right: 8%;
     }
   }
 
-  &__navList{
+  &__navList {
     position: absolute;
     top: 0;
     left: 0;
@@ -113,7 +111,7 @@
     z-index: 99;
     background-color: $background-color;
 
-    ul{
+    ul {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -121,19 +119,58 @@
       margin-top: 3rem;
       padding: 1rem;
 
-      li{
+      li {
         cursor: pointer;
       }
     }
   }
 
-  .hamburger{
+  .hamburger {
     @include hamburger-menu;
   }
-  .hamburger-active{
-  @include hamburger-menu-active;
+  .hamburger-active {
+    @include hamburger-menu-active;
   }
-  .hamburger-inactive{
- @include hamburger-menu-inactive;
+  .hamburger-inactive {
+    @include hamburger-menu-inactive;
   }
+}
+
+// Persona Box
+.box {
+  height: auto;
+  background-color: $blue-algolia;
+  color: #fff;
+  position: absolute;
+  margin: 40px;
+  float: left;
+}
+.arrow-left:after {
+  content: ' ';
+  position: absolute;
+  left: -15px;
+  top: 15px;
+  border-top: 15px solid transparent;
+  border-right: 15px solid $blue-algolia;
+  border-left: none;
+  border-bottom: 15px solid transparent;
+}
+.box-tablet {
+  width: 210px;
+  left: 7rem;
+  top: 8rem;
+  padding: 20px;
+}
+
+.box-mobile {
+  top: 8rem;
+  left: 4rem;
+  width: 135px;
+  padding: 6px;
+}
+.box-desktop {
+  width: 210px;
+  right: 16rem;
+  bottom: 0;
+  padding: 20px;
 }
