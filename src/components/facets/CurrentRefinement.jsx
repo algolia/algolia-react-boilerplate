@@ -45,7 +45,6 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
   return (
     <ul className="refinement-container__refinements">
       {items.map((item) => {
-        console.log('ITEMS', item.items);
         if (item.attribute.includes('price')) {
           return (
             <li key={item.label}>
