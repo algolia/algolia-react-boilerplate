@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 // Recoil Header State
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-// Import Config for the header
-// import { configAtom } from '../../../config/config';
-
 // eslint-disable-next-line import/order
 import { queryAtom } from '../../../config/searchbox';
+
+// Import logo URL for header
+import { logoUrl } from '../../../config/headerConfig';
 
 //Import config for federatedSearch
 import { isFederatedAtom, isVoiceSearch } from '../../../config/config';
@@ -65,7 +65,7 @@ const HeaderMobile = () => {
             }}
           >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
+              src={logoUrl}
               alt=""
             />
           </Link>
