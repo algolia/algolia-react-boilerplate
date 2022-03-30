@@ -8,7 +8,9 @@ import { useLocation } from 'react-router-dom';
 
 // import framer motion
 import { motion } from 'framer-motion';
+
 import { framerMotionPage } from '../../../config/animationConfig';
+
 
 // Recoil state to directly access results
 import { useRecoilValue } from 'recoil';
@@ -107,7 +109,7 @@ const SrpMobile = () => {
           userToken={userToken}
           enablePersonalization={true}
           filters={state ? state : ''}
-          query={queryState && queryState}
+          query={queryState}
         />
         <Index indexName={injectedContentIndex}>
           <Configure hitsPerPage={1} page={0} />
