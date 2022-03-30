@@ -120,7 +120,4 @@ export const personaSelectedAtom = atom({
   default: null, // default value (aka initial value)
 });
 
-export const isPersonaMenuOpen = atom({
-  key: 'isPersonaMenuOpen', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
-});
+
