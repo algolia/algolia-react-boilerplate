@@ -17,6 +17,7 @@ import { hitsConfig } from '../../config/hits';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
+import { Hit } from './Hits';
 
 const CustomHits = ({ hits }) => {
   // Navigate is used by the router
@@ -35,35 +36,9 @@ const CustomHits = ({ hits }) => {
         {hits.map((hit, i) => {
           // Wrap the hit info in an animation, and click functionality to view the product
           return (
-            <motion.li
-              key={i}
-              layout={true}
-              variants={framerMotionHits}
-              initial={framerMotionHits.initial}
-              exit={framerMotionHits.exit}
-              animate={framerMotionHits.animate}
-              transition={framerMotionHits.transition}
-              className="srpItem"
-              onClick={() => {
-                hitState(hit);
-                navigate(`/search/${hit[objectID]}`);
-              }}
-            >
-              <div className="srpItem__imgWrapper">
-                <img src={hit[image]} alt={hit[category]} />
-                <div className="srpItem__imgWrapper__heart">
-                  <Heart />
-                </div>
-              </div>
-              <div className="srpItem__infos">
-                <h3>
-                  <Highlight hit={hit} attribute={productName} />
-                </h3>
-                <div className="srpItem__infos__down">
-                  <p className="srpItem__infos__down__price">{hit[price]}</p>
-                </div>
-              </div>
-            </motion.li>
+            <>
+              <Hit hit={hit} key={i} />
+            </>
           );
         })}
       </ul>
