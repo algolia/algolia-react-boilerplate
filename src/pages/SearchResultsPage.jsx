@@ -23,7 +23,7 @@ import useScreenSize from '../hooks/useScreenSize';
 
 // Import Components
 import QuerySuggestions from '../components/federatedSearch/components/QuerySuggestions';
-import Banner from '../components/searchresultpage/Banner';
+import Banner from '../components/banners/Banner';
 
 // Import Persona State from recoil
 import { isBannerSrp } from '../config/config';
