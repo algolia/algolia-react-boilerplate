@@ -1,35 +1,37 @@
 @import '../mixin/abstracts/abstracts.scss';
 @import './facets.scss';
 
+
+.refinement-container {
+  display: flex;
+  margin: 1rem 0;
+  height: fit-content;
+ &:empty{
+   display: none;
+ }
+
+ &__refinementsInner{
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+  li {
+   @include btn-currentRefinement;
+    a {
+      text-transform: capitalize;
+      color: $white-color;
+    }
+  }
+}
+
 .refinement-container__refinements {
   margin-right: 0.5rem;
   display: flex;
-  li {
-    display: flex;
-    font-weight: 500;
-    font-size: 0.7rem;
-    margin-right: 0.5rem;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    a {
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      background-color: $blue-algolia;
-      height: 100%;
-      padding: 0.3rem;
-      align-items: center;
-      color: $white-color;
-    }
+  &:empty{
+    display: none;
   }
-  ul {
-    display: flex;
-    text-transform: capitalize;
-    li {
-      background-color: $blue-algolia;
-      border-radius: 1rem;
-      color: $white-color;
-    }
-  }
+}
+}
+
+.button-clear-refinement {
+  @include btn-currentRefinement;
 }

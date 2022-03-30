@@ -61,17 +61,33 @@
           $main-color,
           $blue-algolia
         );
-      }
-      :hover > p {
-        color: $white-color;
-      }
-      :hover > span {
-        color: $white-color;
+        &::before {
+          position: absolute;
+          content: "";
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background: $blue-algolia-custom-gradient;
+          z-index: -1;
+          transition: opacity 0.3s ease-in-out;
+          opacity: 0;
+          border-radius: 2px;
+        }
+        &:hover::before{
+          opacity: 1;
+          transition: opacity 0.3s ease-in-out;
+        }
+        &:hover{
+          p,span{
+            color: $white-color;
+            transition: color 0.3s ease-in-out;
+          }
+        }
+       
       }
     }
-    :hover {
-      @include facetsFilterHover($blue-algolia);
-    }
+    
   }
   .refined-filter {
     @include btn-hover($blue-algolia, $white-color);
