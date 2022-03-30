@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 // Recoil Header State
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-// Import Config for the header
-// import { configAtom } from '../../../config/config';
-
 // eslint-disable-next-line import/order
 import { queryAtom } from '../../../config/searchbox';
+
+// Import logo URL for header
+import { logoUrl } from '../../../config/headerConfig';
 
 //Import config for federatedSearch
 import { isFederatedAtom, isVoiceSearch } from '../../../config/config';
@@ -22,7 +22,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Import SearchBox
 // eslint-disable-next-line import/order
-import CustomSearchBoxSimple from '../../searchbox/SearchBox';
+import CustomSearchBox from '../../searchbox/SearchBox';
 
 // Import VoiceSearchComponent
 import CustomVoiceSearchComponent from '../../voicesearch/VoiceSearch';
@@ -65,7 +65,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
             }}
           >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
+              src={logoUrl}
               alt=""
             />
           </Link>
@@ -77,7 +77,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
       </div>
 
       <div className="searchbox-container searchbox-container-mobile">
-        <CustomSearchBoxSimple />
+        <CustomSearchBox />
         {/* Display voicesearch if the  displayVoiceSearch config is set to true */}
         {displayVoiceSearch && <CustomVoiceSearchComponent />}
       </div>

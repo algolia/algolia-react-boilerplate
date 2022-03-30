@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Highlight } from 'react-instantsearch-dom';
 
 import { Heart } from '../../assets/svg/SvgIndex';
-import { framerMotionTransition, framerMotionHits } from '../../config/config';
+import { framerMotionTransition, framerMotionHits } from '../../config/animationConfig';
 
 // Recoil import
 import { hitAtom } from '../../config/results';

@@ -3,7 +3,7 @@
 import { createClassNames, connectHits } from 'react-instantsearch-dom';
 import { connectInjectedHits } from './connectInjectedHits';
 import { motion, AnimatePresence } from 'framer-motion';
-import { framerMotionPage } from '../../../config/config';
+import { framerMotionPage } from '../../../config/animationConfig';
 
 const cx = createClassNames('InfiniteHits');
 

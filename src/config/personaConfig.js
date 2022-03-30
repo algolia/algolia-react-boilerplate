@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
 export const personaConfig = [
-  { value: '', label: 'Neutral' },
+  { value: 'anon', label: 'Neutral' },
   {
     value: 'stephen_james',
     label: 'Stephen',
@@ -88,7 +88,7 @@ export const styles = {
 
 export const personaSelectedAtom = atom({
   key: 'personaSelected', // unique ID (with respect to other atoms/selectors)
-  default: null, // default value (aka initial value)
+  default: 'anon', // default value (aka initial value)
 });
 
 export const isPersonaMenuOpen = atom({

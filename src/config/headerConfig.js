@@ -1,5 +1,8 @@
 import { atom } from 'recoil';
 
+export const logoUrl =
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png';
+
 export const linksHeader = atom({
   key: 'linksHeader', // unique ID (with respect to other atoms/selectors)
   default: [

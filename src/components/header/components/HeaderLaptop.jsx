@@ -9,9 +9,11 @@ import { queryAtom } from '../../../config/searchbox';
 //Import config for federatedSearch
 import { isFederatedAtom, isVoiceSearch } from '../../../config/config';
 
+import { logoUrl } from '../../../config/headerConfig';
+
 // Import SearchBox
 // Rename customSearchbox
-import CustomSearchBoxSimple from '../../searchbox/SearchBox';
+import CustomSearchBox from '../../searchbox/SearchBox';
 
 // Import VoiceSearchComponent
 import CustomVoiceSearchComponent from '../../voicesearch/VoiceSearch';
@@ -36,14 +38,14 @@ const HeaderLaptop = () => {
           >
             {/* Add possibility to change the Logo */}
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
+              src={logoUrl}
               alt=""
             />
           </Link>
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container">
-          <CustomSearchBoxSimple />
+          <CustomSearchBox />
           {displayVoiceSearch && <CustomVoiceSearchComponent />}
         </div>
         <div className="container__header-top__title">

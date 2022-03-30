@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 
 // import framer motion
 import { motion } from 'framer-motion';
-import { framerMotionPage, framerMotionFacet } from '../../../config/config';
+import { framerMotionPage, framerMotionFacet } from '../../../config/animationConfig';
 
 // Recoil state to directly access results
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -32,7 +32,7 @@ import CustomSortBy from '../../../components/searchresultpage/SortBy';
 import { CustomStats } from '../../../components/searchresultpage/Stats';
 import { InjectedHits } from '../../../components/searchresultpage/injected-hits';
 
-import { indexName, indexInfluencer } from '../../../config/appConfig';
+import { indexName, indexInfluencer } from '../../../config/algoliaEnvConfig';
 
 // Import Config File
 import { customDataByType } from '../../../utils';
