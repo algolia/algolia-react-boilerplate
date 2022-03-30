@@ -108,7 +108,7 @@ const SrpLaptop = () => {
           userToken={userToken}
           enablePersonalization={true}
           filters={state ? state : ''}
-          query={queryState}
+          query={queryState && queryState}
         />
         <Index indexName={injectedContentIndex}>
           <Configure hitsPerPage={1} page={0} />
