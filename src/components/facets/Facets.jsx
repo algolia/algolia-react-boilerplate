@@ -118,7 +118,6 @@ const Facets = () => {
                 key={i}
               />
             );
-            break;
           case 'colour':
             return (
               <CustomColorRefinement
@@ -130,7 +129,6 @@ const Facets = () => {
                 shape={Shape.Circle}
               />
             );
-            break;
           case 'hierarchical':
             return (
               <CustomHierarchicalMenu
@@ -139,7 +137,6 @@ const Facets = () => {
                 key={i}
               />
             );
-            break;
           default:
             return (
               <GenericRefinementList
@@ -151,7 +148,6 @@ const Facets = () => {
                 options={options}
               />
             );
-            break;
         }
       })}
     </DynamicWidgets>
