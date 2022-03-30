@@ -21,7 +21,7 @@ import { framerMotionTransition } from '../../config/animationConfig';
 const HomeCarousel = ({ attribute, title }) => {
   return (
     <div className="home-carousel">
-      <Index indexId={indexName.index} indexName={indexName.index}>
+      <Index indexId={title} indexName={indexName.index}>
         <Configure hitsPerPage={8} filters={attribute} />
         <CustomHitsCarousel title={title} />
       </Index>
