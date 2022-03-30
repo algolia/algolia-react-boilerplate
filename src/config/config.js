@@ -20,7 +20,7 @@ export const isBannerSrp = atom({
 
 export const isInjectedHits = atom({
   key: 'injectedHits',
-  default: true,
+  default: false,
 });
 
 export const isFederatedAtom = atom({
