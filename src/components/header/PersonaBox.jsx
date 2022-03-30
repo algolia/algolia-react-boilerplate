@@ -1,7 +1,6 @@
 import useScreenSize from '../../hooks/useScreenSize';
 const PersonaBox = () => {
   const { mobile, tablet } = useScreenSize();
-  console.log(tablet, mobile);
   const styleFunction = () => {
     if (mobile && !tablet) {
       return 'box arrow-left box-mobile';
