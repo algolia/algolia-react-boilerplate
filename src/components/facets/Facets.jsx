@@ -9,15 +9,15 @@ import {
   Shape,
 } from '@algolia/react-instantsearch-widget-color-refinement-list';
 
-
 // Import magnifying glass svg, and price slider component
 import { Glass } from '../../assets/svg/SvgIndex';
+
+// Import components
 import PriceSlider from './PriceSlider';
-
-import { refinements } from '../../config/refinementsConfig'
-
-// Import Config
 import CustomHierarchicalMenu from './Hierarchical';
+
+// Import list of Attributes/Facets
+import { refinements } from '../../config/refinementsConfig';
 
 // expects an attribute which is an array of items
 const RefinementList = ({ title, items, refine, searchForItems, options }) => {
@@ -108,51 +108,47 @@ const Facets = () => {
   return (
     <DynamicWidgets>
       {refinements.map((e, i) => {
-        const refinementType = e.type;
-        if (refinementType === 'price') {
+        const { type, label, currency, options } = e;
+        if (type === 'price') {
           return (
             <PriceSlider
-              attribute={e.options.attribute}
-              title={e.label}
-              currency={e.currency}
+              attribute={options.attribute}
+              title={label}
+              currency={currency}
               key={i}
             />
           );
         }
-        if (refinementType === 'colour') {
+        if (type === 'colour') {
           return (
             <CustomColorRefinement
               key={i}
-              title={e.label}
-              attribute={e.options.attribute}
+              title={label}
+              attribute={options.attribute}
               separator=";"
               layout={Layout.Grid}
               shape={Shape.Circle}
             />
           );
         }
-        if (refinementType === 'hierarchical') {
+        if (type === 'hierarchical') {
           return (
             <CustomHierarchicalMenu
-              attributes={e.options.attribute}
-              title={e.label}
+              attributes={options.attribute}
+              title={label}
               key={i}
             />
           );
         }
-        if (
-          refinementType !== 'price' &&
-          refinementType !== 'hierarchical' &&
-          refinementType !== 'colour'
-        ) {
+        if (type !== 'price' && type !== 'hierarchical' && type !== 'colour') {
           return (
             <GenericRefinementList
-              searchable={e.options?.searchable}
+              searchable={options?.searchable}
               key={i}
-              limit={e.options?.limit}
-              attribute={e.options.attribute}
-              title={e.label}
-              options={e.options}
+              limit={options?.limit}
+              attribute={options.attribute}
+              title={label}
+              options={options}
             />
           );
         }

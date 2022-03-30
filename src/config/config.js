@@ -1,7 +1,5 @@
 import { atom } from 'recoil';
 
-import { indexName } from './algoliaEnvConfig';
-
 // ------------------------------------------
 // Config feature, change by true or false to remove them or change the value
 // ------------------------------------------
@@ -14,6 +12,7 @@ export const isStats = atom({
   key: 'stats',
   default: true,
 });
+
 export const isBannerSrp = atom({
   key: 'bannerSrp',
   default: true,
@@ -63,23 +62,6 @@ export const selectSortByIndex = atom({
   default: '', // default value (aka initial value)
 });
 
-const hitsPerPage = {
-  numberNotInjected: 15,
-  numberInjected: 14,
-};
-
-// ------------------------------------------
-// Sort By Config
-// ------------------------------------------
-
-const sortBy = {
-  value: true,
-  labelIndex: [
-    { value: indexName.index, label: 'All' },
-    { value: `${indexName.index}_price_desc`, label: 'Price Desc' },
-    { value: `${indexName.index}_price_asc`, label: 'Price Asc' },
-  ],
-};
 
 // ------------------------------------------
 // Category Pages
@@ -90,12 +72,4 @@ export const hierarchicalFacet = {
   hierarchicalLvl0: 'hierarchicalCategories.lvl0',
 };
 
-const config = {
-  hitsPerPage,
-  sortBy,
-};
 
-export const configAtom = atom({
-  key: 'configAtom', // unique ID (with respect to other atoms/selectors)
-  default: config, // default value (aka initial value)
-});

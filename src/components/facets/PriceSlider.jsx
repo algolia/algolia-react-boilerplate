@@ -20,7 +20,7 @@ const RangeSlider = ({
   const [minSlider, setMinSlider] = useState(min);
   const [maxSlider, setMaxSlider] = useState(max);
   const [change, setChange] = useState(false);
-  const currencyValue = currency;
+
   useEffect(() => {
     if (canRefine) {
       setMinSlider(currentRefinement.min);
@@ -43,10 +43,10 @@ const RangeSlider = ({
       <div className="filters-container__pricecontainer">
         <div className="filters-container__pricecontainer__prices">
           <p>
-            {minSlider} {currencyValue}
+            {minSlider} {currency}
           </p>
           <p>
-            {maxSlider} {currencyValue}
+            {maxSlider} {currency}
           </p>
         </div>
         <Range

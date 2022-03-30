@@ -8,12 +8,16 @@ import { useLocation } from 'react-router-dom';
 
 // import framer motion
 import { motion } from 'framer-motion';
-import { framerMotionPage, framerMotionFacet } from '../../../config/animationConfig';
+import {
+  framerMotionPage,
+  framerMotionFacet,
+} from '../../../config/animationConfig';
 
 // Recoil state to directly access results
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
-import { configAtom, isStats, isInjectedHits } from '../../../config/config';
+import { isStats, isInjectedHits } from '../../../config/config';
+import { sortBy } from '../../../config/sortByConfig';
 import { queryAtom } from '../../../config/searchbox';
 
 // Import Persona State from recoil
@@ -32,32 +36,37 @@ import CustomSortBy from '../../../components/searchresultpage/SortBy';
 import { CustomStats } from '../../../components/searchresultpage/Stats';
 import { InjectedHits } from '../../../components/searchresultpage/injected-hits';
 
-import { indexName, indexInfluencer } from '../../../config/algoliaEnvConfig';
+import {
+  indexName,
+  injectedContentIndex,
+} from '../../../config/algoliaEnvConfig';
+
+// Handle the number of hits per page
+import { hitsPerPage } from '../../../config/hits';
 
 // Import Config File
 import { customDataByType } from '../../../utils';
 
 const SrpLaptop = () => {
   // Recoil & React states
-  const [config] = useRecoilState(configAtom);
+
   const stats = useRecoilValue(isStats);
-  const injectedValue = useRecoilValue(isInjectedHits);
-  const [injected, setInjected] = useState(false);
+  const shouldInjectContent = useRecoilValue(isInjectedHits);
   const queryState = useRecoilValue(queryAtom);
+  const [injected, setInjected] = useState(false);
 
   // Define Stat Const
-  const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
-  const hitsPerPageInjected = config.hitsPerPage.numberInjected;
+  const { hitsPerPageNotInjected, hitsPerPageInjected } = hitsPerPage;
 
   // Define Price Sort By Const
-  const priceSortBy = config.sortBy.value;
-  const labelItems = config.sortBy.labelIndex;
+  const { value: priceSortBy, labelIndex: labelItems } = sortBy;
 
   // Get states of React Router
   const { state } = useLocation();
-  const personaSelect = useRecoilValue(personaSelectedAtom);
+
   // Persona
-  const userToken = personaSelect;
+  const userToken = useRecoilValue(personaSelectedAtom);
+
   return (
     <div className="srp-container">
       <motion.div
@@ -101,16 +110,15 @@ const SrpLaptop = () => {
           filters={state ? state : ''}
           query={queryState && queryState}
         />
-        <Index indexName={indexInfluencer.index}>
+        <Index indexName={injectedContentIndex}>
           <Configure hitsPerPage={1} page={0} />
         </Index>
         {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
-        {injectedValue ? (
+        {shouldInjectContent ? (
           <InjectedHits
             hitComponent={Hit}
             slots={({ resultsByIndex }) => {
               const indexValue = indexName.index;
-              const indexInfluencerValue = indexInfluencer.index;
               const { noCta, nikeCard } = customDataByType(
                 resultsByIndex?.[indexValue]?.userData
               );
@@ -135,8 +143,8 @@ const SrpLaptop = () => {
                   // eslint-disable-next-line no-shadow
                   getHits: ({ resultsByIndex }) => {
                     setInjected(true);
-                    return resultsByIndex[indexInfluencerValue]
-                      ? resultsByIndex[indexInfluencerValue].hits || []
+                    return resultsByIndex[injectedContentIndex]
+                      ? resultsByIndex[injectedContentIndex].hits || []
                       : [];
                   },
                   slotComponent: InfluencerCard,
