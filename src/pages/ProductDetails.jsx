@@ -64,7 +64,7 @@ const ProductDetails = () => {
     colourHexa,
   } = useRecoilValue(hitsConfig);
 
-  const hexaCode = hit[colourHexa].split(';')[1];
+  const hexaCode = hit[colourHexa]?.split(';')[1];
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -140,14 +140,25 @@ const ProductDetails = () => {
             <p className="brand">{hit[brand]}</p>
             <p className="name">{hit[productName]}</p>
             <div className="color">
-              <div
-                style={{
-                  backgroundColor: hexaCode,
-                  width: '30px',
-                  height: '30px',
-                  borderRadius: '50%',
-                }}
-              ></div>
+              {hexaCode ? (
+                <div
+                  style={{
+                    backgroundColor: hexaCode,
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
+                  }}
+                ></div>
+              ) : (
+                <div
+                  style={{
+                    backgroundColor: '#DDDDDD',
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
+                  }}
+                ></div>
+              )}
               <p>{hit[colour]}</p>
             </div>
             {hit[sizeFilter].length > 0 && (
