@@ -11,12 +11,13 @@ import {
 
 // Import magnifying glass svg, and price slider component
 import { Glass } from '../../assets/svg/SvgIndex';
+
+// Import components
 import PriceSlider from './PriceSlider';
-
-import { refinements } from '../../config/refinementsConfig';
-
-// Import Config
 import CustomHierarchicalMenu from './Hierarchical';
+
+// Import list of Attributes/Facets
+import { refinements } from '../../config/refinementsConfig';
 
 // expects an attribute which is an array of items
 const RefinementList = ({ title, items, refine, searchForItems, options }) => {

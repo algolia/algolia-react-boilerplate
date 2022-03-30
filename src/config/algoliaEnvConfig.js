@@ -16,6 +16,4 @@ export const indexName = {
   indexBlog: 'canda_customDemo_articles',
 };
 
-export const indexInfluencer = {
-  index: 'flagship_fashion_influencers',
-};
+export const injectedContentIndex = 'flagship_fashion_influencers';

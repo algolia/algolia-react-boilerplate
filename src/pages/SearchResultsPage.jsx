@@ -2,9 +2,6 @@
 // Includes functionality for banners, query suggestions, noresults
 // It also renders different search results components depending on screen size
 
-// import Algolia
-import algoliasearch from 'algoliasearch/lite';
-
 // import React functionality
 import { memo } from 'react';
 
@@ -12,7 +9,7 @@ import { memo } from 'react';
 import {
   Configure,
   connectStateResults,
-  InstantSearch,
+  Index,
 } from 'react-instantsearch-dom';
 
 // Recoil state to directly access results
@@ -27,21 +24,24 @@ import Banner from '../components/banners/Banner';
 
 // Import Persona State from recoil
 import { isBannerSrp } from '../config/config';
-import { searchClient, indexName } from '../config/algoliaEnvConfig';
+import { indexName } from '../config/algoliaEnvConfig';
 
 import SrpLaptop from '../components/searchresultpage/srpLaptop/SrpLaptop';
 import SrpMobile from '../components/searchresultpage/srpMobile/SrpMobile';
 
 const SearchResultPage = () => {
   // Recoil & React states
-  // Handle Banner
-  const bannerDisplay = useRecoilValue(isBannerSrp);
+
+  // Do you want to show banner on SRP? This boolean tells us yes or no
+  const shouldDisplayBanners = useRecoilValue(isBannerSrp);
+
   // Handle screen resize
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
+
   return (
     <>
       {/* Display the banner if the bannerSrp config is set to: true */}
-      {bannerDisplay && <Banner />}
+      {shouldDisplayBanners && <Banner />}
       {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
       <NoResultsHandler>
         {(laptop || laptopXS) && <SrpLaptop />}
@@ -52,9 +52,7 @@ const SearchResultPage = () => {
 };
 
 // This is rendered when there are no results to display
-const NoResults = memo(function NoResults({ query }) {
-  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
-  return (
+const NoResults = memo(({ query }) => (
     <div className="no-results">
       <div className="no-results__infos">
         <h4 className="no-results__titles">
@@ -74,19 +72,18 @@ const NoResults = memo(function NoResults({ query }) {
             </span>
           </li>
           <div className="query-suggestion">
-            <InstantSearch
-              searchClient={search}
+            <Index
+              indexId={indexName.indexSuggestion}
               indexName={indexName.indexSuggestion}
             >
               <Configure hitsPerPage={3} />
               <QuerySuggestions />
-            </InstantSearch>
+            </Index>
           </div>
         </ul>
       </div>
     </div>
-  );
-});
+));
 
 // This wrapper decides when to render the NoResults component
 const NoResultsHandlerComponent = ({
@@ -94,15 +91,15 @@ const NoResultsHandlerComponent = ({
   searchState,
   searchResults,
   searching,
-}) => {
+}) => (
   // If there is a search, but there are no results to display, render NoResults component
-  if (searchState?.query && searchResults?.nbHits === 0) {
-    return <NoResults query={searchState.query} isSearching={searching} />;
-  }
-  // Otherwise, just return the search results
-  return <>{children}</>;
-};
+    searchState?.query && searchResults?.nbHits === 0 ?
+     <NoResults query={searchState.query} isSearching={searching} />
+     // Otherwise, just return the search results
+    : <>{children}</>
+  
+);
 
-const NoResultsHandler = connectStateResults(memo(NoResultsHandlerComponent));
+const NoResultsHandler = connectStateResults(NoResultsHandlerComponent);
 
 export default SearchResultPage;
