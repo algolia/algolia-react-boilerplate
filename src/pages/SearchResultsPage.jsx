@@ -6,11 +6,7 @@
 import { memo } from 'react';
 
 // eslint-disable-next-line import/order
-import {
-  Configure,
-  connectStateResults,
-  Index,
-} from 'react-instantsearch-dom';
+import { Configure, connectStateResults, Index } from 'react-instantsearch-dom';
 
 // Recoil state to directly access results
 import { useRecoilValue } from 'recoil';
@@ -53,36 +49,36 @@ const SearchResultPage = () => {
 
 // This is rendered when there are no results to display
 const NoResults = memo(({ query }) => (
-    <div className="no-results">
-      <div className="no-results__infos">
-        <h4 className="no-results__titles">
-          <span className="no-results__titles__span">
-            Sorry, we found no results for{' '}
+  <div className="no-results">
+    <div className="no-results__infos">
+      <h4 className="no-results__titles">
+        <span className="no-results__titles__span">
+          Sorry, we found no result for{' '}
+        </span>
+        <span className="no-results__titles__span-query">“{query}”</span>
+      </h4>
+      <p>Try the following:</p>
+      <ul className="no-results__infos">
+        <li>
+          <span className="no-results__infos__span">Check your spelling</span>
+        </li>
+        <li>
+          <span className="no-results__infos__span">
+            Or check our suggestions bellow 👇
           </span>
-          <span className="no-results__titles__span-query">“{query}”</span>
-        </h4>
-        <p>Try the following:</p>
-        <ul className="no-results__infos">
-          <li>
-            <span className="no-results__infos__span">Check your spelling</span>
-          </li>
-          <li>
-            <span className="no-results__infos__span">
-              Or check our suggestions bellow 👇
-            </span>
-          </li>
-          <div className="query-suggestion">
-            <Index
-              indexId={indexName.indexSuggestion}
-              indexName={indexName.indexSuggestion}
-            >
-              <Configure hitsPerPage={3} />
-              <QuerySuggestions />
-            </Index>
-          </div>
-        </ul>
-      </div>
+        </li>
+        <div className="query-suggestion">
+          <Index
+            indexId={indexName.indexSuggestion}
+            indexName={indexName.indexSuggestion}
+          >
+            <Configure hitsPerPage={3} query="" />
+            <QuerySuggestions />
+          </Index>
+        </div>
+      </ul>
     </div>
+  </div>
 ));
 
 // This wrapper decides when to render the NoResults component
@@ -91,14 +87,17 @@ const NoResultsHandlerComponent = ({
   searchState,
   searchResults,
   searching,
-}) => (
-  // If there is a search, but there are no results to display, render NoResults component
-    searchState?.query && searchResults?.nbHits === 0 ?
-     <NoResults query={searchState.query} isSearching={searching} />
-     // Otherwise, just return the search results
-    : <>{children}</>
-  
-);
+}) => {
+  return (
+    // If there is a search, but there are no results to display, render NoResults component
+    searchState?.query && searchResults?.nbHits === 0 ? (
+      <NoResults query={searchState.query} isSearching={searching} />
+    ) : (
+      // Otherwise, just return the search results
+      <>{children}</>
+    )
+  );
+};
 
 const NoResultsHandler = connectStateResults(NoResultsHandlerComponent);
 
