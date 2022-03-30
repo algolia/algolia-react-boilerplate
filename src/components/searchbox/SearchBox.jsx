@@ -74,6 +74,6 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   );
 };
 
-const CustomSearchBoxSimple = connectSearchBox(SearchBoxSimple);
+const CustomSearchBox = connectSearchBox(SearchBoxSimple);
 
-export default memo(CustomSearchBoxSimple);
+export default memo(CustomSearchBox);

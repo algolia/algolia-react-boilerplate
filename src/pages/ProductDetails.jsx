@@ -10,14 +10,14 @@ import algoliarecommend from '@algolia/recommend';
 
 // framer-motion
 import { motion } from 'framer-motion';
-import { framerMotionPage, framerMotionTransition } from '../config/config';
+import { framerMotionPage, framerMotionTransition } from '../config/animationConfig';
 
 // Import components
 import { ChevronLeft } from '../assets/svg/SvgIndex';
 import RelatedItem from '../components/recommend/RelatedProducts';
 
 // Algolia search client
-import { searchClient, indexName } from '../config/appConfig';
+import { searchClient, indexName } from '../config/algoliaEnvConfig';
 
 // React router import
 import { useNavigate } from 'react-router-dom';

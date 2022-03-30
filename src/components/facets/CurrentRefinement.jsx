@@ -6,7 +6,8 @@ import { connectCurrentRefinements } from 'react-instantsearch-dom';
 import { useRecoilValue } from 'recoil';
 
 // import config file for state of facets
-import { currency, configAtom } from '../../config/config';
+import { currency } from '../../config/config';
+import { refinementPrice } from '../../config/refinementsConfig';
 import { hitsConfig } from '../../config/hits';
 
 const displayPrice = (i, currencyValue, refinementPrice) => {
@@ -40,7 +41,6 @@ const displayColor = (i) => {
 
 const CurrentRefinements = ({ items, refine, createURL }) => {
   const currencyValue = useRecoilValue(currency);
-  const { refinementPrice } = useRecoilValue(configAtom);
   const { colourHexa } = useRecoilValue(hitsConfig);
   return (
     <ul className="refinement-container__refinements">

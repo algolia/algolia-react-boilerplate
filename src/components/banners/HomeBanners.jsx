@@ -36,10 +36,10 @@ const HomeBanners = ({ items }) => {
               imgUrl1={imgUrl1}
               title={title}
               subtitle={subtitle}
-              LinkButton1={LinkButton1}
-              button1={button1}
               imgUrl2={imgUrl2}
               imgUrl3={imgUrl3}
+              LinkButton1={LinkButton1}
+              button1={button1}
               LinkButton2={LinkButton2}
               button2={button2}
             />
@@ -63,6 +63,41 @@ const HomeBanners = ({ items }) => {
   );
 };
 
+const BannerOne = ({
+  imgUrl1,
+  title,
+  subtitle,
+  imgUrl2,
+  imgUrl3,
+  LinkButton1,
+  button1,
+  LinkButton2,
+  button2,
+}) => {
+  <div
+    className="home-banner-container"
+    style={{
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.45)), url(${imgUrl1})`,
+    }}
+    key={index}
+  >
+    <div className="home-banner-container__infos">
+      <h1>{title}</h1>
+      <h2>{subtitle}</h2>
+    </div>
+    <div className="home-banner-container__image-one">
+      <img src={imgUrl2} alt="" />
+    </div>
+    <div className="home-banner-container__image-two">
+      <img src={imgUrl3} alt="" />
+      <div className="home-banner-container__buttons">
+        <Link to={LinkButton1}>{button1}</Link>
+        <Link to={LinkButton2}>{button2}</Link>
+      </div>
+    </div>
+  </div>;
+};
+
 const BannerTwo = ({ imgUrl1, title, subtitle, LinkButton1, button1 }) => {
   return (
     <div className="home-banner3-container">
@@ -81,41 +116,6 @@ const BannerTwo = ({ imgUrl1, title, subtitle, LinkButton1, button1 }) => {
               <Link to={LinkButton1}>{button1}</Link>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-const BannerOne = ({
-  imgUrl1,
-  title,
-  subtitle,
-  LinkButton1,
-  button1,
-  imgUrl2,
-  imgUrl3,
-  LinkButton2,
-  button2,
-}) => {
-  return (
-    <div
-      className="home-banner-container"
-      style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.45)), url(${imgUrl1})`,
-      }}
-    >
-      <div className="home-banner-container__infos">
-        <h1>{title}</h1>
-        <h2>{subtitle}</h2>
-      </div>
-      <div className="home-banner-container__image-one">
-        <img src={imgUrl2} alt="" />
-      </div>
-      <div className="home-banner-container__image-two">
-        <img src={imgUrl3} alt="" />
-        <div className="home-banner-container__buttons">
-          <Link to={LinkButton1}>{button1}</Link>
-          <Link to={LinkButton2}>{button2}</Link>
         </div>
       </div>
     </div>

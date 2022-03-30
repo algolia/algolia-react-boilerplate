@@ -6,13 +6,13 @@ import { Configure, Index } from 'react-instantsearch-dom';
 
 // framer motion
 import { motion } from 'framer-motion';
-import { framerMotionFederatedContainer } from '../../config/config';
+import { framerMotionFederatedContainer } from '../../config/animationConfig';
 
 // import from Recoil
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 // Config
-import { indexName, searchClient } from '../../config/appConfig';
+import { indexName, searchClient } from '../../config/algoliaEnvConfig';
 
 // Those imports are here to check if user is clicking outside the searchbox & federated to close federated
 import { isFederatedAtom, searchBoxAtom } from '../../config/config';

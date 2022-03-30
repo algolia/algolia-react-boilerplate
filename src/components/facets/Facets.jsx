@@ -9,15 +9,14 @@ import {
   Shape,
 } from '@algolia/react-instantsearch-widget-color-refinement-list';
 
-// import config file for state of facets
-import { useRecoilState } from 'recoil';
 
 // Import magnifying glass svg, and price slider component
 import { Glass } from '../../assets/svg/SvgIndex';
 import PriceSlider from './PriceSlider';
 
+import { refinements } from '../../config/refinementsConfig'
+
 // Import Config
-import { configAtom } from '../../config/config';
 import CustomHierarchicalMenu from './Hierarchical';
 
 // expects an attribute which is an array of items
@@ -106,11 +105,9 @@ const CustomColorRefinement = ({
 };
 
 const Facets = () => {
-  const [config] = useRecoilState(configAtom);
-  const refinementParams = config.refinements;
   return (
     <DynamicWidgets>
-      {refinementParams.map((e, i) => {
+      {refinements.map((e, i) => {
         const refinementType = e.type;
         if (refinementType === 'price') {
           return (

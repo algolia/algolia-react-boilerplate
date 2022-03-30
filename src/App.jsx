@@ -14,7 +14,7 @@ import { RecoilRoot } from 'recoil';
 import './scss/index.scss';
 
 // application state from config file
-import { searchClient, indexName } from './config/appConfig';
+import { searchClient, indexName } from './config/algoliaEnvConfig';
 
 // Import Components
 import Loader from './components/loader/Loader';

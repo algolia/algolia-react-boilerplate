@@ -7,7 +7,7 @@ import algoliasearch from 'algoliasearch/lite';
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { framerMotionPage } from '../config/config';
+import { framerMotionPage } from '../config/animationConfig';
 // change to import from '../config/animationConfig;
 
 // recoil import
@@ -23,15 +23,11 @@ import { isCarouselAtom, carouselConfig } from '../config/carouselConfig';
 
 //  should federated search be shown or not
 import { isFederatedAtom } from '../config/config';
-import { searchClient } from '../config/appConfig';
 
 const HomePage = () => {
   // Boolean value which determines if federated search is shown or not, default is false
   const isFederated = useRecoilValue(isFederatedAtom);
   const isCarousel = useRecoilValue(isCarouselAtom);
-
-  // Used for carousel as props
-  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
 
   return (
     // Framer motion wrapper
@@ -64,7 +60,6 @@ const HomePage = () => {
             key={i}
             attribute={carousel.attribute}
             title={carousel.title}
-            search={search}
           />
         ))}
     </motion.div>

@@ -1,8 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-
-// Import Algolia functionality
-import algoliasearch from 'algoliasearch/lite';
-import { connectHits, Configure, InstantSearch } from 'react-instantsearch-dom';
+import { connectHits, Configure, Index } from 'react-instantsearch-dom';
 
 // Import Framer Motion
 import { motion } from 'framer-motion';
@@ -15,19 +12,19 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import configuration
 import { hitsConfig } from '../../config/hits';
-import { indexName } from '../../config/appConfig';
-import { hitAtom, hitsAtom } from '../../config/results';
+import { indexName } from '../../config/algoliaEnvConfig';
+import { hitAtom } from '../../config/results';
 
-import { framerMotionTransition } from '../../config/config';
+import { framerMotionTransition } from '../../config/animationConfig';
 
 // Build the Carousel for use on the Homepage
-const HomeCarousel = ({ attribute, title, search }) => {
+const HomeCarousel = ({ attribute, title }) => {
   return (
     <div className="home-carousel">
-      <InstantSearch indexName={indexName.index} searchClient={search}>
+      <Index indexId={indexName.index} indexName={indexName.index}>
         <Configure hitsPerPage={8} filters={attribute} />
         <CustomHitsCarousel title={title} />
-      </InstantSearch>
+      </Index>
     </div>
   );
 };
