@@ -3,13 +3,19 @@
 // It also renders different search results components depending on screen size
 
 // import React functionality
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 
 // eslint-disable-next-line import/order
-import { Configure, connectStateResults, Index } from 'react-instantsearch-dom';
+import {
+  Configure,
+  connectStateResults,
+  Index,
+  connectSearchBox,
+} from 'react-instantsearch-dom';
 
 // Recoil state to directly access results
 import { useRecoilValue } from 'recoil';
+import { queryAtom } from '../config/searchbox';
 
 // Import custom Hooks
 import useScreenSize from '../hooks/useScreenSize';
@@ -48,38 +54,43 @@ const SearchResultPage = () => {
 };
 
 // This is rendered when there are no results to display
-const NoResults = memo(({ query }) => (
-  <div className="no-results">
-    <div className="no-results__infos">
-      <h4 className="no-results__titles">
-        <span className="no-results__titles__span">
-          Sorry, we found no result for{' '}
-        </span>
-        <span className="no-results__titles__span-query">“{query}”</span>
-      </h4>
-      <p>Try the following:</p>
-      <ul className="no-results__infos">
-        <li>
-          <span className="no-results__infos__span">Check your spelling</span>
-        </li>
-        <li>
-          <span className="no-results__infos__span">
-            Or check our suggestions bellow 👇
+const NoResults = memo(({ query }) => {
+  const getQueryState = useRecoilValue(queryAtom);
+  return (
+    <div className="no-results">
+      <div className="no-results__infos">
+        <h4 className="no-results__titles">
+          <span className="no-results__titles__span">
+            Sorry, we found no result for{' '}
           </span>
-        </li>
-        <div className="query-suggestion">
-          <Index
-            indexId={indexName.indexSuggestion}
-            indexName={indexName.indexSuggestion}
-          >
-            <Configure hitsPerPage={3} query="" />
-            <QuerySuggestions />
-          </Index>
-        </div>
-      </ul>
+          <span className="no-results__titles__span-query">“{query}”</span>
+        </h4>
+        <p>Try the following:</p>
+        <ul className="no-results__infos">
+          <li>
+            <span className="no-results__infos__span">Check your spelling</span>
+          </li>
+          <li>
+            <span className="no-results__infos__span">
+              Or check our suggestions bellow 👇
+            </span>
+          </li>
+          <div className="query-suggestion">
+            <Index
+              indexId={indexName.indexSuggestion}
+              indexName={indexName.indexSuggestion}
+            >
+              <Configure hitsPerPage={3} query="" />
+              <QuerySuggestions />
+            </Index>
+            {/* Add this searchBox Invisible to refine when we click on a suggestion */}
+            <CustomSearchBox query={getQueryState} />
+          </div>
+        </ul>
+      </div>
     </div>
-  </div>
-));
+  );
+});
 
 // This wrapper decides when to render the NoResults component
 const NoResultsHandlerComponent = ({
@@ -100,5 +111,30 @@ const NoResultsHandlerComponent = ({
 };
 
 const NoResultsHandler = connectStateResults(NoResultsHandlerComponent);
+
+// "This searchbox is virtual and will not appear in the DOM. The goal of this virtual searchbox is to refine the app by changing the query state
+// in the main IS instance when clicking on QS when we're in the noResult component"
+const SearchBox = ({ refine, query }) => {
+  const refineFunction = (queryValue) => {
+    refine(queryValue);
+  };
+  useEffect(() => {
+    refineFunction(query);
+  }, [query]);
+
+  return (
+    <form noValidate action="" role="search" className="search-box-invisible">
+      <input
+        type="search"
+        value={query}
+        onChange={(event) => {
+          refine(event.currentTarget.value);
+        }}
+      />
+    </form>
+  );
+};
+
+const CustomSearchBox = connectSearchBox(SearchBox);
 
 export default SearchResultPage;
