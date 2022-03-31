@@ -9,42 +9,38 @@ import { useLocation } from 'react-router-dom';
 // import framer motion
 import { motion } from 'framer-motion';
 
-import { framerMotionPage } from '../../../config/animationConfig';
-
+import { framerMotionPage } from '@/config/animationConfig';
 
 // Recoil state to directly access results
 import { useRecoilValue } from 'recoil';
 
 // Import Persona State from recoil
-import { personaSelectedAtom } from '../../../config/personaConfig';
+import { personaSelectedAtom } from '@/config/personaConfig';
 
-import { isStats, isInjectedHits } from '../../../config/config';
-import { sortBy } from '../../../config/sortByConfig';
-import { queryAtom } from '../../../config/searchbox';
+import { isStats, isInjectedHits } from '@/config/config';
+import { sortBy } from '@/config/sortByConfig';
+import { queryAtom } from '@/config/searchbox';
 
 // Import Components
-import CustomClearRefinements from '../../../components/facets/ClearRefinement';
-import CustomCurrentRefinements from '../../../components/facets/CurrentRefinement';
-import CustomHitsComponent from '../../../components/hits/CustomHits';
-import GiftCard from '../../../components/hits/GiftCard';
-import { Hit } from '../../../components/hits/Hits';
-import InfluencerCard from '../../../components/hits/InfluencerCard';
-import NikeCard from '../../../components/hits/SalesCard';
-import CustomSortBy from '../../../components/searchresultpage/SortBy';
-import { CustomStats } from '../../../components/searchresultpage/Stats';
-import { InjectedHits } from '../../../components/searchresultpage/injected-hits';
-import FacetsMobile from '../../facets/facetsMobile/FacetsMobile';
-import { ChevronRight, ChevronLeft } from '../../../assets/svg/SvgIndex';
+import CustomClearRefinements from '@/components/facets/ClearRefinement';
+import CustomCurrentRefinements from '@/components/facets/CurrentRefinement';
+import CustomHitsComponent from '@/components/hits/CustomHits';
+import GiftCard from '@/components/hits/GiftCard';
+import { Hit } from '@/components/hits/Hits';
+import InfluencerCard from '@/components/hits/InfluencerCard';
+import NikeCard from '@/components/hits/SalesCard';
+import CustomSortBy from '@/components/searchresultpage/SortBy';
+import { CustomStats } from '@/components/searchresultpage/Stats';
+import { InjectedHits } from '@/components/searchresultpage/injected-hits';
+import FacetsMobile from '@/components/facets/facetsMobile/FacetsMobile';
+import { ChevronRight, ChevronLeft } from '@/assets/svg/SvgIndex';
 
-import {
-  indexName,
-  injectedContentIndex,
-} from '../../../config/algoliaEnvConfig';
+import { indexName, injectedContentIndex } from '@/config/algoliaEnvConfig';
 
-import { hitsPerPage } from '../../../config/hits';
+import { hitsPerPage } from '@/config/hits';
 
 // Import Config File
-import { customDataByType } from '../../../utils';
+import { customDataByType } from '@/utils';
 
 const SrpMobile = () => {
   // Recoil & React states

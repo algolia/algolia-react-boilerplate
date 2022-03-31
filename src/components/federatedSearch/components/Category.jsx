@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { connectRefinementList } from 'react-instantsearch-dom';
 
 // component import
-import { ChevronRight } from '../../../assets/svg/SvgIndex';
+import { ChevronRight } from '@/assets/svg/SvgIndex';
 
-import { categories } from '../../../config/federatedConfig';
+import { categories } from '@/config/federatedConfig';
 
 const CategoryItems = ({ items }) => {
   // router hook to navigate using a function

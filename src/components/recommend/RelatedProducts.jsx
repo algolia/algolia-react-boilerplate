@@ -1,14 +1,14 @@
 // Component for rendering the Related Products through Recommend
 
 // Import Hit configuration for use with Recoil
-import { hitsConfig } from '../../config/hits';
+import { hitsConfig } from '@/config/hits';
 import { useRecoilValue } from 'recoil';
 
 //  Import highlight widget from InstantSearch library
 import { Highlight } from 'react-instantsearch-dom';
 
 // Import heart svg
-import { Heart } from '../../assets/svg/SvgIndex';
+import { Heart } from '@/assets/svg/SvgIndex';
 
 const RelatedItem = ({ item }) => {
   // Get hit attribute from config file

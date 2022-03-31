@@ -9,23 +9,23 @@ import { Link } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // eslint-disable-next-line import/order
-import { queryAtom } from '../../../config/searchbox';
+import { queryAtom } from '@/config/searchbox';
 
 // Import logo URL for header
-import { logoUrl } from '../../../config/headerConfig';
+import { logoUrl } from '@/config/headerConfig';
 
 //Import config for federatedSearch
-import { isFederatedAtom, isVoiceSearch } from '../../../config/config';
+import { isFederatedAtom, isVoiceSearch } from '@/config/config';
 
 // Import framer motion
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Import SearchBox
 // eslint-disable-next-line import/order
-import CustomSearchBox from '../../searchbox/SearchBox';
+import CustomSearchBox from '@/components/searchbox/SearchBox';
 
 // Import VoiceSearchComponent
-import CustomVoiceSearchComponent from '../../voicesearch/VoiceSearch';
+import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 // import SelectPersona from '../personnaSelect/SelectPersona';
 
@@ -64,10 +64,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
               federated(false);
             }}
           >
-            <img
-              src={logoUrl}
-              alt=""
-            />
+            <img src={logoUrl} alt="" />
           </Link>
         </div>
         {/* For a search box Simple center */}
