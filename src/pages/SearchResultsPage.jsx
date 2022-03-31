@@ -112,7 +112,8 @@ const NoResultsHandlerComponent = ({
 
 const NoResultsHandler = connectStateResults(NoResultsHandlerComponent);
 
-// Add this searchBox Invisible to refine when we click on a suggestion
+// "This searchbox is virtual and will not appear in the DOM. The goal of this virtual searchbox is to refine the app by changing the query state
+// in the main IS instance when clicking on QS when we're in the noResult component"
 const SearchBox = ({ refine, query }) => {
   const refineFunction = (queryValue) => {
     refine(queryValue);
@@ -122,7 +123,7 @@ const SearchBox = ({ refine, query }) => {
   }, [query]);
 
   return (
-    <form noValidate action="" role="search" style={{ display: 'none' }}>
+    <form noValidate action="" role="search" className="search-box-invisible">
       <input
         type="search"
         value={query}
