@@ -17,7 +17,7 @@ import './scss/index.scss';
 import { searchClient, indexName } from './config/algoliaEnvConfig';
 
 // Import Components
-import Loader from './components/loader/Loader';
+import Loader from '@/components/loader/Loader';
 import { Main } from './Main.jsx';
 
 // Allows logging and manipulation of algolia results etc.
@@ -38,7 +38,7 @@ const App = () => {
       <InstantSearch searchClient={search} indexName={indexName.index}>
         <CustomStateResults />
         <Router>
-          {isLoaded === false && <Loader isLoaded={isLoaded} />}
+          {/* {isLoaded === false && <Loader isLoaded={isLoaded} />} */}
           <Main isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
         </Router>
       </InstantSearch>
