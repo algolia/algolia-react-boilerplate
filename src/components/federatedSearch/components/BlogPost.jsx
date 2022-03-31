@@ -5,7 +5,7 @@ import { memo } from 'react';
 import { connectHits } from 'react-instantsearch-dom';
 import { useRecoilValue } from 'recoil';
 
-import { contentArticlesConfig } from '../../../config/hits';
+import { contentArticlesConfig } from '@/config/hits';
 
 const ArticlesItems = ({ hits }) => {
   const { image, date, title, headings } = useRecoilValue(

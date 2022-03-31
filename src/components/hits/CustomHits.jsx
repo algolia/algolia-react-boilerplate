@@ -7,13 +7,13 @@ import { motion } from 'framer-motion';
 import { connectHits, Highlight } from 'react-instantsearch-dom';
 
 // Import heart icon
-import { Heart } from '../../assets/svg/SvgIndex';
-import { framerMotionHits } from '../../config/animationConfig';
+import { Heart } from '@/assets/svg/SvgIndex';
+import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil configuration
-import { hitAtom } from '../../config/results';
+import { hitAtom } from '@/config/results';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { hitsConfig } from '../../config/hits';
+import { hitsConfig } from '@/config/hits';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';

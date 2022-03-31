@@ -6,35 +6,32 @@ import { Configure, Index } from 'react-instantsearch-dom';
 
 // framer motion
 import { motion } from 'framer-motion';
-import { framerMotionFederatedContainer } from '../../config/animationConfig';
+import { framerMotionFederatedContainer } from '@/config/animationConfig';
 
 // import from Recoil
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 // Config
-import { indexName, searchClient } from '../../config/algoliaEnvConfig';
+import { indexName, searchClient } from '@/config/algoliaEnvConfig';
 
 // Those imports are here to check if user is clicking outside the searchbox & federated to close federated
-import { isFederatedAtom, searchBoxAtom } from '../../config/config';
+import { isFederatedAtom, searchBoxAtom } from '@/config/config';
 
 // Show or unshow sections in federated (product, suggestions, categories, articles, recent searches)
 // categories import is here to choose which attribute you want to show as category
-import {
-  federatedSearchConfig,
-  categories,
-} from '../../config/federatedConfig';
+import { federatedSearchConfig, categories } from '@/config/federatedConfig';
 
 // Sharing query to general state
-import { queryAtom } from '../../config/searchbox';
+import { queryAtom } from '@/config/searchbox';
 
 // Import Persona State from recoil
-import { personaSelectedAtom } from '../../config/personaConfig';
+import { personaSelectedAtom } from '@/config/personaConfig';
 
 // hook import
 // Check if user is clecking outside an element
-import useOutsideClickConditional from '../../hooks/useOutsideClickConditional';
+import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 // Check screensize for responsiveness
-import useScreenSize from '../../hooks/useScreenSize';
+import useScreenSize from '@/hooks/useScreenSize';
 
 // Components imports
 import RecentSearches from './components/RecentSearches';

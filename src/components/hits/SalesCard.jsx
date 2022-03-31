@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion';
 
 // Import config framer Motion
-import { framerMotionHits } from '../../config/animationConfig';
+import { framerMotionHits } from '@/config/animationConfig';
 
 // SALES CARD
 const NikeCard = ({ hit }) => {

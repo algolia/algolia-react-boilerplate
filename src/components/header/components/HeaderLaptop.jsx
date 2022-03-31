@@ -4,19 +4,19 @@
 import { Link } from 'react-router-dom';
 // Recoil Header State
 import { useSetRecoilState } from 'recoil';
-import { queryAtom } from '../../../config/searchbox';
+import { queryAtom } from '@/config/searchbox';
 
 //Import config for federatedSearch
-import { isFederatedAtom, isVoiceSearch } from '../../../config/config';
+import { isFederatedAtom, isVoiceSearch } from '@/config/config';
 
-import { logoUrl } from '../../../config/headerConfig';
+import { logoUrl } from '@/config/headerConfig';
 
 // Import SearchBox
 // Rename customSearchbox
-import CustomSearchBox from '../../searchbox/SearchBox';
+import CustomSearchBox from '@/components/searchbox/SearchBox';
 
 // Import VoiceSearchComponent
-import CustomVoiceSearchComponent from '../../voicesearch/VoiceSearch';
+import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 
 const HeaderLaptop = () => {
@@ -37,10 +37,7 @@ const HeaderLaptop = () => {
             }}
           >
             {/* Add possibility to change the Logo */}
-            <img
-              src={logoUrl}
-              alt=""
-            />
+            <img src={logoUrl} alt="" />
           </Link>
         </div>
         {/* For a search box Simple center */}

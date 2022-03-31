@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 
 // Import framer Motion config
-import { framerMotionHits } from '../../config/animationConfig';
+import { framerMotionHits } from '@/config/animationConfig';
 
 // Display an image, within a framer-motion wrapper
 const GiftCard = ({ hit }) => {

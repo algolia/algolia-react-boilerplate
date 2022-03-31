@@ -1,13 +1,13 @@
 import { memo } from 'react';
 
 // components import
-import { ChevronRight } from '../../../assets/svg/SvgIndex';
+import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
 // recoil import
 import { useSetRecoilState } from 'recoil';
-import { queryAtom } from '../../../config/searchbox';
+import { queryAtom } from '@/config/searchbox';
 
 const RecentSearches = memo(() => {
   const getSearches = localStorage.getItem('recentSearches');

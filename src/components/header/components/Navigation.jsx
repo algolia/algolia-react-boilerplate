@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 // Import Config for the header
-import { hierarchicalFacet } from '../../../config/config';
-import { linksHeader } from '../../../config/headerConfig';
+import { hierarchicalFacet } from '@/config/config';
+import { linksHeader } from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {

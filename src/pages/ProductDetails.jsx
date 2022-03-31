@@ -13,26 +13,26 @@ import { motion } from 'framer-motion';
 import {
   framerMotionPage,
   framerMotionTransition,
-} from '../config/animationConfig';
+} from '@/config/animationConfig';
 
 // Import components
-import { ChevronLeft } from '../assets/svg/SvgIndex';
-import RelatedItem from '../components/recommend/RelatedProducts';
+import { ChevronLeft } from '@/assets/svg/SvgIndex';
+import RelatedItem from '@/components/recommend/RelatedProducts';
 
 // Algolia search client
-import { searchClient, indexName } from '../config/algoliaEnvConfig';
+import { searchClient, indexName } from '@/config/algoliaEnvConfig';
 
 // React router import
 import { useNavigate } from 'react-router-dom';
 
 // Recoil import
 import { useRecoilValue } from 'recoil';
-import { hitAtom } from '../config/results';
-import { isRelatedProducts, isFbtProducts } from '../config/config';
-import { hitsConfig } from '../config/hits';
+import { hitAtom } from '@/config/results';
+import { isRelatedProducts, isFbtProducts } from '@/config/config';
+import { hitsConfig } from '@/config/hits';
 
 // Custom hooks
-import useScreenSize from '../hooks/useScreenSize';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const ProductDetails = () => {
   // access the hit component from recoil state

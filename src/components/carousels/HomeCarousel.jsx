@@ -11,11 +11,11 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import configuration
-import { hitsConfig } from '../../config/hits';
-import { indexName } from '../../config/algoliaEnvConfig';
-import { hitAtom } from '../../config/results';
+import { hitsConfig } from '@/config/hits';
+import { indexName } from '@/config/algoliaEnvConfig';
+import { hitAtom } from '@/config/results';
 
-import { framerMotionTransition } from '../../config/animationConfig';
+import { framerMotionTransition } from '@/config/animationConfig';
 
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ attribute, title }) => {

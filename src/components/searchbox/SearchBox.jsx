@@ -13,18 +13,18 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 // Import SVG from file as a component
-import { Glass } from '../../assets/svg/SvgIndex';
+import { Glass } from '@/assets/svg/SvgIndex';
 import SearchInCategory from './components/SearchInCategory';
 // Import Config for recoil from file as a component
-import { isFederatedAtom, searchBoxAtom } from '../../config/config';
+import { isFederatedAtom, searchBoxAtom } from '@/config/config';
 import {
   queryAtom,
   simplePlaceholderAtom,
   isSearchInCategory,
-} from '../../config/searchbox';
+} from '@/config/searchbox';
 
 // Custom Hooks
-import useStoreQueryToLocalStorage from '../../hooks/useStoreStringToLocalStorage';
+import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
 
 const SearchBoxSimple = ({ refine, currentRefinement }) => {
   // Recoil State

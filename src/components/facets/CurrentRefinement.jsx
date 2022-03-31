@@ -6,9 +6,9 @@ import { connectCurrentRefinements } from 'react-instantsearch-dom';
 import { useRecoilValue } from 'recoil';
 
 // import config file for state of facets
-import { currency } from '../../config/config';
-import { refinementPrice } from '../../config/refinementsConfig';
-import { hitsConfig } from '../../config/hits';
+import { currency } from '@/config/config';
+import { refinementPrice } from '@/config/refinementsConfig';
+import { hitsConfig } from '@/config/hits';
 
 const displayPrice = (i, currencyValue, refinementPrice) => {
   const { moreThan, lessThan } = refinementPrice;

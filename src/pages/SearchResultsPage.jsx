@@ -12,18 +12,18 @@ import { Configure, connectStateResults, Index } from 'react-instantsearch-dom';
 import { useRecoilValue } from 'recoil';
 
 // Import custom Hooks
-import useScreenSize from '../hooks/useScreenSize';
+import useScreenSize from '@/hooks/useScreenSize';
 
 // Import Components
-import QuerySuggestions from '../components/federatedSearch/components/QuerySuggestions';
-import Banner from '../components/banners/Banner';
+import QuerySuggestions from '@/components/federatedSearch/components/QuerySuggestions';
+import Banner from '@/components/banners/Banner';
 
 // Import Persona State from recoil
-import { isBannerSrp } from '../config/config';
-import { indexName } from '../config/algoliaEnvConfig';
+import { isBannerSrp } from '@/config/config';
+import { indexName } from '@/config/algoliaEnvConfig';
 
-import SrpLaptop from '../components/searchresultpage/srpLaptop/SrpLaptop';
-import SrpMobile from '../components/searchresultpage/srpMobile/SrpMobile';
+import SrpLaptop from '@/components/searchresultpage/srpLaptop/SrpLaptop';
+import SrpMobile from '@/components/searchresultpage/srpMobile/SrpMobile';
 
 const SearchResultPage = () => {
   // Recoil & React states

@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import { connectStateResults } from 'react-instantsearch-dom';
 
 // Import framer Motion config
-import { framerMotionHits } from '../../config/animationConfig';
+import { framerMotionHits } from '@/config/animationConfig';
 
 const QueryAndHitsOnly = connectStateResults(
   ({ searchState, searchResults, children }) => {

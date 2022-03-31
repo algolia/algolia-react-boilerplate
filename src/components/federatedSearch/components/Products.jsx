@@ -4,12 +4,12 @@ import { memo } from 'react';
 import { connectHits } from 'react-instantsearch-dom';
 
 // Component import
-import { ChevronRight } from '../../../assets/svg/SvgIndex';
+import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 // Recoil import
-import { hitAtom } from '../../../config/results';
+import { hitAtom } from '@/config/results';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { hitsConfig } from '../../../config/hits';
+import { hitsConfig } from '@/config/hits';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';

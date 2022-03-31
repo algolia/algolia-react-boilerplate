@@ -7,22 +7,22 @@ import algoliasearch from 'algoliasearch/lite';
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { framerMotionPage } from '../config/animationConfig';
+import { framerMotionPage } from '@/config/animationConfig';
 // change to import from '../config/animationConfig;
 
 // recoil import
 import { useRecoilValue } from 'recoil';
 
 // components import
-import CustomHomeBanners from '../components/banners/HomeBanners';
-import FederatedSearch from '../components/federatedSearch/FederatedSearch';
-import HomeCarousel from '../components/carousels/HomeCarousel';
+import CustomHomeBanners from '@/components/banners/HomeBanners';
+import FederatedSearch from '@/components/federatedSearch/FederatedSearch';
+import HomeCarousel from '@/components/carousels/HomeCarousel';
 
 // should carousel be shown or not and config for carousel
-import { isCarouselAtom, carouselConfig } from '../config/carouselConfig';
+import { isCarouselAtom, carouselConfig } from '@/config/carouselConfig';
 
 //  should federated search be shown or not
-import { isFederatedAtom } from '../config/config';
+import { isFederatedAtom } from '@/config/config';
 
 const HomePage = () => {
   // Boolean value which determines if federated search is shown or not, default is false

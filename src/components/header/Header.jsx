@@ -2,11 +2,11 @@
 import { memo } from 'react';
 
 // Import Hook for a Sticky Header
-import useScreenSize from '../../hooks/useScreenSize';
+import useScreenSize from '@/hooks/useScreenSize';
 
 // Import 2 kind of Headers
-import HeaderLaptop from './components/HeaderLaptop';
-import HeaderMobile from './components/HeaderMobile';
+import HeaderLaptop from '@/components/header/components/HeaderLaptop';
+import HeaderMobile from '@/components/header/components/HeaderMobile';
 
 const Header = () => {
   // Handle screen sizing & responsiveness with this hook
