@@ -38,7 +38,7 @@ const App = () => {
       <InstantSearch searchClient={search} indexName={indexName.index}>
         <CustomStateResults />
         <Router>
-          {/* {isLoaded === false && <Loader isLoaded={isLoaded} />} */}
+          {isLoaded === false && <Loader isLoaded={isLoaded} />}
           <Main isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
         </Router>
       </InstantSearch>
