@@ -11,6 +11,9 @@ export const searchClient = {
   appID: '853MYZ81KY',
 };
 
+// DO NOT REMOVE ANYTHING, ONLY RENAME VALUES IF NEEDED
+// IF YOU DON'T WANT IT USED, USE FEATURE CONFIG TO TURN OFF
+// SEE config.js FOR GENERAL FEATURE CONFIGURATION
 export const indexNames = {
   mainIndex: 'flagship_fashion',
   suggestionsIndex: 'flagship_fashion_query_suggestions',
