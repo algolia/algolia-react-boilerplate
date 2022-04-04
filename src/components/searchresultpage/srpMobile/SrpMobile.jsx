@@ -28,7 +28,7 @@ import CustomHitsComponent from '@/components/hits/CustomHits';
 import GiftCard from '@/components/hits/GiftCard';
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
-import NikeCard from '@/components/hits/SalesCard';
+import SalesCard from '@/components/hits/SalesCard';
 import CustomSortBy from '@/components/searchresultpage/SortBy';
 import { CustomStats } from '@/components/searchresultpage/Stats';
 import { InjectedHits } from '@/components/searchresultpage/injected-hits';
@@ -115,13 +115,13 @@ const SrpMobile = () => {
             hitComponent={Hit}
             slots={({ resultsByIndex }) => {
               const indexValue = indexName.index;
-              const { noCta, nikeCard } = customDataByType(
+              const { noCta, salesCard } = customDataByType(
                 resultsByIndex?.[indexValue]?.userData
               );
               // eslint-disable-next-line no-lone-blocks
               {
                 // eslint-disable-next-line no-unused-expressions
-                nikeCard && setInjected(true);
+                salesCard && setInjected(true);
               }
               return [
                 {
@@ -130,9 +130,9 @@ const SrpMobile = () => {
                   slotComponent: GiftCard,
                 },
                 {
-                  getHits: () => [nikeCard],
-                  injectAt: nikeCard ? nikeCard.position : null,
-                  slotComponent: NikeCard,
+                  getHits: () => [salesCard],
+                  injectAt: salesCard ? salesCard.position : null,
+                  slotComponent: SalesCard,
                 },
                 {
                   injectAt: ({ position }) => position === 2,

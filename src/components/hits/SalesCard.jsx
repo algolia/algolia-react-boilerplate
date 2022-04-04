@@ -1,5 +1,3 @@
-// TODO: change all occurrences of NikeCard
-
 //  Import framer motion
 import { motion } from 'framer-motion';
 
@@ -7,7 +5,7 @@ import { motion } from 'framer-motion';
 import { framerMotionHits } from '@/config/animationConfig';
 
 // SALES CARD
-const NikeCard = ({ hit }) => {
+const SalesCard = ({ hit }) => {
   return (
     <motion.li
       layout
@@ -30,4 +28,4 @@ const NikeCard = ({ hit }) => {
   );
 };
 
-export default NikeCard;
+export default SalesCard;
