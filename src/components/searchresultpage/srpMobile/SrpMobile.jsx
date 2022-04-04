@@ -35,7 +35,7 @@ import { InjectedHits } from '@/components/searchresultpage/injected-hits';
 import FacetsMobile from '@/components/facets/facetsMobile/FacetsMobile';
 import { ChevronRight, ChevronLeft } from '@/assets/svg/SvgIndex';
 
-import { indexName, injectedContentIndex } from '@/config/algoliaEnvConfig';
+import { indexNames } from '@/config/algoliaEnvConfig';
 
 import { hitsPerPage } from '@/config/hits';
 
@@ -90,7 +90,7 @@ const SrpMobile = () => {
           {priceSortBy && (
             <CustomSortBy
               items={labelItems}
-              defaultRefinement={indexName.index}
+              defaultRefinement={indexNames.mainIndex}
             />
           )}
         </div>
@@ -107,14 +107,14 @@ const SrpMobile = () => {
           filters={state ? state : ''}
           query={queryState}
         />
-        <Index indexName={injectedContentIndex}>
+        <Index indexName={indexNames.injectedContentIndex}>
           <Configure hitsPerPage={1} page={0} />
         </Index>
         {shouldInjectContent ? (
           <InjectedHits
             hitComponent={Hit}
             slots={({ resultsByIndex }) => {
-              const indexValue = indexName.index;
+              const indexValue = indexNames.mainIndex;
               const { noCta, salesCard } = customDataByType(
                 resultsByIndex?.[indexValue]?.userData
               );
@@ -139,8 +139,8 @@ const SrpMobile = () => {
                   // eslint-disable-next-line no-shadow
                   getHits: ({ resultsByIndex }) => {
                     setInjected(true);
-                    return resultsByIndex[injectedContentIndex]
-                      ? resultsByIndex[injectedContentIndex].hits || []
+                    return resultsByIndex[indexNames.injectedContentIndex]
+                      ? resultsByIndex[indexNames.injectedContentIndex].hits || []
                       : [];
                   },
                   slotComponent: InfluencerCard,

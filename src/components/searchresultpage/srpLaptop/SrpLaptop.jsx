@@ -34,8 +34,7 @@ import { CustomStats } from '@/components/searchresultpage/Stats';
 import { InjectedHits } from '@/components/searchresultpage/injected-hits';
 
 import {
-  indexName,
-  injectedContentIndex,
+  indexNames
 } from '@/config/algoliaEnvConfig';
 
 // Handle the number of hits per page
@@ -90,7 +89,7 @@ const SrpLaptop = () => {
           {priceSortBy && (
             <CustomSortBy
               items={labelItems}
-              defaultRefinement={indexName.index}
+              defaultRefinement={indexNames.mainIndex}
             />
           )}
         </div>
@@ -107,7 +106,7 @@ const SrpLaptop = () => {
           filters={state ? state : ''}
           query={queryState && queryState}
         />
-        <Index indexName={injectedContentIndex}>
+        <Index indexName={indexNames.injectedContentIndex}>
           <Configure hitsPerPage={1} page={0} />
         </Index>
         {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
@@ -115,7 +114,7 @@ const SrpLaptop = () => {
           <InjectedHits
             hitComponent={Hit}
             slots={({ resultsByIndex }) => {
-              const indexValue = indexName.index;
+              const indexValue = indexNames.mainIndex;
               const { noCta, salesCard } = customDataByType(
                 resultsByIndex?.[indexValue]?.userData
               );
@@ -140,8 +139,8 @@ const SrpLaptop = () => {
                   // eslint-disable-next-line no-shadow
                   getHits: ({ resultsByIndex }) => {
                     setInjected(true);
-                    return resultsByIndex[injectedContentIndex]
-                      ? resultsByIndex[injectedContentIndex].hits || []
+                    return resultsByIndex[indexNames.injectedContentIndex]
+                      ? resultsByIndex[indexNames.injectedContentIndex].hits || []
                       : [];
                   },
                   slotComponent: InfluencerCard,

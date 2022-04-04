@@ -20,7 +20,7 @@ import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import RelatedItem from '@/components/recommend/RelatedProducts';
 
 // Algolia search client
-import { searchClient, indexName } from '@/config/algoliaEnvConfig';
+import { searchClient, indexNames } from '@/config/algoliaEnvConfig';
 
 // React router import
 import { useNavigate } from 'react-router-dom';
@@ -194,7 +194,7 @@ const ProductDetails = () => {
         {isRelatedProductsValue && (
           <RelatedProducts
             recommendClient={recommendClient}
-            indexName={indexName.index}
+            indexName={indexNames.mainIndex}
             objectIDs={[hit[objectID]]}
             itemComponent={RelatedItem}
             maxRecommendations={5}
@@ -203,7 +203,7 @@ const ProductDetails = () => {
         {isFbtProductsValue && (
           <FrequentlyBoughtTogether
             recommendClient={recommendClient}
-            indexName={indexName.index}
+            indexName={indexNames.mainIndex}
             objectIDs={[hit[objectID]]}
             itemComponent={RelatedItem}
             maxRecommendations={5}

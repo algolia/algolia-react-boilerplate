@@ -12,7 +12,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import configuration
 import { hitsConfig } from '@/config/hits';
-import { indexName } from '@/config/algoliaEnvConfig';
+import { indexNames } from '@/config/algoliaEnvConfig';
 import { hitAtom } from '@/config/results';
 
 import { framerMotionTransition } from '@/config/animationConfig';
@@ -21,7 +21,7 @@ import { framerMotionTransition } from '@/config/animationConfig';
 const HomeCarousel = ({ attribute, title }) => {
   return (
     <div className="home-carousel">
-      <Index indexId={title} indexName={indexName.index}>
+      <Index indexId={title} indexName={indexNames.mainIndex}>
         <Configure hitsPerPage={8} filters={attribute} />
         <CustomHitsCarousel title={title} />
       </Index>
