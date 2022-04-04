@@ -12,7 +12,7 @@ import { framerMotionFederatedContainer } from '@/config/animationConfig';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 // Config
-import { indexName, searchClient } from '@/config/algoliaEnvConfig';
+import { indexNames, searchClient } from '@/config/algoliaEnvConfig';
 
 // Those imports are here to check if user is clicking outside the searchbox & federated to close federated
 import { isFederatedAtom, searchBoxAtom } from '@/config/config';
@@ -88,7 +88,7 @@ const FederatedSearch = () => {
           {isRecentSearch && !mobile && !tablet && <RecentSearches />}
           {/* If don't want this sections go into config file  */}
           {isQuerySuggestions && (
-            <Index searchClient={search} indexName={indexName.indexSuggestion}>
+            <Index searchClient={search} indexName={indexNames.suggestionsIndex}>
               <Configure
                 hitsPerPage={3}
                 query={query}
@@ -120,7 +120,7 @@ const FederatedSearch = () => {
           <div className="articles federatedSearch__right">
             <Index
               // searchClient={search}
-              indexName={indexName.indexBlog}
+              indexName={indexNames.articlesIndex}
             >
               <Configure hitsPerPage={1} query={query} />
               <Articles />

@@ -14,7 +14,7 @@ import { RecoilRoot } from 'recoil';
 import './scss/index.scss';
 
 // application state from config file
-import { searchClient, indexName } from './config/algoliaEnvConfig';
+import { searchClient, indexNames } from './config/algoliaEnvConfig';
 
 // Import Components
 import Loader from '@/components/loader/Loader';
@@ -35,7 +35,7 @@ const App = () => {
 
   return (
     <RecoilRoot>
-      <InstantSearch searchClient={search} indexName={indexName.index}>
+      <InstantSearch searchClient={search} indexName={indexNames.mainIndex}>
         <CustomStateResults />
         <Router>
           {isLoaded === false && <Loader isLoaded={isLoaded} />}

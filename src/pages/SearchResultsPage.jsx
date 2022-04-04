@@ -26,7 +26,7 @@ import Banner from '@/components/banners/Banner';
 
 // Import Persona State from recoil
 import { isBannerSrp } from '@/config/config';
-import { indexName } from '@/config/algoliaEnvConfig';
+import { indexNames } from '@/config/algoliaEnvConfig';
 
 import SrpLaptop from '@/components/searchresultpage/srpLaptop/SrpLaptop';
 import SrpMobile from '@/components/searchresultpage/srpMobile/SrpMobile';
@@ -77,8 +77,8 @@ const NoResults = memo(({ query }) => {
           </li>
           <div className="query-suggestion">
             <Index
-              indexId={indexName.indexSuggestion}
-              indexName={indexName.indexSuggestion}
+              indexId={indexNames.suggestionsIndex}
+              indexName={indexNames.suggestionsIndex}
             >
               <Configure hitsPerPage={3} query="" />
               <QuerySuggestions />
