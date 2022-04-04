@@ -161,13 +161,86 @@ The user stories :
    - Older female: 'Elizabeth Aniston', likes fashion and she lives in Paris.
       -Likes **black** dresses, size M, also likes blue jeans
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 💉 InjectedContent</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 💉 Injected Content</h3>
 
-[Magazine Layout](https://github.com/algolia/magazine-layout)
+We use the [Magazine Layout](https://github.com/algolia/magazine-layout)
 
-Thanks to the work from the 'Front End Team', we customized their injected content about 2 rules, one for free returns always display, and the 2nd for 'Nike Products'.
-All these rules are modifiable in [Dashboard](https://www.algolia.com/apps/853MYZ81KY/rules/flagship_fashion).
-You can modify, too an other index called 'flagship_fashion_influencers', it contains 2 influencers searchable, like the main index.
+There are two kinds of injected content:
+
+1. Using rules in the main index
+2. Using a seperate index
+
+<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">INJECTION FROM MAIN INDEX</h4>
+
+We have two kinds of rules. If you want to trigger these rules for your own demo, please use the given JSON source for the rules which you must add as a consequence (please edit the values as you see fit):
+  
+1. Free returns (always displayed)
+- You can edit the displayed hit by going to `/components/hits/NoCtaCard.js`
+
+- Rule consequence JSON structure:
+```
+{
+  "type": "noCta",
+  "title": "",
+  "image": {
+    "desktop_url": "https://res.cloudinary.com/hugo-valla/image/upload/v1641220366/L_ptpbwc.png",
+    "mobile_url": "https://api.lorem.space/image/shoes?w-300&h-300"
+  },
+  "position": 7,
+  "isSalesCardDisplay": 6,
+  "gridSpanLaptop": 1,
+  "gridSpanMobile": 1,
+  "size": {
+    "width": 3,
+    "height": 1
+  }
+```
+
+2. Sales card ('nike' trigger)
+- You can edit the displayed hit by going to `/components/hits/SalesCard.js`
+
+- Rule consequence JSON structure:
+```
+{
+  "type": "salesCard",
+  "title": "Receive an extra 20% off nike items",
+  "subtitle": "",
+  "coupon": "Code: NIKE20",
+  "image": {
+    "desktop_url": "https://static.dezeen.com/uploads/2021/03/lil-nas-x-mschf-nike-satan-shoes-blood-pentagram-bible-verse-design-fashion-footwear_dezeen_2364_col_3-scaled.jpg",
+    "mobile_url": "https://"
+  },
+  "position": 3,
+  "size": {
+    "width": 1,
+    "height": 1
+  }
+}
+```
+
+You can see these rules for reference in the Flagship Fashion [Dashboard](https://www.algolia.com/apps/853MYZ81KY/rules/flagship_fashion).
+
+<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">INJECTION FROM SEPERATE INDEX</h4>
+
+- You can edit the displayed hit by going to `/components/hits/InfluencerCard.js`
+
+For this we define a new index in `algoliaEnvConfig.js` called `injectedContentIndex` and if there is a result in this index, we inject it as a result into the Hits.
+
+Here is a sample record structure which is expected for records in the index to inject:
+```
+{
+  "name": "Curry Stephen Under Armour",
+  "gender": "Man",
+  "influencer": {
+    "name": "Stephen Curry",
+    "slug": "steph_curry",
+    "image": "https://about.underarmour.com/sites/default/files/styles/1600xauto/public/2020-11/SC_Curry%20Brand%20FW20%20%284%29.jpg?itok=Rx555Up8"
+  },
+  "category": "Shoes",
+  "sku": "M0E20000000EL70",
+  "objectID": "fab81fae69624_dashboard_generated_id"
+}
+```
 
   <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Debounce</h3>
 
