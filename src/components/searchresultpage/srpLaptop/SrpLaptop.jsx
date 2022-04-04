@@ -1,6 +1,6 @@
 // This is the Search Results Page that you'll see on a normal computer screen
 
-import { useState } from 'react';
+import { lazy, useState, Suspense } from 'react';
 // eslint-disable-next-line import/order
 import { Pagination, Configure, Index } from 'react-instantsearch-dom';
 
@@ -21,10 +21,10 @@ import { queryAtom } from '@/config/searchbox';
 import { personaSelectedAtom } from '@/config/personaConfig';
 
 // Import Components
-import CustomClearRefinements from '@/components/facets/ClearRefinement';
-import CustomCurrentRefinements from '@/components/facets/CurrentRefinement';
-import GenericRefinementList from '@/components/facets/Facets';
-import CustomHitsComponent from '@/components/hits/CustomHits';
+const CustomClearRefinements = lazy(() => import('@/components/facets/ClearRefinement'));
+const CustomCurrentRefinements = lazy(() => import('@/components/facets/CurrentRefinement'));
+const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
+const CustomHitsComponent = lazy(() => import('@/components/hits/CustomHits'));
 import NoCtaCard from '@/components/hits/NoCtaCard';
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
@@ -74,7 +74,9 @@ const SrpLaptop = () => {
         transition={framerMotionFacet.transition}
         className="srp-container__facets"
       >
+      <Suspense fallback={<div>Loading...</div>}>
         <GenericRefinementList />
+      </Suspense>
       </motion.div>
       <motion.div
         className="srp-container__hits"
@@ -96,8 +98,10 @@ const SrpLaptop = () => {
         </div>
         {/* Refinements, to the left of the items, including a list of currently selected refinements */}
         <div className="refinement-container">
-          <CustomCurrentRefinements />
-          <CustomClearRefinements />
+        <Suspense fallback={<div>Loading...</div>}>
+            <CustomCurrentRefinements />
+            <CustomClearRefinements />
+          </Suspense>
         </div>
         <Configure
           hitsPerPage={injected ? hitsPerPageInjected : hitsPerPageNotInjected}
@@ -150,7 +154,9 @@ const SrpLaptop = () => {
             }}
           />
         ) : (
+          <Suspense fallback={<div>Loading...</div>}>
           <CustomHitsComponent />
+          </Suspense>
         )}
         <Pagination />
       </motion.div>
