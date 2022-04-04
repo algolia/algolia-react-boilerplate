@@ -25,7 +25,7 @@ import CustomClearRefinements from '@/components/facets/ClearRefinement';
 import CustomCurrentRefinements from '@/components/facets/CurrentRefinement';
 import GenericRefinementList from '@/components/facets/Facets';
 import CustomHitsComponent from '@/components/hits/CustomHits';
-import GiftCard from '@/components/hits/GiftCard';
+import NoCtaCard from '@/components/hits/NoCtaCard';
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
 import SalesCard from '@/components/hits/SalesCard';
@@ -128,7 +128,7 @@ const SrpLaptop = () => {
                 {
                   getHits: () => [noCta],
                   injectAt: noCta ? noCta.position : null,
-                  slotComponent: GiftCard,
+                  slotComponent: NoCtaCard,
                 },
                 {
                   getHits: () => [salesCard],

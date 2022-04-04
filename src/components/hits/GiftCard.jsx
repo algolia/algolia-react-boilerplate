@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { framerMotionHits } from '@/config/animationConfig';
 
 // Display an image, within a framer-motion wrapper
-const GiftCard = ({ hit }) => {
+const NoCtaCard = ({ hit }) => {
   return (
     <motion.li
       variants={framerMotionHits}
@@ -20,4 +20,4 @@ const GiftCard = ({ hit }) => {
   );
 };
 
-export default GiftCard;
+export default NoCtaCard;
