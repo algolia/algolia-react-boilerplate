@@ -172,9 +172,12 @@ There are two kinds of injected content:
 
 <h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">INJECTION FROM MAIN INDEX</h4>
 
-We have two kinds of rules. If you want to trigger these rules for your own demo, please use the following JSON source for the rules which you must add as a consequence (please edit the values as you see fit):
+We have two kinds of rules. If you want to trigger these rules for your own demo, please use the given JSON source for the rules which you must add as a consequence (please edit the values as you see fit):
   
 1. Free returns (always displayed)
+- You can edit the displayed hit by going to `/components/hits/NoCtaCard.js`
+
+- Rule consequence JSON structure:
 ```
 {
   "type": "noCta",
@@ -194,6 +197,9 @@ We have two kinds of rules. If you want to trigger these rules for your own demo
 ```
 
 2. Sales card ('nike' trigger)
+- You can edit the displayed hit by going to `/components/hits/SalesCard.js`
+
+- Rule consequence JSON structure:
 ```
 {
   "type": "salesCard",
@@ -215,6 +221,8 @@ We have two kinds of rules. If you want to trigger these rules for your own demo
 You can see these rules for reference in the Flagship Fashion [Dashboard](https://www.algolia.com/apps/853MYZ81KY/rules/flagship_fashion).
 
 <h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">INJECTION FROM SEPERATE INDEX</h4>
+
+- You can edit the displayed hit by going to `/components/hits/InfluencerCard.js`
 
 For this we define a new index in `algoliaEnvConfig.js` called `injectedContentIndex` and if there is a result in this index, we inject it as a result into the Hits.
 
