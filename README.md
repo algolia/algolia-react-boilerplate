@@ -170,7 +170,7 @@ There are two kinds of injected content:
 1. Using rules in the main index
 2. Using a seperate index
 
-<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">Main Index Rules</h4>
+<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">INJECTION FROM MAIN INDEX</h4>
 
 We have two kinds of rules. If you want to trigger these rules for your own demo, please use the following JSON source for the rules which you must add as a consequence (please edit the values as you see fit):
   
@@ -213,6 +213,26 @@ We have two kinds of rules. If you want to trigger these rules for your own demo
 ```
 
 You can see these rules for reference in the Flagship Fashion [Dashboard](https://www.algolia.com/apps/853MYZ81KY/rules/flagship_fashion).
+
+<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">INJECTION FROM SEPERATE INDEX</h4>
+
+For this we define a new index in `algoliaEnvConfig.js` called `injectedContentIndex` and if there is a result in this index, we inject it as a result into the Hits.
+
+Here is a sample record structure which is expected for records in the index to inject:
+```
+{
+  "name": "Curry Stephen Under Armour",
+  "gender": "Man",
+  "influencer": {
+    "name": "Stephen Curry",
+    "slug": "steph_curry",
+    "image": "https://about.underarmour.com/sites/default/files/styles/1600xauto/public/2020-11/SC_Curry%20Brand%20FW20%20%284%29.jpg?itok=Rx555Up8"
+  },
+  "category": "Shoes",
+  "sku": "M0E20000000EL70",
+  "objectID": "fab81fae69624_dashboard_generated_id"
+}
+```
 
   <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Debounce</h3>
 
