@@ -19,15 +19,15 @@ import FederatedSearch from '@/components/federatedSearch/FederatedSearch';
 import HomeCarousel from '@/components/carousels/HomeCarousel';
 
 // should carousel be shown or not and config for carousel
-import { isCarouselAtom, carouselConfig } from '@/config/carouselConfig';
+import { carouselConfig } from '@/config/carouselConfig';
 
 //  should federated search be shown or not
-import { isFederatedAtom } from '@/config/config';
+import { shouldHaveFederatedSearch, shouldHaveCarousels } from '@/config/featuresConfig';
 
 const HomePage = () => {
   // Boolean value which determines if federated search is shown or not, default is false
-  const isFederated = useRecoilValue(isFederatedAtom);
-  const isCarousel = useRecoilValue(isCarouselAtom);
+  const isFederated = useRecoilValue(shouldHaveFederatedSearch);
+  const isCarousel = useRecoilValue(shouldHaveCarousels);
 
   return (
     // Framer motion wrapper

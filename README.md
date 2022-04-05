@@ -6,6 +6,25 @@
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
 
+1. Clone this repo under a new name for your own demo.
+
+2. Visit `src/config` and adjust `algoliaEnvConfig` to point to your own app, indices and API keys. If you do not need an index which is present in that file i.e. for articles, please do not remove it, just leave it as is, and you can turn off the relevant feature in the next step.
+
+3. Visit `src/config` and adjust `featuresConfig` to activate/deactivate the features you would like to see in the app.
+
+4. Go through the other files in `src/config` and adjust them according to your own data and requirements, each file describes itself.
+
+5. In in `src/config` , pay particular attention to `hitsConfig` as this is where we map your own attribute names to those used in the app. You should never adjust the attributes used in the app itself, only this map.
+
+6. Run and test your app locally both in desktop and mobile view, if you have any questions, ask #help-demos.
+
+7. In the `src/scss` folder, adjust any styling you need to based on what you see.
+
+8. Log into Netlify on the Algolia Demos team (again ask #help-demos if you don't have access) and deploy your demo from Github, making sure to password protect it!
+
+
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⌨️ Develop on this project</h2>
+
 To run this project locally, install the dependencies and run the local server:
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">👊 Before use please install</h3>
@@ -100,26 +119,6 @@ ProductDetails.jsx
 with
 [BEM Naming](https://css-tricks.com/bem-101/)
 
-<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Config</h2>
-
-There are two places where application configuration is defined:
-
-- utils/env.js contains the env variables like the algolia app ID, index names etc.
-
-- config/config.js contains layout variables like the refinements, sorts etc.
-  - the config is exported via an object which is controlled by a state atom (see state section for more details)
-
-<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Instantsearch State</h2>
-
-By default, instantsearch manages its own state, as long as everything is wrapped in the <Instantsearch> component. Therefore generally we do not have direct access to state, it is all managed by IS (instantsearch) even with connected, customised widgets, but we do get access to many props provided by each widget.
-
-However, there can be times when we want to access the inside of the instantsearch directly to manipulate it or do something that IS widgets cannot.
-
-In order to do that, we use [StateResults](https://www.algolia.com/doc/api-reference/widgets/state-results/react/#connector) which can give us access to the internal state. It lives in its own component.
-
-Every time the search results change, we store them in our own internal state as well as letting instantsearch store them in it's state. Our own state for search results lives in `/config/results`.
-
-This means that you should first only use the Instantsearch state if you can and not access our own, but if needed, you can access our own using recoil (see state manager section).
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
 

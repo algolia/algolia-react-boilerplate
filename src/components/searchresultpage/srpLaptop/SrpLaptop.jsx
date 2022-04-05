@@ -13,9 +13,9 @@ import { framerMotionPage, framerMotionFacet } from '@/config/animationConfig';
 // Recoil state to directly access results
 import { useRecoilValue } from 'recoil';
 
-import { isStats, isInjectedHits } from '@/config/config';
+import { shouldHaveStats, shouldHaveInjectedHits } from '@/config/featuresConfig';
 import { sortBy } from '@/config/sortByConfig';
-import { queryAtom } from '@/config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Persona State from recoil
 import { personaSelectedAtom } from '@/config/personaConfig';
@@ -38,7 +38,7 @@ import {
 } from '@/config/algoliaEnvConfig';
 
 // Handle the number of hits per page
-import { hitsPerPage } from '@/config/hits';
+import { hitsPerPage } from '@/config/hitsConfig';
 
 // Import Config File
 import { customDataByType } from '@/utils';
@@ -46,8 +46,8 @@ import { customDataByType } from '@/utils';
 const SrpLaptop = () => {
   // Recoil & React states
 
-  const stats = useRecoilValue(isStats);
-  const shouldInjectContent = useRecoilValue(isInjectedHits);
+  const stats = useRecoilValue(shouldHaveStats);
+  const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
   const queryState = useRecoilValue(queryAtom);
   const [injected, setInjected] = useState(false);
 

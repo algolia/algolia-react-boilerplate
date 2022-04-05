@@ -2,6 +2,8 @@
 // Refinements Config
 // ------------------------------------------
 
+import { currencySymbol } from './currencyConfig';
+
 export const refinements = [
   {
     type: 'hierarchical',
@@ -20,7 +22,7 @@ export const refinements = [
   {
     type: 'price',
     header: 'Price',
-    currency: '$',
+    currency: currencySymbol,
     label: 'Price',
     options: {
       attribute: 'unformated_price',

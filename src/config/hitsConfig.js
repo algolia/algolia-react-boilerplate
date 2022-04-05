@@ -25,8 +25,6 @@ export const hitsConfig = atom({
   }, // default value (aka initial value)
 });
 
-
-
 //Content blog & articles
 
 // Change string attribute here with the attribute of your index
@@ -39,13 +37,22 @@ export const contentArticlesConfig = atom({
     content: 'content',
     date: 'Date',
     description: 'description',
-    image:'Image Link',
+    image: 'Image Link',
   }, // default value (aka initial value)
 });
-
 
 // Choose number of hit the app should display.
 export const hitsPerPage = {
   numberNotInjected: 15,
   numberInjected: 14,
 };
+
+export const hitsAtom = atom({
+  key: 'hitsAtom', // unique ID (with respect to other atoms/selectors)
+  default: [], // default value (aka initial value)
+});
+
+export const hitAtom = atom({
+  key: 'hitAtom', // unique ID (with respect to other atoms/selectors)
+  default: {}, // default value (aka initial value)
+});

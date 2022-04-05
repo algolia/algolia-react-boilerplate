@@ -7,7 +7,7 @@ import { VoiceSearch } from 'react-instantsearch-dom';
 import { useSetRecoilState } from 'recoil';
 
 // Import Config for recoil from file as a component
-import { queryAtom } from '@/config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
 const Status = ({ transcript }) => {
   const setQueryState = useSetRecoilState(queryAtom);

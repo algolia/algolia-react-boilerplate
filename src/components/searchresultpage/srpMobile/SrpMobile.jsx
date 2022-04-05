@@ -17,9 +17,9 @@ import { useRecoilValue } from 'recoil';
 // Import Persona State from recoil
 import { personaSelectedAtom } from '@/config/personaConfig';
 
-import { isStats, isInjectedHits } from '@/config/config';
+import { shouldHaveStats, shouldHaveInjectedHits } from '@/config/featuresConfig';
 import { sortBy } from '@/config/sortByConfig';
-import { queryAtom } from '@/config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Components
 import CustomClearRefinements from '@/components/facets/ClearRefinement';
@@ -37,7 +37,7 @@ import { ChevronRight, ChevronLeft } from '@/assets/svg/SvgIndex';
 
 import { indexNames } from '@/config/algoliaEnvConfig';
 
-import { hitsPerPage } from '@/config/hits';
+import { hitsPerPage } from '@/config/hitsConfig';
 
 // Import Config File
 import { customDataByType } from '@/utils';
@@ -49,10 +49,10 @@ const SrpMobile = () => {
   const queryState = useRecoilValue(queryAtom);
 
   // Define Stat Const
-  const stats = useRecoilValue(isStats);
+  const stats = useRecoilValue(shouldHaveStats);
   const hitsPerPageNotInjected = hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = hitsPerPage.numberInjected;
-  const shouldInjectContent = useRecoilValue(isInjectedHits);
+  const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
 
   // Define Price Sort By
   const { value: priceSortBy, labelIndex: labelItems } = sortBy;

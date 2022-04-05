@@ -16,12 +16,14 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Glass } from '@/assets/svg/SvgIndex';
 import SearchInCategory from './components/SearchInCategory';
 // Import Config for recoil from file as a component
-import { isFederatedAtom, searchBoxAtom } from '@/config/config';
+import { shouldHaveFederatedSearch } from '@/config/featuresConfig';
+
 import {
   queryAtom,
+  searchBoxAtom,
   simplePlaceholderAtom,
   isSearchInCategory,
-} from '@/config/searchbox';
+} from '@/config/searchboxConfig';
 
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
@@ -31,7 +33,7 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   const [queryState, setQueryState] = useRecoilState(queryAtom);
   const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
-  const setIsFederated = useSetRecoilState(isFederatedAtom);
+  const setIsFederated = useSetRecoilState(shouldHaveFederatedSearch);
   // router hook to navigate using a function
   const navigate = useNavigate();
   // Get states of React Router

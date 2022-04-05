@@ -4,10 +4,10 @@
 import { Link } from 'react-router-dom';
 // Recoil Header State
 import { useSetRecoilState } from 'recoil';
-import { queryAtom } from '@/config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
 //Import config for federatedSearch
-import { isFederatedAtom, isVoiceSearch } from '@/config/config';
+import { shouldHaveFederatedSearch, shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
 import { logoUrl } from '@/config/headerConfig';
 
@@ -21,9 +21,9 @@ import Navigation from './Navigation';
 
 const HeaderLaptop = () => {
   const setQueryState = useSetRecoilState(queryAtom);
-  const federated = useSetRecoilState(isFederatedAtom);
+  const federated = useSetRecoilState(shouldHaveFederatedSearch);
   // Define value to display voiceSearch
-  const displayVoiceSearch = useSetRecoilState(isVoiceSearch);
+  const displayVoiceSearch = useSetRecoilState(shouldHaveVoiceSearch);
 
   return (
     <div className="container">

@@ -5,7 +5,7 @@ import { connectStateResults } from 'react-instantsearch-dom';
 
 import { useRecoilState } from 'recoil';
 
-import { hitsAtom } from '@/config/results';
+import { hitsAtom } from '@/config/hitsConfig';
 
 // Check that the arrays of hits are identical
 const areArraysEqual = (a, b) =>

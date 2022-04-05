@@ -15,7 +15,7 @@ import {
 
 // Recoil state to directly access results
 import { useRecoilValue } from 'recoil';
-import { queryAtom } from '../config/searchbox';
+import { queryAtom } from '../config/searchboxConfig';
 
 // Import custom Hooks
 import useScreenSize from '@/hooks/useScreenSize';
@@ -25,7 +25,7 @@ import QuerySuggestions from '@/components/federatedSearch/components/QuerySugge
 import Banner from '@/components/banners/Banner';
 
 // Import Persona State from recoil
-import { isBannerSrp } from '@/config/config';
+import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 import { indexNames } from '@/config/algoliaEnvConfig';
 
 import SrpLaptop from '@/components/searchresultpage/srpLaptop/SrpLaptop';
@@ -35,7 +35,7 @@ const SearchResultPage = () => {
   // Recoil & React states
 
   // Do you want to show banner on SRP? This boolean tells us yes or no
-  const shouldDisplayBanners = useRecoilValue(isBannerSrp);
+  const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
 
   // Handle screen resize
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
