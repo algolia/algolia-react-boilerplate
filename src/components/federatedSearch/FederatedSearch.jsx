@@ -19,7 +19,7 @@ import { shouldHaveFederatedSearch } from '@/config/featuresConfig';
 
 // Show or unshow sections in federated (product, suggestions, categories, articles, recent searches)
 // categories import is here to choose which attribute you want to show as category
-import { federatedSearchConfig, categories } from '@/config/federatedConfig';
+import { federatedSearchConfig, federatedCategoriesAttribute } from '@/config/federatedConfig';
 
 // Sharing query to general state
 import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig';
@@ -56,11 +56,11 @@ const FederatedSearch = () => {
 
   // Federated search configuration
   const {
-    isRecentSearch,
-    isQuerySuggestions,
-    isCategory,
-    isBlogPosts,
-    isProduct,
+    showRecentSearches,
+    showQuerySuggestions,
+    showCategories,
+    showBlogPosts,
+    showProducts,
   } = federatedSearchConfig;
 
   return (
@@ -82,9 +82,9 @@ const FederatedSearch = () => {
       >
         <div className="federatedSearch__left">
           {/* If don't want this sections go into config file  */}
-          {isRecentSearch && !mobile && !tablet && <RecentSearches />}
+          {showRecentSearches && !mobile && !tablet && <RecentSearches />}
           {/* If don't want this sections go into config file  */}
-          {isQuerySuggestions && (
+          {showQuerySuggestions && (
             <Index searchClient={searchClient} indexName={indexNames.suggestionsIndex}>
               <Configure
                 hitsPerPage={3}
@@ -96,12 +96,12 @@ const FederatedSearch = () => {
             </Index>
           )}
           {/* If don't want this sections go into config file  */}
-          {isCategory && !mobile && !tablet && (
-            <Category attribute={categories.attribute} />
+          {showCategories && !mobile && !tablet && (
+            <Category attribute={federatedCategoriesAttribute} />
           )}
         </div>
         {/* If don't want this sections go into config file  */}
-        {isProduct && (
+        {showProducts && (
           <div className="federatedSearch__middle">
             <Configure
               filters=""
@@ -113,7 +113,7 @@ const FederatedSearch = () => {
           </div>
         )}
         {/* If don't want this sections go into config file  */}
-        {isBlogPosts && !mobile && !tablet && (
+        {showBlogPosts && !mobile && !tablet && (
           <div className="articles federatedSearch__right">
             <Index
               indexName={indexNames.articlesIndex}
