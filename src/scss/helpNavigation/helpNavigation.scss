@@ -3,41 +3,74 @@
 // ------------------------------------------
 @import '../mixin/abstracts/abstracts.scss';
 
-.helpNavigation{
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 30%;
-    padding: 2rem;
-    background-color: $white-color ;
-    z-index: 998;
+.helpNavigation {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 30%;
+  padding: 2rem;
+  background-color: $white-color;
+  z-index: 998;
 
-    h2{
-        font-weight: bold;
-    }
+  h2 {
+    font-weight: bold;
+  }
 }
 
 // SE menu btn/picto that helps navigate in the app
 
-.optionDots__wrapper{
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    cursor: pointer;
-    z-index: 999;
+.optionDots__wrapper {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  z-index: 999;
+  transition: all 0.3s ease-in-out;
+
+  &-active {
+    transform: rotateZ(-90deg);
     transition: all 0.3s ease-in-out;
+  }
 
-    &-active{
-        transform: rotateZ(-90deg);
-        transition: all 0.3s ease-in-out;
+  svg {
+    width: 5px;
+    path {
+      fill: $blue-algolia;
     }
-
-  
-    svg{
-      width: 5px;
-      path{
-        fill: $blue-algolia;
+  }
+}
+.search-terms {
+  margin-bottom: 1rem;
+  &__infos {
+    margin: 1rem 0;
+    &__titles {
+      display: flex;
+      align-items: center;
+      margin-left: 2rem;
+      h3 {
+        font-size: 0.9rem
+      }
+      span {
+        font-size: 0.7rem;
+        color: $blue-algolia;
+      }
+      p {
+        margin-left: 0.9rem;
+        font-size: 0.7rem;
       }
     }
   }
+}
+
+.container-nav-help {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  &____items {
+    cursor: pointer;
+  }
+}
