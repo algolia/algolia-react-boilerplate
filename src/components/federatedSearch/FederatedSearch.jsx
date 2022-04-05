@@ -63,9 +63,6 @@ const FederatedSearch = () => {
     isProduct,
   } = federatedSearchConfig;
 
-  // Algolia searchclient
-  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
-
   return (
     <motion.div
       className="federatedSearch"
@@ -88,7 +85,7 @@ const FederatedSearch = () => {
           {isRecentSearch && !mobile && !tablet && <RecentSearches />}
           {/* If don't want this sections go into config file  */}
           {isQuerySuggestions && (
-            <Index searchClient={search} indexName={indexNames.suggestionsIndex}>
+            <Index searchClient={searchClient} indexName={indexNames.suggestionsIndex}>
               <Configure
                 hitsPerPage={3}
                 query={query}
@@ -119,7 +116,6 @@ const FederatedSearch = () => {
         {isBlogPosts && !mobile && !tablet && (
           <div className="articles federatedSearch__right">
             <Index
-              // searchClient={search}
               indexName={indexNames.articlesIndex}
             >
               <Configure hitsPerPage={1} query={query} />
