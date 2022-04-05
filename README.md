@@ -119,26 +119,6 @@ ProductDetails.jsx
 with
 [BEM Naming](https://css-tricks.com/bem-101/)
 
-<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Config</h2>
-
-There are two places where application configuration is defined:
-
-- utils/env.js contains the env variables like the algolia app ID, index names etc.
-
-- config/config.js contains layout variables like the refinements, sorts etc.
-  - the config is exported via an object which is controlled by a state atom (see state section for more details)
-
-<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Instantsearch State</h2>
-
-By default, instantsearch manages its own state, as long as everything is wrapped in the <Instantsearch> component. Therefore generally we do not have direct access to state, it is all managed by IS (instantsearch) even with connected, customised widgets, but we do get access to many props provided by each widget.
-
-However, there can be times when we want to access the inside of the instantsearch directly to manipulate it or do something that IS widgets cannot.
-
-In order to do that, we use [StateResults](https://www.algolia.com/doc/api-reference/widgets/state-results/react/#connector) which can give us access to the internal state. It lives in its own component.
-
-Every time the search results change, we store them in our own internal state as well as letting instantsearch store them in it's state. Our own state for search results lives in `/config/results`.
-
-This means that you should first only use the Instantsearch state if you can and not access our own, but if needed, you can access our own using recoil (see state manager section).
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
 
