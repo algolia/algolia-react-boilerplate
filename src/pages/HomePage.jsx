@@ -19,10 +19,10 @@ import FederatedSearch from '@/components/federatedSearch/FederatedSearch';
 import HomeCarousel from '@/components/carousels/HomeCarousel';
 
 // should carousel be shown or not and config for carousel
-import { shouldHaveCarousels, carouselConfig } from '@/config/carouselConfig';
+import { carouselConfig } from '@/config/carouselConfig';
 
 //  should federated search be shown or not
-import { shouldHaveFederatedSearch } from '@/config/featuresConfig';
+import { shouldHaveFederatedSearch, shouldHaveCarousels } from '@/config/featuresConfig';
 
 const HomePage = () => {
   // Boolean value which determines if federated search is shown or not, default is false
