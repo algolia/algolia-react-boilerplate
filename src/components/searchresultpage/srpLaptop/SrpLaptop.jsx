@@ -13,7 +13,7 @@ import { framerMotionPage, framerMotionFacet } from '@/config/animationConfig';
 // Recoil state to directly access results
 import { useRecoilValue } from 'recoil';
 
-import { shouldHaveStats, shouldHaveInjectedHits } from '@/config/config';
+import { shouldHaveStats, shouldHaveInjectedHits } from '@/config/featuresConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 

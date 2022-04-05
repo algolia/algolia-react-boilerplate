@@ -22,7 +22,7 @@ import HomeCarousel from '@/components/carousels/HomeCarousel';
 import { isCarouselAtom, carouselConfig } from '@/config/carouselConfig';
 
 //  should federated search be shown or not
-import { shouldHaveFederatedSearch } from '@/config/config';
+import { shouldHaveFederatedSearch } from '@/config/featuresConfig';
 
 const HomePage = () => {
   // Boolean value which determines if federated search is shown or not, default is false

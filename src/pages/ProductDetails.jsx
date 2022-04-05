@@ -28,7 +28,7 @@ import { useNavigate } from 'react-router-dom';
 // Recoil import
 import { useRecoilValue } from 'recoil';
 import { hitAtom } from '@/config/hitsConfig';
-import { shouldHaveRelatedProducts, shouldHaveFbtProducts } from '@/config/config';
+import { shouldHaveRelatedProducts, shouldHaveFbtProducts } from '@/config/featuresConfig';
 import { hitsConfig } from '@/config/hitsConfig';
 
 // Custom hooks

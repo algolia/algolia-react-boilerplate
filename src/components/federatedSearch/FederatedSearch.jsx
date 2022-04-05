@@ -15,7 +15,7 @@ import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { indexNames, searchClient } from '@/config/algoliaEnvConfig';
 
 // Those imports are here to check if user is clicking outside the searchbox & federated to close federated
-import { shouldHaveFederatedSearch } from '@/config/config';
+import { shouldHaveFederatedSearch } from '@/config/featuresConfig';
 
 // Show or unshow sections in federated (product, suggestions, categories, articles, recent searches)
 // categories import is here to choose which attribute you want to show as category

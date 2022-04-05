@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
 //Import config for federatedSearch
-import { shouldHaveFederatedSearch, shouldHaveVoiceSearch } from '@/config/config';
+import { shouldHaveFederatedSearch, shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
 import { logoUrl } from '@/config/headerConfig';
 

@@ -25,7 +25,7 @@ import QuerySuggestions from '@/components/federatedSearch/components/QuerySugge
 import Banner from '@/components/banners/Banner';
 
 // Import Persona State from recoil
-import { shouldHaveInjectedBanners } from '@/config/config';
+import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 import { indexNames } from '@/config/algoliaEnvConfig';
 
 import SrpLaptop from '@/components/searchresultpage/srpLaptop/SrpLaptop';

@@ -15,7 +15,7 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { logoUrl } from '@/config/headerConfig';
 
 //Import config for federatedSearch
-import { shouldHaveFederatedSearch, shouldHaveVoiceSearch } from '@/config/config';
+import { shouldHaveFederatedSearch, shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
 // Import framer motion
 import { motion, AnimatePresence } from 'framer-motion';
