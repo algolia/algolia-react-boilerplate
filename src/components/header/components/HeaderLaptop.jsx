@@ -15,7 +15,7 @@ import {
 import { logoUrl } from '@/config/headerConfig';
 
 //Import config from helped navigation
-import { isHelpedNavigation } from '@/config/helpedNavigation';
+import { isDemoGuideOpen } from '@/config/helpedNavigation';
 
 // Import SearchBox
 // Rename customSearchbox
@@ -35,7 +35,7 @@ const HeaderLaptop = () => {
   const displayVoiceSearch = useSetRecoilState(shouldHaveVoiceSearch);
   // Showing or hiding help navigation menu
   const [showHelpNavigation, setShowHelpNavigation] =
-    useRecoilState(isHelpedNavigation);
+    useRecoilState(isDemoGuideOpen);
 
   return (
     <div className="container">

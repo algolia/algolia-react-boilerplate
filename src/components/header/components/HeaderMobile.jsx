@@ -21,7 +21,7 @@ import {
 } from '@/config/featuresConfig';
 
 //Import config from helped navigation
-import { isHelpedNavigation } from '@/config/helpedNavigation';
+import { isDemoGuideOpen } from '@/config/helpedNavigation';
 
 // Import framer motion
 import { motion, AnimatePresence } from 'framer-motion';
@@ -50,7 +50,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
 
   // Showing or hiding help navigation menu
   const [showHelpNavigation, setShowHelpNavigation] =
-    useRecoilState(isHelpedNavigation);
+    useRecoilState(isDemoGuideOpen);
 
   return (
     <div className="container container-mobile">

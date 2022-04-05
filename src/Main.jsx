@@ -6,8 +6,8 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 
 //Import help navigation state & config
 import {
-  isHelpedNavigation,
-  shouldShowHelpedNavigation,
+  isDemoGuideOpen,
+  shouldShowDemoGuide,
 } from './config/helpedNavigation';
 
 // Import Pages and static components
@@ -21,8 +21,8 @@ import { useRecoilValue } from 'recoil';
 
 export const Main = ({ isLoaded }) => {
   const location = useLocation();
-  const shouldShowNavigation = useRecoilValue(shouldShowHelpedNavigation);
-  const showHelpNavigation = useRecoilValue(isHelpedNavigation);
+  const shouldShowNavigation = useRecoilValue(shouldShowDemoGuide);
+  const showHelpNavigation = useRecoilValue(isDemoGuideOpen);
 
   return (
     <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
