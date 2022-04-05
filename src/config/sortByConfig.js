@@ -1,9 +1,11 @@
 // ------------------------------------------
-// Sort By Config
+// Configuration for Sort By
 // ------------------------------------------
 
 import { indexNames } from './algoliaEnvConfig';
 
+// This const defines the indices for sorts, please add or remove from the array as needed
+// The values for each index use the prefix of the main index for convenience
 export const sortBy = {
   value: true,
   labelIndex: [
