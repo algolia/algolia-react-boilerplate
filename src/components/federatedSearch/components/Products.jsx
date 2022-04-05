@@ -9,7 +9,7 @@ import { ChevronRight } from '@/assets/svg/SvgIndex';
 // Recoil import
 import { hitAtom } from '@/config/results';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { hitsConfig } from '@/config/hits';
+import { hitsConfig } from '@/config/hitsConfig';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';

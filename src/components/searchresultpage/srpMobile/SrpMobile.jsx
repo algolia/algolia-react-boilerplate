@@ -37,7 +37,7 @@ import { ChevronRight, ChevronLeft } from '@/assets/svg/SvgIndex';
 
 import { indexNames } from '@/config/algoliaEnvConfig';
 
-import { hitsPerPage } from '@/config/hits';
+import { hitsPerPage } from '@/config/hitsConfig';
 
 // Import Config File
 import { customDataByType } from '@/utils';

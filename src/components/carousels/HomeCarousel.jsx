@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import configuration
-import { hitsConfig } from '@/config/hits';
+import { hitsConfig } from '@/config/hitsConfig';
 import { indexNames } from '@/config/algoliaEnvConfig';
 import { hitAtom } from '@/config/results';
 

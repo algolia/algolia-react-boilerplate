@@ -29,7 +29,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { hitAtom } from '@/config/results';
 import { isRelatedProducts, isFbtProducts } from '@/config/config';
-import { hitsConfig } from '@/config/hits';
+import { hitsConfig } from '@/config/hitsConfig';
 
 // Custom hooks
 import useScreenSize from '@/hooks/useScreenSize';

@@ -38,7 +38,7 @@ import {
 } from '@/config/algoliaEnvConfig';
 
 // Handle the number of hits per page
-import { hitsPerPage } from '@/config/hits';
+import { hitsPerPage } from '@/config/hitsConfig';
 
 // Import Config File
 import { customDataByType } from '@/utils';
