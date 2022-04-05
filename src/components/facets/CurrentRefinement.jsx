@@ -6,11 +6,11 @@ import { connectCurrentRefinements } from 'react-instantsearch-dom';
 import { useRecoilValue } from 'recoil';
 
 // import config file for state of facets
-import { currency } from '@/config/currencyConfig';
+import { currencySymbol } from '@/config/currencyConfig';
 import { refinementPrice } from '@/config/refinementsConfig';
 import { hitsConfig } from '@/config/hitsConfig';
 
-const displayPrice = (i, currencyValue, refinementPrice) => {
+const displayPrice = (i, currencySymbol, refinementPrice) => {
   const { moreThan, lessThan } = refinementPrice;
 
   // Split the label into an array to work on split
@@ -19,18 +19,18 @@ const displayPrice = (i, currencyValue, refinementPrice) => {
     i.label.includes(i.currentRefinement.max) &&
     !i.label.includes(i.currentRefinement.min)
   ) {
-    return `${lessThan} ${arraySplitLabel[2]} ${currencyValue}`;
+    return `${lessThan} ${arraySplitLabel[2]} ${currencySymbol}`;
   }
   if (
     i.label.includes(i.currentRefinement.min) &&
     !i.label.includes(i.currentRefinement.max)
   ) {
-    return `${moreThan} ${arraySplitLabel[0]} ${currencyValue}`;
+    return `${moreThan} ${arraySplitLabel[0]} ${currencySymbol}`;
   }
   return (
-    `${arraySplitLabel[0]} ${currencyValue} ` +
+    `${arraySplitLabel[0]} ${currencySymbol} ` +
     `-` +
-    ` ${arraySplitLabel[3]} ${currencyValue}`
+    ` ${arraySplitLabel[3]} ${currencySymbol}`
   );
 };
 
@@ -40,7 +40,7 @@ const displayColor = (i) => {
 };
 
 const CurrentRefinements = ({ items, refine, createURL }) => {
-  const currencyValue = useRecoilValue(currency);
+
   const { colourHexa } = useRecoilValue(hitsConfig);
   return (
     <ul className="refinement-container__refinements">
@@ -60,7 +60,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
                     refine(item.value);
                   }}
                 >
-                  {displayPrice(item, currencyValue, refinementPrice)}
+                  {displayPrice(item, currencySymbol, refinementPrice)}
                 </a>
               )}
             </li>
