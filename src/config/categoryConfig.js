@@ -2,7 +2,10 @@
 // Category Pages
 // ------------------------------------------
 
-// This export is used for Category pages. It will create a filters in a Configure widget in SRP to filter out the right products
-export const hierarchicalFacet = {
-  hierarchicalLvl0: 'hierarchicalCategories.lvl0',
-};
+// ------------------------------------------
+// This exported attribute name is used to generate results for Category pages
+// It will create a filter which will be used when a category page link is clicked on
+// Please refer to linksHeader in headerConfig to define the category page values
+// ------------------------------------------
+
+export const categoryPageFilterAttribute = 'hierarchicalCategories.lvl0';

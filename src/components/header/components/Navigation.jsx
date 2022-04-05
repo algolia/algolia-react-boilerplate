@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 // Import Config for the header
-import { hierarchicalFacet } from '@/config/categoryConfig';
+import { categoryPageFilterAttribute } from '@/config/categoryConfig';
 import { linksHeader } from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
@@ -31,7 +31,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
             // Open the sub-menu if the link is hierarchical, otherwise run a search
             if (link.name !== 'All') {
               navigate(`/search`, {
-                state: `${hierarchicalFacet.hierarchicalLvl0}:'${link.filter}'`,
+                state: `${categoryPageFilterAttribute}:'${link.filter}'`,
               });
             } else {
               navigate('/search');
