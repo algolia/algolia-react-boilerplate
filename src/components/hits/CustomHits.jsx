@@ -11,7 +11,7 @@ import { Heart } from '@/assets/svg/SvgIndex';
 import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil configuration
-import { hitAtom } from '@/config/results';
+import { hitAtom } from '@/config/hitsConfig';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
 

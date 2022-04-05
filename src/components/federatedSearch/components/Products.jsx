@@ -7,7 +7,7 @@ import { connectHits } from 'react-instantsearch-dom';
 import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 // Recoil import
-import { hitAtom } from '@/config/results';
+import { hitAtom } from '@/config/hitsConfig';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
 

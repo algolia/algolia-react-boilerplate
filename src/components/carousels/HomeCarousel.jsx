@@ -13,7 +13,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 // Import configuration
 import { hitsConfig } from '@/config/hitsConfig';
 import { indexNames } from '@/config/algoliaEnvConfig';
-import { hitAtom } from '@/config/results';
+import { hitAtom } from '@/config/hitsConfig';
 
 import { framerMotionTransition } from '@/config/animationConfig';
 
