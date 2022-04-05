@@ -9,7 +9,7 @@ import { connectRefinementList } from 'react-instantsearch-dom';
 // component import
 import { ChevronRight } from '@/assets/svg/SvgIndex';
 
-import { categories } from '@/config/federatedConfig';
+import { federatedCategoriesAttribute } from '@/config/federatedConfig';
 
 const CategoryItems = ({ items }) => {
   // router hook to navigate using a function
@@ -25,7 +25,7 @@ const CategoryItems = ({ items }) => {
               key={hit.label}
               onClick={() => {
                 navigate('/search', {
-                  state: `${categories.attribute}:"${hit.label}"`,
+                  state: `${federatedCategoriesAttribute}:"${hit.label}"`,
                 });
               }}
             >
