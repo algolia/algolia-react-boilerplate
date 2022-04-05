@@ -69,7 +69,14 @@ const HeaderMobile = ({ mobile, tablet }) => {
           <span className="hamburger__line"></span>
         </div>
         {/* Picto that returns SE menu on click */}
-        <div className="optionDots__wrapper">
+        <div
+          className={`${
+            showHelpNavigation ? 'optionDots__wrapper-active' : ''
+          } optionDots__wrapper`}
+          onClick={() => {
+            setShowHelpNavigation(!showHelpNavigation);
+          }}
+        >
           <OptionDots />
         </div>
         {/* Logo, which returns to the homepage on click */}
