@@ -1,4 +1,6 @@
 // This is the Search Results Page that you'll see on a phone screen
+import { lazy, Suspense } from 'react';
+import { lazily } from 'react-lazily';
 
 import { useState } from 'react';
 // eslint-disable-next-line import/order
@@ -22,17 +24,17 @@ import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Components
-import CustomClearRefinements from '@/components/facets/ClearRefinement';
-import CustomCurrentRefinements from '@/components/facets/CurrentRefinement';
-import CustomHitsComponent from '@/components/hits/CustomHits';
+const CustomClearRefinements = lazy(() => import('@/components/facets/ClearRefinement'));
+const CustomCurrentRefinements = lazy(() => import('@/components/facets/CurrentRefinement'));
+const CustomHitsComponent = lazy(() => import('@/components/hits/CustomHits'));
 import NoCtaCard from '@/components/hits/NoCtaCard';
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
 import SalesCard from '@/components/hits/SalesCard';
-import CustomSortBy from '@/components/searchresultpage/SortBy';
-import { CustomStats } from '@/components/searchresultpage/Stats';
-import { InjectedHits } from '@/components/searchresultpage/injected-hits';
-import FacetsMobile from '@/components/facets/facetsMobile/FacetsMobile';
+const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
+const { CustomStats } = lazily(() => import('@/components/searchresultpage/Stats'));
+const { InjectedHits } = lazily(() => import('@/components/searchresultpage/injected-hits'));
+const FacetsMobile = lazy(() => import('@/components/facets/facetsMobile/FacetsMobile'));
 import { ChevronRight, ChevronLeft } from '@/assets/svg/SvgIndex';
 
 import { indexNames } from '@/config/algoliaEnvConfig';
@@ -76,7 +78,9 @@ const SrpMobile = () => {
         {isMenuOpen ? <ChevronRight /> : <ChevronLeft />}
         <p>Filters</p>
       </div>
-      <FacetsMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <FacetsMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      </Suspense>
       <motion.div
         className="srp-container__hits"
         variants={framerMotionPage}
@@ -86,18 +90,26 @@ const SrpMobile = () => {
         transition={framerMotionPage.transition}
       >
         <div className="srp-container__stats-sort">
-          {stats && <CustomStats />}
+          {stats && (
+            <Suspense fallback={<div>Loading...</div>}>
+              <CustomStats />
+            </Suspense>
+          )}
           {priceSortBy && (
-            <CustomSortBy
-              items={labelItems}
-              defaultRefinement={indexNames.mainIndex}
-            />
+            <Suspense fallback={<div>Loading...</div>}>
+              <CustomSortBy
+                items={labelItems}
+                defaultRefinement={indexNames.mainIndex}
+              />
+            </Suspense>
           )}
         </div>
 
         <div className="refinement-container">
-          <CustomCurrentRefinements />
-          <CustomClearRefinements />
+          <Suspense fallback={<div>Loading...</div>}>
+            <CustomCurrentRefinements />
+            <CustomClearRefinements />
+          </Suspense>
         </div>
         <Configure
           hitsPerPage={injected ? hitsPerPageInjected : hitsPerPageNotInjected}
@@ -111,45 +123,49 @@ const SrpMobile = () => {
           <Configure hitsPerPage={1} page={0} />
         </Index>
         {shouldInjectContent ? (
-          <InjectedHits
-            hitComponent={Hit}
-            slots={({ resultsByIndex }) => {
-              const indexValue = indexNames.mainIndex;
-              const { noCta, salesCard } = customDataByType(
-                resultsByIndex?.[indexValue]?.userData
-              );
-              // eslint-disable-next-line no-lone-blocks
-              {
-                // eslint-disable-next-line no-unused-expressions
-                salesCard && setInjected(true);
-              }
-              return [
+          <Suspense fallback={<div>Loading...</div>}>
+            <InjectedHits
+              hitComponent={Hit}
+              slots={({ resultsByIndex }) => {
+                const indexValue = indexNames.mainIndex;
+                const { noCta, salesCard } = customDataByType(
+                  resultsByIndex?.[indexValue]?.userData
+                );
+                // eslint-disable-next-line no-lone-blocks
                 {
-                  getHits: () => [noCta],
-                  injectAt: noCta ? noCta.position : null,
-                  slotComponent: NoCtaCard,
-                },
-                {
-                  getHits: () => [salesCard],
-                  injectAt: salesCard ? salesCard.position : null,
-                  slotComponent: SalesCard,
-                },
-                {
-                  injectAt: ({ position }) => position === 2,
-                  // eslint-disable-next-line no-shadow
-                  getHits: ({ resultsByIndex }) => {
-                    setInjected(true);
-                    return resultsByIndex[indexNames.injectedContentIndex]
-                      ? resultsByIndex[indexNames.injectedContentIndex].hits || []
-                      : [];
+                  // eslint-disable-next-line no-unused-expressions
+                  salesCard && setInjected(true);
+                }
+                return [
+                  {
+                    getHits: () => [noCta],
+                    injectAt: noCta ? noCta.position : null,
+                    slotComponent: NoCtaCard,
                   },
-                  slotComponent: InfluencerCard,
-                },
-              ];
-            }}
-          />
+                  {
+                    getHits: () => [salesCard],
+                    injectAt: salesCard ? salesCard.position : null,
+                    slotComponent: SalesCard,
+                  },
+                  {
+                    injectAt: ({ position }) => position === 2,
+                    // eslint-disable-next-line no-shadow
+                    getHits: ({ resultsByIndex }) => {
+                      setInjected(true);
+                      return resultsByIndex[indexNames.injectedContentIndex]
+                        ? resultsByIndex[indexNames.injectedContentIndex].hits || []
+                        : [];
+                    },
+                    slotComponent: InfluencerCard,
+                  },
+                ];
+              }}
+            />
+          </Suspense>
         ) : (
-          <CustomHitsComponent />
+          <Suspense fallback={<div>Loading...</div>}>
+            <CustomHitsComponent />
+          </Suspense>
         )}
       </motion.div>
     </div>
