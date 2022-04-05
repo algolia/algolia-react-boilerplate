@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 
-// Algolia import
-import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch } from 'react-instantsearch-dom';
 
 // React router
