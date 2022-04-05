@@ -1,9 +1,6 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
 
-//Algolia's import
-import algoliasearch from 'algoliasearch/lite';
-
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
 
