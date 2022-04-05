@@ -3,13 +3,19 @@
 // React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
 //Import config for federatedSearch
-import { shouldHaveFederatedSearch, shouldHaveVoiceSearch } from '@/config/featuresConfig';
+import {
+  shouldHaveFederatedSearch,
+  shouldHaveVoiceSearch,
+} from '@/config/featuresConfig';
 
 import { logoUrl } from '@/config/headerConfig';
+
+//Import config from helped navigation
+import { isHelpedNavigation } from '@/config/helpedNavigation';
 
 // Import SearchBox
 // Rename customSearchbox
@@ -19,15 +25,32 @@ import CustomSearchBox from '@/components/searchbox/SearchBox';
 import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 
+//Import the option pictogram component
+import { OptionDots } from '@/assets/svg/SvgIndex';
+
 const HeaderLaptop = () => {
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(shouldHaveFederatedSearch);
   // Define value to display voiceSearch
   const displayVoiceSearch = useSetRecoilState(shouldHaveVoiceSearch);
+  // Showing or hiding help navigation menu
+  const [showHelpNavigation, setShowHelpNavigation] =
+    useRecoilState(isHelpedNavigation);
 
   return (
     <div className="container">
       <div className="container__header-top">
+        {/* Picto that returns SE menu on click */}
+        <div
+          className={`${
+            showHelpNavigation ? 'optionDots__wrapper-active' : ''
+          } optionDots__wrapper`}
+          onClick={() => {
+            setShowHelpNavigation(!showHelpNavigation);
+          }}
+        >
+          <OptionDots />
+        </div>
         <div className="container__header-top__logo">
           <Link
             to="/"

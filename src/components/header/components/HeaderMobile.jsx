@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Recoil Header State
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
 
 // eslint-disable-next-line import/order
 import { queryAtom } from '@/config/searchboxConfig';
@@ -15,7 +15,13 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { logoUrl } from '@/config/headerConfig';
 
 //Import config for federatedSearch
-import { shouldHaveFederatedSearch, shouldHaveVoiceSearch } from '@/config/featuresConfig';
+import {
+  shouldHaveFederatedSearch,
+  shouldHaveVoiceSearch,
+} from '@/config/featuresConfig';
+
+//Import config from helped navigation
+import { isHelpedNavigation } from '@/config/helpedNavigation';
 
 // Import framer motion
 import { motion, AnimatePresence } from 'framer-motion';
@@ -29,6 +35,9 @@ import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 // import SelectPersona from '../personnaSelect/SelectPersona';
 
+//Import the option pictogram component
+import { OptionDots } from '@/assets/svg/SvgIndex';
+
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
   const setQueryState = useSetRecoilState(queryAtom);
@@ -38,6 +47,10 @@ const HeaderMobile = ({ mobile, tablet }) => {
 
   // Define value to display voiceSearch
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
+
+  // Showing or hiding help navigation menu
+  const [showHelpNavigation, setShowHelpNavigation] =
+    useRecoilState(isHelpedNavigation);
 
   return (
     <div className="container container-mobile">
@@ -54,6 +67,17 @@ const HeaderMobile = ({ mobile, tablet }) => {
           <span className="hamburger__line"></span>
           <span className="hamburger__line"></span>
           <span className="hamburger__line"></span>
+        </div>
+        {/* Picto that returns SE menu on click */}
+        <div
+          className={`${
+            showHelpNavigation ? 'optionDots__wrapper-active' : ''
+          } optionDots__wrapper`}
+          onClick={() => {
+            setShowHelpNavigation(!showHelpNavigation);
+          }}
+        >
+          <OptionDots />
         </div>
         {/* Logo, which returns to the homepage on click */}
         <div className="container__header-top__logo">
