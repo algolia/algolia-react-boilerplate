@@ -39,6 +39,7 @@ import QuerySuggestions from './components/QuerySuggestions';
 import Category from './components/Category';
 import Products from './components/Products';
 import Articles from './components/BlogPost';
+import Redirect from '@/components/redirects/Redirect';
 
 const FederatedSearch = () => {
   // Recoil & States
@@ -124,6 +125,7 @@ const FederatedSearch = () => {
           </div>
         )}
       </div>
+      <Redirect/>
     </motion.div>
   );
 };
