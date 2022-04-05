@@ -15,6 +15,7 @@ import Header from './components/header/Header';
 import HelpNavigation from './components/helpNavigation/HelpNavigation';
 import HomePage from './pages/HomePage';
 import SearchResultsPage from './pages/SearchResultsPage';
+import AlertNavigation from './components/helpNavigation/AlertNavigation';
 import ProductDetails from './pages/ProductDetails';
 import Footer from './components/footer/Footer';
 import { useRecoilValue } from 'recoil';
@@ -38,6 +39,7 @@ export const Main = ({ isLoaded }) => {
           <Route path="/search/:objectID" element={<ProductDetails />} />
         </Routes>
       </AnimatePresence>
+      <AlertNavigation />
       <Footer />
     </div>
   );
