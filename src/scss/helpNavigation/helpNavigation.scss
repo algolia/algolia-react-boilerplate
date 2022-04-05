@@ -1,0 +1,43 @@
+// ------------------------------------------
+// Help Navigation
+// ------------------------------------------
+@import '../mixin/abstracts/abstracts.scss';
+
+.helpNavigation{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30%;
+    padding: 2rem;
+    background-color: $white-color ;
+    z-index: 998;
+
+    h2{
+        font-weight: bold;
+    }
+}
+
+// SE menu btn/picto that helps navigate in the app
+
+.optionDots__wrapper{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s ease-in-out;
+
+    &-active{
+        transform: rotateZ(-90deg);
+        transition: all 0.3s ease-in-out;
+    }
+
+  
+    svg{
+      width: 5px;
+      path{
+        fill: $blue-algolia;
+      }
+    }
+  }
