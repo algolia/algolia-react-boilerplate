@@ -19,7 +19,7 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 
 import { isStats, isInjectedHits } from '@/config/config';
 import { sortBy } from '@/config/sortByConfig';
-import { queryAtom } from '@/config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Components
 import CustomClearRefinements from '@/components/facets/ClearRefinement';

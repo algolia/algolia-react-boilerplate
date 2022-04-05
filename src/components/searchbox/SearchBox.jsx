@@ -23,7 +23,7 @@ import {
   searchBoxAtom,
   simplePlaceholderAtom,
   isSearchInCategory,
-} from '@/config/searchbox';
+} from '@/config/searchboxConfig';
 
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';

@@ -22,7 +22,7 @@ import { isFederatedAtom } from '@/config/config';
 import { federatedSearchConfig, categories } from '@/config/federatedConfig';
 
 // Sharing query to general state
-import { queryAtom, searchBoxAtom } from '@/config/searchbox';
+import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig';
 
 // Import Persona State from recoil
 import { personaSelectedAtom } from '@/config/personaConfig';

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // eslint-disable-next-line import/order
-import { queryAtom } from '@/config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
 // Import logo URL for header
 import { logoUrl } from '@/config/headerConfig';

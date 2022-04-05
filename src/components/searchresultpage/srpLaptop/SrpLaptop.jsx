@@ -15,7 +15,7 @@ import { useRecoilValue } from 'recoil';
 
 import { isStats, isInjectedHits } from '@/config/config';
 import { sortBy } from '@/config/sortByConfig';
-import { queryAtom } from '@/config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Persona State from recoil
 import { personaSelectedAtom } from '@/config/personaConfig';

@@ -15,7 +15,7 @@ import {
 
 // Recoil state to directly access results
 import { useRecoilValue } from 'recoil';
-import { queryAtom } from '../config/searchbox';
+import { queryAtom } from '../config/searchboxConfig';
 
 // Import custom Hooks
 import useScreenSize from '@/hooks/useScreenSize';
