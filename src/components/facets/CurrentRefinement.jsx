@@ -6,7 +6,7 @@ import { connectCurrentRefinements } from 'react-instantsearch-dom';
 import { useRecoilValue } from 'recoil';
 
 // import config file for state of facets
-import { currency } from '@/config/config';
+import { currency } from '@/config/currencyConfig';
 import { refinementPrice } from '@/config/refinementsConfig';
 import { hitsConfig } from '@/config/hitsConfig';
 
