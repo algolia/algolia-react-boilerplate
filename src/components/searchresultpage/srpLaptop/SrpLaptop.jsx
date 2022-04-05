@@ -13,7 +13,7 @@ import { framerMotionPage, framerMotionFacet } from '@/config/animationConfig';
 // Recoil state to directly access results
 import { useRecoilValue } from 'recoil';
 
-import { isStats, isInjectedHits } from '@/config/config';
+import { shouldHaveStats, shouldHaveInjectedHits } from '@/config/config';
 import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 
@@ -46,8 +46,8 @@ import { customDataByType } from '@/utils';
 const SrpLaptop = () => {
   // Recoil & React states
 
-  const stats = useRecoilValue(isStats);
-  const shouldInjectContent = useRecoilValue(isInjectedHits);
+  const stats = useRecoilValue(shouldHaveStats);
+  const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
   const queryState = useRecoilValue(queryAtom);
   const [injected, setInjected] = useState(false);
 

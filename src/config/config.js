@@ -1,39 +1,44 @@
 import { atom } from 'recoil';
 
 // ------------------------------------------
-// Config feature, change by true or false to remove them or change the value
+// Config feature, adjust the default value to turn them on or off
 // ------------------------------------------
-export const isVoiceSearch = atom({
-  key: 'voiceSearch',
+
+// ------------------------------------------
+// TODO: add perso and other features here including what to have on federated
+// ------------------------------------------
+
+export const shouldHaveVoiceSearch = atom({
+  key: 'shouldHaveVoiceSearch',
   default: true,
 });
 
-export const isStats = atom({
-  key: 'stats',
+export const shouldHaveStats = atom({
+  key: 'shouldHaveStats',
   default: true,
 });
 
-export const isBannerSrp = atom({
-  key: 'bannerSrp',
+export const shouldHaveInjectedBanners = atom({
+  key: 'shouldHaveInjectedBanners',
   default: true,
 });
 
-export const isInjectedHits = atom({
-  key: 'injectedHits',
+export const shouldHaveInjectedHits = atom({
+  key: 'shouldHaveInjectedHits',
   default: true,
 });
 
-export const isFederatedAtom = atom({
-  key: 'isFederatedAtom', // unique ID (with respect to other atoms/selectors)
+export const shouldHaveFederatedSearch = atom({
+  key: 'shouldHaveFederatedSearch', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
 });
 
-export const isRelatedProducts = atom({
-  key: 'isRelatedProductsAtom', // unique ID (with respect to other atoms/selectors)
+export const shouldHaveRelatedProducts = atom({
+  key: 'shouldHaveRelatedProducts', // unique ID (with respect to other atoms/selectors)
   default: true, // default value (aka initial value)
 });
 
-export const isFbtProducts = atom({
-  key: 'isFbtProductsAtom', // unique ID (with respect to other atoms/selectors)
+export const shouldHaveFbtProducts = atom({
+  key: 'shouldHaveFbtProducts', // unique ID (with respect to other atoms/selectors)
   default: true, // default value (aka initial value)
 });

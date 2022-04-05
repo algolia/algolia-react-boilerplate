@@ -17,7 +17,7 @@ import { useRecoilValue } from 'recoil';
 // Import Persona State from recoil
 import { personaSelectedAtom } from '@/config/personaConfig';
 
-import { isStats, isInjectedHits } from '@/config/config';
+import { shouldHaveStats, shouldHaveInjectedHits } from '@/config/config';
 import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 
@@ -49,10 +49,10 @@ const SrpMobile = () => {
   const queryState = useRecoilValue(queryAtom);
 
   // Define Stat Const
-  const stats = useRecoilValue(isStats);
+  const stats = useRecoilValue(shouldHaveStats);
   const hitsPerPageNotInjected = hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = hitsPerPage.numberInjected;
-  const shouldInjectContent = useRecoilValue(isInjectedHits);
+  const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
 
   // Define Price Sort By
   const { value: priceSortBy, labelIndex: labelItems } = sortBy;

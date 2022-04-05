@@ -15,7 +15,7 @@ import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { indexNames, searchClient } from '@/config/algoliaEnvConfig';
 
 // Those imports are here to check if user is clicking outside the searchbox & federated to close federated
-import { isFederatedAtom } from '@/config/config';
+import { shouldHaveFederatedSearch } from '@/config/config';
 
 // Show or unshow sections in federated (product, suggestions, categories, articles, recent searches)
 // categories import is here to choose which attribute you want to show as category
@@ -43,7 +43,7 @@ import Articles from './components/BlogPost';
 const FederatedSearch = () => {
   // Recoil & States
   const personaSelect = useRecoilValue(personaSelectedAtom);
-  const setIsFederated = useSetRecoilState(isFederatedAtom);
+  const setIsFederated = useSetRecoilState(shouldHaveFederatedSearch);
   const searchboxRef = useRecoilValue(searchBoxAtom);
   const query = useRecoilValue(queryAtom);
 

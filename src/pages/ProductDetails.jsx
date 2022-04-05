@@ -28,7 +28,7 @@ import { useNavigate } from 'react-router-dom';
 // Recoil import
 import { useRecoilValue } from 'recoil';
 import { hitAtom } from '@/config/hitsConfig';
-import { isRelatedProducts, isFbtProducts } from '@/config/config';
+import { shouldHaveRelatedProducts, shouldHaveFbtProducts } from '@/config/config';
 import { hitsConfig } from '@/config/hitsConfig';
 
 // Custom hooks
@@ -38,8 +38,8 @@ const ProductDetails = () => {
   // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
 
-  const isRelatedProductsValue = useRecoilValue(isRelatedProducts);
-  const isFbtProductsValue = useRecoilValue(isFbtProducts);
+  const shouldHaveRelatedProductsValue = useRecoilValue(shouldHaveRelatedProducts);
+  const shouldHaveFbtProductsValue = useRecoilValue(shouldHaveFbtProducts);
 
   // navigate is used by react router
   const navigate = useNavigate();
@@ -191,7 +191,7 @@ const ProductDetails = () => {
       </div>
       {/* Render both Recommend components- Related Products and Frequently Bought Together */}
       <div className="recommend">
-        {isRelatedProductsValue && (
+        {shouldHaveRelatedProductsValue && (
           <RelatedProducts
             recommendClient={recommendClient}
             indexName={indexNames.mainIndex}
@@ -200,7 +200,7 @@ const ProductDetails = () => {
             maxRecommendations={5}
           />
         )}
-        {isFbtProductsValue && (
+        {shouldHaveFbtProductsValue && (
           <FrequentlyBoughtTogether
             recommendClient={recommendClient}
             indexName={indexNames.mainIndex}

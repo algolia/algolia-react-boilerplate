@@ -15,7 +15,7 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { logoUrl } from '@/config/headerConfig';
 
 //Import config for federatedSearch
-import { isFederatedAtom, isVoiceSearch } from '@/config/config';
+import { shouldHaveFederatedSearch, shouldHaveVoiceSearch } from '@/config/config';
 
 // Import framer motion
 import { motion, AnimatePresence } from 'framer-motion';
@@ -32,12 +32,12 @@ import Navigation from './Navigation';
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
   const setQueryState = useSetRecoilState(queryAtom);
-  const federated = useSetRecoilState(isFederatedAtom);
+  const federated = useSetRecoilState(shouldHaveFederatedSearch);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Define value to display voiceSearch
-  const displayVoiceSearch = useRecoilValue(isVoiceSearch);
+  const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
 
   return (
     <div className="container container-mobile">
