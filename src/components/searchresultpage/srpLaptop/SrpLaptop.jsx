@@ -1,6 +1,8 @@
 // This is the Search Results Page that you'll see on a normal computer screen
 
-import { lazy, useState, Suspense } from 'react';
+import {lazy, useState, Suspense } from 'react';
+import { lazily } from 'react-lazily';
+
 // eslint-disable-next-line import/order
 import { Pagination, Configure, Index } from 'react-instantsearch-dom';
 
@@ -29,8 +31,8 @@ import NoCtaCard from '@/components/hits/NoCtaCard';
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
 import SalesCard from '@/components/hits/SalesCard';
-import CustomSortBy from '@/components/searchresultpage/SortBy';
-import { CustomStats } from '@/components/searchresultpage/Stats';
+const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
+const { CustomStats } = lazily(() => import('@/components/searchresultpage/Stats'));
 import { InjectedHits } from '@/components/searchresultpage/injected-hits';
 
 import {
@@ -87,12 +89,18 @@ const SrpLaptop = () => {
       >
         {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
         <div className="srp-container__stats-sort">
-          {stats && <CustomStats />}
+          {stats && (
+            <Suspense fallback={<div>Loading...</div>}>
+              <CustomStats />
+            </Suspense>
+          )}
           {priceSortBy && (
-            <CustomSortBy
-              items={labelItems}
-              defaultRefinement={indexNames.mainIndex}
-            />
+            <Suspense fallback={<div>Loading...</div>}>
+              <CustomSortBy
+                items={labelItems}
+                defaultRefinement={indexNames.mainIndex}
+              />
+            </Suspense>
           )}
         </div>
         {/* Refinements, to the left of the items, including a list of currently selected refinements */}
