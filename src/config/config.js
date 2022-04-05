@@ -37,12 +37,3 @@ export const isFbtProducts = atom({
   key: 'isFbtProductsAtom', // unique ID (with respect to other atoms/selectors)
   default: true, // default value (aka initial value)
 });
-
-// ------------------------------------------
-// Federated Search Atoms
-// ------------------------------------------
-
-export const searchBoxAtom = atom({
-  key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
-});
