@@ -3,7 +3,7 @@
 // It also renders different search results components depending on screen size
 
 // import React functionality
-import { memo, useEffect } from 'react';
+import { memo, useEffect, lazy, Suspense } from 'react';
 
 // eslint-disable-next-line import/order
 import {
@@ -28,8 +28,8 @@ import Banner from '@/components/banners/Banner';
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 import { indexNames } from '@/config/algoliaEnvConfig';
 
-import SrpLaptop from '@/components/searchresultpage/srpLaptop/SrpLaptop';
-import SrpMobile from '@/components/searchresultpage/srpMobile/SrpMobile';
+const SrpLaptop = lazy(() => import('@/components/searchresultpage/srpLaptop/SrpLaptop'));
+const SrpMobile = lazy(() => import('@/components/searchresultpage/srpMobile/SrpMobile'));
 
 const SearchResultPage = () => {
   // Recoil & React states
@@ -45,9 +45,12 @@ const SearchResultPage = () => {
       {/* Display the banner if the bannerSrp config is set to: true */}
       {shouldDisplayBanners && <Banner />}
       {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
+
       <NoResultsHandler>
-        {(laptop || laptopXS) && <SrpLaptop />}
-        {(tablet || mobile) && <SrpMobile />}
+        <Suspense fallback={<div>Loading...</div>}>
+          {(laptop || laptopXS) && <SrpLaptop />}
+          {(tablet || mobile) && <SrpMobile />}
+        </Suspense>
       </NoResultsHandler>
     </>
   );
