@@ -125,6 +125,9 @@
       }
     }
   }
+  .refinement-container{
+    margin: 3rem 0;
+  }
 
   .facets-slider {
     left: 1rem;
@@ -138,6 +141,7 @@
     height: fit-content;
     z-index: 999;
     transition: 0.2s ease-in-out;
+    cursor: pointer;
 
     p {
       font-size: 0.8rem;
