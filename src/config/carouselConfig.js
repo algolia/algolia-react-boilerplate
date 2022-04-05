@@ -7,7 +7,6 @@
 // The attribute uses filter syntax https://www.algolia.com/doc/api-reference/api-parameters/filters/
 // The title is used to show above each carousel to indicate what it shows
 // ------------------------------------------
-
 export const carouselConfig = [
   {
     attribute: "brand: 'polo ralph lauren'",
