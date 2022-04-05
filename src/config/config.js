@@ -47,11 +47,6 @@ export const searchBoxAtom = atom({
   default: '', // default value (aka initial value)
 });
 
-export const selectButtonAtom = atom({
-  key: 'selectButtonAtom', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
-});
-
 export const selectSortByIndex = atom({
   key: 'selectSortByIndexAtom', // unique ID (with respect to other atoms/selectors)
   default: '', // default value (aka initial value)
