@@ -1,19 +1,20 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
 
+import {lazy, Suspense } from 'react';
+
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { framerMotionPage } from '@/config/animationConfig';
-// change to import from '../config/animationConfig;
 
 // recoil import
 import { useRecoilValue } from 'recoil';
 
 // components import
-import CustomHomeBanners from '@/components/banners/HomeBanners';
-import FederatedSearch from '@/components/federatedSearch/FederatedSearch';
-import HomeCarousel from '@/components/carousels/HomeCarousel';
+const CustomHomeBanners = lazy(() => import('@/components/banners/HomeBanners'));
+const FederatedSearch = lazy(() => import('@/components/federatedSearch/FederatedSearch'));
+const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
 
 // should carousel be shown or not and config for carousel
 import { carouselConfig } from '@/config/carouselConfig';
@@ -44,20 +45,26 @@ const HomePage = () => {
       {isFederated && (
         <AnimatePresence>
           {/* Loads federated search if isFederated is true */}
-          <FederatedSearch />
+          <Suspense fallback={<div>Loading...</div>}>
+            <FederatedSearch />
+          </Suspense>
         </AnimatePresence>
       )}
 
       {/* Load custom banners */}
-      <CustomHomeBanners />
+      <Suspense fallback={<div>Loading...</div>}>
+        <CustomHomeBanners />
+      </Suspense>
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
-          <HomeCarousel
-            key={i}
-            attribute={carousel.attribute}
-            title={carousel.title}
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            <HomeCarousel
+              key={i}
+              attribute={carousel.attribute}
+              title={carousel.title}
+            />
+          </Suspense>
         ))}
     </motion.div>
   );
