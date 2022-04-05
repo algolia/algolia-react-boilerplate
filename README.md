@@ -246,3 +246,11 @@ Here is a sample record structure which is expected for records in the index to 
 [Debounce Lodash](https://www.npmjs.com/package/lodash.debounce)
 
 The Utility of this package is to wait before action, for example on the SearchBox, onChange wait some time before send query.
+
+
+  <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Lazy Loading</h3>
+
+  We use the React library Suspense and lazy to load components when needed, and a wrapper called lazily because the default react library doesn't support named exports.
+
+  - https://reactjs.org/docs/code-splitting.html#reactlazy
+  - https://www.npmjs.com/package/react-lazily
