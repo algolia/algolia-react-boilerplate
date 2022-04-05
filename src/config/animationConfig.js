@@ -2,6 +2,10 @@
 // Framer Motion
 // ------------------------------------------
 
+// ------------------------------------------
+// You do not need to touch this file
+// ------------------------------------------
+
 export const framerMotionHits = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
