@@ -1,5 +1,4 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-
 import {lazy, useState, Suspense } from 'react';
 import { lazily } from 'react-lazily';
 
@@ -33,7 +32,7 @@ import InfluencerCard from '@/components/hits/InfluencerCard';
 import SalesCard from '@/components/hits/SalesCard';
 const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
 const { CustomStats } = lazily(() => import('@/components/searchresultpage/Stats'));
-import { InjectedHits } from '@/components/searchresultpage/injected-hits';
+const { InjectedHits } = lazily(() => import('@/components/searchresultpage/injected-hits'));
 
 import {
   indexNames
@@ -123,43 +122,45 @@ const SrpLaptop = () => {
         </Index>
         {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
         {shouldInjectContent ? (
-          <InjectedHits
-            hitComponent={Hit}
-            slots={({ resultsByIndex }) => {
-              const indexValue = indexNames.mainIndex;
-              const { noCta, salesCard } = customDataByType(
-                resultsByIndex?.[indexValue]?.userData
-              );
-              // eslint-disable-next-line no-lone-blocks
-              {
-                // eslint-disable-next-line no-unused-expressions
-                salesCard && setInjected(true);
-              }
-              return [
+          <Suspense fallback={<div>Loading...</div>}>
+            <InjectedHits
+              hitComponent={Hit}
+              slots={({ resultsByIndex }) => {
+                const indexValue = indexNames.mainIndex;
+                const { noCta, salesCard } = customDataByType(
+                  resultsByIndex?.[indexValue]?.userData
+                );
+                // eslint-disable-next-line no-lone-blocks
                 {
-                  getHits: () => [noCta],
-                  injectAt: noCta ? noCta.position : null,
-                  slotComponent: NoCtaCard,
-                },
-                {
-                  getHits: () => [salesCard],
-                  injectAt: salesCard ? salesCard.position : null,
-                  slotComponent: SalesCard,
-                },
-                {
-                  injectAt: ({ position }) => position === 2,
-                  // eslint-disable-next-line no-shadow
-                  getHits: ({ resultsByIndex }) => {
-                    setInjected(true);
-                    return resultsByIndex[indexNames.injectedContentIndex]
-                      ? resultsByIndex[indexNames.injectedContentIndex].hits || []
-                      : [];
+                  // eslint-disable-next-line no-unused-expressions
+                  salesCard && setInjected(true);
+                }
+                return [
+                  {
+                    getHits: () => [noCta],
+                    injectAt: noCta ? noCta.position : null,
+                    slotComponent: NoCtaCard,
                   },
-                  slotComponent: InfluencerCard,
-                },
-              ];
-            }}
-          />
+                  {
+                    getHits: () => [salesCard],
+                    injectAt: salesCard ? salesCard.position : null,
+                    slotComponent: SalesCard,
+                  },
+                  {
+                    injectAt: ({ position }) => position === 2,
+                    // eslint-disable-next-line no-shadow
+                    getHits: ({ resultsByIndex }) => {
+                      setInjected(true);
+                      return resultsByIndex[indexNames.injectedContentIndex]
+                        ? resultsByIndex[indexNames.injectedContentIndex].hits || []
+                        : [];
+                    },
+                    slotComponent: InfluencerCard,
+                  },
+                ];
+              }}
+            />
+          </Suspense>
         ) : (
           <Suspense fallback={<div>Loading...</div>}>
           <CustomHitsComponent />
