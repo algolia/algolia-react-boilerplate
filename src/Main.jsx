@@ -1,4 +1,3 @@
-import { createRef, useRef, useEffect } from 'react';
 // Framer-Motion
 import { AnimatePresence } from 'framer-motion';
 
@@ -9,7 +8,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import {
   isDemoGuideOpen,
   shouldShowDemoGuide,
-} from './config/helpedNavigation';
+} from './config/demoGuideConfig';
 
 // Import Pages and static components
 import Header from './components/header/Header';

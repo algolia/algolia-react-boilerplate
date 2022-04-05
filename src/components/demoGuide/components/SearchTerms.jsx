@@ -15,7 +15,7 @@ import {
   searchTermsConfig,
   styles,
   searchTermsInformations,
-} from '@/config/helpedNavigation';
+} from '@/config/demoGuideConfig';
 
 const SearchTerms = () => {
   // Recoil State - update query in searchBar
