@@ -3,6 +3,8 @@
 
 import {lazy, Suspense } from 'react';
 
+import Loader from '@/components/loader/Loader';
+
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -45,20 +47,20 @@ const HomePage = () => {
       {isFederated && (
         <AnimatePresence>
           {/* Loads federated search if isFederated is true */}
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader/>}>
             <FederatedSearch />
           </Suspense>
         </AnimatePresence>
       )}
 
       {/* Load custom banners */}
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader/>}>
         <CustomHomeBanners />
       </Suspense>
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader/>}>
             <HomeCarousel
               key={i}
               attribute={carousel.attribute}

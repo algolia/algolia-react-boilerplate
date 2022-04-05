@@ -2,6 +2,8 @@
 import {lazy, useState, Suspense } from 'react';
 import { lazily } from 'react-lazily';
 
+import Loader from '@/components/loader/Loader';
+
 // eslint-disable-next-line import/order
 import { Pagination, Configure, Index } from 'react-instantsearch-dom';
 
@@ -74,7 +76,7 @@ const SrpLaptop = () => {
         transition={framerMotionFacet.transition}
         className="srp-container__facets"
       >
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader/>}>
         <GenericRefinementList />
       </Suspense>
       </motion.div>
@@ -89,12 +91,12 @@ const SrpLaptop = () => {
         {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
         <div className="srp-container__stats-sort">
           {stats && (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loader/>}>
               <CustomStats />
             </Suspense>
           )}
           {priceSortBy && (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loader/>}>
               <CustomSortBy
                 items={labelItems}
                 defaultRefinement={indexNames.mainIndex}
@@ -104,7 +106,7 @@ const SrpLaptop = () => {
         </div>
         {/* Refinements, to the left of the items, including a list of currently selected refinements */}
         <div className="refinement-container">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader/>}>
             <CustomCurrentRefinements />
             <CustomClearRefinements />
           </Suspense>
@@ -122,7 +124,7 @@ const SrpLaptop = () => {
         </Index>
         {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
         {shouldInjectContent ? (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader/>}>
             <InjectedHits
               hitComponent={Hit}
               slots={({ resultsByIndex }) => {
@@ -162,7 +164,7 @@ const SrpLaptop = () => {
             />
           </Suspense>
         ) : (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader/>}>
           <CustomHitsComponent />
           </Suspense>
         )}

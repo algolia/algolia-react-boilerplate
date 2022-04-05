@@ -5,6 +5,8 @@
 // import React functionality
 import { memo, useEffect, lazy, Suspense } from 'react';
 
+import Loader from '@/components/loader/Loader';
+
 // eslint-disable-next-line import/order
 import {
   Configure,
@@ -47,7 +49,7 @@ const SearchResultPage = () => {
       {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
 
       <NoResultsHandler>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader/>}>
           {(laptop || laptopXS) && <SrpLaptop />}
           {(tablet || mobile) && <SrpMobile />}
         </Suspense>

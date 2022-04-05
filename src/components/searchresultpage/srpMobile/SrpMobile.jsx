@@ -2,6 +2,8 @@
 import { lazy, Suspense } from 'react';
 import { lazily } from 'react-lazily';
 
+import Loader from '@/components/loader/Loader';
+
 import { useState } from 'react';
 // eslint-disable-next-line import/order
 import { Configure, Index } from 'react-instantsearch-dom';
@@ -78,7 +80,7 @@ const SrpMobile = () => {
         {isMenuOpen ? <ChevronRight /> : <ChevronLeft />}
         <p>Filters</p>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <FacetsMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </Suspense>
       <motion.div
@@ -91,12 +93,12 @@ const SrpMobile = () => {
       >
         <div className="srp-container__stats-sort">
           {stats && (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loader/>}>
               <CustomStats />
             </Suspense>
           )}
           {priceSortBy && (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loader/>}>
               <CustomSortBy
                 items={labelItems}
                 defaultRefinement={indexNames.mainIndex}
@@ -106,7 +108,7 @@ const SrpMobile = () => {
         </div>
 
         <div className="refinement-container">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader/>}>
             <CustomCurrentRefinements />
             <CustomClearRefinements />
           </Suspense>
@@ -123,7 +125,7 @@ const SrpMobile = () => {
           <Configure hitsPerPage={1} page={0} />
         </Index>
         {shouldInjectContent ? (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader/>}>
             <InjectedHits
               hitComponent={Hit}
               slots={({ resultsByIndex }) => {
@@ -163,7 +165,7 @@ const SrpMobile = () => {
             />
           </Suspense>
         ) : (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader/>}>
             <CustomHitsComponent />
           </Suspense>
         )}
