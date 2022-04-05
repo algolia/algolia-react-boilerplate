@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 // Import Config for the header
-import { hierarchicalFacet } from '@/config/config';
+import { hierarchicalFacet } from '@/config/categoryConfig';
 import { linksHeader } from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
