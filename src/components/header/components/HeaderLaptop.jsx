@@ -49,6 +49,7 @@ const HeaderLaptop = () => {
             setShowHelpNavigation(!showHelpNavigation);
           }}
         >
+          <p>Guide</p>
           <OptionDots />
         </div>
         <div className="container__header-top__logo">

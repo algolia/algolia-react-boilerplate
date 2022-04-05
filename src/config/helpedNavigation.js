@@ -16,6 +16,7 @@ export const isDemoGuideOpen = atom({
 // Search Terms Config
 // ------------------------------------------
 export const searchTermsConfig = [
+  { value: '', label: 'Choose' },
   {
     value: 'ring',
     label: 'Ring',
@@ -33,7 +34,7 @@ export const searchTermsInformations = [
   },
   {
     span: 'Dress',
-    details: 'The category searched, is Dress',
+    details: 'Will only search in dress category',
   },
 ];
 
@@ -47,6 +48,7 @@ export const searchTermsSelectedAtom = atom({
 // Search Banners Config
 // ------------------------------------------
 export const searchBannersConfig = [
+  { value: '', label: 'Choose' },
   {
     value: 'algolia',
     label: 'Algolia',
@@ -68,19 +70,19 @@ export const searchBannersConfig = [
 export const searchBannersInformations = [
   {
     span: 'Algolia',
-    details: 'It will display an Algolia Banner',
+    details: 'Will display an Algolia Banner',
   },
   {
     span: 'Christmas',
-    details: 'It will display a Christmas banner',
+    details: 'Will display a Christmas banner',
   },
   {
     span: 'Help',
-    details: 'It will display an Help banner',
+    details: 'Will display an Help banner',
   },
   {
     span: 'Woman',
-    details: 'It will display a Woman banner',
+    details: 'Will display a Woman banner',
   },
 ];
 
@@ -112,12 +114,73 @@ export const searchPersonaInformations = [
   },
   {
     span: 'Stephen',
-    details: 'Stephen James a man who likes sports shoes',
+    details: 'Stephen James is a man who likes sports shoes',
   },
   {
     span: 'Elizabeth',
-    details: 'Elizabeth Aniston a woman who likes Blue Dresses',
+    details: 'Elizabeth Aniston is a woman who likes Blue Dresses',
   },
+];
+
+// Config on Injected content in Demo guide
+export const DemoGuideInjectedContentConfig = [
+  { value: '', label: 'Choose' },
+  {
+    value: 'Nike',
+    label: 'Nike',
+  },
+  {
+    value: 'Woman',
+    label: 'Woman',
+  },
+];
+
+
+export const DemoGuideInjectedContentInformations = [
+  {
+    span: 'Nike',
+    details: 'Will display injected content coupon for Nike',
+  },
+  {
+    span: 'Woman',
+    details: 'Will display injected content ad with Gigi Hadid',
+  }
+];
+
+
+// Config on Dynamic Filters in Demo guide
+export const DemoGuideDynamicFiltersConfig = [
+  { value: '', label: 'Choose' },
+  {
+    value: 'Sandals',
+    label: 'Sandals',
+  },
+];
+
+
+export const DemoGuideDynamicFiltersInformations = [
+  {
+    span: 'Sandals',
+    details: 'Will change the facets ordering to return size facet first',
+  },
+ 
+];
+// Config on Redirection in Demo guide
+export const DemoGuideRedirectConfig = [
+  { value: '', label: 'Choose' },
+  {
+    value: 'Faq',
+    label: 'FAQ',
+  },
+];
+
+
+export const DemoGuideRedirectInformations = [
+  {
+    span: 'FAQ',
+    details: 'Will Redirect the user to Algolia\'s homepage',
+  },
+ 
 ];
 
 // Please ignore this atom

@@ -1,32 +1,31 @@
-import { memo } from 'react';
-
-// Import the Select widget (https://react-select.com/home)
-import Select from 'react-select';
-
-// Import Recoil for state management
+import React from 'react';
 import { useSetRecoilState } from 'recoil';
-import { queryAtom } from '@/config/searchboxConfig';
 
 // Router import
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
+import { queryAtom } from '@/config/searchboxConfig';
+
+// Import the Select widget (https://react-select.com/home)
+import Select from 'react-select';
+
 // Import configuration
 import {
-  searchBannersConfig,
-  searchBannersInformations,
+  DemoGuideDynamicFiltersInformations,
+  DemoGuideDynamicFiltersConfig,
   styles,
 } from '@/config/helpedNavigation';
 
-const SearchBanners = () => {
+const DemoGuideDynamicFilters = () => {
   // Recoil State - update query in searchBar
   const setQueryState = useSetRecoilState(queryAtom);
   // router hook to navigate using a function
   const navigate = useNavigate();
   return (
     <div className="search-terms">
-      <h3>Banners Display</h3>
+      <h3>Dynamic Facet</h3>
       <div className="search-terms__infos">
-        {searchBannersInformations.map((item) => {
+        {DemoGuideDynamicFiltersInformations.map((item) => {
           return (
             <div className="search-terms__infos__titles">
               <span>{item.span}:</span>
@@ -36,10 +35,10 @@ const SearchBanners = () => {
         })}
       </div>
       <Select
-        defaultValue={searchBannersConfig}
-        options={searchBannersConfig}
+        defaultValue={DemoGuideDynamicFiltersConfig}
+        options={DemoGuideDynamicFiltersConfig}
         styles={styles}
-        placeholder="Persona"
+        placeholder="Choose"
         onChange={(e) => {
           navigate({
             pathname: '/search',
@@ -52,4 +51,4 @@ const SearchBanners = () => {
   );
 };
 
-export default SearchBanners;
+export default DemoGuideDynamicFilters;

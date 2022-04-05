@@ -106,52 +106,54 @@ const CustomColorRefinement = ({
 
 const Facets = () => {
   return (
-    <DynamicWidgets>
-      {refinements.map((e, i) => {
-        const { type, currency, label, options } = e;
-        switch (type) {
-          case 'price':
-            return (
-              <PriceSlider
-                attribute={options.attribute}
-                title={label}
-                currency={currency}
-                key={i}
-              />
-            );
-          case 'colour':
-            return (
-              <CustomColorRefinement
-                key={i}
-                title={label}
-                attribute={options.attribute}
-                separator=";"
-                layout={Layout.Grid}
-                shape={Shape.Circle}
-              />
-            );
-          case 'hierarchical':
-            return (
-              <CustomHierarchicalMenu
-                attributes={options.attribute}
-                title={label}
-                key={i}
-              />
-            );
-          default:
-            return (
-              <GenericRefinementList
-                searchable={options?.searchable}
-                key={i}
-                limit={options?.limit}
-                attribute={options.attribute}
-                title={label}
-                options={options}
-              />
-            );
-        }
-      })}
-    </DynamicWidgets>
+    <div>
+      <DynamicWidgets>
+        {refinements.map((e, i) => {
+          const { type, currency, label, options } = e;
+          switch (type) {
+            case 'price':
+              return (
+                <PriceSlider
+                  attribute={options.attribute}
+                  title={label}
+                  currency={currency}
+                  key={i}
+                />
+              );
+            case 'colour':
+              return (
+                <CustomColorRefinement
+                  key={i}
+                  title={label}
+                  attribute={options.attribute}
+                  separator=";"
+                  layout={Layout.Grid}
+                  shape={Shape.Circle}
+                />
+              );
+            case 'hierarchical':
+              return (
+                <CustomHierarchicalMenu
+                  attributes={options.attribute}
+                  title={label}
+                  key={i}
+                />
+              );
+            default:
+              return (
+                <GenericRefinementList
+                  searchable={options?.searchable}
+                  key={i}
+                  limit={options?.limit}
+                  attribute={options.attribute}
+                  title={label}
+                  options={options}
+                />
+              );
+          }
+        })}
+      </DynamicWidgets>
+    </div>
   );
 };
 

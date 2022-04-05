@@ -8,14 +8,19 @@
   top: 0;
   right: 0;
   height: 100%;
-  width: 30%;
-  padding: 2rem;
+  min-width: 30%;
+  padding: 3rem 2rem;
   background-color: $white-color;
   z-index: 998;
+  overflow: scroll;
 
   h2 {
     font-weight: bold;
   }
+}
+
+.helpNavigation-mobile{
+  min-width: 100%;
 }
 
 // SE menu btn/picto that helps navigate in the app
@@ -24,17 +29,33 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
+  width: 3rem;
+  height: 3rem;
   cursor: pointer;
   z-index: 999;
   transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &-active {
-    transform: rotateZ(-90deg);
+    transform: rotate3d(0, 0, 1, -90deg);
     transition: all 0.3s ease-in-out;
+
+    p{
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
   }
 
+  p{
+    font-size: 0.6rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transition: all 0.3s ease-in-out;
+  }
   svg {
-    width: 5px;
+    width: 6px;
     path {
       fill: $blue-algolia;
     }
@@ -46,8 +67,10 @@
     margin: 1rem 0;
     &__titles {
       display: flex;
-      align-items: center;
-      margin-left: 2rem;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 0.3rem;
+      // margin-left: 2rem;
       h3 {
         font-size: 0.9rem
       }
@@ -56,7 +79,6 @@
         color: $blue-algolia;
       }
       p {
-        margin-left: 0.9rem;
         font-size: 0.7rem;
       }
     }
