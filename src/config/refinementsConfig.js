@@ -1,9 +1,13 @@
 // ------------------------------------------
-// Refinements Config
+// Configuration for refinements/facets
 // ------------------------------------------
 
+// Used in the price slider facet
 import { currencySymbol } from './currencyConfig';
 
+// This const defines the refinements to be shown
+// There are five possible types: hierarchical, price, colour, size, list
+// Generally you should use type list if you are adding a new facet here
 export const refinements = [
   {
     type: 'hierarchical',
@@ -64,7 +68,8 @@ export const refinements = [
   },
 ];
 
-export const refinementPrice = {
+// This const defines the labels used in price refinements
+export const refinementPriceLabels = {
   moreThan: 'More than',
   lessThan: 'Less than',
 };

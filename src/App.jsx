@@ -25,7 +25,6 @@ import CustomStateResults from './components/stateResults/stateResults';
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
 
   useEffect(() => {
     setTimeout(() => {
@@ -35,7 +34,7 @@ const App = () => {
 
   return (
     <RecoilRoot>
-      <InstantSearch searchClient={search} indexName={indexNames.mainIndex}>
+      <InstantSearch searchClient={searchClient} indexName={indexNames.mainIndex}>
         <CustomStateResults />
         <Router>
           {isLoaded === false && <Loader isLoaded={isLoaded} />}

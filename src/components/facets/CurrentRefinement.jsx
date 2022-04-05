@@ -7,11 +7,11 @@ import { useRecoilValue } from 'recoil';
 
 // import config file for state of facets
 import { currencySymbol } from '@/config/currencyConfig';
-import { refinementPrice } from '@/config/refinementsConfig';
+import { refinementPriceLabels } from '@/config/refinementsConfig';
 import { hitsConfig } from '@/config/hitsConfig';
 
-const displayPrice = (i, currencySymbol, refinementPrice) => {
-  const { moreThan, lessThan } = refinementPrice;
+const displayPrice = (i, currencySymbol, refinementPriceLabels) => {
+  const { moreThan, lessThan } = refinementPriceLabels;
 
   // Split the label into an array to work on split
   const arraySplitLabel = i.label.replace(`<= ${i.attribute}`, '').split(' ');
@@ -60,7 +60,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
                     refine(item.value);
                   }}
                 >
-                  {displayPrice(item, currencySymbol, refinementPrice)}
+                  {displayPrice(item, currencySymbol, refinementPriceLabels)}
                 </a>
               )}
             </li>

@@ -20,7 +20,7 @@ import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import RelatedItem from '@/components/recommend/RelatedProducts';
 
 // Algolia search client
-import { searchClient, indexNames } from '@/config/algoliaEnvConfig';
+import { searchClientCreds, indexNames } from '@/config/algoliaEnvConfig';
 
 // React router import
 import { useNavigate } from 'react-router-dom';
@@ -46,8 +46,8 @@ const ProductDetails = () => {
 
   // define the client for using Recommend
   const recommendClient = algoliarecommend(
-    searchClient.appID,
-    searchClient.APIKey
+    searchClientCreds.appID,
+    searchClientCreds.APIKey
   );
 
   const { tablet, mobile } = useScreenSize();

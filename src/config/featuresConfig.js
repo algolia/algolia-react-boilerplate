@@ -1,8 +1,8 @@
-import { atom } from 'recoil';
+// ------------------------------------------
+// Configuration for features, adjust the default value to turn them on or off
+// ------------------------------------------
 
-// ------------------------------------------
-// Config feature, adjust the default value to turn them on or off
-// ------------------------------------------
+import { atom } from 'recoil';
 
 // ------------------------------------------
 // TODO: add perso and other features here including what to have on federated

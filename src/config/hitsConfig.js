@@ -1,8 +1,17 @@
+// ------------------------------------------
+// Configuration for results and individual hits
+// Holds both content results and product results
+// ------------------------------------------
+
 import { atom } from 'recoil';
 
-// Change string attribute here with the attribute of your index
+// ------------------------------------------
+// This const defines a map of attributes used in the app to the names of the attributes in your own index
+// Please change only the values in this const i.e. the strings on the right of the semi-colons
+// If you do not have an attribute in your data please do not remove it from here, contact #help-demos
+// ------------------------------------------
 export const hitsConfig = atom({
-  key: 'hitsConfig', // unique ID (with respect to other atoms/selectors)
+  key: 'hitsConfig',
   default: {
     objectID: 'objectID',
     productName: 'name',
@@ -22,12 +31,10 @@ export const hitsConfig = atom({
     hierarchicalCategoriesLvl2: 'hierarchicalCategories.lvl2',
     hierarchicalCategoriesLvl3: 'hierarchicalCategories.lvl3',
     colourHexa: 'colour_hexa_v6',
-  }, // default value (aka initial value)
+  },
 });
 
-//Content blog & articles
-
-// Change string attribute here with the attribute of your index
+// Similar structure to previous const, please do not remove if you don't use articles
 export const contentArticlesConfig = atom({
   key: 'contentArticlesConfig', // unique ID (with respect to other atoms/selectors)
   default: {
@@ -38,20 +45,22 @@ export const contentArticlesConfig = atom({
     date: 'Date',
     description: 'description',
     image: 'Image Link',
-  }, // default value (aka initial value)
+  },
 });
 
-// Choose number of hit the app should display.
+// Choose number of records the app should display per results page
 export const hitsPerPage = {
   numberNotInjected: 15,
   numberInjected: 14,
 };
 
+// Please ignore this atom
 export const hitsAtom = atom({
   key: 'hitsAtom', // unique ID (with respect to other atoms/selectors)
   default: [], // default value (aka initial value)
 });
 
+// Please ignore this atom
 export const hitAtom = atom({
   key: 'hitAtom', // unique ID (with respect to other atoms/selectors)
   default: {}, // default value (aka initial value)
