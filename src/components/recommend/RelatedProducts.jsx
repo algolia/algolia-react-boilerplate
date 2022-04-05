@@ -1,7 +1,7 @@
 // Component for rendering the Related Products through Recommend
 
 // Import Hit configuration for use with Recoil
-import { hitsConfig } from '@/config/hits';
+import { hitsConfig } from '@/config/hitsConfig';
 import { useRecoilValue } from 'recoil';
 
 //  Import highlight widget from InstantSearch library

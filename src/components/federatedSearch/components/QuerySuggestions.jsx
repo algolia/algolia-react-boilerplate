@@ -11,7 +11,7 @@ import { useNavigate, createSearchParams } from 'react-router-dom';
 
 // Recoil import
 import { useSetRecoilState } from 'recoil';
-import { queryAtom } from '@/config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
 const Suggestions = ({ hits }) => {
   // router hook to navigate using a function

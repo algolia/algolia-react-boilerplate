@@ -11,9 +11,9 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import configuration
-import { hitsConfig } from '@/config/hits';
-import { indexName } from '@/config/algoliaEnvConfig';
-import { hitAtom } from '@/config/results';
+import { indexNames } from '@/config/algoliaEnvConfig';
+import { hitsConfig, hitAtom } from '@/config/hitsConfig';
+import { hitsPerCarousel } from '@/config/carouselConfig';
 
 import { framerMotionTransition } from '@/config/animationConfig';
 
@@ -21,8 +21,8 @@ import { framerMotionTransition } from '@/config/animationConfig';
 const HomeCarousel = ({ attribute, title }) => {
   return (
     <div className="home-carousel">
-      <Index indexId={title} indexName={indexName.index}>
-        <Configure hitsPerPage={8} filters={attribute} />
+      <Index indexId={title} indexName={indexNames.mainIndex}>
+        <Configure hitsPerPage={hitsPerCarousel} filters={attribute} />
         <CustomHitsCarousel title={title} />
       </Index>
     </div>

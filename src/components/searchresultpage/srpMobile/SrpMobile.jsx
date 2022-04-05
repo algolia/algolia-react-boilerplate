@@ -17,9 +17,9 @@ import { useRecoilValue } from 'recoil';
 // Import Persona State from recoil
 import { personaSelectedAtom } from '@/config/personaConfig';
 
-import { isStats, isInjectedHits } from '@/config/config';
+import { shouldHaveStats, shouldHaveInjectedHits } from '@/config/featuresConfig';
 import { sortBy } from '@/config/sortByConfig';
-import { queryAtom } from '@/config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Components
 import CustomClearRefinements from '@/components/facets/ClearRefinement';
@@ -35,9 +35,9 @@ import { InjectedHits } from '@/components/searchresultpage/injected-hits';
 import FacetsMobile from '@/components/facets/facetsMobile/FacetsMobile';
 import { ChevronRight, ChevronLeft } from '@/assets/svg/SvgIndex';
 
-import { indexName, injectedContentIndex } from '@/config/algoliaEnvConfig';
+import { indexNames } from '@/config/algoliaEnvConfig';
 
-import { hitsPerPage } from '@/config/hits';
+import { hitsPerPage } from '@/config/hitsConfig';
 
 // Import Config File
 import { customDataByType } from '@/utils';
@@ -49,10 +49,10 @@ const SrpMobile = () => {
   const queryState = useRecoilValue(queryAtom);
 
   // Define Stat Const
-  const stats = useRecoilValue(isStats);
+  const stats = useRecoilValue(shouldHaveStats);
   const hitsPerPageNotInjected = hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = hitsPerPage.numberInjected;
-  const shouldInjectContent = useRecoilValue(isInjectedHits);
+  const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
 
   // Define Price Sort By
   const { value: priceSortBy, labelIndex: labelItems } = sortBy;
@@ -90,7 +90,7 @@ const SrpMobile = () => {
           {priceSortBy && (
             <CustomSortBy
               items={labelItems}
-              defaultRefinement={indexName.index}
+              defaultRefinement={indexNames.mainIndex}
             />
           )}
         </div>
@@ -107,14 +107,14 @@ const SrpMobile = () => {
           filters={state ? state : ''}
           query={queryState}
         />
-        <Index indexName={injectedContentIndex}>
+        <Index indexName={indexNames.injectedContentIndex}>
           <Configure hitsPerPage={1} page={0} />
         </Index>
         {shouldInjectContent ? (
           <InjectedHits
             hitComponent={Hit}
             slots={({ resultsByIndex }) => {
-              const indexValue = indexName.index;
+              const indexValue = indexNames.mainIndex;
               const { noCta, salesCard } = customDataByType(
                 resultsByIndex?.[indexValue]?.userData
               );
@@ -139,8 +139,8 @@ const SrpMobile = () => {
                   // eslint-disable-next-line no-shadow
                   getHits: ({ resultsByIndex }) => {
                     setInjected(true);
-                    return resultsByIndex[injectedContentIndex]
-                      ? resultsByIndex[injectedContentIndex].hits || []
+                    return resultsByIndex[indexNames.injectedContentIndex]
+                      ? resultsByIndex[indexNames.injectedContentIndex].hits || []
                       : [];
                   },
                   slotComponent: InfluencerCard,

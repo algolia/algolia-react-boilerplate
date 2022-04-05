@@ -14,7 +14,7 @@ import { RecoilRoot } from 'recoil';
 import './scss/index.scss';
 
 // application state from config file
-import { searchClient, indexName } from './config/algoliaEnvConfig';
+import { searchClient, indexNames } from './config/algoliaEnvConfig';
 
 // Import Components
 import Loader from '@/components/loader/Loader';
@@ -25,7 +25,6 @@ import CustomStateResults from './components/stateResults/stateResults';
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
 
   useEffect(() => {
     setTimeout(() => {
@@ -35,7 +34,7 @@ const App = () => {
 
   return (
     <RecoilRoot>
-      <InstantSearch searchClient={search} indexName={indexName.index}>
+      <InstantSearch searchClient={searchClient} indexName={indexNames.mainIndex}>
         <CustomStateResults />
         <Router>
           {isLoaded === false && <Loader isLoaded={isLoaded} />}

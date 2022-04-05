@@ -20,16 +20,16 @@ import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import RelatedItem from '@/components/recommend/RelatedProducts';
 
 // Algolia search client
-import { searchClient, indexName } from '@/config/algoliaEnvConfig';
+import { searchClientCreds, indexNames } from '@/config/algoliaEnvConfig';
 
 // React router import
 import { useNavigate } from 'react-router-dom';
 
 // Recoil import
 import { useRecoilValue } from 'recoil';
-import { hitAtom } from '@/config/results';
-import { isRelatedProducts, isFbtProducts } from '@/config/config';
-import { hitsConfig } from '@/config/hits';
+import { hitAtom } from '@/config/hitsConfig';
+import { shouldHaveRelatedProducts, shouldHaveFbtProducts } from '@/config/featuresConfig';
+import { hitsConfig } from '@/config/hitsConfig';
 
 // Custom hooks
 import useScreenSize from '@/hooks/useScreenSize';
@@ -38,16 +38,16 @@ const ProductDetails = () => {
   // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
 
-  const isRelatedProductsValue = useRecoilValue(isRelatedProducts);
-  const isFbtProductsValue = useRecoilValue(isFbtProducts);
+  const shouldHaveRelatedProductsValue = useRecoilValue(shouldHaveRelatedProducts);
+  const shouldHaveFbtProductsValue = useRecoilValue(shouldHaveFbtProducts);
 
   // navigate is used by react router
   const navigate = useNavigate();
 
   // define the client for using Recommend
   const recommendClient = algoliarecommend(
-    searchClient.appID,
-    searchClient.APIKey
+    searchClientCreds.appID,
+    searchClientCreds.APIKey
   );
 
   const { tablet, mobile } = useScreenSize();
@@ -191,19 +191,19 @@ const ProductDetails = () => {
       </div>
       {/* Render both Recommend components- Related Products and Frequently Bought Together */}
       <div className="recommend">
-        {isRelatedProductsValue && (
+        {shouldHaveRelatedProductsValue && (
           <RelatedProducts
             recommendClient={recommendClient}
-            indexName={indexName.index}
+            indexName={indexNames.mainIndex}
             objectIDs={[hit[objectID]]}
             itemComponent={RelatedItem}
             maxRecommendations={5}
           />
         )}
-        {isFbtProductsValue && (
+        {shouldHaveFbtProductsValue && (
           <FrequentlyBoughtTogether
             recommendClient={recommendClient}
-            indexName={indexName.index}
+            indexName={indexNames.mainIndex}
             objectIDs={[hit[objectID]]}
             itemComponent={RelatedItem}
             maxRecommendations={5}
