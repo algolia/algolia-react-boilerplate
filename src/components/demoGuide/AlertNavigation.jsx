@@ -1,4 +1,4 @@
-import { isAlertOpen, alertContent } from '@/config/helpedNavigation';
+import { isAlertOpen, alertContent } from '@/config/demoGuideConfig';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 const AlertNavigation = () => {
