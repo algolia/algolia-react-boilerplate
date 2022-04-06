@@ -5,7 +5,7 @@ import Select from 'react-select';
 
 // Import Recoil for state management
 import { useSetRecoilState } from 'recoil';
-import { queryAtom } from '@/config/searchboxConfig';
+import { alertContent, isAlertOpen } from '@/config/helpedNavigation';
 
 // Router import
 import { useNavigate } from 'react-router-dom';
@@ -22,6 +22,8 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 const SearchPersona = () => {
   // Recoil State - update query in searchBar
   const setPersonaSelect = useSetRecoilState(personaSelectedAtom);
+  const setAlert = useSetRecoilState(alertContent);
+  const setAlertOpen = useSetRecoilState(isAlertOpen);
   // router hook to navigate using a function
   const navigate = useNavigate();
   return (
@@ -43,7 +45,11 @@ const SearchPersona = () => {
         styles={styles}
         placeholder="Persona"
         onChange={(e) => {
-          setPersonaSelect(e.value);
+          if (e.value !== 'anon') {
+            setPersonaSelect(e.value);
+            setAlertOpen(true);
+            setAlert(e.alertContent);
+          }
         }}
       />
     </div>
