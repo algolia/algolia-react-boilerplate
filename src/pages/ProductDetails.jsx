@@ -161,7 +161,7 @@ const ProductDetails = () => {
               )}
               <p>{hit[colour]}</p>
             </div>
-            {hit[sizeFilter].length > 0 && (
+            {hit[sizeFilter]?.length > 0 && (
               <div className="sizes">
                 <p>Available size(s):</p>
                 <motion.div className="sizeList">
