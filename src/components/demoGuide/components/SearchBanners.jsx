@@ -36,9 +36,9 @@ const SearchBanners = () => {
     <div className="search-terms">
       <h3>Banners Display</h3>
       <div className="search-terms__infos">
-        {searchBannersInformations.map((item) => {
+        {searchBannersInformations.map((item, i) => {
           return (
-            <div className="search-terms__infos__titles">
+            <div key={i} className="search-terms__infos__titles">
               <span>{item.span}:</span>
               <p>{item.details}</p>
             </div>
