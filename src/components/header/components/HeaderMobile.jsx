@@ -21,7 +21,7 @@ import {
 } from '@/config/featuresConfig';
 
 //Import config from helped navigation
-import { isDemoGuideOpen } from '@/config/helpedNavigation';
+import { isDemoGuideOpen } from '@/config/demoGuideConfig';
 
 // Import framer motion
 import { motion, AnimatePresence } from 'framer-motion';
@@ -38,6 +38,9 @@ import Navigation from './Navigation';
 //Import the option pictogram component
 import { OptionDots } from '@/assets/svg/SvgIndex';
 
+// Custom hook to prevent body from scrolling
+import usePreventScrolling from '@/hooks/usePreventScrolling';
+
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
   const setQueryState = useSetRecoilState(queryAtom);
@@ -51,6 +54,9 @@ const HeaderMobile = ({ mobile, tablet }) => {
   // Showing or hiding help navigation menu
   const [showHelpNavigation, setShowHelpNavigation] =
     useRecoilState(isDemoGuideOpen);
+
+  // Prevent body from scrolling when panel is open
+  usePreventScrolling(isMenuOpen);
 
   return (
     <div className="container container-mobile">
@@ -77,6 +83,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
             setShowHelpNavigation(!showHelpNavigation);
           }}
         >
+          <p>Guide</p>
           <OptionDots />
         </div>
         {/* Logo, which returns to the homepage on click */}
