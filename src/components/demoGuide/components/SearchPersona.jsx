@@ -5,7 +5,7 @@ import Select from 'react-select';
 
 // Import Recoil for state management
 import { useSetRecoilState } from 'recoil';
-import { alertContent, isAlertOpen } from '@/config/helpedNavigation';
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 
 // Router import
 import { useNavigate } from 'react-router-dom';
@@ -26,6 +26,13 @@ const SearchPersona = () => {
   const setAlertOpen = useSetRecoilState(isAlertOpen);
   // router hook to navigate using a function
   const navigate = useNavigate();
+
+  const triggerAlert = (content) => {
+    setAlertOpen(true);
+    setAlert(content);
+    setTimeout(() => setAlertOpen(false), 5000);
+  }
+
   return (
     <div className="search-terms">
       <h3>Search Persona</h3>
@@ -47,8 +54,7 @@ const SearchPersona = () => {
         onChange={(e) => {
           if (e.value !== 'anon') {
             setPersonaSelect(e.value);
-            setAlertOpen(true);
-            setAlert(e.alertContent);
+            triggerAlert(e.alertContent);
           }
         }}
       />

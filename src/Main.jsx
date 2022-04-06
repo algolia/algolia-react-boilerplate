@@ -11,13 +11,13 @@ import {
 } from './config/demoGuideConfig';
 
 // Import Pages and static components
-import Header from './components/header/Header';
-import DemoGuide from './components/demoGuide/DemoGuide';
+import Header from '@/components/header/Header';
+import DemoGuide from '@/components/demoGuide/DemoGuide';
 import HomePage from './pages/HomePage';
 import SearchResultsPage from './pages/SearchResultsPage';
-import AlertNavigation from './components/helpNavigation/AlertNavigation';
+import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import ProductDetails from './pages/ProductDetails';
-import Footer from './components/footer/Footer';
+import Footer from '@/components/footer/Footer';
 import { useRecoilValue } from 'recoil';
 
 // Custom hook to prevent body from scrolling

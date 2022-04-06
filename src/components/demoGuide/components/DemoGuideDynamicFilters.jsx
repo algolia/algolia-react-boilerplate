@@ -5,7 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
 import { queryAtom } from '@/config/searchboxConfig';
-import { alertContent, isAlertOpen } from '@/config/helpedNavigation';
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 
 // Import the Select widget (https://react-select.com/home)
 import Select from 'react-select';
@@ -24,6 +24,13 @@ const DemoGuideDynamicFilters = () => {
   const setAlertOpen = useSetRecoilState(isAlertOpen);
   // router hook to navigate using a function
   const navigate = useNavigate();
+
+  const triggerAlert = (content) => {
+    setAlertOpen(true);
+    setAlert(content);
+    setTimeout(() => setAlertOpen(false), 5000);
+  }
+  
   return (
     <div className="search-terms">
       <h3>Dynamic Facet</h3>
@@ -49,8 +56,7 @@ const DemoGuideDynamicFilters = () => {
               search: `?${createSearchParams({ query: e.value })}`,
             });
             setQueryState(e.value);
-            setAlertOpen(true);
-            setAlert(e.alertContent);
+            triggerAlert(e.alertContent);
           }
         }}
       />
