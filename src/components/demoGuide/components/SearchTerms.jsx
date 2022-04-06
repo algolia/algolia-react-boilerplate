@@ -6,7 +6,7 @@ import Select from 'react-select';
 // Import Recoil for state management
 import { useSetRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
-import { alertContent, isAlertOpen } from '@/config/helpedNavigation';
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 
 // Router import
 import { useNavigate, createSearchParams } from 'react-router-dom';

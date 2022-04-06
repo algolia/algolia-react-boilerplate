@@ -5,7 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
 import { queryAtom } from '@/config/searchboxConfig';
-import { alertContent, isAlertOpen } from '@/config/helpedNavigation';
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 
 // Import the Select widget (https://react-select.com/home)
 import Select from 'react-select';

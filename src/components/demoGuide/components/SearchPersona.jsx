@@ -5,7 +5,7 @@ import Select from 'react-select';
 
 // Import Recoil for state management
 import { useSetRecoilState } from 'recoil';
-import { alertContent, isAlertOpen } from '@/config/helpedNavigation';
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 
 // Router import
 import { useNavigate } from 'react-router-dom';
