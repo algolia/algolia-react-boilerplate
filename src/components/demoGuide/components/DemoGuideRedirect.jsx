@@ -43,13 +43,15 @@ const DemoGuideRedirect = () => {
         styles={styles}
         placeholder="Choose"
         onChange={(e) => {
-          navigate({
-            pathname: '/search',
-            search: `?${createSearchParams({ query: e.value })}`,
-          });
-          setQueryState(e.value);
-          setAlertOpen(true);
-          setAlert(e.alertContent);
+          if (e.value !== '') {
+            navigate({
+              pathname: '/search',
+              search: `?${createSearchParams({ query: e.value })}`,
+            });
+            setQueryState(e.value);
+            setAlertOpen(true);
+            setAlert(e.alertContent);
+          }
         }}
       />
     </div>

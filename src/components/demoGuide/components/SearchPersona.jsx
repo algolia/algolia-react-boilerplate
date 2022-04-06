@@ -45,9 +45,11 @@ const SearchPersona = () => {
         styles={styles}
         placeholder="Persona"
         onChange={(e) => {
-          setPersonaSelect(e.value);
-          setAlertOpen(true);
-          setAlert(e.alertContent);
+          if (e.value !== 'anon') {
+            setPersonaSelect(e.value);
+            setAlertOpen(true);
+            setAlert(e.alertContent);
+          }
         }}
       />
     </div>

@@ -57,11 +57,6 @@ export const searchBannersConfig = [
     alertContent: 'Will display an Algolia Banner',
   },
   {
-    value: 'christmas',
-    label: 'Christmas',
-    alertContent: 'Will display a Christmas banner',
-  },
-  {
     value: 'help',
     label: 'Help',
     alertContent: 'Will display an Help banner',
@@ -136,12 +131,12 @@ export const DemoGuideInjectedContentConfig = [
   {
     value: 'Nike',
     label: 'Nike',
-    alertContent: 'Your are displaying an injected content coupon for Nike',
+    alertContent: 'You are displaying an injected content coupon for Nike',
   },
   {
     value: 'Women',
     label: 'Women',
-    alertContent: 'Your are displaying an injected content ad with Gigi Hadid',
+    alertContent: 'You are displaying an injected content ad with Gigi Hadid',
   },
 ];
 
