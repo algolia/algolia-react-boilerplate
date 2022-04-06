@@ -122,11 +122,12 @@ const SrpMobile = () => {
           filters={state ? state : ''}
           query={queryState}
         />
-        <Index indexName={indexNames.injectedContentIndex}>
-          <Configure hitsPerPage={1} page={0} />
-        </Index>
+   
         {shouldInjectContent ? (
           <Suspense fallback={<Loader/>}>
+            <Index indexName={indexNames.injectedContentIndex}>
+              <Configure hitsPerPage={1} page={0} />
+            </Index>
             <InjectedHits
               hitComponent={Hit}
               slots={({ resultsByIndex }) => {
