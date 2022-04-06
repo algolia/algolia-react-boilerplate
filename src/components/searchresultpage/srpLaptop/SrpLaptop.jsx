@@ -24,6 +24,7 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 
 // Import Components
+import Redirect from '@/components/redirects/Redirect';
 const CustomClearRefinements = lazy(() => import('@/components/facets/ClearRefinement'));
 const CustomCurrentRefinements = lazy(() => import('@/components/facets/CurrentRefinement'));
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
@@ -169,6 +170,7 @@ const SrpLaptop = () => {
           </Suspense>
         )}
         <Pagination />
+        <Redirect />
       </motion.div>
     </div>
   );

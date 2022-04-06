@@ -14,7 +14,7 @@ import {
   DemoGuideRedirectInformations,
   DemoGuideRedirectConfig,
   styles,
-} from '@/config/helpedNavigation';
+} from '@/config/demoGuideConfig';
 
 const DemoGuideRedirect = () => {
   // Recoil State - update query in searchBar

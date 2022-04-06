@@ -21,7 +21,7 @@ import {
 } from '@/config/featuresConfig';
 
 //Import config from helped navigation
-import { isDemoGuideOpen } from '@/config/helpedNavigation';
+import { isDemoGuideOpen } from '@/config/demoGuideConfig';
 
 // Import framer motion
 import { motion, AnimatePresence } from 'framer-motion';

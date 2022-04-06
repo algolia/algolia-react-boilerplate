@@ -14,7 +14,7 @@ import {
   DemoGuideDynamicFiltersInformations,
   DemoGuideDynamicFiltersConfig,
   styles,
-} from '@/config/helpedNavigation';
+} from '@/config/demoGuideConfig';
 
 const DemoGuideDynamicFilters = () => {
   // Recoil State - update query in searchBar

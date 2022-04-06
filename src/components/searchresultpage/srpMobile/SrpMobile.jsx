@@ -26,6 +26,7 @@ import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Components
+import Redirect from '@/components/redirects/Redirect';
 const CustomClearRefinements = lazy(() => import('@/components/facets/ClearRefinement'));
 const CustomCurrentRefinements = lazy(() => import('@/components/facets/CurrentRefinement'));
 const CustomHitsComponent = lazy(() => import('@/components/hits/CustomHits'));
@@ -169,6 +170,7 @@ const SrpMobile = () => {
             <CustomHitsComponent />
           </Suspense>
         )}
+        <Redirect/>
       </motion.div>
     </div>
   );

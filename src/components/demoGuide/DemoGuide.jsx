@@ -7,7 +7,7 @@ import DemoGuideInjectedContent from './components/DemoGuideInjectedContent';
 import DemoGuideDynamicFilters from './components/DemoGuideDynamicFilters';
 import useScreenSize from '@/hooks/useScreenSize';
 
-// import DemoGuideRedirect from './components/DemoGuideRedirect';
+import DemoGuideRedirect from './components/DemoGuideRedirect';
 
 const DemoGuide = () => {
   const { tablet, mobile } = useScreenSize();
@@ -43,10 +43,10 @@ const DemoGuide = () => {
           <DemoGuideDynamicFilters />
           <hr />
         </li>
-        {/* <li className="container-nav-help__items ">
+        <li className="container-nav-help__items ">
           <DemoGuideRedirect />
           <hr />
-        </li> */}
+        </li>
       </ul>
     </motion.div>
   );

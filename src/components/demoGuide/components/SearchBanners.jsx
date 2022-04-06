@@ -15,7 +15,7 @@ import {
   searchBannersConfig,
   searchBannersInformations,
   styles,
-} from '@/config/helpedNavigation';
+} from '@/config/demoGuideConfig';
 
 const SearchBanners = () => {
   // Recoil State - update query in searchBar

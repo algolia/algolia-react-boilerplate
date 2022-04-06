@@ -8,14 +8,14 @@ import { useSetRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
 // Router import
-import { useNavigate, createSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Import configuration
 import {
   searchPersonaConfig,
   styles,
   searchPersonaInformations,
-} from '@/config/helpedNavigation';
+} from '@/config/demoGuideConfig';
 
 import { personaSelectedAtom } from '@/config/personaConfig';
 
