@@ -1,5 +1,3 @@
-import { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import SearchTerms from './components/SearchTerms';
 import SearchBanners from './components/SearchBanners';
 import SearchPersona from './components/SearchPersona';
@@ -13,14 +11,7 @@ const DemoGuide = () => {
   const { tablet, mobile } = useScreenSize();
 
   return (
-    <motion.div
-      className={`${
-        tablet || mobile ? 'helpNavigation-mobile' : ''
-      } helpNavigation`}
-      initial={{ opacity: 0, x: '120%' }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: '100%' }}
-    >
+    <>
       <h2>Help Navigation Panel</h2>
       <ul className="container-nav-help">
         <li className="container-nav-help__items ">
@@ -48,7 +39,7 @@ const DemoGuide = () => {
           <hr />
         </li>
       </ul>
-    </motion.div>
+    </>
   );
 };
 
