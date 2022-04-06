@@ -96,3 +96,26 @@
     cursor: pointer;
   }
 }
+
+
+// Alert about guided demo
+.demoGuide__alert {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: fit-content;
+  font-family: $main-font;
+  font-weight: bold;
+  color: white;
+  background: $blue-algolia;
+  opacity: 0.8;
+  padding: 1rem;
+  margin: 1rem 0;
+ 
+  border-radius: 3px;
+  &-close {
+    cursor: pointer;
+  }
+}
