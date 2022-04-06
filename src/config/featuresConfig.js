@@ -39,7 +39,7 @@ export const shouldHaveFederatedSearch = atom({
 });
 
 export const shouldHaveRelatedProducts = atom({
-  key: 'shouldHaveRelatedProducts', // unique ID (with respect to other atoms/selectors)
+  key: 'shouldHaveRelatedProductsAtom', // unique ID (with respect to other atoms/selectors)
   default: true, // default value (aka initial value)
 });
 
