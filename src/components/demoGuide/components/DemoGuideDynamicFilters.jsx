@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import React from 'react';
 import { useSetRecoilState } from 'recoil';
 
 // Router import
@@ -37,7 +37,7 @@ const DemoGuideDynamicFilters = () => {
       <div className="search-terms__infos">
         {DemoGuideDynamicFiltersInformations.map((item) => {
           return (
-            <div key={useId()} className="search-terms__infos__titles">
+            <div key={item.details} className="search-terms__infos__titles">
               <span>{item.span}:</span>
               <p>{item.details}</p>
             </div>
