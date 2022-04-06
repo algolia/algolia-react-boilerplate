@@ -17,7 +17,7 @@ const DemoGuide = () => {
       className={`${
         tablet || mobile ? 'helpNavigation-mobile' : ''
       } helpNavigation`}
-      initial={{ opacity: 0, x: '-120%' }}
+      initial={{ opacity: 0, x: '120%' }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: '100%' }}
     >
