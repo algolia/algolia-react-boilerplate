@@ -5,6 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
 import { queryAtom } from '@/config/searchboxConfig';
+import { alertContent, isAlertOpen } from '@/config/helpedNavigation';
 
 // Import the Select widget (https://react-select.com/home)
 import Select from 'react-select';
@@ -19,6 +20,8 @@ import {
 const DemoGuideRedirect = () => {
   // Recoil State - update query in searchBar
   const setQueryState = useSetRecoilState(queryAtom);
+  const setAlert = useSetRecoilState(alertContent);
+  const setAlertOpen = useSetRecoilState(isAlertOpen);
   // router hook to navigate using a function
   const navigate = useNavigate();
   return (
@@ -45,6 +48,8 @@ const DemoGuideRedirect = () => {
             search: `?${createSearchParams({ query: e.value })}`,
           });
           setQueryState(e.value);
+          setAlertOpen(true);
+          setAlert(e.alertContent);
         }}
       />
     </div>

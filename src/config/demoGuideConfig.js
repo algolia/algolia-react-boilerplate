@@ -20,10 +20,12 @@ export const searchTermsConfig = [
   {
     value: 'ring',
     label: 'Ring',
+    alertContent: 'The category Bags is boosted.',
   },
   {
     value: 'dress',
     label: 'Dress',
+    alertContent: 'You are searching in dress category',
   },
 ];
 
@@ -52,18 +54,22 @@ export const searchBannersConfig = [
   {
     value: 'algolia',
     label: 'Algolia',
+    alertContent: 'Will display an Algolia Banner',
   },
   {
     value: 'christmas',
     label: 'Christmas',
+    alertContent: 'Will display a Christmas banner',
   },
   {
     value: 'help',
     label: 'Help',
+    alertContent: 'Will display an Help banner',
   },
   {
     value: 'woman',
     label: 'Woman',
+    alertContent: 'Will display a Woman banner',
   },
 ];
 
@@ -100,10 +106,12 @@ export const searchPersonaConfig = [
   {
     value: 'stephen_james',
     label: 'Stephen',
+    alertContent: 'Stephen James is a man who likes sports shoes',
   },
   {
     value: 'elizabeth_aniston',
     label: 'Elizabeth',
+    alertContent: 'Elizabeth Aniston is a woman who likes Blue Dresses',
   },
 ];
 
@@ -128,13 +136,14 @@ export const DemoGuideInjectedContentConfig = [
   {
     value: 'Nike',
     label: 'Nike',
+    alertContent: 'Your are displaying an injected content coupon for Nike',
   },
   {
     value: 'Woman',
     label: 'Woman',
+    alertContent: 'Your are displaying an injected content ad with Gigi Hadid',
   },
 ];
-
 
 export const DemoGuideInjectedContentInformations = [
   {
@@ -144,9 +153,8 @@ export const DemoGuideInjectedContentInformations = [
   {
     span: 'Woman',
     details: 'Will display injected content ad with Gigi Hadid',
-  }
+  },
 ];
-
 
 // Config on Dynamic Filters in Demo guide
 export const DemoGuideDynamicFiltersConfig = [
@@ -154,16 +162,16 @@ export const DemoGuideDynamicFiltersConfig = [
   {
     value: 'Sandals',
     label: 'Sandals',
+    alertContent:
+      'This is changing the facets ordering to return size facet first',
   },
 ];
-
 
 export const DemoGuideDynamicFiltersInformations = [
   {
     span: 'Sandals',
     details: 'Will change the facets ordering to return size facet first',
   },
- 
 ];
 // Config on Redirection in Demo guide
 export const DemoGuideRedirectConfig = [
@@ -171,16 +179,15 @@ export const DemoGuideRedirectConfig = [
   {
     value: 'Faq',
     label: 'FAQ',
+    alertContent: "You'll Redirect the user to Algolia's homepage",
   },
 ];
-
 
 export const DemoGuideRedirectInformations = [
   {
     span: 'FAQ',
-    details: 'Will Redirect the user to Algolia\'s homepage',
+    details: "Will Redirect the user to Algolia's homepage",
   },
- 
 ];
 
 // Please ignore this atom

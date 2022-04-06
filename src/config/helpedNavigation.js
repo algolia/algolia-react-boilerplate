@@ -15,11 +15,11 @@ export const isDemoGuideOpen = atom({
 // Open alert for Navigation
 export const isAlertOpen = atom({
   key: 'isAlertOpen', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 });
 
 // Alert content to display
 export const alertContent = atom({
   key: 'alertContent', // unique ID (with respect to other atoms/selectors)
-  default: 'TEST TEST', // default value (aka initial value)
+  default: '', // default value (aka initial value)
 });
