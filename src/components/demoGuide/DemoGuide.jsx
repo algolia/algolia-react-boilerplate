@@ -1,31 +1,37 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useRecoilValue } from 'recoil';
 
-//Import component
+//Import components
 import SearchTerms from './components/SearchTerms';
 import SearchBanners from './components/SearchBanners';
 import SearchPersona from './components/SearchPersona';
 import DemoGuideInjectedContent from './components/DemoGuideInjectedContent';
 import DemoGuideDynamicFilters from './components/DemoGuideDynamicFilters';
+import DemoGuideRedirect from './components/DemoGuideRedirect';
 
 //Import Hooks
 import useScreenSize from '@/hooks/useScreenSize';
-import useOutsideClick from '@/hooks/useOutsideClick';
+import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 
 //Import custom transition for panel animations
 import { framerMotionTransition } from '@/config/animationConfig';
 
-import DemoGuideRedirect from './components/DemoGuideRedirect';
+// Import Reference for the Button that trigger the panel
+import { demoGuideBtnRef } from '@/config/demoGuideConfig';
 
-const DemoGuide = ({ onClickOutside }) => {
-  //Listen for screen resize
-  const { tablet, mobile } = useScreenSize();
-
+const DemoGuide = ({ setShowHelpNavigation }) => {
   //Select Panel wrapper
   const demoGuide = useRef();
-
+  // Use teh reference value of the button that trigger the panel
+  const demoGuideBtn = useRecoilValue(demoGuideBtnRef);
+  //Listen for screen resize
+  const { tablet, mobile } = useScreenSize();
   //Listen for click outside the Demo Guide panel
-  useOutsideClick(demoGuide, onClickOutside);
+  useOutsideClickConditional(demoGuide, demoGuideBtn, () =>
+    setShowHelpNavigation(false)
+  );
+
   return (
     <motion.div
       ref={demoGuide}

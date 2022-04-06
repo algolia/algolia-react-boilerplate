@@ -15,7 +15,7 @@ import {
 import { logoUrl } from '@/config/headerConfig';
 
 //Import config from helped navigation
-import { isDemoGuideOpen } from '@/config/demoGuideConfig';
+import { isDemoGuideOpen, demoGuideBtnRef } from '@/config/demoGuideConfig';
 
 // Import SearchBox
 // Rename customSearchbox
@@ -33,6 +33,8 @@ const HeaderLaptop = () => {
   const federated = useSetRecoilState(shouldHaveFederatedSearch);
   // Define value to display voiceSearch
   const displayVoiceSearch = useSetRecoilState(shouldHaveVoiceSearch);
+
+  const demoGuideBtn = useSetRecoilState(demoGuideBtnRef);
   // Showing or hiding help navigation menu
   const [showHelpNavigation, setShowHelpNavigation] =
     useRecoilState(isDemoGuideOpen);
@@ -42,10 +44,12 @@ const HeaderLaptop = () => {
       <div className="container__header-top">
         {/* Picto that returns SE menu on click */}
         <div
+          ref={demoGuideBtn}
           className={`${
             showHelpNavigation ? 'optionDots__wrapper-active' : ''
           } optionDots__wrapper`}
-          onClick={() => {
+          onClick={(e) => {
+            console.log(e.target);
             setShowHelpNavigation(!showHelpNavigation);
           }}
         >

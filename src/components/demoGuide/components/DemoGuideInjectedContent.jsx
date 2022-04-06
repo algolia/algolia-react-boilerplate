@@ -30,7 +30,7 @@ const DemoGuideInjectedContent = () => {
       <div className="search-terms__infos">
         {DemoGuideInjectedContentInformations.map((item) => {
           return (
-            <div className="search-terms__infos__titles">
+            <div className="search-terms__infos__titles" key={item.span}>
               <span>{item.span}:</span>
               <p>{item.details}</p>
             </div>

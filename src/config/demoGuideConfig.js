@@ -12,6 +12,15 @@ export const isDemoGuideOpen = atom({
   default: false, // default value (aka initial value)
 });
 
+
+// Store de reference of the component Demo Panel
+export const demoGuideBtnRef = atom({
+  key: 'demoGuideBtnRef', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+
+
 // ------------------------------------------
 // Search Terms Config
 // ------------------------------------------
