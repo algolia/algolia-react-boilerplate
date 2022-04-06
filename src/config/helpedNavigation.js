@@ -130,8 +130,8 @@ export const DemoGuideInjectedContentConfig = [
     label: 'Nike',
   },
   {
-    value: 'Woman',
-    label: 'Woman',
+    value: 'Women',
+    label: 'Women',
   },
 ];
 
