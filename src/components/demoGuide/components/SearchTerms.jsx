@@ -6,7 +6,7 @@ import Select from 'react-select';
 // Import Recoil for state management
 import { useSetRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
-import { alertContent, isAlertOpen } from '@/config/helpedNavigation';
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 
 // Router import
 import { useNavigate, createSearchParams } from 'react-router-dom';
@@ -25,6 +25,13 @@ const SearchTerms = () => {
   const setAlertOpen = useSetRecoilState(isAlertOpen);
   // router hook to navigate using a function
   const navigate = useNavigate();
+
+  const triggerAlert = (content) => {
+    setAlertOpen(true);
+    setAlert(content);
+    setTimeout(() => setAlertOpen(false), 5000);
+  }
+
   return (
     <div className="search-terms">
       <h3>Search Terms</h3>
@@ -50,8 +57,7 @@ const SearchTerms = () => {
               search: `?${createSearchParams({ query: e.value })}`,
             });
             setQueryState(e.value);
-            setAlertOpen(true);
-            setAlert(e.alertContent);
+            triggerAlert(e.alertContent)          
           }
         }}
       />
