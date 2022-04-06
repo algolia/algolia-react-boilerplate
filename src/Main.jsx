@@ -4,11 +4,11 @@ import { AnimatePresence } from 'framer-motion';
 // React router
 import { Routes, Route, useLocation } from 'react-router-dom';
 
+//Recoil states & values
+import { useRecoilValue, useRecoilState } from 'recoil';
+
 //Import help navigation state & config
-import {
-  isDemoGuideOpen,
-  shouldShowDemoGuide,
-} from './config/demoGuideConfig';
+import { isDemoGuideOpen, shouldShowDemoGuide } from './config/demoGuideConfig';
 
 // Import Pages and static components
 import Header from '@/components/header/Header';
@@ -17,8 +17,8 @@ import HomePage from './pages/HomePage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import ProductDetails from './pages/ProductDetails';
-import Footer from '@/components/footer/Footer';
-import { useRecoilValue } from 'recoil';
+import Footer from './components/footer/Footer';
+
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
@@ -26,7 +26,8 @@ import usePreventScrolling from './hooks/usePreventScrolling';
 export const Main = ({ isLoaded }) => {
   const location = useLocation();
   const shouldShowNavigation = useRecoilValue(shouldShowDemoGuide);
-  const showHelpNavigation = useRecoilValue(isDemoGuideOpen);
+  const [showHelpNavigation, setShowHelpNavigation] =
+    useRecoilState(isDemoGuideOpen);
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showHelpNavigation);
 
@@ -34,7 +35,9 @@ export const Main = ({ isLoaded }) => {
     <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
       <Header />
       <AnimatePresence>
-        {showHelpNavigation && shouldShowNavigation && <DemoGuide />}
+        {showHelpNavigation && shouldShowNavigation && (
+          <DemoGuide onClickOutside={() => setShowHelpNavigation(false)} />
+        )}
       </AnimatePresence>
       <AnimatePresence initial={true} exitBeforeEnter>
         <Routes key={location.pathname} location={location}>

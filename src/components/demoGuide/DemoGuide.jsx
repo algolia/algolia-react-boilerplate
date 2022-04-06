@@ -1,25 +1,41 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
+
+//Import component
 import SearchTerms from './components/SearchTerms';
 import SearchBanners from './components/SearchBanners';
 import SearchPersona from './components/SearchPersona';
 import DemoGuideInjectedContent from './components/DemoGuideInjectedContent';
 import DemoGuideDynamicFilters from './components/DemoGuideDynamicFilters';
+
+//Import Hooks
 import useScreenSize from '@/hooks/useScreenSize';
+import useOutsideClick from '@/hooks/useOutsideClick';
+
+//Import custom transition for panel animations
+import { framerMotionTransition } from '@/config/animationConfig';
 
 import DemoGuideRedirect from './components/DemoGuideRedirect';
 
-const DemoGuide = () => {
+const DemoGuide = ({ onClickOutside }) => {
+  //Listen for screen resize
   const { tablet, mobile } = useScreenSize();
 
+  //Select Panel wrapper
+  const demoGuide = useRef();
+
+  //Listen for click outside the Demo Guide panel
+  useOutsideClick(demoGuide, onClickOutside);
   return (
     <motion.div
+      ref={demoGuide}
       className={`${
         tablet || mobile ? 'helpNavigation-mobile' : ''
       } helpNavigation`}
       initial={{ opacity: 0, x: '120%' }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: '100%' }}
+      transition={framerMotionTransition}
     >
       <h2>Help Navigation Panel</h2>
       <ul className="container-nav-help">
