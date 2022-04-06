@@ -42,37 +42,6 @@ a:hover {
   color: #27ae60;
 }
 
-/* Alert Box CSS */
 
-/* Base Alert Style */
-.alert {
-  font-family: $main-font;
-  font-weight: 800;
-  position: relative;
-  display: block;
-  padding: 1em 1.8em;
-  font-size: 0.9em;
-  line-height: 1.2;
-  text-align: left;
-  margin-top: 0.4em;
-  margin-bottom: 0.4em;
-  background: transparent;
-  color: white;
-}
 
-/* Info */
-.alert-info {
-  background: $blue-algolia;
-  border: 1px solid $blue-algolia;
-  opacity: 0.8;
-}
 
-/* Radius */
-.radius {
-  display: flex;
-  justify-content: space-between;
-  border-radius: 3px;
-  .cross {
-    cursor: pointer;
-  }
-}
