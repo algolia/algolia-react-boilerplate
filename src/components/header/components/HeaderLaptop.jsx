@@ -15,7 +15,7 @@ import {
 import { logoUrl } from '@/config/headerConfig';
 
 //Import config from helped navigation
-import { isDemoGuideOpen } from '@/config/helpedNavigation';
+import { isDemoGuideOpen } from '@/config/demoGuideConfig';
 
 // Import SearchBox
 // Rename customSearchbox
@@ -49,6 +49,7 @@ const HeaderLaptop = () => {
             setShowHelpNavigation(!showHelpNavigation);
           }}
         >
+          <p>Guide</p>
           <OptionDots />
         </div>
         <div className="container__header-top__logo">

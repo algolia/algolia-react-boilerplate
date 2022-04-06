@@ -35,9 +35,10 @@
 }
 html {
   // overflow-x: hidden !important;
-  overflow: auto;
+  // overflow: auto;
 }
 body {
+  overflow: auto;
   background-color: $background-color;
 }
 
