@@ -36,9 +36,7 @@ const CustomHits = ({ hits }) => {
         {hits.map((hit, i) => {
           // Wrap the hit info in an animation, and click functionality to view the product
           return (
-            <>
               <Hit hit={hit} key={i} />
-            </>
           );
         })}
       </ul>
