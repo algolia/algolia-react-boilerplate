@@ -139,14 +139,9 @@ export const DemoGuideInjectedContentConfig = [
     alertContent: 'Your are displaying an injected content coupon for Nike',
   },
   {
-<<<<<<< HEAD
-    value: 'Woman',
-    label: 'Woman',
-    alertContent: 'Your are displaying an injected content ad with Gigi Hadid',
-=======
     value: 'Women',
     label: 'Women',
->>>>>>> 40dc61fefcb48995e8568eacd8e2ff071767fbcb
+    alertContent: 'Your are displaying an injected content ad with Gigi Hadid',
   },
 ];
 
