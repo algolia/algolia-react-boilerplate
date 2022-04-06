@@ -24,6 +24,13 @@ const DemoGuideDynamicFilters = () => {
   const setAlertOpen = useSetRecoilState(isAlertOpen);
   // router hook to navigate using a function
   const navigate = useNavigate();
+
+  const triggerAlert = (content) => {
+    setAlertOpen(true);
+    setAlert(content);
+    setTimeout(() => setAlertOpen(false), 5000);
+  }
+  
   return (
     <div className="search-terms">
       <h3>Dynamic Facet</h3>
@@ -49,8 +56,7 @@ const DemoGuideDynamicFilters = () => {
               search: `?${createSearchParams({ query: e.value })}`,
             });
             setQueryState(e.value);
-            setAlertOpen(true);
-            setAlert(e.alertContent);
+            triggerAlert(e.alertContent);
           }
         }}
       />

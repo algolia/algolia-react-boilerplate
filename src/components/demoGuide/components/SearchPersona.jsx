@@ -26,6 +26,13 @@ const SearchPersona = () => {
   const setAlertOpen = useSetRecoilState(isAlertOpen);
   // router hook to navigate using a function
   const navigate = useNavigate();
+
+  const triggerAlert = (content) => {
+    setAlertOpen(true);
+    setAlert(content);
+    setTimeout(() => setAlertOpen(false), 5000);
+  }
+
   return (
     <div className="search-terms">
       <h3>Search Persona</h3>
@@ -47,8 +54,7 @@ const SearchPersona = () => {
         onChange={(e) => {
           if (e.value !== 'anon') {
             setPersonaSelect(e.value);
-            setAlertOpen(true);
-            setAlert(e.alertContent);
+            triggerAlert(e.alertContent);
           }
         }}
       />
