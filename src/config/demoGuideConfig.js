@@ -89,7 +89,7 @@ export const searchBannersInformations = [
 
 // Please ignore this atom
 export const searchBannersSelectedAtom = atom({
-  key: 'searchTermsSelectedAtom', // unique ID (with respect to other atoms/selectors)
+  key: 'searchBannersSelectedAtom', // unique ID (with respect to other atoms/selectors)
   default: 'anon', // default value (aka initial value)
 });
 
@@ -187,7 +187,7 @@ export const DemoGuideRedirectInformations = [
 
 // Please ignore this atom
 export const searchPersonaSelectedAtom = atom({
-  key: 'searchTermsSelectedAtom', // unique ID (with respect to other atoms/selectors)
+  key: 'searchPersonaSelectedAtom', // unique ID (with respect to other atoms/selectors)
   default: 'anon', // default value (aka initial value)
 });
 
