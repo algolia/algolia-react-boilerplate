@@ -10,11 +10,11 @@
 export const carouselConfig = [
   {
     attribute: "brand: 'polo ralph lauren'",
-    title: 'Ralph Lauren Products',
+    title: 'I am the title of carousel One',
   },
   {
     attribute: "category: 'pullover'",
-    title: 'Our PullOvers',
+    title: 'I am the title of carousel Two',
   },
 ];
 

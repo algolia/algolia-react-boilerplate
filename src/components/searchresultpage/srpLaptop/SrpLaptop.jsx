@@ -120,12 +120,12 @@ const SrpLaptop = () => {
           filters={state ? state : ''}
           query={queryState && queryState}
         />
-        <Index indexName={indexNames.injectedContentIndex}>
-          <Configure hitsPerPage={1} page={0} />
-        </Index>
         {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
         {shouldInjectContent ? (
           <Suspense fallback={<Loader/>}>
+            <Index indexName={indexNames.injectedContentIndex}>
+              <Configure hitsPerPage={1} page={0} />
+            </Index>
             <InjectedHits
               hitComponent={Hit}
               slots={({ resultsByIndex }) => {

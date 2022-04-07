@@ -35,9 +35,9 @@ const DemoGuideRedirect = () => {
     <div className="search-terms">
       <h3>Redirect</h3>
       <div className="search-terms__infos">
-        {DemoGuideRedirectInformations.map((item) => {
+        {DemoGuideRedirectInformations.map((item, i) => {
           return (
-            <div className="search-terms__infos__titles" key={item.span}>
+            <div key={i} className="search-terms__infos__titles">
               <span>{item.span}:</span>
               <p>{item.details}</p>
             </div>
