@@ -28,17 +28,17 @@ export const Main = ({ isLoaded }) => {
   // Should the feature of guided panel for SE should be in this app
   const shouldShowNavigation = useRecoilValue(shouldShowDemoGuide);
   // State that show/hide the panel if click on the guide btn
-  const [showHelpNavigation, setShowHelpNavigation] =
+  const [showDemoGuide, setshowDemoGuide] =
     useRecoilState(isDemoGuideOpen);
   // Prevent body from scrolling when panel is open
-  usePreventScrolling(showHelpNavigation);
+  usePreventScrolling(showDemoGuide);
 
   return (
     <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
       <Header />
       <AnimatePresence>
-        {showHelpNavigation && shouldShowNavigation && (
-          <DemoGuide setShowHelpNavigation={setShowHelpNavigation} />
+        {showDemoGuide && shouldShowNavigation && (
+          <DemoGuide setshowDemoGuide={setshowDemoGuide} />
         )}
       </AnimatePresence>
       <AnimatePresence initial={true} exitBeforeEnter>

@@ -36,7 +36,7 @@ const HeaderLaptop = () => {
 
   const demoGuideBtn = useSetRecoilState(demoGuideBtnRef);
   // Showing or hiding help navigation menu
-  const [showHelpNavigation, setShowHelpNavigation] =
+  const [showDemoGuide, setshowDemoGuide] =
     useRecoilState(isDemoGuideOpen);
 
   return (
@@ -46,11 +46,10 @@ const HeaderLaptop = () => {
         <div
           ref={demoGuideBtn}
           className={`${
-            showHelpNavigation ? 'optionDots__wrapper-active' : ''
+            showDemoGuide ? 'optionDots__wrapper-active' : ''
           } optionDots__wrapper`}
           onClick={(e) => {
-            console.log(e.target);
-            setShowHelpNavigation(!showHelpNavigation);
+            setshowDemoGuide(!showDemoGuide);
           }}
         >
           <p>Guide</p>

@@ -52,7 +52,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
 
   // Showing or hiding help navigation menu
-  const [showHelpNavigation, setShowHelpNavigation] =
+  const [showDemoGuide, setshowDemoGuide] =
     useRecoilState(isDemoGuideOpen);
 
   // Prevent body from scrolling when panel is open
@@ -77,10 +77,10 @@ const HeaderMobile = ({ mobile, tablet }) => {
         {/* Picto that returns SE menu on click */}
         <div
           className={`${
-            showHelpNavigation ? 'optionDots__wrapper-active' : ''
+            showDemoGuide ? 'optionDots__wrapper-active' : ''
           } optionDots__wrapper`}
           onClick={() => {
-            setShowHelpNavigation(!showHelpNavigation);
+            setshowDemoGuide(!showDemoGuide);
           }}
         >
           <p>Guide</p>

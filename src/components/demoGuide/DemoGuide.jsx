@@ -20,7 +20,7 @@ import { framerMotionTransition } from '@/config/animationConfig';
 // Import Reference for the Button that trigger the panel
 import { demoGuideBtnRef } from '@/config/demoGuideConfig';
 
-const DemoGuide = ({ setShowHelpNavigation }) => {
+const DemoGuide = ({ setshowDemoGuide }) => {
   //Select Panel wrapper
   const demoGuide = useRef();
   // Use teh reference value of the button that trigger the panel
@@ -29,7 +29,7 @@ const DemoGuide = ({ setShowHelpNavigation }) => {
   const { tablet, mobile } = useScreenSize();
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(demoGuide, demoGuideBtn, () =>
-    setShowHelpNavigation(false)
+    setshowDemoGuide(false)
   );
 
   return (
