@@ -1,28 +1,73 @@
-import React from 'react';
+// This is the homepage, which you see when you first visit the site.
+// By default it contains some banners and carousels
 
-import CustomHomeBanners from '../components/banners/HomeBanners';
-import Header from '../components/header/Header';
-import FederatedSearch from '../components/federatedSearch/FederatedSearch';
-import { isFederatedAtom } from '../config/config';
+import {lazy, Suspense } from 'react';
 
-//recoil import
+import Loader from '@/components/loader/Loader';
+
+// framer-motion
+import { AnimatePresence, motion } from 'framer-motion';
+
+import { framerMotionPage } from '@/config/animationConfig';
+
+// recoil import
 import { useRecoilValue } from 'recoil';
-import HomeCarousel from '../components/carousels/HomeCarousel';
+
+// components import
+const CustomHomeBanners = lazy(() => import('@/components/banners/HomeBanners'));
+const FederatedSearch = lazy(() => import('@/components/federatedSearch/FederatedSearch'));
+const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
+
+// should carousel be shown or not and config for carousel
+import { carouselConfig } from '@/config/carouselConfig';
+
+//  should federated search be shown or not
+import { shouldHaveFederatedSearch, shouldHaveCarousels } from '@/config/featuresConfig';
 
 const HomePage = () => {
-  const isFederated = useRecoilValue(isFederatedAtom);
+  // Boolean value which determines if federated search is shown or not, default is false
+  const isFederated = useRecoilValue(shouldHaveFederatedSearch);
+  const isCarousel = useRecoilValue(shouldHaveCarousels);
 
   return (
-    <div className="homepage">
-      {isFederated && <FederatedSearch />}
-      {/* Here it's the custom banners */}
-      <CustomHomeBanners />
-      <HomeCarousel
-        attribute={"brand:'polo ralph lauren'"}
-        title={'Ralph Lauren Products'}
-      />
-      <HomeCarousel attribute={"category:'pullover'"} title={'Our PullOver'} />
-    </div>
+    // Framer motion wrapper
+    <motion.div
+      className="homepage"
+      // initial state
+      initial={framerMotionPage.initial}
+      // actual animation
+      animate={framerMotionPage.animate}
+      // everything the animation needs to function
+      variants={framerMotionPage}
+      // what to do when unmounted
+      exit={framerMotionPage.exit}
+      // duration, smoothness etc.
+      transition={framerMotionPage.transition}
+    >
+      {isFederated && (
+        <AnimatePresence>
+          {/* Loads federated search if isFederated is true */}
+          <Suspense fallback={<Loader/>}>
+            <FederatedSearch />
+          </Suspense>
+        </AnimatePresence>
+      )}
+
+      {/* Load custom banners */}
+      <Suspense fallback={<Loader/>}>
+        <CustomHomeBanners />
+      </Suspense>
+
+      {isCarousel &&
+        carouselConfig.map((carousel, i) => (
+          <Suspense key={i} fallback={<Loader/>}>
+            <HomeCarousel
+              attribute={carousel.attribute}
+              title={carousel.title}
+            />
+          </Suspense>
+        ))}
+    </motion.div>
   );
 };
 

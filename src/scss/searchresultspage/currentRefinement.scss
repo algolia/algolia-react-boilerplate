@@ -1,36 +1,36 @@
 @use '../mixin/abstracts' as *;
 @use './facets.scss';
 
-.refinement-container__refinements {
-  margin-right: 0.5rem;
+.refinement-container {
   display: flex;
-  li {
+  margin: 1rem 0;
+  height: fit-content;
+  &:empty {
+    display: none;
+  }
+
+  &__refinementsInner {
     display: flex;
-    font-weight: 700;
-    margin-right: 0.5rem;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    a {
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      background-color: $blue-algolia;
-      height: 100%;
-      padding: 0.5rem;
-      align-items: center;
-      border-radius: 1rem;
-      color: $white-color;
-    }
+    gap: 0.5rem;
   }
-  ul {
+
+  .refinement-container__refinements {
+    margin-right: 0.5rem;
     display: flex;
-    text-transform: capitalize;
-    li {
-      background-color: $blue-algolia;
-      padding: 0.8rem;
-      border-radius: 1rem;
+    &:empty {
+      display: none;
+    }
+  }
+  li {
+    a {
+      @include btn-currentRefinement;
+      text-transform: capitalize;
       color: $white-color;
     }
   }
+}
+
+.button-clear-refinement {
+  @include btn-currentRefinement;
 }

@@ -1,17 +1,17 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 // Algolia's imports
 import { connectHits, Highlight } from 'react-instantsearch-dom';
 
 // components import
-import { ChevronRight } from '../../../assets/svg/SvgIndex';
+import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 // Router import
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
 // Recoil import
 import { useSetRecoilState } from 'recoil';
-import { queryAtom } from '../../../config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
 const Suggestions = ({ hits }) => {
   // router hook to navigate using a function
@@ -22,10 +22,10 @@ const Suggestions = ({ hits }) => {
     <div className="suggestions">
       <h3 className="suggestions__title">SUGGESTIONS</h3>
       <ul className="suggestions__items">
-        {hits.map((hit) => {
+        {hits.map((hit, index) => {
           return (
             <li
-              key={hit.query}
+              key={index}
               className="suggestions__item"
               onClick={() => {
                 navigate({

@@ -1,0 +1,62 @@
+@use '../mixin/abstracts' as *;
+
+.loader{
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100%;
+width: 100%;
+margin: 0 auto;
+flex-direction: column;
+gap: 1rem;
+position: absolute;
+top: 0;
+left: 0;
+z-index: 999;
+
+&__svgWp{
+    max-width: 20%;
+    margin: 0 auto;
+    svg{
+        width: 100%;
+        animation:  3s ease-in-out 0s forwards fadeOut; 
+    }
+}
+
+    &__bar{
+        width: 30%;
+        margin: 0 auto;
+        height: 3px;
+        border-radius: 1rem;
+        background: linear-gradient(201deg, rgba(215,119,254,1) 0%, rgba(8,202,255,1) 100%);
+        transform-origin: 0% 50%;
+        animation:  3s ease-in-out 0s forwards scale; 
+    }
+}
+
+@keyframes scale {
+    0%{
+        transform: scaleX(0);
+        opacity: 1;
+    }
+    95%{
+        opacity: 1;
+    }
+    100%{
+        transform: scaleX(100%); 
+        opacity: 0;
+    }
+    
+}
+@keyframes fadeOut {
+    0%{
+        opacity: 1;
+    }
+    85%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        
+    }    
+}

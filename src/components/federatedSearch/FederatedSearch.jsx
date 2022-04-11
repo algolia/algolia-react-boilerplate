@@ -1,22 +1,37 @@
-import React, { useRef, memo } from 'react';
+import { useRef, memo } from 'react';
 
 // Algolias's import
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, Configure } from 'react-instantsearch-dom';
+import { Configure, Index } from 'react-instantsearch-dom';
+
+// framer motion
+import { motion } from 'framer-motion';
+import { framerMotionFederatedContainer } from '@/config/animationConfig';
 
 // import from Recoil
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
-import {
-  configAtom,
-  isFederatedAtom,
-  searchBoxAtom,
-  selectButtonAtom,
-} from '../../config/config';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+
+// Config
+import { indexNames, searchClient } from '@/config/algoliaEnvConfig';
+
+// Those imports are here to check if user is clicking outside the searchbox & federated to close federated
+import { shouldHaveFederatedSearch } from '@/config/featuresConfig';
+
+// Show or unshow sections in federated (product, suggestions, categories, articles, recent searches)
+// categories import is here to choose which attribute you want to show as category
+import { federatedSearchConfig, federatedCategoriesAttribute } from '@/config/federatedConfig';
+
+// Sharing query to general state
+import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig';
+
 // Import Persona State from recoil
-import { personaSelected } from '../../config/header';
+import { personaSelectedAtom } from '@/config/personaConfig';
 
 // hook import
-import useOutsideClickConditional from '../../hooks/useOutsideClickConditional';
+// Check if user is clecking outside an element
+import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
+// Check screensize for responsiveness
+import useScreenSize from '@/hooks/useScreenSize';
 
 // Components imports
 import RecentSearches from './components/RecentSearches';
@@ -24,79 +39,94 @@ import QuerySuggestions from './components/QuerySuggestions';
 import Category from './components/Category';
 import Products from './components/Products';
 import Articles from './components/BlogPost';
+import Redirect from '@/components/redirects/Redirect';
 
 const FederatedSearch = () => {
   // Recoil & States
-  const [config] = useRecoilState(configAtom);
-  const personaSelect = useRecoilValue(personaSelected);
-  const setIsFederated = useSetRecoilState(isFederatedAtom);
+  const personaSelect = useRecoilValue(personaSelectedAtom);
+  const setIsFederated = useSetRecoilState(shouldHaveFederatedSearch);
   const searchboxRef = useRecoilValue(searchBoxAtom);
-  const selectRef = useRecoilValue(selectButtonAtom);
+  const query = useRecoilValue(queryAtom);
+
   const containerFederated = useRef('');
   // Custom hook
-  useOutsideClickConditional(containerFederated, searchboxRef, selectRef, () =>
+  useOutsideClickConditional(containerFederated, searchboxRef, () =>
     setIsFederated(false)
   );
-  // Persona
-  const userToken = personaSelect?.value;
+  const { mobile, tablet } = useScreenSize();
+
   // Federated search configuration
   const {
-    isRecentSearch,
-    isQuerySuggestions,
-    isCategory,
-    isBlogPosts,
-    isProduct,
-  } = config.federatedSearchConfig;
-  // Algolia searchclient
-  const search = algoliasearch(
-    config.searchClient.appID,
-    config.searchClient.APIKey
-  );
+    showRecentSearches,
+    showQuerySuggestions,
+    showCategories,
+    showBlogPosts,
+    showProducts,
+  } = federatedSearchConfig;
 
   return (
-    <div className="federatedSearch" ref={containerFederated}>
-      <div className="federatedSearch__wrapper">
+    <motion.div
+      className="federatedSearch"
+      ref={containerFederated}
+      variants={framerMotionFederatedContainer}
+      initial={framerMotionFederatedContainer.initial}
+      animate={framerMotionFederatedContainer.animate}
+      exit={framerMotionFederatedContainer.exit}
+      transition={framerMotionFederatedContainer.transition}
+    >
+      <div
+        className={`${
+          mobile || tablet
+            ? 'federatedSearch__wrapper-mobile'
+            : 'federatedSearch__wrapper'
+        }`}
+      >
         <div className="federatedSearch__left">
-          {isRecentSearch && <RecentSearches />}
-          {isQuerySuggestions && (
-            <InstantSearch
-              searchClient={search}
-              indexName={config.indexName.indexSuggestion}
-            >
-              <Configure hitsPerPage={3} />
+          {/* If don't want this sections go into config file  */}
+          {showRecentSearches && !mobile && !tablet && <RecentSearches />}
+          {/* If don't want this sections go into config file  */}
+          {showQuerySuggestions && (
+            <Index searchClient={searchClient} indexName={indexNames.suggestionsIndex}>
+              <Configure
+                hitsPerPage={3}
+                query={query}
+                userToken={personaSelect}
+                enablePersonalization={true}
+              />
               <QuerySuggestions />
-            </InstantSearch>
+            </Index>
           )}
-          {isCategory && (
-            <Category
-              attribute={config.federatedCategory.categoryInFederated}
-            />
+          {/* If don't want this sections go into config file  */}
+          {showCategories && !mobile && !tablet && (
+            <Category attribute={federatedCategoriesAttribute} />
           )}
         </div>
-        {isProduct && (
+        {/* If don't want this sections go into config file  */}
+        {showProducts && (
           <div className="federatedSearch__middle">
             <Configure
               filters=""
               hitsPerPage={6}
-              userToken={userToken}
-              // enablePersonalization={true}
+              userToken={personaSelect}
+              enablePersonalization={true}
             />
             <Products />
           </div>
         )}
-        {isBlogPosts && (
+        {/* If don't want this sections go into config file  */}
+        {showBlogPosts && !mobile && !tablet && (
           <div className="articles federatedSearch__right">
-            <InstantSearch
-              searchClient={search}
-              indexName={config.indexName.indexBlog}
+            <Index
+              indexName={indexNames.articlesIndex}
             >
-              <Configure hitsPerPage={1} />
+              <Configure hitsPerPage={1} query={query} />
               <Articles />
-            </InstantSearch>
+            </Index>
           </div>
         )}
       </div>
-    </div>
+      <Redirect/>
+    </motion.div>
   );
 };
 

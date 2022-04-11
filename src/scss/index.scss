@@ -32,9 +32,10 @@
 }
 html {
   // overflow-x: hidden !important;
-  overflow: auto;
+  // overflow: auto;
 }
 body {
+  overflow: auto;
   background-color: $background-color;
 }
 
@@ -64,4 +65,12 @@ ul {
 
 h3 {
   text-transform: uppercase;
+}
+
+.hidden{
+  @include hidden;
+}
+
+.visible{
+  @include visible
 }

@@ -1,15 +1,15 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 // Algolia's imports
 import { connectHits } from 'react-instantsearch-dom';
 
 // Component import
-import { ChevronRight } from '../../../assets/svg/SvgIndex';
+import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 // Recoil import
-import { hitAtom } from '../../../config/results';
+import { hitAtom } from '@/config/hitsConfig';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { hitsConfig } from '../../../config/hits';
+import { hitsConfig } from '@/config/hitsConfig';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';

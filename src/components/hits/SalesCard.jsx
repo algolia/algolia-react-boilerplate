@@ -1,19 +1,19 @@
+//  Import framer motion
 import { motion } from 'framer-motion';
-import React from 'react';
 
 // Import config framer Motion
-import { listItem } from '../../config/config';
+import { framerMotionHits } from '@/config/animationConfig';
 
 // SALES CARD
-const NikeCard = ({ hit }) => {
+const SalesCard = ({ hit }) => {
   return (
     <motion.li
       layout
-      variants={listItem}
-      initial={listItem.initial}
-      exit={listItem.exit}
-      animate={listItem.animate}
-      transition={listItem.transition}
+      variants={framerMotionHits}
+      initial={framerMotionHits.initial}
+      exit={framerMotionHits.exit}
+      animate={framerMotionHits.animate}
+      transition={framerMotionHits.transition}
       className="image-wrapper-sales"
       style={{
         backgroundImage: `url(${hit.image.desktop_url})`,
@@ -28,4 +28,4 @@ const NikeCard = ({ hit }) => {
   );
 };
 
-export default NikeCard;
+export default SalesCard;

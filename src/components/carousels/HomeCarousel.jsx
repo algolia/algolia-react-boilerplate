@@ -1,33 +1,47 @@
-import algoliasearch from 'algoliasearch/lite';
+import { useRef, useEffect, useState } from 'react';
+import { connectHits, Configure, Index } from 'react-instantsearch-dom';
+
+// Import Framer Motion
 import { motion } from 'framer-motion';
-import React, { useRef, useEffect, useState } from 'react';
-import { connectHits, Configure, InstantSearch } from 'react-instantsearch-dom';
-// Recoil
+
+// React Router
 import { useNavigate } from 'react-router-dom';
+
+// Recoil
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { hitsConfig } from '../../config/hits';
-import { indexName, searchClient } from '../../config/config';
-import { hitAtom } from '../../config/results';
+// Import configuration
+import { indexNames } from '@/config/algoliaEnvConfig';
+import { hitsConfig, hitAtom } from '@/config/hitsConfig';
+import { hitsPerCarousel } from '@/config/carouselConfig';
 
+import { framerMotionTransition } from '@/config/animationConfig';
+
+// Build the Carousel for use on the Homepage
 const HomeCarousel = ({ attribute, title }) => {
-  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
-
   return (
     <div className="home-carousel">
-      <InstantSearch indexName={indexName.index} searchClient={search}>
-        <Configure hitsPerPage={8} filters={attribute} />
+      <Index indexId={title} indexName={indexNames.mainIndex}>
+        <Configure hitsPerPage={hitsPerCarousel} filters={attribute} />
         <CustomHitsCarousel title={title} />
-      </InstantSearch>
+      </Index>
     </div>
   );
 };
 
+// This carousel is used inside of HomeCarousel
 const Carousel = ({ hits, title }) => {
+  // Handle carousel effects when grabbing it
+  const [width, setWidth] = useState(0);
+
+  // Navigate is used by React Router
   const navigate = useNavigate();
+
+  // Hits are imported by Recoil
   const hitState = useSetRecoilState(hitAtom);
   const { price, objectID, image, productName } = useRecoilValue(hitsConfig);
-  const [width, setWidth] = useState(0);
+
+  // Used by Framer Motion
   const carousel = useRef();
   useEffect(() => {
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
@@ -35,25 +49,40 @@ const Carousel = ({ hits, title }) => {
   return (
     <>
       <h3>{title}</h3>
+      {/* This div declares the outer reference for the framer motion */}
       <motion.div
         ref={carousel}
         className="carousel"
         whileTap={{ cursor: 'grabbing' }}
       >
+        {/* This div declares the parameters for the carousel dragging effect */}
         <motion.div
+          // ADD THAT TO NEW FILE ABOUT ANIMATION IN CONFIG
           drag="x"
           dragConstraints={{ right: 0, left: -width }}
-          dragTransition={{ bounceStiffness: 450, bounceDamping: 30 }}
+          dragTransition={
+            ({
+              min: 0,
+              max: 100,
+              velocity: 0,
+              power: 1,
+              bounceStiffness: 10,
+              bounceDamping: 1,
+            },
+            framerMotionTransition)
+          }
           className="inner-carousel"
         >
+          {/* Display the hits in the carousel */}
           {hits.map((hit, i) => {
             return (
               <motion.div key={i} className="item">
-                <img src={hit[image]} alt={hit[objectID]} />
+                <img src={hit[image]} alt={hit[productName]} />
                 <div
                   className="item__infos"
                   onClick={() => {
                     hitState(hit);
+                    // navigate to the product show page
                     navigate(`/search/${hit[objectID]}`);
                   }}
                 >

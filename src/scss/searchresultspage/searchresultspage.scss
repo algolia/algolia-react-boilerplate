@@ -31,8 +31,17 @@
 // ------------------------------------------
 // Stats
 // ------------------------------------------
-.stats-infos {
-  @include stats($blue-algolia);
+
+.srp-container__stats-sort {
+  display: flex;
+  justify-content: space-between;
+  .stats-infos {
+    @include stats($blue-algolia);
+  }
+  select {
+    font-size: 0.9rem;
+    font-family: $main-font;
+  }
 }
 
 // ------------------------------------------
@@ -44,18 +53,6 @@
   @include pagination($blue-algolia);
 }
 
-.refinement-container {
-  display: flex;
-  margin-bottom: 1rem;
-}
-
-.button-clear-refinement {
-  background-color: $blue-algolia;
-  color: $white-color;
-  padding: 0.5rem;
-  border-radius: 1rem;
-  font-weight: 400;
-}
 // ------------------------------------------
 // Pagination
 // ------------------------------------------
@@ -69,12 +66,9 @@
 // No Results
 // ------------------------------------------
 .no-results {
-  background-image: url('https://weekendmarket.lk/assets/wm/image/no-result.png');
-  background-position: center;
-  background-size: cover;
   width: 80%;
-  height: 80vh;
-  margin: 0 auto;
+  height: 70vh;
+  margin: 0rem auto;
   padding: 2rem 2rem;
   &__titles {
     margin-bottom: 2rem;
@@ -92,18 +86,82 @@
     .query-suggestion {
       margin-top: 2rem;
       .suggestions {
-        .suggestions__title {
-        }
-        .suggestions__items {
+        &__items {
           display: flex;
+          flex-direction: column;
+
           .suggestions__item {
             margin-right: 2rem;
             svg {
-              width: 10px;
+              width: 8px;
             }
           }
         }
       }
     }
   }
+}
+
+// ------------------------------------------
+// SRP Container Mobile & tablet
+// ------------------------------------------
+
+.srp-container-mobile {
+  width: 95%;
+  margin: 1rem auto;
+  display: flex;
+  gap: 3rem;
+  position: relative;
+
+  .srp-container__stats-sort {
+    margin: 1rem 0;
+  }
+
+  .srp-container__hits {
+    .ais-InfiniteHits {
+      .ais-InfiniteHits-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+  .refinement-container{
+    margin: 3rem 0;
+  }
+
+  .facets-slider {
+    left: 1rem;
+    top: 3rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    display: flex;
+    position: absolute;
+    height: fit-content;
+    z-index: 999;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+
+    p {
+      font-size: 0.8rem;
+    }
+    svg {
+      // margin-top: 0.5rem;
+      width: 8px;
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+  .facets-slider-active {
+  }
+  .facets-slider-inactive {
+    z-index: 950;
+  }
+}
+
+// ------------------------------------------
+// Search box invisible
+// ------------------------------------------
+.search-box-invisible {
+  display: none;
 }

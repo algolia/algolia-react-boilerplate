@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 // React Router import
 import { useNavigate } from 'react-router-dom';
@@ -7,15 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import { connectRefinementList } from 'react-instantsearch-dom';
 
 // component import
-import { ChevronRight } from '../../../assets/svg/SvgIndex';
+import { ChevronRight } from '@/assets/svg/SvgIndex';
 
-// Recoil state management imports
-import { useRecoilState } from 'recoil';
-import { configAtom } from '../../../config/config';
+import { federatedCategoriesAttribute } from '@/config/federatedConfig';
 
 const CategoryItems = ({ items }) => {
-  // Recoil & States
-  const [config] = useRecoilState(configAtom);
   // router hook to navigate using a function
   const navigate = useNavigate();
 
@@ -29,7 +25,7 @@ const CategoryItems = ({ items }) => {
               key={hit.label}
               onClick={() => {
                 navigate('/search', {
-                  state: `${config.federatedCategory.categoryInFederated}:"${hit.label}"`,
+                  state: `${federatedCategoriesAttribute}:"${hit.label}"`,
                 });
               }}
             >

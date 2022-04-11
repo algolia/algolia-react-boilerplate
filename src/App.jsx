@@ -1,48 +1,42 @@
-import React from 'react';
-// Algolia import
-import algoliasearch from 'algoliasearch/lite';
+import { useState, useEffect } from 'react';
+
 import { InstantSearch } from 'react-instantsearch-dom';
+
 // React router
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// RecoilState Management
-// https://recoiljs.org/docs/introduction/getting-started
+import { BrowserRouter as Router } from 'react-router-dom';
+
+// Recoil State Management
 import { RecoilRoot } from 'recoil';
-
-// Import Pages
-
-import Header from './components/header/Header';
-import HomePage from './pages/HomePage';
-import SearchResultsPage from './pages/SearchResultsPage';
-import ResultsPage from './pages/ResultsPage';
-import ProductDetails from './pages/ProductDetails';
-import Footer from './components/footer/Footer';
-
-import CustomStateResults from './components/stateResults/stateResults';
 
 // SCSS import
 import './scss/index.scss';
 
 // application state from config file
-// eslint-disable-next-line import/order
-import { indexName, searchClient } from './config/config';
+import { searchClient, indexNames } from './config/algoliaEnvConfig';
 
 // Import Components
+import Loader from '@/components/loader/Loader';
+import { Main } from './Main.jsx';
+
+// Allows logging and manipulation of algolia results etc.
+import CustomStateResults from './components/stateResults/stateResults';
 
 const App = () => {
-  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 3000);
+  }, []);
+
   return (
     <RecoilRoot>
-      <InstantSearch searchClient={search} indexName={indexName.index}>
+      <InstantSearch searchClient={searchClient} indexName={indexNames.mainIndex}>
         <CustomStateResults />
         <Router>
-          <Header />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/search" element={<SearchResultsPage />} />
-            <Route path="/search/:objectID" element={<ProductDetails />} />
-            <Route path="/results" element={<ResultsPage />} />
-          </Routes>
-          <Footer />
+          {isLoaded === false && <Loader isLoaded={isLoaded} />}
+          <Main isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
         </Router>
       </InstantSearch>
     </RecoilRoot>

@@ -1,7 +1,16 @@
-import React, { memo } from 'react';
+// Render the blog post in federated search
+import { memo } from 'react';
+
+// Algolia
 import { connectHits } from 'react-instantsearch-dom';
+import { useRecoilValue } from 'recoil';
+
+import { contentArticlesConfig } from '@/config/hitsConfig';
 
 const ArticlesItems = ({ hits }) => {
+  const { image, date, title, headings } = useRecoilValue(
+    contentArticlesConfig
+  );
   return (
     <div className="articles__wrapper">
       <h3 className="articles__title">ARTICLES</h3>
@@ -9,14 +18,14 @@ const ArticlesItems = ({ hits }) => {
         return (
           <div key={index} className="articles__item">
             <div className="image-wrapper">
-              <img src={hit['Image Link']} alt="" />
+              <img src={hit[image]} alt="" />
 
-              <p className="date">{hit.Date}</p>
+              <p className="date">{hit[date]}</p>
               <div className="overlay"></div>
             </div>
             <div className="infos">
-              <p className="title">{hit.Title}</p>
-              <p className="subtitle">{hit.Subtitle}</p>
+              <p className="title">{hit[title]}</p>
+              <p className="subtitle">{hit[headings]}</p>
             </div>
           </div>
         );

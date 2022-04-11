@@ -4,7 +4,7 @@
 @use '../mixin/abstracts' as *;
 
 .home-carousel {
-  margin: 10% 10%;
+  margin: 2rem 4rem;
   h3 {
     color: $blue-algolia;
     font-size: 2rem;
@@ -23,6 +23,7 @@
           width: 100%;
           height: 70%;
           pointer-events: none;
+          object-fit: cover;
         }
 
         &__infos{   
@@ -32,12 +33,13 @@
         align-items: center;
         justify-content: space-between;
         cursor: pointer;
-        height: 7rem;
+        height: 6rem;
         .name {
-          color: $orange-color;
-          font-weight: 400;
+          color: $main-color;
+          font-size: 0.8rem;
           text-align: center;
-          margin-top: 0.5rem;
+          margin-top: 1rem;
+          text-transform: capitalize;
         }
         .price {
           color: $blue-algolia;

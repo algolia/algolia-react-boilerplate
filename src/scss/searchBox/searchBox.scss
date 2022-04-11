@@ -8,6 +8,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   .searchbox {
     width: 90%;
@@ -19,7 +20,7 @@
       svg {
         width: 30px;
         left: 1rem;
-        top: 0.2rem;
+        top: 0rem;
         position: absolute;
 
         path {
@@ -61,11 +62,17 @@
             padding: 0.5rem 1rem;
             background: $blue-algolia-custom-gradient;
             display: flex;
+            justify-content: center;
+            gap: 0.5rem;
             align-items: center;
       
-           p{
+            span{
+              cursor: pointer;
+            }
+           p, span{
+             
              font-size: 0.8rem;
-             color: $grey-dark-color;
+             color: $white-color;
            }
 
            
