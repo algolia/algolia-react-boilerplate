@@ -46,6 +46,13 @@ export const searchTermsInformations = [
 // ------------------------------------------
 // Search Persona Config
 // ------------------------------------------
+
+// This atom represents whether the persona guide should be available or not
+export const shouldShowPersonas = atom({
+  key: 'shouldShowPersonas',
+  default: true,
+});
+
 export const searchPersonaConfig = [
   { value: 'anon', label: 'Neutral' },
   {

@@ -18,15 +18,18 @@ import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 import { framerMotionTransition } from '@/config/animationConfig';
 
 // Import Reference for the Button that trigger the panel
-import { demoGuideBtnRef, shouldShowSearchTerms } from '@/config/demoGuideConfig';
+import { demoGuideBtnRef, shouldShowSearchTerms, shouldShowPersonas } from '@/config/demoGuideConfig';
 
 const DemoGuide = ({ setshowDemoGuide }) => {
   //Select Panel wrapper
   const demoGuide = useRef();
 
+  const shouldShowPersonasAtom = useRecoilValue(shouldShowPersonas)
   const shouldShowSearchTermsAtom = useRecoilValue(shouldShowSearchTerms)
-  // Use teh reference value of the button that trigger the panel
+
+  // Use the reference value of the button that trigger the panel
   const demoGuideBtn = useRecoilValue(demoGuideBtnRef);
+
   //Listen for screen resize
   const { tablet, mobile } = useScreenSize();
   //Listen for click outside the Demo Guide panel
@@ -57,10 +60,12 @@ const DemoGuide = ({ setshowDemoGuide }) => {
           <SearchBanners />
           <hr />
         </li>
-        <li className="container-nav-help__items ">
-          <SearchPersona />
-          <hr />
-        </li>
+        {shouldShowPersonasAtom && 
+          <li className="container-nav-help__items ">
+            <SearchPersona />
+            <hr />
+          </li>
+        }
         <li className="container-nav-help__items ">
           <DemoGuideInjectedContent />
           <hr />
