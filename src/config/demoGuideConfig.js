@@ -7,7 +7,7 @@ export const shouldShowDemoGuide = atom({
 });
 
 // ------------------------------------------
-// Search Terms Config
+// Search Terms Guide Config
 // ------------------------------------------
 
 // This atom represents whether the seach terms guide should be available or not
@@ -44,7 +44,7 @@ export const searchTermsInformations = [
 ];
 
 // ------------------------------------------
-// Search Persona Config
+// Search Persona Guide Config
 // ------------------------------------------
 
 // This atom represents whether the persona guide should be available or not
@@ -83,7 +83,9 @@ export const searchPersonaInformations = [
   },
 ];
 
-// Config on Injected content in Demo guide
+// ------------------------------------------
+// Injected Content Guide Config
+// ------------------------------------------
 
 // This atom represents whether the injected content guide should be available or not
 export const shouldShowInjectedContent = atom({
@@ -91,6 +93,7 @@ export const shouldShowInjectedContent = atom({
   default: true,
 });
 
+// Config on Injected content in Demo guide
 export const DemoGuideInjectedContentConfig = [
   { value: '', label: 'Choose' },
   {
@@ -117,7 +120,9 @@ export const DemoGuideInjectedContentInformations = [
   },
 ];
 
-// Config on Dynamic Filters in Demo guide
+// ------------------------------------------
+// Dynamic Filters Guide Config
+// ------------------------------------------
 
 // This atom represents whether the dynamic filters guide should be available or not
 export const shouldShowDynamicFilters = atom({
@@ -125,6 +130,7 @@ export const shouldShowDynamicFilters = atom({
   default: true,
 });
 
+// Config on Dynamic Filters in Demo guide
 export const DemoGuideDynamicFiltersConfig = [
   { value: '', label: 'Choose' },
   {
@@ -143,7 +149,9 @@ export const DemoGuideDynamicFiltersInformations = [
   },
 ];
 
-// Config on Redirection in Demo guide
+// ------------------------------------------
+// Redirects Guide Config
+// ------------------------------------------
 
 // This atom represents whether the redirects guide should be available or not
 export const shouldShowRedirects = atom({
@@ -151,6 +159,7 @@ export const shouldShowRedirects = atom({
   default: true,
 });
 
+// Config on Redirection in Demo guide
 export const DemoGuideRedirectConfig = [
   { value: '', label: 'Choose' },
   {
@@ -169,7 +178,7 @@ export const DemoGuideRedirectInformations = [
 ];
 
 // ------------------------------------------
-// Search Banners Config
+// Search Banners Guide Config
 // ------------------------------------------
 
 // This atom represents whether the banners guide should be available or not
