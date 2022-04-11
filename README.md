@@ -122,32 +122,32 @@ with
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Facets</h3>
+[Banner](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/add-banners/)
 
-How To Configure it 👇
+There are two types of banners in this demo - Homepage banners and Search Result Page banners. Check out the existing examples on the flagship fashion index to see some examples. 
 
-We use Dynamic Widgets by default in the boilerplate. This means if you want a facet to show in the frontend you should follow three steps:
+How Configure it 👇
 
-1. [Declare your attribute to be available for faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/how-to/declaring-attributes-for-faceting/#using-the-dashboard)
-
-2. Add your facet to [the Facet Display section in the dashboard](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react/#configuring-your-facet-display-using-the-dashboard)
-
-3. Make sure you have added the facet in `src/config/refinementsConfig.js`
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Banners</h3>
-
-[Documentation](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/add-banners/)
-
-How To Configure it 👇
-
-- In rules Section in the Dashboard, you have 2 rules without query conditions.
-- You can edit or create one, and personalise the differrent fields:
+- In rules Section in the Dashboard, you have 2 'HomeBanner' rules without query conditions.
+- You can edit or duplicate one of these, and personalise the differrent fields:
   - Images (For the background, or for the thumbnails)
   - Link or Text for the buttons
   - Titles and Subtitles
 - In the code you have a condition, actually they are called together, but you can keep by type :
 
   - HomeBannerOne or HomeBannerTwo
+
+- The Search Result Page banners are generally set to queries (eg 'shoes'). It'll contain:
+  - type: set this to "bannersrp"
+  - title
+  - banner: this is an image url
+  - link: often a link to a page (eg './categoryPageWoman.html')
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 FacetDisplay</h3>
+
+[Facet Display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react/)
+
+The ability to control the facets to display and their order works by sending a dedicated.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Category Pages</h3>
 
