@@ -14,6 +14,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { indexNames } from '@/config/algoliaEnvConfig';
 import { hitsConfig, hitAtom } from '@/config/hitsConfig';
 import { hitsPerCarousel } from '@/config/carouselConfig';
+import { currencySymbol } from '@/config/currencyConfig';
 
 import { framerMotionTransition } from '@/config/animationConfig';
 
@@ -87,7 +88,10 @@ const Carousel = ({ hits, title }) => {
                   }}
                 >
                   <p className="name">{hit[productName]}</p>
-                  <p className="price">{hit[price]}</p>
+                  <p className="price">
+                    {hit[price]}
+                    {currencySymbol}
+                  </p>
                 </div>
               </motion.div>
             );

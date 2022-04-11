@@ -6,12 +6,16 @@ import { motion } from 'framer-motion';
 import { Highlight } from 'react-instantsearch-dom';
 
 import { Heart } from '@/assets/svg/SvgIndex';
-import { framerMotionTransition, framerMotionHits } from '@/config/animationConfig';
+import {
+  framerMotionTransition,
+  framerMotionHits,
+} from '@/config/animationConfig';
 
 // Recoil import
 import { hitAtom } from '@/config/hitsConfig';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
+import { currencySymbol } from '@/config/currencyConfig';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
@@ -54,7 +58,10 @@ const Hit = ({ hit }) => {
           <Highlight hit={hit} attribute={productName} />
         </h3>
         <div className="srpItem__infos__down">
-          <p className="srpItem__infos__down__price">{hit[price]}</p>
+          <p className="srpItem__infos__down__price">
+            {hit[price]}
+            {currencySymbol}
+          </p>
         </div>
       </div>
     </motion.li>
