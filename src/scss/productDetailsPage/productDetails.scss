@@ -4,7 +4,7 @@
 @use '../mixin/abstracts' as *;
 
 .pdp{
-    height: 78vh;
+    height: 100%;
     position: relative;
     &__wrapper{
         display: flex;
