@@ -171,6 +171,13 @@ export const DemoGuideRedirectInformations = [
 // ------------------------------------------
 // Search Banners Config
 // ------------------------------------------
+
+// This atom represents whether the banners guide should be available or not
+export const shouldShowBanners = atom({
+  key: 'shouldShowBanners',
+  default: true,
+});
+
 export const searchBannersConfig = [
   { value: '', label: 'Choose' },
   {

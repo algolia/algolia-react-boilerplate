@@ -24,7 +24,8 @@ import {
   shouldShowPersonas,
   shouldShowInjectedContent,
   shouldShowDynamicFilters,
-  shouldShowRedirects
+  shouldShowRedirects,
+  shouldShowBanners
 } from '@/config/demoGuideConfig';
 
 const DemoGuide = ({ setshowDemoGuide }) => {
@@ -36,6 +37,7 @@ const DemoGuide = ({ setshowDemoGuide }) => {
   const shouldShowInjectedContentAtom = useRecoilValue(shouldShowInjectedContent)
   const shouldShowDynamicFiltersAtom = useRecoilValue(shouldShowDynamicFilters)
   const shouldShowRedirectsAtom = useRecoilValue(shouldShowRedirects)
+  const shouldShowBannersAtom = useRecoilValue(shouldShowBanners)
 
   // Use the reference value of the button that trigger the panel
   const demoGuideBtn = useRecoilValue(demoGuideBtnRef);
@@ -66,10 +68,12 @@ const DemoGuide = ({ setshowDemoGuide }) => {
             <hr />
           </li>
         }
-        <li className="container-nav-help__items ">
-          <SearchBanners />
-          <hr />
-        </li>
+        {shouldShowBannersAtom && 
+          <li className="container-nav-help__items ">
+            <SearchBanners />
+            <hr />
+          </li>
+        }
         {shouldShowPersonasAtom && 
           <li className="container-nav-help__items ">
             <SearchPersona />
@@ -88,10 +92,12 @@ const DemoGuide = ({ setshowDemoGuide }) => {
             <hr />
           </li>
         }
-        <li className="container-nav-help__items ">
-          <DemoGuideRedirect />
-          <hr />
-        </li>
+        {shouldShowRedirectsAtom &&
+          <li className="container-nav-help__items ">
+            <DemoGuideRedirect />
+            <hr />
+          </li>
+        }
       </ul>
     </motion.div>
   );
