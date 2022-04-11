@@ -16,6 +16,9 @@ import useOutsideClick from '@/hooks/useOutsideClick';
 import {
   shouldHaveInjectedBanners,
   shouldHavePersona,
+  shouldHaveInjectedHits,
+  shouldHaveRedirect,
+  shouldHaveDynamicFacet,
 } from '@/config/featuresConfig';
 import { useRecoilValue } from 'recoil';
 
@@ -34,6 +37,9 @@ const DemoGuide = ({ onClickOutside }) => {
   // Const Recoil to use Recoil Value
   const displayBanner = useRecoilValue(shouldHaveInjectedBanners);
   const displayPersona = useRecoilValue(shouldHavePersona);
+  const displayInjectedHits = useRecoilValue(shouldHaveInjectedHits);
+  const displayDynamicFacet = useRecoilValue(shouldHaveDynamicFacet);
+  const displayRedirect = useRecoilValue(shouldHaveRedirect);
 
   //Listen for click outside the Demo Guide panel
   useOutsideClick(demoGuide, onClickOutside);
@@ -66,18 +72,24 @@ const DemoGuide = ({ onClickOutside }) => {
             <hr />
           </li>
         )}
-        <li className="container-nav-help__items ">
-          <DemoGuideInjectedContent />
-          <hr />
-        </li>
-        <li className="container-nav-help__items ">
-          <DemoGuideDynamicFilters />
-          <hr />
-        </li>
-        <li className="container-nav-help__items ">
-          <DemoGuideRedirect />
-          <hr />
-        </li>
+        {displayInjectedHits && (
+          <li className="container-nav-help__items ">
+            <DemoGuideInjectedContent />
+            <hr />
+          </li>
+        )}
+        {displayDynamicFacet && (
+          <li className="container-nav-help__items ">
+            <DemoGuideDynamicFilters />
+            <hr />
+          </li>
+        )}
+        {displayRedirect && (
+          <li className="container-nav-help__items ">
+            <DemoGuideRedirect />
+            <hr />
+          </li>
+        )}
       </ul>
     </motion.div>
   );
