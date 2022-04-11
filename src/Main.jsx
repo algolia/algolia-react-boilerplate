@@ -8,7 +8,11 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { useRecoilValue, useRecoilState } from 'recoil';
 
 //Import help navigation state & config
-import { isDemoGuideOpen, shouldShowDemoGuide, shouldShowAlert } from '@/config/demoGuideConfig';
+import {
+  isDemoGuideOpen,
+  shouldShowDemoGuide,
+  shouldShowAlert,
+} from '@/config/demoGuideConfig';
 
 // Import Pages and static components
 import Header from '@/components/header/Header';
@@ -18,7 +22,6 @@ import SearchResultsPage from './pages/SearchResultsPage';
 import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import ProductDetails from './pages/ProductDetails';
 import Footer from './components/footer/Footer';
-
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
@@ -32,8 +35,7 @@ export const Main = ({ isLoaded }) => {
   // Should the feature of guided panel for SE should be in this app
   const shouldShowNavigation = useRecoilValue(shouldShowDemoGuide);
   // State that show/hide the panel if click on the guide btn
-  const [showDemoGuide, setshowDemoGuide] =
-    useRecoilState(isDemoGuideOpen);
+  const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
 
@@ -53,9 +55,7 @@ export const Main = ({ isLoaded }) => {
           <Route path="/search/:objectID" element={<ProductDetails />} />
         </Routes>
       </AnimatePresence>
-      {shouldShowAlertAtom &&
-        <AlertNavigation />
-      }
+      {shouldShowAlertAtom && <AlertNavigation />}
       <Footer />
     </div>
   );
