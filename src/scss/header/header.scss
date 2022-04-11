@@ -1,21 +1,54 @@
 // ------------------------------------------
 // Header
 // ------------------------------------------
-@import '../mixin/abstracts/abstracts.scss';
+@use '../mixin/abstracts' as *;
 
 // ------------------------------------------
 // Header Sticky process
 // ------------------------------------------
 
-
 .header {
   text-align: center;
-  position: relative;
-  box-shadow: 0 0 5px $white-color;
+  box-shadow: 0 0 20px $white-color;
   padding: 40px 0;
   background: $grey-light-color;
-  height: 13rem;
+}
+
+.sticky {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
   width: 100%;
+  padding: 40px 0;
+  box-shadow: 0 20px 30px rgba(#000, 0.2);
+  animation: slide 0.3s forwards ease-in-out;
+  background: $grey-light-color;
+
+  label {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+@keyframes slide {
+  0% {
+    opacity: 1;
+    height: 13rem;
+  }
+  100% {
+    opacity: 1;
+    height: 12rem;
+  }
+}
+
+// ------------------------------------------
+// ------------------------------------------
+
+// ------------------------------------------
+//Inside Header
+// ------------------------------------------
+.header {
   .container {
     .container__header-top {
       align-items: center;
@@ -26,13 +59,13 @@
         width: 20%;
         text-align: start;
         img {
-          width: 100%;
+          width: 80%;
         }
       }
       &__title {
-        min-width: 20%;
         h1 {
           font-size: 0.8rem;
+
           line-height: 0;
           text-transform: uppercase;
           font-weight: bold;
@@ -41,9 +74,6 @@
       }
     }
     .container__header-bottom {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
       &__links {
         display: flex;
         justify-content: center;
@@ -53,7 +83,6 @@
           p {
             position: relative;
             transition: 0.2 ease-in-out;
-            
             &:before {
               content: '';
               position: absolute;
@@ -81,61 +110,3 @@
   width: 20%;
   margin: 0 0.5rem 1rem auto;
 }
-
-
-// MOBILE & TABLET
-
-.container-mobile{
-  .container__header-top{
-    margin-top: 1rem;
-    padding: 0 1rem;
-  }
-  .container__header-top__logo{
-    width: 35% !important;
-  }
-  .searchbox-container-mobile{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 0 auto;
-
-    .ais-VoiceSearch{
-      right: 8%;
-    }
-  }
-
-  &__navList{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50vw;
-    height: 100vh;
-    z-index: 998;
-    background-color: $background-color;
-
-    ul{
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-top: 3rem;
-      padding: 1rem;
-
-      li{
-        cursor: pointer;
-      }
-    }
-  }
-
-  .hamburger{
-    @include hamburger-menu;
-  }
-  .hamburger-active{
-  @include hamburger-menu-active;
-  }
-  .hamburger-inactive{
- @include hamburger-menu-inactive;
-  }
-}
-

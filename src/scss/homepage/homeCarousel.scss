@@ -1,7 +1,7 @@
 // ------------------------------------------
 // Home Carousel
 // ------------------------------------------
-@import '../mixin/abstracts/abstracts.scss';
+@use '../mixin/abstracts' as *;
 
 .home-carousel {
   margin: 2rem 4rem;

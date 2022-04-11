@@ -1,7 +1,7 @@
 // ------------------------------------------
 // Help Navigation
 // ------------------------------------------
-@import '../mixin/abstracts/abstracts.scss';
+@use '../mixin/abstracts' as *;
 
 .helpNavigation {
   position: absolute;

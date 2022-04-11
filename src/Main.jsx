@@ -25,7 +25,9 @@ import usePreventScrolling from './hooks/usePreventScrolling';
 
 export const Main = ({ isLoaded }) => {
   const location = useLocation();
+  // Should the feature of guided panel for SE should be in this app
   const shouldShowNavigation = useRecoilValue(shouldShowDemoGuide);
+  // State that show/hide the panel if click on the guide btn
   const [showHelpNavigation, setShowHelpNavigation] =
     useRecoilState(isDemoGuideOpen);
   // Prevent body from scrolling when panel is open
@@ -36,7 +38,7 @@ export const Main = ({ isLoaded }) => {
       <Header />
       <AnimatePresence>
         {showHelpNavigation && shouldShowNavigation && (
-          <DemoGuide onClickOutside={() => setShowHelpNavigation(false)} />
+          <DemoGuide setShowHelpNavigation={setShowHelpNavigation} />
         )}
       </AnimatePresence>
       <AnimatePresence initial={true} exitBeforeEnter>

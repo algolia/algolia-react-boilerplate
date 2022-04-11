@@ -1,6 +1,6 @@
 // Mixins
-@import './variables.scss';
-@import './fonts';
+@use './variables' as *; 
+@use './fonts' as *;
 
 // ------------------------------------------
 // How use mixins
