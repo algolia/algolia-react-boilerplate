@@ -1,7 +1,7 @@
 // ------------------------------------------
 // PDP
 // ------------------------------------------
-@use '../mixin/abstracts/abstracts.scss';
+@use '../mixin/abstracts' as *;
 
 .pdp{
     height: 78vh;

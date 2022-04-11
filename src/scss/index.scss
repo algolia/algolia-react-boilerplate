@@ -1,4 +1,4 @@
-@use './mixin/abstracts/abstracts.scss';
+@use './mixin/abstracts' as *;
 
 // Import Banners for the Home
 @use './banners/homeBanner.scss';

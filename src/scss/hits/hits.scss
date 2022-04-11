@@ -1,7 +1,7 @@
 // ------------------------------------------
 // Hits
 // ------------------------------------------
-@use '../mixin/abstracts/abstracts.scss';
+@use '../mixin/abstracts' as *;
 
 .ais-InfiniteHits {
   .ais-InfiniteHits-list {

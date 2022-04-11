@@ -1,7 +1,7 @@
 // ------------------------------------------
 // VoiceSearch
 // ------------------------------------------
-@use '../mixin/abstracts/abstracts.scss';
+@use '../mixin/abstracts' as *;
 
 .ais-VoiceSearch{
   position: absolute;
