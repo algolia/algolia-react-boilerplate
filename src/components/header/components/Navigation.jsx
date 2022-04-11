@@ -18,7 +18,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   const navigate = useNavigate();
 
   // Const Recoil State
-  const displayPersona = useRecoilValue(shouldHavePersona);
+  const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
 
   // Import the navigation links, as defined in the config
   const [links] = useRecoilState(linksHeader);
@@ -52,7 +52,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         </li>
       ))}
       {/* Display the persona selection component */}
-      {displayPersona && (
+      {shouldShowPersonasAtom && (
         <li>
           <SelectPersona />
         </li>
