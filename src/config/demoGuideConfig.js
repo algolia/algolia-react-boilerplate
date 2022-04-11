@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-// This atom represents whether the demo guide should be available or note
+// This atom represents whether the demo guide should be available or not
 export const shouldShowDemoGuide = atom({
   key: 'shouldShowDemoGuide',
   default: true,
@@ -9,6 +9,12 @@ export const shouldShowDemoGuide = atom({
 // ------------------------------------------
 // Search Terms Config
 // ------------------------------------------
+
+// This atom represents whether the seach terms guide should be available or not
+export const shouldShowSearchTerms = atom({
+  key: 'shouldShowSearchTerms',
+  default: true,
+});
 
 // Configuration for search terms
 export const searchTermsConfig = [
