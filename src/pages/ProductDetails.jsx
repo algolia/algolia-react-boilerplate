@@ -15,6 +15,9 @@ import {
   framerMotionTransition,
 } from '@/config/animationConfig';
 
+// In case of img loading error
+import { logoUrl as placeHolderError } from '@/config/headerConfig';
+
 // Import components
 import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import RelatedItem from '@/components/recommend/RelatedProducts';
@@ -28,7 +31,10 @@ import { useNavigate } from 'react-router-dom';
 // Recoil import
 import { useRecoilValue } from 'recoil';
 import { hitAtom } from '@/config/hitsConfig';
-import { shouldHaveRelatedProducts, shouldHaveFbtProducts } from '@/config/featuresConfig';
+import {
+  shouldHaveRelatedProducts,
+  shouldHaveFbtProducts,
+} from '@/config/featuresConfig';
 import { hitsConfig } from '@/config/hitsConfig';
 
 // Custom hooks
@@ -38,7 +44,9 @@ const ProductDetails = () => {
   // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
 
-  const shouldHaveRelatedProductsValue = useRecoilValue(shouldHaveRelatedProducts);
+  const shouldHaveRelatedProductsValue = useRecoilValue(
+    shouldHaveRelatedProducts
+  );
   const shouldHaveFbtProductsValue = useRecoilValue(shouldHaveFbtProducts);
 
   // navigate is used by react router
@@ -119,6 +127,7 @@ const ProductDetails = () => {
                 transition={framerMotionTransition}
                 src={hit[image]}
                 alt=""
+                onError={(e) => (e.currentTarget.src = placeHolderError)}
               />
             </motion.div>
           </motion.div>

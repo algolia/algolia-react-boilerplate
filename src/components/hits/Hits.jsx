@@ -6,6 +6,10 @@ import { motion } from 'framer-motion';
 import { Highlight } from 'react-instantsearch-dom';
 
 import { Heart } from '@/assets/svg/SvgIndex';
+
+// In case of img loading error
+import { logoUrl as placeHolderError } from '@/config/headerConfig';
+
 import {
   framerMotionTransition,
   framerMotionHits,
@@ -48,6 +52,7 @@ const Hit = ({ hit }) => {
           transition={framerMotionTransition}
           src={hit[image]}
           alt={hit[category]}
+          onError={(e) => (e.currentTarget.src = placeHolderError)}
         />
         <div className="srpItem__imgWrapper__heart">
           <Heart />

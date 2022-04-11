@@ -12,9 +12,8 @@
   text-align: center;
   position: relative;
   box-shadow: 0 0 5px $white-color;
-  padding: 40px 0;
+  padding: 2rem 0;
   background: $grey-light-color;
-  height: 13rem;
   width: 100%;
   .container {
     .container__header-top {
@@ -22,6 +21,7 @@
       padding: 0 2rem;
       display: flex;
       justify-content: space-between;
+      margin-bottom: 1rem;
       &__logo {
         width: 20%;
         text-align: start;

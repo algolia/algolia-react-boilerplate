@@ -1,7 +1,7 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
 
-import {lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 
 import Loader from '@/components/loader/Loader';
 
@@ -13,16 +13,27 @@ import { framerMotionPage } from '@/config/animationConfig';
 // recoil import
 import { useRecoilValue } from 'recoil';
 
+// Import screenShot/ images for the homepage
+import homepage_1 from '../assets/homepage/homepage_1.png';
+import homepage_2 from '../assets/homepage/homepage_2.png';
+
 // components import
-const CustomHomeBanners = lazy(() => import('@/components/banners/HomeBanners'));
-const FederatedSearch = lazy(() => import('@/components/federatedSearch/FederatedSearch'));
+const CustomHomeBanners = lazy(() =>
+  import('@/components/banners/HomeBanners')
+);
+const FederatedSearch = lazy(() =>
+  import('@/components/federatedSearch/FederatedSearch')
+);
 const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
 
 // should carousel be shown or not and config for carousel
 import { carouselConfig } from '@/config/carouselConfig';
 
 //  should federated search be shown or not
-import { shouldHaveFederatedSearch, shouldHaveCarousels } from '@/config/featuresConfig';
+import {
+  shouldHaveFederatedSearch,
+  shouldHaveCarousels,
+} from '@/config/featuresConfig';
 
 const HomePage = () => {
   // Boolean value which determines if federated search is shown or not, default is false
@@ -47,26 +58,30 @@ const HomePage = () => {
       {isFederated && (
         <AnimatePresence>
           {/* Loads federated search if isFederated is true */}
-          <Suspense fallback={<Loader/>}>
+          <Suspense fallback={<Loader />}>
             <FederatedSearch />
           </Suspense>
         </AnimatePresence>
       )}
 
       {/* Load custom banners */}
-      <Suspense fallback={<Loader/>}>
+      <Suspense fallback={<Loader />}>
         <CustomHomeBanners />
       </Suspense>
 
+      {homepage_1 ? <img src={homepage_1} alt="" /> : null}
+
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
-          <Suspense key={i} fallback={<Loader/>}>
+          <Suspense key={i} fallback={<Loader />}>
             <HomeCarousel
               attribute={carousel.attribute}
               title={carousel.title}
             />
           </Suspense>
         ))}
+
+      {homepage_2 && <img src={homepage_2} alt="" />}
     </motion.div>
   );
 };
