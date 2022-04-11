@@ -1,5 +1,5 @@
-@import '../mixin/abstracts/abstracts.scss';
-@import './facets.scss';
+@use '../mixin/abstracts/abstracts.scss';
+@use './facets.scss';
 
 .refinement-container__refinements {
   margin-right: 0.5rem;

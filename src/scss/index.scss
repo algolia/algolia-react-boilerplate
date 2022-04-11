@@ -1,21 +1,21 @@
-@import './mixin/abstracts/abstracts.scss';
+@use './mixin/abstracts/abstracts.scss';
 
 // Import Banners for the Home
-@import './banners/homeBanner.scss';
-@import './banners/homeBanner2.scss';
-@import './banners/homeBanner3.scss';
+@use './banners/homeBanner.scss';
+@use './banners/homeBanner2.scss';
+@use './banners/homeBanner3.scss';
 
 // Import components
-@import './searchBox/searchBox.scss';
-@import './header/header.scss';
-@import './voicesearch/voicesearch.scss';
-@import './searchresultspage/searchresultspage.scss';
-@import './hits/hits.scss';
-@import './federatedSearch/federatedSearch.scss';
-@import './productDetailsPage/productDetails.scss';
-@import './searchresultspage/currentRefinement.scss';
-@import './homepage/homeCarousel.scss';
-@import './footer/footer.scss';
+@use './searchBox/searchBox.scss';
+@use './header/header.scss';
+@use './voicesearch/voicesearch.scss';
+@use './searchresultspage/searchresultspage.scss';
+@use './hits/hits.scss';
+@use './federatedSearch/federatedSearch.scss';
+@use './productDetailsPage/productDetails.scss';
+@use './searchresultspage/currentRefinement.scss';
+@use './homepage/homeCarousel.scss';
+@use './footer/footer.scss';
 
 // Use BEM, to naming class
 // https://css-tricks.com/bem-101/
