@@ -84,6 +84,12 @@ export const searchPersonaInformations = [
 ];
 
 // Config on Injected content in Demo guide
+
+// This atom represents whether the injected content guide should be available or not
+export const shouldShowInjectedContent = atom({
+  key: 'shouldShowInjectedContent',
+  default: true,
+});
 export const DemoGuideInjectedContentConfig = [
   { value: '', label: 'Choose' },
   {
