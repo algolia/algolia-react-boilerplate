@@ -37,7 +37,7 @@ export const searchTermsConfig = [
 export const searchTermsInformations = [
   {
     span: 'Ring',
-    details: 'The category Bags is boosted.',
+    details: 'The category Bags will be boosted.',
   },
   {
     span: 'Dress',
@@ -63,12 +63,12 @@ export const searchPersonaConfig = [
   {
     value: 'stephen_james',
     label: 'Stephen',
-    alertContent: 'Stephen James is a man who likes sports shoes',
+    alertContent: 'Search is personalised - Stephen James is a man who likes sports shoes',
   },
   {
     value: 'elizabeth_aniston',
     label: 'Elizabeth',
-    alertContent: 'Elizabeth Aniston is a woman who likes Blue Dresses',
+    alertContent: 'Search is personalised - Elizabeth Aniston is a woman who likes Blue Dresses',
   },
 ];
 
@@ -175,7 +175,7 @@ export const DemoGuideRedirectConfig = [
   {
     value: 'Faq',
     label: 'FAQ',
-    alertContent: "You'll Redirect the user to Algolia's homepage",
+    alertContent: "Redirecting the user to Algolia's homepage",
   },
 ];
 
@@ -183,7 +183,7 @@ export const DemoGuideRedirectConfig = [
 export const DemoGuideRedirectInformations = [
   {
     span: 'FAQ',
-    details: "Will Redirect the user to Algolia's homepage",
+    details: "Will redirect the user to Algolia's homepage",
   },
 ];
 
@@ -205,17 +205,17 @@ export const searchBannersConfig = [
   {
     value: 'algolia',
     label: 'Algolia',
-    alertContent: 'Will display an Algolia Banner',
+    alertContent: 'Displaying an Algolia Banner',
   },
   {
     value: 'help',
     label: 'Help',
-    alertContent: 'Will display an Help banner',
+    alertContent: 'Displaying an Help banner',
   },
   {
     value: 'woman',
     label: 'Woman',
-    alertContent: 'Will display a Woman banner',
+    alertContent: 'Displaying a Woman banner',
   },
 ];
 
