@@ -6,6 +6,12 @@ export const shouldShowDemoGuide = atom({
   default: true,
 });
 
+// This atom represents whether the alerts should be shown or not when something in the demo guide is triggered
+export const shouldShowAlert = atom({
+  key: 'shouldShowAlert',
+  default: true,
+});
+
 // ------------------------------------------
 // Search Terms Guide Config
 // ------------------------------------------
