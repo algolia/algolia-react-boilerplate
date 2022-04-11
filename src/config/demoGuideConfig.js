@@ -90,6 +90,7 @@ export const shouldShowInjectedContent = atom({
   key: 'shouldShowInjectedContent',
   default: true,
 });
+
 export const DemoGuideInjectedContentConfig = [
   { value: '', label: 'Choose' },
   {
@@ -117,6 +118,13 @@ export const DemoGuideInjectedContentInformations = [
 ];
 
 // Config on Dynamic Filters in Demo guide
+
+// This atom represents whether the dynamic filters guide should be available or not
+export const shouldShowDynamicFilters = atom({
+  key: 'shouldShowDynamicFilters',
+  default: true,
+});
+
 export const DemoGuideDynamicFiltersConfig = [
   { value: '', label: 'Choose' },
   {
@@ -134,7 +142,15 @@ export const DemoGuideDynamicFiltersInformations = [
     details: 'Will change the facets ordering to return size facet first',
   },
 ];
+
 // Config on Redirection in Demo guide
+
+// This atom represents whether the redirects guide should be available or not
+export const shouldShowRedirects = atom({
+  key: 'shouldShowRedirects',
+  default: true,
+});
+
 export const DemoGuideRedirectConfig = [
   { value: '', label: 'Choose' },
   {

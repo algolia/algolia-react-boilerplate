@@ -18,7 +18,14 @@ import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 import { framerMotionTransition } from '@/config/animationConfig';
 
 // Import Reference for the Button that trigger the panel
-import { demoGuideBtnRef, shouldShowSearchTerms, shouldShowPersonas, shouldShowInjectedContent } from '@/config/demoGuideConfig';
+import {
+  demoGuideBtnRef,
+  shouldShowSearchTerms,
+  shouldShowPersonas,
+  shouldShowInjectedContent,
+  shouldShowDynamicFilters,
+  shouldShowRedirects
+} from '@/config/demoGuideConfig';
 
 const DemoGuide = ({ setshowDemoGuide }) => {
   //Select Panel wrapper
@@ -27,6 +34,8 @@ const DemoGuide = ({ setshowDemoGuide }) => {
   const shouldShowPersonasAtom = useRecoilValue(shouldShowPersonas)
   const shouldShowSearchTermsAtom = useRecoilValue(shouldShowSearchTerms)
   const shouldShowInjectedContentAtom = useRecoilValue(shouldShowInjectedContent)
+  const shouldShowDynamicFiltersAtom = useRecoilValue(shouldShowDynamicFilters)
+  const shouldShowRedirectsAtom = useRecoilValue(shouldShowRedirects)
 
   // Use the reference value of the button that trigger the panel
   const demoGuideBtn = useRecoilValue(demoGuideBtnRef);
@@ -73,10 +82,12 @@ const DemoGuide = ({ setshowDemoGuide }) => {
             <hr />
           </li>
         }
-        <li className="container-nav-help__items ">
-          <DemoGuideDynamicFilters />
-          <hr />
-        </li>
+        {shouldShowDynamicFiltersAtom && 
+          <li className="container-nav-help__items ">
+            <DemoGuideDynamicFilters />
+            <hr />
+          </li>
+        }
         <li className="container-nav-help__items ">
           <DemoGuideRedirect />
           <hr />
