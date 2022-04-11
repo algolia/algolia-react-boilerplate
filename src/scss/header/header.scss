@@ -55,6 +55,7 @@
       padding: 0 2rem;
       display: flex;
       justify-content: space-between;
+      margin-bottom: 1rem;
       &__logo {
         width: 20%;
         text-align: start;
@@ -109,4 +110,60 @@
 .select-component {
   width: 20%;
   margin: 0 0.5rem 1rem auto;
+}
+
+// MOBILE & TABLET
+
+.container-mobile {
+  .container__header-top {
+    margin-top: 1rem;
+    padding: 0 1rem;
+  }
+  .container__header-top__logo {
+    width: 35% !important;
+  }
+  .searchbox-container-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+
+    .ais-VoiceSearch {
+      right: 8%;
+    }
+  }
+
+  &__navList {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50vw;
+    height: 100vh;
+    z-index: 998;
+    background-color: $background-color;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-top: 3rem;
+      padding: 1rem;
+
+      li {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .hamburger {
+    @include hamburger-menu;
+  }
+  .hamburger-active {
+    @include hamburger-menu-active;
+  }
+  .hamburger-inactive {
+    @include hamburger-menu-inactive;
+  }
 }

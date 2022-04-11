@@ -14,6 +14,10 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { indexNames } from '@/config/algoliaEnvConfig';
 import { hitsConfig, hitAtom } from '@/config/hitsConfig';
 import { hitsPerCarousel } from '@/config/carouselConfig';
+import { currencySymbol } from '@/config/currencyConfig';
+
+// In case of img loading error
+import { logoUrl as placeHolderError } from '@/config/headerConfig';
 
 import { framerMotionTransition } from '@/config/animationConfig';
 
@@ -77,7 +81,13 @@ const Carousel = ({ hits, title }) => {
           {hits.map((hit, i) => {
             return (
               <motion.div key={i} className="item">
-                <img src={hit[image]} alt={hit[productName]} />
+                <div className="carousel__imageWrapper">
+                  <img
+                    src={hit[image]}
+                    alt={hit[productName]}
+                    onError={(e) => (e.currentTarget.src = placeHolderError)}
+                  />
+                </div>
                 <div
                   className="item__infos"
                   onClick={() => {
@@ -87,7 +97,10 @@ const Carousel = ({ hits, title }) => {
                   }}
                 >
                   <p className="name">{hit[productName]}</p>
-                  <p className="price">{hit[price]}</p>
+                  <p className="price">
+                    {hit[price]}
+                    {currencySymbol}
+                  </p>
                 </div>
               </motion.div>
             );

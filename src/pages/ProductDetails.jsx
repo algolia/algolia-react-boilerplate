@@ -15,6 +15,9 @@ import {
   framerMotionTransition,
 } from '@/config/animationConfig';
 
+// In case of img loading error
+import { logoUrl as placeHolderError } from '@/config/headerConfig';
+
 // Import components
 import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import RelatedItem from '@/components/recommend/RelatedProducts';
@@ -124,6 +127,7 @@ const ProductDetails = () => {
                 transition={framerMotionTransition}
                 src={hit[image]}
                 alt=""
+                onError={(e) => (e.currentTarget.src = placeHolderError)}
               />
             </motion.div>
           </motion.div>

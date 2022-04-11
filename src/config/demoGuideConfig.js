@@ -1,11 +1,30 @@
 import { atom } from 'recoil';
 
-// Is the helped navigation should be in the app
+// Should we show the demo guide in this demo
 export const shouldShowDemoGuide = atom({
-  key: 'shouldShowDemoGuide', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  key: 'shouldShowDemoGuide',
+  default: true,
 });
 
+// This atom represents whether the alerts should be shown or not when something in the demo guide is triggered
+export const shouldShowAlert = atom({
+  key: 'shouldShowAlert',
+  default: true,
+});
+
+// ------------------------------------------
+// Search Terms Guide Config
+// Search terms helps you select queries that allow to
+// showcase category boost or search within a category
+// ------------------------------------------
+
+// Should we show the search terms section in the demo guide
+export const shouldShowSearchTerms = atom({
+  key: 'shouldShowSearchTerms',
+  default: true,
+});
+
+// What would be the content of the select in this section
 // Is the helped navigation menu should be shown because the button has been clicked
 export const isDemoGuideOpen = atom({
   key: 'isDemoGuideOpen', // unique ID (with respect to other atoms/selectors)
@@ -47,10 +66,11 @@ export const searchTermsConfig = [
   },
 ];
 
+// What would be the content of the alert when you're selecting a query
 export const searchTermsInformations = [
   {
     span: 'Ring',
-    details: 'The category Bags is boosted.',
+    details: 'The category Bags will be boosted.',
   },
   {
     span: 'Dress',
@@ -58,34 +78,182 @@ export const searchTermsInformations = [
   },
 ];
 
-// Please ignore this atom
-export const searchTermsSelectedAtom = atom({
-  key: 'searchTermsSelectedAtom', // unique ID (with respect to other atoms/selectors)
-  default: 'anon', // default value (aka initial value)
+// ------------------------------------------
+// Search Persona Guide Config
+// Persona in demo guide allow to select a persona and
+// showcase a personalised Search experience
+// ------------------------------------------
+
+// Should we show the persona section in the demo guide
+export const shouldShowPersonas = atom({
+  key: 'shouldShowPersonas',
+  default: true,
 });
 
+// What would be the content of the select in this section
+export const searchPersonaConfig = [
+  { value: '', label: 'Neutral' },
+  {
+    value: 'stephen_james',
+    label: 'Stephen',
+    alertContent:
+      'Search is personalised - Stephen James is a man who likes sports shoes',
+  },
+  {
+    value: 'elizabeth_aniston',
+    label: 'Elizabeth',
+    alertContent:
+      'Search is personalised - Elizabeth Aniston is a woman who likes Blue Dresses',
+  },
+];
+
+// What would be the content of the alert when you're selecting a persona
+export const searchPersonaInformations = [
+  {
+    span: 'Neutral',
+    details: 'No Persona Selected',
+  },
+  {
+    span: 'Stephen',
+    details: 'Stephen James is a man who likes sports shoes',
+  },
+  {
+    span: 'Elizabeth',
+    details: 'Elizabeth Aniston is a woman who likes Blue Dresses',
+  },
+];
+
 // ------------------------------------------
-// Search Banners Config
+// Injected Content Guide Config
+// Injected content allow to select query that are triggering
+// injected content from rules in the dashboard
 // ------------------------------------------
+
+// Should we show the injected content section in the demo guide
+export const shouldShowInjectedContent = atom({
+  key: 'shouldShowInjectedContent',
+  default: true,
+});
+
+// What would be the content of the select in this section
+export const DemoGuideInjectedContentConfig = [
+  { value: '', label: 'Choose' },
+  {
+    value: 'Nike',
+    label: 'Nike',
+    alertContent: 'You are displaying an injected content coupon for Nike',
+  },
+  {
+    value: 'Women',
+    label: 'Women',
+    alertContent: 'You are displaying an injected content ad with Gigi Hadid',
+  },
+];
+
+// What would be the content of the alert when you're selecting a query
+export const DemoGuideInjectedContentInformations = [
+  {
+    span: 'Nike',
+    details: 'Will display injected content coupon for Nike',
+  },
+  {
+    span: 'Woman',
+    details: 'Will display injected content ad with Gigi Hadid',
+  },
+];
+
+// ------------------------------------------
+// Dynamic Filters Guide Config
+// Dynamic filters allow you to showcase facet order for a given query
+// ------------------------------------------
+
+// Should we show the Dynamic filter/ Facet ordering section in the demo guide
+export const shouldShowDynamicFilters = atom({
+  key: 'shouldShowDynamicFilters',
+  default: true,
+});
+
+// What would be the content of the select in this section
+export const DemoGuideDynamicFiltersConfig = [
+  { value: '', label: 'Choose' },
+  {
+    value: 'Sandals',
+    label: 'Sandals',
+    alertContent:
+      'This is changing the facets ordering to return size facet first',
+  },
+];
+
+// What would be the content of the alert when you're selecting a query
+export const DemoGuideDynamicFiltersInformations = [
+  {
+    span: 'Sandals',
+    details: 'Will change the facets ordering to return size facet first',
+  },
+];
+
+// ------------------------------------------
+// Redirects Guide Config
+// Redirect section allow to showcase redirection for a given query
+// ------------------------------------------
+
+// Should we show the Redirect section in the demo guide
+export const shouldShowRedirects = atom({
+  key: 'shouldShowRedirects',
+  default: true,
+});
+
+// What would be the content of the select in this section
+export const DemoGuideRedirectConfig = [
+  { value: '', label: 'Choose' },
+  {
+    value: 'Faq',
+    label: 'FAQ',
+    alertContent: "Redirecting the user to Algolia's homepage",
+  },
+];
+
+// What would be the content of the alert when you're selecting a query
+export const DemoGuideRedirectInformations = [
+  {
+    span: 'FAQ',
+    details: "Will redirect the user to Algolia's homepage",
+  },
+];
+
+// ------------------------------------------
+// Search Banners Guide Config
+// Search Banner section allow to showcase Banner in the search result page
+// for a given query
+// ------------------------------------------
+
+// Should we show the Banner section in the demo guide
+export const shouldShowBanners = atom({
+  key: 'shouldShowBanners',
+  default: true,
+});
+
+// What would be the content of the select in this section
 export const searchBannersConfig = [
   { value: '', label: 'Choose' },
   {
     value: 'algolia',
     label: 'Algolia',
-    alertContent: 'Will display an Algolia Banner',
+    alertContent: 'Displaying an Algolia Banner',
   },
   {
     value: 'help',
     label: 'Help',
-    alertContent: 'Will display an Help banner',
+    alertContent: 'Displaying an Help banner',
   },
   {
     value: 'woman',
     label: 'Woman',
-    alertContent: 'Will display a Woman banner',
+    alertContent: 'Displaying a Woman banner',
   },
 ];
 
+// What would be the content of the alert when you're selecting a query
 export const searchBannersInformations = [
   {
     span: 'Algolia',
@@ -105,111 +273,25 @@ export const searchBannersInformations = [
   },
 ];
 
-// Please ignore this atom
-export const searchBannersSelectedAtom = atom({
-  key: 'searchBannersSelectedAtom', // unique ID (with respect to other atoms/selectors)
-  default: 'anon', // default value (aka initial value)
-});
-
-// ------------------------------------------
-// Search Persona Config
-// ------------------------------------------
-export const searchPersonaConfig = [
-  { value: 'anon', label: 'Neutral' },
-  {
-    value: 'stephen_james',
-    label: 'Stephen',
-    alertContent: 'Stephen James is a man who likes sports shoes',
-  },
-  {
-    value: 'elizabeth_aniston',
-    label: 'Elizabeth',
-    alertContent: 'Elizabeth Aniston is a woman who likes Blue Dresses',
-  },
-];
-
-export const searchPersonaInformations = [
-  {
-    span: 'Neutral',
-    details: 'No Persona Selected',
-  },
-  {
-    span: 'Stephen',
-    details: 'Stephen James is a man who likes sports shoes',
-  },
-  {
-    span: 'Elizabeth',
-    details: 'Elizabeth Aniston is a woman who likes Blue Dresses',
-  },
-];
-
-// Config on Injected content in Demo guide
-export const DemoGuideInjectedContentConfig = [
-  { value: '', label: 'Choose' },
-  {
-    value: 'Nike',
-    label: 'Nike',
-    alertContent: 'You are displaying an injected content coupon for Nike',
-  },
-  {
-    value: 'Women',
-    label: 'Women',
-    alertContent: 'You are displaying an injected content ad with Gigi Hadid',
-  },
-];
-
-export const DemoGuideInjectedContentInformations = [
-  {
-    span: 'Nike',
-    details: 'Will display injected content coupon for Nike',
-  },
-  {
-    span: 'Woman',
-    details: 'Will display injected content ad with Gigi Hadid',
-  },
-];
-
-// Config on Dynamic Filters in Demo guide
-export const DemoGuideDynamicFiltersConfig = [
-  { value: '', label: 'Choose' },
-  {
-    value: 'Sandals',
-    label: 'Sandals',
-    alertContent:
-      'This is changing the facets ordering to return size facet first',
-  },
-];
-
-export const DemoGuideDynamicFiltersInformations = [
-  {
-    span: 'Sandals',
-    details: 'Will change the facets ordering to return size facet first',
-  },
-];
-// Config on Redirection in Demo guide
-export const DemoGuideRedirectConfig = [
-  { value: '', label: 'Choose' },
-  {
-    value: 'Faq',
-    label: 'FAQ',
-    alertContent: "You'll Redirect the user to Algolia's homepage",
-  },
-];
-
-export const DemoGuideRedirectInformations = [
-  {
-    span: 'FAQ',
-    details: "Will Redirect the user to Algolia's homepage",
-  },
-];
-
-// Please ignore this atom
+// Please ignore this atom - DON'T TOUCH THIS
 export const searchPersonaSelectedAtom = atom({
   key: 'searchPersonaSelectedAtom', // unique ID (with respect to other atoms/selectors)
   default: 'anon', // default value (aka initial value)
 });
 
-// Styles for persona selection dropdown, please ignore
+// Please ignore this atom - DON'T TOUCH THIS
+export const searchTermsSelectedAtom = atom({
+  key: 'searchTermsSelectedAtom', // unique ID (with respect to other atoms/selectors)
+  default: 'anon', // default value (aka initial value)
+});
+
+// Please ignore this atom - DON'T TOUCH THIS
+export const searchBannersSelectedAtom = atom({
+  key: 'searchBannersSelectedAtom', // unique ID (with respect to other atoms/selectors)
+  default: 'anon', // default value (aka initial value)
+});
+
+// Styles for persona selection dropdown, please ignore - DON'T TOUCH THIS
 export const styles = {
   container: () => ({
     border: 'none',

@@ -8,7 +8,11 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { useRecoilValue, useRecoilState } from 'recoil';
 
 //Import help navigation state & config
-import { isDemoGuideOpen, shouldShowDemoGuide } from './config/demoGuideConfig';
+import {
+  isDemoGuideOpen,
+  shouldShowDemoGuide,
+  shouldShowAlert,
+} from '@/config/demoGuideConfig';
 
 // Import Pages and static components
 import Header from '@/components/header/Header';
@@ -19,26 +23,28 @@ import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import ProductDetails from './pages/ProductDetails';
 import Footer from './components/footer/Footer';
 
-
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
 
 export const Main = ({ isLoaded }) => {
   const location = useLocation();
+
+  // Should the alert badges for the demo guide be shown
+  const shouldShowAlertAtom = useRecoilValue(shouldShowAlert);
+
   // Should the feature of guided panel for SE should be in this app
   const shouldShowNavigation = useRecoilValue(shouldShowDemoGuide);
   // State that show/hide the panel if click on the guide btn
-  const [showHelpNavigation, setShowHelpNavigation] =
-    useRecoilState(isDemoGuideOpen);
+  const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
   // Prevent body from scrolling when panel is open
-  usePreventScrolling(showHelpNavigation);
+  usePreventScrolling(showDemoGuide);
 
   return (
     <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
       <Header />
       <AnimatePresence>
-        {showHelpNavigation && shouldShowNavigation && (
-          <DemoGuide setShowHelpNavigation={setShowHelpNavigation} />
+        {showDemoGuide && shouldShowNavigation && (
+          <DemoGuide setshowDemoGuide={setshowDemoGuide} />
         )}
       </AnimatePresence>
       <AnimatePresence initial={true} exitBeforeEnter>
@@ -49,7 +55,7 @@ export const Main = ({ isLoaded }) => {
           <Route path="/search/:objectID" element={<ProductDetails />} />
         </Routes>
       </AnimatePresence>
-      <AlertNavigation />
+      {shouldShowAlertAtom && <AlertNavigation />}
       <Footer />
     </div>
   );
