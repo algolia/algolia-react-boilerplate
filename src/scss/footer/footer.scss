@@ -5,43 +5,11 @@
   align-items: center;
   justify-content: center;
   height: 15rem;
-  margin-top: 0.5rem;
-  background: $blue-algolia-custom-gradient;
+  margin-top: 2rem;
+  background: $blue-algolia-custom-reverse-gradient;
 
   p {
     font-weight: bold;
     font-size: 2rem;
-    color: $white-color;
   }
 }
-
-.wrap {
-  position: fixed;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding-left: 1.4em;
-  padding-right: 1.4em;
-}
-h1 {
-  text-align: center;
-  border: 2px solid #ddd;
-  padding: 1em;
-  margin-bottom: 1em;
-}
-
-h2 {
-  border-bottom: 1px solid #ddd;
-}
-
-a {
-  text-decoration: none;
-  color: #2ecc71;
-}
-a:hover {
-  color: #27ae60;
-}
-
-
-
-
