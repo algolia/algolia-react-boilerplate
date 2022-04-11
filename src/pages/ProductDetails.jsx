@@ -28,7 +28,10 @@ import { useNavigate } from 'react-router-dom';
 // Recoil import
 import { useRecoilValue } from 'recoil';
 import { hitAtom } from '@/config/hitsConfig';
-import { shouldHaveRelatedProducts, shouldHaveFbtProducts } from '@/config/featuresConfig';
+import {
+  shouldHaveRelatedProducts,
+  shouldHaveFbtProducts,
+} from '@/config/featuresConfig';
 import { hitsConfig } from '@/config/hitsConfig';
 
 // Custom hooks
@@ -38,7 +41,9 @@ const ProductDetails = () => {
   // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
 
-  const shouldHaveRelatedProductsValue = useRecoilValue(shouldHaveRelatedProducts);
+  const shouldHaveRelatedProductsValue = useRecoilValue(
+    shouldHaveRelatedProducts
+  );
   const shouldHaveFbtProductsValue = useRecoilValue(shouldHaveFbtProducts);
 
   // navigate is used by react router
@@ -150,14 +155,7 @@ const ProductDetails = () => {
                   }}
                 ></div>
               ) : (
-                <div
-                  style={{
-                    backgroundColor: '#DDDDDD',
-                    width: '30px',
-                    height: '30px',
-                    borderRadius: '50%',
-                  }}
-                ></div>
+                ''
               )}
               <p>{hit[colour]}</p>
             </div>
