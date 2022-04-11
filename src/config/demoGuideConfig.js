@@ -1,42 +1,16 @@
 import { atom } from 'recoil';
 
-// Is the helped navigation should be in the app
+// This atom represents whether the demo guide should be available or note
 export const shouldShowDemoGuide = atom({
-  key: 'shouldShowDemoGuide', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  key: 'shouldShowDemoGuide',
+  default: true,
 });
-
-// Is the helped navigation menu should be shown because the button has been clicked
-export const isDemoGuideOpen = atom({
-  key: 'isDemoGuideOpen', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
-});
-
-
-// Store de reference of the component Demo Panel
-export const demoGuideBtnRef = atom({
-  key: 'demoGuideBtnRef', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
-});
-
-
-// Open alert for Navigation
-export const isAlertOpen = atom({
-  key: 'isAlertOpen', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
-});
-
-// Alert content to display
-export const alertContent = atom({
-  key: 'alertContent', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
-});
-
-
 
 // ------------------------------------------
 // Search Terms Config
 // ------------------------------------------
+
+// Configuration for search terms
 export const searchTermsConfig = [
   { value: '', label: 'Choose' },
   {
@@ -51,6 +25,7 @@ export const searchTermsConfig = [
   },
 ];
 
+// Alert information for search terms
 export const searchTermsInformations = [
   {
     span: 'Ring',
@@ -61,59 +36,6 @@ export const searchTermsInformations = [
     details: 'Will only search in dress category',
   },
 ];
-
-// Please ignore this atom
-export const searchTermsSelectedAtom = atom({
-  key: 'searchTermsSelectedAtom', // unique ID (with respect to other atoms/selectors)
-  default: 'anon', // default value (aka initial value)
-});
-
-// ------------------------------------------
-// Search Banners Config
-// ------------------------------------------
-export const searchBannersConfig = [
-  { value: '', label: 'Choose' },
-  {
-    value: 'algolia',
-    label: 'Algolia',
-    alertContent: 'Will display an Algolia Banner',
-  },
-  {
-    value: 'help',
-    label: 'Help',
-    alertContent: 'Will display an Help banner',
-  },
-  {
-    value: 'woman',
-    label: 'Woman',
-    alertContent: 'Will display a Woman banner',
-  },
-];
-
-export const searchBannersInformations = [
-  {
-    span: 'Algolia',
-    details: 'Will display an Algolia Banner',
-  },
-  {
-    span: 'Christmas',
-    details: 'Will display a Christmas banner',
-  },
-  {
-    span: 'Help',
-    details: 'Will display an Help banner',
-  },
-  {
-    span: 'Woman',
-    details: 'Will display a Woman banner',
-  },
-];
-
-// Please ignore this atom
-export const searchBannersSelectedAtom = atom({
-  key: 'searchBannersSelectedAtom', // unique ID (with respect to other atoms/selectors)
-  default: 'anon', // default value (aka initial value)
-});
 
 // ------------------------------------------
 // Search Persona Config
@@ -132,6 +54,7 @@ export const searchPersonaConfig = [
   },
 ];
 
+// Alert information for search personas
 export const searchPersonaInformations = [
   {
     span: 'Neutral',
@@ -162,6 +85,7 @@ export const DemoGuideInjectedContentConfig = [
   },
 ];
 
+// Alert information for injected content
 export const DemoGuideInjectedContentInformations = [
   {
     span: 'Nike',
@@ -184,6 +108,7 @@ export const DemoGuideDynamicFiltersConfig = [
   },
 ];
 
+// Alert information for dynamic filters
 export const DemoGuideDynamicFiltersInformations = [
   {
     span: 'Sandals',
@@ -200,6 +125,7 @@ export const DemoGuideRedirectConfig = [
   },
 ];
 
+// Alert informatio for redirects
 export const DemoGuideRedirectInformations = [
   {
     span: 'FAQ',
@@ -207,10 +133,90 @@ export const DemoGuideRedirectInformations = [
   },
 ];
 
+// ------------------------------------------
+// Search Banners Config
+// ------------------------------------------
+export const searchBannersConfig = [
+  { value: '', label: 'Choose' },
+  {
+    value: 'algolia',
+    label: 'Algolia',
+    alertContent: 'Will display an Algolia Banner',
+  },
+  {
+    value: 'help',
+    label: 'Help',
+    alertContent: 'Will display an Help banner',
+  },
+  {
+    value: 'woman',
+    label: 'Woman',
+    alertContent: 'Will display a Woman banner',
+  },
+];
+
+// Alert information for banners
+export const searchBannersInformations = [
+  {
+    span: 'Algolia',
+    details: 'Will display an Algolia Banner',
+  },
+  {
+    span: 'Christmas',
+    details: 'Will display a Christmas banner',
+  },
+  {
+    span: 'Help',
+    details: 'Will display an Help banner',
+  },
+  {
+    span: 'Woman',
+    details: 'Will display a Woman banner',
+  },
+];
+
 // Please ignore this atom
 export const searchPersonaSelectedAtom = atom({
   key: 'searchPersonaSelectedAtom', // unique ID (with respect to other atoms/selectors)
   default: 'anon', // default value (aka initial value)
+});
+
+// Please ignore this atom
+export const searchTermsSelectedAtom = atom({
+  key: 'searchTermsSelectedAtom', // unique ID (with respect to other atoms/selectors)
+  default: 'anon', // default value (aka initial value)
+});
+
+// Please ignore this atom
+export const searchBannersSelectedAtom = atom({
+  key: 'searchBannersSelectedAtom', // unique ID (with respect to other atoms/selectors)
+  default: 'anon', // default value (aka initial value)
+});
+
+// Please ignore this atom
+export const isDemoGuideOpen = atom({
+  key: 'isDemoGuideOpen', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
+
+// Please ignore this atom
+export const demoGuideBtnRef = atom({
+  key: 'demoGuideBtnRef', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+// Open alert for Navigation
+// Please ignore this atom
+export const isAlertOpen = atom({
+  key: 'isAlertOpen', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
+
+// Alert content to display
+// Please ignore this atom
+export const alertContent = atom({
+  key: 'alertContent', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
 });
 
 // Styles for persona selection dropdown, please ignore
@@ -286,5 +292,3 @@ export const styles = {
     color: 'black',
   }),
 };
-
-
