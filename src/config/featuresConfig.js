@@ -28,6 +28,11 @@ export const shouldHaveInjectedBanners = atom({
   default: true,
 });
 
+export const shouldHavePersona = atom({
+  key: 'shouldHavePersona',
+  default: true,
+});
+
 export const shouldHaveInjectedHits = atom({
   key: 'shouldHaveInjectedHits',
   default: true,

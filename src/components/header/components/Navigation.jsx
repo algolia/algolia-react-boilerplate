@@ -3,16 +3,22 @@
 // React Router
 import { useNavigate } from 'react-router-dom';
 // Recoil Header State
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Import Config for the header
 import { categoryPageFilterAttribute } from '@/config/categoryConfig';
 import { linksHeader } from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
+// Import Recoil config
+import { shouldHavePersona } from '@/config/featuresConfig';
+
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // navigate is used by React Router
   const navigate = useNavigate();
+
+  // Const Recoil State
+  const displayPersona = useRecoilValue(shouldHavePersona);
 
   // Import the navigation links, as defined in the config
   const [links] = useRecoilState(linksHeader);
@@ -46,9 +52,11 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         </li>
       ))}
       {/* Display the persona selection component */}
-      <li>
-        <SelectPersona />
-      </li>
+      {displayPersona && (
+        <li>
+          <SelectPersona />
+        </li>
+      )}
     </ul>
   );
 };

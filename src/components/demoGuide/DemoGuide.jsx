@@ -12,6 +12,13 @@ import DemoGuideDynamicFilters from './components/DemoGuideDynamicFilters';
 import useScreenSize from '@/hooks/useScreenSize';
 import useOutsideClick from '@/hooks/useOutsideClick';
 
+// Import Recoil Config
+import {
+  shouldHaveInjectedBanners,
+  shouldHavePersona,
+} from '@/config/featuresConfig';
+import { useRecoilValue } from 'recoil';
+
 //Import custom transition for panel animations
 import { framerMotionTransition } from '@/config/animationConfig';
 
@@ -23,6 +30,10 @@ const DemoGuide = ({ onClickOutside }) => {
 
   //Select Panel wrapper
   const demoGuide = useRef();
+
+  // Const Recoil to use Recoil Value
+  const displayBanner = useRecoilValue(shouldHaveInjectedBanners);
+  const displayPersona = useRecoilValue(shouldHavePersona);
 
   //Listen for click outside the Demo Guide panel
   useOutsideClick(demoGuide, onClickOutside);
@@ -43,14 +54,18 @@ const DemoGuide = ({ onClickOutside }) => {
           <SearchTerms />
           <hr />
         </li>
-        <li className="container-nav-help__items ">
-          <SearchBanners />
-          <hr />
-        </li>
-        <li className="container-nav-help__items ">
-          <SearchPersona />
-          <hr />
-        </li>
+        {displayBanner && (
+          <li className="container-nav-help__items ">
+            <SearchBanners />
+            <hr />
+          </li>
+        )}
+        {displayPersona && (
+          <li className="container-nav-help__items ">
+            <SearchPersona />
+            <hr />
+          </li>
+        )}
         <li className="container-nav-help__items ">
           <DemoGuideInjectedContent />
           <hr />
