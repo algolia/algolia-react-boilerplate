@@ -14,15 +14,6 @@ import DemoGuideRedirect from './components/DemoGuideRedirect';
 import useScreenSize from '@/hooks/useScreenSize';
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 
-// Import Recoil Config
-import {
-  shouldHaveInjectedBanners,
-  shouldHavePersona,
-  shouldHaveInjectedHits,
-  shouldHaveRedirect,
-  shouldHaveDynamicFacet,
-} from '@/config/featuresConfig';
-
 //Import custom transition for panel animations
 import { framerMotionTransition } from '@/config/animationConfig';
 
