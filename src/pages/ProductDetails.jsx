@@ -159,14 +159,7 @@ const ProductDetails = () => {
                   }}
                 ></div>
               ) : (
-                <div
-                  style={{
-                    backgroundColor: '#DDDDDD',
-                    width: '30px',
-                    height: '30px',
-                    borderRadius: '50%',
-                  }}
-                ></div>
+                ''
               )}
               <p>{hit[colour]}</p>
             </div>

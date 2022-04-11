@@ -28,6 +28,11 @@ export const shouldHaveInjectedBanners = atom({
   default: true,
 });
 
+export const shouldHavePersona = atom({
+  key: 'shouldHavePersona',
+  default: true,
+});
+
 export const shouldHaveInjectedHits = atom({
   key: 'shouldHaveInjectedHits',
   default: true,
@@ -45,5 +50,15 @@ export const shouldHaveRelatedProducts = atom({
 
 export const shouldHaveFbtProducts = atom({
   key: 'shouldHaveFbtProducts', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+});
+
+export const shouldHaveDynamicFacet = atom({
+  key: 'shouldHaveDynamicFacet', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+});
+
+export const shouldHaveRedirect = atom({
+  key: 'shouldHaveDynamicFacet', // unique ID (with respect to other atoms/selectors)
   default: true, // default value (aka initial value)
 });

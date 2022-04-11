@@ -1,5 +1,5 @@
-@import '../mixin/abstracts/abstracts.scss';
-@import './facets.scss';
+@use '../mixin/abstracts' as *;
+@use './facets.scss';
 
 .refinement-container {
   display: flex;

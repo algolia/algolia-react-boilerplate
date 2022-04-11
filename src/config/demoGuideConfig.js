@@ -14,7 +14,7 @@ export const shouldShowAlert = atom({
 
 // ------------------------------------------
 // Search Terms Guide Config
-// Search terms helps you select queries that allow to 
+// Search terms helps you select queries that allow to
 // showcase category boost or search within a category
 // ------------------------------------------
 
@@ -24,7 +24,34 @@ export const shouldShowSearchTerms = atom({
   default: true,
 });
 
-// What would be the content of the select in this section 
+// What would be the content of the select in this section
+// Is the helped navigation menu should be shown because the button has been clicked
+export const isDemoGuideOpen = atom({
+  key: 'isDemoGuideOpen', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
+
+// Store de reference of the component Demo Panel
+export const demoGuideBtnRef = atom({
+  key: 'demoGuideBtnRef', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+// Open alert for Navigation
+export const isAlertOpen = atom({
+  key: 'isAlertOpen', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
+
+// Alert content to display
+export const alertContent = atom({
+  key: 'alertContent', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+// ------------------------------------------
+// Search Terms Config
+// ------------------------------------------
 export const searchTermsConfig = [
   { value: '', label: 'Choose' },
   {
@@ -63,18 +90,20 @@ export const shouldShowPersonas = atom({
   default: true,
 });
 
-// What would be the content of the select in this section 
+// What would be the content of the select in this section
 export const searchPersonaConfig = [
   { value: '', label: 'Neutral' },
   {
     value: 'stephen_james',
     label: 'Stephen',
-    alertContent: 'Search is personalised - Stephen James is a man who likes sports shoes',
+    alertContent:
+      'Search is personalised - Stephen James is a man who likes sports shoes',
   },
   {
     value: 'elizabeth_aniston',
     label: 'Elizabeth',
-    alertContent: 'Search is personalised - Elizabeth Aniston is a woman who likes Blue Dresses',
+    alertContent:
+      'Search is personalised - Elizabeth Aniston is a woman who likes Blue Dresses',
   },
 ];
 
@@ -96,7 +125,7 @@ export const searchPersonaInformations = [
 
 // ------------------------------------------
 // Injected Content Guide Config
-// Injected content allow to select query that are triggering 
+// Injected content allow to select query that are triggering
 // injected content from rules in the dashboard
 // ------------------------------------------
 
@@ -106,8 +135,7 @@ export const shouldShowInjectedContent = atom({
   default: true,
 });
 
-
-// What would be the content of the select in this section 
+// What would be the content of the select in this section
 export const DemoGuideInjectedContentConfig = [
   { value: '', label: 'Choose' },
   {
@@ -145,7 +173,7 @@ export const shouldShowDynamicFilters = atom({
   default: true,
 });
 
-// What would be the content of the select in this section 
+// What would be the content of the select in this section
 export const DemoGuideDynamicFiltersConfig = [
   { value: '', label: 'Choose' },
   {
@@ -175,7 +203,7 @@ export const shouldShowRedirects = atom({
   default: true,
 });
 
-// What would be the content of the select in this section 
+// What would be the content of the select in this section
 export const DemoGuideRedirectConfig = [
   { value: '', label: 'Choose' },
   {
@@ -205,7 +233,7 @@ export const shouldShowBanners = atom({
   default: true,
 });
 
-// What would be the content of the select in this section 
+// What would be the content of the select in this section
 export const searchBannersConfig = [
   { value: '', label: 'Choose' },
   {
@@ -261,32 +289,6 @@ export const searchTermsSelectedAtom = atom({
 export const searchBannersSelectedAtom = atom({
   key: 'searchBannersSelectedAtom', // unique ID (with respect to other atoms/selectors)
   default: 'anon', // default value (aka initial value)
-});
-
-// Please ignore this atom - DON'T TOUCH THIS
-export const isDemoGuideOpen = atom({
-  key: 'isDemoGuideOpen', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
-});
-
-// Please ignore this atom - DON'T TOUCH THIS
-export const demoGuideBtnRef = atom({
-  key: 'demoGuideBtnRef', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
-});
-
-// Open alert for Navigation
-// Please ignore this atom - DON'T TOUCH THIS
-export const isAlertOpen = atom({
-  key: 'isAlertOpen', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
-});
-
-// Alert content to display
-// Please ignore this atom - DON'T TOUCH THIS
-export const alertContent = atom({
-  key: 'alertContent', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
 });
 
 // Styles for persona selection dropdown, please ignore - DON'T TOUCH THIS

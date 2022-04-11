@@ -1,3 +1,5 @@
+@use '../mixin/abstracts' as *;
+
 .filters-container {
   font-family: $main-font;
   width: 100%;
@@ -68,7 +70,7 @@
           right: 0;
           bottom: 0;
           left: 0;
-          background: $blue-algolia-custom-gradient;
+          background: $main-color;
           z-index: -1;
           transition: opacity 0.3s ease-in-out;
           opacity: 0;

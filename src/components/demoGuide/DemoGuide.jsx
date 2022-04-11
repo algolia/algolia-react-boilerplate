@@ -14,6 +14,15 @@ import DemoGuideRedirect from './components/DemoGuideRedirect';
 import useScreenSize from '@/hooks/useScreenSize';
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 
+// Import Recoil Config
+import {
+  shouldHaveInjectedBanners,
+  shouldHavePersona,
+  shouldHaveInjectedHits,
+  shouldHaveRedirect,
+  shouldHaveDynamicFacet,
+} from '@/config/featuresConfig';
+
 //Import custom transition for panel animations
 import { framerMotionTransition } from '@/config/animationConfig';
 
@@ -25,25 +34,28 @@ import {
   shouldShowInjectedContent,
   shouldShowDynamicFilters,
   shouldShowRedirects,
-  shouldShowBanners
+  shouldShowBanners,
 } from '@/config/demoGuideConfig';
 
 const DemoGuide = ({ setshowDemoGuide }) => {
   //Select Panel wrapper
   const demoGuide = useRef();
 
-  const shouldShowPersonasAtom = useRecoilValue(shouldShowPersonas)
-  const shouldShowSearchTermsAtom = useRecoilValue(shouldShowSearchTerms)
-  const shouldShowInjectedContentAtom = useRecoilValue(shouldShowInjectedContent)
-  const shouldShowDynamicFiltersAtom = useRecoilValue(shouldShowDynamicFilters)
-  const shouldShowRedirectsAtom = useRecoilValue(shouldShowRedirects)
-  const shouldShowBannersAtom = useRecoilValue(shouldShowBanners)
+  const shouldShowPersonasAtom = useRecoilValue(shouldShowPersonas);
+  const shouldShowSearchTermsAtom = useRecoilValue(shouldShowSearchTerms);
+  const shouldShowInjectedContentAtom = useRecoilValue(
+    shouldShowInjectedContent
+  );
+  const shouldShowDynamicFiltersAtom = useRecoilValue(shouldShowDynamicFilters);
+  const shouldShowRedirectsAtom = useRecoilValue(shouldShowRedirects);
+  const shouldShowBannersAtom = useRecoilValue(shouldShowBanners);
 
   // Use the reference value of the button that trigger the panel
   const demoGuideBtn = useRecoilValue(demoGuideBtnRef);
 
   //Listen for screen resize
   const { tablet, mobile } = useScreenSize();
+
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(demoGuide, demoGuideBtn, () =>
     setshowDemoGuide(false)
@@ -62,42 +74,42 @@ const DemoGuide = ({ setshowDemoGuide }) => {
     >
       <h2>Help Navigation Panel</h2>
       <ul className="container-nav-help">
-        {shouldShowSearchTermsAtom && 
+        {shouldShowSearchTermsAtom && (
           <li className="container-nav-help__items ">
             <SearchTerms />
             <hr />
           </li>
-        }
-        {shouldShowBannersAtom && 
+        )}
+        {shouldShowBannersAtom && (
           <li className="container-nav-help__items ">
             <SearchBanners />
             <hr />
           </li>
-        }
-        {shouldShowPersonasAtom && 
+        )}
+        {shouldShowPersonasAtom && (
           <li className="container-nav-help__items ">
             <SearchPersona />
             <hr />
           </li>
-        }
-        {shouldShowInjectedContentAtom &&
+        )}
+        {shouldShowInjectedContentAtom && (
           <li className="container-nav-help__items ">
             <DemoGuideInjectedContent />
             <hr />
           </li>
-        }
-        {shouldShowDynamicFiltersAtom && 
+        )}
+        {shouldShowDynamicFiltersAtom && (
           <li className="container-nav-help__items ">
             <DemoGuideDynamicFilters />
             <hr />
           </li>
-        }
-        {shouldShowRedirectsAtom &&
+        )}
+        {shouldShowRedirectsAtom && (
           <li className="container-nav-help__items ">
             <DemoGuideRedirect />
             <hr />
           </li>
-        }
+        )}
       </ul>
     </motion.div>
   );

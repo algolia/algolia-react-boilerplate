@@ -1,7 +1,7 @@
 // ------------------------------------------
 // Header
 // ------------------------------------------
-@import '../mixin/abstracts/abstracts.scss';
+@use '../mixin/abstracts' as *;
 
 // ------------------------------------------
 // Header Sticky process
@@ -9,11 +9,46 @@
 
 .header {
   text-align: center;
-  position: relative;
-  box-shadow: 0 0 5px $white-color;
-  padding: 2rem 0;
+  box-shadow: 0 0 20px $white-color;
+  padding: 40px 0;
   background: $grey-light-color;
+}
+
+.sticky {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
   width: 100%;
+  padding: 40px 0;
+  box-shadow: 0 20px 30px rgba(#000, 0.2);
+  animation: slide 0.3s forwards ease-in-out;
+  background: $grey-light-color;
+
+  label {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+@keyframes slide {
+  0% {
+    opacity: 1;
+    height: 13rem;
+  }
+  100% {
+    opacity: 1;
+    height: 12rem;
+  }
+}
+
+// ------------------------------------------
+// ------------------------------------------
+
+// ------------------------------------------
+//Inside Header
+// ------------------------------------------
+.header {
   .container {
     .container__header-top {
       align-items: center;
@@ -25,14 +60,13 @@
         width: 20%;
         text-align: start;
         img {
-          object-fit: contain;
-          max-width: 6rem;
+          width: 80%;
         }
       }
       &__title {
-        min-width: 20%;
         h1 {
           font-size: 0.8rem;
+
           line-height: 0;
           text-transform: uppercase;
           font-weight: bold;
@@ -41,9 +75,6 @@
       }
     }
     .container__header-bottom {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
       &__links {
         display: flex;
         justify-content: center;
@@ -53,7 +84,6 @@
           p {
             position: relative;
             transition: 0.2 ease-in-out;
-
             &:before {
               content: '';
               position: absolute;
