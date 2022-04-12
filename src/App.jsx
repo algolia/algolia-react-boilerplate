@@ -23,9 +23,14 @@ import CustomStateResults from './components/stateResults/stateResults';
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  // Get state from main.jsx (inside recoil instance) in order to check in switch statement language value...
+  // ...and choose the right index from config
   const [language, setLanguage] = useState('');
+  // Create a state by default for english language (main index)
+  // Use value from switch statement in IS instance
   const [indexLanguage, setIndexLanguage] = useState(indexNames.mainIndex);
   useEffect(() => {
+    // Allow to set the indexLanguage to the language choose in the selector through Recoil
     switch (language) {
       case 'English':
         setIndexLanguage(indexNames.mainIndex);

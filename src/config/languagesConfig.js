@@ -32,7 +32,7 @@ export const shouldShowLanguageSelectedAtom = atom({
   });
 
 
-  // Styles for persona selection dropdown, please ignore
+  // Styles for language selection dropdown, please ignore
 export const styles = {
     container: () => ({
       border: 'none',

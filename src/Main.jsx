@@ -25,6 +25,7 @@ import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import ProductDetails from './pages/ProductDetails';
 import Footer from './components/footer/Footer';
 
+// Import selected language state from selector
 import { LanguageSelectedAtom } from './config/languagesConfig';
 
 // Custom hook to prevent body from scrolling
@@ -43,9 +44,11 @@ export const Main = ({ isLoaded, setLanguage }) => {
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
 
+  // Get language value from select to switch app language
   const LanguageValue = useRecoilValue(LanguageSelectedAtom);
 
   useEffect(() => {
+    // Set language value to use it in App.jsx
     setLanguage(LanguageValue);
   }, [setLanguage, LanguageValue]);
 

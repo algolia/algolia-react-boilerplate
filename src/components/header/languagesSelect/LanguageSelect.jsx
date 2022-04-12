@@ -9,6 +9,7 @@ import { useSetRecoilState } from 'recoil';
 // Import configuration
 import { languagesConfig, styles } from '@/config/languagesConfig';
 
+// create an atom to store language value globally
 import { LanguageSelectedAtom } from '@/config/languagesConfig';
 
 const LanguageSelect = memo(() => {
