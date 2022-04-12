@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 import { Highlight } from 'react-instantsearch-dom';
 
-import { Heart, PromoLogo } from '@/assets/svg/SvgIndex';
+import { Heart } from '@/assets/svg/SvgIndex';
 
 // In case of img loading error
 import { logoUrl as placeHolderError } from '@/config/headerConfig';
@@ -23,6 +23,7 @@ import { currencySymbol } from '@/config/currencyConfig';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
+import Popular from './Popular';
 
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ const Hit = ({ hit }) => {
           alt={hit[category]}
           onError={(e) => (e.currentTarget.src = placeHolderError)}
         />
-        {isHitPromoted && <PromoLogo />}
+        {isHitPromoted && <Popular />}
         <div className="srpItem__imgWrapper__heart">
           <Heart />
         </div>

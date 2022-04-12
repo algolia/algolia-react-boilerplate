@@ -31,3 +31,19 @@
     @include influencerCard($white-color);
   }
 }
+
+// ------------------------------------------
+// Popular Badge
+// ------------------------------------------
+
+.popular-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0.5rem;
+  background-color: $blue-algolia;
+  padding: 0 0.3rem;
+  p {
+    color: $white-color;
+    font-weight: 500;
+  }
+}
