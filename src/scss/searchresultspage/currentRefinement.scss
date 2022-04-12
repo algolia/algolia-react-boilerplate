@@ -18,6 +18,7 @@
   .refinement-container__refinements {
     margin-right: 0.5rem;
     display: flex;
+    gap: 0.5rem;
     &:empty {
       display: none;
     }
