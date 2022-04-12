@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 import { Highlight } from 'react-instantsearch-dom';
 
-import { Heart } from '@/assets/svg/SvgIndex';
+import { Heart, PromoLogo } from '@/assets/svg/SvgIndex';
 
 // In case of img loading error
 import { logoUrl as placeHolderError } from '@/config/headerConfig';
@@ -27,6 +27,7 @@ import { useNavigate } from 'react-router-dom';
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
+  const isHitPromoted = hit?._rankingInfo?.promoted;
 
   // Get hit attribute from config file
   const { price, objectID, image, category, productName } =
@@ -54,6 +55,7 @@ const Hit = ({ hit }) => {
           alt={hit[category]}
           onError={(e) => (e.currentTarget.src = placeHolderError)}
         />
+        {isHitPromoted && <PromoLogo />}
         <div className="srpItem__imgWrapper__heart">
           <Heart />
         </div>

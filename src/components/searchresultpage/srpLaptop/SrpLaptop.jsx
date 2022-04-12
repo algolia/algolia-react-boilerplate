@@ -1,5 +1,5 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import {lazy, useState, Suspense } from 'react';
+import { lazy, useState, Suspense } from 'react';
 import { lazily } from 'react-lazily';
 
 import Loader from '@/components/loader/Loader';
@@ -16,7 +16,10 @@ import { framerMotionPage, framerMotionFacet } from '@/config/animationConfig';
 // Recoil state to directly access results
 import { useRecoilValue } from 'recoil';
 
-import { shouldHaveStats, shouldHaveInjectedHits } from '@/config/featuresConfig';
+import {
+  shouldHaveStats,
+  shouldHaveInjectedHits,
+} from '@/config/featuresConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 
@@ -25,8 +28,12 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 
 // Import Components
 import Redirect from '@/components/redirects/Redirect';
-const CustomClearRefinements = lazy(() => import('@/components/facets/ClearRefinement'));
-const CustomCurrentRefinements = lazy(() => import('@/components/facets/CurrentRefinement'));
+const CustomClearRefinements = lazy(() =>
+  import('@/components/facets/ClearRefinement')
+);
+const CustomCurrentRefinements = lazy(() =>
+  import('@/components/facets/CurrentRefinement')
+);
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
 const CustomHitsComponent = lazy(() => import('@/components/hits/CustomHits'));
 import NoCtaCard from '@/components/hits/NoCtaCard';
@@ -34,12 +41,14 @@ import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
 import SalesCard from '@/components/hits/SalesCard';
 const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
-const { CustomStats } = lazily(() => import('@/components/searchresultpage/Stats'));
-const { InjectedHits } = lazily(() => import('@/components/searchresultpage/injected-hits'));
+const { CustomStats } = lazily(() =>
+  import('@/components/searchresultpage/Stats')
+);
+const { InjectedHits } = lazily(() =>
+  import('@/components/searchresultpage/injected-hits')
+);
 
-import {
-  indexNames
-} from '@/config/algoliaEnvConfig';
+import { indexNames } from '@/config/algoliaEnvConfig';
 
 // Handle the number of hits per page
 import { hitsPerPage } from '@/config/hitsConfig';
@@ -77,9 +86,9 @@ const SrpLaptop = () => {
         transition={framerMotionFacet.transition}
         className="srp-container__facets"
       >
-      <Suspense fallback={<Loader/>}>
-        <GenericRefinementList />
-      </Suspense>
+        <Suspense fallback={<Loader />}>
+          <GenericRefinementList />
+        </Suspense>
       </motion.div>
       <motion.div
         className="srp-container__hits"
@@ -92,12 +101,12 @@ const SrpLaptop = () => {
         {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
         <div className="srp-container__stats-sort">
           {stats && (
-            <Suspense fallback={<Loader/>}>
+            <Suspense fallback={<Loader />}>
               <CustomStats />
             </Suspense>
           )}
           {priceSortBy && (
-            <Suspense fallback={<Loader/>}>
+            <Suspense fallback={<Loader />}>
               <CustomSortBy
                 items={labelItems}
                 defaultRefinement={indexNames.mainIndex}
@@ -107,7 +116,7 @@ const SrpLaptop = () => {
         </div>
         {/* Refinements, to the left of the items, including a list of currently selected refinements */}
         <div className="refinement-container">
-        <Suspense fallback={<Loader/>}>
+          <Suspense fallback={<Loader />}>
             <CustomCurrentRefinements />
             <CustomClearRefinements />
           </Suspense>
@@ -119,10 +128,11 @@ const SrpLaptop = () => {
           enablePersonalization={true}
           filters={state ? state : ''}
           query={queryState && queryState}
+          getRankingInfo={true}
         />
         {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
         {shouldInjectContent ? (
-          <Suspense fallback={<Loader/>}>
+          <Suspense fallback={<Loader />}>
             <Index indexName={indexNames.injectedContentIndex}>
               <Configure hitsPerPage={1} page={0} />
             </Index>
@@ -155,7 +165,8 @@ const SrpLaptop = () => {
                     getHits: ({ resultsByIndex }) => {
                       setInjected(true);
                       return resultsByIndex[indexNames.injectedContentIndex]
-                        ? resultsByIndex[indexNames.injectedContentIndex].hits || []
+                        ? resultsByIndex[indexNames.injectedContentIndex]
+                            .hits || []
                         : [];
                     },
                     slotComponent: InfluencerCard,
@@ -165,8 +176,8 @@ const SrpLaptop = () => {
             />
           </Suspense>
         ) : (
-          <Suspense fallback={<Loader/>}>
-          <CustomHitsComponent />
+          <Suspense fallback={<Loader />}>
+            <CustomHitsComponent />
           </Suspense>
         )}
         <Pagination />
