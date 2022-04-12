@@ -10,8 +10,13 @@ import { categoryPageFilterAttribute } from '@/config/categoryConfig';
 import { linksHeader } from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
+//import language selector component
+import LanguageSelect from '../languageSelect/LanguageSelect';
+
 // Import Recoil config
 import { shouldHavePersona } from '@/config/featuresConfig';
+
+import { shouldShowLanguageSelectedAtom } from '@/config/languagesConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // navigate is used by React Router
@@ -55,6 +60,12 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
       {shouldShowPersonasAtom && (
         <li>
           <SelectPersona />
+        </li>
+      )}
+      {/* Display the language select component */}
+      {shouldShowLanguageSelectedAtom && (
+        <li>
+          <LanguageSelect />
         </li>
       )}
     </ul>

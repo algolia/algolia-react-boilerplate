@@ -20,6 +20,9 @@ export const searchClient = algoliasearch(
 // SEE config.js FOR GENERAL FEATURE CONFIGURATION
 export const indexNames = {
   mainIndex: 'flagship_fashion',
+  mainIndex_spanish: 'flagship_fashion_spanish', 
+  mainIndex_german: 'flagship_fashion_german', 
+  mainIndex_french: 'flagship_fashion_french', 
   suggestionsIndex: 'flagship_fashion_query_suggestions',
   articlesIndex: 'canda_customDemo_articles',
   injectedContentIndex: 'flagship_fashion_influencers',

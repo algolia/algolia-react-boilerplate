@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 // Framer-Motion
 import { AnimatePresence } from 'framer-motion';
 
@@ -23,10 +25,12 @@ import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import ProductDetails from './pages/ProductDetails';
 import Footer from './components/footer/Footer';
 
+import { LanguageSelectedAtom } from './config/languagesConfig';
+
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
 
-export const Main = ({ isLoaded }) => {
+export const Main = ({ isLoaded, setLanguage }) => {
   const location = useLocation();
 
   // Should the alert badges for the demo guide be shown
@@ -38,6 +42,12 @@ export const Main = ({ isLoaded }) => {
   const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
+
+  const LanguageValue = useRecoilValue(LanguageSelectedAtom);
+
+  useEffect(() => {
+    setLanguage(LanguageValue);
+  }, [setLanguage]);
 
   return (
     <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
