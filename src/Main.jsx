@@ -47,7 +47,7 @@ export const Main = ({ isLoaded, setLanguage }) => {
 
   useEffect(() => {
     setLanguage(LanguageValue);
-  }, [setLanguage]);
+  }, [setLanguage, LanguageValue]);
 
   return (
     <div className={`${isLoaded ? 'visible' : 'hidden'}`}>

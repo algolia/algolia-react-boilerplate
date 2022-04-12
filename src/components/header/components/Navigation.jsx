@@ -11,7 +11,7 @@ import { linksHeader } from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
 //import language selector component
-import LanguageSelect from '../languageSelect/LanguageSelect';
+import LanguageSelect from '../languagesSelect/LanguageSelect';
 
 // Import Recoil config
 import { shouldHavePersona } from '@/config/featuresConfig';
@@ -24,6 +24,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   // Const Recoil State
   const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
+  const shouldShowLanguageSelected = useRecoilValue(
+    shouldShowLanguageSelectedAtom
+  );
 
   // Import the navigation links, as defined in the config
   const [links] = useRecoilState(linksHeader);
@@ -63,7 +66,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         </li>
       )}
       {/* Display the language select component */}
-      {shouldShowLanguageSelectedAtom && (
+      {shouldShowLanguageSelected && (
         <li>
           <LanguageSelect />
         </li>

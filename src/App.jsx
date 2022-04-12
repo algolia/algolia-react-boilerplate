@@ -24,19 +24,30 @@ import CustomStateResults from './components/stateResults/stateResults';
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [language, setLanguage] = useState('');
+  const [indexLanguage, setIndexLanguage] = useState(indexNames.mainIndex);
   useEffect(() => {
-    console.log('toto', language);
+    switch (language) {
+      case 'English':
+        setIndexLanguage(indexNames.mainIndex);
+        break;
+      case 'Spanish':
+        setIndexLanguage(indexNames.mainIndex_spanish);
+        break;
+      case 'French':
+        setIndexLanguage(indexNames.mainIndex_french);
+        break;
+      case 'German':
+        setIndexLanguage(indexNames.mainIndex_german);
+        break;
+    }
     setTimeout(() => {
       setIsLoaded(true);
     }, 3000);
-  }, [language]);
+  }, [setIndexLanguage, indexLanguage, language]);
 
   return (
     <RecoilRoot>
-      <InstantSearch
-        searchClient={searchClient}
-        indexName={indexNames.mainIndex}
-      >
+      <InstantSearch searchClient={searchClient} indexName={indexLanguage}>
         <CustomStateResults />
         <Router>
           {isLoaded === false && <Loader isLoaded={isLoaded} />}
