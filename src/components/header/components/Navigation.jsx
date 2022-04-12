@@ -22,7 +22,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // navigate is used by React Router
   const navigate = useNavigate();
 
-  // Const Recoil State
+  // Should show or not the sections
   const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
   const shouldShowLanguageSelected = useRecoilValue(
     shouldShowLanguageSelectedAtom

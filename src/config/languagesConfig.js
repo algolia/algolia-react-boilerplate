@@ -3,6 +3,8 @@
 // ------------------------------------------
 import { atom } from 'recoil';
 
+
+// Define what values are going to be displayed in the language selector
 export const languagesConfig = [
     { value: 'English', label: 'English' },
     {
@@ -31,6 +33,27 @@ export const shouldShowLanguageSelectedAtom = atom({
     default: true, // default value (aka initial value)
   });
 
+
+// Define index by languages & currency. 
+// Change if necessary
+export const languageSwitchConfig = {
+  EN: {
+    index : "flagship_fashion",
+    currency : '£',
+  },
+  FR:{
+    index : "flagship_fashion_price_desc",
+    currency : '€'
+  },
+  GER:{
+    index : "flagship_fashion_ger",
+    currency : '€'
+  },
+  SPA:{
+    index : "flagship_fashion_spa",
+    currency : '€'
+  }
+}
 
   // Styles for language selection dropdown, please ignore
 export const styles = {
