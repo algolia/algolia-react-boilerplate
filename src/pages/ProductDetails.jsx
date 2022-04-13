@@ -40,6 +40,8 @@ import { hitsConfig } from '@/config/hitsConfig';
 // Custom hooks
 import useScreenSize from '@/hooks/useScreenSize';
 
+import get from 'lodash/get';
+
 const ProductDetails = () => {
   // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
@@ -72,7 +74,7 @@ const ProductDetails = () => {
     colourHexa,
   } = useRecoilValue(hitsConfig);
 
-  const hexaCode = hit[colourHexa]?.split(';')[1];
+  const hexaCode = get(hit, colourHexa)?.split(';')[1];
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -125,7 +127,7 @@ const ProductDetails = () => {
               <motion.img
                 whileHover={{ scale: 1.05 }}
                 transition={framerMotionTransition}
-                src={hit[image]}
+                src={get(hit, image)}
                 alt=""
                 onError={(e) => (e.currentTarget.src = placeHolderError)}
               />
@@ -146,8 +148,8 @@ const ProductDetails = () => {
               transition: { delay: 0.5, framerMotionTransition },
             }}
           >
-            <p className="brand">{hit[brand]}</p>
-            <p className="name">{hit[productName]}</p>
+            <p className="brand">{get(hit, brand)}</p>
+            <p className="name">{get(hit, productName)}</p>
             <div className="color">
               {hexaCode ? (
                 <div
@@ -161,13 +163,13 @@ const ProductDetails = () => {
               ) : (
                 ''
               )}
-              <p>{hit[colour]}</p>
+              <p>{get(hit, colour)}</p>
             </div>
-            {hit[sizeFilter]?.length > 0 && (
+            {get(hit, sizeFilter)?.length > 0 && (
               <div className="sizes">
                 <p>Available size(s):</p>
                 <motion.div className="sizeList">
-                  {hit[sizeFilter].map((size, i) => (
+                  {get(hit, sizeFilter).map((size, i) => (
                     <motion.div className="size" key={i}>
                       <p>{size}</p>
                     </motion.div>
@@ -186,7 +188,7 @@ const ProductDetails = () => {
               }}
               className="price"
             >
-              {hit[price]}
+              {get(hit, price)}
             </motion.p>
           </motion.div>
         </div>
