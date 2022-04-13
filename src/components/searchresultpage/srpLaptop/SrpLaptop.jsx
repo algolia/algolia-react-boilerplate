@@ -22,6 +22,7 @@ import {
 } from '@/config/featuresConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
+import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
 
 // Import Persona State from recoil
 import { personaSelectedAtom } from '@/config/personaConfig';
@@ -48,8 +49,6 @@ const { InjectedHits } = lazily(() =>
   import('@/components/searchresultpage/injected-hits')
 );
 
-import { indexNames } from '@/config/algoliaEnvConfig';
-
 // Handle the number of hits per page
 import { hitsPerPage } from '@/config/hitsConfig';
 
@@ -58,17 +57,22 @@ import { customDataByType } from '@/utils';
 
 const SrpLaptop = () => {
   // Recoil & React states
-
   const stats = useRecoilValue(shouldHaveStats);
-  const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
   const queryState = useRecoilValue(queryAtom);
   const [injected, setInjected] = useState(false);
+
+  // Should show injected content or not
+  // Defined in config file
+  const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
+  //Get indexes Value
+  const index = useRecoilValue(mainIndex);
+  const { injectedContentIndex } = useRecoilValue(indexNames);
 
   // Define Stat Const
   const { hitsPerPageNotInjected, hitsPerPageInjected } = hitsPerPage;
 
   // Define Price Sort By Const
-  const { value: priceSortBy, labelIndex: labelItems } = sortBy;
+  const { value: shoulShowPriceSortBy, labelIndex } = useRecoilValue(sortBy);
 
   // Get states of React Router
   const { state } = useLocation();
@@ -105,12 +109,9 @@ const SrpLaptop = () => {
               <CustomStats />
             </Suspense>
           )}
-          {priceSortBy && (
+          {shoulShowPriceSortBy && (
             <Suspense fallback={<Loader />}>
-              <CustomSortBy
-                items={labelItems}
-                defaultRefinement={indexNames.mainIndex}
-              />
+              <CustomSortBy items={labelIndex} defaultRefinement={index} />
             </Suspense>
           )}
         </div>
@@ -133,15 +134,14 @@ const SrpLaptop = () => {
         {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
         {shouldInjectContent ? (
           <Suspense fallback={<Loader />}>
-            <Index indexName={indexNames.injectedContentIndex}>
+            <Index indexName={injectedContentIndex}>
               <Configure hitsPerPage={1} page={0} />
             </Index>
             <InjectedHits
               hitComponent={Hit}
               slots={({ resultsByIndex }) => {
-                const indexValue = indexNames.mainIndex;
                 const { noCta, salesCard } = customDataByType(
-                  resultsByIndex?.[indexValue]?.userData
+                  resultsByIndex?.[index]?.userData
                 );
                 // eslint-disable-next-line no-lone-blocks
                 {
@@ -164,9 +164,8 @@ const SrpLaptop = () => {
                     // eslint-disable-next-line no-shadow
                     getHits: ({ resultsByIndex }) => {
                       setInjected(true);
-                      return resultsByIndex[indexNames.injectedContentIndex]
-                        ? resultsByIndex[indexNames.injectedContentIndex]
-                            .hits || []
+                      return resultsByIndex[injectedContentIndex]
+                        ? resultsByIndex[injectedContentIndex].hits || []
                         : [];
                     },
                     slotComponent: InfluencerCard,
