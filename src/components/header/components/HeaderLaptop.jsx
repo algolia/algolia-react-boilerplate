@@ -36,8 +36,7 @@ const HeaderLaptop = () => {
 
   const demoGuideBtn = useSetRecoilState(demoGuideBtnRef);
   // Showing or hiding help navigation menu
-  const [showDemoGuide, setshowDemoGuide] =
-    useRecoilState(isDemoGuideOpen);
+  const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
 
   return (
     <div className="container">
