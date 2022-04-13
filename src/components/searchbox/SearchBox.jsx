@@ -15,8 +15,6 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 // Import SVG from file as a component
 import { Glass } from '@/assets/svg/SvgIndex';
 import SearchInCategory from './components/SearchInCategory';
-// Import Config for recoil from file as a component
-import { shouldHaveFederatedSearch } from '@/config/featuresConfig';
 
 import {
   queryAtom,

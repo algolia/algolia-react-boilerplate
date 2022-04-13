@@ -42,7 +42,8 @@ const HomePage = () => {
   const isFederated = useRecoilValue(shouldHaveFederatedSearch);
   const isCarousel = useRecoilValue(shouldHaveCarousels);
   const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch);
-  console.log(isFederatedOpen, isFederated);
+  console.log('isFederatedOpen', isFederatedOpen);
+  console.log('isFederated', isFederated);
 
   return (
     // Framer motion wrapper
