@@ -1,6 +1,7 @@
 // ------------------------------------------
 // Configuration for the federated search modal
 // ------------------------------------------
+import { atom } from 'recoil';
 
 // This const defines the attribute used to show category suggestions if turned on
 export const federatedCategoriesAttribute = 'hierarchicalCategories.lvl2';
@@ -14,3 +15,8 @@ export const federatedSearchConfig = {
   showProducts: true,
   showBlogPosts: true,
 };
+
+export const shouldHaveOpenFederatedSearch = atom({
+  key: 'shouldHaveOpenFederatedSearch', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});

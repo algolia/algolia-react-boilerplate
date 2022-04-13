@@ -35,10 +35,14 @@ import {
   shouldHaveCarousels,
 } from '@/config/featuresConfig';
 
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+
 const HomePage = () => {
   // Boolean value which determines if federated search is shown or not, default is false
   const isFederated = useRecoilValue(shouldHaveFederatedSearch);
   const isCarousel = useRecoilValue(shouldHaveCarousels);
+  const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch);
+  console.log(isFederatedOpen, isFederated);
 
   return (
     // Framer motion wrapper
@@ -55,7 +59,7 @@ const HomePage = () => {
       // duration, smoothness etc.
       transition={framerMotionPage.transition}
     >
-      {isFederated && (
+      {isFederated && isFederatedOpen && (
         <AnimatePresence>
           {/* Loads federated search if isFederated is true */}
           <Suspense fallback={<Loader />}>

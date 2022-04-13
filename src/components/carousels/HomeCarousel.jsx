@@ -12,7 +12,11 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig';
-import { hitsConfig, hitAtom } from '@/config/hitsConfig';
+import {
+  hitsConfig,
+  hitAtom,
+  shouldIdisplayCurrency,
+} from '@/config/hitsConfig';
 import { hitsPerCarousel } from '@/config/carouselConfig';
 import { currencySymbolAtom } from '@/config/currencyConfig';
 
@@ -47,6 +51,7 @@ const Carousel = ({ hits, title }) => {
 
   // Hits are imported by Recoil
   const hitState = useSetRecoilState(hitAtom);
+  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
   const { price, objectID, image, productName } = useRecoilValue(hitsConfig);
 
   // Used by Framer Motion
@@ -103,7 +108,7 @@ const Carousel = ({ hits, title }) => {
                   <p className="name">{hit[productName]}</p>
                   <p className="price">
                     {hit[price]}
-                    {currency}
+                    {displayCurrency && currency}
                   </p>
                 </div>
               </motion.div>

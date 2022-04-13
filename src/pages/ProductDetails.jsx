@@ -35,7 +35,8 @@ import {
   shouldHaveRelatedProducts,
   shouldHaveFbtProducts,
 } from '@/config/featuresConfig';
-import { hitsConfig } from '@/config/hitsConfig';
+import { hitsConfig, shouldIdisplayCurrency } from '@/config/hitsConfig';
+import { currencySymbolAtom } from '@/config/currencyConfig';
 
 // Custom hooks
 import useScreenSize from '@/hooks/useScreenSize';
@@ -76,6 +77,10 @@ const ProductDetails = () => {
   } = useRecoilValue(hitsConfig);
 
   const hexaCode = hit[colourHexa]?.split(';')[1];
+
+  // Get the current currency
+  const currency = useRecoilValue(currencySymbolAtom);
+  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -190,6 +195,7 @@ const ProductDetails = () => {
               className="price"
             >
               {hit[price]}
+              {displayCurrency && currency}
             </motion.p>
           </motion.div>
         </div>

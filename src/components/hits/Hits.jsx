@@ -16,7 +16,7 @@ import {
 } from '@/config/animationConfig';
 
 // Recoil import
-import { hitAtom } from '@/config/hitsConfig';
+import { hitAtom, shouldIdisplayCurrency } from '@/config/hitsConfig';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
 import { currencySymbolAtom } from '@/config/currencyConfig';
@@ -32,6 +32,7 @@ const Hit = ({ hit }) => {
 
   // Get currency symbol
   const currency = useRecoilValue(currencySymbolAtom);
+  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
 
   // Get hit attribute from config file
   const { price, objectID, image, category, productName } =
@@ -71,7 +72,7 @@ const Hit = ({ hit }) => {
         <div className="srpItem__infos__down">
           <p className="srpItem__infos__down__price">
             {hit[price]}
-            {currency}
+            {displayCurrency && currency}
           </p>
         </div>
       </div>
