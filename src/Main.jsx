@@ -1,3 +1,10 @@
+import { useEffect, useState } from 'react';
+
+import { InstantSearch } from 'react-instantsearch-dom';
+
+// application state from config file
+import { searchClient } from './config/algoliaEnvConfig';
+
 // Framer-Motion
 import { AnimatePresence } from 'framer-motion';
 
@@ -5,7 +12,7 @@ import { AnimatePresence } from 'framer-motion';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
 //Recoil states & values
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 
 //Import help navigation state & config
 import {
@@ -13,6 +20,11 @@ import {
   shouldShowDemoGuide,
   shouldShowAlert,
 } from '@/config/demoGuideConfig';
+
+import { mainIndex } from './config/algoliaEnvConfig';
+
+// // Allows logging and manipulation of algolia results etc.
+// import CustomStateResults from './components/stateResults/stateResults';
 
 // Import Pages and static components
 import Header from '@/components/header/Header';
@@ -27,6 +39,8 @@ import Footer from './components/footer/Footer';
 import usePreventScrolling from './hooks/usePreventScrolling';
 
 export const Main = ({ isLoaded }) => {
+  const index = useRecoilValue(mainIndex);
+  // const [index, setIndex] = useState(mainIndex);
   const location = useLocation();
 
   // Should the alert badges for the demo guide be shown
@@ -40,23 +54,27 @@ export const Main = ({ isLoaded }) => {
   usePreventScrolling(showDemoGuide);
 
   return (
-    <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
-      <Header />
-      <AnimatePresence>
-        {showDemoGuide && shouldShowNavigation && (
-          <DemoGuide setshowDemoGuide={setshowDemoGuide} />
-        )}
-      </AnimatePresence>
-      <AnimatePresence initial={true} exitBeforeEnter>
-        <Routes key={location.pathname} location={location}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/search" element={<SearchResultsPage />} />
-          {/* objectID is the unique identifier for an algolia record */}
-          <Route path="/search/:objectID" element={<ProductDetails />} />
-        </Routes>
-      </AnimatePresence>
-      {shouldShowAlertAtom && <AlertNavigation />}
-      <Footer />
-    </div>
+    <InstantSearch searchClient={searchClient} indexName={index}>
+      {/* <CustomStateResults /> */}
+
+      <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
+        <Header />
+        <AnimatePresence>
+          {showDemoGuide && shouldShowNavigation && (
+            <DemoGuide setshowDemoGuide={setshowDemoGuide} />
+          )}
+        </AnimatePresence>
+        <AnimatePresence initial={true} exitBeforeEnter>
+          <Routes key={location.pathname} location={location}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/search" element={<SearchResultsPage />} />
+            {/* objectID is the unique identifier for an algolia record */}
+            <Route path="/search/:objectID" element={<ProductDetails />} />
+          </Routes>
+        </AnimatePresence>
+        {shouldShowAlertAtom && <AlertNavigation />}
+        <Footer />
+      </div>
+    </InstantSearch>
   );
 };

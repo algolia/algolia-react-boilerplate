@@ -11,10 +11,10 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import configuration
-import { indexNames } from '@/config/algoliaEnvConfig';
+import { mainIndex } from '@/config/algoliaEnvConfig';
 import { hitsConfig, hitAtom } from '@/config/hitsConfig';
 import { hitsPerCarousel } from '@/config/carouselConfig';
-import { currencySymbol } from '@/config/currencyConfig';
+import { currencySymbolAtom } from '@/config/currencyConfig';
 
 // In case of img loading error
 import { logoUrl as placeHolderError } from '@/config/headerConfig';
@@ -23,9 +23,10 @@ import { framerMotionTransition } from '@/config/animationConfig';
 
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ attribute, title }) => {
+  const index = useRecoilValue(mainIndex);
   return (
     <div className="home-carousel">
-      <Index indexId={title} indexName={indexNames.mainIndex}>
+      <Index indexId={title} indexName={index}>
         <Configure hitsPerPage={hitsPerCarousel} filters={attribute} />
         <CustomHitsCarousel title={title} />
       </Index>
@@ -40,6 +41,9 @@ const Carousel = ({ hits, title }) => {
 
   // Navigate is used by React Router
   const navigate = useNavigate();
+
+  // Get the currency symbol according to the index language
+  const currency = useRecoilValue(currencySymbolAtom);
 
   // Hits are imported by Recoil
   const hitState = useSetRecoilState(hitAtom);
@@ -99,7 +103,7 @@ const Carousel = ({ hits, title }) => {
                   <p className="name">{hit[productName]}</p>
                   <p className="price">
                     {hit[price]}
-                    {currencySymbol}
+                    {currency}
                   </p>
                 </div>
               </motion.div>

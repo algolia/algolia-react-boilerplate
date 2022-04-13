@@ -12,14 +12,17 @@ import { framerMotionFederatedContainer } from '@/config/animationConfig';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 // Config
-import { indexNames, searchClient } from '@/config/algoliaEnvConfig';
+import { searchClient, mainIndex, indexNames } from '@/config/algoliaEnvConfig';
 
 // Those imports are here to check if user is clicking outside the searchbox & federated to close federated
 import { shouldHaveFederatedSearch } from '@/config/featuresConfig';
 
 // Show or unshow sections in federated (product, suggestions, categories, articles, recent searches)
 // categories import is here to choose which attribute you want to show as category
-import { federatedSearchConfig, federatedCategoriesAttribute } from '@/config/federatedConfig';
+import {
+  federatedSearchConfig,
+  federatedCategoriesAttribute,
+} from '@/config/federatedConfig';
 
 // Sharing query to general state
 import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig';
@@ -48,11 +51,16 @@ const FederatedSearch = () => {
   const searchboxRef = useRecoilValue(searchBoxAtom);
   const query = useRecoilValue(queryAtom);
 
+  // Get Indexes Name
+  const { suggestionsIndex, articlesIndex } = useRecoilValue(indexNames);
+
   const containerFederated = useRef('');
   // Custom hook
   useOutsideClickConditional(containerFederated, searchboxRef, () =>
     setIsFederated(false)
   );
+
+  // Get screen size
   const { mobile, tablet } = useScreenSize();
 
   // Federated search configuration
@@ -86,7 +94,7 @@ const FederatedSearch = () => {
           {showRecentSearches && !mobile && !tablet && <RecentSearches />}
           {/* If don't want this sections go into config file  */}
           {showQuerySuggestions && (
-            <Index searchClient={searchClient} indexName={indexNames.suggestionsIndex}>
+            <Index searchClient={searchClient} indexName={suggestionsIndex}>
               <Configure
                 hitsPerPage={3}
                 query={query}
@@ -116,16 +124,14 @@ const FederatedSearch = () => {
         {/* If don't want this sections go into config file  */}
         {showBlogPosts && !mobile && !tablet && (
           <div className="articles federatedSearch__right">
-            <Index
-              indexName={indexNames.articlesIndex}
-            >
+            <Index indexName={articlesIndex}>
               <Configure hitsPerPage={1} query={query} />
               <Articles />
             </Index>
           </div>
         )}
       </div>
-      <Redirect/>
+      <Redirect />
     </motion.div>
   );
 };

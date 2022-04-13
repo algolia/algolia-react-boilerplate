@@ -23,7 +23,7 @@ import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import RelatedItem from '@/components/recommend/RelatedProducts';
 
 // Algolia search client
-import { searchClientCreds, indexNames } from '@/config/algoliaEnvConfig';
+import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
 
 // React router import
 import { useNavigate } from 'react-router-dom';
@@ -45,6 +45,9 @@ import get from 'lodash/get';
 const ProductDetails = () => {
   // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
+
+  // Get the main index
+  const index = useRecoilValue(mainIndex);
 
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
@@ -198,7 +201,7 @@ const ProductDetails = () => {
         {shouldHaveRelatedProductsValue && (
           <RelatedProducts
             recommendClient={recommendClient}
-            indexName={indexNames.mainIndex}
+            indexName={index}
             objectIDs={[hit[objectID]]}
             itemComponent={RelatedItem}
             maxRecommendations={5}
@@ -207,7 +210,7 @@ const ProductDetails = () => {
         {shouldHaveFbtProductsValue && (
           <FrequentlyBoughtTogether
             recommendClient={recommendClient}
-            indexName={indexNames.mainIndex}
+            indexName={index}
             objectIDs={[hit[objectID]]}
             itemComponent={RelatedItem}
             maxRecommendations={5}

@@ -28,10 +28,14 @@ import Banner from '@/components/banners/Banner';
 
 // Import Persona State from recoil
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
-import { indexNames } from '@/config/algoliaEnvConfig';
+import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
 
-const SrpLaptop = lazy(() => import('@/components/searchresultpage/srpLaptop/SrpLaptop'));
-const SrpMobile = lazy(() => import('@/components/searchresultpage/srpMobile/SrpMobile'));
+const SrpLaptop = lazy(() =>
+  import('@/components/searchresultpage/srpLaptop/SrpLaptop')
+);
+const SrpMobile = lazy(() =>
+  import('@/components/searchresultpage/srpMobile/SrpMobile')
+);
 
 const SearchResultPage = () => {
   // Recoil & React states
@@ -49,7 +53,7 @@ const SearchResultPage = () => {
       {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
 
       <NoResultsHandler>
-        <Suspense fallback={<Loader/>}>
+        <Suspense fallback={<Loader />}>
           {(laptop || laptopXS) && <SrpLaptop />}
           {(tablet || mobile) && <SrpMobile />}
         </Suspense>
@@ -61,6 +65,8 @@ const SearchResultPage = () => {
 // This is rendered when there are no results to display
 const NoResults = memo(({ query }) => {
   const getQueryState = useRecoilValue(queryAtom);
+  // Get QS index from Recoil
+  const { suggestionsIndex } = useRecoilValue(indexNames);
   return (
     <div className="no-results">
       <div className="no-results__infos">
@@ -81,10 +87,7 @@ const NoResults = memo(({ query }) => {
             </span>
           </li>
           <div className="query-suggestion">
-            <Index
-              indexId={indexNames.suggestionsIndex}
-              indexName={indexNames.suggestionsIndex}
-            >
+            <Index indexId={suggestionsIndex} indexName={suggestionsIndex}>
               <Configure hitsPerPage={3} query="" />
               <QuerySuggestions />
             </Index>
