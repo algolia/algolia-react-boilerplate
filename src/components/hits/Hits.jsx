@@ -16,10 +16,13 @@ import {
 } from '@/config/animationConfig';
 
 // Recoil import
-import { hitAtom, shouldIdisplayCurrency } from '@/config/hitsConfig';
+import { hitAtom } from '@/config/hitsConfig';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
-import { currencySymbolAtom } from '@/config/currencyConfig';
+import {
+  currencySymbolAtom,
+  shouldIdisplayCurrency,
+} from '@/config/currencyConfig';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';

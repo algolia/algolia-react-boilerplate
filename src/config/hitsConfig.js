@@ -34,17 +34,6 @@ export const hitsConfig = atom({
   },
 });
 
-// ------------------------------------------
-// Should I have to display a currency
-// If it's already present into hits put the attribute at false
-// To don't have a repetition of currency
-// ------------------------------------------
-
-export const shouldIdisplayCurrency = atom({
-  key: 'shouldIdisplayCurrency',
-  default: false,
-});
-
 // Similar structure to previous const, please do not remove if you don't use articles
 export const contentArticlesConfig = atom({
   key: 'contentArticlesConfig', // unique ID (with respect to other atoms/selectors)

@@ -1,11 +1,14 @@
 // Component for rendering the Related Products through Recommend
 
 // Import Hit configuration for use with Recoil
-import { hitsConfig, shouldIdisplayCurrency } from '@/config/hitsConfig';
+import { hitsConfig } from '@/config/hitsConfig';
 import { useRecoilValue } from 'recoil';
 
 // Import currency
-import { currencySymbolAtom } from '@/config/currencyConfig';
+import {
+  currencySymbolAtom,
+  shouldIdisplayCurrency,
+} from '@/config/currencyConfig';
 
 //  Import highlight widget from InstantSearch library
 import { Highlight } from 'react-instantsearch-dom';

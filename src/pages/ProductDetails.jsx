@@ -35,8 +35,8 @@ import {
   shouldHaveRelatedProducts,
   shouldHaveFbtProducts,
 } from '@/config/featuresConfig';
-import { hitsConfig, shouldIdisplayCurrency } from '@/config/hitsConfig';
-import { currencySymbolAtom } from '@/config/currencyConfig';
+import { hitsConfig } from '@/config/hitsConfig';
+import { currencySymbolAtom, shouldIdisplayCurrency } from '@/config/currencyConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 // Custom hooks

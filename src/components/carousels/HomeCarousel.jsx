@@ -12,13 +12,12 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig';
-import {
-  hitsConfig,
-  hitAtom,
-  shouldIdisplayCurrency,
-} from '@/config/hitsConfig';
+import { hitsConfig, hitAtom } from '@/config/hitsConfig';
 import { hitsPerCarousel } from '@/config/carouselConfig';
-import { currencySymbolAtom } from '@/config/currencyConfig';
+import {
+  currencySymbolAtom,
+  shouldIdisplayCurrency,
+} from '@/config/currencyConfig';
 
 // In case of img loading error
 import { logoUrl as placeHolderError } from '@/config/headerConfig';
