@@ -10,6 +10,8 @@ import { Heart } from '@/assets/svg/SvgIndex';
 // In case of img loading error
 import { logoUrl as placeHolderError } from '@/config/headerConfig';
 
+import get from 'lodash/get'
+
 import {
   framerMotionTransition,
   framerMotionHits,
@@ -52,8 +54,8 @@ const Hit = ({ hit }) => {
         <motion.img
           whileHover={{ scale: 1.1 }}
           transition={framerMotionTransition}
-          src={hit[image]}
-          alt={hit[category]}
+          src={get(hit, image)}
+          alt={get(hit, category)}
           onError={(e) => (e.currentTarget.src = placeHolderError)}
         />
         {isHitPromoted && <Popular />}
@@ -67,7 +69,7 @@ const Hit = ({ hit }) => {
         </h3>
         <div className="srpItem__infos__down">
           <p className="srpItem__infos__down__price">
-            {hit[price]}
+            {get(hit, price)}
             {currencySymbol}
           </p>
         </div>
