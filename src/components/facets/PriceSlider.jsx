@@ -7,6 +7,9 @@ import { useState, useCallback, useEffect } from 'react';
 import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { connectRange } from 'react-instantsearch-dom';
+// import Currency from recoil
+import { useRecoilValue } from 'recoil';
+import { currencySymbolAtom } from '@/config/currencyConfig';
 
 const RangeSlider = ({
   min,
@@ -15,11 +18,11 @@ const RangeSlider = ({
   currentRefinement,
   refine,
   title,
-  currency,
 }) => {
   const [minSlider, setMinSlider] = useState(min);
   const [maxSlider, setMaxSlider] = useState(max);
   const [change, setChange] = useState(false);
+  const currency = useRecoilValue(currencySymbolAtom);
 
   useEffect(() => {
     if (canRefine) {

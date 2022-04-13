@@ -4,6 +4,12 @@
 import { hitsConfig } from '@/config/hitsConfig';
 import { useRecoilValue } from 'recoil';
 
+// Import currency
+import {
+  currencySymbolAtom,
+  shouldIdisplayCurrency,
+} from '@/config/currencyConfig';
+
 //  Import highlight widget from InstantSearch library
 import { Highlight } from 'react-instantsearch-dom';
 
@@ -13,6 +19,9 @@ import { Heart } from '@/assets/svg/SvgIndex';
 const RelatedItem = ({ item }) => {
   // Get hit attribute from config file
   const { price, image, category, productName } = useRecoilValue(hitsConfig);
+  // Get currency symbol
+  const currency = useRecoilValue(currencySymbolAtom);
+  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
 
   return (
     <div className="relatedItem">
@@ -27,7 +36,10 @@ const RelatedItem = ({ item }) => {
           <Highlight hit={item} attribute={productName} />
         </h3>
         <div className="relatedItem__infos__down">
-          <p className="relatedItem__infos__down__price">{item[price]}</p>
+          <p className="relatedItem__infos__down__price">
+            {item[price]}
+            {displayCurrency && currency}
+          </p>
         </div>
       </div>
     </div>

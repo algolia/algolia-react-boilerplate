@@ -7,10 +7,9 @@ import { useSetRecoilState, useRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
 //Import config for federatedSearch
-import {
-  shouldHaveFederatedSearch,
-  shouldHaveVoiceSearch,
-} from '@/config/featuresConfig';
+import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
+
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 import { logoUrl } from '@/config/headerConfig';
 
@@ -30,7 +29,7 @@ import { OptionDots } from '@/assets/svg/SvgIndex';
 
 const HeaderLaptop = () => {
   const setQueryState = useSetRecoilState(queryAtom);
-  const federated = useSetRecoilState(shouldHaveFederatedSearch);
+  const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
   // Define value to display voiceSearch
   const displayVoiceSearch = useSetRecoilState(shouldHaveVoiceSearch);
 

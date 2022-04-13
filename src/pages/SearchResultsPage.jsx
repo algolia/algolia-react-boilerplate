@@ -16,7 +16,7 @@ import {
 } from 'react-instantsearch-dom';
 
 // Recoil state to directly access results
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { queryAtom } from '../config/searchboxConfig';
 
 // Import custom Hooks
@@ -29,6 +29,7 @@ import Banner from '@/components/banners/Banner';
 // Import Persona State from recoil
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 const SrpLaptop = lazy(() =>
   import('@/components/searchresultpage/srpLaptop/SrpLaptop')
@@ -42,6 +43,9 @@ const SearchResultPage = () => {
 
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
+  // Close federated and set value false for return without it
+  const setFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
+  setFederatedOpen(false);
 
   // Handle screen resize
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
