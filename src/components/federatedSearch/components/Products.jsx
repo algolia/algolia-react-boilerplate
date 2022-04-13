@@ -14,6 +14,8 @@ import { hitsConfig } from '@/config/hitsConfig';
 // React-router import
 import { useNavigate } from 'react-router-dom';
 
+import get from 'lodash/get';
+
 const Hits = ({ hits }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
@@ -21,6 +23,7 @@ const Hits = ({ hits }) => {
   // Get hit attribute from config file
   const { price, objectID, image, productName, brand } =
     useRecoilValue(hitsConfig);
+
   return (
     <div className="products">
       <div className="products__header">
@@ -38,12 +41,12 @@ const Hits = ({ hits }) => {
               }}
             >
               <div className="image-wrapper">
-                <img src={hit[image]} alt="" />
+                <img src={get(hit, image)} alt="" />
               </div>
               <div className="infos">
-                <p className="brand">{hit[brand]}</p>
-                <p className="name">{hit[productName]}</p>
-                <p className="price">{hit[price]}</p>
+                <p className="brand">{get(hit, brand)}</p>
+                <p className="name">{get(hit, productName)}</p>
+                <p className="price">{get(hit, price)}</p>
               </div>
             </li>
           );
