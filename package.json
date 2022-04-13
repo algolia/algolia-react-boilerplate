@@ -37,6 +37,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "framer-motion": "^6.2.6",
     "i": "^0.3.7",
+    "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "npm": "^8.5.5",
     "rc-slider": "^9.7.5",
