@@ -1,8 +1,5 @@
 // This is in the Search Results Page for both laptop and mobile windows
 
-// Import framer-motion for animation on hits
-import { motion } from 'framer-motion';
-
 // Import InstantSearch Functionality
 import { connectHits } from 'react-instantsearch-dom';
 

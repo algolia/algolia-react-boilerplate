@@ -7,10 +7,13 @@ import { useRecoilValue } from 'recoil';
 
 import { contentArticlesConfig } from '@/config/hitsConfig';
 
+import get from 'lodash/get';
+
 const ArticlesItems = ({ hits }) => {
   const { image, date, title, headings } = useRecoilValue(
     contentArticlesConfig
   );
+
   return (
     <div className="articles__wrapper">
       <h3 className="articles__title">ARTICLES</h3>
@@ -18,14 +21,14 @@ const ArticlesItems = ({ hits }) => {
         return (
           <div key={index} className="articles__item">
             <div className="image-wrapper">
-              <img src={hit[image]} alt="" />
+              <img src={get(hit, image)} alt="" />
 
-              <p className="date">{hit[date]}</p>
+              <p className="date">{get(hit, date)}</p>
               <div className="overlay"></div>
             </div>
             <div className="infos">
-              <p className="title">{hit[title]}</p>
-              <p className="subtitle">{hit[headings]}</p>
+              <p className="title">{get(hit, title)}</p>
+              <p className="subtitle">{get(hit, headings)}</p>
             </div>
           </div>
         );

@@ -24,6 +24,8 @@ import { logoUrl as placeHolderError } from '@/config/headerConfig';
 
 import { framerMotionTransition } from '@/config/animationConfig';
 
+import get from 'lodash/get';
+
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ attribute, title }) => {
   const index = useRecoilValue(mainIndex);
@@ -91,8 +93,8 @@ const Carousel = ({ hits, title }) => {
               <motion.div key={i} className="item">
                 <div className="carousel__imageWrapper">
                   <img
-                    src={hit[image]}
-                    alt={hit[productName]}
+                    src={get(hit, image)}
+                    alt={get(hit, productName)}
                     onError={(e) => (e.currentTarget.src = placeHolderError)}
                   />
                 </div>
@@ -104,9 +106,9 @@ const Carousel = ({ hits, title }) => {
                     navigate(`/search/${hit[objectID]}`);
                   }}
                 >
-                  <p className="name">{hit[productName]}</p>
+                  <p className="name">{get(hit, productName)}</p>
                   <p className="price">
-                    {hit[price]}
+                    {get(hit, price)}
                     {displayCurrency && currency}
                   </p>
                 </div>
