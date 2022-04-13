@@ -16,9 +16,10 @@ import { logoUrl } from '@/config/headerConfig';
 
 //Import config for federatedSearch
 import {
-  shouldHaveFederatedSearch,
   shouldHaveVoiceSearch,
 } from '@/config/featuresConfig';
+
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 //Import config from helped navigation
 import { isDemoGuideOpen } from '@/config/demoGuideConfig';
@@ -44,7 +45,7 @@ import usePreventScrolling from '@/hooks/usePreventScrolling';
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
   const setQueryState = useSetRecoilState(queryAtom);
-  const federated = useSetRecoilState(shouldHaveFederatedSearch);
+  const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

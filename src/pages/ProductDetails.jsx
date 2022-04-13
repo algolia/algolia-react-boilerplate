@@ -29,13 +29,15 @@ import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
 import { useNavigate } from 'react-router-dom';
 
 // Recoil import
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { hitAtom } from '@/config/hitsConfig';
 import {
   shouldHaveRelatedProducts,
   shouldHaveFbtProducts,
 } from '@/config/featuresConfig';
 import { hitsConfig } from '@/config/hitsConfig';
+import { currencySymbolAtom, shouldIdisplayCurrency } from '@/config/currencyConfig';
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 // Custom hooks
 import useScreenSize from '@/hooks/useScreenSize';
@@ -53,6 +55,10 @@ const ProductDetails = () => {
     shouldHaveRelatedProducts
   );
   const shouldHaveFbtProductsValue = useRecoilValue(shouldHaveFbtProducts);
+
+  // Close federated and set value false for return without it
+  const setFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
+  setFederatedOpen(false);
 
   // navigate is used by react router
   const navigate = useNavigate();
@@ -78,6 +84,10 @@ const ProductDetails = () => {
   } = useRecoilValue(hitsConfig);
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1];
+
+  // Get the current currency
+  const currency = useRecoilValue(currencySymbolAtom);
+  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -192,6 +202,7 @@ const ProductDetails = () => {
               className="price"
             >
               {get(hit, price)}
+              {displayCurrency && currency}
             </motion.p>
           </motion.div>
         </div>

@@ -22,6 +22,7 @@ import { shouldHaveFederatedSearch } from '@/config/featuresConfig';
 import {
   federatedSearchConfig,
   federatedCategoriesAttribute,
+  shouldHaveOpenFederatedSearch,
 } from '@/config/federatedConfig';
 
 // Sharing query to general state
@@ -47,7 +48,7 @@ import Redirect from '@/components/redirects/Redirect';
 const FederatedSearch = () => {
   // Recoil & States
   const personaSelect = useRecoilValue(personaSelectedAtom);
-  const setIsFederated = useSetRecoilState(shouldHaveFederatedSearch);
+  const setIsFederated = useSetRecoilState(shouldHaveOpenFederatedSearch);
   const searchboxRef = useRecoilValue(searchBoxAtom);
   const query = useRecoilValue(queryAtom);
 

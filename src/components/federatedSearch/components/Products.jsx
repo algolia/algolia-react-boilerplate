@@ -11,6 +11,11 @@ import { hitAtom } from '@/config/hitsConfig';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
 
+import {
+  shouldIdisplayCurrency,
+  currencySymbolAtom,
+} from '@/config/currencyConfig';
+
 // React-router import
 import { useNavigate } from 'react-router-dom';
 
@@ -19,6 +24,10 @@ import get from 'lodash/get';
 const Hits = ({ hits }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
+
+  // Get currency symbol
+  const currency = useRecoilValue(currencySymbolAtom);
+  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
 
   // Get hit attribute from config file
   const { price, objectID, image, productName, brand } =
@@ -46,7 +55,10 @@ const Hits = ({ hits }) => {
               <div className="infos">
                 <p className="brand">{get(hit, brand)}</p>
                 <p className="name">{get(hit, productName)}</p>
-                <p className="price">{get(hit, price)}</p>
+                <p className="price">
+                  {get(hit, price)}
+                  {displayCurrency && currency}
+                </p>
               </div>
             </li>
           );
