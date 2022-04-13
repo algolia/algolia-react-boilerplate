@@ -23,10 +23,12 @@ import { currencySymbolAtom } from '@/config/currencyConfig';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
+import Popular from './Popular';
 
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
+  const isHitPromoted = hit?._rankingInfo?.promoted;
 
   // Get currency symbol
   const currency = useRecoilValue(currencySymbolAtom);
@@ -57,6 +59,7 @@ const Hit = ({ hit }) => {
           alt={hit[category]}
           onError={(e) => (e.currentTarget.src = placeHolderError)}
         />
+        {isHitPromoted && <Popular />}
         <div className="srpItem__imgWrapper__heart">
           <Heart />
         </div>

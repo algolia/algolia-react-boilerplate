@@ -129,6 +129,7 @@ const SrpLaptop = () => {
           enablePersonalization={true}
           filters={state ? state : ''}
           query={queryState && queryState}
+          getRankingInfo={true}
         />
         {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
         {shouldInjectContent ? (
