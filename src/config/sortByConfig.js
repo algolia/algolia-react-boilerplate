@@ -8,14 +8,14 @@ import { mainIndex } from './algoliaEnvConfig';
 // The values for each index use the prefix of the main index for convenience
 export const sortBy = selector({
   key: 'sortBy', // unique ID (with respect to other atoms/selectors)
-  get: ({get}) => {
+  get: ({ get }) => {
     return {
-      value: true, 
+      value: true,
       labelIndex: [
         { value: get(mainIndex), label: 'All' },
-        { value: get(mainIndex)+'_price_desc', label: 'Price Desc' },
-        { value: get(mainIndex)+'_price_asc', label: 'Price Asc' },
-      ]
-    }
-  }
+        { value: get(mainIndex) + '_price_desc', label: 'Price Desc' },
+        { value: get(mainIndex) + '_price_asc', label: 'Price Asc' },
+      ],
+    };
+  },
 });

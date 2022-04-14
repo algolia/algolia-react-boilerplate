@@ -24,6 +24,7 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
+  shouldHaveSorts
 } from '@/config/featuresConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
@@ -68,6 +69,7 @@ const SrpMobile = () => {
 
   // Define Stat Const
   const stats = useRecoilValue(shouldHaveStats);
+  const shouldHaveSortsAtom = useRecoilValue(shouldHaveSorts);
 
   const hitsPerPageNotInjected = hitsPerPage.numberNotInjected;
   const hitsPerPageInjected = hitsPerPage.numberInjected;
@@ -81,7 +83,7 @@ const SrpMobile = () => {
   const { injectedContentIndex } = useRecoilValue(indexNames);
 
   // Define Price Sort By
-  const { value: shoulShowPriceSortBy, labelIndex } = useRecoilValue(sortBy);
+  const { value, labelIndex } = useRecoilValue(sortBy);
 
   // Get states of React Router
   const { state } = useLocation();
@@ -119,7 +121,7 @@ const SrpMobile = () => {
               <CustomStats />
             </Suspense>
           )}
-          {shoulShowPriceSortBy && (
+          {shouldHaveSortsAtom && (
             <Suspense fallback={<Loader />}>
               <CustomSortBy items={labelIndex} defaultRefinement={index} />
             </Suspense>
