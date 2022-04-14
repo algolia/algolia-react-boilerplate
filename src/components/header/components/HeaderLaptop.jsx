@@ -3,7 +3,7 @@
 // React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
 //Import config for federatedSearch
@@ -31,7 +31,7 @@ const HeaderLaptop = () => {
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
   // Define value to display voiceSearch
-  const displayVoiceSearch = useSetRecoilState(shouldHaveVoiceSearch);
+  const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
 
   const demoGuideBtn = useSetRecoilState(demoGuideBtnRef);
   // Showing or hiding help navigation menu

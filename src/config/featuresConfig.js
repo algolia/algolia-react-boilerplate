@@ -26,7 +26,7 @@ export const shouldHaveCarousels = atom({
 
 export const shouldHaveVoiceSearch = atom({
   key: 'shouldHaveVoiceSearch',
-  default: true,
+  default: false,
 });
 
 export const shouldHaveStats = atom({
