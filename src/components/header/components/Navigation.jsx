@@ -16,7 +16,7 @@ import LanguageSelect from '../languagesSelect/LanguageSelect';
 // Import Recoil config
 import { shouldHavePersona } from '@/config/featuresConfig';
 
-import { shouldShowLanguageSelectedAtom } from '@/config/languagesConfig';
+import { shouldHaveLanguageSelector } from '@/config/featuresConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // navigate is used by React Router
@@ -25,7 +25,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Should show or not the sections
   const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
   const shouldShowLanguageSelected = useRecoilValue(
-    shouldShowLanguageSelectedAtom
+    shouldHaveLanguageSelector
   );
 
   // Import the navigation links, as defined in the config
