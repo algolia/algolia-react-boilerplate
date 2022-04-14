@@ -19,6 +19,7 @@ import { useRecoilValue } from 'recoil';
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
+  shouldHaveSorts
 } from '@/config/featuresConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
@@ -72,7 +73,9 @@ const SrpLaptop = () => {
   const { hitsPerPageNotInjected, hitsPerPageInjected } = hitsPerPage;
 
   // Define Price Sort By Const
-  const { value: shoulShowPriceSortBy, labelIndex } = useRecoilValue(sortBy);
+  const { value, labelIndex } = useRecoilValue(sortBy);
+
+  const shouldHaveSortsAtom = useRecoilValue(shouldHaveSorts);
 
   // Get states of React Router
   const { state } = useLocation();
@@ -109,7 +112,7 @@ const SrpLaptop = () => {
               <CustomStats />
             </Suspense>
           )}
-          {shoulShowPriceSortBy && (
+          {shouldHaveSortsAtom && (
             <Suspense fallback={<Loader />}>
               <CustomSortBy items={labelIndex} defaultRefinement={index} />
             </Suspense>
