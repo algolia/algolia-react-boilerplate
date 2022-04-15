@@ -45,6 +45,9 @@
             cursor: pointer;
             p{
                 font-size: 0.8rem;
+                &:hover{
+                    font-weight: bold;
+                }
             }
         }
     }
@@ -64,6 +67,9 @@
             cursor: pointer;
             p{
                 font-size: 0.8rem;
+                &:hover{
+                    font-weight: bold;
+                }
             }
         }
     }
@@ -84,6 +90,9 @@
             
             p{
                 font-size: 0.8rem;
+                &:hover{
+                    font-weight: bold;
+                }
             }
         }
     }
