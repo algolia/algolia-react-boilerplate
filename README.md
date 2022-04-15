@@ -249,6 +249,12 @@ Here is a sample record structure which is expected for records in the index to 
 }
 ```
 
+  <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> Icons</h3>
+
+  This project comes with fontawesome added by default so you can adjust or add icons at will. It has been installed by being added in `/src/assets/fontawesome/js/all.js` and linked in the head tag of `index.html`
+
+  You can add your icons by using this method: https://fontawesome.com/docs/web/add-icons/how-to
+
   <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Debounce</h3>
 
 [Debounce Lodash](https://www.npmjs.com/package/lodash.debounce)
