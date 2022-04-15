@@ -129,6 +129,9 @@
                 font-weight: bold;
             }
         }
+        &:hover{
+            background-color: $grey-dark-color-20;
+        }
     }
 
     &__btn{
@@ -171,6 +174,9 @@
             display: -webkit-box;
             text-overflow: ellipsis;
             -webkit-line-clamp: 4;
+        }
+        &:hover{
+            background-color: $grey-dark-color-20;
         }
     }
 }
