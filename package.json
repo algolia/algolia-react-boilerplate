@@ -28,6 +28,7 @@
     "@algolia/recommend": "^4.12.2",
     "@algolia/recommend-react": "^1.1.0",
     "@babel/eslint-parser": "^7.17.0",
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "@vitejs/plugin-react": "^1.1.4",
     "algoliasearch": "4.12.1",
     "css-loader": "^6.5.1",
