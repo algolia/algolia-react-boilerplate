@@ -63,6 +63,9 @@
           $main-color,
           $blue-algolia
         );
+        > p{
+          font-weight: 300;
+        }
         &::before {
           position: absolute;
           content: "";
@@ -140,6 +143,9 @@
           $main-color,
           $blue-algolia
         );
+        > p{
+          font-weight: 300;
+        }
         &:hover {
           @include facetsHierarchicalHover($blue-algolia);
         }
