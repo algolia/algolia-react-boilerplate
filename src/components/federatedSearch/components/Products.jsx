@@ -66,7 +66,7 @@ const Hits = ({ hits }) => {
       </ul>
       <div className="products__btn" onClick={() => {}}>
         <ChevronRight />
-        <p>SHOW ALL PRODUCTS</p>
+        <p onClick={() => navigate('/search')}>SHOW ALL PRODUCTS</p>
       </div>
     </div>
   );
