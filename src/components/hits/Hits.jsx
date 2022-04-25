@@ -1,7 +1,9 @@
 // TODO: why is this NOT export default?
 
+import { useState } from 'react';
+
 // Import framer-motion for animation on hits
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { Highlight } from 'react-instantsearch-dom';
 
@@ -33,6 +35,7 @@ import Popular from './Popular';
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
+  const [isHovered, setIsHovered] = useState(false);
   const isHitPromoted = hit?._rankingInfo?.promoted;
 
   // Get currency symbol
@@ -40,7 +43,7 @@ const Hit = ({ hit }) => {
   const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
 
   // Get hit attribute from config file
-  const { price, objectID, image, category, productName } =
+  const { price, objectID, image, imageAlt, category, productName } =
     useRecoilValue(hitsConfig);
 
   return (
@@ -57,14 +60,48 @@ const Hit = ({ hit }) => {
         navigate(`/search/${hit[objectID]}`);
       }}
     >
-      <motion.div className="srpItem__imgWrapper">
-        <motion.img
-          whileHover={{ scale: 1.1 }}
-          transition={framerMotionTransition}
-          src={get(hit, image)}
-          alt={get(hit, category)}
-          onError={(e) => (e.currentTarget.src = placeHolderError)}
-        />
+      <motion.div
+        className="srpItem__imgWrapper"
+        onMouseLeave={(e) => {
+          setIsHovered(false);
+        }}
+        onMouseOver={(e) => {
+          setIsHovered(true);
+        }}
+      >
+        <AnimatePresence>
+          {isHovered && get(hit, imageAlt) !== undefined ? (
+            <motion.img
+              initial={{ opacity: 1, scale: 1 }}
+              animate={{ opacity: 1, scale: 0.9 }}
+              exit={{ opacity: 0.9 }}
+              transition={{
+                duration: 0.1,
+                ease: [0.43, 0.13, 0.23, 0.96],
+              }}
+              key={1}
+              className="secondImage"
+              src={get(hit, imageAlt)}
+              alt={get(hit, category)}
+              onError={(e) => (e.currentTarget.src = placeHolderError)}
+            />
+          ) : (
+            <motion.img
+              initial={{ opacity: 1, scale: 1 }}
+              animate={{ opacity: 1, scale: 0.9 }}
+              exit={{ opacity: 0.9 }}
+              transition={{
+                duration: 0.1,
+                ease: [0.43, 0.13, 0.23, 0.96],
+              }}
+              className="mainImage"
+              src={get(hit, image)}
+              key={2}
+              alt={get(hit, category)}
+              onError={(e) => (e.currentTarget.src = placeHolderError)}
+            />
+          )}
+        </AnimatePresence>
         {isHitPromoted && <Popular />}
         <div className="srpItem__imgWrapper__heart">
           <Heart />
