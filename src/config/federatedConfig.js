@@ -10,7 +10,7 @@ export const federatedCategoriesAttribute = 'hierarchicalCategories.lvl2';
 // Adjust each value to true or false depending on what you wish to show
 export const federatedSearchConfig = {
   showRecentSearches: true,
-  showQuerySuggestions: true,
+  showQuerySuggestions: false,
   showCategories: true,
   showProducts: true,
   showBlogPosts: true,
