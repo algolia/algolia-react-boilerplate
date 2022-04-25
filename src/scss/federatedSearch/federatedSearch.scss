@@ -60,6 +60,12 @@
     }
     &__items{
         li{
+            .ais-Highlight-highlighted{
+                font-style: normal;
+            }
+            .ais-Highlight-nonHighlighted {
+                font-style: italic;
+            }
             display: flex;
             align-items: center;
             gap: 0.5rem;
