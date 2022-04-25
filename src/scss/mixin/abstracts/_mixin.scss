@@ -159,7 +159,7 @@
 // ------------------------------------------
 // Hits
 // ------------------------------------------
-@mixin hits-individual($title-color, $price-color, $higlight-color, $shadow) {
+@mixin hits-individual($title-color, $price-color, $highlight-color, $shadow) {
   width: 100%;
   display: block;
   &__imgWrapper {
@@ -211,7 +211,7 @@
         color: $title-color;
       }
       .ais-Highlight-highlighted {
-        @include highlight($higlight-color);
+        @include highlight($highlight-color);
       }
     }
     &__down {
@@ -226,8 +226,8 @@
   }
 }
 
-@mixin highlight($higlight-color) {
-  color: $higlight-color;
+@mixin highlight($highlight-color) {
+  color: $highlight-color;
   font-style: normal;
   font-weight: 600;
 }

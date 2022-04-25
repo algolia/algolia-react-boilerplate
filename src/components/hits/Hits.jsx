@@ -10,7 +10,7 @@ import { Heart } from '@/assets/svg/SvgIndex';
 // In case of img loading error
 import { logoUrl as placeHolderError } from '@/config/headerConfig';
 
-import get from 'lodash/get'
+import get from 'lodash/get';
 
 import {
   framerMotionTransition,
