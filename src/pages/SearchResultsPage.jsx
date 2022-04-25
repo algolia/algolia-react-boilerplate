@@ -29,7 +29,10 @@ import Banner from '@/components/banners/Banner';
 // Import Persona State from recoil
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
-import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+import {
+  federatedSearchConfig,
+  shouldHaveOpenFederatedSearch,
+} from '@/config/federatedConfig';
 
 const SrpLaptop = lazy(() =>
   import('@/components/searchresultpage/srpLaptop/SrpLaptop')
@@ -85,19 +88,24 @@ const NoResults = memo(({ query }) => {
           <li>
             <span className="no-results__infos__span">Check your spelling</span>
           </li>
-          <li>
-            <span className="no-results__infos__span">
-              Or check our suggestions bellow 👇
-            </span>
-          </li>
-          <div className="query-suggestion">
-            <Index indexId={suggestionsIndex} indexName={suggestionsIndex}>
-              <Configure hitsPerPage={3} query="" />
-              <QuerySuggestions />
-            </Index>
-            {/* Add this searchBox Invisible to refine when we click on a suggestion */}
-            <CustomSearchBox query={getQueryState} />
-          </div>
+          {/* No Result suggestions displayed when Query Suggestions are active */}
+          {federatedSearchConfig.showQuerySuggestions && (
+            <>
+              <li>
+                <span className="no-results__infos__span">
+                  Or check our suggestions below 👇
+                </span>
+              </li>
+              <div className="query-suggestion">
+                <Index indexId={suggestionsIndex} indexName={suggestionsIndex}>
+                  <Configure hitsPerPage={3} query="" />
+                  <QuerySuggestions />
+                </Index>
+                {/* Add this searchBox Invisible to refine when we click on a suggestion */}
+                <CustomSearchBox query={getQueryState} />
+              </div>
+            </>
+          )}
         </ul>
       </div>
     </div>
