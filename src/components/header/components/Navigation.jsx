@@ -4,6 +4,7 @@
 import { useNavigate } from 'react-router-dom';
 // Recoil Header State
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Config for the header
 import { categoryPageFilterAttribute } from '@/config/categoryConfig';
@@ -19,14 +20,15 @@ import { shouldHavePersona } from '@/config/featuresConfig';
 import { shouldHaveLanguageSelector } from '@/config/featuresConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
+  // Recoil State
+  const [queryState, setQueryState] = useRecoilState(queryAtom);
+
   // navigate is used by React Router
   const navigate = useNavigate();
 
   // Should show or not the sections
   const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
-  const shouldShowLanguageSelected = useRecoilValue(
-    shouldHaveLanguageSelector
-  );
+  const shouldShowLanguageSelected = useRecoilValue(shouldHaveLanguageSelector);
 
   // Import the navigation links, as defined in the config
   const [links] = useRecoilState(linksHeader);
@@ -42,6 +44,8 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         <li
           key={link.url}
           onClick={() => {
+            // Set query to nothing when clicking on a category
+            setQueryState('');
             // Open the sub-menu if the link is hierarchical, otherwise run a search
             if (link.name !== 'All') {
               navigate(`/search`, {
