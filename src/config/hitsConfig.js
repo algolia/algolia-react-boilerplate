@@ -26,6 +26,7 @@ export const hitsConfig = atom({
     sizeFilter: 'sizeFilter',
     price: 'price',
     image: 'img_optimised',
+    imageAlt: 'imageAlt',
     hierarchicalCategoriesLvl0: 'hierarchicalCategories.lvl0',
     hierarchicalCategoriesLvl1: 'hierarchicalCategories.lvl1',
     hierarchicalCategoriesLvl2: 'hierarchicalCategories.lvl2',

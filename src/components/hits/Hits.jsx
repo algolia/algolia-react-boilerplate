@@ -1,7 +1,9 @@
 // TODO: why is this NOT export default?
 
+import { useState } from 'react';
+
 // Import framer-motion for animation on hits
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { Highlight } from 'react-instantsearch-dom';
 
@@ -33,6 +35,7 @@ import Popular from './Popular';
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
+  const [isHovered, setIsHovered] = useState(false);
   const isHitPromoted = hit?._rankingInfo?.promoted;
 
   // Get currency symbol
@@ -40,7 +43,7 @@ const Hit = ({ hit }) => {
   const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
 
   // Get hit attribute from config file
-  const { price, objectID, image, category, productName } =
+  const { price, objectID, image, imageAlt, category, productName } =
     useRecoilValue(hitsConfig);
 
   return (
@@ -57,14 +60,32 @@ const Hit = ({ hit }) => {
         navigate(`/search/${hit[objectID]}`);
       }}
     >
-      <motion.div className="srpItem__imgWrapper">
-        <motion.img
-          whileHover={{ scale: 1.1 }}
-          transition={framerMotionTransition}
-          src={get(hit, image)}
-          alt={get(hit, category)}
-          onError={(e) => (e.currentTarget.src = placeHolderError)}
-        />
+      <motion.div
+        className="srpItem__imgWrapper"
+        onMouseLeave={(e) => {
+          setIsHovered(false);
+        }}
+        onMouseOver={(e) => {
+          setIsHovered(true);
+        }}
+      >
+        {isHovered && get(hit, imageAlt) !== undefined ? (
+          <img
+            key={1}
+            className="secondImage"
+            src={get(hit, imageAlt)}
+            alt={get(hit, category)}
+            onError={(e) => (e.currentTarget.src = placeHolderError)}
+          />
+        ) : (
+          <img
+            className="mainImage"
+            src={get(hit, image)}
+            key={2}
+            alt={get(hit, category)}
+            onError={(e) => (e.currentTarget.src = placeHolderError)}
+          />
+        )}
         {isHitPromoted && <Popular />}
         <div className="srpItem__imgWrapper__heart">
           <Heart />
