@@ -40,32 +40,34 @@ const Hits = ({ hits }) => {
       </div>
       <ul className="products__items">
         {console.log(hits.length)}
-        {hits.length
-          ? hits.map((hit) => {
-              return (
-                <li
-                  key={hit[objectID]}
-                  className="products__item"
-                  onClick={() => {
-                    hitState(hit);
-                    navigate(`/search/${hit[objectID]}`);
-                  }}
-                >
-                  <div className="image-wrapper">
-                    <img src={get(hit, image)} alt="" />
-                  </div>
-                  <div className="infos">
-                    <p className="brand">{get(hit, brand)}</p>
-                    <p className="name">{get(hit, productName)}</p>
-                    <p className="price">
-                      {get(hit, price)}
-                      {displayCurrency && currency}
-                    </p>
-                  </div>
-                </li>
-              );
-            })
-          : 'No Results Found'}
+        {hits.length ? (
+          hits.map((hit) => {
+            return (
+              <li
+                key={hit[objectID]}
+                className="products__item"
+                onClick={() => {
+                  hitState(hit);
+                  navigate(`/search/${hit[objectID]}`);
+                }}
+              >
+                <div className="image-wrapper">
+                  <img src={get(hit, image)} alt="" />
+                </div>
+                <div className="infos">
+                  <p className="brand">{get(hit, brand)}</p>
+                  <p className="name">{get(hit, productName)}</p>
+                  <p className="price">
+                    {get(hit, price)}
+                    {displayCurrency && currency}
+                  </p>
+                </div>
+              </li>
+            );
+          })
+        ) : (
+          <span className="no-results__infos">No Results Found</span>
+        )}
       </ul>
       <div className="products__btn" onClick={() => {}}>
         <ChevronRight />
