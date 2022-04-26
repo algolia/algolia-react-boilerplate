@@ -39,30 +39,33 @@ const Hits = ({ hits }) => {
         <h3 className="products__title">Products</h3>
       </div>
       <ul className="products__items">
-        {hits.map((hit) => {
-          return (
-            <li
-              key={hit[objectID]}
-              className="products__item"
-              onClick={() => {
-                hitState(hit);
-                navigate(`/search/${hit[objectID]}`);
-              }}
-            >
-              <div className="image-wrapper">
-                <img src={get(hit, image)} alt="" />
-              </div>
-              <div className="infos">
-                <p className="brand">{get(hit, brand)}</p>
-                <p className="name">{get(hit, productName)}</p>
-                <p className="price">
-                  {get(hit, price)}
-                  {displayCurrency && currency}
-                </p>
-              </div>
-            </li>
-          );
-        })}
+        {console.log(hits.length)}
+        {hits.length
+          ? hits.map((hit) => {
+              return (
+                <li
+                  key={hit[objectID]}
+                  className="products__item"
+                  onClick={() => {
+                    hitState(hit);
+                    navigate(`/search/${hit[objectID]}`);
+                  }}
+                >
+                  <div className="image-wrapper">
+                    <img src={get(hit, image)} alt="" />
+                  </div>
+                  <div className="infos">
+                    <p className="brand">{get(hit, brand)}</p>
+                    <p className="name">{get(hit, productName)}</p>
+                    <p className="price">
+                      {get(hit, price)}
+                      {displayCurrency && currency}
+                    </p>
+                  </div>
+                </li>
+              );
+            })
+          : 'No Results Found'}
       </ul>
       <div className="products__btn" onClick={() => {}}>
         <ChevronRight />
