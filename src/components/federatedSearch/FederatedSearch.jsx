@@ -31,9 +31,13 @@ import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig';
 // Import Persona State from recoil
 import { personaSelectedAtom } from '@/config/personaConfig';
 
+// Import refs for modal closing functionality
+import { federatedRef } from '@/config/federatedConfig';
+import { selectorNavigationRef } from '@/config/headerConfig';
+
 // hook import
 // Check if user is clecking outside an element
-import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
+import useOutsideClickTwoConditions from '@/hooks/useOutsideClickTwoConditions';
 // Check screensize for responsiveness
 import useScreenSize from '@/hooks/useScreenSize';
 
@@ -52,12 +56,16 @@ const FederatedSearch = () => {
   const searchboxRef = useRecoilValue(searchBoxAtom);
   const query = useRecoilValue(queryAtom);
 
+  //Get reference for dropdowns in Navigation
+  const selector = useRecoilValue(selectorNavigationRef);
+
   // Get Indexes Name
   const { suggestionsIndex, articlesIndex } = useRecoilValue(indexNames);
 
   const containerFederated = useRef('');
+
   // Custom hook
-  useOutsideClickConditional(containerFederated, searchboxRef, () =>
+  useOutsideClickTwoConditions(containerFederated, searchboxRef, selector, () =>
     setIsFederated(false)
   );
 

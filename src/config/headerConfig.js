@@ -34,3 +34,8 @@ export const linksHeader = atom({
     },
   ],
 });
+
+export const selectorNavigationRef = atom({
+  key: 'selectorNavigationRef', // unique ID (with respect to other atoms/selectors)
+  default: '',
+})

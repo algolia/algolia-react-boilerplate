@@ -20,3 +20,8 @@ export const shouldHaveOpenFederatedSearch = atom({
   key: 'shouldHaveOpenFederatedSearch', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
 });
+
+export const federatedRef = atom({
+  key: 'federatedRef', // unique ID (with respect to other atoms/selectors)
+  default: "", // default value (aka initial value)
+})
