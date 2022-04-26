@@ -69,39 +69,23 @@ const Hit = ({ hit }) => {
           setIsHovered(true);
         }}
       >
-        <AnimatePresence>
-          {isHovered && get(hit, imageAlt) !== undefined ? (
-            <motion.img
-              initial={{ opacity: 1, scale: 1 }}
-              animate={{ opacity: 1, scale: 0.9 }}
-              exit={{ opacity: 0.9 }}
-              transition={{
-                duration: 0.1,
-                ease: [0.43, 0.13, 0.23, 0.96],
-              }}
-              key={1}
-              className="secondImage"
-              src={get(hit, imageAlt)}
-              alt={get(hit, category)}
-              onError={(e) => (e.currentTarget.src = placeHolderError)}
-            />
-          ) : (
-            <motion.img
-              initial={{ opacity: 1, scale: 1 }}
-              animate={{ opacity: 1, scale: 0.9 }}
-              exit={{ opacity: 0.9 }}
-              transition={{
-                duration: 0.1,
-                ease: [0.43, 0.13, 0.23, 0.96],
-              }}
-              className="mainImage"
-              src={get(hit, image)}
-              key={2}
-              alt={get(hit, category)}
-              onError={(e) => (e.currentTarget.src = placeHolderError)}
-            />
-          )}
-        </AnimatePresence>
+        {isHovered && get(hit, imageAlt) !== undefined ? (
+          <img
+            key={1}
+            className="secondImage"
+            src={get(hit, imageAlt)}
+            alt={get(hit, category)}
+            onError={(e) => (e.currentTarget.src = placeHolderError)}
+          />
+        ) : (
+          <img
+            className="mainImage"
+            src={get(hit, image)}
+            key={2}
+            alt={get(hit, category)}
+            onError={(e) => (e.currentTarget.src = placeHolderError)}
+          />
+        )}
         {isHitPromoted && <Popular />}
         <div className="srpItem__imgWrapper__heart">
           <Heart />

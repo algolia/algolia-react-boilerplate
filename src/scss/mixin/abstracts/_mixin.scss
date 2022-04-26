@@ -165,14 +165,12 @@
   &__imgWrapper {
     position: relative;
     overflow: hidden;
+    height: 29rem;
     img {
       width: 100%;
       position: relative;
       overflow: hidden;
       cursor: pointer;
-    }
-    :hover {
-      box-shadow: 0 0rem 5rem rgba($shadow, 0.2);
     }
     &__heart {
       position: absolute;
