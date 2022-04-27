@@ -1,5 +1,8 @@
 import { atom } from 'recoil';
 
+// import personaConfig for displaying in the guide
+import { personaConfig } from './personaConfig';
+
 // Should we show the demo guide in this demo
 export const shouldShowDemoGuide = atom({
   key: 'shouldShowDemoGuide',
@@ -107,21 +110,16 @@ export const searchPersonaConfig = [
   },
 ];
 
-// What would be the content of the alert when you're selecting a persona
-export const searchPersonaInformations = [
-  {
-    span: 'Neutral',
-    details: 'No Persona Selected',
-  },
-  {
-    span: 'Stephen',
-    details: 'Stephen James is a man who likes sports shoes',
-  },
-  {
-    span: 'Elizabeth',
-    details: 'Elizabeth Aniston is a woman who likes Blue Dresses',
-  },
-];
+// The info is imported from personaConfig for display in 'Search Persona'
+export const searchPersonaInformations = personaConfig.map((persona) => {
+  const { label, description } = persona
+  return {
+    span: label,
+    details: description
+  }
+})
+
+
 
 // ------------------------------------------
 // Injected Content Guide Config
