@@ -1,4 +1,6 @@
+
 import { atom } from 'recoil';
+import { segmentConfig } from './segmentConfig';
 
 // Should we show the demo guide in this demo
 export const shouldShowDemoGuide = atom({
@@ -79,6 +81,32 @@ export const searchTermsInformations = [
 ];
 
 // ------------------------------------------
+// Segment Guide Config
+// ------------------------------------------
+
+export const searchSegmentConfig = [
+  { value: '', label: 'Segment', description: 'No Segment' },
+  {
+    value: ['season:2022 SPRING', 'hierarchicalCategory.0:Women'],
+    label: 'Segment One',
+    description: `eg: Segment for Women's New Season`
+  },
+  {
+    value: ['brand:Purple Label', 'hierarchicalCategory.0:Men'],
+    label: 'Segment Two',
+    description: `eg: Segment for Men's Purple Clothes`
+  },
+]
+
+export const searchSegmentInformations = segmentConfig.map((segment) => {
+  const { label, description } = segment
+  return {
+    span: label,
+    details: description
+  }
+})
+
+// ------------------------------------------
 // Search Persona Guide Config
 // Persona in demo guide allow to select a persona and
 // showcase a personalised Search experience
@@ -89,6 +117,11 @@ export const shouldShowPersonas = atom({
   key: 'shouldShowPersonas',
   default: true,
 });
+
+export const shouldShowSegments = atom({
+  key: 'shouldShowSegments',
+  default: true
+})
 
 // What would be the content of the select in this section
 export const searchPersonaConfig = [

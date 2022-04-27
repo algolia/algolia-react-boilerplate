@@ -10,12 +10,13 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { categoryPageFilterAttribute } from '@/config/categoryConfig';
 import { linksHeader } from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
+import SelectSegment from '../segmentSelect/SelectSegment';
 
 //import language selector component
 import LanguageSelect from '../languagesSelect/LanguageSelect';
 
 // Import Recoil config
-import { shouldHavePersona } from '@/config/featuresConfig';
+import { shouldHavePersona, shouldHaveSegments } from '@/config/featuresConfig';
 
 import { shouldHaveLanguageSelector } from '@/config/featuresConfig';
 
@@ -28,6 +29,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   // Should show or not the sections
   const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
+  const shouldShowSegmentsAtom = useRecoilValue(shouldHaveSegments);
   const shouldShowLanguageSelected = useRecoilValue(shouldHaveLanguageSelector);
 
   // Import the navigation links, as defined in the config
@@ -67,6 +69,11 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
       {shouldShowPersonasAtom && (
         <li>
           <SelectPersona />
+        </li>
+      )}
+      {shouldShowSegmentsAtom && (
+        <li>
+          <SelectSegment />
         </li>
       )}
       {/* Display the language select component */}

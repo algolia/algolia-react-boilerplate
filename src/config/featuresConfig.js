@@ -44,6 +44,11 @@ export const shouldHavePersona = atom({
   default: true,
 });
 
+export const shouldHaveSegments = atom({
+  key: 'shouldHaveSegments',
+  default: true,
+})
+
 export const shouldHaveInjectedHits = atom({
   key: 'shouldHaveInjectedHits',
   default: true,

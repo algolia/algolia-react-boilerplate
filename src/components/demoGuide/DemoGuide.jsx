@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil';
 import SearchTerms from './components/SearchTerms';
 import SearchBanners from './components/SearchBanners';
 import SearchPersona from './components/SearchPersona';
+import SearchSegments from './components/SearchSegments';
 import DemoGuideInjectedContent from './components/DemoGuideInjectedContent';
 import DemoGuideDynamicFilters from './components/DemoGuideDynamicFilters';
 import DemoGuideRedirect from './components/DemoGuideRedirect';
@@ -22,17 +23,20 @@ import {
   demoGuideBtnRef,
   shouldShowSearchTerms,
   shouldShowPersonas,
+  shouldShowSegments,
   shouldShowInjectedContent,
   shouldShowDynamicFilters,
   shouldShowRedirects,
   shouldShowBanners,
 } from '@/config/demoGuideConfig';
+import { shouldHaveSegments } from '@/config/featuresConfig';
 
 const DemoGuide = ({ setshowDemoGuide }) => {
   //Select Panel wrapper
   const demoGuide = useRef();
 
   const shouldShowPersonasAtom = useRecoilValue(shouldShowPersonas);
+  const shouldShowSegmentsAtom = useRecoilValue(shouldShowSegments);
   const shouldShowSearchTermsAtom = useRecoilValue(shouldShowSearchTerms);
   const shouldShowInjectedContentAtom = useRecoilValue(
     shouldShowInjectedContent
@@ -81,6 +85,11 @@ const DemoGuide = ({ setshowDemoGuide }) => {
           <li className="container-nav-help__items ">
             <SearchPersona />
             <hr />
+          </li>
+        )}
+        {shouldShowSegmentsAtom && (
+          <li className="container-nav-help__items">
+            <SearchSegments />
           </li>
         )}
         {shouldShowInjectedContentAtom && (

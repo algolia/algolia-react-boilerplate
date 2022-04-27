@@ -12,16 +12,16 @@ import { useNavigate } from 'react-router-dom';
 
 // Import configuration
 import {
-  searchPersonaConfig,
+  searchSegmentConfig,
   styles,
-  searchPersonaInformations,
+  searchSegmentInformations,
 } from '@/config/demoGuideConfig';
 
-import { personaSelectedAtom } from '@/config/personaConfig';
+import { segmentSelectedAtom } from '@/config/segmentConfig';
 
-const SearchPersona = () => {
+const SearchSegments = () => {
   // Recoil State - update query in searchBar
-  const setPersonaSelect = useSetRecoilState(personaSelectedAtom);
+  const setSegmentSelect = useSetRecoilState(segmentSelectedAtom);
   const setAlert = useSetRecoilState(alertContent);
   const setAlertOpen = useSetRecoilState(isAlertOpen);
   // router hook to navigate using a function
@@ -35,9 +35,9 @@ const SearchPersona = () => {
 
   return (
     <div className="search-terms">
-      <h3>Search with Persona</h3>
+      <h3>Search with Segments</h3>
       <div className="search-terms__infos">
-        {searchPersonaInformations.map((item, i) => {
+        {searchSegmentInformations.map((item, i) => {
           return (
             <div key={i} className="search-terms__infos__titles">
               <span>{item.span}:</span>
@@ -47,13 +47,13 @@ const SearchPersona = () => {
         })}
       </div>
       <Select
-        defaultValue={searchPersonaConfig}
-        options={searchPersonaConfig}
+        defaultValue={searchSegmentConfig}
+        options={searchSegmentConfig}
         styles={styles}
         placeholder="Persona"
         onChange={(e) => {
           if (e.value !== 'anon') {
-            setPersonaSelect(e.value);
+            setSegmentSelect(e.value);
             triggerAlert(e.alertContent);
           }
         }}
@@ -62,4 +62,4 @@ const SearchPersona = () => {
   );
 };
 
-export default SearchPersona;
+export default SearchSegments;
