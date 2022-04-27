@@ -15,7 +15,7 @@ export const simplePlaceholderAtom = atom({
 // Please ignore this atom
 export const queryAtom = atom({
   key: 'queryAtom', // unique ID (with respect to other atoms/selectors)
-  default: null, // default value (aka initial value)
+  default: '', // default value (aka initial value)
 });
 
 // Please ignore this atom
