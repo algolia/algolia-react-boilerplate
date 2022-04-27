@@ -80,6 +80,7 @@
         display: flex;
         justify-content: center;
         li {
+          z-index: 50;
           margin-left: $two-rem-spaces;
           cursor: pointer;
           p {
