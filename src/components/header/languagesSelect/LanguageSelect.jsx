@@ -1,3 +1,6 @@
+// This is the language selector for the Navigation section in the header.
+// NB this isn't functional on the flagship index as we only have one language
+
 import { memo } from 'react';
 
 // Import the Select widget (https://react-select.com/home)

@@ -1,5 +1,6 @@
 // ------------------------------------------
-// Configuration for languages switch accross the application
+// Configuration for languages switch across the application
+// NB this isn't functional on the flagship index as we only have one language
 // ------------------------------------------
 import { atom } from 'recoil';
 
