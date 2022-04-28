@@ -69,7 +69,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           <SelectPersona />
         </li>
       )}
-      {/* Display the language select component */}
+      {/* Display the language select component NB this isn't functional on the flagship index as we only have one language */}
       {shouldShowLanguageSelected && (
         <li>
           <LanguageSelect />

@@ -32,6 +32,18 @@ export const linksHeader = atom({
       filter: 'Womens',
       url: '/womens',
     },
+  {
+      name: 'Home',
+      type: 'filter',
+      filter: 'Home',
+      url: '/home',
+    },
+    {
+      name: 'Summer 22 Collection',
+      type: 'context',
+      context: 'summer-22-collection',
+      url: '/summer-22-collection',
+    },
   ],
 });
 
