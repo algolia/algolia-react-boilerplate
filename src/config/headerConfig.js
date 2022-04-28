@@ -19,30 +19,28 @@ export const linksHeader = atom({
   default: [
     {
       name: 'All',
+      type: 'filter',
       filter: '',
       url: '/search',
     },
     {
       name: 'Mens',
+      type: 'filter',
       filter: 'Mens',
       url: '/mens',
     },
     {
       name: 'Womens',
+      type: 'filter',
       filter: 'Womens',
       url: '/womens',
     },
-  {
-      name: 'Home',
-      type: 'filter',
-      filter: 'Home',
-      url: '/home',
-    },
+    // This uses context from the Algolia dashboard, configured using Visual Editor
     {
-      name: 'Summer 22 Collection',
+      name: 'Accessories',
       type: 'context',
-      context: 'summer-22-collection',
-      url: '/summer-22-collection',
+      context: 'accessories',
+      url: '/accessories',
     },
   ],
 });

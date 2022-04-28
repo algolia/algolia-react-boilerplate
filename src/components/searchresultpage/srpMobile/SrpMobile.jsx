@@ -24,7 +24,7 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
-  shouldHaveSorts
+  shouldHaveSorts,
 } from '@/config/featuresConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
@@ -139,7 +139,12 @@ const SrpMobile = () => {
           analytics={false}
           userToken={userToken}
           enablePersonalization={true}
-          filters={state ? state : ''}
+          filters={
+            state?.type === 'filter' && state?.action !== null
+              ? state.action
+              : ''
+          }
+          ruleContexts={state?.type === 'context' ? state.action : ''}
           query={queryState}
         />
 
