@@ -97,6 +97,38 @@ ProductDetails.jsx
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Redirects</h3>
+
+Redirects are already activated in the application. In order to trigger one, simply create a rule in the dashboard where the consequence is:
+ ```
+ {
+  "isRedirected": true,
+  "redirect": "URL TO REDIRECT TO GOES HERE"
+ }
+ ```
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Federated Search</h3>
+
+You can turn on federated search in `config/featuresConfig` by setting the `default` value of `shouldHaveFederatedSearch` to true. You can then define which sections are shown by going to `config/federatedConfig`.
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Voice Search</h3>
+
+You can turn on voice search by going to `config/featuresConfig` and setting the `default` value of `shouldHaveVoiceSearch` to true.
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Sorts</h3>
+
+You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveSorts` to true.
+
+You can then define your sorts by going to `config/sortByConfig` and adjusting the values in the export called `sortBy`.
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Carousels</h3>
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Recommend</h3>
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Styling</h3>
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Demo Guide</h3>
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Languages</h3>
 
 In order to turn on this feature, go to `config/featuresConfig` and set `shouldHaveLanguages` to true.
