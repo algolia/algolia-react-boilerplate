@@ -1,5 +1,32 @@
 # React Boilerplate for Custom Demos
 
+<h1>Table of Contents</h1>
+   * [Get started](#️-get-started)
+   * [Structure](#️-structure)
+   * [Features Config](#-features-config)
+      * [ Languages](#--languages)
+      * [ Banners](#--banners)
+      * [ Segments](#--segments)
+      * [ Badges](#--badges)
+      * [ Facet Display](#--facet-display)
+      * [ Category Pages](#--category-pages)
+      * [ Collection Pages](#--collection-pages)
+      * [Personas](#--personas)
+      * [Injected Content](#--injected-content)
+         * [INJECTION FROM MAIN INDEX](#injection-from-main-index)
+         * [INJECTION FROM SEPERATE INDEX](#injection-from-seperate-index)
+      * [Icons](#-icons)
+   * [Dependencies](#️-dependencies)
+      * [State Manager](#-state-manager)
+      * [Router](#-router)
+      * [Slider](#-slider)
+      * [Select Menus](#-select-menus)
+      * [Style](#-style)
+      * [Debounce](#-debounce)
+      * [Lazy Loading](#-lazy-loading)
+   * [Develop on this project](#️-develop-on-this-project)
+      * [Before use please install](#-before-use-please-install)
+
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
 
 1. Clone this repo under a new name for your own demo.
@@ -18,27 +45,6 @@
 
 8. Log into Netlify on the Algolia Demos team (again ask #help-demos if you don't have access) and deploy your demo from Github, making sure to password protect it!
 
-
-<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⌨️ Develop on this project</h2>
-
-To run this project locally, install the dependencies and run the local server:
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">👊 Before use please install</h3>
-
-[GitFlow](https://danielkummer.github.io/git-flow-cheatsheet/)
-
-On Mac 👇
-
-```sh
-brew install git-flow-avh
-git flow init
-```
-
-[Husky](https://typicode.github.io/husky/#/) 🐶
-
-```sh
-npx husky install
-```
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Structure</h2>
 
@@ -88,30 +94,6 @@ ProductDetails.jsx
 - Recommend components
   - Related Products
   - Frequently Bought Together
-
-<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">💻 State Manager</h3>
-
-[Recoil](https://recoiljs.org/)
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🚧 Router</h3>
-
-[React Router](https://v5.reactrouter.com/web/guides/quick-start)
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎚 Slider</h3>
-
-[Slider](https://slider-react-component.vercel.app/)
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🖲 Select Menus</h3>
-
-[React-Select](https://www.npmjs.com/package/react-select)
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎨 Style</h3>
-
-[SCSS](https://sass-lang.com/)
-with
-[BEM Naming](https://css-tricks.com/bem-101/)
 
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
@@ -282,6 +264,31 @@ This project comes with fontawesome added by default so you can adjust or add ic
 
 You can add your icons by using this method: https://fontawesome.com/docs/web/add-icons/how-to
 
+
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">💻 State Manager</h3>
+
+[Recoil](https://recoiljs.org/)
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🚧 Router</h3>
+
+[React Router](https://v5.reactrouter.com/web/guides/quick-start)
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎚 Slider</h3>
+
+[Slider](https://slider-react-component.vercel.app/)
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🖲 Select Menus</h3>
+
+[React-Select](https://www.npmjs.com/package/react-select)
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎨 Style</h3>
+
+[SCSS](https://sass-lang.com/)
+with
+[BEM Naming](https://css-tricks.com/bem-101/)
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Debounce</h3>
 
 [Debounce Lodash](https://www.npmjs.com/package/lodash.debounce)
@@ -295,3 +302,24 @@ We use the React library Suspense and lazy to load components when needed, and a
 
 - https://reactjs.org/docs/code-splitting.html#reactlazy
 - https://www.npmjs.com/package/react-lazily
+
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⌨️ Develop on this project</h2>
+
+To run this project locally, install the dependencies and run the local server:
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">👊 Before use please install</h3>
+
+[GitFlow](https://danielkummer.github.io/git-flow-cheatsheet/)
+
+On Mac 👇
+
+```sh
+brew install git-flow-avh
+git flow init
+```
+
+[Husky](https://typicode.github.io/husky/#/) 🐶
+
+```sh
+npx husky install
+```
