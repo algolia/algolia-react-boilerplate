@@ -3,11 +3,13 @@
 import { useState } from 'react';
 
 // Import framer-motion for animation on hits
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { Highlight } from 'react-instantsearch-dom';
 
 import { Heart } from '@/assets/svg/SvgIndex';
+
+import { badgeCriteria } from '@/config/badgeConfig';
 
 // In case of img loading error
 import { logoUrl as placeHolderError } from '@/config/headerConfig';
@@ -15,7 +17,6 @@ import { logoUrl as placeHolderError } from '@/config/headerConfig';
 import get from 'lodash/get';
 
 import {
-  framerMotionTransition,
   framerMotionHits,
 } from '@/config/animationConfig';
 
@@ -30,13 +31,12 @@ import {
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
-import Popular from './Popular';
+import Badge from './Badge';
 
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
-  const isHitPromoted = hit?._rankingInfo?.promoted;
 
   // Get currency symbol
   const currency = useRecoilValue(currencySymbolAtom);
@@ -86,7 +86,7 @@ const Hit = ({ hit }) => {
             onError={(e) => (e.currentTarget.src = placeHolderError)}
           />
         )}
-        {isHitPromoted && <Popular />}
+        {badgeCriteria(hit) !== null && <Badge title={badgeCriteria(hit)} />}
         <div className="srpItem__imgWrapper__heart">
           <Heart />
         </div>
