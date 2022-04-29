@@ -11,7 +11,7 @@ import { atom } from 'recoil';
 // Should the language selector be displayed on the screen
 export const shouldHaveLanguageSelector = atom({
   key: 'shouldHaveLanguageSelector', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 });
 
 export const shouldHaveSorts = atom({
