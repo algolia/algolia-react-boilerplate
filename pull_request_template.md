@@ -1,11 +1,4 @@
 ## Objective
-
-Describe the problem and what is to be achieved with this pull request...
-- What is it?
-- Why is it needed?
-- How is it implemented?
-- How is it customised?
-
 What:
 Why:
 How: 
@@ -21,13 +14,6 @@ Usage:
 - [ ] Documentation
 - [ ] Tests
 
-## Work Done
-
-Outline your technical solution and the changes made to the code base to achieve the goals stated above...
-
-## Screenshots / Output
-
-Add screenshots or a representation of the desired effect or output achieved...
 
 ## Tested
 

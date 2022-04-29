@@ -1,26 +1,23 @@
 // ------------------------------------------
-// Configuration for personalisation accross the application
+// Configuration for segments accross the application
 // ------------------------------------------
 import { atom } from 'recoil';
 
 // ------------------------------------------
-// This const defines the personas available for personalisation
+// This const defines the options available for segmentation
 // The labels will show in a dropdown in the navigation
-// The values are what is sent as the userToken to Algolia
+// The values are what is sent as optional filters to Algolia
 // Add or remove objects to this array as you see fit
-// Just make sure you have events and profiles for your values
 // ------------------------------------------
-export const personaConfig = [
-  { value: 'anon', label: 'Neutral', description: 'Anonymous user' },
+export const segmentConfig = [
+  { value: '', label: 'No Segment' },
   {
-    value: 'stephen_james',
-    label: 'Stephen',
-    description: 'Stephen James is a man who likes sports shoes',
+    value: ['season:2022 SPRING', 'hierarchicalCategory.0:Women'],
+    label: 'Female New Season Segment',
   },
   {
-    value: 'elizabeth_aniston',
-    label: 'Elizabeth',
-    description: 'Elizabeth is a woman who likes blue dresses',
+    value: ['brand:Purple Label', 'hierarchicalCategory.0:Men'],
+    label: 'Male Purple Label Segment',
   },
 ];
 
@@ -98,13 +95,13 @@ export const styles = {
 };
 
 // Please ignore this atom
-export const personaSelectedAtom = atom({
-  key: 'personaSelected', // unique ID (with respect to other atoms/selectors)
-  default: 'anon', // default value (aka initial value)
+export const segmentSelectedAtom = atom({
+  key: 'segmentSelected', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
 });
 
 // Please ignore this atom
-export const isPersonaMenuOpen = atom({
-  key: 'isPersonaMenuOpen', // unique ID (with respect to other atoms/selectors)
+export const isSegmentMenuOpen = atom({
+  key: 'isSegmentMenuOpen', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
 });

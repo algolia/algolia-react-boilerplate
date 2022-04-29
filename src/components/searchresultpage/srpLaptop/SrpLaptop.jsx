@@ -28,6 +28,9 @@ import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
 // Import Persona State from recoil
 import { personaSelectedAtom } from '@/config/personaConfig';
 
+// Import Segment State from recoil
+import { segmentSelectedAtom } from '@/config/segmentConfig';
+
 // Import Components
 import Redirect from '@/components/redirects/Redirect';
 const CustomClearRefinements = lazy(() =>
@@ -83,6 +86,9 @@ const SrpLaptop = () => {
   // Persona
   const userToken = useRecoilValue(personaSelectedAtom);
 
+  // Segments
+  const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
+
   return (
     <div className="srp-container">
       <motion.div
@@ -135,6 +141,7 @@ const SrpLaptop = () => {
               ? state.action
               : ''
           }
+          optionalFilters={segmentOptionalFilters}
           ruleContexts={state?.type === 'context' ? state.action : ''}
           query={queryState && queryState}
           getRankingInfo={true}

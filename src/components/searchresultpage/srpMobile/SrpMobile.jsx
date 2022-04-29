@@ -21,6 +21,9 @@ import { useRecoilValue } from 'recoil';
 // Import Persona State from recoil
 import { personaSelectedAtom } from '@/config/personaConfig';
 
+// Import Segment State from recoil
+import { segmentSelectedAtom } from '@/config/segmentConfig';
+
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
@@ -91,6 +94,9 @@ const SrpMobile = () => {
   // Persona
   const userToken = useRecoilValue(personaSelectedAtom);
 
+  // Segments
+  const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
+
   return (
     <div className="srp-container-mobile">
       <div
@@ -144,6 +150,7 @@ const SrpMobile = () => {
               ? state.action
               : ''
           }
+          optionalFilters={segmentOptionalFilters}
           ruleContexts={state?.type === 'context' ? state.action : ''}
           query={queryState}
         />
