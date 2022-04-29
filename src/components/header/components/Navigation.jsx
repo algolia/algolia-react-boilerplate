@@ -15,9 +15,9 @@ import SelectPersona from '../personnaSelect/SelectPersona';
 import LanguageSelect from '../languagesSelect/LanguageSelect';
 
 // Import Recoil config
-import { shouldHavePersona } from '@/config/featuresConfig';
+import { shouldHavePersona, shouldHaveSegments, shouldHaveLanguageSelector } from '@/config/featuresConfig';
 
-import { shouldHaveLanguageSelector } from '@/config/featuresConfig';
+import SelectSegment from '../segmentSelect/SelectSegment';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
@@ -28,6 +28,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   // Should show or not the sections
   const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
+  const shouldShowSegmentsAtom = useRecoilValue(shouldHaveSegments);
   const shouldShowLanguageSelected = useRecoilValue(shouldHaveLanguageSelector);
 
   // Import the navigation links, as defined in the config
@@ -79,6 +80,11 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
       {shouldShowPersonasAtom && (
         <li>
           <SelectPersona />
+        </li>
+      )}
+      {shouldShowSegmentsAtom && (
+        <li>
+          <SelectSegment />
         </li>
       )}
       {/* Display the language select component NB this isn't functional on the flagship index as we only have one language */}
