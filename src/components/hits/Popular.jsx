@@ -1,9 +1,9 @@
-const Popular = () => {
+const Pinned = () => {
   return (
-    <div className="popular-badge">
-      <p>Popular</p>
+    <div className="pinned-badge">
+      <p>Pinned</p>
     </div>
   );
 };
 
-export default Popular;
+export default Pinned;

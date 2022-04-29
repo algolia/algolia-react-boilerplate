@@ -30,7 +30,7 @@ import {
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
-import Popular from './Popular';
+import Pinned from './Pinned';
 
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
@@ -86,7 +86,7 @@ const Hit = ({ hit }) => {
             onError={(e) => (e.currentTarget.src = placeHolderError)}
           />
         )}
-        {isHitPromoted && <Popular />}
+        {isHitPromoted && <Pinned />}
         <div className="srpItem__imgWrapper__heart">
           <Heart />
         </div>
