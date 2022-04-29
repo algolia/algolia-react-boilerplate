@@ -32,8 +32,8 @@ export const styles = {
     border: 'none',
     display: 'flex',
     alignItems: 'center',
-    gap: '0.5rem',
-    width: 'auto',
+    gap: '1rem',
+    width: '6rem',
     cursor: 'pointer',
   }),
   menu: () => ({
@@ -64,7 +64,7 @@ export const styles = {
     cursor: 'pointer',
   }),
   placeholder: () => ({
-    fontFamily: "'Space Grotesk', 'Comic Sans MS'",
+    fontFamily: "'Poppins', sans-serif",
     cursor: 'pointer',
   }),
   valueContainer: () => ({
@@ -72,12 +72,12 @@ export const styles = {
   }),
   option: () => {
     return {
-      textTransform: 'uppercase',
-      fontFamily: "'Space Grotesk', 'Comic Sans MS'",
+      textTransform: 'capitalize',
+      fontFamily: "'Poppins', sans-serif",
       padding: '0.5rem',
       cursor: 'pointer',
       borderRadius: '0.3rem',
-      fontSize: '0.7rem',
+      fontSize: '1rem',
       '&:hover': {
         backgroundColor: 'black',
         color: 'white',
@@ -85,10 +85,10 @@ export const styles = {
     };
   },
   singleValue: () => ({
-    fontFamily: "'Space Grotesk', 'Comic Sans MS'",
-    textTransform: 'uppercase',
+    fontFamily: "'Poppins', sans-serif",
+    textTransform: 'capitalize',
     cursor: 'pointer',
-    fontSize: '0.7rem',
+    fontSize: '1rem',
   }),
   dropdownIndicator: () => ({
     color: 'black',

@@ -14,10 +14,11 @@ import SelectPersona from '../personnaSelect/SelectPersona';
 //import language selector component
 import LanguageSelect from '../languagesSelect/LanguageSelect';
 
+// import segment selector component
+import SelectSegment from '../segmentSelect/SelectSegment';
+
 // Import Recoil config
 import { shouldHavePersona, shouldHaveSegments, shouldHaveLanguageSelector } from '@/config/featuresConfig';
-
-import SelectSegment from '../segmentSelect/SelectSegment';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
