@@ -15,7 +15,7 @@ import SelectPersona from '../personnaSelect/SelectPersona';
 import LanguageSelect from '../languagesSelect/LanguageSelect';
 
 // import segment selector component
-import SelectSegment from '../segmentSelect/SelectSegment';
+import SelectSegment from '../segmentSelect/selectSegment';
 
 // Import Recoil config
 import { shouldHavePersona, shouldHaveSegments, shouldHaveLanguageSelector } from '@/config/featuresConfig';
