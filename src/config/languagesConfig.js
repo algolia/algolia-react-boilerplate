@@ -17,12 +17,6 @@ export const languagesConfig = [
   },
 ];
 
-// Please ignore this atom - DO NOT TOUCH
-export const LanguageSelectedAtom = atom({
-  key: 'LanguageSelected', // unique ID (with respect to other atoms/selectors)
-  default: 'English', // default value (aka initial value)
-});
-
 // Define index by languages & currency.
 // Change if necessary
 export const languageSwitchConfig = {
@@ -135,6 +129,12 @@ export const languageSwitchConfig = {
     ],
   },
 };
+
+// Please ignore this atom - DO NOT TOUCH
+export const LanguageSelectedAtom = atom({
+  key: 'LanguageSelected', // unique ID (with respect to other atoms/selectors)
+  default: 'English', // default value (aka initial value)
+});
 
 // Styles for language selection dropdown, please ignore
 export const styles = {

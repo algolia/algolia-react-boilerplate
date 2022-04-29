@@ -18,7 +18,7 @@ import LanguageSelect from '../languagesSelect/LanguageSelect';
 import SelectSegment from '../segmentSelect/selectSegment';
 
 // Import Recoil config
-import { shouldHavePersona, shouldHaveSegments, shouldHaveLanguageSelector } from '@/config/featuresConfig';
+import { shouldHavePersona, shouldHaveSegments, shouldHaveLanguages } from '@/config/featuresConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
@@ -30,7 +30,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Should show or not the sections
   const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
   const shouldShowSegmentsAtom = useRecoilValue(shouldHaveSegments);
-  const shouldShowLanguageSelected = useRecoilValue(shouldHaveLanguageSelector);
+  const shouldShowLanguageSelected = useRecoilValue(shouldHaveLanguages);
 
   // Import the navigation links, as defined in the config
   const [links] = useRecoilState(linksHeader);

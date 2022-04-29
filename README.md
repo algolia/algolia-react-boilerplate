@@ -1,8 +1,30 @@
-# React Boilerplate for Demo Engineer
+# React Boilerplate for Custom Demos
 
-![Algolia](https://assets.codepen.io/707316/internal/avatars/users/default.png?fit=crop&format=auto&height=256&version=5&width=256)
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">✍️ V2</h3>
+   * [Get started](#️-get-started)
+   * [Structure](#️-structure)
+   * [Features Config](#-features-config)
+      * [ Languages](#--languages)
+      * [ Banners](#--banners)
+      * [ Segments](#--segments)
+      * [ Badges](#--badges)
+      * [ Facet Display](#--facet-display)
+      * [ Category Pages](#--category-pages)
+      * [ Collection Pages](#--collection-pages)
+      * [Personas](#--personas)
+      * [Injected Content](#--injected-content)
+         * [From Main Index](#from-main-index)
+         * [From Seperate Index](#from-seperate-index)
+      * [Icons](#-icons)
+   * [Dependencies](#️-dependencies)
+      * [State Manager](#-state-manager)
+      * [Router](#-router)
+      * [Slider](#-slider)
+      * [Select Menus](#-select-menus)
+      * [Style](#-style)
+      * [Debounce](#-debounce)
+      * [Lazy Loading](#-lazy-loading)
+   * [Develop on this project](#️-develop-on-this-project)
+      * [Before use please install](#-before-use-please-install)
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
 
@@ -14,37 +36,14 @@
 
 4. Go through the other files in `src/config` and adjust them according to your own data and requirements, each file describes itself.
 
-5. In in `src/config` , pay particular attention to `hitsConfig` as this is where we map your own attribute names to those used in the app. You should never adjust the attributes used in the app itself, only this map.
+5. In `src/config` , pay particular attention to `hitsConfig` as this is where we map your own attribute names to those used in the app. You should never adjust the attributes used in the app itself, only this map.
 
-6. Run and test your app locally both in desktop and mobile view, if you have any questions, ask #help-demos.
+6. Run and test your app locally, if you have any questions, ask #help-demos.
 
 7. In the `src/scss` folder, adjust any styling you need to based on what you see.
 
 8. Log into Netlify on the Algolia Demos team (again ask #help-demos if you don't have access) and deploy your demo from Github, making sure to password protect it!
 
-
-<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⌨️ Develop on this project</h2>
-
-To run this project locally, install the dependencies and run the local server:
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">👊 Before use please install</h3>
-
-[GitFlow](https://danielkummer.github.io/git-flow-cheatsheet/)
-
-On Mac 👇
-
-```sh
-brew install git-flow-avh
-git flow init
-```
-
-[Husky](https://typicode.github.io/husky/#/)
-
-```sh
-npx husky install
-```
-
-🐶
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Structure</h2>
 
@@ -95,34 +94,20 @@ ProductDetails.jsx
   - Related Products
   - Frequently Bought Together
 
-<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">💻 State Manager</h3>
-
-[Recoil](https://recoiljs.org/)
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🚧Router</h3>
-
-[React Router](https://v5.reactrouter.com/web/guides/quick-start)
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎚 Slider</h3>
-
-[Slider](https://slider-react-component.vercel.app/)
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🖲 Personas Select</h3>
-
-[React-Select](https://www.npmjs.com/package/react-select)
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎨 Style</h3>
-
-[SCSS](https://sass-lang.com/)
-with
-[BEM Naming](https://css-tricks.com/bem-101/)
-
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
 
-[Banner](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/add-banners/)
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Languages</h3>
+
+In order to turn on this feature, go to `config/featuresConfig` and set `shouldHaveLanguages` to true.
+
+Use it by making sure you have an index per language, and that the attribute names are always in the default language, but the values change in each index according to the local language.
+
+Then, go to `config/languagesConfig` and adjust each export to what you need. Specifically, in `languageSwitchConfig` you must make sure each node has an `index` defined, and this index will be used when that language is selected.
+ 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Banners</h3>
+
+https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/add-banners/
 
 There are two types of banners in this demo - Homepage banners and Search Result Page banners. Check out the existing examples on the flagship fashion index to see some examples. 
 
@@ -163,21 +148,28 @@ When two triggers are matched, the one found first in the configuration array wi
 
 [Facet Display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react/)
 
-The ability to control the facets to display and their order works by sending a dedicated.
+The ability to control the facets which get displayed including their order. When adding your facets inside this app via `config/refinementsConfig`, you *must* ensure those facets are also added in the dashboard not just in the Facets section, but also in the Facet Display section, otherwise they will not show.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Category Pages</h3>
 
-[Category Pages]
+In order to configure Category Pages, first got to `config/categoryConfig` and edit the value for `categoryPageFilterAttribute`. This represents the attribute you will filter on to create your individual category pages.
 
-In order to configure Category Pages (Add or Remove) go in config > header.js. From there you can add some link in the Navigation tab
+Next, go to `config/headerConfig`. From there you can add links in the Navigation tab, if they are a category page, the type must be `filter`, and the value for `filter` must match the value of the category you are filtering on to create the resulting page.
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Collection Pages</h3>
+
+In order to configure Collection Pages, go in `config/headerConfig`. From there you can add links to the Navigation tab. Collection pages are powered by rule contexts. In order for this to work, you must set the type to `context` and make sure that you have a rule set up in the Algolia dashboard matching the context trigger which you define as the value of `context`
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👩‍💼🧑‍💼 Personas</h3>
 
 [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/)
 
-The user stories : - Younger male 'Stephen James', likes Basketball and he lives in NYC.
--Likes **Sneakers**, size 24, also likes **tracksuit**
-The user stories : 
+To configure personalisation please first make sure you have user profiles created in Algolia with their respective user tokens.
+
+Then, you can visit `config/personaConfig` and update the `value`s to match the user tokens you need to send. The `description` will also show up in the demo guide component.
+
+The current user stories are:
+
    - Younger male 'Stephen James', likes Basketball and he lives in NYC.
       -Likes **Sneakers**, size 24, also likes **tracksuit**
 
@@ -193,7 +185,7 @@ There are two kinds of injected content:
 1. Using rules in the main index
 2. Using a seperate index
 
-<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">INJECTION FROM MAIN INDEX</h4>
+<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">From Main Index</h4>
 
 We have two kinds of rules. If you want to trigger these rules for your own demo, please use the given JSON source for the rules which you must add as a consequence (please edit the values as you see fit):
   
@@ -243,7 +235,7 @@ We have two kinds of rules. If you want to trigger these rules for your own demo
 
 You can see these rules for reference in the Flagship Fashion [Dashboard](https://www.algolia.com/apps/853MYZ81KY/rules/flagship_fashion).
 
-<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">INJECTION FROM SEPERATE INDEX</h4>
+<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">From Seperate Index</h4>
 
 - You can edit the displayed hit by going to `/components/hits/InfluencerCard.js`
 
@@ -265,22 +257,68 @@ Here is a sample record structure which is expected for records in the index to 
 }
 ```
 
-  <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> Icons</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> Icons</h3>
 
-  This project comes with fontawesome added by default so you can adjust or add icons at will. It has been installed by being added in `/src/assets/fontawesome/js/all.js` and linked in the head tag of `index.html`
+This project comes with fontawesome added by default so you can adjust or add icons at will. It has been installed by being added in `/src/assets/fontawesome/js/all.js` and linked in the head tag of `index.html`
 
-  You can add your icons by using this method: https://fontawesome.com/docs/web/add-icons/how-to
+You can add your icons by using this method: https://fontawesome.com/docs/web/add-icons/how-to
 
-  <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Debounce</h3>
+
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">💻 State Manager</h3>
+
+[Recoil](https://recoiljs.org/)
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🚧 Router</h3>
+
+[React Router](https://v5.reactrouter.com/web/guides/quick-start)
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎚 Slider</h3>
+
+[Slider](https://slider-react-component.vercel.app/)
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🖲 Select Menus</h3>
+
+[React-Select](https://www.npmjs.com/package/react-select)
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎨 Style</h3>
+
+[SCSS](https://sass-lang.com/)
+with
+[BEM Naming](https://css-tricks.com/bem-101/)
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Debounce</h3>
 
 [Debounce Lodash](https://www.npmjs.com/package/lodash.debounce)
 
 The Utility of this package is to wait before action, for example on the SearchBox, onChange wait some time before send query.
 
 
-  <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Lazy Loading</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Lazy Loading</h3>
 
-  We use the React library Suspense and lazy to load components when needed, and a wrapper called lazily because the default react library doesn't support named exports.
+We use the React library Suspense and lazy to load components when needed, and a wrapper called lazily because the default react library doesn't support named exports.
 
-  - https://reactjs.org/docs/code-splitting.html#reactlazy
-  - https://www.npmjs.com/package/react-lazily
+- https://reactjs.org/docs/code-splitting.html#reactlazy
+- https://www.npmjs.com/package/react-lazily
+
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⌨️ Develop on this project</h2>
+
+To run this project locally, install the dependencies and run the local server:
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">👊 Before use please install</h3>
+
+[GitFlow](https://danielkummer.github.io/git-flow-cheatsheet/)
+
+On Mac 👇
+
+```sh
+brew install git-flow-avh
+git flow init
+```
+
+[Husky](https://typicode.github.io/husky/#/) 🐶
+
+```sh
+npx husky install
+```

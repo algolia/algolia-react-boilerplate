@@ -15,8 +15,8 @@ export const shouldHaveSegments = atom({
 });
 
 // Should the language selector be displayed on the screen
-export const shouldHaveLanguageSelector = atom({
-  key: 'shouldHaveLanguageSelector', // unique ID (with respect to other atoms/selectors)
+export const shouldHaveLanguages = atom({
+  key: 'shouldHaveLanguages', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
 });
 
