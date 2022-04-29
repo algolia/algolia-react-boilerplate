@@ -33,7 +33,6 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
-    width: '6rem',
     cursor: 'pointer',
   }),
   menu: () => ({

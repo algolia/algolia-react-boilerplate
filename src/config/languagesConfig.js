@@ -60,7 +60,7 @@ export const languageSwitchConfig = {
         context: 'Summer 22 Collection',
         url: '/summer-22-collection',
       },
-    ]
+    ],
   },
   FR: {
     index: 'flagship_fashion_price_desc',
@@ -96,8 +96,7 @@ export const languageSwitchConfig = {
         context: 'Collection été 2022',
         url: '/collection-ete-2022',
       },
-    ]
-
+    ],
   },
   GER: {
     index: 'flagship_fashion_ger',
@@ -133,9 +132,8 @@ export const languageSwitchConfig = {
         context: 'Summer 22 Collection',
         url: '/summer-22-collection',
       },
-    ]
+    ],
   },
-  
 };
 
 // Styles for language selection dropdown, please ignore
@@ -150,7 +148,6 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
-    width: '6rem',
     cursor: 'pointer',
   }),
   menu: () => ({

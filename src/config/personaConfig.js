@@ -11,17 +11,16 @@ import { atom } from 'recoil';
 // Just make sure you have events and profiles for your values
 // ------------------------------------------
 export const personaConfig = [
-  { value: 'anon', label: 'Neutral',
-description: 'Anonymous user' },
+  { value: 'anon', label: 'Neutral', description: 'Anonymous user' },
   {
     value: 'stephen_james',
     label: 'Stephen',
-    description: 'Stephen James is a man who likes sports shoes'
+    description: 'Stephen James is a man who likes sports shoes',
   },
   {
     value: 'elizabeth_aniston',
     label: 'Elizabeth',
-    description: 'Elizabeth is a woman who likes blue dresses'
+    description: 'Elizabeth is a woman who likes blue dresses',
   },
 ];
 
@@ -37,7 +36,6 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
-    width: '6rem',
     cursor: 'pointer',
   }),
   menu: () => ({
