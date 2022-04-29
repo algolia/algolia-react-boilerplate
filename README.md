@@ -12,8 +12,8 @@
       * [ Collection Pages](#--collection-pages)
       * [Personas](#--personas)
       * [Injected Content](#--injected-content)
-         * [INJECTION FROM MAIN INDEX](#injection-from-main-index)
-         * [INJECTION FROM SEPERATE INDEX](#injection-from-seperate-index)
+         * [From Main Index](#from-main-index)
+         * [From Seperate Index](#from-seperate-index)
       * [Icons](#-icons)
    * [Dependencies](#️-dependencies)
       * [State Manager](#-state-manager)
@@ -185,7 +185,7 @@ There are two kinds of injected content:
 1. Using rules in the main index
 2. Using a seperate index
 
-<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">INJECTION FROM MAIN INDEX</h4>
+<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">From Main Index</h4>
 
 We have two kinds of rules. If you want to trigger these rules for your own demo, please use the given JSON source for the rules which you must add as a consequence (please edit the values as you see fit):
   
@@ -235,7 +235,7 @@ We have two kinds of rules. If you want to trigger these rules for your own demo
 
 You can see these rules for reference in the Flagship Fashion [Dashboard](https://www.algolia.com/apps/853MYZ81KY/rules/flagship_fashion).
 
-<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">INJECTION FROM SEPERATE INDEX</h4>
+<h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">From Seperate Index</h4>
 
 - You can edit the displayed hit by going to `/components/hits/InfluencerCard.js`
 
