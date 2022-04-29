@@ -3,6 +3,14 @@
    * [Get started](#️-get-started)
    * [Structure](#️-structure)
    * [Features Config](#-features-config)
+      * [ Redirects](#--redirects)
+      * [ Federated Search](#--federated-search)
+      * [ Voice Search](#--voice-search)
+      * [ Sorts](#--sorts)
+      * [ Carousels](#--carousels)
+      * [ Recommend](#--recommend)
+      * [ Styling](#--styling)
+      * [ Demo Guide](#--demo-guide)
       * [ Languages](#--languages)
       * [ Banners](#--banners)
       * [ Segments](#--segments)
@@ -10,11 +18,11 @@
       * [ Facet Display](#--facet-display)
       * [ Category Pages](#--category-pages)
       * [ Collection Pages](#--collection-pages)
-      * [Personas](#--personas)
-      * [Injected Content](#--injected-content)
+      * [ Personas](#--personas)
+      * [ Injected Content](#--injected-content)
          * [From Main Index](#from-main-index)
          * [From Seperate Index](#from-seperate-index)
-      * [Icons](#-icons)
+      * [ Icons](#-icons)
    * [Dependencies](#️-dependencies)
       * [State Manager](#-state-manager)
       * [Router](#-router)
@@ -96,6 +104,50 @@ ProductDetails.jsx
 
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Redirects</h3>
+
+Redirects are already activated in the application. In order to trigger one, simply create a rule in the dashboard where the consequence is:
+ ```
+ {
+  "isRedirected": true,
+  "redirect": "URL TO REDIRECT TO GOES HERE"
+ }
+ ```
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Federated Search</h3>
+
+You can turn on federated search in `config/featuresConfig` by setting the `default` value of `shouldHaveFederatedSearch` to true. You can then define which sections are shown by going to `config/federatedConfig`.
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Voice Search</h3>
+
+You can turn on voice search by going to `config/featuresConfig` and setting the `default` value of `shouldHaveVoiceSearch` to true.
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Sorts</h3>
+
+You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveSorts` to true.
+
+You can then define your sorts by going to `config/sortByConfig` and adjusting the values in the export called `sortBy`.
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Carousels</h3>
+
+You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveCarousels` to true.
+
+You can configure your carousels by going to `config/carouselConfig`. Each carousel is powered by filtering on the attributes defined in this configuration.
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Recommend</h3>
+
+TBD
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Styling</h3>
+
+You can adjust all of the styling of this application by adjusting anything found in the `scss` folder. It is recommended to start with the `mixin` folder.
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Demo Guide</h3>
+
+The demo guide is opened by clicking on the three dots in the top right of the application and serves to guide the user through the features available in the app.
+
+It is all defined and adjusted in `config/demoGuideConfig` and is self described.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Languages</h3>
 
