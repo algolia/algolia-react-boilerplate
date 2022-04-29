@@ -1,6 +1,5 @@
 # React Boilerplate for Custom Demos
 
-<h1>Table of Contents</h1>
    * [Get started](#️-get-started)
    * [Structure](#️-structure)
    * [Features Config](#-features-config)
