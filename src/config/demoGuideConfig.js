@@ -112,14 +112,12 @@ export const searchPersonaConfig = [
 
 // The info is imported from personaConfig for display in 'Search Persona'
 export const searchPersonaInformations = personaConfig.map((persona) => {
-  const { label, description } = persona
+  const { label, description } = persona;
   return {
     span: label,
-    details: description
-  }
-})
-
-
+    details: description,
+  };
+});
 
 // ------------------------------------------
 // Injected Content Guide Config
@@ -301,7 +299,6 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
-    width: '6rem',
     cursor: 'pointer',
   }),
   menu: () => ({

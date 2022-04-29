@@ -1,7 +1,6 @@
 import { useRef, memo } from 'react';
 
 // Algolias's import
-import algoliasearch from 'algoliasearch/lite';
 import { Configure, Index } from 'react-instantsearch-dom';
 
 // framer motion
@@ -12,10 +11,7 @@ import { framerMotionFederatedContainer } from '@/config/animationConfig';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 // Config
-import { searchClient, mainIndex, indexNames } from '@/config/algoliaEnvConfig';
-
-// Those imports are here to check if user is clicking outside the searchbox & federated to close federated
-import { shouldHaveFederatedSearch } from '@/config/featuresConfig';
+import { searchClient, indexNames } from '@/config/algoliaEnvConfig';
 
 // Show or unshow sections in federated (product, suggestions, categories, articles, recent searches)
 // categories import is here to choose which attribute you want to show as category
@@ -25,14 +21,17 @@ import {
   shouldHaveOpenFederatedSearch,
 } from '@/config/federatedConfig';
 
+
 // Sharing query to general state
 import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig';
 
 // Import Persona State from recoil
 import { personaSelectedAtom } from '@/config/personaConfig';
 
+// Import Segment State from recoil
+import { segmentSelectedAtom } from '@/config/segmentConfig';
+
 // Import refs for modal closing functionality
-import { federatedRef } from '@/config/federatedConfig';
 import { selectorNavigationRef } from '@/config/headerConfig';
 
 // hook import
@@ -52,6 +51,7 @@ import Redirect from '@/components/redirects/Redirect';
 const FederatedSearch = () => {
   // Recoil & States
   const personaSelect = useRecoilValue(personaSelectedAtom);
+  const segmentSelect = useRecoilValue(segmentSelectedAtom);
   const setIsFederated = useSetRecoilState(shouldHaveOpenFederatedSearch);
   const searchboxRef = useRecoilValue(searchBoxAtom);
   const query = useRecoilValue(queryAtom);
@@ -125,6 +125,7 @@ const FederatedSearch = () => {
               filters=""
               hitsPerPage={6}
               userToken={personaSelect}
+              optionalFilters={segmentSelect}
               enablePersonalization={true}
             />
             <Products />

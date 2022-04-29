@@ -39,7 +39,6 @@ const Hits = ({ hits }) => {
         <h3 className="products__title">Products</h3>
       </div>
       <ul className="products__items">
-        {console.log(hits.length)}
         {hits.length ? (
           hits.map((hit) => {
             return (
