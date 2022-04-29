@@ -42,17 +42,29 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
     >
       {links.map((link) => (
         <li
+          id={link.name}
+          tabIndex="0"
           key={link.url}
           onClick={() => {
             // Set query to nothing when clicking on a category
             setQueryState('');
-            // Open the sub-menu if the link is hierarchical, otherwise run a search
             if (link.name !== 'All') {
-              navigate(`/search`, {
-                state: `${categoryPageFilterAttribute}:'${link.filter}'`,
-              });
+              if (link.type === 'filter') {
+                navigate(`/search`, {
+                  state: {
+                    type: link.type,
+                    action: `${categoryPageFilterAttribute}:'${link.filter}'`,
+                  },
+                });
+              } else if (link.type === 'context') {
+                navigate(`/search`, {
+                  state: { type: link.type, action: link.context },
+                });
+              }
             } else {
-              navigate('/search');
+              navigate('/search', {
+                state: { type: link.type, action: null },
+              });
             }
             // Only used for Mobile view
             if (tablet || mobile) {

@@ -19,7 +19,7 @@ import { useRecoilValue } from 'recoil';
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
-  shouldHaveSorts
+  shouldHaveSorts,
 } from '@/config/featuresConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
@@ -130,7 +130,12 @@ const SrpLaptop = () => {
           analytics={false}
           userToken={userToken}
           enablePersonalization={true}
-          filters={state ? state : ''}
+          filters={
+            state?.type === 'filter' && state?.action !== null
+              ? state.action
+              : ''
+          }
+          ruleContexts={state?.type === 'context' ? state.action : ''}
           query={queryState && queryState}
           getRankingInfo={true}
         />

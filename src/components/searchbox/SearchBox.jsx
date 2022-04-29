@@ -55,7 +55,7 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
           event.preventDefault();
           setQueryState(currentRefinement);
           useStoreQueryToLocalStorage(currentRefinement);
-          navigate('/search');
+          // navigate('/search');
         }}
       >
         <input
