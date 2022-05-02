@@ -3,12 +3,12 @@
 // React Router
 import { useNavigate } from 'react-router-dom';
 // Recoil Header State
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Config for the header
 import { categoryPageFilterAttribute } from '@/config/categoryConfig';
-import { linksHeader } from '@/config/headerConfig';
+import { linksHeader, selectorNavigationRef } from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
 //import language selector component
@@ -30,6 +30,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   // navigate is used by React Router
   const navigate = useNavigate();
+
+  // Get references for dropdowns in Navigation
+  const selectorsNavigation = useSetRecoilState(selectorNavigationRef);
 
   // Should show or not the sections
   const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
@@ -81,23 +84,27 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           <p>{link.name}</p>
         </li>
       ))}
-      {/* Display the persona selection component */}
-      {shouldShowPersonasAtom && (
-        <li>
-          <SelectPersona />
-        </li>
-      )}
-      {shouldShowSegmentsAtom && (
-        <li>
-          <SelectSegment />
-        </li>
-      )}
-      {/* Display the language select component NB this isn't functional on the flagship index as we only have one language */}
-      {shouldShowLanguageSelected && (
-        <li>
-          <LanguageSelect />
-        </li>
-      )}
+      <div
+        className="container__header-nav-selectors"
+        ref={selectorsNavigation}
+      >
+        {shouldShowPersonasAtom && (
+          <li>
+            <SelectPersona />
+          </li>
+        )}
+        {shouldShowSegmentsAtom && (
+          <li>
+            <SelectSegment />
+          </li>
+        )}
+        {/* Display the language select component */}
+        {shouldShowLanguageSelected && (
+          <li>
+            <LanguageSelect />
+          </li>
+        )}
+      </div>
     </ul>
   );
 };
