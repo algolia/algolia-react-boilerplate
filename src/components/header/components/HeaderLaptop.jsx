@@ -40,19 +40,6 @@ const HeaderLaptop = () => {
   return (
     <div className="container">
       <div className="container__header-top">
-        {/* Picto that returns SE menu on click */}
-        <div
-          ref={demoGuideBtn}
-          className={`${
-            showDemoGuide ? 'optionDots__wrapper-active' : ''
-          } optionDots__wrapper`}
-          onClick={(e) => {
-            setshowDemoGuide(!showDemoGuide);
-          }}
-        >
-          <p>Guide</p>
-          <OptionDots />
-        </div>
         <div className="container__header-top__logo">
           <Link
             to="/"
@@ -74,7 +61,7 @@ const HeaderLaptop = () => {
           <h1>Demo BoilerPlate</h1>
         </div>
       </div>
-      <div className="container__header-bottom">
+      <div className="container__header-nav">
         <Navigation />
         {/* <SelectPersona /> */}
       </div>

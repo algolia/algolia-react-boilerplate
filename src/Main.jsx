@@ -24,11 +24,12 @@ import {
 import { mainIndex } from './config/algoliaEnvConfig';
 
 // // Allows logging and manipulation of algolia results etc.
-// import CustomStateResults from './components/stateResults/stateResults';
+import CustomStateResults from './components/stateResults/stateResults';
 
 // Import Pages and static components
 import Header from '@/components/header/Header';
 import DemoGuide from '@/components/demoGuide/DemoGuide';
+import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
 import HomePage from './pages/HomePage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import AlertNavigation from '@/components/demoGuide/AlertNavigation';
@@ -55,10 +56,11 @@ export const Main = ({ isLoaded }) => {
 
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
-      {/* <CustomStateResults /> */}
+      <CustomStateResults />
 
       <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
         <Header />
+        <DemoGuideOpener />
         <AnimatePresence>
           {showDemoGuide && shouldShowNavigation && (
             <DemoGuide setshowDemoGuide={setshowDemoGuide} />

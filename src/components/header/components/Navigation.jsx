@@ -18,7 +18,11 @@ import LanguageSelect from '../languagesSelect/LanguageSelect';
 import SelectSegment from '../segmentSelect/selectSegment';
 
 // Import Recoil config
-import { shouldHavePersona, shouldHaveSegments, shouldHaveLanguages } from '@/config/featuresConfig';
+import {
+  shouldHavePersona,
+  shouldHaveSegments,
+  shouldHaveLanguages,
+} from '@/config/featuresConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
@@ -39,7 +43,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
       className={`${
         isMenuOpen
           ? 'container-mobile__navList-items'
-          : 'container__header-bottom__links'
+          : 'container__header-nav__links'
       } `}
     >
       {links.map((link) => (
