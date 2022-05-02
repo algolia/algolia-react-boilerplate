@@ -15,9 +15,7 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { logoUrl } from '@/config/headerConfig';
 
 //Import config for federatedSearch
-import {
-  shouldHaveVoiceSearch,
-} from '@/config/featuresConfig';
+import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
@@ -53,8 +51,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
 
   // Showing or hiding help navigation menu
-  const [showDemoGuide, setshowDemoGuide] =
-    useRecoilState(isDemoGuideOpen);
+  const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
 
   // Prevent body from scrolling when panel is open
   usePreventScrolling(isMenuOpen);
@@ -75,18 +72,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
           <span className="hamburger__line"></span>
           <span className="hamburger__line"></span>
         </div>
-        {/* Picto that returns SE menu on click */}
-        <div
-          className={`${
-            showDemoGuide ? 'optionDots__wrapper-active' : ''
-          } optionDots__wrapper`}
-          onClick={() => {
-            setshowDemoGuide(!showDemoGuide);
-          }}
-        >
-          <p>Guide</p>
-          <OptionDots />
-        </div>
+
         {/* Logo, which returns to the homepage on click */}
         <div className="container__header-top__logo">
           <Link

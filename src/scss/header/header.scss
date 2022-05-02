@@ -115,7 +115,7 @@
 }
 
 // MOBILE & TABLET
-
+.header{
 .container-mobile {
   .container__header-top {
     margin-top: 1rem;
@@ -158,7 +158,7 @@
       }
     }
   }
-
+}
   .hamburger {
     @include hamburger-menu;
   }
