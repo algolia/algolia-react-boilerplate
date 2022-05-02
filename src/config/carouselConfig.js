@@ -9,12 +9,12 @@
 // ------------------------------------------
 export const carouselConfig = [
   {
-    attribute: "brand: 'polo ralph lauren'",
-    title: 'I am the title of carousel One',
+    context: 'homepage-carousel-one',
+    title: 'Our Hat Collection',
   },
   {
-    attribute: "category: 'pullover'",
-    title: 'I am the title of carousel Two',
+    context: 'homepage-carousel-two',
+    title: 'Our Best Sneakers',
   },
 ];
 

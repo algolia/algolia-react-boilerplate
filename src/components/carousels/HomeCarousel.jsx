@@ -27,12 +27,12 @@ import { framerMotionTransition } from '@/config/animationConfig';
 import get from 'lodash/get';
 
 // Build the Carousel for use on the Homepage
-const HomeCarousel = ({ attribute, title }) => {
+const HomeCarousel = ({ context, title }) => {
   const index = useRecoilValue(mainIndex);
   return (
     <div className="home-carousel">
       <Index indexId={title} indexName={index}>
-        <Configure hitsPerPage={hitsPerCarousel} filters={attribute} />
+        <Configure hitsPerPage={hitsPerCarousel} ruleContexts={context} />
         <CustomHitsCarousel title={title} />
       </Index>
     </div>

@@ -77,10 +77,7 @@ const HomePage = () => {
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
           <Suspense key={i} fallback={<Loader />}>
-            <HomeCarousel
-              attribute={carousel.attribute}
-              title={carousel.title}
-            />
+            <HomeCarousel context={carousel.context} title={carousel.title} />
           </Suspense>
         ))}
 
