@@ -1,4 +1,4 @@
-import { useRef, memo } from 'react';
+import { useRef, useEffect, memo } from 'react';
 
 // Algolias's import
 import { Configure, Index } from 'react-instantsearch-dom';
@@ -77,6 +77,14 @@ const FederatedSearch = () => {
     selector,
     () => setIsFederated(false)
   );
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+      setIsFederated(false);
+    };
+  }, []);
 
   // Federated search configuration
   const {

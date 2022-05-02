@@ -46,7 +46,7 @@ const HomePage = () => {
   const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch);
 
   // Prevent body from scrolling when panel is open
-  usePreventScrolling(isFederatedOpen);
+  // usePreventScrolling(isFederatedOpen);
 
   return (
     // Framer motion wrapper
