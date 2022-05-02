@@ -72,7 +72,6 @@ const HeaderMobile = ({ mobile, tablet }) => {
           <span className="hamburger__line"></span>
           <span className="hamburger__line"></span>
         </div>
-
         {/* Logo, which returns to the homepage on click */}
         <div className="container__header-top__logo">
           <Link
