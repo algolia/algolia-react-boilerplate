@@ -17,6 +17,8 @@ import { useRecoilValue } from 'recoil';
 import homepage_1 from '../assets/homepage/homepage_1.png';
 import homepage_2 from '../assets/homepage/homepage_2.png';
 
+import usePreventScrolling from '@/hooks/usePreventScrolling';
+
 // components import
 const CustomHomeBanners = lazy(() =>
   import('@/components/banners/HomeBanners')
@@ -42,6 +44,9 @@ const HomePage = () => {
   const isFederated = useRecoilValue(shouldHaveFederatedSearch);
   const isCarousel = useRecoilValue(shouldHaveCarousels);
   const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch);
+
+  // Prevent body from scrolling when panel is open
+  usePreventScrolling(isFederatedOpen);
 
   return (
     // Framer motion wrapper

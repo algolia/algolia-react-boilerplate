@@ -21,7 +21,6 @@ import {
   shouldHaveOpenFederatedSearch,
 } from '@/config/federatedConfig';
 
-
 // Sharing query to general state
 import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig';
 
@@ -83,7 +82,7 @@ const FederatedSearch = () => {
 
   return (
     <motion.div
-      className="federatedSearch"
+      className={`${mobile ? 'federatedSearch-mobile' : 'federatedSearch'}`}
       ref={containerFederated}
       variants={framerMotionFederatedContainer}
       initial={framerMotionFederatedContainer.initial}

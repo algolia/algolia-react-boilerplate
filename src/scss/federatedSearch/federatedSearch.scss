@@ -198,6 +198,12 @@
 
 
 // MOBILE & TABLET 
+.federatedSearch-mobile{
+    height: 100vh;
+    padding: 2rem;
+    position: absolute;
+    background-color: $background-color;
+    z-index: 40;
 .federatedSearch__wrapper-mobile{
     display: flex;
     flex-direction: column;
@@ -237,5 +243,9 @@
             }
         }
     }
+    .chevronRight{
+        width: 5px; 
+     }
        
+}
 }
