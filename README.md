@@ -133,7 +133,7 @@ You can then define your sorts by going to `config/sortByConfig` and adjusting t
 
 You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveCarousels` to true.
 
-You can configure your carousels by going to `config/carouselConfig`. Each carousel is powered by filtering on the attributes defined in this configuration.
+Carousels are configured using [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#using-context). You can configure your carousels by going to `config/carouselConfig` and adjusting the values for each `context`. You must ensure you have a rule in the algolia dashboard for each context, which pins products as this is what powers the carousels.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Recommend</h3>
 
