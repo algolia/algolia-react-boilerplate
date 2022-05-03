@@ -108,7 +108,7 @@ const FederatedSearch = () => {
       transition={framerMotionFederatedContainer.transition}
     >
       <span className="closeFederated" onClick={() => setIsFederated(false)}>
-        X
+        &lsaquo; Return to Homepage
       </span>
       <div
         className={`${

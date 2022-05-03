@@ -30,6 +30,12 @@
        width: 5px; 
     }
 }
+.closeFederated {
+    position: absolute;
+    top: -2rem;
+    right: 1rem;
+    cursor: pointer;
+}
 
 //Recent searches
 .recentSearches{
@@ -255,5 +261,6 @@
     position: absolute;
     top: 1rem;
     right: 1rem;
+    cursor: pointer;
 }
 }
