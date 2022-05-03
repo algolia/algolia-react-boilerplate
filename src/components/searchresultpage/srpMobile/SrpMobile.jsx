@@ -107,7 +107,7 @@ const SrpMobile = () => {
           setIsMenuOpen(!isMenuOpen);
         }}
       >
-        {isMenuOpen ? <ChevronRight /> : <ChevronLeft />}
+        {isMenuOpen ? <ChevronLeft /> : <ChevronRight />}
         <p>Filters</p>
       </div>
       <Suspense fallback={<Loader />}>
