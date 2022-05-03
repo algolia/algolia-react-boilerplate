@@ -10,6 +10,8 @@ import { ChevronRight } from '@/assets/svg/SvgIndex';
 import { hitAtom } from '@/config/hitsConfig';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
+import { personaSelectedAtom } from '@/config/personaConfig';
+import { queryAtom } from '@/config/searchboxConfig';
 
 import {
   shouldIdisplayCurrency,
@@ -25,6 +27,9 @@ const Hits = ({ hits }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
 
+  const personaSelected = useRecoilValue(personaSelectedAtom);
+  const query = useRecoilValue(queryAtom);
+
   // Get currency symbol
   const currency = useRecoilValue(currencySymbolAtom);
   const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
@@ -36,7 +41,11 @@ const Hits = ({ hits }) => {
   return (
     <div className="products">
       <div className="products__header">
-        <h3 className="products__title">Products</h3>
+        {personaSelected !== '' && query === '' ? (
+          <h3 className="products__title">Recommended for you</h3>
+        ) : (
+          <h3 className="products__title">Products</h3>
+        )}
       </div>
       <ul className="products__items">
         {hits.length ? (

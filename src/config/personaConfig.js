@@ -11,7 +11,7 @@ import { atom } from 'recoil';
 // Just make sure you have events and profiles for your values
 // ------------------------------------------
 export const personaConfig = [
-  { value: 'anon', label: 'Neutral', description: 'Anonymous user' },
+  { value: '', label: 'Neutral', description: 'Anonymous user' },
   {
     value: 'stephen_james',
     label: 'Stephen',
@@ -100,7 +100,7 @@ export const styles = {
 // Please ignore this atom
 export const personaSelectedAtom = atom({
   key: 'personaSelected', // unique ID (with respect to other atoms/selectors)
-  default: 'anon', // default value (aka initial value)
+  default: '', // default value (aka initial value)
 });
 
 // Please ignore this atom
