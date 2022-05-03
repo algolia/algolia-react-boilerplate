@@ -29,13 +29,13 @@ import useScreenSize from '@/hooks/useScreenSize';
 import get from 'lodash/get';
 
 // Build the Carousel for use on the Homepage
-const HomeCarousel = ({ attribute, title }) => {
+const HomeCarousel = ({ context, title }) => {
   const index = useRecoilValue(mainIndex);
   const { tablet, mobile } = useScreenSize();
   return (
     <div className={`${mobile ? 'home-carousel-mobile' : 'home-carousel'}`}>
       <Index indexId={title} indexName={index}>
-        <Configure hitsPerPage={hitsPerCarousel} filters={attribute} />
+        <Configure hitsPerPage={hitsPerCarousel} ruleContexts={context} />
         <CustomHitsCarousel title={title} />
       </Index>
     </div>
