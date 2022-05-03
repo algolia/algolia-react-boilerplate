@@ -1,5 +1,7 @@
 // Render the navigation menu in the header
 
+import { useState } from 'react';
+
 // React Router
 import { useNavigate } from 'react-router-dom';
 // Recoil Header State
@@ -25,6 +27,8 @@ import {
 } from '@/config/featuresConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
+  const [isActive, setIsActive] = useState(null);
+
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
 
@@ -49,12 +53,13 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           : 'container__header-nav__links'
       } `}
     >
-      {links.map((link) => (
+      {links.map((link, i) => (
         <li
           id={link.name}
           tabIndex="0"
           key={link.url}
           onClick={() => {
+            console.log(isActive);
             // Set query to nothing when clicking on a category
             setQueryState('');
             if (link.name !== 'All') {
@@ -81,7 +86,14 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
             }
           }}
         >
-          <p>{link.name}</p>
+          <p
+            className={isActive === i ? 'selected' : 'egg'}
+            onClick={() => {
+              setIsActive(i);
+            }}
+          >
+            {link.name}
+          </p>
         </li>
       ))}
       <div

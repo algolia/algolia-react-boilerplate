@@ -86,7 +86,9 @@
           p {
             position: relative;
             transition: 0.2 ease-in-out;
-            &:before {
+            // padding-bottom: 0.2rem;
+            // border-bottom: 1px solid red;
+            &::before {
               content: '';
               position: absolute;
               background-color: $grey-dark-color;
@@ -103,6 +105,17 @@
               transform: scaleX(1);
             }
           }
+          .selected {
+            &::before {
+              content: '';
+              position: absolute;
+              background-color: $grey-dark-color;
+              height: 1px;
+              width: 100%;
+              bottom: -0.5rem;
+              transform: scaleX(1);
+            }
+          }
         }
       }
       .container__header-nav-selectors{
@@ -115,6 +128,7 @@
   }
 
 }
+
 
 .select-component {
   width: 20%;
