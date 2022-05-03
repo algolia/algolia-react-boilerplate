@@ -12,12 +12,12 @@ import { atom } from 'recoil';
 export const segmentConfig = [
   { value: '', label: 'No Segment' },
   {
-    value: ['season:2022 SPRING', 'hierarchicalCategory.0:Women'],
-    label: 'Female New Season Segment',
+    value: ['hierarchicalCategories.lvl0:Womens'],
+    label: 'Female Segment',
   },
   {
-    value: ['brand:Purple Label', 'hierarchicalCategory.0:Men'],
-    label: 'Male Purple Label Segment',
+    value: ['hierarchicalCategories.lvl0:Mens'],
+    label: 'Male Segment',
   },
 ];
 
