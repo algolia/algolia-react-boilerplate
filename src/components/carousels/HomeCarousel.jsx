@@ -24,13 +24,16 @@ import { logoUrl as placeHolderError } from '@/config/headerConfig';
 
 import { framerMotionTransition } from '@/config/animationConfig';
 
+import useScreenSize from '@/hooks/useScreenSize';
+
 import get from 'lodash/get';
 
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ attribute, title }) => {
   const index = useRecoilValue(mainIndex);
+  const { tablet, mobile } = useScreenSize();
   return (
-    <div className="home-carousel">
+    <div className={`${mobile ? 'home-carousel-mobile' : 'home-carousel'}`}>
       <Index indexId={title} indexName={index}>
         <Configure hitsPerPage={hitsPerCarousel} filters={attribute} />
         <CustomHitsCarousel title={title} />

@@ -30,6 +30,12 @@
        width: 5px; 
     }
 }
+.closeFederated {
+    position: absolute;
+    top: -2rem;
+    right: 1rem;
+    cursor: pointer;
+}
 
 //Recent searches
 .recentSearches{
@@ -198,6 +204,15 @@
 
 
 // MOBILE & TABLET 
+.federatedSearch-mobile{
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+    position: absolute;
+    background-color: $background-color;
+    z-index: 40;
+    
+
 .federatedSearch__wrapper-mobile{
     display: flex;
     flex-direction: column;
@@ -222,7 +237,7 @@
             justify-content: stretch;
 
             .image-wrapper{
-                max-width: 70%;
+                max-width: 60%;
             }
             .infos{
                 text-align: center;
@@ -237,5 +252,15 @@
             }
         }
     }
+    .chevronRight{
+        width: 5px; 
+     }
        
+}
+.closeFederated{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
 }

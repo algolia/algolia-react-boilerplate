@@ -1,4 +1,4 @@
-import { useRef, memo } from 'react';
+import { useRef, useEffect, memo } from 'react';
 
 // Algolias's import
 import { Configure, Index } from 'react-instantsearch-dom';
@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import { framerMotionFederatedContainer } from '@/config/animationConfig';
 
 // import from Recoil
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 
 // Config
 import { searchClient, indexNames } from '@/config/algoliaEnvConfig';
@@ -19,8 +19,8 @@ import {
   federatedSearchConfig,
   federatedCategoriesAttribute,
   shouldHaveOpenFederatedSearch,
+  federatedRef,
 } from '@/config/federatedConfig';
-
 
 // Sharing query to general state
 import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig';
@@ -36,7 +36,7 @@ import { selectorNavigationRef } from '@/config/headerConfig';
 
 // hook import
 // Check if user is clecking outside an element
-import useOutsideClickTwoConditions from '@/hooks/useOutsideClickTwoConditions';
+import useOutsideClickTwoConditionals from '@/hooks/useOutsideClickTwoConditions';
 // Check screensize for responsiveness
 import useScreenSize from '@/hooks/useScreenSize';
 
@@ -62,15 +62,29 @@ const FederatedSearch = () => {
   // Get Indexes Name
   const { suggestionsIndex, articlesIndex } = useRecoilValue(indexNames);
 
-  const containerFederated = useRef('');
-
-  // Custom hook
-  useOutsideClickTwoConditions(containerFederated, searchboxRef, selector, () =>
-    setIsFederated(false)
-  );
+  // const containerFederated = useRef('');
+  const [containerFederated, setContainerFederated] =
+    useRecoilState(federatedRef);
 
   // Get screen size
   const { mobile, tablet } = useScreenSize();
+
+  // Custom hook
+
+  useOutsideClickTwoConditionals(
+    containerFederated,
+    searchboxRef,
+    selector,
+    () => setIsFederated(false)
+  );
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+      setIsFederated(false);
+    };
+  }, []);
 
   // Federated search configuration
   const {
@@ -83,14 +97,19 @@ const FederatedSearch = () => {
 
   return (
     <motion.div
-      className="federatedSearch"
-      ref={containerFederated}
+      className={`${
+        mobile || tablet ? 'federatedSearch-mobile' : 'federatedSearch'
+      }`}
+      ref={setContainerFederated}
       variants={framerMotionFederatedContainer}
       initial={framerMotionFederatedContainer.initial}
       animate={framerMotionFederatedContainer.animate}
       exit={framerMotionFederatedContainer.exit}
       transition={framerMotionFederatedContainer.transition}
     >
+      <span className="closeFederated" onClick={() => setIsFederated(false)}>
+        &lsaquo; Return to Homepage
+      </span>
       <div
         className={`${
           mobile || tablet

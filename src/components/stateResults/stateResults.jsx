@@ -14,7 +14,6 @@ const areArraysEqual = (a, b) =>
 // Update the state if there's new results
 function StateResults({ searchResults }) {
   const [hitsState, setHitsState] = useRecoilState(hitsAtom);
-
   useEffect(() => {
     if (searchResults?.hits) {
       // array of algolia hits

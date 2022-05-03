@@ -75,7 +75,7 @@
         }
       }
     }
-    .container__header-bottom {
+    .container__header-nav {
       &__links {
         display: flex;
         justify-content: center;
@@ -105,8 +105,15 @@
           }
         }
       }
+      .container__header-nav-selectors{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+      }
     }
   }
+
 }
 
 .select-component {
@@ -115,7 +122,7 @@
 }
 
 // MOBILE & TABLET
-
+.header{
 .container-mobile {
   .container__header-top {
     margin-top: 1rem;
@@ -158,7 +165,7 @@
       }
     }
   }
-
+}
   .hamburger {
     @include hamburger-menu;
   }
