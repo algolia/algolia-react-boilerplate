@@ -185,35 +185,18 @@ export const searchBannersConfig = [
     value: 'algolia',
     label: 'Algolia',
     alertContent: 'Displaying an Algolia Banner',
+    details: 'Will display an Algolia Banner',
   },
   {
     value: 'help',
     label: 'Help',
     alertContent: 'Displaying an Help banner',
+    details: 'Will display an Help banner',
   },
   {
     value: 'woman',
     label: 'Woman',
     alertContent: 'Displaying a Woman banner',
-  },
-];
-
-// What would be the content of the alert when you're selecting a query
-export const searchBannersInformations = [
-  {
-    span: 'Algolia',
-    details: 'Will display an Algolia Banner',
-  },
-  {
-    span: 'Christmas',
-    details: 'Will display a Christmas banner',
-  },
-  {
-    span: 'Help',
-    details: 'Will display an Help banner',
-  },
-  {
-    span: 'Woman',
     details: 'Will display a Woman banner',
   },
 ];
