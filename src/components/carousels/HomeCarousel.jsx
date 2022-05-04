@@ -14,6 +14,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { mainIndex } from '@/config/algoliaEnvConfig';
 import { hitsConfig, hitAtom } from '@/config/hitsConfig';
 import { hitsPerCarousel } from '@/config/carouselConfig';
+import { personaSelectedAtom } from '@/config/personaConfig';
 import {
   currencySymbolAtom,
   shouldIdisplayCurrency,
@@ -31,11 +32,16 @@ import get from 'lodash/get';
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ context, title }) => {
   const index = useRecoilValue(mainIndex);
+  const userToken = useRecoilValue(personaSelectedAtom);
   const { tablet, mobile } = useScreenSize();
   return (
     <div className={`${mobile ? 'home-carousel-mobile' : 'home-carousel'}`}>
       <Index indexId={title} indexName={index}>
-        <Configure hitsPerPage={hitsPerCarousel} ruleContexts={context} />
+        <Configure
+          hitsPerPage={hitsPerCarousel}
+          ruleContexts={context}
+          userToken={userToken}
+        />
         <CustomHitsCarousel title={title} />
       </Index>
     </div>
