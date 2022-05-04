@@ -140,13 +140,6 @@ export const DemoGuideDynamicFiltersConfig = [
     label: 'Sandals',
     alertContent:
       'This is changing the facets ordering to return size facet first',
-  },
-];
-
-// What would be the content of the alert when you're selecting a query
-export const DemoGuideDynamicFiltersInformations = [
-  {
-    span: 'Sandals',
     details: 'Will change the facets ordering to return size facet first',
   },
 ];

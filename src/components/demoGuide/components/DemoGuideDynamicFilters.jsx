@@ -35,10 +35,10 @@ const DemoGuideDynamicFilters = () => {
     <div className="search-terms">
       <h3>Dynamic Facet</h3>
       <div className="search-terms__infos">
-        {DemoGuideDynamicFiltersInformations.map((item, i) => {
+        {DemoGuideDynamicFiltersConfig.map((item, i) => {
           return (
             <div key={i} className="search-terms__infos__titles">
-              <span>{item.span}:</span>
+              <span>{item.label}:</span>
               <p>{item.details}</p>
             </div>
           );
