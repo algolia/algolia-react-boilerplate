@@ -11,7 +11,7 @@ import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
-import { logoUrl } from '@/config/headerConfig';
+import { logoUrl, categorySelectionAtom } from '@/config/headerConfig';
 
 //Import config from helped navigation
 import { isDemoGuideOpen, demoGuideBtnRef } from '@/config/demoGuideConfig';
@@ -30,6 +30,8 @@ import { OptionDots } from '@/assets/svg/SvgIndex';
 const HeaderLaptop = () => {
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
+  const categorySelection = useRecoilValue(categorySelectionAtom);
+  const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   // Define value to display voiceSearch
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
 
@@ -46,6 +48,7 @@ const HeaderLaptop = () => {
             onClick={() => {
               setQueryState('');
               federated(false);
+              setUnderlineCategory(null);
             }}
           >
             {/* Add possibility to change the Logo */}
