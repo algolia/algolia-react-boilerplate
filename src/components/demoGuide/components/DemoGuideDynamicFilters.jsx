@@ -12,7 +12,6 @@ import Select from 'react-select';
 
 // Import configuration
 import {
-  DemoGuideDynamicFiltersInformations,
   DemoGuideDynamicFiltersConfig,
   styles,
 } from '@/config/demoGuideConfig';
