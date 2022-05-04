@@ -59,7 +59,6 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           tabIndex="0"
           key={link.url}
           onClick={() => {
-            console.log(isActive);
             // Set query to nothing when clicking on a category
             setQueryState('');
             if (link.name !== 'All') {
@@ -87,7 +86,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           }}
         >
           <p
-            className={isActive === i ? 'selected' : 'egg'}
+            className={isActive === i ? 'selected' : ''}
             onClick={() => {
               setIsActive(i);
             }}
