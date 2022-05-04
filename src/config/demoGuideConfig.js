@@ -83,23 +83,6 @@ export const shouldShowPersonas = atom({
   default: true,
 });
 
-// What would be the content of the select in this section
-export const searchPersonaConfig = [
-  { value: '', label: 'Neutral' },
-  {
-    value: 'stephen_james',
-    label: 'Stephen',
-    alertContent:
-      'Search is personalised - Stephen James is a man who likes sports shoes',
-  },
-  {
-    value: 'elizabeth_aniston',
-    label: 'Elizabeth',
-    alertContent:
-      'Search is personalised - Elizabeth Aniston is a woman who likes Blue Dresses',
-  },
-];
-
 // The info is imported from personaConfig for display in 'Search Persona'
 export const searchPersonaInformations = personaConfig.map((persona) => {
   const { label, description } = persona;
