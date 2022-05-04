@@ -61,22 +61,12 @@ export const searchTermsConfig = [
     value: 'ring',
     label: 'Ring',
     alertContent: 'The category Bags is boosted.',
+    details: 'The category Bags will be boosted.',
   },
   {
     value: 'dress',
     label: 'Dress',
     alertContent: 'You are searching in dress category',
-  },
-];
-
-// What would be the content of the alert when you're selecting a query
-export const searchTermsInformations = [
-  {
-    span: 'Ring',
-    details: 'The category Bags will be boosted.',
-  },
-  {
-    span: 'Dress',
     details: 'Will only search in dress category',
   },
 ];
@@ -92,23 +82,6 @@ export const shouldShowPersonas = atom({
   key: 'shouldShowPersonas',
   default: true,
 });
-
-// What would be the content of the select in this section
-export const searchPersonaConfig = [
-  { value: '', label: 'Neutral' },
-  {
-    value: 'stephen_james',
-    label: 'Stephen',
-    alertContent:
-      'Search is personalised - Stephen James is a man who likes sports shoes',
-  },
-  {
-    value: 'elizabeth_aniston',
-    label: 'Elizabeth',
-    alertContent:
-      'Search is personalised - Elizabeth Aniston is a woman who likes Blue Dresses',
-  },
-];
 
 // The info is imported from personaConfig for display in 'Search Persona'
 export const searchPersonaInformations = personaConfig.map((persona) => {
@@ -138,22 +111,12 @@ export const DemoGuideInjectedContentConfig = [
     value: 'Nike',
     label: 'Nike',
     alertContent: 'You are displaying an injected content coupon for Nike',
+    details: 'Will display injected content coupon for Nike',
   },
   {
     value: 'Women',
     label: 'Women',
     alertContent: 'You are displaying an injected content ad with Gigi Hadid',
-  },
-];
-
-// What would be the content of the alert when you're selecting a query
-export const DemoGuideInjectedContentInformations = [
-  {
-    span: 'Nike',
-    details: 'Will display injected content coupon for Nike',
-  },
-  {
-    span: 'Woman',
     details: 'Will display injected content ad with Gigi Hadid',
   },
 ];
@@ -177,13 +140,6 @@ export const DemoGuideDynamicFiltersConfig = [
     label: 'Sandals',
     alertContent:
       'This is changing the facets ordering to return size facet first',
-  },
-];
-
-// What would be the content of the alert when you're selecting a query
-export const DemoGuideDynamicFiltersInformations = [
-  {
-    span: 'Sandals',
     details: 'Will change the facets ordering to return size facet first',
   },
 ];
@@ -206,13 +162,6 @@ export const DemoGuideRedirectConfig = [
     value: 'Faq',
     label: 'FAQ',
     alertContent: "Redirecting the user to Algolia's homepage",
-  },
-];
-
-// What would be the content of the alert when you're selecting a query
-export const DemoGuideRedirectInformations = [
-  {
-    span: 'FAQ',
     details: "Will redirect the user to Algolia's homepage",
   },
 ];
@@ -236,35 +185,18 @@ export const searchBannersConfig = [
     value: 'algolia',
     label: 'Algolia',
     alertContent: 'Displaying an Algolia Banner',
+    details: 'Will display an Algolia Banner',
   },
   {
     value: 'help',
     label: 'Help',
     alertContent: 'Displaying an Help banner',
+    details: 'Will display an Help banner',
   },
   {
     value: 'woman',
     label: 'Woman',
     alertContent: 'Displaying a Woman banner',
-  },
-];
-
-// What would be the content of the alert when you're selecting a query
-export const searchBannersInformations = [
-  {
-    span: 'Algolia',
-    details: 'Will display an Algolia Banner',
-  },
-  {
-    span: 'Christmas',
-    details: 'Will display a Christmas banner',
-  },
-  {
-    span: 'Help',
-    details: 'Will display an Help banner',
-  },
-  {
-    span: 'Woman',
     details: 'Will display a Woman banner',
   },
 ];

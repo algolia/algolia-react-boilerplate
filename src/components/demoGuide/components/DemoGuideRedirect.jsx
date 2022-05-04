@@ -12,7 +12,6 @@ import Select from 'react-select';
 
 // Import configuration
 import {
-  DemoGuideRedirectInformations,
   DemoGuideRedirectConfig,
   styles,
 } from '@/config/demoGuideConfig';
@@ -35,10 +34,10 @@ const DemoGuideRedirect = () => {
     <div className="search-terms">
       <h3>Redirect</h3>
       <div className="search-terms__infos">
-        {DemoGuideRedirectInformations.map((item, i) => {
+        {DemoGuideRedirectConfig.map((item, i) => {
           return (
             <div key={i} className="search-terms__infos__titles">
-              <span>{item.span}:</span>
+              <span>{item.label}:</span>
               <p>{item.details}</p>
             </div>
           );
