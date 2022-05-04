@@ -52,8 +52,9 @@ const SearchPersona = () => {
         placeholder="Persona"
         onChange={(e) => {
           if (e.value !== 'anon') {
+            console.log(e)
             setPersonaSelect(e.value);
-            triggerAlert(e.alertContent);
+            triggerAlert(e.description);
           }
         }}
       />
