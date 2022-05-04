@@ -14,8 +14,7 @@ import { useNavigate, createSearchParams } from 'react-router-dom';
 // Import configuration
 import {
   searchTermsConfig,
-  styles,
-  searchTermsInformations,
+  styles
 } from '@/config/demoGuideConfig';
 
 const SearchTerms = () => {
@@ -36,14 +35,14 @@ const SearchTerms = () => {
     <div className="search-terms">
       <h3>Search Terms</h3>
       <div className="search-terms__infos">
-        {searchTermsInformations.map((item, i) => {
-          return (
+        {searchTermsConfig.map((item, i) => (
+          item.details && (
             <div key={i} className="search-terms__infos__titles">
-              <span>{item.span}:</span>
+              <span>{item.label}:</span>
               <p>{item.details}</p>
             </div>
-          );
-        })}
+          )
+        ))}
       </div>
       <Select
         defaultValue={searchTermsConfig}

@@ -61,22 +61,12 @@ export const searchTermsConfig = [
     value: 'ring',
     label: 'Ring',
     alertContent: 'The category Bags is boosted.',
+    details: 'The category Bags will be boosted.',
   },
   {
     value: 'dress',
     label: 'Dress',
     alertContent: 'You are searching in dress category',
-  },
-];
-
-// What would be the content of the alert when you're selecting a query
-export const searchTermsInformations = [
-  {
-    span: 'Ring',
-    details: 'The category Bags will be boosted.',
-  },
-  {
-    span: 'Dress',
     details: 'Will only search in dress category',
   },
 ];
