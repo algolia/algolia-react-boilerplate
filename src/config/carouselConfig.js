@@ -10,11 +10,11 @@
 export const carouselConfig = [
   {
     context: 'homepage-carousel-one',
-    title: 'Our Hat Collection',
+    title: 'Our Bags Collection',
   },
   {
     context: 'homepage-carousel-two',
-    title: 'Our Best Sneakers',
+    title: 'Our Best Hoodies',
   },
 ];
 
