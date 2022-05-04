@@ -12,7 +12,6 @@ import Select from 'react-select';
 
 // Import configuration
 import {
-  DemoGuideInjectedContentInformations,
   DemoGuideInjectedContentConfig,
   styles,
 } from '@/config/demoGuideConfig';
@@ -35,10 +34,10 @@ const DemoGuideInjectedContent = () => {
     <div className="search-terms">
       <h3>Injected Content</h3>
       <div className="search-terms__infos">
-        {DemoGuideInjectedContentInformations.map((item, i) => {
+        {DemoGuideInjectedContentConfig.map((item, i) => {
           return (
             <div key={i} className="search-terms__infos__titles">
-              <span>{item.span}:</span>
+              <span>{item.label}:</span>
               <p>{item.details}</p>
             </div>
           );

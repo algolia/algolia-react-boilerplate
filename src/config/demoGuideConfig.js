@@ -111,22 +111,12 @@ export const DemoGuideInjectedContentConfig = [
     value: 'Nike',
     label: 'Nike',
     alertContent: 'You are displaying an injected content coupon for Nike',
+    details: 'Will display injected content coupon for Nike',
   },
   {
     value: 'Women',
     label: 'Women',
     alertContent: 'You are displaying an injected content ad with Gigi Hadid',
-  },
-];
-
-// What would be the content of the alert when you're selecting a query
-export const DemoGuideInjectedContentInformations = [
-  {
-    span: 'Nike',
-    details: 'Will display injected content coupon for Nike',
-  },
-  {
-    span: 'Woman',
     details: 'Will display injected content ad with Gigi Hadid',
   },
 ];
