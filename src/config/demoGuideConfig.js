@@ -162,13 +162,6 @@ export const DemoGuideRedirectConfig = [
     value: 'Faq',
     label: 'FAQ',
     alertContent: "Redirecting the user to Algolia's homepage",
-  },
-];
-
-// What would be the content of the alert when you're selecting a query
-export const DemoGuideRedirectInformations = [
-  {
-    span: 'FAQ',
     details: "Will redirect the user to Algolia's homepage",
   },
 ];
