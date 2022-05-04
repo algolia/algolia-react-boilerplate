@@ -35,6 +35,7 @@ import SearchResultsPage from './pages/SearchResultsPage';
 import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import ProductDetails from './pages/ProductDetails';
 import Footer from './components/footer/Footer';
+import CustomAppliedRules from './components/appliedRules/AppliedRules';
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
@@ -57,6 +58,7 @@ export const Main = ({ isLoaded }) => {
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
       <CustomStateResults />
+      <CustomAppliedRules />
 
       <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
         <Header />
