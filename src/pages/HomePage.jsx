@@ -77,14 +77,14 @@ const HomePage = () => {
         <CustomHomeBanners />
       </Suspense>
 
-      {homepage_1 ? <img src={homepage_1} alt="" /> : null}
-
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
           <Suspense key={i} fallback={<Loader />}>
             <HomeCarousel context={carousel.context} title={carousel.title} />
           </Suspense>
         ))}
+        
+      {homepage_1 ? <img src={homepage_1} alt="" /> : null}
 
       {homepage_2 && <img src={homepage_2} alt="" />}
     </motion.div>

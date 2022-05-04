@@ -15,6 +15,7 @@ import { mainIndex } from '@/config/algoliaEnvConfig';
 import { hitsConfig, hitAtom } from '@/config/hitsConfig';
 import { hitsPerCarousel } from '@/config/carouselConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
+import { segmentSelectedAtom } from '@/config/segmentConfig';
 import {
   currencySymbolAtom,
   shouldIdisplayCurrency,
@@ -33,6 +34,8 @@ import get from 'lodash/get';
 const HomeCarousel = ({ context, title }) => {
   const index = useRecoilValue(mainIndex);
   const userToken = useRecoilValue(personaSelectedAtom);
+  const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
+
   const { tablet, mobile } = useScreenSize();
   return (
     <div className={`${mobile ? 'home-carousel-mobile' : 'home-carousel'}`}>
@@ -40,6 +43,7 @@ const HomeCarousel = ({ context, title }) => {
         <Configure
           hitsPerPage={hitsPerCarousel}
           ruleContexts={context}
+          optionalFilters={segmentOptionalFilters}
           userToken={userToken}
         />
         <CustomHitsCarousel title={title} />
