@@ -58,8 +58,8 @@ export const alertContent = atom({
 export const searchTermsConfig = [
   { value: '', label: 'Choose' },
   {
-    value: 'ring',
-    label: 'Ring',
+    value: 'bag',
+    label: 'Bag',
     alertContent: 'The category Bags is boosted.',
   },
   {
@@ -72,7 +72,7 @@ export const searchTermsConfig = [
 // What would be the content of the alert when you're selecting a query
 export const searchTermsInformations = [
   {
-    span: 'Ring',
+    span: 'Bag',
     details: 'The category Bags will be boosted.',
   },
   {

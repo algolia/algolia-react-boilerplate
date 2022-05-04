@@ -1,0 +1,39 @@
+// ------------------------------------------
+// applied Rules
+// ------------------------------------------
+@use '../mixin/abstracts' as *;
+
+.appliedRules{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    background: $blue-algolia-custom-gradient;
+    width: 100%;
+    z-index: 999;
+    padding: 1rem;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    animation: .3s showRules ease-in forwards ;
+    animation-delay: 3.5s;
+
+    &__list{
+        li{
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+    }
+
+}
+
+@keyframes showRules {
+    0%{
+        opacity: 0;
+        transform: translateY(100%);
+        
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}

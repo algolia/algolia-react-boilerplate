@@ -3,7 +3,7 @@
 // ------------------------------------------
 
 import { atom, selector } from 'recoil';
-import algoliasearch from 'algoliasearch/lite';
+import algoliasearch from 'algoliasearch';
 
 // This export represents the information needed for the Algolia API client
 export const searchClientCreds = {
