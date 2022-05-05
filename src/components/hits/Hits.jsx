@@ -45,6 +45,10 @@ const Hit = ({ hit }) => {
   // Get hit attribute from config file
   const { price, objectID, image, imageAlt, category, productName } = hitsConfig;
 
+  const showRankingFormula = (hit) => {
+    console.log(hit._rankingInfo)
+  }
+
   return (
     <motion.li
       layout
@@ -54,11 +58,8 @@ const Hit = ({ hit }) => {
       animate={framerMotionHits.animate}
       transition={framerMotionHits.transition}
       className="srpItem"
-      onClick={() => {
-        hitState(hit);
-        navigate(`/search/${hit[objectID]}`);
-      }}
     >
+        <button onClick={() => showRankingFormula(hit)} className='ranking-formula-button'></button>
       <motion.div
         className="srpItem__imgWrapper"
         onMouseLeave={(e) => {
@@ -66,6 +67,10 @@ const Hit = ({ hit }) => {
         }}
         onMouseOver={(e) => {
           setIsHovered(true);
+        }}
+        onClick={() => {
+          hitState(hit);
+          navigate(`/search/${hit[objectID]}`);
         }}
       >
         {isHovered && get(hit, imageAlt) !== undefined ? (

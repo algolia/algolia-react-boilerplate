@@ -49,3 +49,11 @@
     font-weight: 500;
   }
 }
+
+.ranking-formula-button {
+  display:block;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  border: 1px solid $blue-algolia;
+}
