@@ -42,7 +42,7 @@ export const PDPHitSections = {
   price: true,
   productName: true,
   brand: true,
-  sizeFilter: true,
+  sizeFilter: false,
   colour: true,
 };
 

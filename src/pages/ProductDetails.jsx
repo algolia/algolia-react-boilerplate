@@ -39,14 +39,38 @@ import { hitsConfig, PDPHitSections } from '@/config/hitsConfig';
 import { currencySymbolAtom, shouldDisplayCurrency } from '@/config/currencyConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
+// Used to send insights event on add to cart
+import { personaSelectedAtom } from '@/config/personaConfig';
+
 // Custom hooks
 import useScreenSize from '@/hooks/useScreenSize';
 
 import get from 'lodash/get';
 
+// Send an insights event to algolia
+import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+
+// Used to show alert when add to cart event is sent
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
+
 const ProductDetails = () => {
+
+  // For alert on sending add to cart event
+  const setAlert = useSetRecoilState(alertContent);
+  const setAlertOpen = useSetRecoilState(isAlertOpen);
+
+  // Function to manage the alert
+  const triggerAlert = (content) => {
+    setAlertOpen(true);
+    setAlert(content);
+    setTimeout(() => setAlertOpen(false), 5000);
+  }
+
   // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
+
+  // personalisation user token
+  const userToken = useRecoilValue(personaSelectedAtom);
 
   // Get the main index
   const index = useRecoilValue(mainIndex);
@@ -191,7 +215,8 @@ const ProductDetails = () => {
                 </motion.div>
               </div>
             )}
-
+            // Add to cart button which sends an Insights API call to Algolia but only if there is no size filter
+            {!PDPHitSections.sizeFilter && <motion.button class='add-to-cart' onClick={() => {triggerAlert('Sending add to cart event to Algolia'), useSendAlgoliaEvent('clickedObjectIDs', userToken, index, hit, 'add-to-cart')}}><i className="fa-solid fa-shopping-cart"></i><p>Add to cart</p></motion.button>}
             {PDPHitSections.price && <motion.p
               initial={{
                 opacity: 0,
