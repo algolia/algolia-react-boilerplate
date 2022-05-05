@@ -73,12 +73,14 @@
         text-transform: capitalize;
         font-style: italic;
       }
+      .add-to-cart {
+        margin-top: 5rem;
+        align-self: flex-start;
+      }
       .price {
         color: $blue-algolia;
         font-weight: bold;
         font-size: 2rem;
-        margin-top: 5rem;
-        align-self: flex-end;
       }
       .sizes {
         font-weight: bold;
