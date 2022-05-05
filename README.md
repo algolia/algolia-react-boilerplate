@@ -123,6 +123,8 @@ Redirects are already activated in the application. In order to trigger one, sim
  }
  ```
 
+ You can find an example redirect rule by searching for `qr-1634733813616` in `rules/example-rules.json`
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Federated Search</h3>
 
 You can turn on federated search in `config/featuresConfig` by setting the `default` value of `shouldHaveFederatedSearch` to true. You can then define which sections are shown by going to `config/federatedConfig`.
@@ -142,6 +144,8 @@ You can then define your sorts by going to `config/sortByConfig` and adjusting t
 You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveCarousels` to true.
 
 Carousels are configured using [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#using-context). You can configure your carousels by going to `config/carouselConfig` and adjusting the values for each `context`. You must ensure you have a rule in the algolia dashboard for each context, which pins products as this is what powers the carousels.
+
+You can find an example carousel rule by searching for `qr-1651497727816` in `rules/example-rules.json`.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Recommend</h3>
 
@@ -186,7 +190,10 @@ How Configure it 👇
   - type: set this to "bannersrp"
   - title
   - banner: this is an image url
-  - link: often a link to a page (eg './categoryPageWoman.html')
+
+You can find an example of a bannersrp rule by searching for `qr-1634719042792` in `rules/example-rules.json`.
+
+You can find an example of a homeBannerTwo rule by searching for `qr-1645197289062` in `rules/example-rules.json`.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Segments</h3>
 
@@ -218,7 +225,9 @@ Next, go to `config/headerConfig`. From there you can add links in the Navigatio
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Collection Pages</h3>
 
-In order to configure Collection Pages, go in `config/headerConfig`. From there you can add links to the Navigation tab. Collection pages are powered by rule contexts. In order for this to work, you must set the type to `context` and make sure that you have a rule set up in the Algolia dashboard matching the context trigger which you define as the value of `context`
+In order to configure Collection Pages, go in `config/headerConfig`. From there you can add links to the Navigation tab. Collection pages are powered by rule contexts. In order for this to work, you must set the type to `context` and make sure that you have a rule set up in the Algolia dashboard matching the context trigger which you define as the value of `context`.
+
+You can find an example of a collection page rule by searching for `qr-1651145630794` in `rules/example-rules.json`.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👩‍💼🧑‍💼 Personas</h3>
 
@@ -252,48 +261,12 @@ We have two kinds of rules. If you want to trigger these rules for your own demo
 1. Free returns (always displayed)
 - You can edit the displayed hit by going to `/components/hits/NoCtaCard.js`
 
-- Rule consequence JSON structure:
-```
-{
-  "type": "noCta",
-  "title": "",
-  "image": {
-    "desktop_url": "https://res.cloudinary.com/hugo-valla/image/upload/v1641220366/L_ptpbwc.png",
-    "mobile_url": "https://api.lorem.space/image/shoes?w-300&h-300"
-  },
-  "position": 7,
-  "isSalesCardDisplay": 6,
-  "gridSpanLaptop": 1,
-  "gridSpanMobile": 1,
-  "size": {
-    "width": 3,
-    "height": 1
-  }
-```
+You can find an example of this injected content rule by searching for `qr-1644582034227` in `rules/example-rules.json`.
 
 2. Sales card ('nike' trigger)
 - You can edit the displayed hit by going to `/components/hits/SalesCard.js`
 
-- Rule consequence JSON structure:
-```
-{
-  "type": "salesCard",
-  "title": "Receive an extra 20% off nike items",
-  "subtitle": "",
-  "coupon": "Code: NIKE20",
-  "image": {
-    "desktop_url": "https://static.dezeen.com/uploads/2021/03/lil-nas-x-mschf-nike-satan-shoes-blood-pentagram-bible-verse-design-fashion-footwear_dezeen_2364_col_3-scaled.jpg",
-    "mobile_url": "https://"
-  },
-  "position": 3,
-  "size": {
-    "width": 1,
-    "height": 1
-  }
-}
-```
-
-You can see these rules for reference in the Flagship Fashion [Dashboard](https://www.algolia.com/apps/853MYZ81KY/rules/flagship_fashion).
+You can find an example of this injected content rule by searching for `qr-1649055462539` in `rules/example-rules.json`.
 
 <h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">From Seperate Index</h4>
 
@@ -321,7 +294,7 @@ Here is a sample record structure which is expected for records in the index to 
 
 This project comes with fontawesome added by default so you can adjust or add icons at will. It has been installed by being added in `/src/assets/fontawesome/js/all.js` and linked in the head tag of `index.html`
 
-You can add your icons by using this method: https://fontawesome.com/docs/web/add-icons/how-to
+It is then as simple as adding in your HTML the correct fontawesome tags i.e. `<i className="fa-solid fa-shopping-cart"></i>`
 
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
