@@ -105,6 +105,21 @@
       }
     }
   }
+  .addToCartBtn{
+    @include btn($blue-algolia-custom-gradient, $white-color, transparent);
+    gap: 1rem;
+   
+    &:hover{
+      @include btn-hover($blue-algolia-custom-gradient, $white-color);
+      gap: 1.5rem;
+    }
+    svg{
+      width: 12px;
+    }
+    p{
+      color: $white-color;
+    }
+  }
 }
 // MOBILE & TABLET
 .pdp-mobile {

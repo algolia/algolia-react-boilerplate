@@ -33,16 +33,16 @@
   margin: 0.5rem 0;
   padding: 0.8em;
   font-size: 0.7rem;
-  background-color: $background;
-  transition: all 0.4s ease-in-out;
+  background: $background;
   text-transform: uppercase;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 @mixin btn-hover($background, $text-color) {
-  transition: all 0.4s ease-in-out;
-  background: $blue-algolia-custom-gradient;
-  color: $white-color;
+  background: $background;
+  color: $text-color;
+  transition: all 0.3s ease-in-out;
 }
 
 // ------------------------------------------
