@@ -13,8 +13,6 @@ import { hitsConfig } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 
-import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
-
 import {
   shouldDisplayCurrency,
   currencySymbolAtom,
@@ -73,7 +71,6 @@ const Hits = ({ hits }) => {
                     {displayCurrency && currency}
                   </p>
                 </div>
-                <button onClick={() => useSendAlgoliaEvent(hit, 'add-to-cart')}><i className="fa-solid fa-shopping-cart"></i></button>
               </li>
             );
           })
