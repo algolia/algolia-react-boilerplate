@@ -109,6 +109,10 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Insights</h3>
+
+On the product details page, if you have chosen not to show the size filter, you will see an add to cart button. By clicking this button, an event will be sent to algolia using the Insights API and an alert will be shown to the user.
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Redirects</h3>
 
 Redirects are already activated in the application. In order to trigger one, simply create a rule in the dashboard where the consequence is:
