@@ -105,7 +105,7 @@ const ProductDetails = () => {
     sizeFilter,
     colour,
     colourHexa,
-  } = useRecoilValue(hitsConfig);
+  } = hitsConfig;
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1];
 

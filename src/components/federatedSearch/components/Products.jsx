@@ -35,8 +35,7 @@ const Hits = ({ hits }) => {
   const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
   // Get hit attribute from config file
-  const { price, objectID, image, productName, brand } =
-    useRecoilValue(hitsConfig);
+  const { price, objectID, image, productName, brand } = hitsConfig;
 
   return (
     <div className="products">

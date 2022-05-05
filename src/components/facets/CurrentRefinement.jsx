@@ -40,7 +40,7 @@ const displayColor = (i) => {
 };
 
 const CurrentRefinements = ({ items, refine, createURL }) => {
-  const { colourHexa } = useRecoilValue(hitsConfig);
+  const { colourHexa } = hitsConfig;
   const currencySymbol = useRecoilValue(currencySymbolAtom);
   return (
     <ul className="refinement-container__refinements">

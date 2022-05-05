@@ -66,7 +66,7 @@ const Carousel = ({ hits, title }) => {
   // Hits are imported by Recoil
   const hitState = useSetRecoilState(hitAtom);
   const displayCurrency = useRecoilValue(shouldDisplayCurrency);
-  const { price, objectID, image, productName } = useRecoilValue(hitsConfig);
+  const { price, objectID, image, productName } = hitsConfig;
 
   // Used by Framer Motion
   const carousel = useRef();
