@@ -35,6 +35,17 @@ export const hitsConfig = atom({
   },
 });
 
+// ------------------------------------------
+// This const defines what parts of a hit you want to show on the PDP or not
+// ------------------------------------------
+export const PDPHitSections = {
+  price: true,
+  productName: true,
+  brand: true,
+  sizeFilter: false,
+  colour: true,
+};
+
 // Similar structure to previous const, please do not remove if you don't use articles
 export const contentArticlesConfig = atom({
   key: 'contentArticlesConfig', // unique ID (with respect to other atoms/selectors)

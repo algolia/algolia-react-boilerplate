@@ -10,7 +10,11 @@ import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Config for the header
 import { categoryPageFilterAttribute } from '@/config/categoryConfig';
-import { linksHeader, selectorNavigationRef } from '@/config/headerConfig';
+import {
+  linksHeader,
+  selectorNavigationRef,
+  categorySelectionAtom,
+} from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
 //import language selector component
@@ -27,10 +31,11 @@ import {
 } from '@/config/featuresConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
-  const [isActive, setIsActive] = useState(null);
-
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
+  const [categorySelectionState, setCategorySelectionState] = useRecoilState(
+    categorySelectionAtom
+  );
 
   // navigate is used by React Router
   const navigate = useNavigate();
@@ -86,9 +91,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           }}
         >
           <p
-            className={isActive === i ? 'selected' : ''}
+            className={categorySelectionState === i ? 'selected' : ''}
             onClick={() => {
-              setIsActive(i);
+              setCategorySelectionState(i);
             }}
           >
             {link.name}
