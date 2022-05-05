@@ -45,8 +45,15 @@ const Hit = ({ hit }) => {
   // Get hit attribute from config file
   const { price, objectID, image, imageAlt, category, productName } = hitsConfig;
 
-  const showRankingFormula = (hit) => {
-    console.log(hit._rankingInfo)
+  const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false)
+
+  const RankingFormulaOverlay = ({hit}) => {
+     
+    return (
+      <div className="srpItem">
+        {Object.entries(hit._rankingInfo).map((entry) => (<p>{entry[0]} {JSON.stringify(entry[1])}</p>))}
+      </div>
+    )
   }
 
   return (
@@ -59,7 +66,10 @@ const Hit = ({ hit }) => {
       transition={framerMotionHits.transition}
       className="srpItem"
     >
-        <button onClick={() => showRankingFormula(hit)} className='ranking-formula-button'></button>
+      <button onClick={() => setShouldShowRankingInfo(!shouldShowRankingInfo)} className='ranking-formula-button'></button>
+      {shouldShowRankingInfo && <RankingFormulaOverlay hit={hit} />}
+      {!shouldShowRankingInfo && (
+      <>
       <motion.div
         className="srpItem__imgWrapper"
         onMouseLeave={(e) => {
@@ -106,6 +116,7 @@ const Hit = ({ hit }) => {
           </p>
         </div>
       </div>
+      </>)}
     </motion.li>
   );
 };
