@@ -211,7 +211,7 @@ const ProductDetails = () => {
                 </motion.div>
               </div>
             )}
-            {!PDPHitSections.sizeFilter && <motion.button class='add-to-cart' onClick={() => {triggerAlert('Sending add to cart event to Algolia'), useSendAlgoliaEvent('clickedObjectIDs', userToken, index, hit, 'add-to-cart')}}><i className="fa-solid fa-shopping-cart"></i>Add to cart</motion.button>}
+            {!PDPHitSections.sizeFilter && <motion.button class='add-to-cart' onClick={() => {triggerAlert('Sending add to cart event to Algolia'), useSendAlgoliaEvent('clickedObjectIDs', userToken, index, hit, 'add-to-cart')}}><i className="fa-solid fa-shopping-cart"></i><p>Add to cart</p></motion.button>}
             {PDPHitSections.price && <motion.p
               initial={{
                 opacity: 0,
