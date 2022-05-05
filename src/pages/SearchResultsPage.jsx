@@ -33,6 +33,7 @@ import {
   federatedSearchConfig,
   shouldHaveOpenFederatedSearch,
 } from '@/config/federatedConfig';
+import HomeCarousel from '@/components/carousels/HomeCarousel';
 
 const SrpLaptop = lazy(() =>
   import('@/components/searchresultpage/srpLaptop/SrpLaptop')
@@ -104,6 +105,7 @@ const NoResults = memo(({ query }) => {
                 {/* Add this searchBox Invisible to refine when we click on a suggestion */}
                 <CustomSearchBox query={getQueryState} />
               </div>
+              <HomeCarousel />
             </>
           )}
         </ul>
