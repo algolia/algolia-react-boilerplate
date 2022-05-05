@@ -211,7 +211,7 @@ const ProductDetails = () => {
               {get(hit, price)}
               {displayCurrency && currency}
             </motion.p>
-            <button onClick={() => useSendAlgoliaEvent('clickedObjectIDs', userToken, index, hit, 'add-to-cart')}><i className="fa-solid fa-shopping-cart"></i></button>
+            <button onClick={() => useSendAlgoliaEvent('clickedObjectIDs', userToken, index, hit, 'add-to-cart')}><i className="fa-solid fa-shopping-cart"></i>Add to cart</button>
           </motion.div>
         </div>
       </div>
