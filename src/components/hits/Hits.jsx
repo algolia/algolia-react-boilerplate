@@ -43,8 +43,7 @@ const Hit = ({ hit }) => {
   const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
   // Get hit attribute from config file
-  const { price, objectID, image, imageAlt, category, productName } =
-    useRecoilValue(hitsConfig);
+  const { price, objectID, image, imageAlt, category, productName } = hitsConfig;
 
   return (
     <motion.li
