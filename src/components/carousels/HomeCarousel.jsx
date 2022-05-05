@@ -18,7 +18,7 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import {
   currencySymbolAtom,
-  shouldIdisplayCurrency,
+  shouldDisplayCurrency,
 } from '@/config/currencyConfig';
 
 // In case of img loading error
@@ -65,7 +65,7 @@ const Carousel = ({ hits, title }) => {
 
   // Hits are imported by Recoil
   const hitState = useSetRecoilState(hitAtom);
-  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
+  const displayCurrency = useRecoilValue(shouldDisplayCurrency);
   const { price, objectID, image, productName } = useRecoilValue(hitsConfig);
 
   // Used by Framer Motion
