@@ -38,15 +38,22 @@ import {
 import { hitsConfig } from '@/config/hitsConfig';
 import { currencySymbolAtom, shouldIdisplayCurrency } from '@/config/currencyConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+import { personaSelectedAtom } from '@/config/personaConfig';
 
 // Custom hooks
 import useScreenSize from '@/hooks/useScreenSize';
 
 import get from 'lodash/get';
 
+// Send an insights event to algolia
+import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+
 const ProductDetails = () => {
   // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
+
+  // personalisation user token
+  const userToken = useRecoilValue(personaSelectedAtom);
 
   // Get the main index
   const index = useRecoilValue(mainIndex);
@@ -204,6 +211,7 @@ const ProductDetails = () => {
               {get(hit, price)}
               {displayCurrency && currency}
             </motion.p>
+            <button onClick={() => useSendAlgoliaEvent('clickedObjectIDs', userToken, index, hit, 'add-to-cart')}><i className="fa-solid fa-shopping-cart"></i></button>
           </motion.div>
         </div>
       </div>
