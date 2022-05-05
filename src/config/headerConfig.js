@@ -49,3 +49,8 @@ export const selectorNavigationRef = atom({
   key: 'selectorNavigationRef', // unique ID (with respect to other atoms/selectors)
   default: '',
 })
+
+export const categorySelectionAtom = atom({
+  key: 'categorySelectionAtom',
+  default: null
+})
