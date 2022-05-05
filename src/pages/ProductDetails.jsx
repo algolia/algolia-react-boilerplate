@@ -35,16 +35,8 @@ import {
   shouldHaveRelatedProducts,
   shouldHaveFbtProducts,
 } from '@/config/featuresConfig';
-<<<<<<< HEAD
-import { hitsConfig } from '@/config/hitsConfig';
-import {
-  currencySymbolAtom,
-  shouldIdisplayCurrency,
-} from '@/config/currencyConfig';
-=======
 import { hitsConfig, PDPHitSections } from '@/config/hitsConfig';
 import { currencySymbolAtom, shouldDisplayCurrency } from '@/config/currencyConfig';
->>>>>>> f835072d3e413bc9d9911065abc14d5481e52cc2
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 
@@ -232,26 +224,7 @@ const ProductDetails = () => {
             >
               {get(hit, price)}
               {displayCurrency && currency}
-<<<<<<< HEAD
-            </motion.p>
-            <button
-              className="addToCartBtn"
-              onClick={() =>
-                useSendAlgoliaEvent(
-                  'clickedObjectIDs',
-                  userToken,
-                  index,
-                  hit,
-                  'add-to-cart'
-                )
-              }
-            >
-              <i className="fa-solid fa-shopping-cart"></i>
-              <p>Add to cart</p>
-            </button>
-=======
             </motion.p>}
->>>>>>> f835072d3e413bc9d9911065abc14d5481e52cc2
           </motion.div>
         </div>
       </div>
