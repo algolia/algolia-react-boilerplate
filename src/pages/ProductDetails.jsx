@@ -35,8 +35,8 @@ import {
   shouldHaveRelatedProducts,
   shouldHaveFbtProducts,
 } from '@/config/featuresConfig';
-import { hitsConfig } from '@/config/hitsConfig';
-import { currencySymbolAtom, shouldIdisplayCurrency } from '@/config/currencyConfig';
+import { hitsConfig, PDPHitSections } from '@/config/hitsConfig';
+import { currencySymbolAtom, shouldDisplayCurrency } from '@/config/currencyConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 
@@ -94,7 +94,7 @@ const ProductDetails = () => {
 
   // Get the current currency
   const currency = useRecoilValue(currencySymbolAtom);
-  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
+  const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -168,9 +168,9 @@ const ProductDetails = () => {
               transition: { delay: 0.5, framerMotionTransition },
             }}
           >
-            <p className="brand">{get(hit, brand)}</p>
-            <p className="name">{get(hit, productName)}</p>
-            <div className="color">
+            {PDPHitSections.brand && <p className="brand">{get(hit, brand)}</p>}
+            {PDPHitSections.productName && <p className="name">{get(hit, productName)}</p>}
+            {PDPHitSections.colour && <div className="color">
               {hexaCode ? (
                 <div
                   style={{
@@ -184,8 +184,9 @@ const ProductDetails = () => {
                 ''
               )}
               <p>{get(hit, colour)}</p>
-            </div>
-            {get(hit, sizeFilter)?.length > 0 && (
+            </div>}
+            
+            {PDPHitSections.sizeFilter && get(hit, sizeFilter)?.length > 0 && (
               <div className="sizes">
                 <p>Available size(s):</p>
                 <motion.div className="sizeList">
@@ -197,8 +198,8 @@ const ProductDetails = () => {
                 </motion.div>
               </div>
             )}
-            <motion.button class='add-to-cart' onClick={() => useSendAlgoliaEvent('clickedObjectIDs', userToken, index, hit, 'add-to-cart')}><i className="fa-solid fa-shopping-cart"></i>Add to cart</motion.button>
-            <motion.p
+            {!PDPHitSections.sizeFilter && <motion.button class='add-to-cart' onClick={() => useSendAlgoliaEvent('clickedObjectIDs', userToken, index, hit, 'add-to-cart')}><i className="fa-solid fa-shopping-cart"></i>Add to cart</motion.button>}
+            {PDPHitSections.price && <motion.p
               initial={{
                 opacity: 0,
               }}
@@ -210,7 +211,7 @@ const ProductDetails = () => {
             >
               {get(hit, price)}
               {displayCurrency && currency}
-            </motion.p>
+            </motion.p>}
           </motion.div>
         </div>
       </div>

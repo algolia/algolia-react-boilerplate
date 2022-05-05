@@ -8,7 +8,7 @@
 
 import { atom } from 'recoil';
 
-// Change de default currency symbol
+// Change the default currency symbol
 // If no need for currency symbol please leave an empty string
 export const currencySymbolAtom = atom({
   key: 'currencySymbolAtom', // unique ID (with respect to other atoms/selectors)
@@ -16,12 +16,10 @@ export const currencySymbolAtom = atom({
 });
 
 // ------------------------------------------
-// Should I have to display a currency
-// If it's already present into hits put the attribute at false
-// To don't have a repetition of currency
+// Should the app display a currency symbol
+// If it's already present in your price data, make the attribute false
 // ------------------------------------------
-
-export const shouldIdisplayCurrency = atom({
-  key: 'shouldIdisplayCurrency',
+export const shouldDisplayCurrency = atom({
+  key: 'shouldDisplayCurrency',
   default: false,
 });
