@@ -81,6 +81,26 @@ export const searchTermsInformations = [
   },
 ];
 
+
+
+
+// ------------------------------------------
+// Applied Rules
+// Will show the rules applied in the app while browsing 
+// ------------------------------------------
+// Should we show the applied rules Switcher
+export const shouldShowAppliedRulesSwitcher = atom({
+  key: 'shouldShowAppliedRulesSwitcher',
+  default: true,
+});
+// What should be the information showed to the user
+export const appliedRulesInformations = [
+  {
+    span: 'Rules On',
+    details: 'The rules that are apply will be shown live',
+  },
+];
+
 // ------------------------------------------
 // Search Persona Guide Config
 // Persona in demo guide allow to select a persona and

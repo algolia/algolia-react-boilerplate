@@ -40,11 +40,13 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   // Get states of React Router
   const { state } = useLocation();
 
+  // Get array of rules from Recoil
   const rulesApplied = useSetRecoilState(rulesAtom);
 
   const refineFunction = (query) => {
     setQueryState(query);
     refine(query);
+    // Empty array of rules on each Keystrokes
     rulesApplied([]);
   };
 
