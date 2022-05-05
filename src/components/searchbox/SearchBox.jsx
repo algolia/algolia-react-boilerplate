@@ -10,7 +10,7 @@ import { connectSearchBox } from 'react-instantsearch-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 // Import Recoil
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 // Import SVG from file as a component
 import { Glass } from '@/assets/svg/SvgIndex';
@@ -36,7 +36,7 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
-  const categorySelection = useRecoilValue(categorySelectionAtom);
+
   const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   // router hook to navigate using a function
   const navigate = useNavigate();
@@ -60,6 +60,7 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
           setQueryState(currentRefinement);
           useStoreQueryToLocalStorage(currentRefinement);
           navigate('/search');
+          // set the Navigation category to 'All', which is at index 0
           setUnderlineCategory(0);
         }}
       >

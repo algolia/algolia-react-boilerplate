@@ -54,3 +54,10 @@ export const categorySelectionAtom = atom({
   key: 'categorySelectionAtom',
   default: null
 })
+
+// This is the state of the 'state' from SearchInCategory.jsx
+// It is used to persist the category underline on refresh
+export const searchCategoryStateAtom = atom({
+  key: 'searchCategoryStateAtom',
+  default: null
+})

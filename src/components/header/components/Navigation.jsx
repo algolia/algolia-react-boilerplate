@@ -14,6 +14,7 @@ import {
   linksHeader,
   selectorNavigationRef,
   categorySelectionAtom,
+  searchCategoryStateAtom,
 } from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
@@ -36,6 +37,8 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   const [categorySelectionState, setCategorySelectionState] = useRecoilState(
     categorySelectionAtom
   );
+
+  const searchCategoryState = useRecoilState(searchCategoryStateAtom);
 
   // navigate is used by React Router
   const navigate = useNavigate();
@@ -91,9 +94,12 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           }}
         >
           <p
-            className={categorySelectionState === i ? 'selected' : ''}
+            className={
+              searchCategoryState === categorySelectionState ? 'selected' : ''
+            }
             onClick={() => {
-              setCategorySelectionState(i);
+              // find the index of the new state
+              setCategorySelectionState(link.filter);
             }}
           >
             {link.name}

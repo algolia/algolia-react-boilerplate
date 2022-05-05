@@ -11,16 +11,17 @@ import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 import { useNavigate } from 'react-router-dom';
 
 // Import configuration
-import {
-  styles,
-  searchPersonaInformations,
-} from '@/config/demoGuideConfig';
+import { styles, searchPersonaInformations } from '@/config/demoGuideConfig';
 
 import { personaSelectedAtom, personaConfig } from '@/config/personaConfig';
+
+import { categorySelectionAtom } from '@/config/headerConfig';
 
 const SearchPersona = () => {
   // Recoil State - update query in searchBar
   const setPersonaSelect = useSetRecoilState(personaSelectedAtom);
+  // Recoil State - set the category to 'All'
+  const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   const setAlert = useSetRecoilState(alertContent);
   const setAlertOpen = useSetRecoilState(isAlertOpen);
   // router hook to navigate using a function
@@ -30,7 +31,7 @@ const SearchPersona = () => {
     setAlertOpen(true);
     setAlert(content);
     setTimeout(() => setAlertOpen(false), 5000);
-  }
+  };
 
   return (
     <div className="search-terms">
@@ -52,9 +53,11 @@ const SearchPersona = () => {
         placeholder="Persona"
         onChange={(e) => {
           if (e.value !== 'anon') {
-            console.log(e)
+            console.log(e);
             setPersonaSelect(e.value);
             triggerAlert(e.description);
+            // set the Navigation category to 'All', which is at index 0
+            setUnderlineCategory(0);
           }
         }}
       />
