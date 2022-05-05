@@ -48,7 +48,20 @@ import get from 'lodash/get';
 // Send an insights event to algolia
 import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
+
 const ProductDetails = () => {
+
+  // For alert on sending add to cart event
+  const setAlert = useSetRecoilState(alertContent);
+  const setAlertOpen = useSetRecoilState(isAlertOpen);
+
+  const triggerAlert = (content) => {
+    setAlertOpen(true);
+    setAlert(content);
+    setTimeout(() => setAlertOpen(false), 5000);
+  }
+
   // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
 
@@ -198,7 +211,7 @@ const ProductDetails = () => {
                 </motion.div>
               </div>
             )}
-            {!PDPHitSections.sizeFilter && <motion.button class='add-to-cart' onClick={() => useSendAlgoliaEvent('clickedObjectIDs', userToken, index, hit, 'add-to-cart')}><i className="fa-solid fa-shopping-cart"></i>Add to cart</motion.button>}
+            {!PDPHitSections.sizeFilter && <motion.button class='add-to-cart' onClick={() => {triggerAlert('Sending add to cart event to Algolia'), useSendAlgoliaEvent('clickedObjectIDs', userToken, index, hit, 'add-to-cart')}}><i className="fa-solid fa-shopping-cart"></i>Add to cart</motion.button>}
             {PDPHitSections.price && <motion.p
               initial={{
                 opacity: 0,
