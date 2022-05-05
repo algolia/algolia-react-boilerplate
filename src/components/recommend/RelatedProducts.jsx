@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil';
 // Import currency
 import {
   currencySymbolAtom,
-  shouldIdisplayCurrency,
+  shouldDisplayCurrency,
 } from '@/config/currencyConfig';
 
 //  Import highlight widget from InstantSearch library
@@ -21,7 +21,7 @@ const RelatedItem = ({ item }) => {
   const { price, image, category, productName } = useRecoilValue(hitsConfig);
   // Get currency symbol
   const currency = useRecoilValue(currencySymbolAtom);
-  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
+  const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
   return (
     <div className="relatedItem">

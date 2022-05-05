@@ -98,9 +98,13 @@ ProductDetails.jsx
   - Colour
   - Size
   - Price
+
+You can define whether you want each attribute shown by adjusting `PDPHitSections` in `/config/hitsConfig`
+
 - Recommend components
   - Related Products
   - Frequently Bought Together
+
 
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
