@@ -31,6 +31,9 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Badge from './Badge';
 
+//Import hook for store ID into local storage
+import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
+
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
@@ -41,7 +44,8 @@ const Hit = ({ hit }) => {
   const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
   // Get hit attribute from config file
-  const { price, objectID, image, imageAlt, category, productName } = hitsConfig;
+  const { price, objectID, image, imageAlt, category, productName } =
+    hitsConfig;
 
   const promoted = hit?._rankingInfo?.promoted;
 
@@ -56,6 +60,7 @@ const Hit = ({ hit }) => {
       className={`${promoted ? 'promotedItems' : ''} srpItem`}
       onClick={() => {
         hitState(hit);
+        useStoreIdToLocalStorage(hit[objectID]);
         navigate(`/search/${hit[objectID]}`);
       }}
     >
