@@ -9,7 +9,7 @@ import { uniq } from 'lodash';
 import { mainIndex, searchClient } from '@/config/algoliaEnvConfig';
 import { rulesAtom } from '@/config/appliedRulesConfig';
 
-function AppliedRules({ searchResults }) {
+const AppliedRules = ({ searchResults }) => {
   const [rules, setRules] = useRecoilState(rulesAtom);
 
   // Init API request to get rules by their IDs
@@ -21,6 +21,7 @@ function AppliedRules({ searchResults }) {
 
   // Get rules from Search result state
   // Store it in an array handled by recoil
+  console.log(searchResults);
   useEffect(() => {
     if (searchResults?.appliedRules !== null) {
       let rules = searchResults?.appliedRules;
@@ -41,7 +42,7 @@ function AppliedRules({ searchResults }) {
       </ul>
     </div>
   );
-}
+};
 
 const CustomAppliedRules = connectStateResults(AppliedRules);
 
