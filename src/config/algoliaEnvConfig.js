@@ -4,7 +4,6 @@
 
 import { atom, selector } from 'recoil';
 import algoliasearch from 'algoliasearch';
-import algoliasearch from 'algoliasearch/lite';
 import aa from 'search-insights';
 
 
