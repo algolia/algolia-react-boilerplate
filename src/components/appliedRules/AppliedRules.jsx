@@ -31,6 +31,7 @@ const AppliedRules = ({ searchResults }) => {
       });
     }
   }, [searchResults.appliedRules, setRules]);
+
   // Create an array without duplicates
   const uniqRules = uniq(rules);
 
