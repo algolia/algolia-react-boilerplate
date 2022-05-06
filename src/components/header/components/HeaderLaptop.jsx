@@ -1,5 +1,8 @@
 // Render the Header component in Main.jsx, for large screen sizes
 
+// React Tour
+import { useTour } from '@reactour/tour';
+
 // React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
@@ -28,6 +31,9 @@ import Navigation from './Navigation';
 import { OptionDots } from '@/assets/svg/SvgIndex';
 
 const HeaderLaptop = () => {
+  // React Tour
+  const { setIsOpen } = useTour();
+
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
   const categorySelection = useRecoilValue(categorySelectionAtom);
@@ -54,6 +60,9 @@ const HeaderLaptop = () => {
             {/* Add possibility to change the Logo */}
             <img src={logoUrl} alt="" />
           </Link>
+          <button className="open-tour__button" onClick={() => setIsOpen(true)}>
+            Open Tour
+          </button>
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container">

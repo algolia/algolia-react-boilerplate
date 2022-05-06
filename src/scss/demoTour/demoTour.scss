@@ -1,0 +1,9 @@
+@use '../mixin/abstracts' as *;
+
+.open-tour__button {
+  font-family: $main-font;
+  @include btn($grey-dark-color, $white-color, $white-color);
+}
+.reactour__popover {
+  font-family: $main-font;
+}
