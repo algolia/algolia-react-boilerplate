@@ -50,6 +50,7 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   const refineFunction = (query) => {
     setQueryState(query);
     refine(query);
+    // console.log(query);
     // Empty array of rules on each Keystrokes
     rulesApplied([]);
   };
