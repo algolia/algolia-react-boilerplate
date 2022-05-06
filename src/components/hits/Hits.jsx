@@ -74,7 +74,6 @@ const Hit = ({ hit }) => {
     );
   };
 
-
   const promoted = hit?._rankingInfo?.promoted;
 
   return (
@@ -86,7 +85,6 @@ const Hit = ({ hit }) => {
       animate={framerMotionHits.animate}
       transition={framerMotionHits.transition}
       className={`${promoted ? 'promotedItems' : ''} srpItem`}
-
     >
       <div
         className="button-ranking-container"
@@ -136,7 +134,9 @@ const Hit = ({ hit }) => {
               onError={(e) => (e.currentTarget.src = placeHolderError)}
             />
           )}
-          {badgeCriteria(hit) !== null && <Badge title={badgeCriteria(hit)} />}
+          {badgeCriteria(hit) !== null && !shouldShowRankingInfo && (
+            <Badge title={badgeCriteria(hit)} />
+          )}
           <div className="srpItem__imgWrapper__heart">
             <Heart />
           </div>

@@ -21,7 +21,8 @@
         position: absolute;
         background-color: transparent;
         display: grid;
-        width: 20%;
+        width: 100%;
+        margin-left: 0.5rem;
         p {
           font-size: 0.6rem;
           margin-top: 0.2rem;
@@ -31,9 +32,10 @@
       }
     }
 
-    .promotedItems{
+    .promotedItems {
       border: 1px solid rgb(170, 183, 251);
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     }
   }
 }
