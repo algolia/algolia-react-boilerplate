@@ -21,7 +21,6 @@ const AppliedRules = ({ searchResults }) => {
 
   // Get rules from Search result state
   // Store it in an array handled by recoil
-  console.log(searchResults);
   useEffect(() => {
     if (searchResults?.appliedRules !== null) {
       let rules = searchResults?.appliedRules;

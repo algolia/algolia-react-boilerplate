@@ -153,6 +153,7 @@ const SrpMobile = () => {
           optionalFilters={segmentOptionalFilters}
           ruleContexts={state?.type === 'context' ? state.action : ''}
           query={queryState}
+          getRankingInfo={true}
         />
 
         {shouldInjectContent ? (
