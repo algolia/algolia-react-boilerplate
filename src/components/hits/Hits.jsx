@@ -32,6 +32,9 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Badge from './Badge';
 
+//Import hook for store ID into local storage
+import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
+
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
@@ -71,6 +74,7 @@ const Hit = ({ hit }) => {
     );
   };
 
+
   const promoted = hit?._rankingInfo?.promoted;
 
   return (
@@ -82,6 +86,7 @@ const Hit = ({ hit }) => {
       animate={framerMotionHits.animate}
       transition={framerMotionHits.transition}
       className={`${promoted ? 'promotedItems' : ''} srpItem`}
+
     >
       <div
         className="button-ranking-container"
@@ -105,6 +110,7 @@ const Hit = ({ hit }) => {
           onClick={() => {
             hitState(hit);
             navigate(`/search/${hit[objectID]}`);
+            useStoreIdToLocalStorage(hit[objectID]);
           }}
         >
           {isHovered && get(hit, imageAlt) !== undefined ? (
