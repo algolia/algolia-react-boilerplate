@@ -100,14 +100,12 @@ const ProductDetails = () => {
       transition={framerMotionPage.transition}
     >
       <div
-        className={`${
-          mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
-        }`}
+        className={`${mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
+          }`}
       >
         <div
-          className={`${
-            mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
-          }`}
+          className={`${mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+            }`}
           onClick={() => navigate(-1)}
         >
           <ChevronLeft />
@@ -201,8 +199,8 @@ const ProductDetails = () => {
               }}
               className="price"
             >
-              {get(hit, price)}
               {displayCurrency && currency}
+              {get(hit, price)}
             </motion.p>
           </motion.div>
         </div>

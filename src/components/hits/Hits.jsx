@@ -97,8 +97,8 @@ const Hit = ({ hit }) => {
         </h3>
         <div className="srpItem__infos__down">
           <p className="srpItem__infos__down__price">
-            {get(hit, price)}
             {displayCurrency && currency}
+            {get(hit, price)}
           </p>
         </div>
       </div>

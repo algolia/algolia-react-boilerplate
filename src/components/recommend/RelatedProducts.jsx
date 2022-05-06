@@ -37,8 +37,8 @@ const RelatedItem = ({ item }) => {
         </h3>
         <div className="relatedItem__infos__down">
           <p className="relatedItem__infos__down__price">
-            {item[price]}
             {displayCurrency && currency}
+            {item[price]}
           </p>
         </div>
       </div>

@@ -96,7 +96,7 @@ const Carousel = ({ hits, title }) => {
               bounceStiffness: 10,
               bounceDamping: 1,
             },
-            framerMotionTransition)
+              framerMotionTransition)
           }
           className="inner-carousel"
         >
@@ -121,8 +121,8 @@ const Carousel = ({ hits, title }) => {
                 >
                   <p className="name">{get(hit, productName)}</p>
                   <p className="price">
-                    {get(hit, price)}
                     {displayCurrency && currency}
+                    {get(hit, price)}
                   </p>
                 </div>
               </motion.div>
