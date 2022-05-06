@@ -18,6 +18,11 @@
       );
       
     }
+
+    .promotedItems{
+      border: 1px solid rgb(170, 183, 251);
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    }
   }
 }
 
@@ -39,7 +44,7 @@
 
 .badge {
   position: absolute;
-  top: 0;
+  top: 0.5rem;
   left: 0.5rem;
   background-color: $blue-algolia;
   padding: 0 0.3rem;

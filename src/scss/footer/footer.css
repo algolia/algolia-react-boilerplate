@@ -1,0 +1,29 @@
+@use '../mixin/abstracts' as *;
+.footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  max-height: 15rem;
+  margin-top: 0.5rem;
+}
+
+.footer img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.wrap {
+  position: fixed;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-left: 1.4em;
+  padding-right: 1.4em;
+}
+/*# sourceMappingURL=footer.css.map */

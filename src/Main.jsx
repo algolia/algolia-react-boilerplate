@@ -21,6 +21,8 @@ import {
   shouldShowAlert,
 } from '@/config/demoGuideConfig';
 
+import { isRulesSwitchToggle } from './config/appliedRulesConfig';
+
 import { mainIndex } from './config/algoliaEnvConfig';
 
 // // Allows logging and manipulation of algolia results etc.
@@ -35,6 +37,7 @@ import SearchResultsPage from './pages/SearchResultsPage';
 import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import ProductDetails from './pages/ProductDetails';
 import Footer from './components/footer/Footer';
+import CustomAppliedRules from './components/appliedRules/AppliedRules';
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
@@ -47,6 +50,9 @@ export const Main = ({ isLoaded }) => {
   // Should the alert badges for the demo guide be shown
   const shouldShowAlertAtom = useRecoilValue(shouldShowAlert);
 
+  // Show rules applied panel when switch on in the demo guide panel
+  const isRulesSwitchToggleChecked = useRecoilValue(isRulesSwitchToggle);
+
   // Should the feature of guided panel for SE should be in this app
   const shouldShowNavigation = useRecoilValue(shouldShowDemoGuide);
   // State that show/hide the panel if click on the guide btn
@@ -57,7 +63,6 @@ export const Main = ({ isLoaded }) => {
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
       <CustomStateResults />
-
       <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
         <Header />
         <DemoGuideOpener />
@@ -76,6 +81,7 @@ export const Main = ({ isLoaded }) => {
         </AnimatePresence>
         {shouldShowAlertAtom && <AlertNavigation />}
         <Footer />
+        {isRulesSwitchToggleChecked && <CustomAppliedRules />}
       </div>
     </InstantSearch>
   );

@@ -58,8 +58,8 @@ export const alertContent = atom({
 export const searchTermsConfig = [
   { value: '', label: 'Choose' },
   {
-    value: 'ring',
-    label: 'Ring',
+    value: 'bag',
+    label: 'Bag',
     alertContent: 'The category Bags is boosted.',
     details: 'The category Bags will be boosted.',
   },
@@ -67,7 +67,38 @@ export const searchTermsConfig = [
     value: 'dress',
     label: 'Dress',
     alertContent: 'You are searching in dress category',
+  },
+];
+
+// What would be the content of the alert when you're selecting a query
+export const searchTermsInformations = [
+  {
+    span: 'Bag',
+    details: 'The category Bags will be boosted.',
+  },
+  {
+    span: 'Dress',
     details: 'Will only search in dress category',
+  },
+];
+
+
+
+
+// ------------------------------------------
+// Applied Rules
+// Will show the rules applied in the app while browsing 
+// ------------------------------------------
+// Should we show the applied rules Switcher
+export const shouldShowAppliedRulesSwitcher = atom({
+  key: 'shouldShowAppliedRulesSwitcher',
+  default: true,
+});
+// What should be the information showed to the user
+export const appliedRulesInformations = [
+  {
+    span: 'Rules On',
+    details: 'The rules that are apply will be shown live',
   },
 ];
 
