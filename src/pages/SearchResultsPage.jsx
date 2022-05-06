@@ -5,6 +5,21 @@
 // import React functionality
 import { memo, useEffect, lazy, Suspense } from 'react';
 
+// To display if no results
+// Recommend
+import { RelatedProducts } from '@algolia/recommend-react';
+import algoliarecommend from '@algolia/recommend';
+import RelatedItem from '@/components/recommend/RelatedProducts';
+
+// Algolia search client
+import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
+
+// define the client for using Recommend
+const recommendClient = algoliarecommend(
+  searchClientCreds.appID,
+  searchClientCreds.APIKey
+);
+
 import Loader from '@/components/loader/Loader';
 
 // eslint-disable-next-line import/order
@@ -28,12 +43,14 @@ import Banner from '@/components/banners/Banner';
 
 // Import Persona State from recoil
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
-import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
+
+// Config suggestions
+import { indexNames } from '@/config/algoliaEnvConfig';
+
 import {
   federatedSearchConfig,
   shouldHaveOpenFederatedSearch,
 } from '@/config/federatedConfig';
-import HomeCarousel from '@/components/carousels/HomeCarousel';
 
 const SrpLaptop = lazy(() =>
   import('@/components/searchresultpage/srpLaptop/SrpLaptop')
@@ -73,8 +90,13 @@ const SearchResultPage = () => {
 // This is rendered when there are no results to display
 const NoResults = memo(({ query }) => {
   const getQueryState = useRecoilValue(queryAtom);
+  const getSearches = localStorage.getItem('objectId');
+  const cleanSearches = JSON.parse(getSearches);
+  const lastId = cleanSearches[cleanSearches.length - 1];
   // Get QS index from Recoil
   const { suggestionsIndex } = useRecoilValue(indexNames);
+  // Get the main index
+  const index = useRecoilValue(mainIndex);
   return (
     <div className="no-results">
       <div className="no-results__infos">
@@ -104,6 +126,22 @@ const NoResults = memo(({ query }) => {
                 </Index>
                 {/* Add this searchBox Invisible to refine when we click on a suggestion */}
                 <CustomSearchBox query={getQueryState} />
+              </div>
+              <div>
+                <p className="no-results__infos__p">
+                  Customers who searched <span>{query}</span> also viewed:
+                </p>
+                {lastId && (
+                  <div className="recommend">
+                    <RelatedProducts
+                      recommendClient={recommendClient}
+                      indexName={index}
+                      objectIDs={[lastId]}
+                      itemComponent={RelatedItem}
+                      maxRecommendations={5}
+                    />
+                  </div>
+                )}
               </div>
             </>
           )}

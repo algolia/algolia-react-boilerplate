@@ -16,9 +16,7 @@ import { logoUrl as placeHolderError } from '@/config/headerConfig';
 
 import get from 'lodash/get';
 
-import {
-  framerMotionHits,
-} from '@/config/animationConfig';
+import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
 import { hitAtom } from '@/config/hitsConfig';
@@ -33,6 +31,9 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Badge from './Badge';
 
+//Import hook for store ID into local storage
+import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
+
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
@@ -43,7 +44,8 @@ const Hit = ({ hit }) => {
   const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
   // Get hit attribute from config file
-  const { price, objectID, image, imageAlt, category, productName } = hitsConfig;
+  const { price, objectID, image, imageAlt, category, productName } =
+    hitsConfig;
 
   return (
     <motion.li
@@ -56,6 +58,7 @@ const Hit = ({ hit }) => {
       className="srpItem"
       onClick={() => {
         hitState(hit);
+        useStoreIdToLocalStorage(hit[objectID]);
         navigate(`/search/${hit[objectID]}`);
       }}
     >
