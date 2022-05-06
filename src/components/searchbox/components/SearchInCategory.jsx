@@ -28,9 +28,9 @@ const SearchInCategory = ({ state }) => {
         <span
           onClick={() => {
             navigate('/search');
-            setUnderlineCategory(stateActionName);
-            setSearchCategoryStateAtom(stateActionName);
-            // set the state
+            setUnderlineCategory('All');
+            // TODO: set the state to All when click CloseButton
+            setSearchCategoryStateAtom('All');
           }}
           className="searchbox__category__close-btn"
         >
@@ -45,7 +45,9 @@ const SearchInCategory = ({ state }) => {
         <span
           onClick={() => {
             navigate('/search');
-            setUnderlineCategory(0);
+            setUnderlineCategory('All');
+            // TODO: set the state to All when click CloseButton
+            setSearchCategoryStateAtom('All');
           }}
           className="searchbox__category__close-btn"
         >

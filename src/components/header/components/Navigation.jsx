@@ -38,7 +38,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
     categorySelectionAtom
   );
 
-  const searchCategoryState = useRecoilState(searchCategoryStateAtom);
+  const searchCategoryState = useRecoilValue(searchCategoryStateAtom);
+  // 6/5/22 Working here
+  console.log('SEARCHCATEGORYSTATE', searchCategoryState);
 
   // navigate is used by React Router
   const navigate = useNavigate();
