@@ -3,7 +3,8 @@
 import { useState } from 'react';
 
 // Import framer-motion for animation on hits
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { framerMotionTransition } from '@/config/animationConfig';
 
 import { Highlight } from 'react-instantsearch-dom';
 
@@ -16,9 +17,7 @@ import { logoUrl as placeHolderError } from '@/config/headerConfig';
 
 import get from 'lodash/get';
 
-import {
-  framerMotionHits,
-} from '@/config/animationConfig';
+import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
 import { hitAtom } from '@/config/hitsConfig';
@@ -43,18 +42,34 @@ const Hit = ({ hit }) => {
   const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
   // Get hit attribute from config file
-  const { price, objectID, image, imageAlt, category, productName } = hitsConfig;
+  const { price, objectID, image, imageAlt, category, productName } =
+    hitsConfig;
 
-  const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false)
+  const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
 
-  const RankingFormulaOverlay = ({hit}) => {
-     
+  const RankingFormulaOverlay = ({ hit }) => {
     return (
-      <div className="srpItem">
-        {Object.entries(hit._rankingInfo).map((entry) => (<p>{entry[0]} {JSON.stringify(entry[1])}</p>))}
-      </div>
-    )
-  }
+      <motion.div
+        layout
+        variants={framerMotionHits}
+        initial={framerMotionHits.initial}
+        exit={framerMotionHits.exit}
+        animate={framerMotionHits.animate}
+        transition={{
+          duration: 0.8,
+          delay: 0.3,
+          ease: [0.43, 0.13, 0.23, 0.96],
+        }}
+        className="ranking-formula"
+      >
+        {Object.entries(hit._rankingInfo).map((entry) => (
+          <p>
+            {entry[0]} {JSON.stringify(entry[1])}
+          </p>
+        ))}
+      </motion.div>
+    );
+  };
 
   return (
     <motion.li
@@ -66,57 +81,70 @@ const Hit = ({ hit }) => {
       transition={framerMotionHits.transition}
       className="srpItem"
     >
-      <button onClick={() => setShouldShowRankingInfo(!shouldShowRankingInfo)} className='ranking-formula-button'></button>
-      {shouldShowRankingInfo && <RankingFormulaOverlay hit={hit} />}
-      {!shouldShowRankingInfo && (
-      <>
-      <motion.div
-        className="srpItem__imgWrapper"
-        onMouseLeave={(e) => {
-          setIsHovered(false);
-        }}
-        onMouseOver={(e) => {
-          setIsHovered(true);
-        }}
-        onClick={() => {
-          hitState(hit);
-          navigate(`/search/${hit[objectID]}`);
-        }}
+      <div
+        className="button-ranking-container"
+        onClick={() => setShouldShowRankingInfo(!shouldShowRankingInfo)}
       >
-        {isHovered && get(hit, imageAlt) !== undefined ? (
-          <img
-            key={1}
-            className="secondImage"
-            src={get(hit, imageAlt)}
-            alt={get(hit, category)}
-            onError={(e) => (e.currentTarget.src = placeHolderError)}
-          />
-        ) : (
-          <img
-            className="mainImage"
-            src={get(hit, image)}
-            key={2}
-            alt={get(hit, category)}
-            onError={(e) => (e.currentTarget.src = placeHolderError)}
-          />
-        )}
-        {badgeCriteria(hit) !== null && <Badge title={badgeCriteria(hit)} />}
-        <div className="srpItem__imgWrapper__heart">
-          <Heart />
-        </div>
-      </motion.div>
-      <div className="srpItem__infos">
-        <h3>
-          <Highlight hit={hit} attribute={productName} />
-        </h3>
-        <div className="srpItem__infos__down">
-          <p className="srpItem__infos__down__price">
-            {get(hit, price)}
-            {displayCurrency && currency}
-          </p>
-        </div>
+        <button className="ranking-formula-button"></button>
+        <p>Click to see Ranking</p>
       </div>
-      </>)}
+      <AnimatePresence>
+        {shouldShowRankingInfo && <RankingFormulaOverlay hit={hit} />}
+      </AnimatePresence>
+      <>
+        <motion.div
+          className="srpItem__imgWrapper"
+          onMouseLeave={(e) => {
+            setIsHovered(false);
+          }}
+          onMouseOver={(e) => {
+            !shouldShowRankingInfo && setIsHovered(true);
+          }}
+          onClick={() => {
+            hitState(hit);
+            navigate(`/search/${hit[objectID]}`);
+          }}
+        >
+          {isHovered && get(hit, imageAlt) !== undefined ? (
+            <img
+              key={1}
+              className={
+                shouldShowRankingInfo ? 'secondImage-opacity' : 'secondImage'
+              }
+              src={get(hit, imageAlt)}
+              alt={get(hit, category)}
+              onError={(e) => (e.currentTarget.src = placeHolderError)}
+            />
+          ) : (
+            <img
+              className={
+                shouldShowRankingInfo
+                  ? 'mainImage-opacity'
+                  : 'mainImage-visible'
+              }
+              src={get(hit, image)}
+              key={2}
+              alt={get(hit, category)}
+              onError={(e) => (e.currentTarget.src = placeHolderError)}
+            />
+          )}
+          {badgeCriteria(hit) !== null && <Badge title={badgeCriteria(hit)} />}
+          <div className="srpItem__imgWrapper__heart">
+            <Heart />
+          </div>
+        </motion.div>
+        <div className="srpItem__infos">
+          <h3>
+            <Highlight hit={hit} attribute={productName} />
+          </h3>
+          <div className="srpItem__infos__down">
+            <p className="srpItem__infos__down__price">
+              {get(hit, price)}
+              {displayCurrency && currency}
+            </p>
+          </div>
+        </div>
+      </>
     </motion.li>
   );
 };

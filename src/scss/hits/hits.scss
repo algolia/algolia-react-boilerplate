@@ -10,13 +10,25 @@
     grid-column-gap: 0.5rem;
     grid-row-gap: 1rem;
     .srpItem {
+      position: relative;
       @include hits-individual(
         $main-color,
         $blue-algolia,
         $blue-algolia,
         $blue-algolia
       );
-      
+      .ranking-formula {
+        position: absolute;
+        background-color: transparent;
+        display: grid;
+        width: 20%;
+        p {
+          font-size: 0.6rem;
+          margin-top: 0.2rem;
+          color: $blue-algolia;
+          font-weight: 700;
+        }
+      }
     }
   }
 }
@@ -49,11 +61,26 @@
     font-weight: 500;
   }
 }
-
-.ranking-formula-button {
-  display:block;
-  height: 1rem;
-  width: 1rem;
-  border-radius: 50%;
-  border: 1px solid $blue-algolia;
+.button-ranking-container {
+  display: flex;
+  align-items: center;
+  .ranking-formula-button {
+    display: block;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    border: 1px solid $blue-algolia;
+  }
+  p {
+    visibility: hidden;
+    cursor: pointer;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    font-size: 0.6rem;
+    margin-left: 0.6rem;
+  }
+  &:hover p {
+    visibility: visible;
+    opacity: 1;
+  }
 }
