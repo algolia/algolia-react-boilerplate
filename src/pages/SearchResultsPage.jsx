@@ -92,7 +92,7 @@ const NoResults = memo(({ query }) => {
   const getQueryState = useRecoilValue(queryAtom);
   const getSearches = localStorage.getItem('objectId');
   const cleanSearches = JSON.parse(getSearches);
-  const lastId = cleanSearches[cleanSearches.length - 1];
+  const lastId = cleanSearches?.[cleanSearches.length - 1];
   // Get QS index from Recoil
   const { suggestionsIndex } = useRecoilValue(indexNames);
   // Get the main index
@@ -127,11 +127,11 @@ const NoResults = memo(({ query }) => {
                 {/* Add this searchBox Invisible to refine when we click on a suggestion */}
                 <CustomSearchBox query={getQueryState} />
               </div>
-              <div>
-                <p className="no-results__infos__p">
-                  Customers who searched <span>{query}</span> also viewed:
-                </p>
-                {lastId && (
+              {lastId && (
+                <div>
+                  <p className="no-results__infos__p">
+                    Customers who searched <span>{query}</span> also viewed:
+                  </p>
                   <div className="recommend">
                     <RelatedProducts
                       recommendClient={recommendClient}
@@ -141,8 +141,8 @@ const NoResults = memo(({ query }) => {
                       maxRecommendations={5}
                     />
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </>
           )}
         </ul>
