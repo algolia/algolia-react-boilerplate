@@ -71,6 +71,8 @@ const Hit = ({ hit }) => {
     );
   };
 
+  const promoted = hit?._rankingInfo?.promoted;
+
   return (
     <motion.li
       layout
@@ -79,7 +81,7 @@ const Hit = ({ hit }) => {
       exit={framerMotionHits.exit}
       animate={framerMotionHits.animate}
       transition={framerMotionHits.transition}
-      className="srpItem"
+      className={`${promoted ? 'promotedItems' : ''} srpItem`}
     >
       <div
         className="button-ranking-container"
