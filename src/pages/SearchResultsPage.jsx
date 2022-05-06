@@ -105,7 +105,6 @@ const NoResults = memo(({ query }) => {
                 {/* Add this searchBox Invisible to refine when we click on a suggestion */}
                 <CustomSearchBox query={getQueryState} />
               </div>
-              <HomeCarousel />
             </>
           )}
         </ul>
