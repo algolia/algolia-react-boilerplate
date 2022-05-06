@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 // Import the Select widget (https://react-select.com/home)
 import Select from 'react-select';
 
@@ -29,7 +27,7 @@ const SearchTerms = () => {
     setAlertOpen(true);
     setAlert(content);
     setTimeout(() => setAlertOpen(false), 5000);
-  }
+  };
 
   return (
     <div className="search-terms">
@@ -56,7 +54,7 @@ const SearchTerms = () => {
               search: `?${createSearchParams({ query: e.value })}`,
             });
             setQueryState(e.value);
-            triggerAlert(e.alertContent)          
+            triggerAlert(e.alertContent);
           }
         }}
       />
