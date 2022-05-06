@@ -35,18 +35,42 @@ import {
   shouldHaveRelatedProducts,
   shouldHaveFbtProducts,
 } from '@/config/featuresConfig';
-import { hitsConfig } from '@/config/hitsConfig';
-import { currencySymbolAtom, shouldIdisplayCurrency } from '@/config/currencyConfig';
+import { hitsConfig, PDPHitSections } from '@/config/hitsConfig';
+import { currencySymbolAtom, shouldDisplayCurrency } from '@/config/currencyConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+
+// Used to send insights event on add to cart
+import { personaSelectedAtom } from '@/config/personaConfig';
 
 // Custom hooks
 import useScreenSize from '@/hooks/useScreenSize';
 
 import get from 'lodash/get';
 
+// Send an insights event to algolia
+import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+
+// Used to show alert when add to cart event is sent
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
+
 const ProductDetails = () => {
+
+  // For alert on sending add to cart event
+  const setAlert = useSetRecoilState(alertContent);
+  const setAlertOpen = useSetRecoilState(isAlertOpen);
+
+  // Function to manage the alert
+  const triggerAlert = (content) => {
+    setAlertOpen(true);
+    setAlert(content);
+    setTimeout(() => setAlertOpen(false), 5000);
+  }
+
   // access the hit component from recoil state
   const hit = useRecoilValue(hitAtom);
+
+  // personalisation user token
+  const userToken = useRecoilValue(personaSelectedAtom);
 
   // Get the main index
   const index = useRecoilValue(mainIndex);
@@ -81,13 +105,13 @@ const ProductDetails = () => {
     sizeFilter,
     colour,
     colourHexa,
-  } = useRecoilValue(hitsConfig);
+  } = hitsConfig;
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1];
 
   // Get the current currency
   const currency = useRecoilValue(currencySymbolAtom);
-  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
+  const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -161,9 +185,9 @@ const ProductDetails = () => {
               transition: { delay: 0.5, framerMotionTransition },
             }}
           >
-            <p className="brand">{get(hit, brand)}</p>
-            <p className="name">{get(hit, productName)}</p>
-            <div className="color">
+            {PDPHitSections.brand && <p className="brand">{get(hit, brand)}</p>}
+            {PDPHitSections.productName && <p className="name">{get(hit, productName)}</p>}
+            {PDPHitSections.colour && <div className="color">
               {hexaCode ? (
                 <div
                   style={{
@@ -177,8 +201,9 @@ const ProductDetails = () => {
                 ''
               )}
               <p>{get(hit, colour)}</p>
-            </div>
-            {get(hit, sizeFilter)?.length > 0 && (
+            </div>}
+            
+            {PDPHitSections.sizeFilter && get(hit, sizeFilter)?.length > 0 && (
               <div className="sizes">
                 <p>Available size(s):</p>
                 <motion.div className="sizeList">
@@ -190,8 +215,9 @@ const ProductDetails = () => {
                 </motion.div>
               </div>
             )}
-
-            <motion.p
+            {/* Add to cart button which sends an Insights API call to Algolia but only if there is no size filter */}
+            {!PDPHitSections.sizeFilter && <motion.button class='add-to-cart' onClick={() => {triggerAlert('Sending add to cart event to Algolia'), useSendAlgoliaEvent('clickedObjectIDs', userToken, index, hit, 'add-to-cart')}}><i className="fa-solid fa-shopping-cart"></i><p>Add to cart</p></motion.button>}
+            {PDPHitSections.price && <motion.p
               initial={{
                 opacity: 0,
               }}
@@ -203,7 +229,7 @@ const ProductDetails = () => {
             >
               {get(hit, price)}
               {displayCurrency && currency}
-            </motion.p>
+            </motion.p>}
           </motion.div>
         </div>
       </div>

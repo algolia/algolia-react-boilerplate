@@ -10,7 +10,7 @@ import { connectSearchBox } from 'react-instantsearch-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 // Import Recoil
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 
 // Import SVG from file as a component
 import { Glass } from '@/assets/svg/SvgIndex';
@@ -26,6 +26,8 @@ import { rulesAtom } from '@/config/appliedRulesConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
+import { categorySelectionAtom } from '@/config/headerConfig';
+
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
 
@@ -35,6 +37,8 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
+  const categorySelection = useRecoilValue(categorySelectionAtom);
+  const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   // router hook to navigate using a function
   const navigate = useNavigate();
   // Get states of React Router
@@ -62,6 +66,7 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
           setQueryState(currentRefinement);
           useStoreQueryToLocalStorage(currentRefinement);
           navigate('/search');
+          setUnderlineCategory(0);
         }}
       >
         <input

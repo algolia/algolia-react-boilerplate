@@ -24,7 +24,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
 import {
   currencySymbolAtom,
-  shouldIdisplayCurrency,
+  shouldDisplayCurrency,
 } from '@/config/currencyConfig';
 
 // React-router import
@@ -38,11 +38,10 @@ const Hit = ({ hit }) => {
 
   // Get currency symbol
   const currency = useRecoilValue(currencySymbolAtom);
-  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
+  const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
   // Get hit attribute from config file
-  const { price, objectID, image, imageAlt, category, productName } =
-    useRecoilValue(hitsConfig);
+  const { price, objectID, image, imageAlt, category, productName } = hitsConfig;
 
   const promoted = hit?._rankingInfo?.promoted;
 

@@ -12,12 +12,11 @@ import { useNavigate } from 'react-router-dom';
 
 // Import configuration
 import {
-  searchPersonaConfig,
   styles,
   searchPersonaInformations,
 } from '@/config/demoGuideConfig';
 
-import { personaSelectedAtom } from '@/config/personaConfig';
+import { personaSelectedAtom, personaConfig } from '@/config/personaConfig';
 
 const SearchPersona = () => {
   // Recoil State - update query in searchBar
@@ -47,14 +46,15 @@ const SearchPersona = () => {
         })}
       </div>
       <Select
-        defaultValue={searchPersonaConfig}
-        options={searchPersonaConfig}
+        defaultValue={personaConfig}
+        options={personaConfig}
         styles={styles}
         placeholder="Persona"
         onChange={(e) => {
           if (e.value !== 'anon') {
+            console.log(e)
             setPersonaSelect(e.value);
-            triggerAlert(e.alertContent);
+            triggerAlert(e.description);
           }
         }}
       />

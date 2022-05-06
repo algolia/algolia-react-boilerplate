@@ -14,8 +14,7 @@ import { useNavigate, createSearchParams } from 'react-router-dom';
 // Import configuration
 import {
   searchBannersConfig,
-  searchBannersInformations,
-  styles,
+  styles
 } from '@/config/demoGuideConfig';
 
 const SearchBanners = () => {
@@ -36,10 +35,10 @@ const SearchBanners = () => {
     <div className="search-terms">
       <h3>Banners Display</h3>
       <div className="search-terms__infos">
-        {searchBannersInformations.map((item, i) => {
+        {searchBannersConfig.map((item, i) => {
           return (
             <div key={i} className="search-terms__infos__titles">
-              <span>{item.span}:</span>
+              <span>{item.label}:</span>
               <p>{item.details}</p>
             </div>
           );

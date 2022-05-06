@@ -14,7 +14,7 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 
 import {
-  shouldIdisplayCurrency,
+  shouldDisplayCurrency,
   currencySymbolAtom,
 } from '@/config/currencyConfig';
 
@@ -32,11 +32,10 @@ const Hits = ({ hits }) => {
 
   // Get currency symbol
   const currency = useRecoilValue(currencySymbolAtom);
-  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
+  const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
   // Get hit attribute from config file
-  const { price, objectID, image, productName, brand } =
-    useRecoilValue(hitsConfig);
+  const { price, objectID, image, productName, brand } = hitsConfig;
 
   return (
     <div className="products">
@@ -54,12 +53,13 @@ const Hits = ({ hits }) => {
               <li
                 key={hit[objectID]}
                 className="products__item"
-                onClick={() => {
-                  hitState(hit);
-                  navigate(`/search/${hit[objectID]}`);
-                }}
               >
-                <div className="image-wrapper">
+                <div className="image-wrapper" 
+                  onClick={() => {
+                    hitState(hit);
+                    navigate(`/search/${hit[objectID]}`);
+                  }}
+                >
                   <img src={get(hit, image)} alt="" />
                 </div>
                 <div className="infos">

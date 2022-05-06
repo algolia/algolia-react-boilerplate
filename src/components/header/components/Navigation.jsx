@@ -1,5 +1,7 @@
 // Render the navigation menu in the header
 
+import { useState } from 'react';
+
 // React Router
 import { useNavigate } from 'react-router-dom';
 // Recoil Header State
@@ -8,7 +10,11 @@ import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Config for the header
 import { categoryPageFilterAttribute } from '@/config/categoryConfig';
-import { linksHeader, selectorNavigationRef } from '@/config/headerConfig';
+import {
+  linksHeader,
+  selectorNavigationRef,
+  categorySelectionAtom,
+} from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
 //import language selector component
@@ -27,6 +33,9 @@ import {
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
+  const [categorySelectionState, setCategorySelectionState] = useRecoilState(
+    categorySelectionAtom
+  );
 
   // navigate is used by React Router
   const navigate = useNavigate();
@@ -49,7 +58,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           : 'container__header-nav__links'
       } `}
     >
-      {links.map((link) => (
+      {links.map((link, i) => (
         <li
           id={link.name}
           tabIndex="0"
@@ -81,7 +90,14 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
             }
           }}
         >
-          <p>{link.name}</p>
+          <p
+            className={categorySelectionState === i ? 'selected' : ''}
+            onClick={() => {
+              setCategorySelectionState(i);
+            }}
+          >
+            {link.name}
+          </p>
         </li>
       ))}
       <div

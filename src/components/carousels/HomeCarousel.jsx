@@ -15,9 +15,10 @@ import { mainIndex } from '@/config/algoliaEnvConfig';
 import { hitsConfig, hitAtom } from '@/config/hitsConfig';
 import { hitsPerCarousel } from '@/config/carouselConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
+import { segmentSelectedAtom } from '@/config/segmentConfig';
 import {
   currencySymbolAtom,
-  shouldIdisplayCurrency,
+  shouldDisplayCurrency,
 } from '@/config/currencyConfig';
 
 // In case of img loading error
@@ -33,6 +34,8 @@ import get from 'lodash/get';
 const HomeCarousel = ({ context, title }) => {
   const index = useRecoilValue(mainIndex);
   const userToken = useRecoilValue(personaSelectedAtom);
+  const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
+
   const { tablet, mobile } = useScreenSize();
   return (
     <div className={`${mobile ? 'home-carousel-mobile' : 'home-carousel'}`}>
@@ -40,6 +43,7 @@ const HomeCarousel = ({ context, title }) => {
         <Configure
           hitsPerPage={hitsPerCarousel}
           ruleContexts={context}
+          optionalFilters={segmentOptionalFilters}
           userToken={userToken}
         />
         <CustomHitsCarousel title={title} />
@@ -61,8 +65,8 @@ const Carousel = ({ hits, title }) => {
 
   // Hits are imported by Recoil
   const hitState = useSetRecoilState(hitAtom);
-  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
-  const { price, objectID, image, productName } = useRecoilValue(hitsConfig);
+  const displayCurrency = useRecoilValue(shouldDisplayCurrency);
+  const { price, objectID, image, productName } = hitsConfig;
 
   // Used by Framer Motion
   const carousel = useRef();
