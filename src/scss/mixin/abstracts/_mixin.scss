@@ -33,16 +33,16 @@
   margin: 0.5rem 0;
   padding: 0.8em;
   font-size: 0.7rem;
-  background-color: $background;
-  transition: all 0.4s ease-in-out;
+  background: $background;
   text-transform: uppercase;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 @mixin btn-hover($background, $text-color) {
-  transition: all 0.4s ease-in-out;
-  background: $blue-algolia-custom-gradient;
-  color: $white-color;
+  background: $background;
+  color: $text-color;
+  transition: all 0.3s ease-in-out;
 }
 
 // ------------------------------------------
@@ -189,6 +189,12 @@
       right: 0;
       width: 3.5rem;
     }
+    .mainImage-opacity {
+      animation: fadeOutImage 0.7s forwards ease-in-out;
+    }
+    .mainImage-visible {
+      animation: fadeInImage 0.9s forwards ease-in-out;
+    }
   }
   &__infos {
     display: flex;
@@ -220,6 +226,24 @@
         font-size: 1rem;
       }
     }
+  }
+}
+
+@keyframes fadeInImage {
+  0% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutImage {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
   }
 }
 

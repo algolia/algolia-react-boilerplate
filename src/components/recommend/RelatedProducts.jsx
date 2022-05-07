@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil';
 // Import currency
 import {
   currencySymbolAtom,
-  shouldIdisplayCurrency,
+  shouldDisplayCurrency,
 } from '@/config/currencyConfig';
 
 //  Import highlight widget from InstantSearch library
@@ -18,10 +18,10 @@ import { Heart } from '@/assets/svg/SvgIndex';
 
 const RelatedItem = ({ item }) => {
   // Get hit attribute from config file
-  const { price, image, category, productName } = useRecoilValue(hitsConfig);
+  const { price, image, category, productName } = hitsConfig;
   // Get currency symbol
   const currency = useRecoilValue(currencySymbolAtom);
-  const displayCurrency = useRecoilValue(shouldIdisplayCurrency);
+  const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
   return (
     <div className="relatedItem">

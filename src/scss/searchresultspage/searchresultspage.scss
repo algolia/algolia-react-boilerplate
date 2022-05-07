@@ -99,6 +99,14 @@
         }
       }
     }
+    &__p {
+      margin-top: 1rem;
+      font-weight: 700;
+      span {
+        font-weight: 700;
+        color: $blue-algolia;
+      }
+    }
   }
 }
 
@@ -125,7 +133,7 @@
       }
     }
   }
-  .refinement-container{
+  .refinement-container {
     margin: 3rem 0;
   }
 

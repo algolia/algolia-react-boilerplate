@@ -1,12 +1,15 @@
 // Component for the searchbox being used when a category is selected eg. 'Mens'
 import { useNavigate } from 'react-router-dom';
 import { queryAtom } from '@/config/searchboxConfig';
-import { useRecoilValue } from 'recoil';
+import { categorySelectionAtom } from '@/config/headerConfig';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { CloseButton, Glass } from '@/assets/svg/SvgIndex';
 const SearchInCategory = ({ state }) => {
   // navigate is used by React Router
   const navigate = useNavigate();
   const query = useRecoilValue(queryAtom);
+  const categorySelection = useRecoilValue(categorySelectionAtom);
+  const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
 
   if (state?.type === 'filter' && state?.action !== null) {
     return (
@@ -23,6 +26,7 @@ const SearchInCategory = ({ state }) => {
         <span
           onClick={() => {
             navigate('/search');
+            setUnderlineCategory(0);
           }}
           className="searchbox__category__close-btn"
         >
@@ -37,6 +41,7 @@ const SearchInCategory = ({ state }) => {
         <span
           onClick={() => {
             navigate('/search');
+            setUnderlineCategory(0);
           }}
           className="searchbox__category__close-btn"
         >

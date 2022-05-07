@@ -10,13 +10,32 @@
     grid-column-gap: 0.5rem;
     grid-row-gap: 1rem;
     .srpItem {
+      position: relative;
       @include hits-individual(
         $main-color,
         $blue-algolia,
         $blue-algolia,
         $blue-algolia
       );
-      
+      .ranking-formula {
+        position: absolute;
+        background-color: transparent;
+        display: grid;
+        width: 100%;
+        margin-left: 0.5rem;
+        p {
+          font-size: 0.6rem;
+          margin-top: 0.2rem;
+          color: $blue-algolia;
+          font-weight: 700;
+        }
+      }
+    }
+
+    .promotedItems {
+      border: 1px solid rgb(170, 183, 251);
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     }
   }
 }
@@ -39,7 +58,7 @@
 
 .badge {
   position: absolute;
-  top: 0;
+  top: 0.5rem;
   left: 0.5rem;
   background-color: $blue-algolia;
   padding: 0 0.3rem;
@@ -47,5 +66,28 @@
   p {
     color: $white-color;
     font-weight: 500;
+  }
+}
+.button-ranking-container {
+  display: flex;
+  align-items: center;
+  .ranking-formula-button {
+    display: block;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    border: 1px solid $blue-algolia;
+  }
+  p {
+    visibility: hidden;
+    cursor: pointer;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    font-size: 0.6rem;
+    margin-left: 0.6rem;
+  }
+  &:hover p {
+    visibility: visible;
+    opacity: 1;
   }
 }

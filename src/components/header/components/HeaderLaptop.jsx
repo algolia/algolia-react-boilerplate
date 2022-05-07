@@ -11,7 +11,7 @@ import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
-import { logoUrl } from '@/config/headerConfig';
+import { logoUrl, categorySelectionAtom } from '@/config/headerConfig';
 
 //Import config from helped navigation
 import { isDemoGuideOpen, demoGuideBtnRef } from '@/config/demoGuideConfig';
@@ -24,14 +24,20 @@ import CustomSearchBox from '@/components/searchbox/SearchBox';
 import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 
+import { rulesAtom } from '@/config/appliedRulesConfig';
+
 //Import the option pictogram component
 import { OptionDots } from '@/assets/svg/SvgIndex';
 
 const HeaderLaptop = () => {
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
+  const categorySelection = useRecoilValue(categorySelectionAtom);
+  const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   // Define value to display voiceSearch
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
+
+  const rulesApplied = useSetRecoilState(rulesAtom);
 
   const demoGuideBtn = useSetRecoilState(demoGuideBtnRef);
   // Showing or hiding help navigation menu
@@ -46,6 +52,9 @@ const HeaderLaptop = () => {
             onClick={() => {
               setQueryState('');
               federated(false);
+              rulesApplied([]);
+              setUnderlineCategory(null);
+
             }}
           >
             {/* Add possibility to change the Logo */}
