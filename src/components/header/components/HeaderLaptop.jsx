@@ -19,6 +19,8 @@ import { logoUrl, categorySelectionAtom } from '@/config/headerConfig';
 //Import config from helped navigation
 import { isDemoGuideOpen, demoGuideBtnRef } from '@/config/demoGuideConfig';
 
+import { shouldShowDemoTour } from '@/config/demoTourConfig';
+
 // Import SearchBox
 // Rename customSearchbox
 import CustomSearchBox from '@/components/searchbox/SearchBox';
@@ -31,6 +33,7 @@ import Navigation from './Navigation';
 import { OptionDots } from '@/assets/svg/SvgIndex';
 
 const HeaderLaptop = () => {
+  console.log(shouldShowDemoTour);
   // React Tour
   const { setIsOpen } = useTour();
 
@@ -40,6 +43,7 @@ const HeaderLaptop = () => {
   const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   // Define value to display voiceSearch
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
+  const displayDemoTour = useRecoilValue(shouldShowDemoTour);
 
   const demoGuideBtn = useSetRecoilState(demoGuideBtnRef);
   // Showing or hiding help navigation menu
@@ -60,9 +64,14 @@ const HeaderLaptop = () => {
             {/* Add possibility to change the Logo */}
             <img src={logoUrl} alt="" />
           </Link>
-          <button className="open-tour__button" onClick={() => setIsOpen(true)}>
-            Open Tour
-          </button>
+          {displayDemoTour && (
+            <button
+              className="open-tour__button"
+              onClick={() => setIsOpen(true)}
+            >
+              Open Tour
+            </button>
+          )}
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container">
