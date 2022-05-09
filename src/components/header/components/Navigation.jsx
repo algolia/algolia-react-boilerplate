@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 // React Router
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 // Recoil Header State
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
@@ -13,7 +13,8 @@ import { categoryPageFilterAttribute } from '@/config/categoryConfig';
 import {
   linksHeader,
   selectorNavigationRef,
-  categorySelectionAtom,
+  // categorySelectionAtom,
+  // searchCategoryStateAtom,
 } from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
@@ -33,12 +34,35 @@ import {
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
-  const [categorySelectionState, setCategorySelectionState] = useRecoilState(
-    categorySelectionAtom
-  );
+  // LEFT IN FOR REFACTO PURPOSES
+  // const [categorySelectionState, setCategorySelectionState] = useRecoilState(
+  //   categorySelectionAtom
+  // );
+
+  // const searchCategoryState = useRecoilState(searchCategoryStateAtom);
 
   // navigate is used by React Router
   const navigate = useNavigate();
+  const { state } = useLocation();
+
+  const highlightingCat = () => {
+    if (state?.action !== null) {
+      if (state?.type === 'filter') {
+        return state.action
+          .split(':')[1]
+          .split('>')
+          .pop()
+          .replace("'", '')
+          .slice(0, -1)
+          .toLowerCase();
+      } else if (state?.type === 'context') {
+        return state?.action.toLowerCase();
+      } else {
+        null;
+      }
+    } else {
+    }
+  };
 
   // Get references for dropdowns in Navigation
   const selectorsNavigation = useSetRecoilState(selectorNavigationRef);
@@ -50,6 +74,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   // Import the navigation links, as defined in the config
   const [links] = useRecoilState(linksHeader);
+
   return (
     <ul
       className={`${
@@ -81,7 +106,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
               }
             } else {
               navigate('/search', {
-                state: { type: link.type, action: null },
+                state: { type: link.type, name: link.name, action: null },
               });
             }
             // Only used for Mobile view
@@ -91,9 +116,16 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           }}
         >
           <p
-            className={categorySelectionState === i ? 'selected' : ''}
+            className={
+              highlightingCat() === link.name.toLowerCase() ||
+              state?.name === link.name
+                ? 'selected'
+                : ''
+            }
             onClick={() => {
-              setCategorySelectionState(i);
+              // find the index of the new state
+              // LEFT IN FOR REFACTO PURPOSES
+              // setCategorySelectionState(link.filter);
             }}
           >
             {link.name}

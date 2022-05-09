@@ -66,8 +66,8 @@ const Hits = ({ hits }) => {
                   <p className="brand">{get(hit, brand)}</p>
                   <p className="name">{get(hit, productName)}</p>
                   <p className="price">
-                    {get(hit, price)}
                     {displayCurrency && currency}
+                    {get(hit, price)}
                   </p>
                 </div>
               </li>
@@ -77,7 +77,7 @@ const Hits = ({ hits }) => {
           <span className="no-results__infos">No Results Found</span>
         )}
       </ul>
-      <div className="products__btn" onClick={() => {}}>
+      <div className="products__btn" onClick={() => { }}>
         <ChevronRight />
         <p onClick={() => navigate('/search')}>SHOW ALL PRODUCTS</p>
       </div>
