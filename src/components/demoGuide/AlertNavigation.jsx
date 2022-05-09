@@ -1,12 +1,16 @@
 import { isAlertOpen, alertContent } from '@/config/demoGuideConfig';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { isRulesSwitchToggle } from '@/config/appliedRulesConfig';
 
 const AlertNavigation = () => {
   const [alertOpen, setAlertOpen] = useRecoilState(isAlertOpen);
   const alertContentToDisplay = useRecoilValue(alertContent);
 
+  // Check if rules applied panel is switch on to adapt styling
+  const isRulesAppliedToggle = useRecoilValue(isRulesSwitchToggle);
+
   return (
-    <div className="wrap">
+    <div className={`${isRulesAppliedToggle ? 'wrap-up ' : ''}wrap`}>
       {alertOpen && (
         <div className="demoGuide__alert">
           <div>{alertContentToDisplay}</div>

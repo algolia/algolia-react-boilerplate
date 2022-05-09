@@ -51,6 +51,7 @@
     "recoil": "^0.6.1",
     "sass": "^1.49.0",
     "sass-loader": "^12.4.0",
+    "search-insights": "^2.2.1",
     "style-loader": "^3.3.1"
   },
   "devDependencies": {

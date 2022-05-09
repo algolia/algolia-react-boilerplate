@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 // Import the Select widget (https://react-select.com/home)
 import Select from 'react-select';
 
@@ -61,6 +59,7 @@ const SearchTerms = () => {
             });
             setQueryState(e.value);
             triggerAlert(e.alertContent);
+
             // set the Navigation category to 'All', which is at index 0
             // LEFT IN FOR REFACTO PURPOSES
             // setUnderlineCategory(0);

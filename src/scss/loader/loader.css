@@ -1,0 +1,104 @@
+@use '../mixin/abstracts' as *;
+.loader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.loader__svgWp {
+  max-width: 20%;
+  margin: 0 auto;
+}
+
+.loader__svgWp svg {
+  width: 100%;
+  -webkit-animation: 3s ease-in-out 0s forwards fadeOut;
+          animation: 3s ease-in-out 0s forwards fadeOut;
+}
+
+.loader__bar {
+  width: 30%;
+  margin: 0 auto;
+  height: 3px;
+  border-radius: 1rem;
+  background: linear-gradient(201deg, #d777fe 0%, #08caff 100%);
+  -webkit-transform-origin: 0% 50%;
+          transform-origin: 0% 50%;
+  -webkit-animation: 3s ease-in-out 0s forwards scale;
+          animation: 3s ease-in-out 0s forwards scale;
+}
+
+@-webkit-keyframes scale {
+  0% {
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleX(100%);
+            transform: scaleX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes scale {
+  0% {
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleX(100%);
+            transform: scaleX(100%);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/*# sourceMappingURL=loader.css.map */

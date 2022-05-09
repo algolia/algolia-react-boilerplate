@@ -24,6 +24,8 @@ import CustomSearchBox from '@/components/searchbox/SearchBox';
 import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 
+import { rulesAtom } from '@/config/appliedRulesConfig';
+
 //Import the option pictogram component
 import { OptionDots } from '@/assets/svg/SvgIndex';
 
@@ -35,6 +37,8 @@ const HeaderLaptop = () => {
   // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   // Define value to display voiceSearch
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
+
+  const rulesApplied = useSetRecoilState(rulesAtom);
 
   const demoGuideBtn = useSetRecoilState(demoGuideBtnRef);
   // Showing or hiding help navigation menu
@@ -49,6 +53,8 @@ const HeaderLaptop = () => {
             onClick={() => {
               setQueryState('');
               federated(false);
+              rulesApplied([]);
+              // LEFT IN FOR REFACTO PURPOSES
               // setUnderlineCategory(null);
             }}
           >

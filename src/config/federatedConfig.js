@@ -11,7 +11,7 @@ export const federatedCategoriesAttribute = 'hierarchicalCategories.lvl2';
 // Do not delete anything from this object please.
 export const federatedSearchConfig = {
   showRecentSearches: true,
-  showQuerySuggestions: false,
+  showQuerySuggestions: true,
   showCategories: true,
   showProducts: true,
   showBlogPosts: true,

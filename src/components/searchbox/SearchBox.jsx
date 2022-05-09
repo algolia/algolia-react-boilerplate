@@ -22,6 +22,7 @@ import {
   simplePlaceholderAtom,
   isSearchInCategory,
 } from '@/config/searchboxConfig';
+import { rulesAtom } from '@/config/appliedRulesConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
@@ -44,9 +45,15 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   // Get states of React Router
   const { state } = useLocation();
 
+  // Get array of rules from Recoil
+  const rulesApplied = useSetRecoilState(rulesAtom);
+
   const refineFunction = (query) => {
+    rulesApplied([]);
     setQueryState(query);
     refine(query);
+    // console.log(query);
+    // Empty array of rules on each Keystrokes
   };
 
   return (

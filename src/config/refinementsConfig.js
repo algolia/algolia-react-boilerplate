@@ -2,6 +2,8 @@
 // Configuration for refinements/facets
 // ------------------------------------------
 
+import { hitsConfig } from './hitsConfig';
+
 // This const defines the refinements to be shown
 // There are five possible types: hierarchical, price, colour, size, list
 // Generally you should use type list if you are adding a new facet here
@@ -12,10 +14,10 @@ export const refinements = [
     label: 'Category',
     options: {
       attribute: [
-        'hierarchicalCategories.lvl0',
-        'hierarchicalCategories.lvl1',
-        'hierarchicalCategories.lvl2',
-        'hierarchicalCategories.lvl3',
+        hitsConfig.hierarchicalCategoriesLvl0,
+        hitsConfig.hierarchicalCategoriesLvl1,
+        hitsConfig.hierarchicalCategoriesLvl2,
+        hitsConfig.hierarchicalCategoriesLvl3,
       ],
       searchable: true,
     },
@@ -25,7 +27,7 @@ export const refinements = [
     header: 'Price',
     label: 'Price',
     options: {
-      attribute: 'unformated_price',
+      attribute: hitsConfig.price,
     },
   },
   {
@@ -33,7 +35,7 @@ export const refinements = [
     header: 'Brand',
     label: 'Brand',
     options: {
-      attribute: 'brand',
+      attribute: hitsConfig.brand,
       searchable: true,
     },
   },
@@ -42,7 +44,7 @@ export const refinements = [
     header: 'Colour',
     label: 'Colour',
     options: {
-      attribute: 'colour_hexa_v6',
+      attribute: hitsConfig.colourHexa,
     },
   },
   {
@@ -50,7 +52,7 @@ export const refinements = [
     header: 'Gender',
     label: 'Gender',
     options: {
-      attribute: 'genderFilter',
+      attribute: hitsConfig.genderFilter,
     },
   },
   {
@@ -58,7 +60,7 @@ export const refinements = [
     header: 'Sizes',
     label: 'Size',
     options: {
-      attribute: 'sizeFilter',
+      attribute: hitsConfig.sizeFilter,
       limit: 8,
     },
   },
