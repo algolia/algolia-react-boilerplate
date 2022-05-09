@@ -6,7 +6,7 @@ import { useTour } from '@reactour/tour';
 // React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
-import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
 //Import config for federatedSearch
@@ -15,9 +15,6 @@ import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 import { logoUrl, categorySelectionAtom } from '@/config/headerConfig';
-
-//Import config from helped navigation
-import { isDemoGuideOpen, demoGuideBtnRef } from '@/config/demoGuideConfig';
 
 import { shouldShowDemoTour } from '@/config/demoTourConfig';
 
@@ -31,27 +28,18 @@ import Navigation from './Navigation';
 
 import { rulesAtom } from '@/config/appliedRulesConfig';
 
-//Import the option pictogram component
-import { OptionDots } from '@/assets/svg/SvgIndex';
-
 const HeaderLaptop = () => {
-  console.log(shouldShowDemoTour);
   // React Tour
   const { setIsOpen } = useTour();
 
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
-  const categorySelection = useRecoilValue(categorySelectionAtom);
   const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   // Define value to display voiceSearch
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
   const displayDemoTour = useRecoilValue(shouldShowDemoTour);
 
   const rulesApplied = useSetRecoilState(rulesAtom);
-
-  const demoGuideBtn = useSetRecoilState(demoGuideBtnRef);
-  // Showing or hiding help navigation menu
-  const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
 
   return (
     <div className="container">
@@ -90,7 +78,6 @@ const HeaderLaptop = () => {
       </div>
       <div className="container__header-nav">
         <Navigation />
-        {/* <SelectPersona /> */}
       </div>
     </div>
   );
