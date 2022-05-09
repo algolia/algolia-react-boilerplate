@@ -126,12 +126,14 @@ const ProductDetails = () => {
       transition={framerMotionPage.transition}
     >
       <div
-        className={`${mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
-          }`}
+        className={`${
+          mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
+        }`}
       >
         <div
-          className={`${mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
-            }`}
+          className={`${
+            mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+          }`}
           onClick={() => navigate(-1)}
         >
           <ChevronLeft />
@@ -219,22 +221,6 @@ const ProductDetails = () => {
                 </motion.div>
               </div>
             )}
-<<<<<<< HEAD
-
-            <motion.p
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-                transition: { delay: 1, framerMotionTransition },
-              }}
-              className="price"
-            >
-              {displayCurrency && currency}
-              {get(hit, price)}
-            </motion.p>
-=======
             {/* Add to cart button which sends an Insights API call to Algolia but only if there is no size filter */}
             {!PDPHitSections.sizeFilter && (
               <motion.button
@@ -269,7 +255,6 @@ const ProductDetails = () => {
                 {displayCurrency && currency}
               </motion.p>
             )}
->>>>>>> 87e3aa349f07c7e5142a92e00474346a0a41d1b5
           </motion.div>
         </div>
       </div>
