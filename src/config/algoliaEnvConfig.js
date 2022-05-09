@@ -3,8 +3,9 @@
 // ------------------------------------------
 
 import { atom, selector } from 'recoil';
-import algoliasearch from 'algoliasearch/lite';
+import algoliasearch from 'algoliasearch';
 import aa from 'search-insights';
+
 
 // This export represents the information needed for the Algolia API client
 export const searchClientCreds = {
@@ -32,6 +33,8 @@ aa('init', {
 
 // Export an active insights client
 export const insightsClient = aa;
+
+
 
 // DO NOT REMOVE ANYTHING, ONLY RENAME VALUES IF NEEDED
 // IF YOU DON'T WANT IT USED, USE FEATURE CONFIG TO TURN OFF

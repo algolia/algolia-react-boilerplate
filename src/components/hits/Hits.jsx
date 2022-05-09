@@ -16,9 +16,7 @@ import { logoUrl as placeHolderError } from '@/config/headerConfig';
 
 import get from 'lodash/get';
 
-import {
-  framerMotionHits,
-} from '@/config/animationConfig';
+import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
 import { hitAtom } from '@/config/hitsConfig';
@@ -45,6 +43,8 @@ const Hit = ({ hit }) => {
   // Get hit attribute from config file
   const { price, objectID, image, imageAlt, category, productName } = hitsConfig;
 
+  const promoted = hit?._rankingInfo?.promoted;
+
   return (
     <motion.li
       layout
@@ -53,7 +53,7 @@ const Hit = ({ hit }) => {
       exit={framerMotionHits.exit}
       animate={framerMotionHits.animate}
       transition={framerMotionHits.transition}
-      className="srpItem"
+      className={`${promoted ? 'promotedItems' : ''} srpItem`}
       onClick={() => {
         hitState(hit);
         navigate(`/search/${hit[objectID]}`);

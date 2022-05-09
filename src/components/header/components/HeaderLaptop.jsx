@@ -29,6 +29,8 @@ import CustomSearchBox from '@/components/searchbox/SearchBox';
 import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 
+import { rulesAtom } from '@/config/appliedRulesConfig';
+
 //Import the option pictogram component
 import { OptionDots } from '@/assets/svg/SvgIndex';
 
@@ -45,6 +47,8 @@ const HeaderLaptop = () => {
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
   const displayDemoTour = useRecoilValue(shouldShowDemoTour);
 
+  const rulesApplied = useSetRecoilState(rulesAtom);
+
   const demoGuideBtn = useSetRecoilState(demoGuideBtnRef);
   // Showing or hiding help navigation menu
   const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
@@ -58,7 +62,9 @@ const HeaderLaptop = () => {
             onClick={() => {
               setQueryState('');
               federated(false);
+              rulesApplied([]);
               setUnderlineCategory(null);
+
             }}
           >
             {/* Add possibility to change the Logo */}

@@ -9,6 +9,7 @@ import SearchPersona from './components/SearchPersona';
 import DemoGuideInjectedContent from './components/DemoGuideInjectedContent';
 import DemoGuideDynamicFilters from './components/DemoGuideDynamicFilters';
 import DemoGuideRedirect from './components/DemoGuideRedirect';
+import DemoGuideRulesApplied from './components/DemoGuideRulesApplied';
 
 //Import Hooks
 import useScreenSize from '@/hooks/useScreenSize';
@@ -26,6 +27,7 @@ import {
   shouldShowDynamicFilters,
   shouldShowRedirects,
   shouldShowBanners,
+  shouldShowAppliedRulesSwitcher,
 } from '@/config/demoGuideConfig';
 
 const DemoGuide = ({ setshowDemoGuide }) => {
@@ -40,6 +42,10 @@ const DemoGuide = ({ setshowDemoGuide }) => {
   const shouldShowDynamicFiltersAtom = useRecoilValue(shouldShowDynamicFilters);
   const shouldShowRedirectsAtom = useRecoilValue(shouldShowRedirects);
   const shouldShowBannersAtom = useRecoilValue(shouldShowBanners);
+  // Should the applied rules section shows in the demo panel
+  const shouldShowRulesAppliedAtom = useRecoilValue(
+    shouldShowAppliedRulesSwitcher
+  );
 
   // Use the reference value of the button that trigger the panel
   const demoGuideBtn = useRecoilValue(demoGuideBtnRef);
@@ -65,6 +71,12 @@ const DemoGuide = ({ setshowDemoGuide }) => {
     >
       <h2>Help Navigation Panel</h2>
       <ul className="container-nav-help">
+        {shouldShowRulesAppliedAtom && (
+          <li className="container-nav-help__items ">
+            <DemoGuideRulesApplied />
+            <hr />
+          </li>
+        )}
         {shouldShowSearchTermsAtom && (
           <li className="container-nav-help__items ">
             <SearchTerms />
