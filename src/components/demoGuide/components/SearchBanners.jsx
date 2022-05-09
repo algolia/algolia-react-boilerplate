@@ -20,7 +20,8 @@ const SearchBanners = () => {
   // Recoil State - update query in searchBar
   const setQueryState = useSetRecoilState(queryAtom);
   // Recoil State - set the category to 'All'
-  const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
+  // LEFT IN FOR REFACTO PURPOSES
+  // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
 
   const setAlert = useSetRecoilState(alertContent);
   const setAlertOpen = useSetRecoilState(isAlertOpen);
@@ -60,7 +61,8 @@ const SearchBanners = () => {
             setQueryState(e.value);
             triggerAlert(e.alertContent);
             // set the Navigation category to 'All', which is at index 0
-            setUnderlineCategory(0);
+            // LEFT IN FOR REFACTO PURPOSES
+            // setUnderlineCategory(0);
           }
         }}
       />

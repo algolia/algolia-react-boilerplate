@@ -37,7 +37,8 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
-  const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
+  // LEFT IN FOR REFACTO PURPOSES
+  // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   // router hook to navigate using a function
   const navigate = useNavigate();
   // Get states of React Router
@@ -61,7 +62,8 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
           useStoreQueryToLocalStorage(currentRefinement);
           navigate('/search');
           // set the Navigation category to 'All', which is at index 0
-          setUnderlineCategory(0);
+          // LEFT IN FOR REFACTO PURPOSES
+          // setUnderlineCategory(0);
         }}
       >
         <input

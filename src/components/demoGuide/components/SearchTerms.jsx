@@ -19,7 +19,7 @@ const SearchTerms = () => {
   // Recoil State - update query in searchBar
   const setQueryState = useSetRecoilState(queryAtom);
   // Recoil State - set the category to 'All'
-  const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
+  // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   const setAlert = useSetRecoilState(alertContent);
   const setAlertOpen = useSetRecoilState(isAlertOpen);
   // router hook to navigate using a function
@@ -52,14 +52,18 @@ const SearchTerms = () => {
         placeholder="Choose"
         onChange={(e) => {
           if (e.value !== '') {
-            navigate({
+            navigate(`/search`, {
+              state: {
+                name: 'All',
+              },
               pathname: '/search',
               search: `?${createSearchParams({ query: e.value })}`,
             });
             setQueryState(e.value);
             triggerAlert(e.alertContent);
             // set the Navigation category to 'All', which is at index 0
-            setUnderlineCategory(0);
+            // LEFT IN FOR REFACTO PURPOSES
+            // setUnderlineCategory(0);
           }
         }}
       />
