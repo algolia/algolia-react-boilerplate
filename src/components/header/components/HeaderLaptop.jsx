@@ -1,9 +1,12 @@
 // Render the Header component in Main.jsx, for large screen sizes
 
+// React Tour
+import { useTour } from '@reactour/tour';
+
 // React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
-import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
 //Import config for federatedSearch
@@ -13,8 +16,7 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 import { logoUrl, categorySelectionAtom } from '@/config/headerConfig';
 
-//Import config from helped navigation
-import { isDemoGuideOpen, demoGuideBtnRef } from '@/config/demoGuideConfig';
+import { shouldShowDemoTour } from '@/config/demoTourConfig';
 
 // Import SearchBox
 // Rename customSearchbox
@@ -26,23 +28,22 @@ import Navigation from './Navigation';
 
 import { rulesAtom } from '@/config/appliedRulesConfig';
 
-//Import the option pictogram component
-import { OptionDots } from '@/assets/svg/SvgIndex';
-
 const HeaderLaptop = () => {
+  // React Tour
+  const { setIsOpen } = useTour();
+
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
+
   const categorySelection = useRecoilValue(categorySelectionAtom);
   // LEFT IN FOR REFACTO PURPOSES
   // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
+
   // Define value to display voiceSearch
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
+  const displayDemoTour = useRecoilValue(shouldShowDemoTour);
 
   const rulesApplied = useSetRecoilState(rulesAtom);
-
-  const demoGuideBtn = useSetRecoilState(demoGuideBtnRef);
-  // Showing or hiding help navigation menu
-  const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
 
   return (
     <div className="container">
@@ -61,6 +62,14 @@ const HeaderLaptop = () => {
             {/* Add possibility to change the Logo */}
             <img src={logoUrl} alt="" />
           </Link>
+          {displayDemoTour && (
+            <button
+              className="open-tour__button"
+              onClick={() => setIsOpen(true)}
+            >
+              Open Tour
+            </button>
+          )}
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container">
@@ -73,7 +82,6 @@ const HeaderLaptop = () => {
       </div>
       <div className="container__header-nav">
         <Navigation />
-        {/* <SelectPersona /> */}
       </div>
     </div>
   );

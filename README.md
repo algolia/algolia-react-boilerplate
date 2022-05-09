@@ -109,6 +109,12 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Demo Tour</h3>
+
+This app offers the ability to present a guided tour to the user, highlighting different elements and explaining them. The feature is currently in BETA, and is subject to change. It can be turned on by going to `config/demoTourConfig` and setting the `default` value of `shouldShowDemoTour` to `true`.
+
+You can configure your tour by adjusting the `steps` const, also found in `config/demoTourConfig`.
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Insights</h3>
 
 On the product details page, if you have chosen not to show the size filter, you will see an add to cart button. By clicking this button, an event will be sent to algolia using the Insights API and an alert will be shown to the user.
