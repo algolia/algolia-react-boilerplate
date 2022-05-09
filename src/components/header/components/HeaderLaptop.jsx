@@ -33,7 +33,8 @@ const HeaderLaptop = () => {
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
   const categorySelection = useRecoilValue(categorySelectionAtom);
-  const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
+  // LEFT IN FOR REFACTO PURPOSES
+  // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   // Define value to display voiceSearch
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
 
@@ -53,8 +54,8 @@ const HeaderLaptop = () => {
               setQueryState('');
               federated(false);
               rulesApplied([]);
-              setUnderlineCategory(null);
-
+              // LEFT IN FOR REFACTO PURPOSES
+              // setUnderlineCategory(null);
             }}
           >
             {/* Add possibility to change the Logo */}
