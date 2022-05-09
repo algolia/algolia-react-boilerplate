@@ -90,38 +90,6 @@ const Hit = ({ hit }) => {
         className="button-ranking-container"
         onClick={() => setShouldShowRankingInfo(!shouldShowRankingInfo)}
       >
-        {isHovered && get(hit, imageAlt) !== undefined ? (
-          <img
-            key={1}
-            className="secondImage"
-            src={get(hit, imageAlt)}
-            alt={get(hit, category)}
-            onError={(e) => (e.currentTarget.src = placeHolderError)}
-          />
-        ) : (
-          <img
-            className="mainImage"
-            src={get(hit, image)}
-            key={2}
-            alt={get(hit, category)}
-            onError={(e) => (e.currentTarget.src = placeHolderError)}
-          />
-        )}
-        {badgeCriteria(hit) !== null && <Badge title={badgeCriteria(hit)} />}
-        <div className="srpItem__imgWrapper__heart">
-          <Heart />
-        </div>
-      </motion.div>
-      <div className="srpItem__infos">
-        <h3>
-          <Highlight hit={hit} attribute={productName} />
-        </h3>
-        <div className="srpItem__infos__down">
-          <p className="srpItem__infos__down__price">
-            {displayCurrency && currency}
-            {get(hit, price)}
-          </p>
-        </div>
         <button className="ranking-formula-button"></button>
         <p>Click to see Ranking</p>
       </div>
