@@ -331,8 +331,7 @@ It is then as simple as adding in your HTML the correct fontawesome tags i.e. `<
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🚌 Tour</h3>
 
-[Reactour] https://reactour.js.org/
-https://github.com/elrumordelaluz/reactour
+[Reactour](https://reactour.js.org/)
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">💻 State Manager</h3>
 
