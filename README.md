@@ -108,7 +108,7 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Demo Tour</h3>
 
-This app offers the ability to present a guided tour to the user, highlighting different elements and explaining them. The feature is currently in BETA, and is subject to change. It can be turned on by going to `config/demoTourConfig` and setting the `default` value of `shouldShowDemoTour` to `true`.
+This app offers the ability to present a guided tour to the user, highlighting different elements and explaining them. The feature is currently in BETA, and is subject to change. It is on by default; it can be turned off by going to `config/demoTourConfig` and setting the `default` value of `shouldShowDemoTour` to `false`.
 
 You can configure your tour by adjusting the `steps` const, also found in `config/demoTourConfig`.
 
@@ -328,6 +328,11 @@ This project comes with fontawesome added by default so you can adjust or add ic
 It is then as simple as adding in your HTML the correct fontawesome tags i.e. `<i className="fa-solid fa-shopping-cart"></i>`
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🚌 Tour</h3>
+
+[Reactour] https://reactour.js.org/
+https://github.com/elrumordelaluz/reactour
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">💻 State Manager</h3>
 
