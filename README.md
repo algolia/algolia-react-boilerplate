@@ -1,38 +1,38 @@
 # React Boilerplate for Custom Demos
 
-   * [Get started](#️-get-started)
-   * [Structure](#️-structure)
-   * [Features Config](#-features-config)
-      * [ Redirects](#--redirects)
-      * [ Federated Search](#--federated-search)
-      * [ Voice Search](#--voice-search)
-      * [ Sorts](#--sorts)
-      * [ Carousels](#--carousels)
-      * [ Recommend](#--recommend)
-      * [ Styling](#--styling)
-      * [ Demo Guide](#--demo-guide)
-      * [ Languages](#--languages)
-      * [ Banners](#--banners)
-      * [ Segments](#--segments)
-      * [ Badges](#--badges)
-      * [ Facet Display](#--facet-display)
-      * [ Category Pages](#--category-pages)
-      * [ Collection Pages](#--collection-pages)
-      * [ Personas](#--personas)
-      * [ Injected Content](#--injected-content)
-         * [From Main Index](#from-main-index)
-         * [From Seperate Index](#from-seperate-index)
-      * [ Icons](#-icons)
-   * [Dependencies](#️-dependencies)
-      * [State Manager](#-state-manager)
-      * [Router](#-router)
-      * [Slider](#-slider)
-      * [Select Menus](#-select-menus)
-      * [Style](#-style)
-      * [Debounce](#-debounce)
-      * [Lazy Loading](#-lazy-loading)
-   * [Develop on this project](#️-develop-on-this-project)
-      * [Before use please install](#-before-use-please-install)
+- [Get started](#️-get-started)
+- [Structure](#️-structure)
+- [Features Config](#-features-config)
+  - [ Redirects](#--redirects)
+  - [ Federated Search](#--federated-search)
+  - [ Voice Search](#--voice-search)
+  - [ Sorts](#--sorts)
+  - [ Carousels](#--carousels)
+  - [ Recommend](#--recommend)
+  - [ Styling](#--styling)
+  - [ Demo Guide](#--demo-guide)
+  - [ Languages](#--languages)
+  - [ Banners](#--banners)
+  - [ Segments](#--segments)
+  - [ Badges](#--badges)
+  - [ Facet Display](#--facet-display)
+  - [ Category Pages](#--category-pages)
+  - [ Collection Pages](#--collection-pages)
+  - [ Personas](#--personas)
+  - [ Injected Content](#--injected-content)
+    - [From Main Index](#from-main-index)
+    - [From Seperate Index](#from-seperate-index)
+  - [ Icons](#-icons)
+- [Dependencies](#️-dependencies)
+  - [State Manager](#-state-manager)
+  - [Router](#-router)
+  - [Slider](#-slider)
+  - [Select Menus](#-select-menus)
+  - [Style](#-style)
+  - [Debounce](#-debounce)
+  - [Lazy Loading](#-lazy-loading)
+- [Develop on this project](#️-develop-on-this-project)
+  - [Before use please install](#-before-use-please-install)
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
 
@@ -51,7 +51,6 @@
 7. In the `src/scss` folder, adjust any styling you need to based on what you see.
 
 8. Log into Netlify on the Algolia Demos team (again ask #help-demos if you don't have access) and deploy your demo from Github, making sure to password protect it!
-
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Structure</h2>
 
@@ -105,8 +104,6 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
   - Related Products
   - Frequently Bought Together
 
-
-
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Demo Tour</h3>
@@ -122,14 +119,15 @@ On the product details page, if you have chosen not to show the size filter, you
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Redirects</h3>
 
 Redirects are already activated in the application. In order to trigger one, simply create a rule in the dashboard where the consequence is:
- ```
- {
-  "isRedirected": true,
-  "redirect": "URL TO REDIRECT TO GOES HERE"
- }
- ```
 
- You can find an example redirect rule by searching for `qr-1634733813616` in `rules/example-rules.json`
+```
+{
+ "isRedirected": true,
+ "redirect": "URL TO REDIRECT TO GOES HERE"
+}
+```
+
+You can find an example redirect rule by searching for `qr-1634733813616` in `rules/example-rules.json`
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Federated Search</h3>
 
@@ -173,6 +171,16 @@ The demo guide is opened by clicking on the three dots in the top right of the a
 
 It is all defined and adjusted in `config/demoGuideConfig` and is self described.
 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 🧱 Rules Applied Mode</h3>
+
+In order to turn on this feature, go to `config/demoGuideConfig` and set `shouldShowAppliedRulesSwitcher` to true.
+
+If turn to true you will find this feature in the Demo Guide panel.
+Switch on, you will find at the bottom of your screen information about the rules that are applied live while you are browsing the app. Switch off, no information will be disclosed.
+You can change description of the rules directly in the dashboard under the rule description input.
+
+You might notice `config/appliedRulesConfig` file, please ignore it.
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Languages</h3>
 
 In order to turn on this feature, go to `config/featuresConfig` and set `shouldHaveLanguages` to true.
@@ -180,12 +188,12 @@ In order to turn on this feature, go to `config/featuresConfig` and set `shouldH
 Use it by making sure you have an index per language, and that the attribute names are always in the default language, but the values change in each index according to the local language.
 
 Then, go to `config/languagesConfig` and adjust each export to what you need. Specifically, in `languageSwitchConfig` you must make sure each node has an `index` defined, and this index will be used when that language is selected.
- 
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Banners</h3>
 
 https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/add-banners/
 
-There are two types of banners in this demo - Homepage banners and Search Result Page banners. Check out the existing examples on the flagship fashion index to see some examples. 
+There are two types of banners in this demo - Homepage banners and Search Result Page banners. Check out the existing examples on the flagship fashion index to see some examples.
 
 How Configure it 👇
 
@@ -227,7 +235,7 @@ When two triggers are matched, the one found first in the configuration array wi
 
 [Facet Display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react/)
 
-The ability to control the facets which get displayed including their order. When adding your facets inside this app via `config/refinementsConfig`, you *must* ensure those facets are also added in the dashboard not just in the Facets section, but also in the Facet Display section, otherwise they will not show.
+The ability to control the facets which get displayed including their order. When adding your facets inside this app via `config/refinementsConfig`, you _must_ ensure those facets are also added in the dashboard not just in the Facets section, but also in the Facet Display section, otherwise they will not show.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Category Pages</h3>
 
@@ -244,10 +252,10 @@ You can find an example of a collection page rule by searching for `qr-165114563
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 No Results Page</h3>
 
 To have the best UI, we defined the no results page with 3 parts:
-  - First we just display the wrong query ex: yellow pant nike with an apologize message.
-  - Secondly we incorporate the query suggestions to help the customer on navigation behaviour.
-  - Third we stored, if the person already go on our website, his previous articles see. Them if he types a wrong query, we use Recomment and Related product with his last article seen, to create a carousel. 
 
+- First we just display the wrong query ex: yellow pant nike with an apologize message.
+- Secondly we incorporate the query suggestions to help the customer on navigation behaviour.
+- Third we stored, if the person already go on our website, his previous articles see. Them if he types a wrong query, we use Recomment and Related product with his last article seen, to create a carousel.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👩‍💼🧑‍💼 Personas</h3>
 
@@ -259,11 +267,11 @@ Then, you can visit `config/personaConfig` and update the `value`s to match the 
 
 The current user stories are:
 
-   - Younger male 'Stephen James', likes Basketball and he lives in NYC.
-      -Likes **Sneakers**, size 24, also likes **tracksuit**
+- Younger male 'Stephen James', likes Basketball and he lives in NYC.
+  -Likes **Sneakers**, size 24, also likes **tracksuit**
 
-   - Older female: 'Elizabeth Aniston', likes fashion and she lives in Paris.
-      -Likes **black** dresses, size M, also likes blue jeans
+- Older female: 'Elizabeth Aniston', likes fashion and she lives in Paris.
+  -Likes **black** dresses, size M, also likes blue jeans
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 💉 Injected Content</h3>
 
@@ -277,13 +285,15 @@ There are two kinds of injected content:
 <h4 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">From Main Index</h4>
 
 We have two kinds of rules. If you want to trigger these rules for your own demo, please use the given JSON source for the rules which you must add as a consequence (please edit the values as you see fit):
-  
+
 1. Free returns (always displayed)
+
 - You can edit the displayed hit by going to `/components/hits/NoCtaCard.js`
 
 You can find an example of this injected content rule by searching for `qr-1644582034227` in `rules/example-rules.json`.
 
 2. Sales card ('nike' trigger)
+
 - You can edit the displayed hit by going to `/components/hits/SalesCard.js`
 
 You can find an example of this injected content rule by searching for `qr-1649055462539` in `rules/example-rules.json`.
@@ -295,6 +305,7 @@ You can find an example of this injected content rule by searching for `qr-16490
 For this we define a new index in `algoliaEnvConfig.js` called `injectedContentIndex` and if there is a result in this index, we inject it as a result into the Hits.
 
 Here is a sample record structure which is expected for records in the index to inject:
+
 ```
 {
   "name": "Curry Stephen Under Armour",
@@ -315,7 +326,6 @@ Here is a sample record structure which is expected for records in the index to 
 This project comes with fontawesome added by default so you can adjust or add icons at will. It has been installed by being added in `/src/assets/fontawesome/js/all.js` and linked in the head tag of `index.html`
 
 It is then as simple as adding in your HTML the correct fontawesome tags i.e. `<i className="fa-solid fa-shopping-cart"></i>`
-
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
 
@@ -346,7 +356,6 @@ with
 [Debounce Lodash](https://www.npmjs.com/package/lodash.debounce)
 
 The Utility of this package is to wait before action, for example on the SearchBox, onChange wait some time before send query.
-
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⏰ Lazy Loading</h3>
 
