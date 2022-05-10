@@ -155,7 +155,8 @@ You can find an example carousel rule by searching for `qr-1651497727816` in `ru
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Recommend</h3>
 
-TBD
+We wrote a Gdoc to know how use [FIG](https://github.com/algolia/fake-insights-generator). You can find it [here](https://docs.google.com/document/d/1T8ClZX5I06D-NpV9ZehFCXA_yx095cCFd7P2e3VeM5U/edit?usp=sharing).
+So we used recommend for the PDP and alos for the NoResultsPage with the RelatedProductsCarousel.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Styling</h3>
 
