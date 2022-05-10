@@ -155,7 +155,13 @@ You can find an example carousel rule by searching for `qr-1651497727816` in `ru
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Recommend</h3>
 
-TBD
+Use FIG to generate the CSVs needed for Recommend, which you can then upload to the dashboard, and following this, enable FBT and Related in the appropriate config of this application.
+
+We wrote a Gdoc to detail how use [FIG](https://github.com/algolia/fake-insights-generator). You can find it [here](https://docs.google.com/document/d/1T8ClZX5I06D-NpV9ZehFCXA_yx095cCFd7P2e3VeM5U/edit?usp=sharing).
+
+Recommend is present in this app on the PDP, and also on the NoResultsPage with RelatedProductsCarousel.
+
+"Trends" will be implementated in future, because we're waiting for FIG to integrate a CSV facility to generate Trends.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Styling</h3>
 
