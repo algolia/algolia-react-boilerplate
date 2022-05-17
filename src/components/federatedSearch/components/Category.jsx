@@ -15,7 +15,6 @@ function Category(props) {
   const { items } = useRefinementList(props);
   // router hook to navigate using a function
   const navigate = useNavigate();
-  console.log(items);
   return (
     <div className="categories">
       <h3 className="categories__title">Categories</h3>
