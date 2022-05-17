@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Algolia's imports
-import { useCurrentRefinements } from 'react-instantsearch-hooks-web';
+import { useRefinementList } from 'react-instantsearch-hooks-web';
 
 // component import
 import { ChevronRight } from '@/assets/svg/SvgIndex';
@@ -12,7 +12,7 @@ import { ChevronRight } from '@/assets/svg/SvgIndex';
 import { federatedCategoriesAttribute } from '@/config/federatedConfig';
 
 function Category(props) {
-  const { items } = useCurrentRefinements(props);
+  const { items } = useRefinementList(props);
   // router hook to navigate using a function
   const navigate = useNavigate();
   console.log(items);
