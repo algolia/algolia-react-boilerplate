@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { connectHits, Configure, Index } from 'react-instantsearch-dom';
+import { useHits, Configure, Index } from 'react-instantsearch-hooks-web';
 
 // Import Framer Motion
 import { motion } from 'framer-motion';
@@ -46,14 +46,16 @@ const HomeCarousel = ({ context, title }) => {
           optionalFilters={segmentOptionalFilters}
           userToken={userToken}
         />
-        <CustomHitsCarousel title={title} />
+        <Carousel title={title} />
       </Index>
     </div>
   );
 };
 
 // This carousel is used inside of HomeCarousel
-const Carousel = ({ hits, title }) => {
+function Carousel(props) {
+  const { hits } = useHits(props);
+  const { title } = props;
   // Handle carousel effects when grabbing it
   const [width, setWidth] = useState(0);
 
@@ -96,7 +98,7 @@ const Carousel = ({ hits, title }) => {
               bounceStiffness: 10,
               bounceDamping: 1,
             },
-              framerMotionTransition)
+            framerMotionTransition)
           }
           className="inner-carousel"
         >
@@ -132,7 +134,6 @@ const Carousel = ({ hits, title }) => {
       </motion.div>
     </>
   );
-};
-const CustomHitsCarousel = connectHits(Carousel);
+}
 
 export default HomeCarousel;

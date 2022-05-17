@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 // Recoil State Management
-import { RecoilRoot, useRecoilValue } from 'recoil';
+import { RecoilRoot } from 'recoil';
 
 // SCSS import
 import './scss/index.scss';

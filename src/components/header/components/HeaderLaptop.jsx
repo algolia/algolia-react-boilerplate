@@ -74,7 +74,7 @@ const HeaderLaptop = () => {
         {/* For a search box Simple center */}
         <div className="searchbox-container">
           <CustomSearchBox />
-          {displayVoiceSearch && <CustomVoiceSearchComponent />}
+          {/* {displayVoiceSearch && <CustomVoiceSearchComponent />} */}
         </div>
         <div className="container__header-top__title">
           <h1>Demo BoilerPlate</h1>

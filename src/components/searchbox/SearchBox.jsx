@@ -5,6 +5,7 @@ import { memo } from 'react';
 
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
+import { useSearchBox } from 'react-instantsearch-hooks-web';
 
 // Import navigate function to route to results page on search submit
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -31,7 +32,8 @@ import { categorySelectionAtom } from '@/config/headerConfig';
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
 
-const SearchBoxSimple = ({ refine, currentRefinement }) => {
+function CustomSearchBox(props) {
+  const { refine, currentRefinement } = useSearchBox(props);
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
   const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
@@ -89,8 +91,6 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
       </form>
     </div>
   );
-};
-
-const CustomSearchBox = connectSearchBox(SearchBoxSimple);
+}
 
 export default memo(CustomSearchBox);

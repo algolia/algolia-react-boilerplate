@@ -74,7 +74,7 @@ const HomePage = () => {
 
       {/* Load custom banners */}
       <Suspense fallback={<Loader />}>
-        <CustomHomeBanners />
+        {/* <CustomHomeBanners /> */}
       </Suspense>
 
       {isCarousel &&
@@ -83,7 +83,7 @@ const HomePage = () => {
             <HomeCarousel context={carousel.context} title={carousel.title} />
           </Suspense>
         ))}
-        
+
       {homepage_1 ? <img src={homepage_1} alt="" /> : null}
 
       {homepage_2 && <img src={homepage_2} alt="" />}

@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
-
-import { InstantSearch } from 'react-instantsearch-dom';
+import { InstantSearch } from 'react-instantsearch-hooks-web';
 
 // application state from config file
 import { searchClient } from './config/algoliaEnvConfig';
@@ -12,7 +10,7 @@ import { AnimatePresence } from 'framer-motion';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
 //Recoil states & values
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 
 //Import help navigation state & config
 import {
@@ -62,7 +60,8 @@ export const Main = ({ isLoaded }) => {
 
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
-      <CustomStateResults />
+      {/* Comment until Hooks Update */}
+      {/* <CustomStateResults /> */}
       <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
         <Header />
         <DemoGuideOpener />

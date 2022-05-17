@@ -93,7 +93,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
       <div className="searchbox-container searchbox-container-mobile">
         <CustomSearchBox />
         {/* Display voicesearch if the  displayVoiceSearch config is set to true */}
-        {displayVoiceSearch && <CustomVoiceSearchComponent />}
+        {/* {displayVoiceSearch && <CustomVoiceSearchComponent />} */}
       </div>
       <AnimatePresence>
         {isMenuOpen && (
