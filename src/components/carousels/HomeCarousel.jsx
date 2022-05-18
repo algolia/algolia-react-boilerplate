@@ -123,10 +123,6 @@ const Carousel = ({ hits, title }) => {
                 >
                   <p className="name">{get(hit, productName)}</p>
                   <Price hit={hit} />
-                  {/* <p className="price">
-                    {displayCurrency && currency}
-                    {get(hit, price)}
-                  </p> */}
                 </div>
               </motion.div>
             );
