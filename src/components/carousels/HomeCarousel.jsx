@@ -30,6 +30,8 @@ import useScreenSize from '@/hooks/useScreenSize';
 
 import get from 'lodash/get';
 
+import Price from '@/components/price/price.jsx';
+
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ context, title }) => {
   const index = useRecoilValue(mainIndex);
@@ -96,7 +98,7 @@ const Carousel = ({ hits, title }) => {
               bounceStiffness: 10,
               bounceDamping: 1,
             },
-              framerMotionTransition)
+            framerMotionTransition)
           }
           className="inner-carousel"
         >
@@ -120,10 +122,11 @@ const Carousel = ({ hits, title }) => {
                   }}
                 >
                   <p className="name">{get(hit, productName)}</p>
-                  <p className="price">
+                  <Price hit={hit} />
+                  {/* <p className="price">
                     {displayCurrency && currency}
                     {get(hit, price)}
-                  </p>
+                  </p> */}
                 </div>
               </motion.div>
             );
