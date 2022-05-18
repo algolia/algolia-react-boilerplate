@@ -1,0 +1,65 @@
+@use '../mixin/abstracts' as *;
+
+.skeleton{
+    width: 95%;
+    height: 100%;
+    margin: 1rem auto;
+    display: flex;
+    gap: 3rem;
+   
+    &__facets {
+      width: 18%;
+      will-change: width;
+      flex-shrink: 0;
+      overflow: visible;
+      display: inline-block;
+      background-color: rgb(233, 233, 233);
+      border-radius: 0.5rem;
+    }
+    &__hits {
+      width: 83%;
+      position: relative;
+      flex-grow: 2;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    &__sortBy{
+        width: 100%;
+        height: 3rem;
+        background-color: rgb(233, 233, 233);
+        border-radius: 0.5rem;
+    }
+    &__hitsList{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-column-gap: 0.5rem;
+        grid-row-gap: 1rem;
+    }
+
+    &__hit{
+        height: 18rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        
+
+        &-top, &-bottom{
+            height: 100%;
+            width: 100%;
+            background-color: rgb(233, 233, 233);
+            border-radius: 0.3rem;
+        }
+
+        &-top{
+            height: 100%;
+        }
+        &-bottom{
+            height: 50%;
+        }
+
+    }
+}

@@ -25,6 +25,12 @@ export const framerMotionPage = {
   animate: { opacity: 1 },
   transition: { duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
 };
+export const framerMotionFooter = {
+  initial: { opacity: 0 },
+  exit: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 3, delay: 1, ease: [0.43, 0.13, 0.23, 0.96] },
+};
 
 export const framerMotionFederatedContainer = {
   initial: { y: '-100%', opacity: 0 },

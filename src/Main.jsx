@@ -44,6 +44,8 @@ import usePreventScrolling from './hooks/usePreventScrolling';
 
 export const Main = ({ isLoaded }) => {
   const index = useRecoilValue(mainIndex);
+  const [isMounted, setIsMounted] = useState(false);
+  console.log(isMounted);
   // const [index, setIndex] = useState(mainIndex);
   const location = useLocation();
 
@@ -73,14 +75,20 @@ export const Main = ({ isLoaded }) => {
         </AnimatePresence>
         <AnimatePresence initial={true} exitBeforeEnter>
           <Routes key={location.pathname} location={location}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/search" element={<SearchResultsPage />} />
+            <Route
+              path="/"
+              element={<HomePage setIsMounted={setIsMounted} />}
+            />
+            <Route
+              path="/search"
+              element={<SearchResultsPage setIsMounted={setIsMounted} />}
+            />
             {/* objectID is the unique identifier for an algolia record */}
             <Route path="/search/:objectID" element={<ProductDetails />} />
           </Routes>
+          {isMounted && <Footer />}
         </AnimatePresence>
         {shouldShowAlertAtom && <AlertNavigation />}
-        <Footer />
         {isRulesSwitchToggleChecked && <CustomAppliedRules />}
       </div>
     </InstantSearch>

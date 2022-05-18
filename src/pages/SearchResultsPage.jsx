@@ -3,7 +3,7 @@
 // It also renders different search results components depending on screen size
 
 // import React functionality
-import { memo, useEffect, lazy, Suspense } from 'react';
+import { memo, useEffect, lazy, Suspense, useRef } from 'react';
 
 // To display if no results
 // Recommend
@@ -59,7 +59,7 @@ const SrpMobile = lazy(() =>
   import('@/components/searchresultpage/srpMobile/SrpMobile')
 );
 
-const SearchResultPage = () => {
+const SearchResultPage = ({ setIsMounted }) => {
   // Recoil & React states
 
   // Do you want to show banner on SRP? This boolean tells us yes or no
@@ -70,20 +70,29 @@ const SearchResultPage = () => {
 
   // Handle screen resize
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
+  const srpMounted = useRef(false);
+  useEffect(() => {
+    srpMounted.current = true;
+    setIsMounted(srpMounted.current);
+    return () => {
+      srpMounted.current = false;
+      setIsMounted(srpMounted.current);
+    };
+  }, []);
 
   return (
-    <>
+    <div ref={srpMounted}>
       {/* Display the banner if the bannerSrp config is set to: true */}
       {shouldDisplayBanners && <Banner />}
       {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
 
       <NoResultsHandler>
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={''}>
           {(laptop || laptopXS) && <SrpLaptop />}
           {(tablet || mobile) && <SrpMobile />}
         </Suspense>
       </NoResultsHandler>
-    </>
+    </div>
   );
 };
 
