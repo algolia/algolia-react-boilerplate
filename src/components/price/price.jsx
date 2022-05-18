@@ -1,42 +1,47 @@
 // Component for building and showing prices in the correct format
-
-// REGEX that I might use
-// (USD|EUR|€|\$|£)\s?(\d{1,}(?:[.,]*\d{3})*(?:[.,]*\d*))|(\d{1,3}(?:[.,]*\d*)*(?:[.,]*\d*)?)\s?(USD|EUR)
+// It currently has functionality for £ $ € and defaults to putting the currency symbol first
 
 // Recoil
 import { useRecoilValue } from 'recoil';
 
 import { hitsConfig } from '@/config/hitsConfig';
 
-const { price } = hitsConfig;
-
 import get from 'lodash/get';
 
+// Add this function with hitPrice to convert the decimal separators ie. 1,999.99 => 1.999,99 and vice versa
+// like this => {convertSeparators(hitPrice)}
+const convertSeparators = (price) => {
+  return price.replace(/[,.]/g, (m) => (m === ',' ? '.' : ','));
+};
+
 const PriceBuilder = ({ hit }) => {
+  const { price } = hitsConfig;
   const currencySymbol = useRecoilValue(currencySymbolAtom);
   const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
+  const hitPrice = get(hit, price);
+
   switch (currencySymbol) {
-    case '£':
+    case '£' || '$':
       return (
-        <p className="price">
+        <>
           {displayCurrency && currencySymbol}
-          {get(hit, price)}
-        </p>
+          {hitPrice}
+        </>
       );
     case '€':
       return (
-        <p className="price">
-          {get(hit, price).replace(/[,.]/g, (m) => (m === ',' ? '.' : ','))}
+        <>
+          {hitPrice}
           {displayCurrency && currencySymbol}
-        </p>
+        </>
       );
     default:
       return (
-        <p className="price">
+        <>
           {displayCurrency && currencySymbol}
-          {get(hit, price)}
-        </p>
+          {hitPrice}
+        </>
       );
   }
 };

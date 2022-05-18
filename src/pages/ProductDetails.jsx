@@ -21,6 +21,7 @@ import { logoUrl as placeHolderError } from '@/config/headerConfig';
 // Import components
 import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import RelatedItem from '@/components/recommend/RelatedProducts';
+import Price from '@/components/price/price.jsx';
 
 // Algolia search client
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
@@ -36,10 +37,6 @@ import {
   shouldHaveFbtProducts,
 } from '@/config/featuresConfig';
 import { hitsConfig, PDPHitSections } from '@/config/hitsConfig';
-import {
-  currencySymbolAtom,
-  shouldDisplayCurrency,
-} from '@/config/currencyConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 // Used to send insights event on add to cart
@@ -99,7 +96,6 @@ const ProductDetails = () => {
 
   // Get hit attribute from config file
   const {
-    price,
     objectID,
     image,
     productName,
@@ -110,10 +106,6 @@ const ProductDetails = () => {
   } = hitsConfig;
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1];
-
-  // Get the current currency
-  const currency = useRecoilValue(currencySymbolAtom);
-  const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -251,8 +243,7 @@ const ProductDetails = () => {
                 }}
                 className="price"
               >
-                {get(hit, price)}
-                {displayCurrency && currency}
+                <Price hit={hit} />
               </motion.p>
             )}
           </motion.div>

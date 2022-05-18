@@ -16,10 +16,6 @@ import { hitsConfig, hitAtom } from '@/config/hitsConfig';
 import { hitsPerCarousel } from '@/config/carouselConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
-import {
-  currencySymbolAtom,
-  shouldDisplayCurrency,
-} from '@/config/currencyConfig';
 
 // In case of img loading error
 import { logoUrl as placeHolderError } from '@/config/headerConfig';
@@ -30,6 +26,7 @@ import useScreenSize from '@/hooks/useScreenSize';
 
 import get from 'lodash/get';
 
+// import Price component
 import Price from '@/components/price/price.jsx';
 
 // Build the Carousel for use on the Homepage
@@ -62,13 +59,9 @@ const Carousel = ({ hits, title }) => {
   // Navigate is used by React Router
   const navigate = useNavigate();
 
-  // Get the currency symbol according to the index language
-  const currency = useRecoilValue(currencySymbolAtom);
-
   // Hits are imported by Recoil
   const hitState = useSetRecoilState(hitAtom);
-  const displayCurrency = useRecoilValue(shouldDisplayCurrency);
-  const { price, objectID, image, productName } = hitsConfig;
+  const { objectID, image, productName } = hitsConfig;
 
   // Used by Framer Motion
   const carousel = useRef();
@@ -122,7 +115,9 @@ const Carousel = ({ hits, title }) => {
                   }}
                 >
                   <p className="name">{get(hit, productName)}</p>
-                  <Price hit={hit} />
+                  <p className="price">
+                    <Price hit={hit} />
+                  </p>
                 </div>
               </motion.div>
             );

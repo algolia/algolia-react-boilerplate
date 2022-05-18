@@ -16,6 +16,9 @@ import { Highlight } from 'react-instantsearch-dom';
 // Import heart svg
 import { Heart } from '@/assets/svg/SvgIndex';
 
+// import Price component
+import Price from '@/components/price/price.jsx';
+
 const RelatedItem = ({ item }) => {
   // Get hit attribute from config file
   const { price, image, category, productName } = hitsConfig;
