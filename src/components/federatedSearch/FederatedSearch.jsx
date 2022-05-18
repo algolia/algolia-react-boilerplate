@@ -138,7 +138,7 @@ const FederatedSearch = () => {
           )}
         </div>
         {/* If don't want this sections go into config file  */}
-        {/* {showProducts && (
+        {showProducts && (
           <div className="federatedSearch__middle">
             <Configure
               filters=""
@@ -149,18 +149,18 @@ const FederatedSearch = () => {
             />
             <Products />
           </div>
-        )} */}
+        )}
         {/* If don't want this sections go into config file  */}
-        {/* {showBlogPosts && !mobile && !tablet && (
+        {showBlogPosts && !mobile && !tablet && (
           <div className="articles federatedSearch__right">
             <Index indexName={articlesIndex}>
               <Configure hitsPerPage={1} query={query} />
               <Articles />
             </Index>
           </div>
-        )} */}
+        )}
       </div>
-      {/* <Redirect /> */}
+      <Redirect />
     </motion.div>
   );
 };

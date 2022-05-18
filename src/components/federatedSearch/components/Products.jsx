@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 // Algolia's imports
-import { connectHits } from 'react-instantsearch-dom';
+import { useHits } from 'react-instantsearch-hooks-web';
 
 // Component import
 import { ChevronRight } from '@/assets/svg/SvgIndex';
@@ -23,7 +23,8 @@ import { useNavigate } from 'react-router-dom';
 
 import get from 'lodash/get';
 
-const Hits = ({ hits }) => {
+function Products(props) {
+  const { hits } = useHits(props);
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
 
@@ -50,11 +51,9 @@ const Hits = ({ hits }) => {
         {hits.length ? (
           hits.map((hit) => {
             return (
-              <li
-                key={hit[objectID]}
-                className="products__item"
-              >
-                <div className="image-wrapper" 
+              <li key={hit[objectID]} className="products__item">
+                <div
+                  className="image-wrapper"
                   onClick={() => {
                     hitState(hit);
                     navigate(`/search/${hit[objectID]}`);
@@ -77,14 +76,12 @@ const Hits = ({ hits }) => {
           <span className="no-results__infos">No Results Found</span>
         )}
       </ul>
-      <div className="products__btn" onClick={() => { }}>
+      <div className="products__btn" onClick={() => {}}>
         <ChevronRight />
         <p onClick={() => navigate('/search')}>SHOW ALL PRODUCTS</p>
       </div>
     </div>
   );
-};
-
-const Products = connectHits(Hits);
+}
 
 export default memo(Products);
