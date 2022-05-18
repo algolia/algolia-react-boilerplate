@@ -97,6 +97,7 @@ ProductDetails.jsx
   - Colour
   - Size
   - Price
+    - The price should display correctly according to the currency. Please check the price component file where you can change the decimals as well.
 
 You can define whether you want each attribute shown by adjusting `PDPHitSections` in `/config/hitsConfig`
 
