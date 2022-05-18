@@ -5,7 +5,7 @@ import { lazily } from 'react-lazily';
 import Loader from '@/components/loader/Loader';
 
 // eslint-disable-next-line import/order
-import { Pagination, Configure, Index } from 'react-instantsearch-dom';
+import { Index, Configure } from 'react-instantsearch-hooks-web';
 
 import { useLocation } from 'react-router-dom';
 
@@ -60,6 +60,7 @@ import { hitsPerPage } from '@/config/hitsConfig';
 import { customDataByType } from '@/utils';
 
 const SrpLaptop = () => {
+  console.log('firstSrpLaptop');
   // Recoil & React states
 
   const stats = useRecoilValue(shouldHaveStats);
@@ -101,7 +102,7 @@ const SrpLaptop = () => {
         className="srp-container__facets"
       >
         <Suspense fallback={<Loader />}>
-          <GenericRefinementList />
+          {/* <GenericRefinementList /> */}
         </Suspense>
       </motion.div>
       <motion.div
@@ -115,21 +116,19 @@ const SrpLaptop = () => {
         {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
         <div className="srp-container__stats-sort">
           {stats && (
-            <Suspense fallback={<Loader />}>
-              <CustomStats />
-            </Suspense>
+            <Suspense fallback={<Loader />}>{/* <CustomStats /> */}</Suspense>
           )}
           {shouldHaveSortsAtom && (
             <Suspense fallback={<Loader />}>
-              <CustomSortBy items={labelIndex} defaultRefinement={index} />
+              {/* <CustomSortBy items={labelIndex} defaultRefinement={index} /> */}
             </Suspense>
           )}
         </div>
         {/* Refinements, to the left of the items, including a list of currently selected refinements */}
         <div className="refinement-container">
           <Suspense fallback={<Loader />}>
-            <CustomCurrentRefinements />
-            <CustomClearRefinements />
+            {/* <CustomCurrentRefinements />
+            <CustomClearRefinements /> */}
           </Suspense>
         </div>
         <Configure
@@ -153,7 +152,7 @@ const SrpLaptop = () => {
             <Index indexName={injectedContentIndex}>
               <Configure hitsPerPage={1} page={0} />
             </Index>
-            <InjectedHits
+            {/* <InjectedHits
               hitComponent={Hit}
               slots={({ resultsByIndex }) => {
                 const { noCta, salesCard } = customDataByType(
@@ -188,15 +187,15 @@ const SrpLaptop = () => {
                   },
                 ];
               }}
-            />
+            /> */}
           </Suspense>
         ) : (
           <Suspense fallback={<Loader />}>
             <CustomHitsComponent />
           </Suspense>
         )}
-        <Pagination />
-        <Redirect />
+        {/* <Pagination />
+        <Redirect /> */}
       </motion.div>
     </div>
   );

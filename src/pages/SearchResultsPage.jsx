@@ -22,13 +22,7 @@ const recommendClient = algoliarecommend(
 
 import Loader from '@/components/loader/Loader';
 
-// eslint-disable-next-line import/order
-import {
-  Configure,
-  connectStateResults,
-  Index,
-  connectSearchBox,
-} from 'react-instantsearch-dom';
+import { useHits, Configure, Index } from 'react-instantsearch-hooks-web';
 
 // Recoil state to directly access results
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -74,15 +68,16 @@ const SearchResultPage = () => {
   return (
     <>
       {/* Display the banner if the bannerSrp config is set to: true */}
-      {shouldDisplayBanners && <Banner />}
+      {/* {shouldDisplayBanners && <Banner />} */}
       {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
 
-      <NoResultsHandler>
-        <Suspense fallback={<Loader />}>
-          {(laptop || laptopXS) && <SrpLaptop />}
-          {(tablet || mobile) && <SrpMobile />}
-        </Suspense>
-      </NoResultsHandler>
+      {/* <NoResultsHandler>
+        <Suspense fallback={<Loader />}> */}
+      {/* {(laptop || laptopXS) && <SrpLaptop />} */}
+      {/* {(tablet || mobile) && <SrpMobile />} */}
+      {/* </Suspense>
+      </NoResultsHandler> */}
+      <NoResultsHandler />
     </>
   );
 };
@@ -125,7 +120,7 @@ const NoResults = memo(({ query }) => {
                   <QuerySuggestions />
                 </Index>
                 {/* Add this searchBox Invisible to refine when we click on a suggestion */}
-                <CustomSearchBox query={getQueryState} />
+                {/* <CustomSearchBox query={getQueryState} /> */}
               </div>
               {lastId && (
                 <div>
@@ -152,48 +147,64 @@ const NoResults = memo(({ query }) => {
 });
 
 // This wrapper decides when to render the NoResults component
-const NoResultsHandlerComponent = ({
-  children,
-  searchState,
-  searchResults,
-  searching,
-}) => {
-  return (
-    // If there is a search, but there are no results to display, render NoResults component
-    searchState?.query && searchResults?.nbHits === 0 ? (
-      <NoResults query={searchState.query} isSearching={searching} />
-    ) : (
-      // Otherwise, just return the search results
-      <>{children}</>
-    )
-  );
-};
+// const NoResultsHandlerComponent = ({
+//   children,
+//   searchState,
+//   searchResults,
+//   searching,
+// }) => {
+//   return (
+// If there is a search, but there are no results to display, render NoResults component
+// searchState?.query && searchResults?.nbHits === 0 ? (
+//   <NoResults query={searchState.query} isSearching={searching} />
+// ) : (
+// Otherwise, just return the search results
+//       <>{children}</>
+//     )
+//   );
+// };
 
-const NoResultsHandler = connectStateResults(NoResultsHandlerComponent);
+// const NoResultsHandler = connectStateResults(NoResultsHandlerComponent);
+
+function NoResultsHandler(props) {
+  // Handle screen resize
+  const { mobile, tablet, laptopXS, laptop } = useScreenSize();
+  const { hits } = useHits(props);
+  const length = hits.length;
+  console.log('children', hits, length);
+  return length ? (
+    <Suspense fallback={<Loader />}>
+      {(laptop || laptopXS) && <SrpLaptop />}
+      {(tablet || mobile) && <SrpMobile />}
+    </Suspense>
+  ) : (
+    <h1>Nope Length</h1>
+  );
+}
 
 // "This searchbox is virtual and will not appear in the DOM. The goal of this virtual searchbox is to refine the app by changing the query state
 // in the main IS instance when clicking on QS when we're in the noResult component"
-const SearchBox = ({ refine, query }) => {
-  const refineFunction = (queryValue) => {
-    refine(queryValue);
-  };
-  useEffect(() => {
-    refineFunction(query);
-  }, [query]);
+// const SearchBox = ({ refine, query }) => {
+//   const refineFunction = (queryValue) => {
+//     refine(queryValue);
+//   };
+//   useEffect(() => {
+//     refineFunction(query);
+//   }, [query]);
 
-  return (
-    <form noValidate action="" role="search" className="search-box-invisible">
-      <input
-        type="search"
-        value={query}
-        onChange={(event) => {
-          refine(event.currentTarget.value);
-        }}
-      />
-    </form>
-  );
-};
+//   return (
+//     <form noValidate action="" role="search" className="search-box-invisible">
+//       <input
+//         type="search"
+//         value={query}
+//         onChange={(event) => {
+//           refine(event.currentTarget.value);
+//         }}
+//       />
+//     </form>
+//   );
+// };
 
-const CustomSearchBox = connectSearchBox(SearchBox);
+// const CustomSearchBox = connectSearchBox(SearchBox);
 
 export default SearchResultPage;

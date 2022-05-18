@@ -6,6 +6,7 @@ import { connectHits } from 'react-instantsearch-dom';
 import { Hit } from './Hits';
 
 const CustomHits = ({ hits }) => {
+  console.log('CustomHits');
   return (
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
