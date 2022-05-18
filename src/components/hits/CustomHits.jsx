@@ -1,12 +1,12 @@
 // This is in the Search Results Page for both laptop and mobile windows
 
 // Import InstantSearch Functionality
-import { connectHits } from 'react-instantsearch-dom';
+import { useHits } from 'react-instantsearch-hooks-web';
 
 import { Hit } from './Hits';
 
-const CustomHits = ({ hits }) => {
-  console.log('CustomHits');
+function CustomHits(props) {
+  const { hits } = useHits(props);
   return (
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
@@ -17,8 +17,6 @@ const CustomHits = ({ hits }) => {
       </ul>
     </div>
   );
-};
+}
 
-const CustomHitsComponent = connectHits(CustomHits);
-
-export default CustomHitsComponent;
+export default CustomHits;

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { framerMotionTransition } from '@/config/animationConfig';
 
-import { Highlight } from 'react-instantsearch-dom';
+import { Highlight } from 'react-instantsearch-hooks-web';
 
 import { Heart } from '@/assets/svg/SvgIndex';
 

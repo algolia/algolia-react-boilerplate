@@ -2,7 +2,7 @@
 // Component that renders the Current Refinements (icons above the products)
 
 // Recoil State
-import { connectCurrentRefinements } from 'react-instantsearch-dom';
+import { useCurrentRefinements } from 'react-instantsearch-hooks-web';
 import { useRecoilValue } from 'recoil';
 
 // import config file for state of facets
@@ -39,7 +39,8 @@ const displayColor = (i) => {
   return newColorRefinement;
 };
 
-const CurrentRefinements = ({ items, refine, createURL }) => {
+function CurrentRefinements(props) {
+  const { items, refine, createURL } = useCurrentRefinements(props);
   const { colourHexa } = hitsConfig;
   const currencySymbol = useRecoilValue(currencySymbolAtom);
   return (
@@ -87,7 +88,7 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
             </li>
           );
         }
-
+        console.log('else', item.items);
         return (
           <li key={item.label}>
             {item.items ? (
@@ -96,7 +97,6 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
               </>
             ) : (
               <a
-                href={createURL(item.value)}
                 onClick={(event) => {
                   event.preventDefault();
                   refine(item.value);
@@ -110,9 +110,10 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
       })}
     </ul>
   );
-};
+}
 
 const CurrentRefinementGeneral = ({ item, colourHexa }) => {
+  console.log('CurrentRefinementGeneral', item);
   return (
     <ul className="refinement-container__refinementsInner">
       {item.items.map((nested) => (
@@ -131,6 +132,4 @@ const CurrentRefinementGeneral = ({ item, colourHexa }) => {
   );
 };
 
-const CustomCurrentRefinements = connectCurrentRefinements(CurrentRefinements);
-
-export default CustomCurrentRefinements;
+export default CurrentRefinements;

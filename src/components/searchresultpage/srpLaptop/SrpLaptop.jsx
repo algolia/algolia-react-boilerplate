@@ -5,7 +5,7 @@ import { lazily } from 'react-lazily';
 import Loader from '@/components/loader/Loader';
 
 // eslint-disable-next-line import/order
-import { Index, Configure } from 'react-instantsearch-hooks-web';
+import { Index, Configure, Pagination } from 'react-instantsearch-hooks-web';
 
 import { useLocation } from 'react-router-dom';
 
@@ -102,7 +102,7 @@ const SrpLaptop = () => {
         className="srp-container__facets"
       >
         <Suspense fallback={<Loader />}>
-          {/* <GenericRefinementList /> */}
+          <GenericRefinementList />
         </Suspense>
       </motion.div>
       <motion.div
@@ -120,15 +120,15 @@ const SrpLaptop = () => {
           )}
           {shouldHaveSortsAtom && (
             <Suspense fallback={<Loader />}>
-              {/* <CustomSortBy items={labelIndex} defaultRefinement={index} /> */}
+              <CustomSortBy items={labelIndex} defaultRefinement={index} />
             </Suspense>
           )}
         </div>
         {/* Refinements, to the left of the items, including a list of currently selected refinements */}
         <div className="refinement-container">
           <Suspense fallback={<Loader />}>
-            {/* <CustomCurrentRefinements />
-            <CustomClearRefinements /> */}
+            <CustomCurrentRefinements />
+            {/* <CustomClearRefinements /> */}
           </Suspense>
         </div>
         <Configure
@@ -194,8 +194,8 @@ const SrpLaptop = () => {
             <CustomHitsComponent />
           </Suspense>
         )}
-        {/* <Pagination />
-        <Redirect /> */}
+        <Pagination />
+        <Redirect />
       </motion.div>
     </div>
   );

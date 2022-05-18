@@ -6,7 +6,7 @@ import Loader from '@/components/loader/Loader';
 
 import { useState } from 'react';
 // eslint-disable-next-line import/order
-import { Configure, Index } from 'react-instantsearch-dom';
+import { Index, Configure } from 'react-instantsearch-hooks-web';
 
 import { useLocation } from 'react-router-dom';
 
