@@ -4,7 +4,7 @@
 import { atom } from 'recoil';
 
 // This const defines the logo shown on the header
-export const logoUrl = 'https://zupimages.net/up/22/13/jv0t.png';
+export const logoUrl = 'https://upload.wikimedia.org/wikipedia/commons/e/ef/Logo-algolia-nebula-blue-withspaces%402x.png';
 
 // ------------------------------------------
 // This const defines the navigation aspect of the header

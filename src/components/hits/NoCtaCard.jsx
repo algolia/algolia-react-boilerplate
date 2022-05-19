@@ -11,7 +11,7 @@ const NoCtaCard = ({ hit }) => {
       variants={framerMotionHits}
       initial="hidden"
       animate="show"
-      className="hit-list"
+      className="hit-list  srpItem"
     >
       <div className="image-wrapper">
         <img src={hit.image.desktop_url} alt="" />
