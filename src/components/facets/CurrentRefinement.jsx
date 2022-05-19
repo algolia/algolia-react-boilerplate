@@ -88,7 +88,7 @@ function CurrentRefinements(props) {
             </li>
           );
         }
-        console.log('else', item.items);
+        console.log('else', item);
         return (
           <li key={item.label}>
             {item.items ? (
@@ -96,14 +96,7 @@ function CurrentRefinements(props) {
                 <CurrentRefinementGeneral item={item} />
               </>
             ) : (
-              <a
-                onClick={(event) => {
-                  event.preventDefault();
-                  refine(item.value);
-                }}
-              >
-                {item.label}
-              </a>
+              <CurrentRefinementGeneral item={item} />
             )}
           </li>
         );
@@ -112,24 +105,29 @@ function CurrentRefinements(props) {
   );
 }
 
-const CurrentRefinementGeneral = ({ item, colourHexa }) => {
-  console.log('CurrentRefinementGeneral', item);
+function CurrentRefinementGeneral(props) {
+  const { refine } = useCurrentRefinements(props);
+  const { item, colourHexa } = props;
   return (
     <ul className="refinement-container__refinementsInner">
-      {item.items.map((nested) => (
-        <li key={nested.label}>
-          <a
-            onClick={(event) => {
-              event.preventDefault();
-              refine(nested.value);
-            }}
-          >
-            {colourHexa ? displayColor(nested.label) : nested.label}
-          </a>
-        </li>
-      ))}
+      {item.refinements.map((nested) => {
+        console.log('nested', nested.label);
+        return (
+          <li key={nested.label}>
+            <a
+              onClick={(event) => {
+                console.log('click');
+                event.preventDefault();
+                refine(nested.value);
+              }}
+            >
+              {colourHexa ? displayColor(nested.label) : nested.label}
+            </a>
+          </li>
+        );
+      })}
     </ul>
   );
-};
+}
 
 export default CurrentRefinements;
