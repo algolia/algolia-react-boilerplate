@@ -1,6 +1,6 @@
 // Component for displaying hits in teh
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Import framer-motion for animation on hits
 import { motion, AnimatePresence } from 'framer-motion';
@@ -31,10 +31,11 @@ import Badge from './Badge';
 //Import hook for store ID into local storage
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 
+
 // import Price component
 import Price from '@/components/price/price.jsx';
 
-const Hit = ({ hit }) => {
+const Hit = ({ hit, setSrpIsLoaded }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
@@ -43,6 +44,11 @@ const Hit = ({ hit }) => {
   const { objectID, image, imageAlt, category, productName } = hitsConfig;
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
+  useEffect(() => {
+    setSrpIsLoaded(true);
+
+    // return () => setSrpIsLoaded(false);
+  }, [hit]);
 
   const RankingFormulaOverlay = ({ hit }) => {
     return (

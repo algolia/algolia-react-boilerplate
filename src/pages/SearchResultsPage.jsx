@@ -3,13 +3,14 @@
 // It also renders different search results components depending on screen size
 
 // import React functionality
-import { memo, useEffect, lazy, Suspense } from 'react';
+import { memo, useEffect, lazy, Suspense, useRef, useState } from 'react';
 
 // To display if no results
 // Recommend
 import { RelatedProducts } from '@algolia/recommend-react';
 import algoliarecommend from '@algolia/recommend';
 import RelatedItem from '@/components/recommend/RelatedProducts';
+import SkeletonLoader from '@/components/searchresultpage/srpLaptop/SkeletonLoader';
 
 // Algolia search client
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
@@ -51,6 +52,7 @@ import {
   federatedSearchConfig,
   shouldHaveOpenFederatedSearch,
 } from '@/config/federatedConfig';
+import { AnimatePresence } from 'framer-motion';
 
 const SrpLaptop = lazy(() =>
   import('@/components/searchresultpage/srpLaptop/SrpLaptop')
@@ -59,9 +61,8 @@ const SrpMobile = lazy(() =>
   import('@/components/searchresultpage/srpMobile/SrpMobile')
 );
 
-const SearchResultPage = () => {
-  // Recoil & React states
-
+const SearchResultPage = ({ setIsMounted }) => {
+  const [srpIsLoaded, setSrpIsLoaded] = useState(false);
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Close federated and set value false for return without it
@@ -70,20 +71,44 @@ const SearchResultPage = () => {
 
   // Handle screen resize
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
+  const srpMounted = useRef(false);
+  useEffect(() => {
+    srpMounted.current = true;
+    setIsMounted(srpMounted.current);
+    return () => {
+      srpMounted.current = false;
+      setIsMounted(srpMounted.current);
+    };
+  }, []);
 
   return (
-    <>
+    <div ref={srpMounted} className="srp">
+      {/* Create a skeleton while page is loading */}
+      <AnimatePresence>
+        {srpIsLoaded === false && <SkeletonLoader />}
+      </AnimatePresence>
+
       {/* Display the banner if the bannerSrp config is set to: true */}
       {shouldDisplayBanners && <Banner />}
       {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
 
       <NoResultsHandler>
-        <Suspense fallback={<Loader />}>
-          {(laptop || laptopXS) && <SrpLaptop />}
-          {(tablet || mobile) && <SrpMobile />}
+        <Suspense fallback={''}>
+          {(laptop || laptopXS) && (
+            <SrpLaptop
+              setSrpIsLoaded={setSrpIsLoaded}
+              srpIsLoaded={srpIsLoaded}
+            />
+          )}
+          {(tablet || mobile) && (
+            <SrpMobile
+              setSrpIsLoaded={setSrpIsLoaded}
+              srpIsLoaded={srpIsLoaded}
+            />
+          )}
         </Suspense>
       </NoResultsHandler>
-    </>
+    </div>
   );
 };
 

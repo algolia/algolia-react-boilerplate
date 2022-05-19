@@ -10,7 +10,7 @@ export const framerMotionHits = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
   animate: { opacity: 1 },
-  transition: { duration: 0.5, delay: 0.3, ease: [0.43, 0.13, 0.23, 0.96] },
+  transition: { duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] },
 };
 
 export const framerMotionTransition = {
@@ -24,6 +24,12 @@ export const framerMotionPage = {
   exit: { opacity: 0 },
   animate: { opacity: 1 },
   transition: { duration: 1, ease: [0.43, 0.13, 0.23, 0.96] },
+};
+export const framerMotionFooter = {
+  initial: { opacity: 0 },
+  exit: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 3, delay: 1, ease: [0.43, 0.13, 0.23, 0.96] },
 };
 
 export const framerMotionFederatedContainer = {
