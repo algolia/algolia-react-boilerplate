@@ -2,7 +2,7 @@
 // Component that renders the Current Refinements (icons above the products)
 
 // Recoil State
-import { useCurrentRefinements } from 'react-instantsearch-hooks-web';
+import { useCurrentRefinements, useClearRefinements } from 'react-instantsearch-hooks-web';
 import { useRecoilValue } from 'recoil';
 
 // import config file for state of facets
@@ -106,7 +106,7 @@ function CurrentRefinements(props) {
 }
 
 function CurrentRefinementGeneral(props) {
-  const { refine } = useCurrentRefinements(props);
+  const { refine } = useClearRefinements(props);
   const { item, colourHexa } = props;
   return (
     <ul className="refinement-container__refinementsInner">
