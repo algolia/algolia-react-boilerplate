@@ -171,7 +171,6 @@ function NoResultsHandler(props) {
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
   const { hits } = useHits(props);
   const length = hits.length;
-  console.log('children', hits, length);
   return length ? (
     <Suspense fallback={<Loader />}>
       {(laptop || laptopXS) && <SrpLaptop />}

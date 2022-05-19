@@ -60,7 +60,6 @@ import { hitsPerPage } from '@/config/hitsConfig';
 import { customDataByType } from '@/utils';
 
 const SrpLaptop = () => {
-  console.log('firstSrpLaptop');
   // Recoil & React states
 
   const stats = useRecoilValue(shouldHaveStats);

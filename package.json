@@ -33,6 +33,7 @@
     "@reactour/tour": "^2.10.3",
     "@vitejs/plugin-react": "^1.1.4",
     "algoliasearch": "4.12.1",
+    "codesandbox": "^2.2.3",
     "css-loader": "^6.5.1",
     "eslint-config-algolia": "^20.0.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
