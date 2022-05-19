@@ -83,6 +83,7 @@ const SearchResultPage = ({ setIsMounted }) => {
 
   return (
     <div ref={srpMounted} className="srp">
+      {/* Create a skeleton while page is loading */}
       <AnimatePresence>
         {srpIsLoaded === false && <SkeletonLoader />}
       </AnimatePresence>
