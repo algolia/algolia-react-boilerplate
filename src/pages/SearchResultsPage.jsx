@@ -3,13 +3,14 @@
 // It also renders different search results components depending on screen size
 
 // import React functionality
-import { memo, useEffect, lazy, Suspense, useRef } from 'react';
+import { memo, useEffect, lazy, Suspense, useRef, useState } from 'react';
 
 // To display if no results
 // Recommend
 import { RelatedProducts } from '@algolia/recommend-react';
 import algoliarecommend from '@algolia/recommend';
 import RelatedItem from '@/components/recommend/RelatedProducts';
+import SkeletonLoader from '@/components/searchresultpage/srpLaptop/SkeletonLoader';
 
 // Algolia search client
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
@@ -51,6 +52,7 @@ import {
   federatedSearchConfig,
   shouldHaveOpenFederatedSearch,
 } from '@/config/federatedConfig';
+import { AnimatePresence } from 'framer-motion';
 
 const SrpLaptop = lazy(() =>
   import('@/components/searchresultpage/srpLaptop/SrpLaptop')
@@ -60,8 +62,7 @@ const SrpMobile = lazy(() =>
 );
 
 const SearchResultPage = ({ setIsMounted }) => {
-  // Recoil & React states
-
+  const [srpIsLoaded, setSrpIsLoaded] = useState(false);
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Close federated and set value false for return without it
@@ -81,15 +82,29 @@ const SearchResultPage = ({ setIsMounted }) => {
   }, []);
 
   return (
-    <div ref={srpMounted}>
+    <div ref={srpMounted} className="srp">
+      <AnimatePresence>
+        {srpIsLoaded === false && <SkeletonLoader />}
+      </AnimatePresence>
+
       {/* Display the banner if the bannerSrp config is set to: true */}
       {shouldDisplayBanners && <Banner />}
       {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
 
       <NoResultsHandler>
         <Suspense fallback={''}>
-          {(laptop || laptopXS) && <SrpLaptop />}
-          {(tablet || mobile) && <SrpMobile />}
+          {(laptop || laptopXS) && (
+            <SrpLaptop
+              setSrpIsLoaded={setSrpIsLoaded}
+              srpIsLoaded={srpIsLoaded}
+            />
+          )}
+          {(tablet || mobile) && (
+            <SrpMobile
+              setSrpIsLoaded={setSrpIsLoaded}
+              srpIsLoaded={srpIsLoaded}
+            />
+          )}
         </Suspense>
       </NoResultsHandler>
     </div>

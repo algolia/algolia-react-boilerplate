@@ -45,7 +45,6 @@ import usePreventScrolling from './hooks/usePreventScrolling';
 export const Main = ({ isLoaded }) => {
   const index = useRecoilValue(mainIndex);
   const [isMounted, setIsMounted] = useState(false);
-  console.log(isMounted);
   // const [index, setIndex] = useState(mainIndex);
   const location = useLocation();
 

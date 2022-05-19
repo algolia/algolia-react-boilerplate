@@ -1,5 +1,5 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { lazy, useState, Suspense } from 'react';
+import { lazy, useState, Suspense, useEffect } from 'react';
 import { lazily } from 'react-lazily';
 
 import Loader from '@/components/loader/Loader';
@@ -60,7 +60,7 @@ import { hitsPerPage } from '@/config/hitsConfig';
 // Import Config File
 import { customDataByType } from '@/utils';
 
-const SrpLaptop = () => {
+const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   // Recoil & React states
 
   const stats = useRecoilValue(shouldHaveStats);
@@ -93,8 +93,16 @@ const SrpLaptop = () => {
 
   return (
     <>
-      <SkeletonLoader />
-      <div className="srp-container">
+      <motion.div
+        className={`${
+          srpIsLoaded === false ? 'srp-hidden' : 'srp-active'
+        } srp-container`}
+        variants={framerMotionPage}
+        initial={framerMotionPage.initial}
+        animate={framerMotionPage.animate}
+        exit={framerMotionPage.exit}
+        transition={framerMotionPage.transition}
+      >
         <motion.div
           variants={framerMotionFacet}
           initial={framerMotionFacet.initial}
@@ -159,6 +167,7 @@ const SrpLaptop = () => {
                 <Configure hitsPerPage={1} page={0} />
               </Index>
               <InjectedHits
+                setSrpIsLoaded={setSrpIsLoaded}
                 hitComponent={Hit}
                 slots={({ resultsByIndex }) => {
                   const { noCta, salesCard } = customDataByType(
@@ -203,7 +212,7 @@ const SrpLaptop = () => {
           <Pagination />
           <Redirect />
         </motion.div>
-      </div>
+      </motion.div>
     </>
   );
 };

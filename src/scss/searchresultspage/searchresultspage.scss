@@ -7,7 +7,9 @@
 // ------------------------------------------
 // Container
 // ------------------------------------------
-
+.srp{
+  position: relative;
+}
 .srp-container {
   width: 95%;
   height: 100%;
@@ -109,6 +111,26 @@
       }
     }
   }
+}
+
+.srp-hidden{
+  opacity: 0;
+  visibility: hidden;
+}
+
+.srp-active{
+  opacity: 0;
+  animation: fadeIn 3s forwards cubic-bezier(0.43, 0.13, 0.23, 0.96);
+}
+
+@keyframes fadeIn {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+  
 }
 
 // ------------------------------------------
