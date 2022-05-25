@@ -51,11 +51,10 @@ function CustomSearchBox(props) {
   const rulesApplied = useSetRecoilState(rulesAtom);
 
   const refineFunction = (query) => {
+    // Empty array of rules on each Keystrokes
     rulesApplied([]);
     setQueryState(query);
     refine(query);
-    // console.log(query);
-    // Empty array of rules on each Keystrokes
   };
 
   return (

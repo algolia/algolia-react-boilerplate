@@ -1,7 +1,7 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
 
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useRef, useEffect } from 'react';
 
 import Loader from '@/components/loader/Loader';
 
@@ -39,11 +39,21 @@ import {
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
-const HomePage = () => {
+const HomePage = ({ setIsMounted }) => {
   // Boolean value which determines if federated search is shown or not, default is false
   const isFederated = useRecoilValue(shouldHaveFederatedSearch);
   const isCarousel = useRecoilValue(shouldHaveCarousels);
   const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch);
+  const HomePage = useRef(false);
+
+  useEffect(() => {
+    HomePage.current = true;
+    setIsMounted(HomePage.current);
+    return () => {
+      HomePage.current = false;
+      setIsMounted(HomePage.current);
+    };
+  }, []);
 
   // Prevent body from scrolling when panel is open
   // usePreventScrolling(isFederatedOpen);
@@ -62,6 +72,7 @@ const HomePage = () => {
       exit={framerMotionPage.exit}
       // duration, smoothness etc.
       transition={framerMotionPage.transition}
+      ref={HomePage}
     >
       {isFederated && isFederatedOpen && (
         <AnimatePresence>

@@ -7,12 +7,13 @@ import { Hit } from './Hits';
 
 function CustomHits(props) {
   const { hits } = useHits(props);
+  const { setSrpIsLoaded } = props;
   return (
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
         {hits.map((hit, i) => {
           // Wrap the hit info in an animation, and click functionality to view the product
-          return <Hit hit={hit} key={i} />;
+          return <Hit hit={hit} key={i} setSrpIsLoaded={setSrpIsLoaded} />;
         })}
       </ul>
     </div>

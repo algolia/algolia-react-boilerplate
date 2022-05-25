@@ -1,6 +1,6 @@
-// TODO: why is this NOT export default?
+// Component for displaying hits in teh
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Import framer-motion for animation on hits
 import { motion, AnimatePresence } from 'framer-motion';
@@ -23,10 +23,6 @@ import { framerMotionHits } from '@/config/animationConfig';
 import { hitAtom } from '@/config/hitsConfig';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
-import {
-  currencySymbolAtom,
-  shouldDisplayCurrency,
-} from '@/config/currencyConfig';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
@@ -35,20 +31,24 @@ import Badge from './Badge';
 //Import hook for store ID into local storage
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 
-const Hit = ({ hit }) => {
+
+// import Price component
+import Price from '@/components/price/price.jsx';
+
+const Hit = ({ hit, setSrpIsLoaded }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Get currency symbol
-  const currency = useRecoilValue(currencySymbolAtom);
-  const displayCurrency = useRecoilValue(shouldDisplayCurrency);
-
   // Get hit attribute from config file
-  const { price, objectID, image, imageAlt, category, productName } =
-    hitsConfig;
+  const { objectID, image, imageAlt, category, productName } = hitsConfig;
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
+  useEffect(() => {
+    setSrpIsLoaded(true);
+
+    // return () => setSrpIsLoaded(false);
+  }, [hit]);
 
   const RankingFormulaOverlay = ({ hit }) => {
     return (
@@ -146,9 +146,8 @@ const Hit = ({ hit }) => {
             <Highlight hit={hit} attribute={productName} />
           </h3>
           <div className="srpItem__infos__down">
-            <p className="srpItem__infos__down__price">
-              {get(hit, price)}
-              {displayCurrency && currency}
+            <p className="price">
+              <Price hit={hit} />
             </p>
           </div>
         </div>

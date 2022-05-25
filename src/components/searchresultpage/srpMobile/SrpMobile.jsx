@@ -64,7 +64,7 @@ import { hitsPerPage } from '@/config/hitsConfig';
 // Import Config File
 import { customDataByType } from '@/utils';
 
-const SrpMobile = () => {
+const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
   // Recoil & React states
   const [injected, setInjected] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -98,7 +98,11 @@ const SrpMobile = () => {
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
 
   return (
-    <div className="srp-container-mobile">
+    <div
+      className={`${
+        srpIsLoaded === false ? 'srp-hidden' : 'srp-active'
+      } srp-container-mobile`}
+    >
       <div
         className={`${
           isMenuOpen ? 'facets-slider-active' : 'facets-slider-inactive'
@@ -162,6 +166,7 @@ const SrpMobile = () => {
               <Configure hitsPerPage={1} page={0} />
             </Index>
             <InjectedHits
+              setSrpIsLoaded={setSrpIsLoaded}
               hitComponent={Hit}
               slots={({ resultsByIndex }) => {
                 const { noCta, salesCard } = customDataByType(
