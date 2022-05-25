@@ -21,7 +21,7 @@ import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
 import { hitAtom } from '@/config/hitsConfig';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
 
 // React-router import
@@ -30,7 +30,6 @@ import Badge from './Badge';
 
 //Import hook for store ID into local storage
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
-
 
 // import Price component
 import Price from '@/components/price/price.jsx';

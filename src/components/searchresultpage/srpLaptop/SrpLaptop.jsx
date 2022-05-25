@@ -166,7 +166,7 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
               <Index indexName={injectedContentIndex}>
                 <Configure hitsPerPage={1} page={0} />
               </Index>
-              {/* <InjectedHits
+              <InjectedHits
               hitComponent={Hit}
               slots={({ resultsByIndex }) => {
                 const { noCta, salesCard } = customDataByType(
@@ -189,20 +189,19 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
                     slotComponent: SalesCard,
                   },
                   {
-                    // eslint-disable-next-line no-unused-expressions
-                    salesCard && setInjected(true);
-                  }
-                  return [
-                    {
-                      getHits: () => [noCta],
-                      injectAt: noCta ? noCta.position : null,
-                      slotComponent: NoCtaCard,
+                    injectAt: ({ position }) => position === 2,
+                    // eslint-disable-next-line no-shadow
+                    getHits: ({ resultsByIndex }) => {
+                      setInjected(true);
+                      return resultsByIndex[injectedContentIndex]
+                        ? resultsByIndex[injectedContentIndex].hits || []
+                        : [];
                     },
                     slotComponent: InfluencerCard,
                   },
                 ];
               }}
-            /> */}
+            />
             </Suspense>
           ) : (
             <Suspense fallback={<Loader />}>
