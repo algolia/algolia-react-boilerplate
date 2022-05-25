@@ -141,7 +141,7 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
         <div className="refinement-container">
           <Suspense fallback={<Loader />}>
             <CustomCurrentRefinements />
-            <CustomClearRefinements />
+            {/* <CustomClearRefinements /> */}
           </Suspense>
         </div>
         <Configure
