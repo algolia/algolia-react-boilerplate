@@ -167,41 +167,42 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
                 <Configure hitsPerPage={1} page={0} />
               </Index>
               <InjectedHits
-              hitComponent={Hit}
-              slots={({ resultsByIndex }) => {
-                const { noCta, salesCard } = customDataByType(
-                  resultsByIndex?.[index]?.userData
-                );
-                // eslint-disable-next-line no-lone-blocks
-                {
-                  // eslint-disable-next-line no-unused-expressions
-                  salesCard && setInjected(true);
-                }
-                return [
+                hitComponent={Hit}
+                slots={({ resultsByIndex }) => {
+                  console.log('InjectedHits');
+                  const { noCta, salesCard } = customDataByType(
+                    resultsByIndex?.[index]?.userData
+                  );
+                  // eslint-disable-next-line no-lone-blocks
                   {
-                    getHits: () => [noCta],
-                    injectAt: noCta ? noCta.position : null,
-                    slotComponent: NoCtaCard,
-                  },
-                  {
-                    getHits: () => [salesCard],
-                    injectAt: salesCard ? salesCard.position : null,
-                    slotComponent: SalesCard,
-                  },
-                  {
-                    injectAt: ({ position }) => position === 2,
-                    // eslint-disable-next-line no-shadow
-                    getHits: ({ resultsByIndex }) => {
-                      setInjected(true);
-                      return resultsByIndex[injectedContentIndex]
-                        ? resultsByIndex[injectedContentIndex].hits || []
-                        : [];
+                    // eslint-disable-next-line no-unused-expressions
+                    salesCard && setInjected(true);
+                  }
+                  return [
+                    {
+                      getHits: () => [noCta],
+                      injectAt: noCta ? noCta.position : null,
+                      slotComponent: NoCtaCard,
                     },
-                    slotComponent: InfluencerCard,
-                  },
-                ];
-              }}
-            />
+                    {
+                      getHits: () => [salesCard],
+                      injectAt: salesCard ? salesCard.position : null,
+                      slotComponent: SalesCard,
+                    },
+                    {
+                      injectAt: ({ position }) => position === 2,
+                      // eslint-disable-next-line no-shadow
+                      getHits: ({ resultsByIndex }) => {
+                        setInjected(true);
+                        return resultsByIndex[injectedContentIndex]
+                          ? resultsByIndex[injectedContentIndex].hits || []
+                          : [];
+                      },
+                      slotComponent: InfluencerCard,
+                    },
+                  ];
+                }}
+              />
             </Suspense>
           ) : (
             <Suspense fallback={<Loader />}>
