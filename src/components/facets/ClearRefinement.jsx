@@ -3,13 +3,13 @@ import { useClearRefinements } from 'react-instantsearch-hooks-web';
 
 function CustomClearRefinements(props) {
   const { canRefine, refine } = useClearRefinements(props);
-  console.log(canRefine);
+
   // if there are refinements, show the button
   return canRefine ? (
     <button
       className="button-clear-refinement"
-      onClick={() => refine(items)}
-      disabled={!items}
+      onClick={() => refine('')}
+      // disabled={!items}
     >
       Clear all refinements
     </button>
