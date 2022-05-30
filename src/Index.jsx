@@ -5,7 +5,7 @@ import { TourProvider } from '@reactour/tour';
 
 import App from './App';
 
-import { steps } from '@/config/demoTourConfig'
+import { steps } from '@/config/demoTourConfig';
 
 ReactDOM.render(
   // React Tour

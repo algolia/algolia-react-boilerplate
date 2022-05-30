@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 module.exports = {
-  extends: ['algolia', 'algolia/react'],
+  // Comment the Algolia EsLint Config too strict
+  // extends: ['algolia', 'algolia/react'],
   parser: '@babel/eslint-parser',
   rules: {
     'import/prefer-default-export': 'off',
