@@ -52,7 +52,7 @@ export const shouldHavePersona = atom({
 
 export const shouldHaveInjectedHits = atom({
   key: 'shouldHaveInjectedHits',
-  default: true,
+  default: false,
 });
 
 export const shouldHaveFederatedSearch = atom({

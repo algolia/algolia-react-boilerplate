@@ -4,7 +4,7 @@
 import { hitsConfig } from '@/config/hitsConfig';
 
 //  Import highlight widget from InstantSearch library
-import { Highlight } from 'react-instantsearch-dom';
+import { Highlight } from 'react-instantsearch-hooks-web';
 
 // Import heart svg
 import { Heart } from '@/assets/svg/SvgIndex';
