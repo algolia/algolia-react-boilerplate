@@ -5,13 +5,13 @@ import { connectHits } from 'react-instantsearch-dom';
 
 import { Hit } from './Hits';
 
-const CustomHits = ({ hits }) => {
+const CustomHits = ({ hits, setSrpIsLoaded }) => {
   return (
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
         {hits.map((hit, i) => {
           // Wrap the hit info in an animation, and click functionality to view the product
-          return <Hit hit={hit} key={i} />;
+          return <Hit hit={hit} key={i} setSrpIsLoaded={setSrpIsLoaded} />;
         })}
       </ul>
     </div>
