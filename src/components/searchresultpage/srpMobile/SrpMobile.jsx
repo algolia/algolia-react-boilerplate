@@ -205,7 +205,7 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
           </Suspense>
         ) : (
           <Suspense fallback={<Loader />}>
-            <CustomHitsComponent />
+            <CustomHitsComponent setSrpIsLoaded={setSrpIsLoaded} />
           </Suspense>
         )}
         <Redirect />

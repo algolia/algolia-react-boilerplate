@@ -206,7 +206,7 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
             </Suspense>
           ) : (
             <Suspense fallback={''}>
-              <CustomHitsComponent />
+              <CustomHitsComponent setSrpIsLoaded={setSrpIsLoaded} />
             </Suspense>
           )}
           <Pagination />
