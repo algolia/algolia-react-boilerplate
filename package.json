@@ -6,7 +6,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "serve": "vite preview",
+    "serve": "vite",
     "format": "prettier --write .",
     "test": "npm run lint",
     "lint": "eslint .",
