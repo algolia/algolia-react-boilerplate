@@ -9,8 +9,8 @@ import aa from 'search-insights';
 
 // This export represents the information needed for the Algolia API client
 export const searchClientCreds = {
-  APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
-  appID: '853MYZ81KY',
+  APIKey: '4c9a5c0a6506634edf6437e7c8ef1e32',
+  appID: 'RSBCBF0EG8',
 };
 
 // This export is a single instance Algolia API client
@@ -22,7 +22,7 @@ export const searchClient = algoliasearch(
 // Please ignore this atom - DO NOT TOUCH
 export const mainIndex = atom({
   key: 'mainIndex', // unique ID (with respect to other atoms/selectors)
-  default: 'flagship_fashion', // default value (aka initial value)
+  default: 'andertons_demo', // default value (aka initial value)
 });
 
 // Initialise insights client
