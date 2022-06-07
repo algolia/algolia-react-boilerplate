@@ -1,7 +1,7 @@
 {
-  "name": "demo-engineer-react-boilerplateV2",
+  "name": "algolia-react-boilerplate",
   "version": "1.0.0",
-  "description": "A boilerplate for Custom Demo",
+  "description": "A boilerplate for Algolia Demos",
   "main": "index.js",
   "scripts": {
     "start": "vite",
@@ -14,15 +14,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/algolia/demo-engineer-react-boilerplateV2.git"
+    "url": "git+https://github.com/algolia/algolia-react-boilerplate.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/algolia/demo-engineer-react-boilerplateV2/issues"
+    "url": "https://github.com/algolia/algolia-react-boilerplate/issues"
   },
-  "homepage": "https://github.com/algolia/demo-engineer-react-boilerplateV2#readme",
+  "homepage": "https://github.com/algolia/algolia-react-boilerplate#readme",
   "dependencies": {
     "@algolia/react-instantsearch-widget-color-refinement-list": "^1.4.5",
     "@algolia/recommend": "^4.12.2",
