@@ -5,6 +5,7 @@
 import {
   RelatedProducts,
   FrequentlyBoughtTogether,
+  TrendingItems
 } from '@algolia/recommend-react';
 import algoliarecommend from '@algolia/recommend';
 
@@ -77,6 +78,9 @@ const ProductDetails = () => {
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
   );
+
+  const shouldHaveTrendingProductsValue = useRecoilValue(shouldHaveTrendingProducts);
+  
   const shouldHaveFbtProductsValue = useRecoilValue(shouldHaveFbtProducts);
 
   // Close federated and set value false for return without it
@@ -249,8 +253,18 @@ const ProductDetails = () => {
           </motion.div>
         </div>
       </div>
-      {/* Render both Recommend components- Related Products and Frequently Bought Together */}
+      {/* Render three Recommend components - Related Products, Frequently Bought Together, Trending Products */}
       <div className="recommend">
+      {shouldHaveTrendingProductsValue && (
+          <div>
+            <h3>Trending Products</h3>
+            <TrendingItems
+              recommendClient={recommendClient}
+              indexName={index}
+              itemComponent={RelatedItem}
+            />
+          </div>
+        )}
         {shouldHaveRelatedProductsValue && (
           <div>
             <h3>Related Products</h3>
