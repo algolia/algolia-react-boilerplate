@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { atom, useRecoilState } from 'recoil';
+import { atom, useSetRecoilState } from 'recoil';
 
 // Should we show the demo tour in this demo
 export const shouldShowDemoTour = atom({
@@ -21,7 +20,7 @@ export const tourStepAtom = atom({
 // Documentation here: https://github.com/elrumordelaluz/reactour/tree/master/packages/tour#steps-steptype
 export const useSteps = () => {
   // Get the tour controller
-  const [tourStep, setTourStep] = useRecoilState(tourStepAtom);
+  const setTourStep = useSetRecoilState(tourStepAtom);
 
   return [
     {
@@ -50,14 +49,41 @@ export const useSteps = () => {
         controls: () => ({ display: 'none' }),
       },
       stepInteraction: true,
-      action: () => {
-        console.log('yey!');
+      action: (searchbox) => {
+        const input = searchbox.querySelector('input');
 
-        setTimeout(() => {
-          setTourStep((current) => current + 1);
-        }, 600);
+        // Remember the current step
+        let stepCache = null;
+
+        // Use setter to get access to the real current step
+        setTourStep((currentStep) => (stepCache = currentStep));
+
+        // Listen for user click
+        function passStepOnClick() {
+          console.log('ye boy');
+
+          setTourStep((currentStep) => {
+            // Avoid passing the step in a later step
+            console.log(stepCache, currentStep);
+
+            if (stepCache == currentStep) return currentStep + 1;
+            else return currentStep;
+          });
+
+          // Also remove listener on trigger
+          input.removeEventListener('click', passStepOnClick);
+        }
+
+        input.addEventListener('click', passStepOnClick);
       },
     },
+    // {
+    //   selector: '.federatedSearch',
+    //   content:
+    //     'Here is the federated search experience — it provides a lightning fast access to our unified search experience',
+    //   // Ensure fed search opens in this step
+    //   action: () => {},
+    // },
     {
       selector: '.ais-VoiceSearch',
       content: 'This is VoiceSearch - search by saying something',
