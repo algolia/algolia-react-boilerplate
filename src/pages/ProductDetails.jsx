@@ -39,6 +39,7 @@ import {
   shouldHaveTrendingProducts,
   shouldHaveOpenFederatedSearch
 } from '@/config/featuresConfig';
+
 import { hitsConfig, PDPHitSections } from '@/config/hitsConfig';
 
 // Used to send insights event on add to cart

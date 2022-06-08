@@ -104,6 +104,7 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
 - Recommend components
   - Related Products
   - Frequently Bought Together
+  - Trending Products
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
 
@@ -256,7 +257,7 @@ To have the best UI, we defined the no results page with 3 parts:
 
 - First we just display the wrong query ex: yellow pant nike with an apologize message.
 - Secondly we incorporate the query suggestions to help the customer on navigation behaviour.
-- Third we stored, if the person already go on our website, his previous articles see. Them if he types a wrong query, we use Recomment and Related product with his last article seen, to create a carousel.
+- Third we stored, if the person already go on our website, his previous articles see. Them if he types a wrong query, we use Recommend and Related product with his last article seen, to create a carousel.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👩‍💼🧑‍💼 Personas</h3>
 
