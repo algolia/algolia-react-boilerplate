@@ -36,10 +36,10 @@ import { hitAtom } from '@/config/hitsConfig';
 import {
   shouldHaveRelatedProducts,
   shouldHaveFbtProducts,
+  shouldHaveTrendingProducts,
+  shouldHaveOpenFederatedSearch
 } from '@/config/featuresConfig';
 import { hitsConfig, PDPHitSections } from '@/config/hitsConfig';
-import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
-import { shouldHaveTrendingProducts } from '@/config/featuresConfig';
 
 // Used to send insights event on add to cart
 import { personaSelectedAtom } from '@/config/personaConfig';
