@@ -84,15 +84,15 @@ const SearchResultPage = ({ setIsMounted }) => {
   return (
     <div ref={srpMounted} className="srp">
       {/* Create a skeleton while page is loading */}
-      <AnimatePresence>
-        {srpIsLoaded === false && <SkeletonLoader />}
-      </AnimatePresence>
-
-      {/* Display the banner if the bannerSrp config is set to: true */}
-      {shouldDisplayBanners && <Banner />}
-      {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
-
       <NoResultsHandler>
+        <AnimatePresence>
+          {srpIsLoaded === false && <SkeletonLoader />}
+        </AnimatePresence>
+
+        {/* Display the banner if the bannerSrp config is set to: true */}
+        {shouldDisplayBanners && <Banner />}
+        {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
+
         <Suspense fallback={''}>
           {(laptop || laptopXS) && (
             <SrpLaptop
