@@ -5,7 +5,7 @@
 import {
   RelatedProducts,
   FrequentlyBoughtTogether,
-  TrendingItems
+  TrendingItems,
 } from '@algolia/recommend-react';
 import algoliarecommend from '@algolia/recommend';
 
@@ -39,6 +39,7 @@ import {
 } from '@/config/featuresConfig';
 import { hitsConfig, PDPHitSections } from '@/config/hitsConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+import { shouldHaveTrendingProducts } from '@/config/featuresConfig';
 
 // Used to send insights event on add to cart
 import { personaSelectedAtom } from '@/config/personaConfig';
@@ -79,8 +80,10 @@ const ProductDetails = () => {
     shouldHaveRelatedProducts
   );
 
-  const shouldHaveTrendingProductsValue = useRecoilValue(shouldHaveTrendingProducts);
-  
+  const shouldHaveTrendingProductsValue = useRecoilValue(
+    shouldHaveTrendingProducts
+  );
+
   const shouldHaveFbtProductsValue = useRecoilValue(shouldHaveFbtProducts);
 
   // Close federated and set value false for return without it
@@ -255,7 +258,7 @@ const ProductDetails = () => {
       </div>
       {/* Render three Recommend components - Related Products, Frequently Bought Together, Trending Products */}
       <div className="recommend">
-      {shouldHaveTrendingProductsValue && (
+        {shouldHaveTrendingProductsValue && (
           <div>
             <h3>Trending Products</h3>
             <TrendingItems
