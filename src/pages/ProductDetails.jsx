@@ -27,6 +27,9 @@ import Price from '@/components/price/price.jsx';
 // Algolia search client
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
 
+import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
+
+
 // React router import
 import { useNavigate } from 'react-router-dom';
 
@@ -36,11 +39,10 @@ import { hitAtom } from '@/config/hitsConfig';
 import {
   shouldHaveRelatedProducts,
   shouldHaveFbtProducts,
-  shouldHaveTrendingProducts,
-  shouldHaveOpenFederatedSearch
+  shouldHaveTrendingProducts
 } from '@/config/featuresConfig';
-
 import { hitsConfig, PDPHitSections } from '@/config/hitsConfig';
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 // Used to send insights event on add to cart
 import { personaSelectedAtom } from '@/config/personaConfig';
@@ -267,6 +269,7 @@ const ProductDetails = () => {
               indexName={index}
               itemComponent={RelatedItem}
               maxRecommendations={5}
+              view={HorizontalSlider}
             />
           </div>
         )}

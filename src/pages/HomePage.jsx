@@ -1,6 +1,14 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
 
+import {
+  TrendingItems,
+} from '@algolia/recommend-react';
+import algoliarecommend from '@algolia/recommend';
+
+// Algolia search client
+import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
+
 import { lazy, Suspense, useRef, useEffect } from 'react';
 
 import Loader from '@/components/loader/Loader';
@@ -27,6 +35,9 @@ const FederatedSearch = lazy(() =>
   import('@/components/federatedSearch/FederatedSearch')
 );
 const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
+import RelatedItem from '@/components/recommend/RelatedProducts';
+import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
+
 
 // should carousel be shown or not and config for carousel
 import { carouselConfig } from '@/config/carouselConfig';
@@ -35,16 +46,28 @@ import { carouselConfig } from '@/config/carouselConfig';
 import {
   shouldHaveFederatedSearch,
   shouldHaveCarousels,
+  shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 const HomePage = ({ setIsMounted }) => {
+  // Get the main index
+  const index = useRecoilValue(mainIndex);
+
   // Boolean value which determines if federated search is shown or not, default is false
   const isFederated = useRecoilValue(shouldHaveFederatedSearch);
   const isCarousel = useRecoilValue(shouldHaveCarousels);
   const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch);
   const HomePage = useRef(false);
+  const shouldHaveTrendingProductsValue = useRecoilValue(
+    shouldHaveTrendingProducts
+  );
+
+  const recommendClient = algoliarecommend(
+    searchClientCreds.appID,
+    searchClientCreds.APIKey
+  );
 
   useEffect(() => {
     HomePage.current = true;
@@ -94,6 +117,22 @@ const HomePage = ({ setIsMounted }) => {
             <HomeCarousel context={carousel.context} title={carousel.title} />
           </Suspense>
         ))}
+
+      {/* Render Recommend component - Trending Products */}
+      <div className="recommend">
+        {shouldHaveTrendingProductsValue && (
+          <div>
+            <h3>Trending Products</h3>
+            <TrendingItems
+              recommendClient={recommendClient}
+              indexName={index}
+              itemComponent={RelatedItem}
+              maxRecommendations={5}
+              view={HorizontalSlider}
+            />
+          </div>
+        )}
+      </div>
 
       {homepage_1 ? <img src={homepage_1} alt="" /> : null}
 
