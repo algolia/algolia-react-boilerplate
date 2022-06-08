@@ -37,6 +37,7 @@ const FederatedSearch = lazy(() =>
 const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
 import RelatedItem from '@/components/recommend/RelatedProducts';
 import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
+import '@algolia/ui-components-horizontal-slider-theme';
 
 
 // should carousel be shown or not and config for carousel
