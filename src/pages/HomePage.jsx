@@ -139,13 +139,12 @@ const HomePage = ({ setIsMounted }) => {
               itemComponent={RelatedItem}
               maxRecommendations={trendingConfig.maxRecommendations}
               view={HorizontalSlider}
-              headerComponent={TrendingSliderTitle}
+              headerComponent={() => <h3>{trendingConfig.title}</h3>}
               threshold={trendingConfig.threshold}
             />
           </div>
         )}
       </div>
-
 
       {homepage_1 ? <img src={homepage_1} alt="" /> : null}
 
@@ -153,15 +152,6 @@ const HomePage = ({ setIsMounted }) => {
     </motion.div>
   );
 };
-
-
-function TrendingSliderTitle() {
-  return (
-    <h3>
-      {trendingConfig.title}
-    </h3>
-  );
-}
 
 export default HomePage;
 
