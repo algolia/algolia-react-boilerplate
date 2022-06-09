@@ -6,7 +6,6 @@ import algoliarecommend from '@algolia/recommend';
 import {
   RelatedProducts,
   FrequentlyBoughtTogether,
-  TrendingItems,
 } from '@algolia/recommend-react';
 
 // framer-motion
@@ -29,7 +28,6 @@ import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 import {
   shouldHaveRelatedProducts,
   shouldHaveFbtProducts,
-  shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { logoUrl as placeHolderError } from '@/config/headerConfig';
@@ -78,10 +76,6 @@ const ProductDetails = () => {
 
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
-  );
-
-  const shouldHaveTrendingProductsValue = useRecoilValue(
-    shouldHaveTrendingProducts
   );
 
   const shouldHaveFbtProductsValue = useRecoilValue(shouldHaveFbtProducts);

@@ -25,7 +25,6 @@ import { useRecoilValue } from 'recoil';
 import homepage_1 from '../assets/homepage/homepage_1.png';
 import homepage_2 from '../assets/homepage/homepage_2.png';
 
-import usePreventScrolling from '@/hooks/usePreventScrolling';
 
 // components import
 const CustomHomeBanners = lazy(() =>
@@ -36,7 +35,10 @@ const FederatedSearch = lazy(() =>
 );
 const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
 import RelatedItem from '@/components/recommend/RelatedProducts';
+
 import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
+
+// styles for Recommend HorizontalSlider
 import '@algolia/ui-components-horizontal-slider-theme';
 
 
@@ -61,10 +63,13 @@ const HomePage = ({ setIsMounted }) => {
   const isCarousel = useRecoilValue(shouldHaveCarousels);
   const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch);
   const HomePage = useRef(false);
+
+  // Boolean value which determines if federated search is shown or not, default is false
   const shouldHaveTrendingProductsValue = useRecoilValue(
     shouldHaveTrendingProducts
   );
 
+  // define the client for using Recommend
   const recommendClient = algoliarecommend(
     searchClientCreds.appID,
     searchClientCreds.APIKey
@@ -119,7 +124,7 @@ const HomePage = ({ setIsMounted }) => {
           </Suspense>
         ))}
 
-      {/* Render Recommend component - Trending Products */}
+      {/* Render Recommend component - Trending Products Slider */}
       <div className="recommend">
         {shouldHaveTrendingProductsValue && (
           <div>
@@ -128,7 +133,7 @@ const HomePage = ({ setIsMounted }) => {
               recommendClient={recommendClient}
               indexName={index}
               itemComponent={RelatedItem}
-              maxRecommendations={5}
+              maxRecommendations={10}
               view={HorizontalSlider}
             />
           </div>
