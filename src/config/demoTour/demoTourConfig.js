@@ -78,9 +78,21 @@ export const useSteps = () => {
       position: 'center',
     },
     {
+      // I want to select .homepage but reactour moves the window if you choose it.
+      // selector: '.overlay',
+      content: 'This is the Homepage. It has banners, and carousels which you can customise.',
+      position: 'center',
+      // This component should be positioned just above the homepage component, ie: covering the navigation panel
+      // styles: {}
+    },
+    {
+      selector: '.home-carousel',
+      content: 'This is a carousel, which can be a collection, or it can use our powerful Recommend AI to show personalised products for each user, as well as Trending products.'
+    },
+    {
       selector: '.searchbox-container',
       content:
-        'This is the searchbox. It offers a unified search experience, which allows you to search for anything you want: products, brands, articles',
+        'This is the searchbox. It offers a unified search experience, which allows you to search for anything you want: products, brands, articles.',
       // action: (searchbox) => {
       //   const input = searchbox.querySelector('input');
 
@@ -103,7 +115,7 @@ export const useSteps = () => {
     {
       // Names are useful for calling the getStepIndex method
       name: 'openFedSearch',
-
+      selector: '.federatedSearch',
       content:
         'Here is the federated search experience — it provides lightning fast access to our unified search experience',
       // Ensure fed search opens in this step
@@ -165,7 +177,19 @@ export const useSteps = () => {
       selector: '.optionDots__wrapper',
       content:
         'We made a helpful Guide Panel to show some of the awesome features in this demo!',
+        stepInteraction: true,
     },
+    // {
+    //   selector: '.optionDots__wrapper',
+    //   content: 'Try clicking it to open the Demo Guide panel!',
+    //   styles: {
+    //     controls: () => ({ display: 'none' }),
+    //   },
+    //   stepInteraction: true,
+    //   // This action needs building 
+    //  // action: (searchbox) => passStepOnFedClick(DEMOGUIDE, controlMethods),
+    // },
+    // TODO: move to '/search' url, display Tour for facets, results, sorts, etc
   ];
 
   return steps;

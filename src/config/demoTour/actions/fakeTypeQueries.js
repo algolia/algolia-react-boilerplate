@@ -130,7 +130,7 @@ export default function fakeTypeQueries(
   // Type something
   setTimeout(() => {
     const cancelTyping = fakeTypeMultiple([
-      'red shirts',
+      'Lacoste shirts',
       'blue skirts',
       'green glasses',
     ]);
