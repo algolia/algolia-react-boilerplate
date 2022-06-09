@@ -83,6 +83,9 @@ Homepage.jsx
 - maps over carousels from configuration and renders each carousel
 - wraps all components in animations from framer-motion
 
+- Recommend components
+  - Trending Products
+
 SearchResultsPage.jsx
 
 - called by Main.jsx for route `/search`
@@ -256,7 +259,7 @@ To have the best UI, we defined the no results page with 3 parts:
 
 - First we just display the wrong query ex: yellow pant nike with an apologize message.
 - Secondly we incorporate the query suggestions to help the customer on navigation behaviour.
-- Third we stored, if the person already go on our website, his previous articles see. Them if he types a wrong query, we use Recomment and Related product with his last article seen, to create a carousel.
+- Third we stored, if the person already go on our website, his previous articles see. Them if he types a wrong query, we use Recommend and Related product with his last article seen, to create a carousel.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👩‍💼🧑‍💼 Personas</h3>
 

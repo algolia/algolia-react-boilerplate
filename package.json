@@ -26,7 +26,9 @@
   "dependencies": {
     "@algolia/react-instantsearch-widget-color-refinement-list": "^1.4.5",
     "@algolia/recommend": "^4.12.2",
-    "@algolia/recommend-react": "^1.1.0",
+    "@algolia/recommend-react": "^1.3.1",
+    "@algolia/ui-components-horizontal-slider-react": "^1.0.0",
+    "@algolia/ui-components-horizontal-slider-theme": "^1.0.0",
     "@babel/eslint-parser": "^7.17.0",
     "@emotion/react": "^11.9.0",
     "@fortawesome/fontawesome-free": "^6.1.1",

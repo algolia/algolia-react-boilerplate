@@ -9,6 +9,7 @@ module.exports = {
   parser: '@babel/eslint-parser',
   rules: {
     'import/prefer-default-export': 'off',
+    'import/no-unresolved': 'off',
   },
   plugins: ['react', 'import', 'jsx-a11y', 'react-hooks'], // here we include the plugins as well, this is like new abilities for ESLint
   parserOptions: {
