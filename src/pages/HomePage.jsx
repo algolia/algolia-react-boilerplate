@@ -9,7 +9,7 @@ import algoliarecommend from '@algolia/recommend';
 // Algolia search client
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
 
-import { lazy, Suspense, useRef, useEffect } from 'react';
+import React, { lazy, Suspense, useRef, useEffect } from 'react';
 
 import Loader from '@/components/loader/Loader';
 
@@ -51,6 +51,9 @@ import {
   shouldHaveCarousels,
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
+
+// trending carousel config
+import { trendingConfig } from '@/config/trendingConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
@@ -125,20 +128,23 @@ const HomePage = ({ setIsMounted }) => {
         ))}
 
       {/* Render Recommend component - Trending Products Slider */}
+      {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
         {shouldHaveTrendingProductsValue && (
           <div>
-            <h3>Trending Products</h3>
             <TrendingItems
               recommendClient={recommendClient}
               indexName={index}
               itemComponent={RelatedItem}
-              maxRecommendations={10}
+              maxRecommendations={trendingConfig.maxRecommendations}
               view={HorizontalSlider}
+              headerComponent={TrendingSliderTitle}
+              threshold={trendingConfig.threshold}
             />
           </div>
         )}
       </div>
+
 
       {homepage_1 ? <img src={homepage_1} alt="" /> : null}
 
@@ -147,4 +153,14 @@ const HomePage = ({ setIsMounted }) => {
   );
 };
 
+
+function TrendingSliderTitle() {
+  return (
+    <h3>
+      {trendingConfig.title}
+    </h3>
+  );
+}
+
 export default HomePage;
+

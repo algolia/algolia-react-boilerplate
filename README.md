@@ -83,6 +83,9 @@ Homepage.jsx
 - maps over carousels from configuration and renders each carousel
 - wraps all components in animations from framer-motion
 
+- Recommend components
+  - Trending Products
+
 SearchResultsPage.jsx
 
 - called by Main.jsx for route `/search`
@@ -104,7 +107,6 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
 - Recommend components
   - Related Products
   - Frequently Bought Together
-  - Trending Products
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
 
