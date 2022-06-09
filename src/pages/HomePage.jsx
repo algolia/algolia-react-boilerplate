@@ -1,6 +1,7 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
 
+// import algolia recommend
 import {
   TrendingItems,
 } from '@algolia/recommend-react';
