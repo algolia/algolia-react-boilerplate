@@ -2,10 +2,10 @@
 // By default it contains some banners and carousels
 
 // import algolia recommend
+import algoliarecommend from '@algolia/recommend';
 import {
   TrendingItems,
 } from '@algolia/recommend-react';
-import algoliarecommend from '@algolia/recommend';
 
 // Algolia search client
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
