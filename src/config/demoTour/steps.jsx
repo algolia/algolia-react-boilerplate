@@ -1,6 +1,8 @@
 // This file is dedicating to configuring only the steps of the tour
 
 import { useSetRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+
 import { tourStepAtom } from '.';
 import { shouldHaveOpenFederatedSearch } from '../federatedConfig';
 import fakeTypeQueries from './actions/fakeTypeQueries';
@@ -29,8 +31,16 @@ export default function useSteps(onlyGetChapters = false) {
     }
   };
 
+  // Access to routes
+  const navigate = useNavigate();
+
   // Wrap these methods to easily provide them
-  const controlMethods = { setTourStep, setFederatedSearch, goToChapter };
+  const controlMethods = {
+    setTourStep,
+    setFederatedSearch,
+    goToChapter,
+    navigate,
+  };
 
   const steps = {
     Introduction: [
@@ -102,6 +112,7 @@ export default function useSteps(onlyGetChapters = false) {
         // Ensure fed search opens in this step
         action: () =>
           setTimeout(() => {
+            navigate('/');
             setFederatedSearch(true);
             window.scrollTo(0, 0);
           }, 100),
