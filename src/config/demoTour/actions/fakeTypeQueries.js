@@ -7,11 +7,11 @@ import {
 
 export default function fakeTypeQueries(
   panel,
-  { setTourStep, setFederatedSearch, getStepIndex }
+  { setFederatedSearch, goToChapter }
 ) {
   // In the panel is not mounted, retrace to the fed open step
   if (panel == undefined) {
-    setTourStep(getStepIndex('openFedSearch'));
+    goToChapter('FederatedSearch');
     return;
   }
 
