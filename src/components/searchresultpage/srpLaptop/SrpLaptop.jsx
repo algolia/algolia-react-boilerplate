@@ -60,6 +60,11 @@ import { hitsPerPage } from '@/config/hitsConfig';
 // Import Config File
 import { customDataByType } from '@/utils';
 
+import Trending from '@/components/trending/Trending';
+
+// Should trending  be shown or not
+import { shouldHaveTrendingProducts } from '@/config/featuresConfig';
+
 const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   // Recoil & React states
 
@@ -70,6 +75,7 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   // Should show injected content or not
   // Defined in config file
   const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
+
   //Get indexes Value
   const index = useRecoilValue(mainIndex);
   const { injectedContentIndex } = useRecoilValue(indexNames);
@@ -78,7 +84,7 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   const { hitsPerPageNotInjected, hitsPerPageInjected } = hitsPerPage;
 
   // Define Price Sort By Const
-  const { value, labelIndex } = useRecoilValue(sortBy);
+  const { labelIndex } = useRecoilValue(sortBy);
 
   const shouldHaveSortsAtom = useRecoilValue(shouldHaveSorts);
 
@@ -90,6 +96,21 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
 
   // Segments
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
+
+  // Trending
+  const shouldHaveTrendingProductsValue = useRecoilValue(
+    shouldHaveTrendingProducts
+  );
+
+  // Related to next conditional
+  let facetName;
+  let facetValue;
+
+  // Trending needs to know if you are on category page
+  if (state?.type === 'filter' && state?.action !== null) {
+    facetName = state.action.split(':')[0];
+    facetValue = state.action.split(':')[1].replace(/['"]+/g, '');
+  }
 
   return (
     <>
@@ -161,6 +182,15 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
             getRankingInfo={true}
           />
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
+
+          {/* Render Recommend component - Trending Products Slider */}
+          {/* Change header and maxRecommendations in /config/trendingConfig.js */}
+          <div className="recommend">
+            {shouldHaveTrendingProductsValue && (
+              <Trending facetName={facetName} facetValue={facetValue} />
+            )}
+          </div>
+
           {shouldInjectContent ? (
             <Suspense fallback={''}>
               <Index indexName={injectedContentIndex}>
