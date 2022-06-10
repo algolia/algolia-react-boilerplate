@@ -3,6 +3,8 @@
 import { useSetRecoilState } from 'recoil';
 import { tourStepAtom } from '.';
 import { shouldHaveOpenFederatedSearch } from '../federatedConfig';
+import fakeTypeQueries from './actions/fakeTypeQueries';
+import passStepOnFedClick from './actions/passStepOnFedClick';
 
 // Steps for the demo tour, these are adjustable
 // Documentation here: https://github.com/elrumordelaluz/reactour/tree/master/packages/tour#steps-steptype
@@ -22,37 +24,51 @@ export default function useSteps() {
 
   const steps = [
     {
-      content:
-        "Welcome to the demo tour! You can click the X or out of this box at any moment to close it. You can also select a specific chapter of the tour in the selector below, if you'd like",
+      content: (
+        <>
+          <p>
+            Welcome to the <b>demo tour!</b> You can click the X or out of this
+            box at any moment to close it.{' '}
+          </p>
+
+          <p style={{ marginTop: '0.8rem' }}>
+            {' '}
+            You can also <b>select a specific chapter</b> of the tour in the
+            selector below, if you'd like.
+          </p>
+        </>
+      ),
       position: 'center',
     },
     {
-      // I want to select .homepage but reactour moves the window if you choose it.
-      // selector: '.overlay',
-      content:
-        'This is the Homepage. It has banners, and carousels which you can customise.',
-      position: 'center',
-      // This component should be positioned just above the homepage component, ie: covering the navigation panel
-      // styles: {}
+      selector: '.homepage',
+      content: (
+        <p>
+          This is the Homepage. It has <b>banners</b> and{' '}
+          <b>product carousels</b>, which you can customise.
+        </p>
+      ),
+
+      // @Ben, some tips: set the position with x and y coordinates so that you can pick exactly where the popover must sit
+      position: [30, 30],
+
+      // @Ben, also you can scroll the view so that it doesn't end up in the middle of the page. But the timeout is necessary so that it only scrolls once the tour has done loading
+      action: () => {
+        setTimeout(() => {
+          window.scrollTo(0, 150);
+        }, 50);
+      },
     },
     {
       selector: '.home-carousel',
       content:
         'This is a carousel, which can be a collection, or it can use our powerful Recommend AI to show personalised products for each user, as well as Trending products.',
+      position: [30, 30],
     },
     {
       selector: '.searchbox-container',
       content:
         'This is the searchbox. It offers a unified search experience, which allows you to search for anything you want: products, brands, articles.',
-      // action: (searchbox) => {
-      //   const input = searchbox.querySelector('input');
-
-      //   // searchbox.dispatchEvent(new Event('input', { bubbles: true }));
-      //   setTimeout(() => {
-      //     console.log('click!', input);
-      //     input.click();
-      //   }, 1000);
-      // },
     },
     {
       selector: '.searchbox-container',
@@ -66,14 +82,17 @@ export default function useSteps() {
     {
       // Names are useful for calling the getStepIndex method
       name: 'openFedSearch',
-      selector: '.federatedSearch',
+      selector: '.homepage',
       content:
         'Here is the federated search experience — it provides lightning fast access to our unified search experience',
       // Ensure fed search opens in this step
       action: () =>
         setTimeout(() => {
           setFederatedSearch(true);
+          window.scrollTo(0, 0);
         }, 100),
+
+      position: [30, 30],
       stepInteraction: false,
     },
     {

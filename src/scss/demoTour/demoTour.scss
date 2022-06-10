@@ -18,6 +18,8 @@
   align-items: center;
   justify-content: space-between;
 
+  font-weight: 500;
+
   span {
     cursor: pointer;
   }
@@ -29,4 +31,8 @@
   .flip {
     transform: rotate(180deg);
   }
+}
+
+.tour-content-container {
+  margin-top: 0.7rem;
 }
