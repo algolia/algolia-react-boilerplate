@@ -3,7 +3,7 @@ import {
   addListenerToTourToggle,
   removeListenerToStepChange,
   removeListenerToTourToggle,
-} from '../demoTourConfig';
+} from '..';
 
 export default function fakeTypeQueries(
   panel,

@@ -8,11 +8,9 @@ import { TourProvider } from '@reactour/tour';
 import Loader from '@/components/loader/Loader';
 import { Main } from './Main.jsx';
 import { useRecoilState } from 'recoil';
-import {
-  announceTourToggle,
-  tourStepAtom,
-  useSteps,
-} from './config/demoTour/demoTourConfig';
+import { announceTourToggle, tourStepAtom } from './config/demoTour';
+import useSteps from './config/demoTour/steps';
+import Navigation from './config/demoTour/Navigation';
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -39,6 +37,7 @@ const App = () => {
       setCurrentStep={setTourStep}
       beforeClose={() => announceTourToggle(false)}
       afterOpen={() => announceTourToggle(true)}
+      components={{ Navigation }}
     >
       {isLoaded === false && <Loader isLoaded={isLoaded} />}
       <Main isLoaded={isLoaded} setIsLoaded={setIsLoaded} />

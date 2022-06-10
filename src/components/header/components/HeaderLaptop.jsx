@@ -16,7 +16,7 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 import { logoUrl, categorySelectionAtom } from '@/config/headerConfig';
 
-import { shouldShowDemoTour } from '@/config/demoTour/demoTourConfig';
+import { shouldShowDemoTour } from '@/config/demoTour';
 
 // Import SearchBox
 // Rename customSearchbox

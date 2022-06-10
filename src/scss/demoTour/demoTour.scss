@@ -7,3 +7,26 @@
 .reactour__popover {
   font-family: $main-font;
 }
+
+// Styles of the custom navigation component
+.tour-navigation {
+  width: 100%;
+
+  margin-top: 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    cursor: pointer;
+  }
+
+  select {
+    cursor: pointer;
+  }
+
+  .flip {
+    transform: rotate(180deg);
+  }
+}

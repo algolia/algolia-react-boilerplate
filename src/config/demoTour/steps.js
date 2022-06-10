@@ -1,63 +1,12 @@
-import { atom, useSetRecoilState } from 'recoil';
+// This file is dedicating to configuring only the steps of the tour
+
+import { useSetRecoilState } from 'recoil';
+import { tourStepAtom } from '.';
 import { shouldHaveOpenFederatedSearch } from '../federatedConfig';
-import passStepOnFedClick from './actions/passStepOnFedClick';
-import fakeTypeQueries from './actions/fakeTypeQueries';
-
-// Should we show the demo tour in this demo
-export const shouldShowDemoTour = atom({
-  key: 'shouldShowDemoTour',
-  default: true,
-});
-
-// General styles to be applied
-// Documentation here: https://github.com/elrumordelaluz/reactour/tree/master/packages/tour#styles-stylesobj--popoverstylesobj--maskstylesobj-1
-export const styles = {};
-
-// Atom for tour controller
-export const tourStepAtom = atom({
-  key: 'tourStep',
-  default: 0,
-  effects: [
-    ({ onSet }) =>
-      onSet((newValue, oldValue) => {
-        for (const listener of stepListeners) listener(newValue, oldValue);
-      }),
-  ],
-});
-
-// Allows for listening to step changes
-const stepListeners = [];
-
-export function addListenerToStepChange(callback) {
-  stepListeners.push(callback);
-}
-
-export function removeListenerToStepChange(callback) {
-  const listenerIndex = stepListeners.indexOf(callback);
-
-  stepListeners.splice(listenerIndex, 1);
-}
-
-// Allows for listening to tour opening and closing
-const tourToggleListeners = [];
-
-export function addListenerToTourToggle(callback) {
-  tourToggleListeners.push(callback);
-}
-
-export function removeListenerToTourToggle(callback) {
-  const listenerIndex = tourToggleListeners.indexOf(callback);
-
-  tourToggleListeners.splice(listenerIndex, 1);
-}
-
-export function announceTourToggle(toggle) {
-  for (const listener of tourToggleListeners) listener(toggle);
-}
 
 // Steps for the demo tour, these are adjustable
 // Documentation here: https://github.com/elrumordelaluz/reactour/tree/master/packages/tour#steps-steptype
-export const useSteps = () => {
+export default function useSteps() {
   // Get the tour controller
   const setTourStep = useSetRecoilState(tourStepAtom);
 
@@ -74,20 +23,22 @@ export const useSteps = () => {
   const steps = [
     {
       content:
-        'Welcome to the demo tour! You can click the X or out of this box at any moment to close it.',
+        "Welcome to the demo tour! You can click the X or out of this box at any moment to close it. You can also select a specific chapter of the tour in the selector below, if you'd like",
       position: 'center',
     },
     {
       // I want to select .homepage but reactour moves the window if you choose it.
       // selector: '.overlay',
-      content: 'This is the Homepage. It has banners, and carousels which you can customise.',
+      content:
+        'This is the Homepage. It has banners, and carousels which you can customise.',
       position: 'center',
       // This component should be positioned just above the homepage component, ie: covering the navigation panel
       // styles: {}
     },
     {
       selector: '.home-carousel',
-      content: 'This is a carousel, which can be a collection, or it can use our powerful Recommend AI to show personalised products for each user, as well as Trending products.'
+      content:
+        'This is a carousel, which can be a collection, or it can use our powerful Recommend AI to show personalised products for each user, as well as Trending products.',
     },
     {
       selector: '.searchbox-container',
@@ -177,7 +128,7 @@ export const useSteps = () => {
       selector: '.optionDots__wrapper',
       content:
         'We made a helpful Guide Panel to show some of the awesome features in this demo!',
-        stepInteraction: true,
+      stepInteraction: true,
     },
     // {
     //   selector: '.optionDots__wrapper',
@@ -186,11 +137,11 @@ export const useSteps = () => {
     //     controls: () => ({ display: 'none' }),
     //   },
     //   stepInteraction: true,
-    //   // This action needs building 
+    //   // This action needs building
     //  // action: (searchbox) => passStepOnFedClick(DEMOGUIDE, controlMethods),
     // },
     // TODO: move to '/search' url, display Tour for facets, results, sorts, etc
   ];
 
   return steps;
-};
+}
