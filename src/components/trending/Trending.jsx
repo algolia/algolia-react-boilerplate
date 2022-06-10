@@ -11,6 +11,7 @@ import RelatedItem from '@/components/recommend/RelatedProducts';
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
 import { trendingConfig } from '@/config/trendingConfig';
 
+// Trending provides a carousel of trending products, filtered if needed by any facet
 const Trending = ({ facetName, facetValue }) => {
   // define the client for using Recommend
   const recommendClient = algoliarecommend(
