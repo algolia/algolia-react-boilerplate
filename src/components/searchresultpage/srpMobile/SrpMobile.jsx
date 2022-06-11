@@ -18,7 +18,8 @@ import { Configure, Index } from 'react-instantsearch-dom';
 // import framer motion
 
 import Redirect from '@/components/redirects/Redirect';
-import Trending from '@/components/trending/Trending';
+import TrendingFacetValues from '@/components/trending/TrendingFacetValues';
+import TrendingProducts from '@/components/trending/TrendingProducts';
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import { framerMotionPage } from '@/config/animationConfig';
 
@@ -29,22 +30,15 @@ import {
   shouldHaveStats,
   shouldHaveInjectedHits,
   shouldHaveSorts,
+  shouldHaveTrendingProducts,
+  shouldHaveTrendingFacets,
 } from '@/config/featuresConfig';
-import { shouldHaveTrendingProducts } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
-
-// Import Segment State from recoil
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
-
-// Import Components
-
-// Import Config File
 import { customDataByType } from '@/utils';
-
-// Should trending be shown or not
 
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/ClearRefinement')
@@ -100,6 +94,11 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
   // Trending
   const shouldHaveTrendingProductsValue = useRecoilValue(
     shouldHaveTrendingProducts
+  );
+
+  // Trending
+  const shouldHaveTrendingFacetsValue = useRecoilValue(
+    shouldHaveTrendingFacets
   );
 
   // Related to next conditional
@@ -175,11 +174,22 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
           getRankingInfo={true}
         />
 
+        {/* Render Recommend component - Trending Facets */}
+        {/* Change config in /config/trendingConfig.js */}
+        <div className="recommend">
+          {shouldHaveTrendingFacetsValue && (
+            <TrendingFacetValues
+              facetName={facetName}
+              facetValue={facetValue}
+            />
+          )}
+        </div>
+
         {/* Render Recommend component - Trending Products Slider */}
         {/* Change header and maxRecommendations in /config/trendingConfig.js */}
         <div className="recommend">
           {shouldHaveTrendingProductsValue && (
-            <Trending facetName={facetName} facetValue={facetValue} />
+            <TrendingProducts facetName={facetName} facetValue={facetValue} />
           )}
         </div>
 

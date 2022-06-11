@@ -1,39 +1,34 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { lazy, useState, Suspense, useEffect } from 'react';
-import { lazily } from 'react-lazily';
-
-import Loader from '@/components/loader/Loader';
-import SkeletonLoader from './SkeletonLoader';
-
-// eslint-disable-next-line import/order
-import { Pagination, Configure, Index } from 'react-instantsearch-dom';
-
-import { useLocation } from 'react-router-dom';
-
-// import framer motion
 import { motion } from 'framer-motion';
-import { framerMotionPage, framerMotionFacet } from '@/config/animationConfig';
-
-// Recoil state to directly access results
+import { lazy, useState, Suspense } from 'react';
+import { Pagination, Configure, Index } from 'react-instantsearch-dom';
+import { lazily } from 'react-lazily';
+import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
+import { Hit } from '@/components/hits/Hits';
+import InfluencerCard from '@/components/hits/InfluencerCard';
+import NoCtaCard from '@/components/hits/NoCtaCard';
+import SalesCard from '@/components/hits/SalesCard';
+import Redirect from '@/components/redirects/Redirect';
+import TrendingFacetValues from '@/components/trending/TrendingFacetValues';
+import TrendingProducts from '@/components/trending/TrendingProducts';
+import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
+import { framerMotionPage, framerMotionFacet } from '@/config/animationConfig';
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
   shouldHaveSorts,
+  shouldHaveTrendingProducts,
+  shouldHaveTrendingFacets,
 } from '@/config/featuresConfig';
-import { sortBy } from '@/config/sortByConfig';
-import { queryAtom } from '@/config/searchboxConfig';
-import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
-
-// Import Persona State from recoil
+import { hitsPerPage } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
-
-// Import Segment State from recoil
+import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
+import { sortBy } from '@/config/sortByConfig';
+import { customDataByType } from '@/utils';
 
-// Import Components
-import Redirect from '@/components/redirects/Redirect';
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/ClearRefinement')
 );
@@ -42,10 +37,6 @@ const CustomCurrentRefinements = lazy(() =>
 );
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
 const CustomHitsComponent = lazy(() => import('@/components/hits/CustomHits'));
-import NoCtaCard from '@/components/hits/NoCtaCard';
-import { Hit } from '@/components/hits/Hits';
-import InfluencerCard from '@/components/hits/InfluencerCard';
-import SalesCard from '@/components/hits/SalesCard';
 const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
 const { CustomStats } = lazily(() =>
   import('@/components/searchresultpage/Stats')
@@ -53,17 +44,6 @@ const { CustomStats } = lazily(() =>
 const { InjectedHits } = lazily(() =>
   import('@/components/searchresultpage/injected-hits')
 );
-
-// Handle the number of hits per page
-import { hitsPerPage } from '@/config/hitsConfig';
-
-// Import Config File
-import { customDataByType } from '@/utils';
-
-import Trending from '@/components/trending/Trending';
-
-// Should trending  be shown or not
-import { shouldHaveTrendingProducts } from '@/config/featuresConfig';
 
 const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   // Recoil & React states
@@ -76,7 +56,7 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   // Defined in config file
   const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
 
-  //Get indexes Value
+  // Get indexes Value
   const index = useRecoilValue(mainIndex);
   const { injectedContentIndex } = useRecoilValue(indexNames);
 
@@ -100,6 +80,11 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   // Trending
   const shouldHaveTrendingProductsValue = useRecoilValue(
     shouldHaveTrendingProducts
+  );
+
+  // Trending
+  const shouldHaveTrendingFacetsValue = useRecoilValue(
+    shouldHaveTrendingFacets
   );
 
   // Related to next conditional
@@ -183,11 +168,22 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
           />
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
 
+          {/* Render Recommend component - Trending Facets */}
+          {/* Change config in /config/trendingConfig.js */}
+          <div className="recommend">
+            {shouldHaveTrendingFacetsValue && (
+              <TrendingFacetValues
+                facetName={facetName}
+                facetValue={facetValue}
+              />
+            )}
+          </div>
+
           {/* Render Recommend component - Trending Products Slider */}
           {/* Change header and maxRecommendations in /config/trendingConfig.js */}
           <div className="recommend">
             {shouldHaveTrendingProductsValue && (
-              <Trending facetName={facetName} facetValue={facetValue} />
+              <TrendingProducts facetName={facetName} facetValue={facetValue} />
             )}
           </div>
 

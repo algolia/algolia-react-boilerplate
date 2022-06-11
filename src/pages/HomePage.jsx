@@ -40,7 +40,7 @@ const FederatedSearch = lazy(() =>
 
 const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
 
-const Trending = lazy(() => import('@/components/trending/Trending'));
+const Trending = lazy(() => import('@/components/trending/TrendingProducts'));
 
 const HomePage = ({ setIsMounted }) => {
   // Get the main index

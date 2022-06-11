@@ -2,6 +2,7 @@
 // Config Index and Search Client
 // ------------------------------------------
 
+import algoliarecommend from '@algolia/recommend';
 import algoliasearch from 'algoliasearch';
 import { atom, selector } from 'recoil';
 import aa from 'search-insights';
@@ -14,6 +15,11 @@ export const searchClientCreds = {
 
 // This export is a single instance Algolia API client
 export const searchClient = algoliasearch(
+  searchClientCreds.appID,
+  searchClientCreds.APIKey
+);
+
+export const recommendClient = algoliarecommend(
   searchClientCreds.appID,
   searchClientCreds.APIKey
 );
