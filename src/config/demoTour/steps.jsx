@@ -65,6 +65,8 @@ export default function useSteps(onlyGetChapters = false) {
     Homepage: [
       {
         selector: '.homepage',
+        mutationObservables: ['.homepage'],
+
         content: (
           <p>
             This is the Homepage. It has <b>banners</b> and{' '}
@@ -78,6 +80,9 @@ export default function useSteps(onlyGetChapters = false) {
         // @Ben, also you can scroll the view so that it doesn't end up in the middle of the page. But the timeout is necessary so that it only scrolls once the tour has done loading
         action: () => {
           setTimeout(() => {
+            navigate('/');
+            setFederatedSearch(false);
+
             window.scrollTo(0, 150);
           }, 50);
         },
@@ -87,6 +92,37 @@ export default function useSteps(onlyGetChapters = false) {
         content:
           'This is a carousel, which can be a collection, or it can use our powerful Recommend AI to show personalised products for each user, as well as Trending products.',
         position: [30, 30],
+        action: (panel) => {
+          // In the carousel is not mounted, retrace to the first chapter step
+          if (panel == undefined) goToChapter('Homepage');
+        },
+      },
+    ],
+
+    Header: [
+      {
+        selector: '.container__header-nav__links ',
+        content:
+          'This is the Navigation section. There are the Categories, Personas and Segments, all customisable!',
+      },
+      {
+        selector: '.container__header-nav-selectors',
+        content:
+          'Changing the persona or segment will show you how we create unique, AI-powered search experiences',
+      },
+      {
+        selector: '.optionDots__wrapper',
+        content:
+          'We made a helpful Guide Panel to show some of the awesome features in this demo!',
+        stepInteraction: true,
+      },
+      {
+        selector: '.ais-VoiceSearch',
+        resizeObservables: ['.ais-VoiceSearch'],
+        content: 'This is VoiceSearch - search by saying something',
+
+        // Close fed search
+        action: () => setFederatedSearch(false),
       },
       {
         selector: '.searchbox-container',
@@ -102,6 +138,18 @@ export default function useSteps(onlyGetChapters = false) {
         stepInteraction: true,
         action: (searchbox) => passStepOnFedClick(searchbox, controlMethods),
       },
+
+      // {
+      //   selector: '.optionDots__wrapper',
+      //   content: 'Try clicking it to open the Demo Guide panel!',
+      //   styles: {
+      //     controls: () => ({ display: 'none' }),
+      //   },
+      //   stepInteraction: true,
+      //   // This action needs building
+      //  // action: (searchbox) => passStepOnFedClick(DEMOGUIDE, controlMethods),
+      // },
+      // TODO: move to '/search' url, display Tour for facets, results, sorts, etc
     ],
 
     FederatedSearch: [
@@ -150,44 +198,42 @@ export default function useSteps(onlyGetChapters = false) {
 
         position: [30, 135],
       },
+      {
+        selector: '.searchbox-container',
+        content: (
+          <p>
+            When you hit <b>enter</b> in the searchbar, you'll be directed to
+            the <b>search results page</b>, where you can browse the products
+            more freely.
+          </p>
+        ),
+
+        position: [30, 135],
+      },
     ],
 
-    Header: [
+    SearchResults: [
       {
-        selector: '.ais-VoiceSearch',
-        resizeObservables: ['.ais-VoiceSearch'],
-        content: 'This is VoiceSearch - search by saying something',
+        selector: '.srp',
 
-        // Close fed search
-        action: () => setFederatedSearch(false),
+        content: (
+          <p>
+            And here is our <b>search results page!</b> In it, you'll find
+            detailed product results, as well as powerful methods to{' '}
+            <b>further refine</b> your search.
+          </p>
+        ),
+        // Ensure search results opens in this step
+        action: () =>
+          setTimeout(() => {
+            navigate('/search');
+            setFederatedSearch(false);
+            window.scrollTo(0, 0);
+          }, 100),
+
+        position: [30, 30],
+        stepInteraction: false,
       },
-      {
-        selector: '.container__header-nav__links ',
-        content:
-          'This is the Navigation section. There are the Categories, Personas and Segments, all customisable!',
-      },
-      {
-        selector: '.container__header-nav-selectors',
-        content:
-          'Changing the persona or segment will show you how we create unique, AI-powered search experiences',
-      },
-      {
-        selector: '.optionDots__wrapper',
-        content:
-          'We made a helpful Guide Panel to show some of the awesome features in this demo!',
-        stepInteraction: true,
-      },
-      // {
-      //   selector: '.optionDots__wrapper',
-      //   content: 'Try clicking it to open the Demo Guide panel!',
-      //   styles: {
-      //     controls: () => ({ display: 'none' }),
-      //   },
-      //   stepInteraction: true,
-      //   // This action needs building
-      //  // action: (searchbox) => passStepOnFedClick(DEMOGUIDE, controlMethods),
-      // },
-      // TODO: move to '/search' url, display Tour for facets, results, sorts, etc
     ],
   };
 
