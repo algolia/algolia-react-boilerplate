@@ -38,7 +38,7 @@ export default function Navigation({
 
   // Seek a chapter
   function handleChapterSelect(event) {
-    setCurrentStep(event.target.value);
+    setCurrentStep(parseInt(event.target.value));
   }
 
   return (
@@ -67,7 +67,11 @@ export default function Navigation({
       <span
         className="flip"
         onClick={() =>
-          setCurrentStep((current) => Math.min(current + 1, steps.length - 1))
+          setCurrentStep((current) => {
+            console.log(current);
+
+            return Math.min(current + 1, steps.length - 1);
+          })
         }
       >
         <Arrow />
