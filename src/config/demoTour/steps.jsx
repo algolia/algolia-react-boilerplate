@@ -228,10 +228,38 @@ export default function useSteps(onlyGetChapters = false) {
             navigate('/search');
             setFederatedSearch(false);
             window.scrollTo(0, 0);
-          }, 100),
+          }, 200),
 
         position: [30, 30],
         stepInteraction: false,
+      },
+      {
+        selector: '.srp-container__facets',
+        resizeObservables: ['.srp-container__facets'],
+        content: (
+          <p>
+            This panel on the left allows you to refine your search with{' '}
+            <b>facets</b>, such as filtering by <b>brand, color or size</b>.
+            Give it a try!
+          </p>
+        ),
+        action: (panel) => {
+          // In the component is not mounted, retrace to the first chapter step
+          if (panel == undefined) goToChapter('SearchResults');
+        },
+      },
+      {
+        selector: '.custom-sort-by',
+        content: (
+          <p>
+            With this little menu, you're able to <b>sort the results</b> by
+            relevancy, price, etc — all options easily customisable. Try it out!
+          </p>
+        ),
+        action: (panel) => {
+          // In the component is not mounted, retrace to the first chapter step
+          if (panel == undefined) goToChapter('SearchResults');
+        },
       },
     ],
   };

@@ -4,7 +4,7 @@ import { connectSortBy } from 'react-instantsearch-dom';
 
 const SortBy = ({ refine, items }) => {
   return (
-    <div>
+    <div className="custom-sort-by">
       <select
         onChange={(event) => {
           event.preventDefault();
