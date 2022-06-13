@@ -251,7 +251,16 @@ const ProductDetails = () => {
         </div>
       </div>
       {/* Render two Recommend components - Related Products, Frequently Bought Together */}
-      <div className="recommend">
+      <motion.div
+        className="recommend"
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+          transition: { delay: 1, framerMotionTransition },
+        }}
+      >
         {shouldHaveRelatedProductsValue && (
           <div>
             <h3>Related Products</h3>
@@ -276,7 +285,7 @@ const ProductDetails = () => {
             />
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };
