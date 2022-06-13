@@ -59,12 +59,13 @@ export default function useSteps(onlyGetChapters = false) {
           </>
         ),
         position: 'center',
+        action: () => setFederatedSearch(false),
       },
     ],
 
     Homepage: [
       {
-        selector: '.homepage',
+        selector: '.visible',
         content: (
           <p>
             This is the Homepage. It has <b>banners</b> and{' '}
@@ -106,7 +107,7 @@ export default function useSteps(onlyGetChapters = false) {
 
     FederatedSearch: [
       {
-        selector: '.homepage',
+        selector: '.visible',
         content:
           'Here is the federated search experience — it provides lightning fast access to our unified search experience',
         // Ensure fed search opens in this step
@@ -114,10 +115,10 @@ export default function useSteps(onlyGetChapters = false) {
           setTimeout(() => {
             navigate('/');
             setFederatedSearch(true);
-            window.scrollTo(0, 0);
-          }, 100),
+            // window.scrollTo(0, 0);
+          }, 10),
 
-        position: [30, 30],
+        // position: [30, 30],
         stepInteraction: false,
       },
       {
