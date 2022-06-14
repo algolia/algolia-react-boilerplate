@@ -21,8 +21,8 @@ import { refinements } from '@/config/refinementsConfig';
 
 // expects an attribute which is an array of items
 const RefinementList = ({ title, items, refine, searchForItems, options }) => {
-  const [showFacet, setShowFacet] = useState(false);
   const [searchInput, setSearchInput] = useState(false);
+
   return (
     <div className="filters-container">
       <div className="filters-container__title">
@@ -42,11 +42,6 @@ const RefinementList = ({ title, items, refine, searchForItems, options }) => {
       <div className="filters-container__list">
         {searchInput && (
           <input
-            className={`${
-              showFacet
-                ? 'filters-container__list__search-facet'
-                : 'filters-container__list__search-facet__hidden'
-            }`}
             type="search"
             placeholder="Search"
             onChange={(event) => {
