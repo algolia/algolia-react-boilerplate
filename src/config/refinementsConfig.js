@@ -10,7 +10,6 @@ import { hitsConfig } from './hitsConfig';
 export const refinements = [
   {
     type: 'hierarchical',
-    header: 'Categories',
     label: 'Category',
     options: {
       attribute: [
@@ -24,7 +23,6 @@ export const refinements = [
   },
   {
     type: 'price',
-    header: 'Price',
     label: 'Price',
     options: {
       attribute: hitsConfig.price,
@@ -32,7 +30,6 @@ export const refinements = [
   },
   {
     type: 'list',
-    header: 'Brand',
     label: 'Brand',
     options: {
       attribute: hitsConfig.brand,
@@ -41,7 +38,6 @@ export const refinements = [
   },
   {
     type: 'colour',
-    header: 'Colour',
     label: 'Colour',
     options: {
       attribute: hitsConfig.colourHexa,
@@ -49,7 +45,6 @@ export const refinements = [
   },
   {
     type: 'list',
-    header: 'Gender',
     label: 'Gender',
     options: {
       attribute: hitsConfig.genderFilter,
@@ -57,7 +52,6 @@ export const refinements = [
   },
   {
     type: 'size',
-    header: 'Sizes',
     label: 'Size',
     options: {
       attribute: hitsConfig.sizeFilter,
