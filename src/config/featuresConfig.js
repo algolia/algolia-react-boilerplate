@@ -50,9 +50,10 @@ export const shouldHavePersona = atom({
   default: true,
 });
 
+// NB Make sure that you build your injected hits before turning this on, otherwise you'll run into errors
 export const shouldHaveInjectedHits = atom({
   key: 'shouldHaveInjectedHits',
-  default: true,
+  default: false,
 });
 
 export const shouldHaveFederatedSearch = atom({
