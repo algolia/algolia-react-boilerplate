@@ -1,30 +1,34 @@
-import { TrendingFacets } from '@algolia/recommend-react';
 import recommend from '@algolia/recommend';
-
-// import algolia recommend
+import { TrendingFacets } from '@algolia/recommend-react';
 import { useRecoilValue } from 'recoil';
 
-// styles for Recommend HorizontalSlider
 import '@algolia/ui-components-horizontal-slider-theme';
-
 import { recommendClient, mainIndex } from '@/config/algoliaEnvConfig';
+
+import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
+
 import { trendingConfig } from '@/config/trendingConfig';
 
-const TrendingFacetValues = ({ facetName }) => {
+const TrendingFacetValues = () => {
   const index = useRecoilValue(mainIndex);
 
-  const TrendingFacetsItem = ({ item }) => (
-    <pre>
-      <code>{JSON.stringify(item)}</code>
-    </pre>
-  );
+  const TrendingFacetsItem = ({ item }) => {
+    return (
+      <>
+        <p>{item.facetValue}</p>
+      </>
+    );
+  };
 
   return (
     <TrendingFacets
       recommendClient={recommendClient}
       indexName={index}
       itemComponent={TrendingFacetsItem}
-      facetName={facetName}
+      facetName={'brand'}
+      maxRecommendations={5}
+      view={HorizontalSlider}
+      headerComponent={() => <h3>{trendingConfig.facetValuesTitle}</h3>}
     />
   );
 };

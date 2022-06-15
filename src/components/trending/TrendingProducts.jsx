@@ -24,7 +24,7 @@ const TrendingProducts = ({ facetName, facetValue }) => {
         itemComponent={RelatedItem}
         maxRecommendations={trendingConfig.maxRecommendations}
         view={HorizontalSlider}
-        headerComponent={() => <h3>{trendingConfig.title}</h3>}
+        headerComponent={() => <h3>{trendingConfig.productsTitle}</h3>}
         threshold={trendingConfig.threshold}
         facetName={facetName}
         facetValue={facetValue}
