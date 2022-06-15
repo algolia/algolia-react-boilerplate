@@ -50,7 +50,8 @@ export const shouldHavePersona = atom({
   default: true,
 });
 
-// Make sure you create the injected hits before turning this on, to avoid errors
+// Make sure you create the injected content before turning this on, to avoid errors
+// Please see https://github.com/algolia/algolia-react-boilerplate#--injected-content for more info on injected content
 export const shouldHaveInjectedHits = atom({
   key: 'shouldHaveInjectedHits',
   default: false,
