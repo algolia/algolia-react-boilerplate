@@ -62,7 +62,6 @@ import { customDataByType } from '@/utils';
 
 const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   // Recoil & React states
-  console.log('sssss');
   const stats = useRecoilValue(shouldHaveStats);
   const queryState = useRecoilValue(queryAtom);
   const [injected, setInjected] = useState(false);
