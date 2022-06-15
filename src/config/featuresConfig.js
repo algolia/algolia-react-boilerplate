@@ -42,7 +42,7 @@ export const shouldHaveStats = atom({
 
 export const shouldHaveInjectedBanners = atom({
   key: 'shouldHaveInjectedBanners',
-  default: false,
+  default: true,
 });
 
 export const shouldHavePersona = atom({

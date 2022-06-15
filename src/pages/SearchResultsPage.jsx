@@ -57,8 +57,6 @@ const SrpMobile = lazy(() =>
 
 const SearchResultPage = ({ setIsMounted }) => {
   const [srpIsLoaded, setSrpIsLoaded] = useState(false);
-  // Do you want to show banner on SRP? This boolean tells us yes or no
-  const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Close federated and set value false for return without it
   const setFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
   setFederatedOpen(false);
@@ -78,29 +76,22 @@ const SearchResultPage = ({ setIsMounted }) => {
   return (
     <div ref={srpMounted} className="srp">
       {/* Create a skeleton while page is loading */}
-      {/* <NoResultsHandler> */}
-        <AnimatePresence>
-          {srpIsLoaded === false && <SkeletonLoader />}
-        </AnimatePresence>
-        {/* Display the banner if the bannerSrp config is set to: true */}
-        {shouldDisplayBanners && <Banner />}
-        {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
-
-        <Suspense fallback={''}>
-          {(laptop || laptopXS) && (
-            <SrpLaptop
-              setSrpIsLoaded={setSrpIsLoaded}
-              srpIsLoaded={srpIsLoaded}
-            />
-          )}
-          {(tablet || mobile) && (
-            <SrpMobile
-              setSrpIsLoaded={setSrpIsLoaded}
-              srpIsLoaded={srpIsLoaded}
-            />
-          )}
-        </Suspense>
-      {/* </NoResultsHandler> */}
+      <AnimatePresence>
+        {srpIsLoaded === false && <SkeletonLoader />}
+      </AnimatePresence>
+      {/* Display the banner if the bannerSrp config is set to: true */}
+      {/* {shouldDisplayBanners && <Banner />} */}
+      {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
+      {/* <NoResultsHandler>
+        <Suspense fallback={<Loader />}> */}
+      {/* {(laptop || laptopXS) && <SrpLaptop />} */}
+      {/* {(tablet || mobile) && <SrpMobile />} */}
+      {/* </Suspense>
+      </NoResultsHandler> */}
+      <NoResultsHandler
+        srpIsLoaded={srpIsLoaded}
+        setSrpIsLoaded={setSrpIsLoaded}
+      />
     </div>
   );
 };
@@ -190,6 +181,8 @@ const NoResults = memo(({ query }) => {
 // const NoResultsHandler = connectStateResults(NoResultsHandlerComponent);
 
 function NoResultsHandler(props) {
+  // Do you want to show banner on SRP? This boolean tells us yes or no
+  const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Handle screen resize
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
   const { hits } = useHits(props);
@@ -197,9 +190,16 @@ function NoResultsHandler(props) {
   const { setSrpIsLoaded } = props;
   const { srpIsLoaded } = props;
   return length ? (
-    <Suspense fallback={''}>
+    <Suspense fallback={<Loader />}>
       {(laptop || laptopXS) && (
-        <SrpLaptop setSrpIsLoaded={setSrpIsLoaded} srpIsLoaded={srpIsLoaded} />
+        /* Display the banner if the bannerSrp config is set to: true */
+        <div>
+          {/* {shouldDisplayBanners && <Banner />} */}
+          <SrpLaptop
+            setSrpIsLoaded={setSrpIsLoaded}
+            srpIsLoaded={srpIsLoaded}
+          />
+        </div>
       )}
       {(tablet || mobile) && (
         <SrpMobile setSrpIsLoaded={setSrpIsLoaded} srpIsLoaded={srpIsLoaded} />
