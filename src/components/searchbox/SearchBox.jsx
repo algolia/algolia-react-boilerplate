@@ -33,9 +33,14 @@ import { categorySelectionAtom } from '@/config/headerConfig';
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
 
 function CustomSearchBox(props) {
-  const { refine, currentRefinement } = useSearchBox(props);
+  const { refine, query } = useSearchBox(props);
+  console.log(
+    '🚀 ~ file: SearchBox.jsx ~ line 37 ~ CustomSearchBox ~ query',
+    query
+  );
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
+  console.log(queryState);
   const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
@@ -52,6 +57,7 @@ function CustomSearchBox(props) {
 
   const refineFunction = (query) => {
     // Empty array of rules on each Keystrokes
+    console.log(query);
     rulesApplied([]);
     setQueryState(query);
     refine(query);
@@ -65,9 +71,14 @@ function CustomSearchBox(props) {
         role="search"
         autoComplete="off"
         onSubmit={(event) => {
+          console.log(
+            '🚀 ~ file: SearchBox.jsx ~ line 70 ~ CustomSearchBox ~ event',
+            event.currentTarget.value
+          );
           event.preventDefault();
-          setQueryState(currentRefinement);
-          useStoreQueryToLocalStorage(currentRefinement);
+
+          setQueryState(query);
+          useStoreQueryToLocalStorage(query);
           navigate('/search');
           // set the Navigation category to 'All', which is at index 0
           // LEFT IN FOR REFACTO PURPOSES

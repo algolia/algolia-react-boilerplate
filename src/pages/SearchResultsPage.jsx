@@ -93,13 +93,14 @@ const SearchResultPage = ({ setIsMounted }) => {
 };
 
 // This is rendered when there are no results to display
-const NoResults = ({ query }) => {
-  console.log(
-    '🚀 ~ file: SearchResultsPage.jsx ~ line 97 ~ NoResults ~ query',
-    query
-  );
+const NoResults = () => {
   //Get the query
   const getQueryState = useRecoilValue(queryAtom);
+  console.log(
+    '🚀 ~ file: SearchResultsPage.jsx ~ line 103 ~ NoResults ~ getQueryState',
+    getQueryState
+  );
+
   const getSearches = localStorage.getItem('objectId');
   const cleanSearches = JSON.parse(getSearches);
   const lastId = cleanSearches?.[cleanSearches.length - 1];
@@ -142,16 +143,17 @@ const NoResults = ({ query }) => {
               {lastId && (
                 <div>
                   <p className="no-results__infos__p">
-                    Customers who searched <span>{query}</span> also viewed:
+                    Customers who searched <span>{getQueryState}</span> also
+                    viewed:
                   </p>
                   <div className="recommend">
-                    <RelatedProducts
+                    {/* <RelatedProducts
                       recommendClient={recommendClient}
                       indexName={index}
                       objectIDs={[lastId]}
                       itemComponent={RelatedItem}
                       maxRecommendations={5}
-                    />
+                    /> */}
                   </div>
                 </div>
               )}
@@ -184,6 +186,7 @@ const NoResults = ({ query }) => {
 // const NoResultsHandler = connectStateResults(NoResultsHandlerComponent);
 
 function NoResultsHandler(props) {
+  console.log('cc');
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Handle screen resize
