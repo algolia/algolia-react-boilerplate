@@ -1,12 +1,12 @@
 {
-  "name": "demo-engineer-react-boilerplateV2",
+  "name": "algolia-react-boilerplate",
   "version": "1.0.0",
-  "description": "A boilerplate for Custom Demo",
+  "description": "A boilerplate for Algolia Demos",
   "main": "index.js",
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "serve": "vite preview",
+    "serve": "vite --host",
     "format": "prettier --write .",
     "test": "npm run lint",
     "lint": "eslint .",
@@ -14,19 +14,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/algolia/demo-engineer-react-boilerplateV2.git"
+    "url": "git+https://github.com/algolia/algolia-react-boilerplate.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/algolia/demo-engineer-react-boilerplateV2/issues"
+    "url": "https://github.com/algolia/algolia-react-boilerplate/issues"
   },
-  "homepage": "https://github.com/algolia/demo-engineer-react-boilerplateV2#readme",
+  "homepage": "https://github.com/algolia/algolia-react-boilerplate#readme",
   "dependencies": {
     "@algolia/react-instantsearch-widget-color-refinement-list": "^1.4.5",
     "@algolia/recommend": "^4.12.2",
-    "@algolia/recommend-react": "^1.1.0",
+    "@algolia/recommend-react": "^1.3.1",
+    "@algolia/ui-components-horizontal-slider-react": "^1.0.0",
+    "@algolia/ui-components-horizontal-slider-theme": "^1.0.0",
     "@babel/eslint-parser": "^7.17.0",
     "@emotion/react": "^11.9.0",
     "@fortawesome/fontawesome-free": "^6.1.1",

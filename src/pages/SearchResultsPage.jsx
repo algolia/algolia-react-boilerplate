@@ -78,23 +78,29 @@ const SearchResultPage = ({ setIsMounted }) => {
   return (
     <div ref={srpMounted} className="srp">
       {/* Create a skeleton while page is loading */}
-      <AnimatePresence>
-        {srpIsLoaded === false && <SkeletonLoader />}
-      </AnimatePresence>
+      {/* <NoResultsHandler> */}
+        <AnimatePresence>
+          {srpIsLoaded === false && <SkeletonLoader />}
+        </AnimatePresence>
+        {/* Display the banner if the bannerSrp config is set to: true */}
+        {shouldDisplayBanners && <Banner />}
+        {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
 
-      {/* Display the banner if the bannerSrp config is set to: true */}
-      {/* {shouldDisplayBanners && <Banner />} */}
-      {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
-      {/* <NoResultsHandler>
-        <Suspense fallback={<Loader />}> */}
-      {/* {(laptop || laptopXS) && <SrpLaptop />} */}
-      {/* {(tablet || mobile) && <SrpMobile />} */}
-      {/* </Suspense>
-      </NoResultsHandler> */}
-      <NoResultsHandler
-        srpIsLoaded={srpIsLoaded}
-        setSrpIsLoaded={setSrpIsLoaded}
-      />
+        <Suspense fallback={''}>
+          {(laptop || laptopXS) && (
+            <SrpLaptop
+              setSrpIsLoaded={setSrpIsLoaded}
+              srpIsLoaded={srpIsLoaded}
+            />
+          )}
+          {(tablet || mobile) && (
+            <SrpMobile
+              setSrpIsLoaded={setSrpIsLoaded}
+              srpIsLoaded={srpIsLoaded}
+            />
+          )}
+        </Suspense>
+      {/* </NoResultsHandler> */}
     </div>
   );
 };

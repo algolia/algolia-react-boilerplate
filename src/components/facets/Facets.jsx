@@ -28,6 +28,7 @@ function GenericRefinementList(props) {
   const { title, options } = props;
   const [showFacet, setShowFacet] = useState(false);
   const [searchInput, setSearchInput] = useState(false);
+
   return (
     <div className="filters-container">
       <div className="filters-container__title">
@@ -47,11 +48,6 @@ function GenericRefinementList(props) {
       <div className="filters-container__list">
         {searchInput && (
           <input
-            className={`${
-              showFacet
-                ? 'filters-container__list__search-facet'
-                : 'filters-container__list__search-facet__hidden'
-            }`}
             type="search"
             placeholder="Search"
             onChange={(event) => {

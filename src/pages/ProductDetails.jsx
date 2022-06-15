@@ -2,42 +2,45 @@
 // It contains both Recommend components
 
 // Recommend
+import algoliarecommend from '@algolia/recommend';
 import {
   RelatedProducts,
   FrequentlyBoughtTogether,
 } from '@algolia/recommend-react';
-import algoliarecommend from '@algolia/recommend';
 
 // framer-motion
 import { motion } from 'framer-motion';
+import get from 'lodash/get';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+
+import { ChevronLeft } from '@/assets/svg/SvgIndex';
+import Price from '@/components/price/price.jsx';
+import RelatedItem from '@/components/recommend/RelatedProducts';
+import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
 import {
   framerMotionPage,
   framerMotionTransition,
 } from '@/config/animationConfig';
 
 // In case of img loading error
-import { logoUrl as placeHolderError } from '@/config/headerConfig';
-
-// Import components
-import { ChevronLeft } from '@/assets/svg/SvgIndex';
-import RelatedItem from '@/components/recommend/RelatedProducts';
-import Price from '@/components/price/price.jsx';
-
-// Algolia search client
-import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
-
-// React router import
-import { useNavigate } from 'react-router-dom';
-
-// Recoil import
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { hitAtom } from '@/config/hitsConfig';
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 import {
   shouldHaveRelatedProducts,
   shouldHaveFbtProducts,
 } from '@/config/featuresConfig';
-import { hitsConfig, PDPHitSections } from '@/config/hitsConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+import { logoUrl as placeHolderError } from '@/config/headerConfig';
+
+// Import components
+
+// Algolia search client
+
+// React router import
+
+// Recoil import
+
+import { hitAtom, hitsConfig, PDPHitSections } from '@/config/hitsConfig';
 
 // Used to send insights event on add to cart
 import { personaSelectedAtom } from '@/config/personaConfig';
@@ -45,13 +48,10 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 // Custom hooks
 import useScreenSize from '@/hooks/useScreenSize';
 
-import get from 'lodash/get';
-
 // Send an insights event to algolia
 import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
 // Used to show alert when add to cart event is sent
-import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 
 const ProductDetails = () => {
   // For alert on sending add to cart event
@@ -77,6 +77,7 @@ const ProductDetails = () => {
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
   );
+
   const shouldHaveFbtProductsValue = useRecoilValue(shouldHaveFbtProducts);
 
   // Close federated and set value false for return without it
@@ -249,8 +250,17 @@ const ProductDetails = () => {
           </motion.div>
         </div>
       </div>
-      {/* Render both Recommend components- Related Products and Frequently Bought Together */}
-      <div className="recommend">
+      {/* Render two Recommend components - Related Products, Frequently Bought Together */}
+      <motion.div
+        className="recommend"
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+          transition: { delay: 1, framerMotionTransition },
+        }}
+      >
         {shouldHaveRelatedProductsValue && (
           <div>
             <h3>Related Products</h3>
@@ -275,7 +285,7 @@ const ProductDetails = () => {
             />
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };

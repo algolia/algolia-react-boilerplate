@@ -1,7 +1,16 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
 
-import { lazy, Suspense, useRef, useEffect } from 'react';
+// import algolia recommend
+import algoliarecommend from '@algolia/recommend';
+import {
+  TrendingItems,
+} from '@algolia/recommend-react';
+
+// Algolia search client
+import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
+
+import React, { lazy, Suspense, useRef, useEffect } from 'react';
 
 import Loader from '@/components/loader/Loader';
 
@@ -17,7 +26,6 @@ import { useRecoilValue } from 'recoil';
 import homepage_1 from '../assets/homepage/homepage_1.png';
 import homepage_2 from '../assets/homepage/homepage_2.png';
 
-import usePreventScrolling from '@/hooks/usePreventScrolling';
 
 // components import
 const CustomHomeBanners = lazy(() =>
@@ -27,6 +35,13 @@ const FederatedSearch = lazy(() =>
   import('@/components/federatedSearch/FederatedSearch')
 );
 const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
+import RelatedItem from '@/components/recommend/RelatedProducts';
+
+import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
+
+// styles for Recommend HorizontalSlider
+import '@algolia/ui-components-horizontal-slider-theme';
+
 
 // should carousel be shown or not and config for carousel
 import { carouselConfig } from '@/config/carouselConfig';
@@ -35,16 +50,34 @@ import { carouselConfig } from '@/config/carouselConfig';
 import {
   shouldHaveFederatedSearch,
   shouldHaveCarousels,
+  shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
+
+// trending carousel config
+import { trendingConfig } from '@/config/trendingConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 const HomePage = ({ setIsMounted }) => {
+  // Get the main index
+  const index = useRecoilValue(mainIndex);
+
   // Boolean value which determines if federated search is shown or not, default is false
   const isFederated = useRecoilValue(shouldHaveFederatedSearch);
   const isCarousel = useRecoilValue(shouldHaveCarousels);
   const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch);
   const HomePage = useRef(false);
+
+  // Boolean value which determines if federated search is shown or not, default is false
+  const shouldHaveTrendingProductsValue = useRecoilValue(
+    shouldHaveTrendingProducts
+  );
+
+  // define the client for using Recommend
+  const recommendClient = algoliarecommend(
+    searchClientCreds.appID,
+    searchClientCreds.APIKey
+  );
 
   useEffect(() => {
     HomePage.current = true;
@@ -95,6 +128,24 @@ const HomePage = ({ setIsMounted }) => {
           </Suspense>
         ))}
 
+      {/* Render Recommend component - Trending Products Slider */}
+      {/* Change header and maxRecommendations in /config/trendingConfig.js */}
+      <div className="recommend">
+        {shouldHaveTrendingProductsValue && (
+          <div>
+            <TrendingItems
+              recommendClient={recommendClient}
+              indexName={index}
+              itemComponent={RelatedItem}
+              maxRecommendations={trendingConfig.maxRecommendations}
+              view={HorizontalSlider}
+              headerComponent={() => <h3>{trendingConfig.title}</h3>}
+              threshold={trendingConfig.threshold}
+            />
+          </div>
+        )}
+      </div>
+
       {homepage_1 ? <img src={homepage_1} alt="" /> : null}
 
       {homepage_2 && <img src={homepage_2} alt="" />}
@@ -103,3 +154,4 @@ const HomePage = ({ setIsMounted }) => {
 };
 
 export default HomePage;
+
