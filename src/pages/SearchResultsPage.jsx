@@ -75,10 +75,6 @@ const SearchResultPage = ({ setIsMounted }) => {
 
   return (
     <div ref={srpMounted} className="srp">
-      {/* Create a skeleton while page is loading */}
-      <AnimatePresence>
-        {srpIsLoaded === false && <SkeletonLoader />}
-      </AnimatePresence>
       {/* Display the banner if the bannerSrp config is set to: true */}
       {/* {shouldDisplayBanners && <Banner />} */}
       {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
@@ -97,7 +93,12 @@ const SearchResultPage = ({ setIsMounted }) => {
 };
 
 // This is rendered when there are no results to display
-const NoResults = memo(({ query }) => {
+const NoResults = ({ query }) => {
+  console.log(
+    '🚀 ~ file: SearchResultsPage.jsx ~ line 97 ~ NoResults ~ query',
+    query
+  );
+  //Get the query
   const getQueryState = useRecoilValue(queryAtom);
   const getSearches = localStorage.getItem('objectId');
   const cleanSearches = JSON.parse(getSearches);
@@ -113,7 +114,9 @@ const NoResults = memo(({ query }) => {
           <span className="no-results__titles__span">
             Sorry, we found no result for{' '}
           </span>
-          <span className="no-results__titles__span-query">“{query}”</span>
+          <span className="no-results__titles__span-query">
+            “{getQueryState}”
+          </span>
         </h4>
         <p>Try the following:</p>
         <ul className="no-results__infos">
@@ -158,7 +161,7 @@ const NoResults = memo(({ query }) => {
       </div>
     </div>
   );
-});
+};
 
 // This wrapper decides when to render the NoResults component
 // const NoResultsHandlerComponent = ({
@@ -194,6 +197,10 @@ function NoResultsHandler(props) {
       {(laptop || laptopXS) && (
         /* Display the banner if the bannerSrp config is set to: true */
         <div>
+          {/* Create a skeleton while page is loading */}
+          <AnimatePresence>
+            {srpIsLoaded === false && <SkeletonLoader />}
+          </AnimatePresence>
           {/* {shouldDisplayBanners && <Banner />} */}
           <SrpLaptop
             setSrpIsLoaded={setSrpIsLoaded}
@@ -206,33 +213,8 @@ function NoResultsHandler(props) {
       )}
     </Suspense>
   ) : (
-    <h1>Nope Length</h1>
+    <NoResults />
   );
 }
-
-// "This searchbox is virtual and will not appear in the DOM. The goal of this virtual searchbox is to refine the app by changing the query state
-// in the main IS instance when clicking on QS when we're in the noResult component"
-// const SearchBox = ({ refine, query }) => {
-//   const refineFunction = (queryValue) => {
-//     refine(queryValue);
-//   };
-//   useEffect(() => {
-//     refineFunction(query);
-//   }, [query]);
-
-//   return (
-//     <form noValidate action="" role="search" className="search-box-invisible">
-//       <input
-//         type="search"
-//         value={query}
-//         onChange={(event) => {
-//           refine(event.currentTarget.value);
-//         }}
-//       />
-//     </form>
-//   );
-// };
-
-// const CustomSearchBox = connectSearchBox(SearchBox);
 
 export default SearchResultPage;
