@@ -20,10 +20,10 @@
 .env.test.local
 .env.production.local
 
+# fail to install packages
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
 
 # VSCode Config
 /.vscode

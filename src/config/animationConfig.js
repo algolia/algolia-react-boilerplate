@@ -29,7 +29,7 @@ export const framerMotionFooter = {
   initial: { opacity: 0 },
   exit: { opacity: 0 },
   animate: { opacity: 1 },
-  transition: { duration: 3, delay: 1, ease: [0.43, 0.13, 0.23, 0.96] },
+  transition: { duration: 0.1, delay: 0, ease: [0.43, 0.13, 0.23, 0.96] },
 };
 
 export const framerMotionFederatedContainer = {
