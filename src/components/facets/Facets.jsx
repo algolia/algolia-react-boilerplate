@@ -17,10 +17,19 @@ import PriceSlider from './PriceSlider';
 import CustomHierarchicalMenu from './Hierarchical';
 
 // Import list of Attributes/Facets
-import { refinements } from '@/config/refinementsConfig';
+import { refinements, refineFunctionAtom } from '@/config/refinementsConfig';
+import { useRecoilState } from 'recoil';
+import { useEffect } from 'react';
 
 // expects an attribute which is an array of items
 const RefinementList = ({ title, items, refine, searchForItems, options }) => {
+  const [refineAtom, setRefineAtom] = useRecoilState(refineFunctionAtom);
+
+  useEffect(() => {
+    setRefineAtom(refine);
+    console.log(refineAtom);
+  }, []);
+
   const [showFacet, setShowFacet] = useState(false);
   const [searchInput, setSearchInput] = useState(false);
   return (

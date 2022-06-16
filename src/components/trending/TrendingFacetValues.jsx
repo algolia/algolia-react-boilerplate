@@ -9,13 +9,23 @@ import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react
 
 import { trendingConfig } from '@/config/trendingConfig';
 
+import { refineFunctionAtom } from '@/config/refinementsConfig';
+
 const TrendingFacetValues = () => {
   const index = useRecoilValue(mainIndex);
+
+  const refineAtom = useRecoilValue(refineFunctionAtom);
 
   const TrendingFacetsItem = ({ item }) => {
     return (
       <>
-        <p>{item.facetValue}</p>
+        <p
+        // onClick={() => {
+        //   refine(item.facetValue);
+        // }}
+        >
+          {item.facetValue}
+        </p>
       </>
     );
   };

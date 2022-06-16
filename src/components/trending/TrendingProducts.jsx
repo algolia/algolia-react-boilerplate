@@ -15,6 +15,7 @@ const TrendingProducts = ({ facetName, facetValue }) => {
   // define the client for using Recommend
 
   const index = useRecoilValue(mainIndex);
+  console.log(facetName, facetValue);
 
   return (
     <div>

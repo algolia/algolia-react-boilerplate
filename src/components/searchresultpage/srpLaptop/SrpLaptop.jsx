@@ -28,6 +28,7 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { customDataByType } from '@/utils';
+import { currentRefinementsAtom } from '@/config/refinementsConfig';
 
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/ClearRefinement')
@@ -35,6 +36,7 @@ const CustomClearRefinements = lazy(() =>
 const CustomCurrentRefinements = lazy(() =>
   import('@/components/facets/CurrentRefinement')
 );
+
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
 const CustomHitsComponent = lazy(() => import('@/components/hits/CustomHits'));
 const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
@@ -51,6 +53,7 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   const stats = useRecoilValue(shouldHaveStats);
   const queryState = useRecoilValue(queryAtom);
   const [injected, setInjected] = useState(false);
+  const currentRefinements = useRecoilValue(currentRefinementsAtom);
 
   // Should show injected content or not
   // Defined in config file
