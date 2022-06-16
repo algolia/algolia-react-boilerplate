@@ -38,19 +38,21 @@
 
 1. Clone this repo under a new name for your own demo.
 
-2. Visit `src/config` and adjust `algoliaEnvConfig` to point to your own app, indices and API keys. If you do not need an index which is present in that file i.e. for articles, please do not remove it, just leave it as is, and you can turn off the relevant feature in the next step.
+2. Run `npm install` in the root directory and `npm start` to view your project on [http://localhost:3000](http://localhost:3000/)
 
-3. Visit `src/config` and adjust `featuresConfig` to activate/deactivate the features you would like to see in the app.
+3. Visit `src/config` and adjust `algoliaEnvConfig` to point to your own app, indices and API keys. If you do not need an index which is present in that file i.e. for articles, please do not remove it, just leave it as is, and you can turn off the relevant feature in the next step.
 
-4. Go through the other files in `src/config` and adjust them according to your own data and requirements, each file describes itself.
+4. Visit `src/config` and adjust `featuresConfig` to activate/deactivate the features you would like to see in the app.
 
-5. In `src/config` , pay particular attention to `hitsConfig` as this is where we map your own attribute names to those used in the app. You should never adjust the attributes used in the app itself, only this map.
+5. Go through the other files in `src/config` and adjust them according to your own data and requirements, each file describes itself.
 
-6. Run and test your app locally, if you have any questions, ask #help-demos.
+6. In `src/config` , pay particular attention to `hitsConfig` as this is where we map your own attribute names to those used in the app. You should never adjust the attributes used in the app itself, only this map.
 
-7. In the `src/scss` folder, adjust any styling you need to based on what you see.
+7. Run and test your app locally, if you have any questions, ask #help-demos.
 
-8. Log into Netlify on the Algolia Demos team (again ask #help-demos if you don't have access) and deploy your demo from Github, making sure to password protect it!
+8. In the `src/scss` folder, adjust any styling you need to based on what you see.
+
+9. Log into Netlify on the Algolia Demos team (again ask #help-demos if you don't have access) and deploy your demo from Github, making sure to password protect it!
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Structure</h2>
 
