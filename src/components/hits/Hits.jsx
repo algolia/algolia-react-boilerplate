@@ -31,11 +31,10 @@ import Badge from './Badge';
 //Import hook for store ID into local storage
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 
-
 // import Price component
 import Price from '@/components/price/price.jsx';
 
-const Hit = ({ hit, setSrpIsLoaded }) => {
+const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
@@ -44,11 +43,6 @@ const Hit = ({ hit, setSrpIsLoaded }) => {
   const { objectID, image, imageAlt, category, productName } = hitsConfig;
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
-  useEffect(() => {
-    setSrpIsLoaded(true);
-
-    // return () => setSrpIsLoaded(false);
-  }, [hit]);
 
   const RankingFormulaOverlay = ({ hit }) => {
     return (

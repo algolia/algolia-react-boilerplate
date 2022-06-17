@@ -81,31 +81,37 @@ const SearchResultPage = ({ setIsMounted }) => {
     };
   }, []);
 
+  const [useSkeleton, setUseSkeleton] = useState(true);
+
+  // This will run one time after the component mounts
+  useEffect(() => {
+    const onPageLoad = () => {
+      setUseSkeleton(false);
+    };
+
+    // Check if the page has already loaded
+    if (document.readyState === 'complete') {
+      onPageLoad();
+    } else {
+      window.addEventListener('load', onPageLoad);
+      // Remove the event listener when component unmounts
+      return () => window.removeEventListener('load', onPageLoad);
+    }
+  }, []);
+
   return (
     <div ref={srpMounted} className="srp">
       {/* Create a skeleton while page is loading */}
       <NoResultsHandler>
-        <AnimatePresence>
-          {srpIsLoaded === false && <SkeletonLoader />}
-        </AnimatePresence>
+        <AnimatePresence>{useSkeleton && <SkeletonLoader />}</AnimatePresence>
 
         {/* Display the banner if the bannerSrp config is set to: true */}
         {shouldDisplayBanners && <Banner />}
         {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
 
         <Suspense fallback={''}>
-          {(laptop || laptopXS) && (
-            <SrpLaptop
-              setSrpIsLoaded={setSrpIsLoaded}
-              srpIsLoaded={srpIsLoaded}
-            />
-          )}
-          {(tablet || mobile) && (
-            <SrpMobile
-              setSrpIsLoaded={setSrpIsLoaded}
-              srpIsLoaded={srpIsLoaded}
-            />
-          )}
+          {(laptop || laptopXS) && <SrpLaptop />}
+          {(tablet || mobile) && <SrpMobile />}
         </Suspense>
       </NoResultsHandler>
     </div>
