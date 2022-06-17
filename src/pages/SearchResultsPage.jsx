@@ -62,7 +62,6 @@ const SrpMobile = lazy(() =>
 );
 
 const SearchResultPage = ({ setIsMounted }) => {
-  const [srpIsLoaded, setSrpIsLoaded] = useState(false);
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Close federated and set value false for return without it

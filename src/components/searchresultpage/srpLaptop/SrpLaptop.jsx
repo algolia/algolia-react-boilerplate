@@ -42,7 +42,7 @@ const { InjectedHits } = lazily(() =>
   import('@/components/searchresultpage/injected-hits')
 );
 
-const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
+const SrpLaptop = () => {
   // Recoil & React states
 
   const stats = useRecoilValue(shouldHaveStats);
@@ -76,9 +76,7 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   return (
     <>
       <motion.div
-        className={`${
-          srpIsLoaded === false ? 'srp-hidden' : 'srp-active'
-        } srp-container`}
+        className={'srp-active srp-container'}
         variants={framerMotionPage}
         initial={framerMotionPage.initial}
         animate={framerMotionPage.animate}
