@@ -14,6 +14,7 @@ import SkeletonLoader from '@/components/searchresultpage/srpLaptop/SkeletonLoad
 
 // Algolia search client
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 // define the client for using Recommend
 const recommendClient = algoliarecommend(
@@ -102,7 +103,7 @@ const SearchResultPage = ({ setIsMounted }) => {
     <div ref={srpMounted} className="srp">
       <NoResultsHandler>
         {/* Create a skeleton while page is loading */}
-        <AnimatePresence>{useSkeleton && <SkeletonLoader />}</AnimatePresence>
+        {/* <AnimatePresence>{useSkeleton && <SkeletonLoader />}</AnimatePresence> */}
 
         {/* Display the banner if the bannerSrp config is set to: true */}
         {shouldDisplayBanners && <Banner />}
