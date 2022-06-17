@@ -101,8 +101,8 @@ const SearchResultPage = ({ setIsMounted }) => {
 
   return (
     <div ref={srpMounted} className="srp">
-      {/* Create a skeleton while page is loading */}
       <NoResultsHandler>
+        {/* Create a skeleton while page is loading */}
         <AnimatePresence>{useSkeleton && <SkeletonLoader />}</AnimatePresence>
 
         {/* Display the banner if the bannerSrp config is set to: true */}
