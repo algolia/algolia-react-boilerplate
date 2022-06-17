@@ -1,11 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-// React Tour
 import { TourProvider } from '@reactour/tour';
+import ReactDOM from 'react-dom';
 
 import App from './App';
 
-import { steps } from '@/config/demoTourConfig'
+// React Tour
+import { steps } from '@/config/demoTourConfig';
 
 ReactDOM.render(
   // React Tour
