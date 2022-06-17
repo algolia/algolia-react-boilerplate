@@ -5,8 +5,6 @@ import { Pagination, Configure, Index } from 'react-instantsearch-dom';
 import { lazily } from 'react-lazily';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-
-<<<<<<< Updated upstream
 // Import Components
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
@@ -15,10 +13,8 @@ import SalesCard from '@/components/hits/SalesCard';
 import Redirect from '@/components/redirects/Redirect';
 import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
 import { framerMotionPage, framerMotionFacet } from '@/config/animationConfig';
-=======
 import ClipLoader from 'react-spinners/ClipLoader';
 
->>>>>>> Stashed changes
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
@@ -80,29 +76,9 @@ const SrpLaptop = () => {
 
   return (
     <>
-<<<<<<< Updated upstream
-      <motion.div
-        className={'srp-active srp-container'}
-        variants={framerMotionPage}
-        initial={framerMotionPage.initial}
-        animate={framerMotionPage.animate}
-        exit={framerMotionPage.exit}
-        transition={framerMotionPage.transition}
-      >
-        <motion.div
-          variants={framerMotionFacet}
-          initial={framerMotionFacet.initial}
-          animate={framerMotionFacet.animate}
-          exit={framerMotionFacet.exit}
-          transition={framerMotionFacet.transition}
-          className="srp-container__facets"
-        >
-          <Suspense fallback={''}>
-=======
       <div className="srp-container">
         <div>
           <Suspense fallback={<ClipLoader />}>
->>>>>>> Stashed changes
             <GenericRefinementList />
           </Suspense>
         </div>
