@@ -9,7 +9,7 @@ const cx = createClassNames('InfiniteHits');
 
 export const InjectedHits = connectHits(
   connectInjectedHits(({ injectedHits }) => (
-    <motion.div
+    <div
       className={cx('')}
       variants={framerMotionPage}
       initial={framerMotionPage.initial}
@@ -24,6 +24,6 @@ export const InjectedHits = connectHits(
           })}
         </AnimatePresence>
       </motion.ul>
-    </motion.div>
+    </div>
   ))
 );

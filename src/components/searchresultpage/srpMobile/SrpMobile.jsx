@@ -96,7 +96,7 @@ const SrpMobile = () => {
       <Suspense fallback={<Loader />}>
         <FacetsMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </Suspense>
-      <motion.div
+      <div
         className="srp-container__hits"
         variants={framerMotionPage}
         initial={framerMotionPage.initial}
@@ -187,7 +187,7 @@ const SrpMobile = () => {
           </Suspense>
         )}
         <Redirect />
-      </motion.div>
+      </div>
     </div>
   );
 };

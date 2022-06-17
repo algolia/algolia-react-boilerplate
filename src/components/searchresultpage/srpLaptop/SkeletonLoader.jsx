@@ -6,7 +6,7 @@ import useScreenSize from '@/hooks/useScreenSize';
 const SkeletonLoader = () => {
   const { tablet, mobile } = useScreenSize();
   return (
-    <motion.div
+    <div
       className={`${tablet || mobile ? 'skeleton-mobile' : 'skeleton'}`} // initial state
       initial={framerMotionPage.initial}
       // actual animation
@@ -134,7 +134,7 @@ const SkeletonLoader = () => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

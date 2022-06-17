@@ -46,7 +46,7 @@ const Hit = ({ hit }) => {
 
   const RankingFormulaOverlay = ({ hit }) => {
     return (
-      <motion.div
+      <div
         layout
         variants={framerMotionHits}
         initial={framerMotionHits.initial}
@@ -64,7 +64,7 @@ const Hit = ({ hit }) => {
             {entry[0]} {JSON.stringify(entry[1])}
           </p>
         ))}
-      </motion.div>
+      </div>
     );
   };
 
@@ -91,7 +91,7 @@ const Hit = ({ hit }) => {
         {shouldShowRankingInfo && <RankingFormulaOverlay hit={hit} />}
       </AnimatePresence>
       <>
-        <motion.div
+        <div
           className="srpItem__imgWrapper"
           onMouseLeave={(e) => {
             setIsHovered(false);
@@ -134,7 +134,7 @@ const Hit = ({ hit }) => {
           <div className="srpItem__imgWrapper__heart">
             <Heart />
           </div>
-        </motion.div>
+        </div>
         <div className="srpItem__infos">
           <h3>
             <Highlight hit={hit} attribute={productName} />
