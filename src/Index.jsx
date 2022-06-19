@@ -1,5 +1,5 @@
 import { TourProvider } from '@reactour/tour';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import App from './App';
 import { steps } from '@/config/demoTourConfig';
 

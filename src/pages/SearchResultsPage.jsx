@@ -10,7 +10,7 @@ import { memo, useEffect, lazy, Suspense, useRef, useState } from 'react';
 import { RelatedProducts } from '@algolia/recommend-react';
 import algoliarecommend from '@algolia/recommend';
 import RelatedItem from '@/components/recommend/RelatedProducts';
-import SkeletonLoader from '@/components/searchresultpage/srpLaptop/SkeletonLoader';
+import SkeletonLoader from '@/components/hits/HitsSkeletonLoader';
 
 // Algolia search client
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
@@ -109,7 +109,7 @@ const SearchResultPage = ({ setIsMounted }) => {
         {shouldDisplayBanners && <Banner />}
         {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
 
-        <Suspense fallback={''}>
+        <Suspense fallback={<div style={{ height: "2004px" }}></div>}>
           {(laptop || laptopXS) && <SrpLaptop />}
           {(tablet || mobile) && <SrpMobile />}
         </Suspense>

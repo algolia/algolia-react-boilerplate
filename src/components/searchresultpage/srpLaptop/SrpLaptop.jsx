@@ -1,5 +1,4 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { motion } from 'framer-motion';
 import { lazy, useState, Suspense } from 'react';
 import { Pagination, Configure, Index } from 'react-instantsearch-dom';
 import { lazily } from 'react-lazily';
@@ -12,8 +11,7 @@ import NoCtaCard from '@/components/hits/NoCtaCard';
 import SalesCard from '@/components/hits/SalesCard';
 import Redirect from '@/components/redirects/Redirect';
 import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
-import { framerMotionPage, framerMotionFacet } from '@/config/animationConfig';
-import ClipLoader from 'react-spinners/ClipLoader';
+import FacetsSkeletonLoader from '@/components/facets/FacetsSkeletonLoader';
 
 import {
   shouldHaveStats,
@@ -26,6 +24,7 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { customDataByType } from '@/utils';
+import SkeletonLoader from '../../hits/HitsSkeletonLoader';
 
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/ClearRefinement')
@@ -78,7 +77,7 @@ const SrpLaptop = () => {
     <>
       <div className="srp-container">
         <div>
-          <Suspense fallback={<ClipLoader />}>
+          <Suspense fallback={<FacetsSkeletonLoader />}>
             <GenericRefinementList />
           </Suspense>
         </div>
@@ -122,7 +121,7 @@ const SrpLaptop = () => {
           />
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
           {shouldInjectContent ? (
-            <Suspense fallback={ClipLoader}>
+            <Suspense fallback={<SkeletonLoader />}>
               <Index indexName={injectedContentIndex}>
                 <Configure hitsPerPage={1} page={0} />
               </Index>
@@ -164,7 +163,7 @@ const SrpLaptop = () => {
               />
             </Suspense>
           ) : (
-            <Suspense fallback={''}>
+            <Suspense fallback={<SkeletonLoader />}>
               <CustomHitsComponent />
             </Suspense>
           )}
