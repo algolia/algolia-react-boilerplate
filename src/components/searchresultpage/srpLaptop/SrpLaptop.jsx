@@ -11,7 +11,7 @@ import InfluencerCard from '@/components/hits/InfluencerCard';
 import NoCtaCard from '@/components/hits/NoCtaCard';
 import SalesCard from '@/components/hits/SalesCard';
 import Redirect from '@/components/redirects/Redirect';
-import TrendingFacetValues from '@/components/trending/TrendingFacetValues';
+import WrappedTrendingFacetValues from '@/components/trending/TrendingFacetValues';
 import TrendingProducts from '@/components/trending/TrendingProducts';
 import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
 import { framerMotionPage, framerMotionFacet } from '@/config/animationConfig';
@@ -28,7 +28,6 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { customDataByType } from '@/utils';
-import { currentRefinementsAtom } from '@/config/refinementsConfig';
 
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/ClearRefinement')
@@ -53,7 +52,6 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   const stats = useRecoilValue(shouldHaveStats);
   const queryState = useRecoilValue(queryAtom);
   const [injected, setInjected] = useState(false);
-  const currentRefinements = useRecoilValue(currentRefinementsAtom);
 
   // Should show injected content or not
   // Defined in config file
@@ -103,9 +101,8 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   return (
     <>
       <motion.div
-        className={`${
-          srpIsLoaded === false ? 'srp-hidden' : 'srp-active'
-        } srp-container`}
+        className={`${srpIsLoaded === false ? 'srp-hidden' : 'srp-active'
+          } srp-container`}
         variants={framerMotionPage}
         initial={framerMotionPage.initial}
         animate={framerMotionPage.animate}
@@ -175,8 +172,10 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
           {/* Change config in /config/trendingConfig.js */}
           <div className="recommend">
             {shouldHaveTrendingFacetsValue && (
-              <TrendingFacetValues
-                facetName={facetName}
+              <WrappedTrendingFacetValues
+                attribute="brand"
+                facetName={"brand"}
+                limit={500}
                 facetValue={facetValue}
               />
             )}

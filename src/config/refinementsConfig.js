@@ -67,13 +67,7 @@ export const refinementPriceLabels = {
   lessThan: 'Less than',
 };
 
-// Please ignore this atom
-export const currentRefinementsAtom = atom({
-  key: 'currentRefinements', // unique ID (with respect to other atoms/selectors)
+export const refinementsAtom = atom({
+  key: 'refinementsAtom', // unique ID (with respect to other atoms/selectors)
   default: [], // default value (aka initial value)
-});
-
-export const refineFunctionAtom = atom({
-  key: 'refineFunction', // unique ID (with respect to other atoms/selectors)
-  default: null, // default value (aka initial value)
-});
+})

@@ -3,10 +3,12 @@
 .filters-container {
   font-family: $main-font;
   width: 100%;
+
   &__title {
     width: 100%;
     display: flex;
     justify-content: space-between;
+
     h3 {
       font-size: 1rem;
       font-weight: 600;
@@ -14,18 +16,22 @@
       color: $main-color;
       padding: 0.6rem;
     }
+
     svg {
       width: 25px;
       cursor: pointer;
     }
   }
+
   &__pricecontainer {
     width: 80%;
     margin: 1rem auto;
+
     &__prices {
       display: flex;
       justify-content: space-between;
       margin-bottom: 1rem;
+
       p {
         font-family: $main-font;
         color: $blue-algolia;
@@ -36,6 +42,7 @@
 
   &__list {
     margin: 0.8rem 0;
+
     &__search-facet__hidden {
       border: 1px solid #000;
       text-decoration: none;
@@ -53,19 +60,20 @@
       cursor: text;
     }
   }
+
   &__content {
     &__list {
       &__button-filter {
         display: flex;
-        @include facetsFilter(
-          $white-color,
+        @include facetsFilter($white-color,
           $main-color,
           $main-color,
-          $blue-algolia
-        );
-        > p{
+          $blue-algolia );
+
+        >p {
           font-weight: 300;
         }
+
         &::before {
           position: absolute;
           content: "";
@@ -79,45 +87,56 @@
           opacity: 0;
           border-radius: 2px;
         }
-        &:hover::before{
+
+        &:hover::before {
           opacity: 1;
           transition: opacity 0.3s ease-in-out;
         }
-        &:hover{
-          p,span{
+
+        &:hover {
+
+          p,
+          span {
             color: $white-color;
             transition: color 0.3s ease-in-out;
           }
         }
-       
+
       }
     }
-    
+
   }
+
   .refined-filter {
     @include btn-hover($blue-algolia, $white-color);
+
     p,
     span {
       color: $white-color;
     }
   }
+
   // Personalisation Slider price
   .rc-slider {
     @include priceSlider($blue-algolia);
   }
 }
+
 .filters-container-hierarchical {
   font-family: $main-font;
   width: 100%;
+
   &__title {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    > * {
+
+    >* {
       &:empty {
         display: none;
       }
     }
+
     h3 {
       font-size: 1rem;
       font-weight: 600;
@@ -125,52 +144,62 @@
       color: $main-color;
       padding: 0.6rem;
     }
+
     svg {
       width: 25px;
       cursor: pointer;
     }
   }
+
   &__list {
     margin: 0.8rem 0;
   }
+
   &__content {
     &__list {
       &__button-filter {
         display: flex;
-        @include facetsFilter(
-          $white-color,
+        @include facetsFilter($white-color,
           $main-color,
           $main-color,
-          $blue-algolia
-        );
-        > p{
+          $blue-algolia );
+
+        >p {
           font-weight: 300;
         }
+
         &:hover {
           @include facetsHierarchicalHover($blue-algolia);
         }
       }
-      :hover > p {
+
+      :hover>p {
         color: $white-color;
       }
-      :hover > span {
+
+      :hover>span {
         color: $white-color;
       }
+
       &-isOpened {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+
         .filters-container-hierarchical {
           width: 97%;
         }
-        &:hover > button {
+
+        &:hover>button {
           @include facetsHierarchicalHover($blue-algolia);
         }
       }
     }
   }
+
   .refined-filter {
     @include btn-hover($blue-algolia, $white-color);
+
     p,
     span {
       color: $white-color;
@@ -189,6 +218,7 @@
     color: $main-color;
     padding: 0.6rem;
   }
+
   .ais-ColorRefinementList {
     --transition-duration: 0.2s;
     --items-column-width: 3rem;
@@ -196,32 +226,37 @@
     --refined-icon-size: 1.1rem;
     --color-size: 1.75rem;
   }
+
   .ais-ColorRefinementList-layoutList .ais-ColorRefinementList-items {
     grid-template-columns: 1fr;
   }
+
   .ais-ColorRefinementList-layoutList .ais-ColorRefinementList-item {
     flex-basis: 100%;
     flex-direction: row;
     max-width: 100%;
   }
+
   .ais-ColorRefinementList-layoutList .ais-ColorRefinementList-color {
     margin-right: 0.8rem;
   }
+
   .ais-ColorRefinementList-layoutList .ais-ColorRefinementList-label {
     margin-top: 0;
   }
+
   .ais-ColorRefinementList-layoutList .ais-ColorRefinementList-count {
     display: block;
     margin-left: auto;
   }
+
   .ais-ColorRefinementList-items {
     display: grid;
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(var(--items-column-width), 1fr)
-    );
+    grid-template-columns: repeat(auto-fit,
+        minmax(var(--items-column-width), 1fr));
     gap: var(--items-gap);
   }
+
   .ais-ColorRefinementList-item {
     display: flex;
     flex-direction: column;
@@ -233,6 +268,7 @@
     padding: 0px;
     cursor: pointer;
   }
+
   .ais-ColorRefinementList-color {
     width: var(--color-size);
     height: var(--color-size);
@@ -243,30 +279,38 @@
     justify-content: center;
     background-size: contain;
   }
+
   .ais-ColorRefinementList-item:hover .ais-ColorRefinementList-color {
     transform: scale(1.1);
   }
+
   .ais-ColorRefinementList-item:active .ais-ColorRefinementList-color {
     transform: scale(0.9);
   }
+
   .ais-ColorRefinementList-color.color--ffffff {
     border: 1px solid #d1d1d1;
   }
+
   .ais-ColorRefinementList-shapeSquare .ais-ColorRefinementList-color {
     border-radius: 0;
   }
+
   .ais-ColorRefinementList-label {
     margin-top: 0.3rem;
     transition: 0.3s color ease-out;
     padding: 0 0.3rem;
     font-family: $main-font;
   }
+
   .ais-ColorRefinementList-item:hover .ais-ColorRefinementList-label {
     color: #848484;
   }
+
   .ais-ColorRefinementList-count {
     display: none;
   }
+
   .ais-ColorRefinementList-refinedIcon {
     position: relative;
     width: var(--refined-icon-size);
@@ -279,8 +323,8 @@
       opacity var(--transition-duration) linear 0s,
       visibility 0s linear var(--transition-duration);
   }
-  .ais-ColorRefinementList-item.ais-ColorRefinementList-itemRefined
-    .ais-ColorRefinementList-refinedIcon {
+
+  .ais-ColorRefinementList-item.ais-ColorRefinementList-itemRefined .ais-ColorRefinementList-refinedIcon {
     transform: scale(1);
     visibility: visible;
     opacity: 1;
@@ -292,7 +336,7 @@
 
 // Mobile & tablet 
 
-.srp-container__facets-mobile{
+.srp-container__facets-mobile {
   position: absolute;
   top: 0;
   left: 0;
@@ -301,7 +345,7 @@
   z-index: 998;
   padding: 3rem 1rem;
 
-  .filters-container{
+  .filters-container {
     margin-top: 2rem;
   }
 }

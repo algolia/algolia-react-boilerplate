@@ -1,7 +1,5 @@
 // Render the navigation menu in the header
 
-import { useState } from 'react';
-
 // React Router
 import { useNavigate, useLocation } from 'react-router-dom';
 // Recoil Header State
@@ -13,8 +11,6 @@ import { categoryPageFilterAttribute } from '@/config/categoryConfig';
 import {
   linksHeader,
   selectorNavigationRef,
-  // categorySelectionAtom,
-  // searchCategoryStateAtom,
 } from '@/config/headerConfig';
 import SelectPersona from '../personnaSelect/SelectPersona';
 
@@ -77,11 +73,10 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   return (
     <ul
-      className={`${
-        isMenuOpen
-          ? 'container-mobile__navList-items'
-          : 'container__header-nav__links'
-      } `}
+      className={`${isMenuOpen
+        ? 'container-mobile__navList-items'
+        : 'container__header-nav__links'
+        } `}
     >
       {links.map((link, i) => (
         <li
@@ -118,7 +113,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           <p
             className={
               highlightingCat() === link.name.toLowerCase() ||
-              state?.name === link.name
+                state?.name === link.name
                 ? 'selected'
                 : ''
             }

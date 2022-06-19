@@ -6,14 +6,26 @@ import { connectStateResults } from 'react-instantsearch-dom';
 import { useRecoilState } from 'recoil';
 
 import { hitsAtom } from '@/config/hitsConfig';
+import { refinementsAtom } from "@/config/refinementsConfig";
 
 // Check that the arrays of hits are identical
 const areArraysEqual = (a, b) =>
   a.length === b.length && a.every((v, i) => v === b[i]);
 
 // Update the state if there's new results
-function StateResults({ searchResults }) {
+function StateResults({ searchResults, searchState }) {
   const [hitsState, setHitsState] = useRecoilState(hitsAtom);
+  const [refinementsState, setRefinementsState] = useRecoilState(refinementsAtom)
+
+  useEffect(() => {
+    let refinements = searchState?.refinementList
+    if (refinements
+      // && !areArraysEqual(refinementsState, refinements)
+    ) {
+      setRefinementsState(refinements)
+    }
+  }, [searchState])
+
   useEffect(() => {
     if (searchResults?.hits) {
       // array of algolia hits

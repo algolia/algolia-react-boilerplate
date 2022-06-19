@@ -7,12 +7,8 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 
 // import config file for state of facets
 import { currencySymbolAtom } from '@/config/currencyConfig';
-import {
-  refinementPriceLabels,
-  currentRefinementsAtom,
-} from '@/config/refinementsConfig';
+import { refinementPriceLabels } from '@/config/refinementsConfig';
 import { hitsConfig } from '@/config/hitsConfig';
-import { useEffect } from 'react';
 
 const displayPrice = (i, currencySymbol, refinementPriceLabels) => {
   const { moreThan, lessThan } = refinementPriceLabels;
@@ -44,20 +40,11 @@ const displayColor = (i) => {
 };
 
 const CurrentRefinements = ({ items, refine, createURL }) => {
-  const [CR, setCR] = useRecoilState(currentRefinementsAtom);
-
-  const equals = (a, b) =>
-    a.length === b.length && a.every((v, i) => v === b[i]);
-
-  // useEffect(() => {
-  if (!equals(items, CR)) {
-    console.log('changed', items, CR);
-    setCR(items);
-  }
-  // }, []);
-
   const { colourHexa } = hitsConfig;
   const currencySymbol = useRecoilValue(currencySymbolAtom);
+
+  items = items.filter((item, index, array) => array.findIndex(t => t.attribute == item.attribute) == index);
+
   return (
     <ul className="refinement-container__refinements">
       {items.map((item) => {
