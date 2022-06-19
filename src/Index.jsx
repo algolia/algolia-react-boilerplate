@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 // React Tour
 import { TourProvider } from '@reactour/tour';
 
@@ -7,10 +7,13 @@ import App from './App';
 
 import { steps } from '@/config/demoTourConfig'
 
-ReactDOM.render(
+
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(
   // React Tour
   <TourProvider steps={steps} showBadge={false}>
     <App />
-  </TourProvider>,
-  document.querySelector('#root')
+  </TourProvider>
 );
