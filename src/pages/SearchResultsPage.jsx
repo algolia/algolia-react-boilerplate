@@ -96,11 +96,6 @@ const SearchResultPage = ({ setIsMounted }) => {
 const NoResults = () => {
   //Get the query
   const getQueryState = useRecoilValue(queryAtom);
-  console.log(
-    '🚀 ~ file: SearchResultsPage.jsx ~ line 103 ~ NoResults ~ getQueryState',
-    getQueryState
-  );
-
   const getSearches = localStorage.getItem('objectId');
   const cleanSearches = JSON.parse(getSearches);
   const lastId = cleanSearches?.[cleanSearches.length - 1];
@@ -186,16 +181,23 @@ const NoResults = () => {
 // const NoResultsHandler = connectStateResults(NoResultsHandlerComponent);
 
 function NoResultsHandler(props) {
-  console.log('cc');
+  const { hits } = useHits(props);
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Handle screen resize
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
-  const { hits } = useHits(props);
-  const length = hits.length;
   const { setSrpIsLoaded } = props;
   const { srpIsLoaded } = props;
-  return length ? (
+  useEffect(() => {
+    console.log('UseEffect');
+    return () => {
+      const length = hits.length;
+      return len
+    };
+  }, [hits, length]);
+  console.log(length);
+
+  return length > 0 ? (
     <Suspense fallback={<Loader />}>
       {(laptop || laptopXS) && (
         /* Display the banner if the bannerSrp config is set to: true */
