@@ -7,6 +7,7 @@
     "start": "vite",
     "build": "vite build",
     "serve": "vite --host",
+    "preview": "vite preview --host",
     "format": "prettier --write .",
     "test": "npm run lint",
     "lint": "eslint .",
