@@ -6,7 +6,7 @@ import { framerMotionFooter } from '@/config/animationConfig';
 
 const Footer = (props) => {
   return (
-    <motion.div
+    <div
       className="footer"
       variants={framerMotionFooter}
       initial={framerMotionFooter.initial}
@@ -15,7 +15,7 @@ const Footer = (props) => {
       transition={framerMotionFooter.transition}
     >
       <img src={footer} alt="" />
-    </motion.div>
+    </div>
   );
 };
 
