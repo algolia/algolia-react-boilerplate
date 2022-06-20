@@ -9,6 +9,7 @@
 
 .recommend {
   margin: 2rem 4rem;
+
   .auc-Recommend-list {
     display: flex;
     flex-wrap: nowrap;
@@ -25,6 +26,7 @@
     font-weight: bold;
     font-size: 1.5rem;
   }
+
   h3 {
     color: #207def;
     font-size: 2rem;
@@ -36,12 +38,10 @@
   }
 
   .relatedItem {
-    @include hits-individual(
-      $main-color,
+    @include hits-individual($main-color,
       $blue-algolia,
       $blue-algolia,
-      $blue-algolia
-    );
+      $blue-algolia );
   }
 }
 

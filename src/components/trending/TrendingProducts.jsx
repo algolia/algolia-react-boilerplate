@@ -12,7 +12,7 @@ import { trendingConfig } from '@/config/trendingConfig';
 import { refinementsAtom } from "@/config/refinementsConfig";
 
 // Trending provides a carousel of trending products, filtered if needed by any facet
-const TrendingProducts = ({ facetName, facetValue }) => {
+const TrendingProducts = () => {
   // define the client for using Recommend
 
   const index = useRecoilValue(mainIndex);

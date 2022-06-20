@@ -118,6 +118,20 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
           className="srp-container__facets"
         >
           <Suspense fallback={''}>
+
+            {/* Render Recommend component - Trending Facets */}
+            {/* Change config in /config/trendingConfig.js */}
+            <div className="recommend">
+              {shouldHaveTrendingFacetsValue && (
+                <WrappedTrendingFacetValues
+                  attribute="brand"
+                  facetName={"brand"}
+                  limit={500}
+                  facetValue={facetValue}
+                />
+              )}
+            </div>
+
             <GenericRefinementList />
           </Suspense>
         </motion.div>
@@ -167,19 +181,6 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
             getRankingInfo={true}
           />
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
-
-          {/* Render Recommend component - Trending Facets */}
-          {/* Change config in /config/trendingConfig.js */}
-          <div className="recommend">
-            {shouldHaveTrendingFacetsValue && (
-              <WrappedTrendingFacetValues
-                attribute="brand"
-                facetName={"brand"}
-                limit={500}
-                facetValue={facetValue}
-              />
-            )}
-          </div>
 
           {/* Render Recommend component - Trending Products Slider */}
           {/* Change header and maxRecommendations in /config/trendingConfig.js */}
