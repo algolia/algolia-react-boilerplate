@@ -93,6 +93,7 @@ SearchResultsPage.jsx
 
 - Recommend components
   - Trending Products
+  - Trending Facet Values
 
 ProductDetails.jsx
 
@@ -166,8 +167,8 @@ We wrote a Gdoc to detail how use [FIG](https://github.com/algolia/fake-insights
 
 Recommend is present in this app on the homepage, search results page, product details page, and also on the NoResultsPage.
 
-Homepage: Trends
-Results Page: Trends
+Homepage: Trending products
+Results Page: Trending products and trending facet values
 PDP: Related and FBT
 NRP: Related
 

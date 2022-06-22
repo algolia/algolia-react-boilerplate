@@ -11,12 +11,13 @@ import { trendingConfig } from '@/config/trendingConfig';
 const TrendingFacetValues = ({ items, refine }) => {
 
   const index = useRecoilValue(mainIndex);
+  const { facetValuesAttribute, facetValuesTitle, maxFacetValuesRecommendations } = trendingConfig
 
   const { recommendations } = useTrendingFacets({
     recommendClient,
     indexName: index,
-    facetName: 'brand',
-    maxRecommendations: 4
+    facetName: facetValuesAttribute,
+    maxRecommendations: maxFacetValuesRecommendations
   });
 
   const TrendingFacetsItem = ({ trendingFacetValue }) => {
@@ -65,7 +66,7 @@ const TrendingFacetValues = ({ items, refine }) => {
         recommendations.length > 0 && (
           <div class="filters-container">
             <div class="filters-container__title">
-              <h4>Trending Brands</h4>
+              <h4>{facetValuesTitle}</h4>
             </div>
             <div class="filters-container__list">
             </div>

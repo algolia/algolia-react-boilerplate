@@ -1,7 +1,18 @@
-// Config to customise the trending products carousel on home page
+// Config to customise trending. There are two kinds:
+// Trending products: shown on homepage, results page and category pages
+// Trending facet values: shown on results pages
+
 export const trendingConfig = {
+  // Title for trending products carousel
   productsTitle: 'Trending Products',
+  // Title for trending facet values refinement list
   facetValuesTitle: 'Trending Brands',
-  maxRecommendations: 10,
-  threshold: 2, // recommendations confidence score (between 0 and 100). Only recommendations with a greater score are returned.
+  // Attribute on which you've trained trending facet values
+  facetValuesAttribute: 'brand',
+  // The maximum number of trending products to retrieve/display
+  maxProductsRecommendations: 10,
+  // The maximum number of trending facet values to retrieve/display
+  maxFacetValuesRecommendations: 4,
+  // Recommendations confidence score (between 0 and 100). Only recommendations with a greater score are returned.
+  threshold: 2
 };

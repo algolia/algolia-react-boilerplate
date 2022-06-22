@@ -15,6 +15,7 @@ const TrendingProducts = ({ facetName, facetValue }) => {
   // define the client for using Recommend
 
   const index = useRecoilValue(mainIndex);
+  const { threshold, productsTitle, maxProductsRecommendations } = trendingConfig
 
   return (
     <div>
@@ -22,10 +23,10 @@ const TrendingProducts = ({ facetName, facetValue }) => {
         recommendClient={recommendClient}
         indexName={index}
         itemComponent={RelatedItem}
-        maxRecommendations={trendingConfig.maxRecommendations}
+        maxRecommendations={maxProductsRecommendations}
         view={HorizontalSlider}
-        headerComponent={() => <h3>{trendingConfig.productsTitle}</h3>}
-        threshold={trendingConfig.threshold}
+        headerComponent={() => <h3>{productsTitle}</h3>}
+        threshold={threshold}
         facetName={facetName}
         facetValue={facetValue}
       />
