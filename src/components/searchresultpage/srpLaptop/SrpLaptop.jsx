@@ -5,14 +5,8 @@ import { lazily } from 'react-lazily';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
-import { Hit } from '@/components/hits/Hits';
-import InfluencerCard from '@/components/hits/InfluencerCard';
-import NoCtaCard from '@/components/hits/NoCtaCard';
-import SalesCard from '@/components/hits/SalesCard';
-import Redirect from '@/components/redirects/Redirect';
-import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
+import SkeletonLoader from '../../hits/HitsSkeletonLoader';
 import FacetsSkeletonLoader from '@/components/facets/FacetsSkeletonLoader';
-
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
 import NoCtaCard from '@/components/hits/NoCtaCard';
@@ -21,7 +15,6 @@ import Redirect from '@/components/redirects/Redirect';
 import WrappedTrendingFacetValues from '@/components/trending/TrendingFacetValues';
 import TrendingProducts from '@/components/trending/TrendingProducts';
 import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
-import { framerMotionPage, framerMotionFacet } from '@/config/animationConfig';
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
@@ -35,8 +28,6 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { customDataByType } from '@/utils';
-
-import SkeletonLoader from '../../hits/HitsSkeletonLoader';
 
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/ClearRefinement')
@@ -115,24 +106,11 @@ const SrpLaptop = () => {
           <TrendingProducts facetName={facetName} facetValue={facetValue} />
         )}
       </div>
-      <motion.div
-        className={`${srpIsLoaded === false ? 'srp-hidden' : 'srp-active'
-          } srp-container`}
-        variants={framerMotionPage}
-        initial={framerMotionPage.initial}
-        animate={framerMotionPage.animate}
-        exit={framerMotionPage.exit}
-        transition={framerMotionPage.transition}
+      <div
+        className='srp-active srp-container'
       >
-        <motion.div
-          variants={framerMotionFacet}
-          initial={framerMotionFacet.initial}
-          animate={framerMotionFacet.animate}
-          exit={framerMotionFacet.exit}
-          transition={framerMotionFacet.transition}
-          className="srp-container__facets"
-        >
-          <Suspense fallback={''}>
+        <div className="srp-container__facets">
+          <Suspense fallback={<FacetsSkeletonLoader />}>
 
             {/* Render Recommend component - Trending Facets */}
             {/* Change config in /config/trendingConfig.js */}
