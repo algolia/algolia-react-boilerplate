@@ -96,7 +96,7 @@ const FederatedSearch = () => {
   } = federatedSearchConfig;
 
   return (
-    <motion.div
+    <div
       className={`${
         mobile || tablet ? 'federatedSearch-mobile' : 'federatedSearch'
       }`}
@@ -161,7 +161,7 @@ const FederatedSearch = () => {
         )}
       </div>
       <Redirect />
-    </motion.div>
+    </div>
   );
 };
 

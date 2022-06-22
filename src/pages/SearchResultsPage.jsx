@@ -10,10 +10,11 @@ import { memo, useEffect, lazy, Suspense, useRef, useState } from 'react';
 import { RelatedProducts } from '@algolia/recommend-react';
 import algoliarecommend from '@algolia/recommend';
 import RelatedItem from '@/components/recommend/RelatedProducts';
-import SkeletonLoader from '@/components/searchresultpage/srpLaptop/SkeletonLoader';
+import SkeletonLoader from '@/components/hits/HitsSkeletonLoader';
 
 // Algolia search client
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 // define the client for using Recommend
 const recommendClient = algoliarecommend(
@@ -62,7 +63,6 @@ const SrpMobile = lazy(() =>
 );
 
 const SearchResultPage = ({ setIsMounted }) => {
-  const [srpIsLoaded, setSrpIsLoaded] = useState(false);
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Close federated and set value false for return without it
@@ -84,31 +84,37 @@ const SearchResultPage = ({ setIsMounted }) => {
     };
   }, []);
 
+  const [useSkeleton, setUseSkeleton] = useState(true);
+
+  // This will run one time after the component mounts
+  useEffect(() => {
+    const onPageLoad = () => {
+      setUseSkeleton(false);
+    };
+
+    // Check if the page has already loaded
+    if (document.readyState === 'complete') {
+      onPageLoad();
+    } else {
+      window.addEventListener('load', onPageLoad);
+      // Remove the event listener when component unmounts
+      return () => window.removeEventListener('load', onPageLoad);
+    }
+  }, []);
+
   return (
     <div ref={srpMounted} className="srp">
-      {/* Create a skeleton while page is loading */}
       <NoResultsHandler>
-        <AnimatePresence>
-          {srpIsLoaded === false && <SkeletonLoader />}
-        </AnimatePresence>
+        {/* Create a skeleton while page is loading */}
+        {/* <AnimatePresence>{useSkeleton && <SkeletonLoader />}</AnimatePresence> */}
 
         {/* Display the banner if the bannerSrp config is set to: true */}
         {shouldDisplayBanners && <Banner />}
         {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
 
-        <Suspense fallback={''}>
-          {(laptop || laptopXS) && (
-            <SrpLaptop
-              setSrpIsLoaded={setSrpIsLoaded}
-              srpIsLoaded={srpIsLoaded}
-            />
-          )}
-          {(tablet || mobile) && (
-            <SrpMobile
-              setSrpIsLoaded={setSrpIsLoaded}
-              srpIsLoaded={srpIsLoaded}
-            />
-          )}
+        <Suspense fallback={<div style={{ height: "2004px" }}></div>}>
+          {(laptop || laptopXS) && <SrpLaptop />}
+          {(tablet || mobile) && <SrpMobile />}
         </Suspense>
       </NoResultsHandler>
     </div>

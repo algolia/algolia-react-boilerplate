@@ -23,9 +23,7 @@ import TrendingProducts from '@/components/trending/TrendingProducts';
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import { framerMotionPage } from '@/config/animationConfig';
 
-// Recoil state to directly access results
 
-// Import Persona State from recoil
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
@@ -58,7 +56,7 @@ const FacetsMobile = lazy(() =>
   import('@/components/facets/facetsMobile/FacetsMobile')
 );
 
-const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
+const SrpMobile = () => {
   // Recoil & React states
   const [injected, setInjected] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -80,7 +78,7 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
   const { injectedContentIndex } = useRecoilValue(indexNames);
 
   // Define Price Sort By
-  const { value, labelIndex } = useRecoilValue(sortBy);
+  const { labelIndex } = useRecoilValue(sortBy);
 
   // Get states of React Router
   const { state } = useLocation();
@@ -112,12 +110,10 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
   }
 
   return (
-    <div
-      className={`${
-        srpIsLoaded === false ? 'srp-hidden' : 'srp-active'
-      } srp-container-mobile`}
-    >
+    <div className={'srp-active srp-container-mobile'}>
       <div
+        role="menu"
+        tabIndex={0}
         className={`${
           isMenuOpen ? 'facets-slider-active' : 'facets-slider-inactive'
         } facets-slider`}
@@ -131,7 +127,7 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
       <Suspense fallback={<Loader />}>
         <FacetsMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </Suspense>
-      <motion.div
+      <div
         className="srp-container__hits"
         variants={framerMotionPage}
         initial={framerMotionPage.initial}
@@ -199,7 +195,6 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
               <Configure hitsPerPage={1} page={0} />
             </Index>
             <InjectedHits
-              setSrpIsLoaded={setSrpIsLoaded}
               hitComponent={Hit}
               slots={({ resultsByIndex }) => {
                 const { noCta, salesCard } = customDataByType(
@@ -238,11 +233,11 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
           </Suspense>
         ) : (
           <Suspense fallback={<Loader />}>
-            <CustomHitsComponent setSrpIsLoaded={setSrpIsLoaded} />
+            <CustomHitsComponent />
           </Suspense>
         )}
         <Redirect />
-      </motion.div>
+      </div>
     </div>
   );
 };

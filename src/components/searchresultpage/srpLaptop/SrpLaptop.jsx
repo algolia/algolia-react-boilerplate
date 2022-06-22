@@ -1,10 +1,17 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { motion } from 'framer-motion';
 import { lazy, useState, Suspense } from 'react';
 import { Pagination, Configure, Index } from 'react-instantsearch-dom';
 import { lazily } from 'react-lazily';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
+// Import Components
+import { Hit } from '@/components/hits/Hits';
+import InfluencerCard from '@/components/hits/InfluencerCard';
+import NoCtaCard from '@/components/hits/NoCtaCard';
+import SalesCard from '@/components/hits/SalesCard';
+import Redirect from '@/components/redirects/Redirect';
+import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
+import FacetsSkeletonLoader from '@/components/facets/FacetsSkeletonLoader';
 
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
@@ -29,6 +36,8 @@ import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { customDataByType } from '@/utils';
 
+import SkeletonLoader from '../../hits/HitsSkeletonLoader';
+
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/ClearRefinement')
 );
@@ -46,9 +55,8 @@ const { InjectedHits } = lazily(() =>
   import('@/components/searchresultpage/injected-hits')
 );
 
-const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
+const SrpLaptop = () => {
   // Recoil & React states
-
   const stats = useRecoilValue(shouldHaveStats);
   const queryState = useRecoilValue(queryAtom);
   const [injected, setInjected] = useState(false);
@@ -140,15 +148,8 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
             </div>
             <GenericRefinementList />
           </Suspense>
-        </motion.div>
-        <motion.div
-          className="srp-container__hits"
-          variants={framerMotionPage}
-          initial={framerMotionPage.initial}
-          animate={framerMotionPage.animate}
-          exit={framerMotionPage.exit}
-          transition={framerMotionPage.transition}
-        >
+        </div>
+        <div className="srp-container__hits">
           {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
           <div className="srp-container__stats-sort">
             {stats && (
@@ -190,12 +191,11 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
 
 
           {shouldInjectContent ? (
-            <Suspense fallback={''}>
+            <Suspense fallback={<SkeletonLoader />}>
               <Index indexName={injectedContentIndex}>
                 <Configure hitsPerPage={1} page={0} />
               </Index>
               <InjectedHits
-                setSrpIsLoaded={setSrpIsLoaded}
                 hitComponent={Hit}
                 slots={({ resultsByIndex }) => {
                   const { noCta, salesCard } = customDataByType(
@@ -233,14 +233,14 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
               />
             </Suspense>
           ) : (
-            <Suspense fallback={''}>
-              <CustomHitsComponent setSrpIsLoaded={setSrpIsLoaded} />
+            <Suspense fallback={<SkeletonLoader />}>
+              <CustomHitsComponent />
             </Suspense>
           )}
           <Pagination />
           <Redirect />
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </>
   );
 };

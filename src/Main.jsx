@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import { InstantSearch } from 'react-instantsearch-dom';
 
 // application state from config file
@@ -7,19 +5,15 @@ import { searchClient } from './config/algoliaEnvConfig';
 
 // Framer-Motion
 import { AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 // React router
 import { Routes, Route, useLocation } from 'react-router-dom';
 
-//Recoil states & values
+// Recoil states & values
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 
-//Import help navigation state & config
-import {
-  isDemoGuideOpen,
-  shouldShowDemoGuide,
-  shouldShowAlert,
-} from '@/config/demoGuideConfig';
+// Import help navigation state & config
 
 import { isRulesSwitchToggle } from './config/appliedRulesConfig';
 
@@ -41,6 +35,11 @@ import CustomAppliedRules from './components/appliedRules/AppliedRules';
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
+import {
+  isDemoGuideOpen,
+  shouldShowDemoGuide,
+  shouldShowAlert,
+} from '@/config/demoGuideConfig';
 
 export const Main = () => {
   const index = useRecoilValue(mainIndex);
@@ -64,7 +63,6 @@ export const Main = () => {
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
       <CustomStateResults />
-      <div className='visible'>
         <Header />
         <DemoGuideOpener />
         <AnimatePresence>
@@ -72,7 +70,7 @@ export const Main = () => {
             <DemoGuide setshowDemoGuide={setshowDemoGuide} />
           )}
         </AnimatePresence>
-        <AnimatePresence initial={true} exitBeforeEnter>
+        <AnimatePresence initial={true}>
           <Routes key={location.pathname} location={location}>
             <Route
               path="/"

@@ -71,7 +71,7 @@ const HomePage = ({ setIsMounted }) => {
 
   return (
     // Framer motion wrapper
-    <motion.div
+    <div
       className="homepage"
       // initial state
       initial={framerMotionPage.initial}
@@ -119,7 +119,7 @@ const HomePage = ({ setIsMounted }) => {
       {homepage_1 ? <img src={homepage_1} alt="" /> : null}
 
       {homepage_2 && <img src={homepage_2} alt="" />}
-    </motion.div>
+    </div>
   );
 };
 

@@ -31,11 +31,10 @@ import Badge from './Badge';
 //Import hook for store ID into local storage
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 
-
 // import Price component
 import Price from '@/components/price/price.jsx';
 
-const Hit = ({ hit, setSrpIsLoaded }) => {
+const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
@@ -44,15 +43,10 @@ const Hit = ({ hit, setSrpIsLoaded }) => {
   const { objectID, image, imageAlt, category, productName } = hitsConfig;
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
-  useEffect(() => {
-    setSrpIsLoaded(true);
-
-    // return () => setSrpIsLoaded(false);
-  }, [hit]);
 
   const RankingFormulaOverlay = ({ hit }) => {
     return (
-      <motion.div
+      <div
         layout
         variants={framerMotionHits}
         initial={framerMotionHits.initial}
@@ -70,7 +64,7 @@ const Hit = ({ hit, setSrpIsLoaded }) => {
             {entry[0]} {JSON.stringify(entry[1])}
           </p>
         ))}
-      </motion.div>
+      </div>
     );
   };
 
@@ -97,7 +91,7 @@ const Hit = ({ hit, setSrpIsLoaded }) => {
         {shouldShowRankingInfo && <RankingFormulaOverlay hit={hit} />}
       </AnimatePresence>
       <>
-        <motion.div
+        <div
           className="srpItem__imgWrapper"
           onMouseLeave={(e) => {
             setIsHovered(false);
@@ -140,7 +134,7 @@ const Hit = ({ hit, setSrpIsLoaded }) => {
           <div className="srpItem__imgWrapper__heart">
             <Heart />
           </div>
-        </motion.div>
+        </div>
         <div className="srpItem__infos">
           <h3>
             <Highlight hit={hit} attribute={productName} />
