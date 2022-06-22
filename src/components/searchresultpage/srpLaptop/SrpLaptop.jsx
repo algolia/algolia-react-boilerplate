@@ -100,6 +100,13 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
 
   return (
     <>
+      {/* Render Recommend component - Trending Products Slider */}
+      {/* Change header and maxRecommendations in /config/trendingConfig.js */}
+      <div className="recommend">
+        {shouldHaveTrendingProductsValue && queryState === "" && (
+          <TrendingProducts facetName={facetName} facetValue={facetValue} />
+        )}
+      </div>
       <motion.div
         className={`${srpIsLoaded === false ? 'srp-hidden' : 'srp-active'
           } srp-container`}
@@ -121,7 +128,7 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
 
             {/* Render Recommend component - Trending Facets */}
             {/* Change config in /config/trendingConfig.js */}
-            <div className="recommend">
+            <div className="">
               {shouldHaveTrendingFacetsValue && (
                 <WrappedTrendingFacetValues
                   attribute="brand"
@@ -131,7 +138,6 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
                 />
               )}
             </div>
-
             <GenericRefinementList />
           </Suspense>
         </motion.div>
@@ -182,13 +188,6 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
           />
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
 
-          {/* Render Recommend component - Trending Products Slider */}
-          {/* Change header and maxRecommendations in /config/trendingConfig.js */}
-          <div className="recommend">
-            {shouldHaveTrendingProductsValue && (
-              <TrendingProducts facetName={facetName} facetValue={facetValue} />
-            )}
-          </div>
 
           {shouldInjectContent ? (
             <Suspense fallback={''}>
