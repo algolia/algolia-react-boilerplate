@@ -16,13 +16,13 @@ export const connectInjectedHits = createConnector({
     const resultsByIndex = isSingleIndex
       ? { [mainTargetedIndex]: { ...results, hits } }
       : Object.entries(results).reduce((acc, [indexName, indexResults]) => {
-          const isMainIndex = indexName === mainTargetedIndex;
+        const isMainIndex = indexName === mainTargetedIndex;
 
-          return {
-            ...acc,
-            [indexName]: isMainIndex ? { ...indexResults, hits } : indexResults,
-          };
-        }, {});
+        return {
+          ...acc,
+          [indexName]: isMainIndex ? { ...indexResults, hits } : indexResults,
+        };
+      }, {});
 
     const mainIndexHits = resultsByIndex[mainTargetedIndex]
       ? resultsByIndex[mainTargetedIndex].hits || []
@@ -43,9 +43,9 @@ export const connectInjectedHits = createConnector({
               const shouldInject =
                 typeof injectAt === 'function'
                   ? injectAt({
-                      ...slotScopeProps,
-                      hit,
-                    })
+                    ...slotScopeProps,
+                    hit,
+                  })
                   : position === injectAt;
 
               if (!shouldInject) {
