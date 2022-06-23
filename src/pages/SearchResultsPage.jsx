@@ -204,6 +204,10 @@ const NoResults = () => {
 
 function NoResultsHandler(props) {
   const { hits } = useHits(props);
+  console.log(
+    '🚀 ~ file: SearchResultsPage.jsx ~ line 207 ~ NoResultsHandler ~ hits',
+    hits.length
+  );
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Handle screen resize
