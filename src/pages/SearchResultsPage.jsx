@@ -204,6 +204,7 @@ const NoResults = () => {
 
 function NoResultsHandler(props) {
   const { hits } = useHits(props);
+  const [length, setLength] = useState(0);
   console.log(
     '🚀 ~ file: SearchResultsPage.jsx ~ line 207 ~ NoResultsHandler ~ hits',
     hits.length
@@ -215,13 +216,12 @@ function NoResultsHandler(props) {
   const { setSrpIsLoaded } = props;
   const { srpIsLoaded } = props;
   useEffect(() => {
-    console.log('UseEffect');
-    return () => {
-      const length = hits.length;
-      return length;
-    };
-  }, [hits, length]);
-  console.log(length);
+    setLength(hits.length);
+  }, [hits]);
+
+  useEffect(() => {
+    console.log(length);
+  }, [length]);
 
   return length > 0 ? (
     <Suspense fallback={<Loader />}>
