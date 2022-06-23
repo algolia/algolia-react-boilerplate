@@ -9,13 +9,15 @@ import '@algolia/ui-components-horizontal-slider-theme';
 import RelatedItem from '@/components/recommend/RelatedProducts';
 import { recommendClient, mainIndex } from '@/config/algoliaEnvConfig';
 import { trendingConfig } from '@/config/trendingConfig';
+import { segmentSelectedAtom } from '@/config/segmentConfig';
 
 // Trending provides a carousel of trending products, filtered if needed by any facet
 const TrendingProducts = ({ facetName, facetValue }) => {
   // define the client for using Recommend
 
   const index = useRecoilValue(mainIndex);
-  const { threshold, productsTitle, maxProductsRecommendations } = trendingConfig
+  const { threshold, productsTitle, maxProductsRecommendations } = trendingConfig;
+  const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
 
   return (
     <div>
@@ -29,6 +31,7 @@ const TrendingProducts = ({ facetName, facetValue }) => {
         threshold={threshold}
         facetName={facetName}
         facetValue={facetValue}
+        queryParameters={{ "optionalFilters": segmentOptionalFilters }}
       />
     </div>
   );
