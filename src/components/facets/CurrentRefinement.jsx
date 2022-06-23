@@ -43,7 +43,6 @@ const displayColor = (i) => {
 
 function CurrentRefinements(props) {
   const { items, refine, createURL } = useCurrentRefinements(props);
-  console.log(items);
   const { colourHexa } = hitsConfig;
   const currencySymbol = useRecoilValue(currencySymbolAtom);
 

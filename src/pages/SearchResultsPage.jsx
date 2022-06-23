@@ -205,10 +205,7 @@ const NoResults = () => {
 function NoResultsHandler(props) {
   const { hits } = useHits(props);
   const [length, setLength] = useState(0);
-  console.log(
-    '🚀 ~ file: SearchResultsPage.jsx ~ line 207 ~ NoResultsHandler ~ hits',
-    hits.length
-  );
+
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Handle screen resize
@@ -219,19 +216,15 @@ function NoResultsHandler(props) {
     setLength(hits.length);
   }, [hits]);
 
-  useEffect(() => {
-    console.log(length);
-  }, [length]);
-
   return length > 0 ? (
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<div style={{ height: '2004px' }}></div>}>
       {(laptop || laptopXS) && (
         /* Display the banner if the bannerSrp config is set to: true */
         <div>
           {/* Create a skeleton while page is loading */}
-          <AnimatePresence>
+          {/* <AnimatePresence>
             {srpIsLoaded === false && <SkeletonLoader />}
-          </AnimatePresence>
+          </AnimatePresence> */}
           {/* {shouldDisplayBanners && <Banner />} */}
           <SrpLaptop
             setSrpIsLoaded={setSrpIsLoaded}

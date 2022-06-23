@@ -1,7 +1,7 @@
 const FacetsSkeletonLoader = () => {
-    return (
-        <div class="filters-container">
-            {/* <div class="filters-container__title">
+  return (
+    <div className="filters-container">
+      {/* <div class="filters-container__title">
                 <h3>Brand</h3>
                 <div>
                     <svg viewBox="0 0 897 897" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -76,8 +76,8 @@ const FacetsSkeletonLoader = () => {
                     </button>
                 </li>
             </ul> */}
-        </div>
-    )
-}
+    </div>
+  );
+};
 
-export default FacetsSkeletonLoader
+export default FacetsSkeletonLoader;

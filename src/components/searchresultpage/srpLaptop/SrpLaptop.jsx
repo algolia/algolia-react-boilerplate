@@ -2,15 +2,14 @@
 import { lazy, useState, Suspense, useEffect } from 'react';
 import { lazily } from 'react-lazily';
 
-import Loader from '@/components/loader/Loader';
-import SkeletonLoader from './SkeletonLoader';
-
 // eslint-disable-next-line import/order
 import { Index, Configure, Pagination } from 'react-instantsearch-hooks-web';
 
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
+import Loader from '@/components/loader/Loader';
+import SkeletonLoader from '@/components/hits/HitsSkeletonLoader';
 import FacetsSkeletonLoader from '@/components/facets/FacetsSkeletonLoader';
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
@@ -107,9 +106,9 @@ const SrpLaptop = () => {
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
-        {shouldHaveTrendingProductsValue && queryState === '' && (
+        {/* {shouldHaveTrendingProductsValue && queryState === '' && (
           <TrendingProducts facetName={facetName} facetValue={facetValue} />
-        )}
+        )} */}
       </div>
       <div className="srp-active srp-container">
         <div className="srp-container__facets">
@@ -117,14 +116,14 @@ const SrpLaptop = () => {
             {/* Render Recommend component - Trending Facets */}
             {/* Change config in /config/trendingConfig.js */}
             <div className="">
-              {shouldHaveTrendingFacetsValue && (
+              {/* {shouldHaveTrendingFacetsValue && (
                 <WrappedTrendingFacetValues
                   attribute="brand"
                   facetName={'brand'}
                   limit={500}
                   facetValue={facetValue}
                 />
-              )}
+              )} */}
             </div>
             <GenericRefinementList />
           </Suspense>
@@ -133,23 +132,23 @@ const SrpLaptop = () => {
           {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
           <div className="srp-container__stats-sort">
             {stats && (
-              <Suspense fallback={<Loader />}>
+              <Suspense fallback={''}>
                 <CustomStats />
               </Suspense>
             )}
             {shouldHaveSortsAtom && (
-              <Suspense fallback={<Loader />}>
+              <Suspense fallback={''}>
                 <CustomSortBy items={labelIndex} defaultRefinement={index} />
               </Suspense>
             )}
           </div>
           {/* Refinements, to the left of the items, including a list of currently selected refinements */}
           <div className="refinement-container">
-            <Suspense fallback={<Loader />}>
+            <Suspense fallback={''}>
               <CustomCurrentRefinements />
               <CustomClearRefinements />
             </Suspense>
-          </div>
+          </div>z
           <Configure
             hitsPerPage={
               injected ? hitsPerPageInjected : hitsPerPageNotInjected
