@@ -75,13 +75,13 @@ function Carousel(props) {
     <>
       <h3>{title}</h3>
       {/* This div declares the outer reference for the framer motion */}
-      <div
+      <motion.div
         ref={carousel}
         className="carousel"
         whileTap={{ cursor: 'grabbing' }}
       >
         {/* This div declares the parameters for the carousel dragging effect */}
-        <div
+        <motion.div
           // ADD THAT TO NEW FILE ABOUT ANIMATION IN CONFIG
           drag="x"
           dragConstraints={{ right: 0, left: -width }}
@@ -94,7 +94,7 @@ function Carousel(props) {
               bounceStiffness: 10,
               bounceDamping: 1,
             },
-            framerMotionTransition)
+              framerMotionTransition)
           }
           className="inner-carousel"
         >
@@ -125,8 +125,8 @@ function Carousel(props) {
               </div>
             );
           })}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </>
   );
 }
