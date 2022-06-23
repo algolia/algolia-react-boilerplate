@@ -5,18 +5,22 @@ import { lazily } from 'react-lazily';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
+import SkeletonLoader from '../../hits/HitsSkeletonLoader';
+import FacetsSkeletonLoader from '@/components/facets/FacetsSkeletonLoader';
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
 import NoCtaCard from '@/components/hits/NoCtaCard';
 import SalesCard from '@/components/hits/SalesCard';
 import Redirect from '@/components/redirects/Redirect';
+import WrappedTrendingFacetValues from '@/components/trending/TrendingFacetValues';
+import TrendingProducts from '@/components/trending/TrendingProducts';
 import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
-import FacetsSkeletonLoader from '@/components/facets/FacetsSkeletonLoader';
-
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
   shouldHaveSorts,
+  shouldHaveTrendingProducts,
+  shouldHaveTrendingFacets,
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
@@ -24,7 +28,6 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { customDataByType } from '@/utils';
-import SkeletonLoader from '../../hits/HitsSkeletonLoader';
 
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/ClearRefinement')
@@ -32,6 +35,7 @@ const CustomClearRefinements = lazy(() =>
 const CustomCurrentRefinements = lazy(() =>
   import('@/components/facets/CurrentRefinement')
 );
+
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
 const CustomHitsComponent = lazy(() => import('@/components/hits/CustomHits'));
 const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
@@ -44,7 +48,6 @@ const { InjectedHits } = lazily(() =>
 
 const SrpLaptop = () => {
   // Recoil & React states
-
   const stats = useRecoilValue(shouldHaveStats);
   const queryState = useRecoilValue(queryAtom);
   const [injected, setInjected] = useState(false);
@@ -52,6 +55,7 @@ const SrpLaptop = () => {
   // Should show injected content or not
   // Defined in config file
   const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
+
   // Get indexes Value
   const index = useRecoilValue(mainIndex);
   const { injectedContentIndex } = useRecoilValue(indexNames);
@@ -73,11 +77,53 @@ const SrpLaptop = () => {
   // Segments
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
 
+  // Trending
+  const shouldHaveTrendingProductsValue = useRecoilValue(
+    shouldHaveTrendingProducts
+  );
+
+  // Trending
+  const shouldHaveTrendingFacetsValue = useRecoilValue(
+    shouldHaveTrendingFacets
+  );
+
+  // Related to next conditional
+  let facetName;
+  let facetValue;
+
+  // Trending needs to know if you are on category page
+  if (state?.type === 'filter' && state?.action !== null) {
+    facetName = state.action.split(':')[0];
+    facetValue = state.action.split(':')[1].replace(/['"]+/g, '');
+  }
+
   return (
     <>
-      <div className="srp-container">
-        <div>
+      {/* Render Recommend component - Trending Products Slider */}
+      {/* Change header and maxRecommendations in /config/trendingConfig.js */}
+      <div className="recommend">
+        {shouldHaveTrendingProductsValue && queryState === "" && (
+          <TrendingProducts facetName={facetName} facetValue={facetValue} />
+        )}
+      </div>
+      <div
+        className='srp-active srp-container'
+      >
+        <div className="srp-container__facets">
           <Suspense fallback={<FacetsSkeletonLoader />}>
+
+            {/* Render Recommend component - Trending Facets */}
+            {/* Change config in /config/trendingConfig.js */}
+            <div className="">
+              {shouldHaveTrendingFacetsValue && (
+                <WrappedTrendingFacetValues
+                  attribute="brand"
+                  facetName={"brand"}
+                  limit={500}
+                  facetValue={facetValue}
+                />
+              )}
+            </div>
             <GenericRefinementList />
           </Suspense>
         </div>
@@ -120,6 +166,8 @@ const SrpLaptop = () => {
             getRankingInfo={true}
           />
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
+
+
           {shouldInjectContent ? (
             <Suspense fallback={<SkeletonLoader />}>
               <Index indexName={injectedContentIndex}>

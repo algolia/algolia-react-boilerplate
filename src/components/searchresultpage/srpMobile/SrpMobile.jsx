@@ -1,7 +1,6 @@
 // This is the Search Results Page that you'll see on a phone screen
 import { motion } from 'framer-motion';
 import { lazy, Suspense, useState } from 'react';
-import { Configure, Index } from 'react-instantsearch-dom';
 import { lazily } from 'react-lazily';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
@@ -12,13 +11,25 @@ import InfluencerCard from '@/components/hits/InfluencerCard';
 import NoCtaCard from '@/components/hits/NoCtaCard';
 import SalesCard from '@/components/hits/SalesCard';
 import Loader from '@/components/loader/Loader';
+
+// eslint-disable-next-line import/order
+import { Configure, Index } from 'react-instantsearch-dom';
+
+// import framer motion
+
 import Redirect from '@/components/redirects/Redirect';
+import TrendingFacetValues from '@/components/trending/TrendingFacetValues';
+import TrendingProducts from '@/components/trending/TrendingProducts';
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import { framerMotionPage } from '@/config/animationConfig';
+
+
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
   shouldHaveSorts,
+  shouldHaveTrendingProducts,
+  shouldHaveTrendingFacets,
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
@@ -77,6 +88,26 @@ const SrpMobile = () => {
 
   // Segments
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
+
+  // Trending
+  const shouldHaveTrendingProductsValue = useRecoilValue(
+    shouldHaveTrendingProducts
+  );
+
+  // Trending
+  const shouldHaveTrendingFacetsValue = useRecoilValue(
+    shouldHaveTrendingFacets
+  );
+
+  // Related to next conditional
+  let facetName;
+  let facetValue;
+
+  // Trending needs to know if you are on category page
+  if (state?.type === 'filter' && state?.action !== null) {
+    facetName = state.action.split(':')[0];
+    facetValue = state.action.split(':')[1].replace(/['"]+/g, '');
+  }
 
   return (
     <div className={'srp-active srp-container-mobile'}>
@@ -138,6 +169,25 @@ const SrpMobile = () => {
           query={queryState}
           getRankingInfo={true}
         />
+
+        {/* Render Recommend component - Trending Facets */}
+        {/* Change config in /config/trendingConfig.js */}
+        <div className="recommend">
+          {shouldHaveTrendingFacetsValue && (
+            <TrendingFacetValues
+              facetName={facetName}
+              facetValue={facetValue}
+            />
+          )}
+        </div>
+
+        {/* Render Recommend component - Trending Products Slider */}
+        {/* Change header and maxRecommendations in /config/trendingConfig.js */}
+        <div className="recommend">
+          {shouldHaveTrendingProductsValue && (
+            <TrendingProducts facetName={facetName} facetValue={facetValue} />
+          )}
+        </div>
 
         {shouldInjectContent ? (
           <Suspense fallback={<Loader />}>

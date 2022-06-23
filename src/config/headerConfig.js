@@ -4,7 +4,8 @@
 import { atom } from 'recoil';
 
 // This const defines the logo shown on the header
-export const logoUrl = 'https://upload.wikimedia.org/wikipedia/commons/e/ef/Logo-algolia-nebula-blue-withspaces%402x.png';
+export const logoUrl =
+  'https://upload.wikimedia.org/wikipedia/commons/e/ef/Logo-algolia-nebula-blue-withspaces%402x.png';
 
 // ------------------------------------------
 // This const defines the navigation aspect of the header
@@ -48,12 +49,12 @@ export const linksHeader = atom({
 export const selectorNavigationRef = atom({
   key: 'selectorNavigationRef', // unique ID (with respect to other atoms/selectors)
   default: '',
-})
+});
 
 export const categorySelectionAtom = atom({
   key: 'categorySelectionAtom',
-  default: null
-})
+  default: null,
+});
 
 // This is the state of the 'state' from SearchInCategory.jsx
 // It is used to persist the category underline on refresh

@@ -67,7 +67,10 @@ const SearchResultPage = ({ setIsMounted }) => {
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Close federated and set value false for return without it
   const setFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
-  setFederatedOpen(false);
+
+  useEffect(() => {
+    setFederatedOpen(false);
+  }, [])
 
   // Handle screen resize
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();

@@ -63,7 +63,7 @@ export const Main = () => {
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
       <CustomStateResults />
-      <div>
+      <div className='visible'>
         <Header />
         <DemoGuideOpener />
         <AnimatePresence>

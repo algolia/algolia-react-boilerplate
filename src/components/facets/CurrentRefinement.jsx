@@ -3,7 +3,7 @@
 
 // Recoil State
 import { connectCurrentRefinements } from 'react-instantsearch-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 // import config file for state of facets
 import { currencySymbolAtom } from '@/config/currencyConfig';
@@ -42,6 +42,9 @@ const displayColor = (i) => {
 const CurrentRefinements = ({ items, refine, createURL }) => {
   const { colourHexa } = hitsConfig;
   const currencySymbol = useRecoilValue(currencySymbolAtom);
+
+  items = items.filter((item, index, array) => array.findIndex(t => t.attribute == item.attribute) == index);
+
   return (
     <ul className="refinement-container__refinements">
       {items.map((item) => {

@@ -82,12 +82,9 @@ export const searchTermsInformations = [
   },
 ];
 
-
-
-
 // ------------------------------------------
 // Applied Rules
-// Will show the rules applied in the app while browsing 
+// Will show the rules applied in the app while browsing
 // ------------------------------------------
 // Should we show the applied rules Switcher
 export const shouldShowAppliedRulesSwitcher = atom({

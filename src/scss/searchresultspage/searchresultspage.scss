@@ -7,15 +7,17 @@
 // ------------------------------------------
 // Container
 // ------------------------------------------
-.srp{
+.srp {
   position: relative;
 }
+
 .srp-container {
   width: 95%;
   height: 100%;
   margin: 1rem auto;
   display: flex;
   gap: 3rem;
+
   &__facets {
     width: 18%;
     will-change: width;
@@ -23,11 +25,21 @@
     overflow: visible;
     display: inline-block;
   }
+
   &__hits {
     width: 85%;
     position: relative;
     flex-grow: 2;
     padding: 0 1rem;
+  }
+}
+
+.refined-filter {
+  @include btn-hover($blue-algolia, $white-color);
+
+  p,
+  span {
+    color: $white-color;
   }
 }
 
@@ -38,9 +50,11 @@
 .srp-container__stats-sort {
   display: flex;
   justify-content: space-between;
+
   .stats-infos {
     @include stats($blue-algolia);
   }
+
   select {
     font-size: 0.9rem;
     font-family: $main-font;
@@ -65,6 +79,7 @@
   background-position: center;
   @include bannerSrp($white-color);
 }
+
 // ------------------------------------------
 // No Results
 // ------------------------------------------
@@ -73,21 +88,26 @@
   height: 80vh;
   margin: 0rem auto;
   padding: 2rem 2rem;
+
   &__titles {
     margin-bottom: 2rem;
-    &__span {
-    }
+
+    &__span {}
+
     &__span-query {
       color: $blue-algolia;
       font-weight: 900;
     }
   }
+
   &__infos {
     &__span {
       color: $blue-algolia;
     }
+
     .query-suggestion {
       margin-top: 2rem;
+
       .suggestions {
         &__items {
           display: flex;
@@ -95,6 +115,7 @@
 
           .suggestions__item {
             margin-right: 2rem;
+
             svg {
               width: 8px;
             }
@@ -102,9 +123,11 @@
         }
       }
     }
+
     &__p {
       margin-top: 1rem;
       font-weight: 700;
+
       span {
         font-weight: 700;
         color: $blue-algolia;
@@ -113,24 +136,25 @@
   }
 }
 
-.srp-hidden{
+.srp-hidden {
   opacity: 0;
   visibility: hidden;
 }
 
-.srp-active{
+.srp-active {
   opacity: 0;
   animation: fadeIn 3s forwards cubic-bezier(0.43, 0.13, 0.23, 0.96);
 }
 
 @keyframes fadeIn {
-  0%{
+  0% {
     opacity: 0;
   }
-  100%{
+
+  100% {
     opacity: 1;
   }
-  
+
 }
 
 // ------------------------------------------
@@ -156,6 +180,7 @@
       }
     }
   }
+
   .refinement-container {
     margin: 3rem 0;
   }
@@ -177,14 +202,16 @@
     p {
       font-size: 0.8rem;
     }
+
     svg {
       // margin-top: 0.5rem;
       width: 8px;
       transition: transform 0.3s ease-in-out;
     }
   }
-  .facets-slider-active {
-  }
+
+  .facets-slider-active {}
+
   .facets-slider-inactive {
     z-index: 950;
   }

@@ -12,13 +12,26 @@ import { Heart } from '@/assets/svg/SvgIndex';
 // import Price component
 import Price from '@/components/price/price.jsx';
 
+import { hitAtom } from '@/config/hitsConfig';
+import { useSetRecoilState } from 'recoil';
+
+// React-router import
+import { useNavigate } from 'react-router-dom';
+import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
+
 const RelatedItem = ({ item }) => {
+  const navigate = useNavigate();
+  const hitState = useSetRecoilState(hitAtom);
   // Get hit attribute from config file
-  const { image, category, productName } = hitsConfig;
+  const { image, category, productName, objectID } = hitsConfig;
 
   return (
     <div className="relatedItem">
-      <div className="relatedItem__imgWrapper">
+      <div className="relatedItem__imgWrapper" onClick={() => {
+        hitState(item);
+        navigate(`/search/${item[objectID]}`);
+        useStoreIdToLocalStorage(item[objectID]);
+      }}>
         <img src={item[image]} alt={item[category]} />
         <div className="relatedItem__imgWrapper__heart">
           <Heart />
