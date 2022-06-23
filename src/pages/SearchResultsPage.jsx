@@ -214,7 +214,7 @@ function NoResultsHandler(props) {
     console.log('UseEffect');
     return () => {
       const length = hits.length;
-      return len;
+      return length;
     };
   }, [hits, length]);
   console.log(length);
