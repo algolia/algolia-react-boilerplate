@@ -1,5 +1,4 @@
 import { InstantSearch } from 'react-instantsearch-hooks-web';
-import { useState } from 'react';
 
 // application state from config file
 import { searchClient } from './config/algoliaEnvConfig';
@@ -65,7 +64,7 @@ export const Main = () => {
     <InstantSearch searchClient={searchClient} indexName={index}>
       {/* Comment until Hooks Update */}
       {/* <CustomStateResults /> */}
-      <div className={`${isLoaded ? 'visible' : 'hidden'}`}>
+      <div className="visible">
         <Header />
         <DemoGuideOpener />
         <AnimatePresence>

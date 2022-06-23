@@ -11,7 +11,6 @@ import { Index, Configure, Pagination } from 'react-instantsearch-hooks-web';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
-import SkeletonLoader from '../../hits/HitsSkeletonLoader';
 import FacetsSkeletonLoader from '@/components/facets/FacetsSkeletonLoader';
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';

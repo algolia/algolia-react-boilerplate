@@ -2,7 +2,10 @@
 // Component that renders the Current Refinements (icons above the products)
 
 // Recoil State
-import { useCurrentRefinements, useClearRefinements } from 'react-instantsearch-hooks-web';
+import {
+  useCurrentRefinements,
+  useClearRefinements,
+} from 'react-instantsearch-hooks-web';
 import { useRecoilValue, useRecoilState } from 'recoil';
 // import config file for state of facets
 import { currencySymbolAtom } from '@/config/currencyConfig';
@@ -40,10 +43,14 @@ const displayColor = (i) => {
 
 function CurrentRefinements(props) {
   const { items, refine, createURL } = useCurrentRefinements(props);
+  console.log(items);
   const { colourHexa } = hitsConfig;
   const currencySymbol = useRecoilValue(currencySymbolAtom);
 
-  items = items.filter((item, index, array) => array.findIndex(t => t.attribute == item.attribute) == index);
+  // items = items.filter(
+  //   (item, index, array) =>
+  //     array.findIndex((t) => t.attribute == item.attribute) == index
+  // );
 
   return (
     <ul className="refinement-container__refinements">
