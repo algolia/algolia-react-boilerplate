@@ -38,7 +38,7 @@
 
 1. Clone this repo under a new name for your own demo.
 
-2. Run `npm install` in the root directory and `npm start` to view your project on [http://localhost:3000](http://localhost:3000/)
+2. Run `yarn install` in the root directory and `yarn run` to view your project on [http://localhost:3000](http://localhost:3000/)
 
 3. Visit `src/config` and adjust `algoliaEnvConfig` to point to your own app, indices and API keys. If you do not need an index which is present in that file i.e. for articles, please do not remove it, just leave it as is, and you can turn off the relevant feature in the next step.
 
