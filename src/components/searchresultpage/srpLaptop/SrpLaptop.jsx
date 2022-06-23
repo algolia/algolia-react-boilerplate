@@ -148,7 +148,7 @@ const SrpLaptop = () => {
               <CustomCurrentRefinements />
               <CustomClearRefinements />
             </Suspense>
-          </div>z
+          </div>
           <Configure
             hitsPerPage={
               injected ? hitsPerPageInjected : hitsPerPageNotInjected

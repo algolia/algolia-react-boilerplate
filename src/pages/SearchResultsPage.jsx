@@ -210,8 +210,6 @@ function NoResultsHandler(props) {
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Handle screen resize
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
-  const { setSrpIsLoaded } = props;
-  const { srpIsLoaded } = props;
   useEffect(() => {
     setLength(hits.length);
   }, [hits]);
@@ -219,22 +217,11 @@ function NoResultsHandler(props) {
   return length > 0 ? (
     <Suspense fallback={<div style={{ height: '2004px' }}></div>}>
       {(laptop || laptopXS) && (
-        /* Display the banner if the bannerSrp config is set to: true */
         <div>
-          {/* Create a skeleton while page is loading */}
-          {/* <AnimatePresence>
-            {srpIsLoaded === false && <SkeletonLoader />}
-          </AnimatePresence> */}
-          {/* {shouldDisplayBanners && <Banner />} */}
-          <SrpLaptop
-            setSrpIsLoaded={setSrpIsLoaded}
-            srpIsLoaded={srpIsLoaded}
-          />
+          <SrpLaptop />
         </div>
       )}
-      {(tablet || mobile) && (
-        <SrpMobile setSrpIsLoaded={setSrpIsLoaded} srpIsLoaded={srpIsLoaded} />
-      )}
+      {(tablet || mobile) && <SrpMobile />}
     </Suspense>
   ) : (
     <NoResults />
