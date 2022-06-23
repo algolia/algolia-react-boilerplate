@@ -48,11 +48,13 @@
 
 6. In `src/config` , pay particular attention to `hitsConfig` as this is where we map your own attribute names to those used in the app. You should never adjust the attributes used in the app itself, only this map.
 
-7. Run and test your app locally, if you have any questions, ask #help-demos.
+7. Run and test your app locally, if you have any questions or find any issues please raise an issue with us here https://github.com/algolia/algolia-react-boilerplate/issues.
 
 8. In the `src/scss` folder, adjust any styling you need to based on what you see.
 
-9. Log into Netlify on the Algolia Demos team (again ask #help-demos if you don't have access) and deploy your demo from Github, making sure to password protect it!
+9. Preferrably you can use Netlify to deploy your project, but you can use other deployment tools.
+
+10. Log into Netlify on the Algolia Demos team (again ask #help-demos if you don't have access) and deploy your demo from Github, making sure to password protect it!
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Structure</h2>
 
