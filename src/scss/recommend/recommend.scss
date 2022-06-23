@@ -8,7 +8,8 @@
 // ------------------------------------------
 
 .recommend {
-  padding: 2rem;
+  margin: 2rem 4rem;
+
   .auc-Recommend-list {
     display: flex;
     flex-wrap: nowrap;
@@ -25,9 +26,11 @@
     font-weight: bold;
     font-size: 1.5rem;
   }
+
   h3 {
-    font-weight: bold;
-    font-size: 1.5rem;
+    color: #207def;
+    font-size: 2rem;
+    font-weight: 800;
   }
 
   .auc-Recommend-item {
@@ -35,12 +38,10 @@
   }
 
   .relatedItem {
-    @include hits-individual(
-      $main-color,
+    @include hits-individual($main-color,
       $blue-algolia,
       $blue-algolia,
-      $blue-algolia
-    );
+      $blue-algolia );
   }
 }
 

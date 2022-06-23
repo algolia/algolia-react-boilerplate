@@ -1,39 +1,43 @@
 // This is the Search Results Page that you'll see on a phone screen
-import { lazy, Suspense } from 'react';
+import { motion } from 'framer-motion';
+import { lazy, Suspense, useState } from 'react';
 import { lazily } from 'react-lazily';
+import { useLocation } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
+import { ChevronRight, ChevronLeft } from '@/assets/svg/SvgIndex';
+import { Hit } from '@/components/hits/Hits';
+import InfluencerCard from '@/components/hits/InfluencerCard';
+import NoCtaCard from '@/components/hits/NoCtaCard';
+import SalesCard from '@/components/hits/SalesCard';
 import Loader from '@/components/loader/Loader';
 
-import { useState } from 'react';
 // eslint-disable-next-line import/order
 import { Index, Configure } from 'react-instantsearch-hooks-web';
 
-import { useLocation } from 'react-router-dom';
-
 // import framer motion
-import { motion } from 'framer-motion';
 
+import Redirect from '@/components/redirects/Redirect';
+import TrendingFacetValues from '@/components/trending/TrendingFacetValues';
+import TrendingProducts from '@/components/trending/TrendingProducts';
+import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import { framerMotionPage } from '@/config/animationConfig';
 
-// Recoil state to directly access results
-import { useRecoilValue } from 'recoil';
-
-// Import Persona State from recoil
-import { personaSelectedAtom } from '@/config/personaConfig';
-
-// Import Segment State from recoil
-import { segmentSelectedAtom } from '@/config/segmentConfig';
 
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
   shouldHaveSorts,
+  shouldHaveTrendingProducts,
+  shouldHaveTrendingFacets,
 } from '@/config/featuresConfig';
-import { sortBy } from '@/config/sortByConfig';
+import { hitsPerPage } from '@/config/hitsConfig';
+import { personaSelectedAtom } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
+import { segmentSelectedAtom } from '@/config/segmentConfig';
+import { sortBy } from '@/config/sortByConfig';
+import { customDataByType } from '@/utils';
 
-// Import Components
-import Redirect from '@/components/redirects/Redirect';
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/ClearRefinement')
 );
@@ -41,10 +45,6 @@ const CustomCurrentRefinements = lazy(() =>
   import('@/components/facets/CurrentRefinement')
 );
 const CustomHitsComponent = lazy(() => import('@/components/hits/CustomHits'));
-import NoCtaCard from '@/components/hits/NoCtaCard';
-import { Hit } from '@/components/hits/Hits';
-import InfluencerCard from '@/components/hits/InfluencerCard';
-import SalesCard from '@/components/hits/SalesCard';
 const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
 const { CustomStats } = lazily(() =>
   import('@/components/searchresultpage/Stats')
@@ -55,16 +55,8 @@ const { InjectedHits } = lazily(() =>
 const FacetsMobile = lazy(() =>
   import('@/components/facets/facetsMobile/FacetsMobile')
 );
-import { ChevronRight, ChevronLeft } from '@/assets/svg/SvgIndex';
 
-import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
-
-import { hitsPerPage } from '@/config/hitsConfig';
-
-// Import Config File
-import { customDataByType } from '@/utils';
-
-const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
+const SrpMobile = () => {
   // Recoil & React states
   const [injected, setInjected] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -81,12 +73,12 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
   // Defined in config file
   const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
 
-  //Get indexes Value
+  // Get indexes Value
   const index = useRecoilValue(mainIndex);
   const { injectedContentIndex } = useRecoilValue(indexNames);
 
   // Define Price Sort By
-  const { value, labelIndex } = useRecoilValue(sortBy);
+  const { labelIndex } = useRecoilValue(sortBy);
 
   // Get states of React Router
   const { state } = useLocation();
@@ -97,13 +89,31 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
   // Segments
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
 
+  // Trending
+  const shouldHaveTrendingProductsValue = useRecoilValue(
+    shouldHaveTrendingProducts
+  );
+
+  // Trending
+  const shouldHaveTrendingFacetsValue = useRecoilValue(
+    shouldHaveTrendingFacets
+  );
+
+  // Related to next conditional
+  let facetName;
+  let facetValue;
+
+  // Trending needs to know if you are on category page
+  if (state?.type === 'filter' && state?.action !== null) {
+    facetName = state.action.split(':')[0];
+    facetValue = state.action.split(':')[1].replace(/['"]+/g, '');
+  }
+
   return (
-    <div
-      className={`${
-        srpIsLoaded === false ? 'srp-hidden' : 'srp-active'
-      } srp-container-mobile`}
-    >
+    <div className={'srp-active srp-container-mobile'}>
       <div
+        role="menu"
+        tabIndex={0}
         className={`${
           isMenuOpen ? 'facets-slider-active' : 'facets-slider-inactive'
         } facets-slider`}
@@ -117,7 +127,7 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
       <Suspense fallback={<Loader />}>
         <FacetsMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </Suspense>
-      <motion.div
+      <div
         className="srp-container__hits"
         variants={framerMotionPage}
         initial={framerMotionPage.initial}
@@ -160,13 +170,31 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
           getRankingInfo={true}
         />
 
+        {/* Render Recommend component - Trending Facets */}
+        {/* Change config in /config/trendingConfig.js */}
+        <div className="recommend">
+          {shouldHaveTrendingFacetsValue && (
+            <TrendingFacetValues
+              facetName={facetName}
+              facetValue={facetValue}
+            />
+          )}
+        </div>
+
+        {/* Render Recommend component - Trending Products Slider */}
+        {/* Change header and maxRecommendations in /config/trendingConfig.js */}
+        <div className="recommend">
+          {shouldHaveTrendingProductsValue && (
+            <TrendingProducts facetName={facetName} facetValue={facetValue} />
+          )}
+        </div>
+
         {shouldInjectContent ? (
           <Suspense fallback={<Loader />}>
             <Index indexName={injectedContentIndex}>
               <Configure hitsPerPage={1} page={0} />
             </Index>
             <InjectedHits
-              setSrpIsLoaded={setSrpIsLoaded}
               hitComponent={Hit}
               slots={({ resultsByIndex }) => {
                 const { noCta, salesCard } = customDataByType(
@@ -205,11 +233,11 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
           </Suspense>
         ) : (
           <Suspense fallback={<Loader />}>
-            <CustomHitsComponent setSrpIsLoaded={setSrpIsLoaded} />
+            <CustomHitsComponent />
           </Suspense>
         )}
         <Redirect />
-      </motion.div>
+      </div>
     </div>
   );
 };

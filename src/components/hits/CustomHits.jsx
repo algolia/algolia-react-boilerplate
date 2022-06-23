@@ -13,7 +13,7 @@ function CustomHits(props) {
       <ul className="ais-InfiniteHits-list">
         {hits.map((hit, i) => {
           // Wrap the hit info in an animation, and click functionality to view the product
-          return <Hit hit={hit} key={i} setSrpIsLoaded={setSrpIsLoaded} />;
+          return <Hit hit={hit} key={i} />;
         })}
       </ul>
     </div>

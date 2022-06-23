@@ -10,10 +10,11 @@ import { memo, useEffect, lazy, Suspense, useRef, useState } from 'react';
 import { RelatedProducts } from '@algolia/recommend-react';
 import algoliarecommend from '@algolia/recommend';
 import RelatedItem from '@/components/recommend/RelatedProducts';
-import SkeletonLoader from '@/components/searchresultpage/srpLaptop/SkeletonLoader';
+import SkeletonLoader from '@/components/hits/HitsSkeletonLoader';
 
 // Algolia search client
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 // define the client for using Recommend
 const recommendClient = algoliarecommend(
@@ -59,7 +60,10 @@ const SearchResultPage = ({ setIsMounted }) => {
   const [srpIsLoaded, setSrpIsLoaded] = useState(false);
   // Close federated and set value false for return without it
   const setFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
-  setFederatedOpen(false);
+
+  useEffect(() => {
+    setFederatedOpen(false);
+  }, []);
 
   // Handle screen resize
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();
@@ -71,6 +75,24 @@ const SearchResultPage = ({ setIsMounted }) => {
       srpMounted.current = false;
       setIsMounted(srpMounted.current);
     };
+  }, []);
+
+  const [useSkeleton, setUseSkeleton] = useState(true);
+
+  // This will run one time after the component mounts
+  useEffect(() => {
+    const onPageLoad = () => {
+      setUseSkeleton(false);
+    };
+
+    // Check if the page has already loaded
+    if (document.readyState === 'complete') {
+      onPageLoad();
+    } else {
+      window.addEventListener('load', onPageLoad);
+      // Remove the event listener when component unmounts
+      return () => window.removeEventListener('load', onPageLoad);
+    }
   }, []);
 
   return (
@@ -192,7 +214,7 @@ function NoResultsHandler(props) {
     console.log('UseEffect');
     return () => {
       const length = hits.length;
-      return len
+      return len;
     };
   }, [hits, length]);
   console.log(length);

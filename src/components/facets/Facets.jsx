@@ -60,9 +60,8 @@ function GenericRefinementList(props) {
         {items.map((item) => (
           <li className="filters-container__content__list" key={item.value}>
             <button
-              className={`filters-container__content__list__button-filter ${
-                item.isRefined ? 'refined-filter' : ''
-              }`}
+              className={`filters-container__content__list__button-filter ${item.isRefined ? 'refined-filter' : ''
+                }`}
               type="button"
               href="#"
               onClick={(event) => {
@@ -106,7 +105,9 @@ const CustomColorRefinement = ({
 const Facets = () => {
   return (
     <div>
-      <DynamicWidgets>
+      <DynamicWidgets
+        maxValuesPerFacet={500}
+      >
         {refinements.map((e, i) => {
           const { type, currency, label, options } = e;
           switch (type) {

@@ -2,6 +2,7 @@
 // Configuration for Sort By
 // ------------------------------------------
 import { selector } from 'recoil';
+
 import { mainIndex } from './algoliaEnvConfig';
 
 // This const defines the indices for sorts, please add or remove from the array as needed
@@ -13,8 +14,8 @@ export const sortBy = selector({
       value: true,
       labelIndex: [
         { value: get(mainIndex), label: 'All' },
-        { value: get(mainIndex) + '_price_desc', label: 'Price Desc' },
-        { value: get(mainIndex) + '_price_asc', label: 'Price Asc' },
+        { value: `${get(mainIndex)}_price_desc`, label: 'Price Desc' },
+        { value: `${get(mainIndex)}_price_asc`, label: 'Price Asc' },
       ],
     };
   },

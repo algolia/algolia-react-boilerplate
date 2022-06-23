@@ -59,7 +59,7 @@ const DemoGuide = ({ setshowDemoGuide }) => {
   );
 
   return (
-    <motion.div
+    <div
       ref={demoGuide}
       className={`${
         tablet || mobile ? 'helpNavigation-mobile' : ''
@@ -114,7 +114,7 @@ const DemoGuide = ({ setshowDemoGuide }) => {
           </li>
         )}
       </ul>
-    </motion.div>
+    </div>
   );
 };
 

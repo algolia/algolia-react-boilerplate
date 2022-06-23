@@ -91,6 +91,10 @@ SearchResultsPage.jsx
 - called by Main.jsx for route `/search`
 - loads components related to results
 
+- Recommend components
+  - Trending Products
+  - Trending Facet Values
+
 ProductDetails.jsx
 
 - Display attributes of an individual product
@@ -161,9 +165,12 @@ Use FIG to generate the CSVs needed for Recommend, which you can then upload to 
 
 We wrote a Gdoc to detail how use [FIG](https://github.com/algolia/fake-insights-generator). You can find it [here](https://docs.google.com/document/d/1T8ClZX5I06D-NpV9ZehFCXA_yx095cCFd7P2e3VeM5U/edit?usp=sharing).
 
-Recommend is present in this app on the PDP, and also on the NoResultsPage with RelatedProductsCarousel.
+Recommend is present in this app on the homepage, search results page, product details page, and also on the NoResultsPage.
 
-"Trends" will be implementated in future, because we're waiting for FIG to integrate a CSV facility to generate Trends.
+Homepage: Trending products
+Results Page: Trending products and trending facet values
+PDP: Related and FBT
+NRP: Related
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Styling</h3>
 

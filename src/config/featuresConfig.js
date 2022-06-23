@@ -54,7 +54,7 @@ export const shouldHavePersona = atom({
 // Please see https://github.com/algolia/algolia-react-boilerplate#--injected-content for more info on injected content
 export const shouldHaveInjectedHits = atom({
   key: 'shouldHaveInjectedHits',
-  default: false,
+  default: true,
 });
 
 export const shouldHaveFederatedSearch = atom({
@@ -72,9 +72,15 @@ export const shouldHaveFbtProducts = atom({
   default: true, // default value (aka initial value)
 });
 
-// this feature will be visible in the home page if activated -> (activated by default)
+// this feature will be visible on home, results and category pages if activated -> (activated by default)
 export const shouldHaveTrendingProducts = atom({
   key: 'shouldHaveTrendingProductsAtom', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+});
+
+// this feature will be visible on home, results and category pages if activated -> (activated by default)
+export const shouldHaveTrendingFacets = atom({
+  key: 'shouldHaveTrendingFacetsAtom', // unique ID (with respect to other atoms/selectors)
   default: true, // default value (aka initial value)
 });
 

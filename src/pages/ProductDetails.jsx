@@ -132,7 +132,7 @@ const ProductDetails = () => {
           <ChevronLeft />
           <p>Back to search</p>
         </div>
-        <motion.div
+        <div
           initial={{
             opacity: 0,
           }}
@@ -142,7 +142,7 @@ const ProductDetails = () => {
           }}
           className={`${mobile || tablet ? 'pdp-mobile__left' : 'pdp__left'}`}
         >
-          <motion.div
+          <div
             className="container"
             initial={{
               height: '100%',
@@ -155,7 +155,7 @@ const ProductDetails = () => {
               transition: { delay: 0.2, framerMotionTransition },
             }}
           >
-            <motion.div className="imageWrapper">
+            <div className="imageWrapper">
               <motion.img
                 whileHover={{ scale: 1.05 }}
                 transition={framerMotionTransition}
@@ -163,13 +163,13 @@ const ProductDetails = () => {
                 alt=""
                 onError={(e) => (e.currentTarget.src = placeHolderError)}
               />
-            </motion.div>
-          </motion.div>
-        </motion.div>
+            </div>
+          </div>
+        </div>
         <div
           className={`${mobile || tablet ? 'pdp-mobile__right' : 'pdp__right'}`}
         >
-          <motion.div
+          <div
             className="pdp__right__infos"
             initial={{
               opacity: 0,
@@ -205,13 +205,13 @@ const ProductDetails = () => {
             {PDPHitSections.sizeFilter && get(hit, sizeFilter)?.length > 0 && (
               <div className="sizes">
                 <p>Available size(s):</p>
-                <motion.div className="sizeList">
+                <div className="sizeList">
                   {get(hit, sizeFilter).map((size, i) => (
-                    <motion.div className="size" key={i}>
+                    <div className="size" key={i}>
                       <p>{size}</p>
-                    </motion.div>
+                    </div>
                   ))}
-                </motion.div>
+                </div>
               </div>
             )}
             {/* Add to cart button which sends an Insights API call to Algolia but only if there is no size filter */}
@@ -247,11 +247,11 @@ const ProductDetails = () => {
                 <Price hit={hit} />
               </motion.p>
             )}
-          </motion.div>
+          </div>
         </div>
       </div>
       {/* Render two Recommend components - Related Products, Frequently Bought Together */}
-      <motion.div
+      <div
         className="recommend"
         initial={{
           opacity: 0,
@@ -285,7 +285,7 @@ const ProductDetails = () => {
             />
           </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 };

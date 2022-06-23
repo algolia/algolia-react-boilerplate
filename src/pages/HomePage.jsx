@@ -1,23 +1,11 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
 
-// import algolia recommend
-import algoliarecommend from '@algolia/recommend';
-import {
-  TrendingItems,
-} from '@algolia/recommend-react';
-
 // Algolia search client
-import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
-
-import React, { lazy, Suspense, useRef, useEffect } from 'react';
-
-import Loader from '@/components/loader/Loader';
 
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
-
-import { framerMotionPage } from '@/config/animationConfig';
+import React, { lazy, Suspense, useRef, useEffect } from 'react';
 
 // recoil import
 import { useRecoilValue } from 'recoil';
@@ -26,22 +14,9 @@ import { useRecoilValue } from 'recoil';
 import homepage_1 from '../assets/homepage/homepage_1.png';
 import homepage_2 from '../assets/homepage/homepage_2.png';
 
-
-// components import
-const CustomHomeBanners = lazy(() =>
-  import('@/components/banners/HomeBanners')
-);
-const FederatedSearch = lazy(() =>
-  import('@/components/federatedSearch/FederatedSearch')
-);
-const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
-import RelatedItem from '@/components/recommend/RelatedProducts';
-
-import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
-
-// styles for Recommend HorizontalSlider
-import '@algolia/ui-components-horizontal-slider-theme';
-
+import Loader from '@/components/loader/Loader';
+import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
+import { framerMotionPage } from '@/config/animationConfig';
 
 // should carousel be shown or not and config for carousel
 import { carouselConfig } from '@/config/carouselConfig';
@@ -52,11 +27,20 @@ import {
   shouldHaveCarousels,
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
-
-// trending carousel config
-import { trendingConfig } from '@/config/trendingConfig';
-
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+
+// components import
+const CustomHomeBanners = lazy(() =>
+  import('@/components/banners/HomeBanners')
+);
+
+const FederatedSearch = lazy(() =>
+  import('@/components/federatedSearch/FederatedSearch')
+);
+
+const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
+
+const Trending = lazy(() => import('@/components/trending/TrendingProducts'));
 
 const HomePage = ({ setIsMounted }) => {
   // Get the main index
@@ -73,12 +57,6 @@ const HomePage = ({ setIsMounted }) => {
     shouldHaveTrendingProducts
   );
 
-  // define the client for using Recommend
-  const recommendClient = algoliarecommend(
-    searchClientCreds.appID,
-    searchClientCreds.APIKey
-  );
-
   useEffect(() => {
     HomePage.current = true;
     setIsMounted(HomePage.current);
@@ -93,7 +71,7 @@ const HomePage = ({ setIsMounted }) => {
 
   return (
     // Framer motion wrapper
-    <motion.div
+    <div
       className="homepage"
       // initial state
       initial={framerMotionPage.initial}
@@ -132,26 +110,17 @@ const HomePage = ({ setIsMounted }) => {
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
         {shouldHaveTrendingProductsValue && (
-          <div>
-            <TrendingItems
-              recommendClient={recommendClient}
-              indexName={index}
-              itemComponent={RelatedItem}
-              maxRecommendations={trendingConfig.maxRecommendations}
-              view={HorizontalSlider}
-              headerComponent={() => <h3>{trendingConfig.title}</h3>}
-              threshold={trendingConfig.threshold}
-            />
-          </div>
+          <Suspense fallback={<Loader />}>
+            <Trending filter={null} />
+          </Suspense>
         )}
       </div>
 
       {homepage_1 ? <img src={homepage_1} alt="" /> : null}
 
       {homepage_2 && <img src={homepage_2} alt="" />}
-    </motion.div>
+    </div>
   );
 };
 
 export default HomePage;
-

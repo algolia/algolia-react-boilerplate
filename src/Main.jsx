@@ -6,6 +6,7 @@ import { searchClient } from './config/algoliaEnvConfig';
 
 // Framer-Motion
 import { AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 // React router
 import { Routes, Route, useLocation } from 'react-router-dom';
@@ -13,12 +14,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 //Recoil states & values
 import { useRecoilValue, useRecoilState } from 'recoil';
 
-//Import help navigation state & config
-import {
-  isDemoGuideOpen,
-  shouldShowDemoGuide,
-  shouldShowAlert,
-} from '@/config/demoGuideConfig';
+// Import help navigation state & config
 
 import { isRulesSwitchToggle } from './config/appliedRulesConfig';
 
@@ -40,8 +36,13 @@ import CustomAppliedRules from './components/appliedRules/AppliedRules';
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
+import {
+  isDemoGuideOpen,
+  shouldShowDemoGuide,
+  shouldShowAlert,
+} from '@/config/demoGuideConfig';
 
-export const Main = ({ isLoaded }) => {
+export const Main = () => {
   const index = useRecoilValue(mainIndex);
   const [isMounted, setIsMounted] = useState(false);
   // const [index, setIndex] = useState(mainIndex);
@@ -72,7 +73,7 @@ export const Main = ({ isLoaded }) => {
             <DemoGuide setshowDemoGuide={setshowDemoGuide} />
           )}
         </AnimatePresence>
-        <AnimatePresence initial={true} exitBeforeEnter>
+        <AnimatePresence initial={true}>
           <Routes key={location.pathname} location={location}>
             <Route
               path="/"

@@ -75,13 +75,13 @@ function Carousel(props) {
     <>
       <h3>{title}</h3>
       {/* This div declares the outer reference for the framer motion */}
-      <motion.div
+      <div
         ref={carousel}
         className="carousel"
         whileTap={{ cursor: 'grabbing' }}
       >
         {/* This div declares the parameters for the carousel dragging effect */}
-        <motion.div
+        <div
           // ADD THAT TO NEW FILE ABOUT ANIMATION IN CONFIG
           drag="x"
           dragConstraints={{ right: 0, left: -width }}
@@ -101,7 +101,7 @@ function Carousel(props) {
           {/* Display the hits in the carousel */}
           {hits.map((hit, i) => {
             return (
-              <motion.div key={i} className="item">
+              <div key={i} className="item">
                 <div className="carousel__imageWrapper">
                   <img
                     src={get(hit, image)}
@@ -122,11 +122,11 @@ function Carousel(props) {
                     <Price hit={hit} />
                   </p>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </>
   );
 }

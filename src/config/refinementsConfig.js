@@ -1,7 +1,7 @@
 // ------------------------------------------
 // Configuration for refinements/facets
 // ------------------------------------------
-
+import { atom } from 'recoil';
 import { hitsConfig } from './hitsConfig';
 
 // This const defines the refinements to be shown
@@ -66,3 +66,8 @@ export const refinementPriceLabels = {
   moreThan: 'More than',
   lessThan: 'Less than',
 };
+
+export const refinementsAtom = atom({
+  key: 'refinementsAtom', // unique ID (with respect to other atoms/selectors)
+  default: [], // default value (aka initial value)
+})

@@ -8,8 +8,8 @@ import { framerMotionPage } from '@/config/animationConfig';
 const cx = createClassNames('InfiniteHits');
 
 export const InjectedHits = connectHits(
-  connectInjectedHits(({ injectedHits, setSrpIsLoaded }) => (
-    <motion.div
+  connectInjectedHits(({ injectedHits }) => (
+    <div
       className={cx('')}
       variants={framerMotionPage}
       initial={framerMotionPage.initial}
@@ -20,17 +20,10 @@ export const InjectedHits = connectHits(
       <motion.ul className={cx('list')} layout>
         <AnimatePresence initial={false}>
           {injectedHits.map(({ props, type, Hit }, index) => {
-            return (
-              <Hit
-                {...props}
-                index={index}
-                key={index}
-                setSrpIsLoaded={setSrpIsLoaded}
-              />
-            );
+            return <Hit {...props} index={index} key={index} />;
           })}
         </AnimatePresence>
       </motion.ul>
-    </motion.div>
+    </div>
   ))
 );
