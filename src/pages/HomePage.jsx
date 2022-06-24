@@ -11,11 +11,11 @@ import React, { lazy, Suspense, useRef, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 // Import screenShot/ images for the homepage
-import homepage_1 from '../assets/homepage/homepage_1.png';
-import homepage_2 from '../assets/homepage/homepage_2.png';
+import homepage_1 from '@/assets/homepage/homepage_1.webp';
+import homepage_2 from '@/assets/homepage/homepage_2.webp';
 
 import Loader from '@/components/loader/Loader';
-import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
+import { mainIndex } from '@/config/algoliaEnvConfig';
 import { framerMotionPage } from '@/config/animationConfig';
 
 // should carousel be shown or not and config for carousel

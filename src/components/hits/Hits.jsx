@@ -13,7 +13,7 @@ import { Heart } from '@/assets/svg/SvgIndex';
 import { badgeCriteria } from '@/config/badgeConfig';
 
 // In case of img loading error
-import { logoUrl as placeHolderError } from '@/config/headerConfig';
+import * as placeHolderError from '@/assets/logo/logo.webp'
 
 import get from 'lodash/get';
 

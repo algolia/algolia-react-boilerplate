@@ -30,7 +30,7 @@ import {
   shouldHaveFbtProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
-import { logoUrl as placeHolderError } from '@/config/headerConfig';
+import * as placeHolderError from '@/assets/logo/logo.webp'
 
 // Import components
 
@@ -119,14 +119,12 @@ const ProductDetails = () => {
       transition={framerMotionPage.transition}
     >
       <div
-        className={`${
-          mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
-        }`}
+        className={`${mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
+          }`}
       >
         <div
-          className={`${
-            mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
-          }`}
+          className={`${mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+            }`}
           onClick={() => navigate(-1)}
         >
           <ChevronLeft />
