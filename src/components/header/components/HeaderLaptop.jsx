@@ -52,6 +52,7 @@ const HeaderLaptop = () => {
         <div className="container__header-top__logo">
           <Link
             to="/"
+            aria-label="link to home"
             onClick={() => {
               setQueryState('');
               federated(false);
