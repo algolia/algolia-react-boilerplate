@@ -127,27 +127,23 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           </p>
         </li>
       ))}
-      <div
-        className="container__header-nav-selectors"
-        ref={selectorsNavigation}
-      >
-        {shouldShowPersonasAtom && (
-          <li>
-            <SelectPersona />
-          </li>
-        )}
-        {shouldShowSegmentsAtom && (
-          <li>
-            <SelectSegment />
-          </li>
-        )}
-        {/* Display the language select component */}
-        {shouldShowLanguageSelected && (
-          <li>
-            <LanguageSelect />
-          </li>
-        )}
-      </div>
+      
+      {shouldShowPersonasAtom && (
+        <li>
+          <SelectPersona />
+        </li>
+      )}
+      {shouldShowSegmentsAtom && (
+        <li>
+          <SelectSegment />
+        </li>
+      )}
+      {/* Display the language select component */}
+      {shouldShowLanguageSelected && (
+        <li>
+          <LanguageSelect />
+        </li>
+      )}
     </ul>
   );
 };
