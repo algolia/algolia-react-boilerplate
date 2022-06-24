@@ -73,7 +73,7 @@ const BannerOne = ({
   button1,
   LinkButton2,
   button2,
-}) => {
+}) => (
   <div
     className="home-banner-container"
     style={{
@@ -95,32 +95,32 @@ const BannerOne = ({
         <Link to={LinkButton2}>{button2}</Link>
       </div>
     </div>
-  </div>;
-};
+  </div>
+);
 
-const BannerTwo = ({ imgUrl1, title, subtitle, LinkButton1, button1 }) => {
-  return (
-    <div className="home-banner3-container">
-      <div className="home-banner3-container__image">
-        <img src={imgUrl1} alt="" />
-        <div className="overlay"></div>
-      </div>
-      <div className="home-banner3-container__infos">
-        <h1>{title}</h1>
-        <h2>{subtitle}</h2>
-      </div>
-      <div className="home-banner3-container__buttons">
+const BannerTwo = ({ imgUrl1, title, subtitle, LinkButton1, button1 }) => (
+  <div className="home-banner3-container">
+    <div className="home-banner3-container__image">
+      <img src={imgUrl1} alt="" />
+      <div className="overlay"></div>
+    </div>
+    <div className="home-banner3-container__infos">
+      <h1>{title}</h1>
+      <h2>{subtitle}</h2>
+    </div>
+    <div className="home-banner3-container__buttons">
+      <Link to={LinkButton1}>
         <div className="home-banner3-container__buttons__circles">
           <div className="home-banner3-container__buttons__circles__circles2">
             <div className="home-banner3-container__buttons__circles__circles2__circles3">
-              <Link to={LinkButton1}>{button1}</Link>
+              <p>{button1}</p>
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
-  );
-};
+  </div>
+);
 
 const CustomHomeBanners = connectQueryRules(HomeBanners);
 
