@@ -1,0 +1,95 @@
+// ------------------------------------------
+// SearchBox
+// ------------------------------------------
+@use '../../../scss/partials' as *;
+
+.searchbox-container {
+  width: 40%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  .searchbox {
+    width: 90%;
+    &__form {
+      margin: 1rem auto;
+      width: 100%;
+      display: flex;
+      position: relative;
+      svg {
+        width: 30px;
+        left: 1rem;
+        top: 0rem;
+        position: absolute;
+
+        path {
+          fill: $main-color;
+        }
+      }
+
+      &__input {
+        @include searchBoxSimple($white-color, $grey-light-color-80);
+        
+        &::placeholder{
+          color: $grey-dark-color;
+        }
+        &:focus {
+          outline: none;
+        }
+        &::-webkit-search-cancel-button {
+          // If you want display or not cross in searchbox
+          -webkit-appearance: none;
+          height: 1em;
+          width: 1em;
+          border-radius: 50em;
+          background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+            no-repeat 50% 50%;
+          background-size: contain;
+          cursor: pointer;
+        }
+       
+      }
+
+    }
+          &__category{
+            position: absolute;
+            max-width:60%;
+            height: 100%;
+            top: 0;
+            right:0rem;
+            border-radius: 0 8px 8px 0;
+            padding: 0.5rem 1rem;
+            background: $blue-algolia-custom-gradient;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            align-items: center;
+            text-transform: capitalize;
+      
+            span{
+              cursor: pointer;
+            }
+           p{
+             
+             font-size: 0.8rem;
+             color: $white-color;
+           }
+           svg {
+             border: 1px solid #000000;
+             background-color: #000000;
+             width: 20px;
+             height: 20px;
+             border-radius: 10px;
+           }
+           
+           &__close-btn {
+             position: absolute;
+             top: -5px;
+             right: 30px;
+
+           }
+        }
+  }
+       
+}

@@ -26,10 +26,10 @@ import CustomStateResults from './components/stateResults/stateResults';
 import Header from '@/components/header/Header';
 import DemoGuide from '@/components/demoGuide/DemoGuide';
 import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
-import HomePage from './pages/HomePage';
-import SearchResultsPage from './pages/SearchResultsPage';
+import HomePage from './pages/homepage/HomePage';
+import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
 import AlertNavigation from '@/components/demoGuide/AlertNavigation';
-import ProductDetails from './pages/ProductDetails';
+import ProductDetails from './pages/productDetailsPage/ProductDetails';
 import Footer from './components/footer/Footer';
 import CustomAppliedRules from './components/appliedRules/AppliedRules';
 
@@ -63,7 +63,7 @@ export const Main = () => {
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
       <CustomStateResults />
-      <div className='visible'>
+      <div className="visible">
         <Header />
         <DemoGuideOpener />
         <AnimatePresence>
