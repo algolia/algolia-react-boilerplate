@@ -1,29 +1,11 @@
-// This builds the injected hits component
+import CustomHits from '@/components/hits/CustomHits';
+import { useHits } from 'react-instantsearch-hooks-web';
 
-import { createClassNames, connectHits } from 'react-instantsearch-dom';
-import { connectInjectedHits } from './connectInjectedHits';
-import { motion, AnimatePresence } from 'framer-motion';
-import { framerMotionPage } from '@/config/animationConfig';
+const InjectedHits = (props) => {
+  // Get the regular hits
+  const { hits } = useHits(props);
 
-const cx = createClassNames('InfiniteHits');
+  return <CustomHits hits={hits} />;
+};
 
-export const InjectedHits = connectHits(
-  connectInjectedHits(({ injectedHits }) => (
-    <div
-      className={cx('')}
-      variants={framerMotionPage}
-      initial={framerMotionPage.initial}
-      animate={framerMotionPage.animate}
-      exit={framerMotionPage.exit}
-      transition={framerMotionPage.transition}
-    >
-      <motion.ul className={cx('list')} layout>
-        <AnimatePresence initial={false}>
-          {injectedHits.map(({ props, type, Hit }, index) => {
-            return <Hit {...props} index={index} key={index} />;
-          })}
-        </AnimatePresence>
-      </motion.ul>
-    </div>
-  ))
-);
+export default InjectedHits;

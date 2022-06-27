@@ -46,8 +46,8 @@ const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
 const { CustomStats } = lazily(() =>
   import('@/components/searchresultpage/Stats')
 );
-const { InjectedHits } = lazily(() =>
-  import('@/components/searchresultpage/injected-hits')
+const InjectedHits = lazy(() =>
+  import('@/components/searchresultpage/injected-hits/InjectedHits')
 );
 
 const SrpLaptop = () => {
@@ -173,49 +173,14 @@ const SrpLaptop = () => {
               <Index indexName={injectedContentIndex}>
                 <Configure hitsPerPage={1} page={0} />
               </Index>
-              <InjectedHits
-                hitComponent={Hit}
-                slots={({ resultsByIndex }) => {
-                  console.log('InjectedHits');
-                  const { noCta, salesCard } = customDataByType(
-                    resultsByIndex?.[index]?.userData
-                  );
-                  // eslint-disable-next-line no-lone-blocks
-                  {
-                    // eslint-disable-next-line no-unused-expressions
-                    salesCard && setInjected(true);
-                  }
-                  return [
-                    {
-                      getHits: () => [noCta],
-                      injectAt: noCta ? noCta.position : null,
-                      slotComponent: NoCtaCard,
-                    },
-                    {
-                      getHits: () => [salesCard],
-                      injectAt: salesCard ? salesCard.position : null,
-                      slotComponent: SalesCard,
-                    },
-                    {
-                      injectAt: ({ position }) => position === 2,
-                      // eslint-disable-next-line no-shadow
-                      getHits: ({ resultsByIndex }) => {
-                        setInjected(true);
-                        return resultsByIndex[injectedContentIndex]
-                          ? resultsByIndex[injectedContentIndex].hits || []
-                          : [];
-                      },
-                      slotComponent: InfluencerCard,
-                    },
-                  ];
-                }}
-              />
+              <InjectedHits hitComponent={Hit} />
             </Suspense>
           ) : (
             <Suspense fallback={<SkeletonLoader />}>
               <CustomHitsComponent />
             </Suspense>
           )}
+
           <Pagination />
           <Redirect />
         </div>

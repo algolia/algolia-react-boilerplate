@@ -23,7 +23,6 @@ import TrendingProducts from '@/components/trending/TrendingProducts';
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import { framerMotionPage } from '@/config/animationConfig';
 
-
 import {
   shouldHaveStats,
   shouldHaveInjectedHits,
@@ -194,48 +193,14 @@ const SrpMobile = () => {
             <Index indexName={injectedContentIndex}>
               <Configure hitsPerPage={1} page={0} />
             </Index>
-            <InjectedHits
-              hitComponent={Hit}
-              slots={({ resultsByIndex }) => {
-                const { noCta, salesCard } = customDataByType(
-                  resultsByIndex?.[index]?.userData
-                );
-                // eslint-disable-next-line no-lone-blocks
-                {
-                  // eslint-disable-next-line no-unused-expressions
-                  salesCard && setInjected(true);
-                }
-                return [
-                  {
-                    getHits: () => [noCta],
-                    injectAt: noCta ? noCta.position : null,
-                    slotComponent: NoCtaCard,
-                  },
-                  {
-                    getHits: () => [salesCard],
-                    injectAt: salesCard ? salesCard.position : null,
-                    slotComponent: SalesCard,
-                  },
-                  {
-                    injectAt: ({ position }) => position === 2,
-                    // eslint-disable-next-line no-shadow
-                    getHits: ({ resultsByIndex }) => {
-                      setInjected(true);
-                      return resultsByIndex[injectedContentIndex]
-                        ? resultsByIndex[injectedContentIndex].hits || []
-                        : [];
-                    },
-                    slotComponent: InfluencerCard,
-                  },
-                ];
-              }}
-            />
+            <InjectedHits hitComponent={Hit} />
           </Suspense>
         ) : (
           <Suspense fallback={<Loader />}>
             <CustomHitsComponent />
           </Suspense>
         )}
+
         <Redirect />
       </div>
     </div>
