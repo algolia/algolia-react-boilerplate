@@ -31,13 +31,13 @@ function CustomHits(props) {
       <ul className="ais-InfiniteHits-list">
         {hits.map((hit) => {
           // Wrap the hit info in an animation, and click functionality to view the product
-          // Note: it's not good practice to use the item index as key, because that may cause the renderer
-          // to think 2 different products are one and the same in case they change positions
           if (hit._component != undefined) {
             // If the hit has a component property, use it instead of the default component
             return <hit._component hit={hit} key={hit.objectID} />;
           }
           return <Hit hit={hit} key={hit.objectID} />;
+          // Note: it's not good practice to use the item index as key, because that may cause the renderer
+          // to think 2 different products are one and the same in case they change positions
         })}
       </ul>
     </div>
