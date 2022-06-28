@@ -10,6 +10,9 @@ import { connectQueryRules } from 'react-instantsearch-dom';
 // Imports from router
 import { Link } from 'react-router-dom';
 
+//Import scope SCSS
+import './SCSS/HomeBanner.scss';
+
 // This component renders a different banner based on the props passed to it.
 //The props are passed through the Dashboard in rules section.
 const HomeBanners = ({ items }) => {

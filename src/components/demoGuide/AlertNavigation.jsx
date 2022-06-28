@@ -2,6 +2,9 @@ import { isAlertOpen, alertContent } from '@/config/demoGuideConfig';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isRulesSwitchToggle } from '@/config/appliedRulesConfig';
 
+//Import scope SCSS
+import './SCSS/alertNavigation.scss';
+
 const AlertNavigation = () => {
   const [alertOpen, setAlertOpen] = useRecoilState(isAlertOpen);
   const alertContentToDisplay = useRecoilValue(alertContent);

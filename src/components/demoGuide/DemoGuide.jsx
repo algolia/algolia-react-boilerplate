@@ -30,6 +30,9 @@ import {
   shouldShowAppliedRulesSwitcher,
 } from '@/config/demoGuideConfig';
 
+//Import scope SCSS
+import './SCSS/demoGuide.scss';
+
 const DemoGuide = ({ setshowDemoGuide }) => {
   //Select Panel wrapper
   const demoGuide = useRef();

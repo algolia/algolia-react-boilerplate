@@ -4,6 +4,9 @@
 
 import { QueryRuleCustomData } from 'react-instantsearch-dom';
 
+//SCSS import
+import './SCSS/banner.scss';
+
 const Banner = () => {
   return (
     <QueryRuleCustomData>

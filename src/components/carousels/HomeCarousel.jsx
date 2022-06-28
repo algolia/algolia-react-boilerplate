@@ -29,6 +29,9 @@ import get from 'lodash/get';
 // import Price component
 import Price from '@/components/price/price.jsx';
 
+//Import scope SCSS
+import './SCSS/carousels.scss';
+
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ context, title }) => {
   const index = useRecoilValue(mainIndex);
@@ -92,7 +95,7 @@ const Carousel = ({ hits, title }) => {
               bounceStiffness: 10,
               bounceDamping: 1,
             },
-              framerMotionTransition)
+            framerMotionTransition)
           }
           className="inner-carousel"
         >

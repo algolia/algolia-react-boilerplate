@@ -9,6 +9,9 @@ import { uniq } from 'lodash';
 import { mainIndex, searchClient } from '@/config/algoliaEnvConfig';
 import { rulesAtom } from '@/config/appliedRulesConfig';
 
+//Import scope SCSS
+import './SCSS/appliedRules.scss';
+
 const AppliedRules = ({ searchResults }) => {
   const [rules, setRules] = useRecoilState(rulesAtom);
   // Init API request to get rules by their IDs
