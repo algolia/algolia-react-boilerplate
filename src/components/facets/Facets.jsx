@@ -13,15 +13,17 @@ import {
 import { Glass } from '@/assets/svg/SvgIndex';
 
 // Import components
-import PriceSlider from './PriceSlider';
-import CustomHierarchicalMenu from './Hierarchical';
+import PriceSlider from './components/PriceSlider';
+import CustomHierarchicalMenu from './components/Hierarchical';
 
 // Import list of Attributes/Facets
 import { refinements } from '@/config/refinementsConfig';
 
+//Import scope SCSS
+import './SCSS/facets.scss';
+
 // expects an attribute which is an array of items
 const RefinementList = ({ title, items, refine, searchForItems, options }) => {
-
   const [searchInput, setSearchInput] = useState(false);
 
   return (
@@ -55,8 +57,9 @@ const RefinementList = ({ title, items, refine, searchForItems, options }) => {
         {items.map((item) => (
           <li className="filters-container__content__list" key={item.value}>
             <button
-              className={`filters-container__content__list__button-filter ${item.isRefined ? 'refined-filter' : ''
-                }`}
+              className={`filters-container__content__list__button-filter ${
+                item.isRefined ? 'refined-filter' : ''
+              }`}
               type="button"
               href="#"
               onClick={(event) => {
@@ -102,9 +105,7 @@ const CustomColorRefinement = ({
 const Facets = () => {
   return (
     <div>
-      <DynamicWidgets
-        maxValuesPerFacet={500}
-      >
+      <DynamicWidgets maxValuesPerFacet={500}>
         {refinements.map((e, i) => {
           const { type, currency, label, options } = e;
           switch (type) {

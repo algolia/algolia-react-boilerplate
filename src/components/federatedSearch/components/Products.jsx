@@ -5,7 +5,7 @@ import { connectHits } from 'react-instantsearch-dom';
 
 // Component import
 import { ChevronRight } from '@/assets/svg/SvgIndex';
-import Price from '@/components/price/price.jsx';
+import Price from '@/components/hits/components/Price.jsx';
 
 // Recoil import
 import { hitAtom } from '@/config/hitsConfig';

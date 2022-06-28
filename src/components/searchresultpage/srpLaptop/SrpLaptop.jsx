@@ -5,15 +5,15 @@ import { lazily } from 'react-lazily';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
-import SkeletonLoader from '../../hits/HitsSkeletonLoader';
-import FacetsSkeletonLoader from '@/components/facets/FacetsSkeletonLoader';
+import SkeletonLoader from '../../hits/components/HitsSkeletonLoader';
+import FacetsSkeletonLoader from '@/components/facets/components/FacetsSkeletonLoader';
 import { Hit } from '@/components/hits/Hits';
-import InfluencerCard from '@/components/hits/InfluencerCard';
-import NoCtaCard from '@/components/hits/NoCtaCard';
-import SalesCard from '@/components/hits/SalesCard';
+import InfluencerCard from '@/components/hits/components/InfluencerCard';
+import NoCtaCard from '@/components/hits/components/NoCtaCard';
+import SalesCard from '@/components/hits/components/SalesCard';
 import Redirect from '@/components/redirects/Redirect';
-import WrappedTrendingFacetValues from '@/components/trending/TrendingFacetValues';
-import TrendingProducts from '@/components/trending/TrendingProducts';
+import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
+import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
 import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
 import {
   shouldHaveStats,
@@ -30,21 +30,24 @@ import { sortBy } from '@/config/sortByConfig';
 import { customDataByType } from '@/utils';
 
 const CustomClearRefinements = lazy(() =>
-  import('@/components/facets/ClearRefinement')
+  import('@/components/facets/components/ClearRefinement')
 );
 const CustomCurrentRefinements = lazy(() =>
-  import('@/components/facets/CurrentRefinement')
+  import('@/components/facets/components/CurrentRefinement')
 );
 
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
-const CustomHitsComponent = lazy(() => import('@/components/hits/CustomHits'));
-const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
-const { CustomStats } = lazily(() =>
-  import('@/components/searchresultpage/Stats')
+const CustomHitsComponent = lazy(() =>
+  import('@/components/hits/components/CustomHits')
 );
+const CustomSortBy = lazy(() => import('@/components/sortBy/SortBy'));
+const { CustomStats } = lazily(() => import('@/components/stats/Stats'));
 const { InjectedHits } = lazily(() =>
-  import('@/components/searchresultpage/injected-hits')
+  import('@/components/hits/components/injected-hits')
 );
+
+//Import scope SCSS
+import '../SCSS/searchresultspage.scss';
 
 const SrpLaptop = () => {
   // Recoil & React states
@@ -102,23 +105,20 @@ const SrpLaptop = () => {
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
-        {shouldHaveTrendingProductsValue && queryState === "" && (
+        {shouldHaveTrendingProductsValue && queryState === '' && (
           <TrendingProducts facetName={facetName} facetValue={facetValue} />
         )}
       </div>
-      <div
-        className='srp-active srp-container'
-      >
+      <div className="srp-active srp-container">
         <div className="srp-container__facets">
           <Suspense fallback={<FacetsSkeletonLoader />}>
-
             {/* Render Recommend component - Trending Facets */}
             {/* Change config in /config/trendingConfig.js */}
             <div className="">
               {shouldHaveTrendingFacetsValue && (
                 <WrappedTrendingFacetValues
                   attribute="brand"
-                  facetName={"brand"}
+                  facetName={'brand'}
                   limit={500}
                   facetValue={facetValue}
                 />
@@ -166,7 +166,6 @@ const SrpLaptop = () => {
             getRankingInfo={true}
           />
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
-
 
           {shouldInjectContent ? (
             <Suspense fallback={<SkeletonLoader />}>

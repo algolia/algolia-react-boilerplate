@@ -9,8 +9,8 @@ import { memo, useEffect, lazy, Suspense, useRef, useState } from 'react';
 // Recommend
 import { RelatedProducts } from '@algolia/recommend-react';
 import algoliarecommend from '@algolia/recommend';
-import RelatedItem from '@/components/recommend/RelatedProducts';
-import SkeletonLoader from '@/components/hits/HitsSkeletonLoader';
+import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
+import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
 
 // Algolia search client
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';

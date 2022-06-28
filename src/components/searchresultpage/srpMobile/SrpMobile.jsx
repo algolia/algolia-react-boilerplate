@@ -7,9 +7,9 @@ import { useRecoilValue } from 'recoil';
 
 import { ChevronRight, ChevronLeft } from '@/assets/svg/SvgIndex';
 import { Hit } from '@/components/hits/Hits';
-import InfluencerCard from '@/components/hits/InfluencerCard';
-import NoCtaCard from '@/components/hits/NoCtaCard';
-import SalesCard from '@/components/hits/SalesCard';
+import InfluencerCard from '@/components/hits/components/InfluencerCard';
+import NoCtaCard from '@/components/hits/components/NoCtaCard';
+import SalesCard from '@/components/hits/components/SalesCard';
 import Loader from '@/components/loader/Loader';
 
 // eslint-disable-next-line import/order
@@ -18,11 +18,10 @@ import { Configure, Index } from 'react-instantsearch-dom';
 // import framer motion
 
 import Redirect from '@/components/redirects/Redirect';
-import TrendingFacetValues from '@/components/trending/TrendingFacetValues';
-import TrendingProducts from '@/components/trending/TrendingProducts';
+import TrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
+import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import { framerMotionPage } from '@/config/animationConfig';
-
 
 import {
   shouldHaveStats,
@@ -39,22 +38,25 @@ import { sortBy } from '@/config/sortByConfig';
 import { customDataByType } from '@/utils';
 
 const CustomClearRefinements = lazy(() =>
-  import('@/components/facets/ClearRefinement')
+  import('@/components/facets/components/ClearRefinement')
 );
 const CustomCurrentRefinements = lazy(() =>
-  import('@/components/facets/CurrentRefinement')
+  import('@/components/facets/components/CurrentRefinement')
 );
-const CustomHitsComponent = lazy(() => import('@/components/hits/CustomHits'));
-const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
-const { CustomStats } = lazily(() =>
-  import('@/components/searchresultpage/Stats')
+const CustomHitsComponent = lazy(() =>
+  import('@/components/hits/components/CustomHits')
 );
+const CustomSortBy = lazy(() => import('@/components/sortBy/SortBy'));
+const { CustomStats } = lazily(() => import('@/components/stats/Stats'));
 const { InjectedHits } = lazily(() =>
-  import('@/components/searchresultpage/injected-hits')
+  import('@/components/hits/components/injected-hits')
 );
 const FacetsMobile = lazy(() =>
   import('@/components/facets/facetsMobile/FacetsMobile')
 );
+
+//Import scope SCSS
+import '../SCSS/searchresultspage.scss';
 
 const SrpMobile = () => {
   // Recoil & React states

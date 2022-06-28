@@ -48,6 +48,9 @@ import Products from './components/Products';
 import Articles from './components/BlogPost';
 import Redirect from '@/components/redirects/Redirect';
 
+//Import scope SCSS
+import './SCSS/federatedSearch.scss';
+
 const FederatedSearch = () => {
   // Recoil & States
   const personaSelect = useRecoilValue(personaSelectedAtom);

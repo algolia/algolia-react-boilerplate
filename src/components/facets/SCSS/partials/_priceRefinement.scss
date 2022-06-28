@@ -1,0 +1,26 @@
+@use '../../../../scss/partials/' as *;
+
+.filters-container{
+
+    &__pricecontainer {
+        width: 80%;
+        margin: 1rem auto;
+    
+        &__prices {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 1rem;
+    
+          p {
+            font-family: $main-font;
+            color: $blue-algolia;
+            font-weight: 600;
+          }
+        }
+      }
+
+  // Personalisation Slider price
+  .rc-slider {
+    @include priceSlider($blue-algolia);
+  }
+}

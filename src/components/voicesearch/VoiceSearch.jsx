@@ -10,6 +10,9 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 // Import Config for recoil from file as a component
 import { queryAtom } from '@/config/searchboxConfig';
 
+//Import scope SCSS
+import './SCSS/voiceSearch.scss';
+
 const Status = ({ transcript, isListening }) => {
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
   const setQueryState = useSetRecoilState(queryAtom);

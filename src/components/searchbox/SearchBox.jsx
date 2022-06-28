@@ -31,6 +31,9 @@ import { categorySelectionAtom } from '@/config/headerConfig';
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
 
+//Import scope SCSS
+import './SCSS/searchBox.scss';
+
 const SearchBoxSimple = ({ refine, currentRefinement }) => {
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);

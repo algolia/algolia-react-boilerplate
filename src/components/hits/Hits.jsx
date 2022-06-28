@@ -13,7 +13,7 @@ import { Heart } from '@/assets/svg/SvgIndex';
 import { badgeCriteria } from '@/config/badgeConfig';
 
 // In case of img loading error
-import * as placeHolderError from '@/assets/logo/logo.webp'
+import * as placeHolderError from '@/assets/logo/logo.webp';
 
 import get from 'lodash/get';
 
@@ -26,13 +26,16 @@ import { hitsConfig } from '@/config/hitsConfig';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
-import Badge from './Badge';
+import Badge from './components/Badge';
 
 //Import hook for store ID into local storage
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 
 // import Price component
-import Price from '@/components/price/price.jsx';
+import Price from '@/components/hits/components/Price.jsx';
+
+//Import scope SCSS
+import './SCSS/hits.scss';
 
 const Hit = ({ hit }) => {
   const navigate = useNavigate();

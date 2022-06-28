@@ -8,17 +8,14 @@ import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Config for the header
 import { categoryPageFilterAttribute } from '@/config/categoryConfig';
-import {
-  linksHeader,
-  selectorNavigationRef,
-} from '@/config/headerConfig';
-import SelectPersona from '../personnaSelect/SelectPersona';
+import { linksHeader, selectorNavigationRef } from '@/config/headerConfig';
+import SelectPersona from './personnaSelect/SelectPersona';
 
 //import language selector component
-import LanguageSelect from '../languagesSelect/LanguageSelect';
+import LanguageSelect from './languagesSelect/LanguageSelect';
 
 // import segment selector component
-import SelectSegment from '../segmentSelect/selectSegment';
+import SelectSegment from './segmentSelect/selectSegment';
 
 // Import Recoil config
 import {
@@ -73,10 +70,11 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   return (
     <ul
-      className={`${isMenuOpen
-        ? 'container-mobile__navList-items'
-        : 'container__header-nav__links'
-        } `}
+      className={`${
+        isMenuOpen
+          ? 'container-mobile__navList-items'
+          : 'container__header-nav__links'
+      } `}
     >
       {links.map((link, i) => (
         <li
@@ -113,7 +111,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           <p
             className={
               highlightingCat() === link.name.toLowerCase() ||
-                state?.name === link.name
+              state?.name === link.name
                 ? 'selected'
                 : ''
             }

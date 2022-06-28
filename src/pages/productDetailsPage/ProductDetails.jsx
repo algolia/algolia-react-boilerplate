@@ -15,8 +15,8 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { ChevronLeft } from '@/assets/svg/SvgIndex';
-import Price from '@/components/price/price.jsx';
-import RelatedItem from '@/components/recommend/RelatedProducts';
+import Price from '@/components/hits/components/Price.jsx';
+import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
 import {
   framerMotionPage,
@@ -30,7 +30,7 @@ import {
   shouldHaveFbtProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
-import * as placeHolderError from '@/assets/logo/logo.webp'
+import * as placeHolderError from '@/assets/logo/logo.webp';
 
 // Import components
 
@@ -51,7 +51,8 @@ import useScreenSize from '@/hooks/useScreenSize';
 // Send an insights event to algolia
 import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
-// Used to show alert when add to cart event is sent
+//Import scope SCSS
+import './SCSS/productDetails.scss';
 
 const ProductDetails = () => {
   // For alert on sending add to cart event
@@ -119,12 +120,14 @@ const ProductDetails = () => {
       transition={framerMotionPage.transition}
     >
       <div
-        className={`${mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
-          }`}
+        className={`${
+          mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
+        }`}
       >
         <div
-          className={`${mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
-            }`}
+          className={`${
+            mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+          }`}
           onClick={() => navigate(-1)}
         >
           <ChevronLeft />

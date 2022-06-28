@@ -1,0 +1,128 @@
+// ------------------------------------------
+// Color Refinement List
+// ------------------------------------------
+@use '../../../../scss/partials/' as *;
+
+.color-refinement {
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: $main-color;
+      padding: 0.6rem;
+    }
+  
+    .ais-ColorRefinementList {
+      --transition-duration: 0.2s;
+      --items-column-width: 3rem;
+      --items-gap: 1rem;
+      --refined-icon-size: 1.1rem;
+      --color-size: 1.75rem;
+    }
+  
+    .ais-ColorRefinementList-layoutList .ais-ColorRefinementList-items {
+      grid-template-columns: 1fr;
+    }
+  
+    .ais-ColorRefinementList-layoutList .ais-ColorRefinementList-item {
+      flex-basis: 100%;
+      flex-direction: row;
+      max-width: 100%;
+    }
+  
+    .ais-ColorRefinementList-layoutList .ais-ColorRefinementList-color {
+      margin-right: 0.8rem;
+    }
+  
+    .ais-ColorRefinementList-layoutList .ais-ColorRefinementList-label {
+      margin-top: 0;
+    }
+  
+    .ais-ColorRefinementList-layoutList .ais-ColorRefinementList-count {
+      display: block;
+      margin-left: auto;
+    }
+  
+    .ais-ColorRefinementList-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,
+          minmax(var(--items-column-width), 1fr));
+      gap: var(--items-gap);
+    }
+  
+    .ais-ColorRefinementList-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #000;
+      background: transparent;
+      border: 0px;
+      padding: 0px;
+      cursor: pointer;
+    }
+  
+    .ais-ColorRefinementList-color {
+      width: var(--color-size);
+      height: var(--color-size);
+      border-radius: 9999px;
+      transition: var(--transition-duration) transform ease-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-size: contain;
+    }
+  
+    .ais-ColorRefinementList-item:hover .ais-ColorRefinementList-color {
+      transform: scale(1.1);
+    }
+  
+    .ais-ColorRefinementList-item:active .ais-ColorRefinementList-color {
+      transform: scale(0.9);
+    }
+  
+    .ais-ColorRefinementList-color.color--ffffff {
+      border: 1px solid #d1d1d1;
+    }
+  
+    .ais-ColorRefinementList-shapeSquare .ais-ColorRefinementList-color {
+      border-radius: 0;
+    }
+  
+    .ais-ColorRefinementList-label {
+      margin-top: 0.3rem;
+      transition: 0.3s color ease-out;
+      padding: 0 0.3rem;
+      font-family: $main-font;
+    }
+  
+    .ais-ColorRefinementList-item:hover .ais-ColorRefinementList-label {
+      color: #848484;
+    }
+  
+    .ais-ColorRefinementList-count {
+      display: none;
+    }
+  
+    .ais-ColorRefinementList-refinedIcon {
+      position: relative;
+      width: var(--refined-icon-size);
+      height: var(--refined-icon-size);
+      color: var(--contrast-color);
+      transform: scale(0);
+      visibility: hidden;
+      opacity: 0;
+      transition: transform var(--transition-duration) ease-out 0s,
+        opacity var(--transition-duration) linear 0s,
+        visibility 0s linear var(--transition-duration);
+    }
+  
+    .ais-ColorRefinementList-item.ais-ColorRefinementList-itemRefined .ais-ColorRefinementList-refinedIcon {
+      transform: scale(1);
+      visibility: visible;
+      opacity: 1;
+      transition: transform var(--transition-duration) ease-out 0s,
+        opacity var(--transition-duration) linear 0s, visibility 0s linear 0s;
+    }
+  }
+  

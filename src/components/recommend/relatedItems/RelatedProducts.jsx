@@ -10,7 +10,7 @@ import { Highlight } from 'react-instantsearch-dom';
 import { Heart } from '@/assets/svg/SvgIndex';
 
 // import Price component
-import Price from '@/components/price/price.jsx';
+import Price from '@/components/hits/components/Price.jsx';
 
 import { hitAtom } from '@/config/hitsConfig';
 import { useSetRecoilState } from 'recoil';
@@ -18,6 +18,9 @@ import { useSetRecoilState } from 'recoil';
 // React-router import
 import { useNavigate } from 'react-router-dom';
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
+
+//Import scope SCSS
+import '../SCSS/recommend.scss';
 
 const RelatedItem = ({ item }) => {
   const navigate = useNavigate();
@@ -27,11 +30,14 @@ const RelatedItem = ({ item }) => {
 
   return (
     <div className="relatedItem">
-      <div className="relatedItem__imgWrapper" onClick={() => {
-        hitState(item);
-        navigate(`/search/${item[objectID]}`);
-        useStoreIdToLocalStorage(item[objectID]);
-      }}>
+      <div
+        className="relatedItem__imgWrapper"
+        onClick={() => {
+          hitState(item);
+          navigate(`/search/${item[objectID]}`);
+          useStoreIdToLocalStorage(item[objectID]);
+        }}
+      >
         <img src={item[image]} alt={item[category]} />
         <div className="relatedItem__imgWrapper__heart">
           <Heart />

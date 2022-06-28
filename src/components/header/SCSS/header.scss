@@ -1,54 +1,13 @@
-// ------------------------------------------
-// Header
-// ------------------------------------------
 @use '../../../scss//partials' as *;
 
 // ------------------------------------------
-// Header Sticky process
+// Header
 // ------------------------------------------
-
 .header {
   text-align: center;
   box-shadow: 0 0 20px $white-color;
-  padding: 40px 0;
+  padding: 2rem 0;
   background: $grey-light-color;
-}
-
-.sticky {
-  position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 40px 0;
-  box-shadow: 0 20px 30px rgba(#000, 0.2);
-  animation: slide 0.3s forwards ease-in-out;
-  background: $grey-light-color;
-
-  label {
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-}
-
-@keyframes slide {
-  0% {
-    opacity: 1;
-    height: 13rem;
-  }
-  100% {
-    opacity: 1;
-    height: 12rem;
-  }
-}
-
-// ------------------------------------------
-// ------------------------------------------
-
-// ------------------------------------------
-//Inside Header
-// ------------------------------------------
-.header {
   .container {
     .container__header-top {
       align-items: center;

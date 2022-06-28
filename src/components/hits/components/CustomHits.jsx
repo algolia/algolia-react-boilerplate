@@ -3,7 +3,7 @@
 // Import InstantSearch Functionality
 import { connectHits } from 'react-instantsearch-dom';
 
-import { Hit } from './Hits';
+import { Hit } from '../Hits';
 
 const CustomHits = ({ hits }) => {
   return (

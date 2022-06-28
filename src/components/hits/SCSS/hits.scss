@@ -1,8 +1,12 @@
+// Global scss partials
+@use '../../../scss/partials' as *;
+
+// Local scss partials
+@use './partials/index';
+
 // ------------------------------------------
 // Hits
 // ------------------------------------------
-@use '../../../scss//partials' as *;
-
 .ais-InfiniteHits {
   .ais-InfiniteHits-list {
     display: grid;
@@ -37,57 +41,5 @@
       box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
         rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     }
-  }
-}
-
-// ------------------------------------------
-// SalesCard
-// ------------------------------------------
-.image-wrapper-sales {
-  @include salesCard($white-color);
-}
-.image-wrapper-sales {
-  .infos_influencer {
-    @include influencerCard($white-color);
-  }
-}
-
-// ------------------------------------------
-// Badges
-// ------------------------------------------
-
-.badge {
-  position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
-  background-color: $blue-algolia;
-  padding: 0 0.3rem;
-  border-radius: 0.2rem;
-  p {
-    color: $white-color;
-    font-weight: 500;
-  }
-}
-.button-ranking-container {
-  display: flex;
-  align-items: center;
-  .ranking-formula-button {
-    display: block;
-    height: 1rem;
-    width: 1rem;
-    border-radius: 50%;
-    border: 1px solid $blue-algolia;
-  }
-  p {
-    visibility: hidden;
-    cursor: pointer;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s linear;
-    font-size: 0.6rem;
-    margin-left: 0.6rem;
-  }
-  &:hover p {
-    visibility: visible;
-    opacity: 1;
   }
 }

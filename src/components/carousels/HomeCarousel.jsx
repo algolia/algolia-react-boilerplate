@@ -27,7 +27,7 @@ import useScreenSize from '@/hooks/useScreenSize';
 import get from 'lodash/get';
 
 // import Price component
-import Price from '@/components/price/price.jsx';
+import Price from '@/components/hits/components/Price.jsx';
 
 //Import scope SCSS
 import './SCSS/carousels.scss';
