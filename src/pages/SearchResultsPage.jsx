@@ -30,9 +30,6 @@ import { useHits, Configure, Index } from 'react-instantsearch-hooks-web';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { queryAtom } from '../config/searchboxConfig';
 
-// Import custom Hooks
-import useScreenSize from '@/hooks/useScreenSize';
-
 // Import Components
 import QuerySuggestions from '@/components/federatedSearch/components/QuerySuggestions';
 import Banner from '@/components/banners/Banner';
@@ -66,7 +63,6 @@ const SearchResultPage = ({ setIsMounted }) => {
   }, []);
 
   // Handle screen resize
-  const { mobile, tablet, laptopXS, laptop } = useScreenSize();
   const srpMounted = useRef(false);
   useEffect(() => {
     srpMounted.current = true;
@@ -97,15 +93,6 @@ const SearchResultPage = ({ setIsMounted }) => {
 
   return (
     <div ref={srpMounted} className="srp">
-      {/* Display the banner if the bannerSrp config is set to: true */}
-      {/* {shouldDisplayBanners && <Banner />} */}
-      {/* This wrapper will  decide to render the NoResults component if there are no results from the search */}
-      {/* <NoResultsHandler>
-        <Suspense fallback={<Loader />}> */}
-      {/* {(laptop || laptopXS) && <SrpLaptop />} */}
-      {/* {(tablet || mobile) && <SrpMobile />} */}
-      {/* </Suspense>
-      </NoResultsHandler> */}
       <NoResultsHandler
         srpIsLoaded={srpIsLoaded}
         setSrpIsLoaded={setSrpIsLoaded}
@@ -182,26 +169,6 @@ const NoResults = () => {
   );
 };
 
-// This wrapper decides when to render the NoResults component
-// const NoResultsHandlerComponent = ({
-//   children,
-//   searchState,
-//   searchResults,
-//   searching,
-// }) => {
-//   return (
-// If there is a search, but there are no results to display, render NoResults component
-// searchState?.query && searchResults?.nbHits === 0 ? (
-//   <NoResults query={searchState.query} isSearching={searching} />
-// ) : (
-// Otherwise, just return the search results
-//       <>{children}</>
-//     )
-//   );
-// };
-
-// const NoResultsHandler = connectStateResults(NoResultsHandlerComponent);
-
 function NoResultsHandler(props) {
   const { hits } = useHits(props);
   const [length, setLength] = useState(0);
@@ -209,19 +176,15 @@ function NoResultsHandler(props) {
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   // Handle screen resize
-  const { mobile, tablet, laptopXS, laptop } = useScreenSize();
   useEffect(() => {
     setLength(hits.length);
   }, [hits]);
 
   return length > 0 ? (
     <Suspense fallback={<div style={{ height: '2004px' }}></div>}>
-      {(laptop || laptopXS) && (
-        <div>
-          <SrpLaptop />
-        </div>
-      )}
-      {(tablet || mobile) && <SrpMobile />}
+      <div>
+        <SrpLaptop />
+      </div>
     </Suspense>
   ) : (
     <NoResults />
