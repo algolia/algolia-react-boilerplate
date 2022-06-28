@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 //The props are passed through the Dashboard in rules section.
 function CustomHomeBanners(props) {
   const { items } = useQueryRules(props);
-  console.log(items);
   return items.map(
     (
       {

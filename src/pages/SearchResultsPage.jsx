@@ -204,7 +204,6 @@ function CustomSearchBox(props) {
     refine(queryValue);
   };
   useEffect(() => {
-    console.log('Custom Search', queryChanged);
     refineFunction(queryChanged);
   }, [query]);
 
