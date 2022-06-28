@@ -71,13 +71,10 @@ const InjectedHits = (props) => {
 
     // Add the items from rule data
     itemsToInject = ruleData
+      // Only keep items with type either "noCta", "salesCard"
+      .filter(({ type }) => type == 'noCta' || type == 'salesCard')
       // Concat the inject index hits
       .concat(injectionIndexResults)
-      // Only keep items with type either "noCta", "salesCard", injectedIndexType
-      .filter(
-        ({ type }) =>
-          type == 'noCta' || type == 'salesCard' || type == injectedIndexType
-      )
       // Add to each injected item the corresponding component that will render it
       .map((item) => ({
         ...item,
