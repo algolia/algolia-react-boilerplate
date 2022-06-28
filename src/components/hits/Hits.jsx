@@ -35,7 +35,6 @@ import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 import Price from '@/components/price/price.jsx';
 
 const Hit = ({ hit }) => {
-  // console.log('Hit');
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);

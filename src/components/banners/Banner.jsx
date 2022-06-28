@@ -5,8 +5,6 @@
 import { useQueryRules } from 'react-instantsearch-hooks-web';
 
 function Banner(props) {
-  console.log('🚀 ~ file: Banner.jsx ~ line 8 ~ Banner ~ props', props);
-
   const { items } = useQueryRules(props);
   return (
     <div>
