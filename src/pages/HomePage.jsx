@@ -96,7 +96,7 @@ const HomePage = ({ setIsMounted }) => {
 
       {/* Load custom banners */}
       <Suspense fallback={<Loader />}>
-        {/* <CustomHomeBanners /> */}
+        <CustomHomeBanners />
       </Suspense>
 
       {isCarousel &&

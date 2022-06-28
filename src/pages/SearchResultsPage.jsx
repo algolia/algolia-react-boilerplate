@@ -24,7 +24,12 @@ const recommendClient = algoliarecommend(
 
 import Loader from '@/components/loader/Loader';
 
-import { useHits, Configure, Index } from 'react-instantsearch-hooks-web';
+import {
+  useSearchBox,
+  useHits,
+  Configure,
+  Index,
+} from 'react-instantsearch-hooks-web';
 
 // Recoil state to directly access results
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -33,9 +38,6 @@ import { queryAtom } from '../config/searchboxConfig';
 // Import Components
 import QuerySuggestions from '@/components/federatedSearch/components/QuerySuggestions';
 import Banner from '@/components/banners/Banner';
-
-// Import SearchBox
-import CustomSearchBox from '@/components/searchbox/SearchBox';
 
 // Import Persona State from recoil
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
@@ -141,7 +143,7 @@ const NoResults = () => {
                   <Configure hitsPerPage={3} query="" />
                   <QuerySuggestions />
                   {/* Add this searchBox Invisible to refine when we click on a suggestion */}
-                  <CustomSearchBox query={getQueryState} />
+                  <CustomSearchBox queryChanged={getQueryState} />
                 </Index>
               </div>
               {lastId && (
@@ -192,3 +194,29 @@ function NoResultsHandler(props) {
 }
 
 export default SearchResultPage;
+
+// "This searchbox is virtual and will not appear in the DOM. The goal of this virtual searchbox is to refine the app by changing the query state
+// in the main IS instance when clicking on QS when we're in the noResult component"
+function CustomSearchBox(props) {
+  const { refine, query } = useSearchBox(props);
+  const { queryChanged } = props;
+  const refineFunction = (queryValue) => {
+    refine(queryValue);
+  };
+  useEffect(() => {
+    console.log('Custom Search', queryChanged);
+    refineFunction(queryChanged);
+  }, [query]);
+
+  return (
+    <form noValidate action="" role="search" className="search-box-invisible">
+      <input
+        type="search"
+        value={query}
+        onChange={(event) => {
+          refine(event.currentTarget.value);
+        }}
+      />
+    </form>
+  );
+}
