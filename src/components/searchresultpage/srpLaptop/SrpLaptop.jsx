@@ -170,6 +170,7 @@ const SrpLaptop = () => {
 
           {shouldInjectContent ? (
             <Suspense fallback={<SkeletonLoader />}>
+              {/* Load results for the injection index, so that we can later access them via the useInstantSearch hook, with the scopedResults property */}
               <Index indexName={injectedContentIndex}>
                 <Configure hitsPerPage={1} page={0} />
               </Index>
