@@ -8,11 +8,6 @@
     font-family: $main-font;
     width: 100%;
   
-    &__title {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-  
       >* {
         &:empty {
           display: none;
@@ -20,18 +15,14 @@
       }
   
       h3 {
-        font-size: 1rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        color: $main-color;
-        padding: 0.6rem;
+       @include facetsTitle($main-color)
       }
   
       svg {
         width: 25px;
         cursor: pointer;
       }
-    }
+    
   
     &__list {
       margin: 0.8rem 0;
@@ -41,8 +32,7 @@
       &__list {
         &__button-filter {
           display: flex;
-          @include facetsFilter($white-color,
-            $main-color,
+          @include facetsFilter('transparent',
             $main-color,
             $blue-algolia );
   
@@ -51,7 +41,7 @@
           }
   
           &:hover {
-            @include facetsHierarchicalHover($blue-algolia);
+            @include facetsHover($blue-algolia-custom-gradient);
           }
         }
   
@@ -73,14 +63,14 @@
           }
   
           &:hover>button {
-            @include facetsHierarchicalHover($blue-algolia);
+            @include facetsHover($blue-algolia-custom-gradient);
           }
         }
       }
     }
   
     .refined-filter {
-      @include btn-hover($blue-algolia, $white-color);
+      @include refinedFacet($blue-algolia-custom-gradient, $white-color);
   
       p,
       span {

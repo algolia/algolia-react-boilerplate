@@ -22,15 +22,8 @@
       display: none;
     }
   }
-  li {
-    a {
-      @include btn-currentRefinement;
-      text-transform: capitalize;
-      color: $white-color;
-    }
+  a {
+    @include btn($blue-algolia-custom-gradient, $white-color);
   }
 }
 
-.button-clear-refinement {
-  @include btn-currentRefinement;
-}

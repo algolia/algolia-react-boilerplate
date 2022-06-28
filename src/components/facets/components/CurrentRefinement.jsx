@@ -43,14 +43,17 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
   const { colourHexa } = hitsConfig;
   const currencySymbol = useRecoilValue(currencySymbolAtom);
 
-  items = items.filter((item, index, array) => array.findIndex(t => t.attribute == item.attribute) == index);
+  items = items.filter(
+    (item, index, array) =>
+      array.findIndex((t) => t.attribute == item.attribute) == index
+  );
 
   return (
-    <ul className="refinement-container__refinements">
+    <div className="refinement-container__refinements">
       {items.map((item) => {
         if (item.attribute.includes('price')) {
           return (
-            <li key={item.label}>
+            <>
               {item.items ? (
                 <>
                   <CurrentRefinementGeneral item={item} />
@@ -66,12 +69,12 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
                   {displayPrice(item, currencySymbol, refinementPriceLabels)}
                 </a>
               )}
-            </li>
+            </>
           );
         }
         if (item.attribute.includes(colourHexa)) {
           return (
-            <li key={item.label}>
+            <>
               {item.items ? (
                 <>
                   <CurrentRefinementGeneral item={item} colourHexa={true} />
@@ -87,12 +90,12 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
                   {displayColor(item)}
                 </a>
               )}
-            </li>
+            </>
           );
         }
 
         return (
-          <li key={item.label}>
+          <>
             {item.items ? (
               <>
                 <CurrentRefinementGeneral item={item} />
@@ -108,10 +111,10 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
                 {item.label}
               </a>
             )}
-          </li>
+          </>
         );
       })}
-    </ul>
+    </div>
   );
 };
 

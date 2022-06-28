@@ -74,8 +74,21 @@
         font-style: italic;
       }
       .add-to-cart {
+        @include btn($blue-algolia-custom-gradient, $white-color);
         margin-top: 5rem;
-        align-self: flex-start;
+        gap: 1rem;
+        width: 30%;
+        &:hover{
+          @include btn-hover($blue-algolia-custom-gradient, $white-color);
+          gap: 1.5rem;
+        }
+        svg{
+          width: 12px;
+        }
+        p{
+          color: $white-color;
+        }
+        
       }
       .price {
         color: $blue-algolia;
@@ -108,19 +121,9 @@
     }
   }
   .addToCartBtn{
-    @include btn($blue-algolia-custom-gradient, $white-color, transparent);
-    gap: 1rem;
+  
    
-    &:hover{
-      @include btn-hover($blue-algolia-custom-gradient, $white-color);
-      gap: 1.5rem;
-    }
-    svg{
-      width: 12px;
-    }
-    p{
-      color: $white-color;
-    }
+  
   }
 }
 // MOBILE & TABLET

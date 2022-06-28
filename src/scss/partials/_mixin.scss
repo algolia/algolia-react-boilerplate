@@ -20,22 +20,17 @@
 // ------------------------------------------
 // Button
 // ------------------------------------------
-@mixin btn($background, $text-color, $border-color) {
-  font-family: $main-font;
-  font-weight: 700;
-  border: 1px solid $border-color;
-  text-decoration: none;
-  color: $text-color;
-  width: 100%;
+@mixin btn($background, $text-color) {
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin: 0.5rem 0;
-  padding: 0.8em;
-  font-size: 0.7rem;
+  align-items: center;
   background: $background;
-  text-transform: uppercase;
-  cursor: pointer;
+  color: $text-color;
+  font-weight: 400;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  font-family: $main-font;
+  border-radius: 2px;
   transition: all 0.3s ease-in-out;
 }
 
@@ -264,6 +259,11 @@
   font-weight: 600;
 }
 
+
+
+// ------------------------------------------
+// Injected content 
+// ------------------------------------------
 @mixin salesCard($text-color) {
   position: relative;
   &__infos {
@@ -284,7 +284,7 @@
   }
 }
 
-@mixin influencerCard($text-color) {
+@mixin infosSalesCard($text-color) {
   position: absolute;
   padding: 1rem 1rem;
   bottom: 0;
@@ -308,79 +308,61 @@
 // ------------------------------------------
 // Facets
 // ------------------------------------------
-@mixin facetsFilter($background, $text-color, $p-color, $span-color) {
-  text-decoration: none;
-  width: 100%;
-  justify-content: center;
-  margin: 0.5rem 0;
-  padding: 0.8em;
-  font-size: 0.7rem;
-  transition: all 0.4s ease-in-out;
-  text-transform: capitalize;
-  cursor: pointer;
-  color: rgba($text-color, 0.8);
+@mixin facetsFilter($background, $text-color, $nb-hit-color) {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: none;
-  background: initial;
-  position: relative;
-  border-radius: 2px;
-  p {
-    color: $p-color;
-    font-size: 0.9rem;
-    font-weight: 100;
-    text-align: left;
-  }
-  span {
-    color: $span-color;
-    font-size: 0.7rem;
-  }
-}
-
-@mixin facetsFilterHover($background) {
+  width: 100%;
   background: $background;
-  transition: background 0.2s ease-in-out;
-}
-
-@mixin facetsHierarchicalHover($background) {
-  background: $background;
-  transition: background 0.2s ease-in-out;
-}
-
-// ------------------------------------------
-// Current Refinement
-// ------------------------------------------
-
-@mixin btn-currentRefinement {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: $blue-algolia-custom-gradient;
-  color: $white-color;
   font-weight: 400;
   padding: 0.5rem;
   font-size: 0.8rem;
   font-family: $main-font;
   border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+  p {
+    color: $text-color;
+    font-size: 0.9rem;
+    font-weight: 100;
+    text-align: left;
+  }
+  span {
+    color: $nb-hit-color;
+    font-size: 0.7rem;
+  }
 }
 
-// Price Slider
-@mixin priceSlider($color-slider) {
-  .rc-slider-track,
-  .rc-slider-track-1 {
-    background-color: $color-slider;
-  }
-  .rc-slider-handle-1 {
-    border: solid 1px $color-slider;
-  }
-  .rc-slider-handle-2 {
-    border: solid 1px $color-slider;
-  }
-  .rc-slider-handle-dragging {
-    box-shadow: (0 0 0 3px $color-slider);
-  }
+@mixin facetsTitle($text-color){
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $text-color;
+  margin: 2rem 0 1rem 0;
+
 }
+
+@mixin refinedFacet($background, $text-color){
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $background;
+  color: $text-color;
+  font-weight: 400;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  font-family: $main-font;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+@mixin facetsHover($background) {
+  background: $background;
+  transition: background 0.2s ease-in-out;
+}
+
+
+
 
 // Hamburger menu
 @mixin hamburger-menu {
@@ -446,15 +428,11 @@
 }
 
 @mixin visible {
-  // visibility: visible;
   opacity: 1;
   transition: opacity 1s ease-in-out;
-  // display: block;
 }
 
 @mixin hidden {
-  // visibility: hidden;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
-  // display: none;
 }

@@ -5,11 +5,7 @@
 
 .color-refinement {
     h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: $main-color;
-      padding: 0.6rem;
+      @include facetsTitle($main-color)
     }
   
     .ais-ColorRefinementList {
@@ -18,6 +14,7 @@
       --items-gap: 1rem;
       --refined-icon-size: 1.1rem;
       --color-size: 1.75rem;
+      margin-top: 1rem;
     }
   
     .ais-ColorRefinementList-layoutList .ais-ColorRefinementList-items {

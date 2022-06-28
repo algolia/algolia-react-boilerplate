@@ -216,6 +216,21 @@ const ProductDetails = () => {
               </div>
             )}
             {/* Add to cart button which sends an Insights API call to Algolia but only if there is no size filter */}
+
+            {PDPHitSections.price && (
+              <motion.p
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: 1,
+                  transition: { delay: 1, framerMotionTransition },
+                }}
+                className="price"
+              >
+                <Price hit={hit} />
+              </motion.p>
+            )}
             {!PDPHitSections.sizeFilter && (
               <motion.button
                 class="add-to-cart"
@@ -233,20 +248,6 @@ const ProductDetails = () => {
                 <i className="fa-solid fa-shopping-cart"></i>
                 <p>Add to cart</p>
               </motion.button>
-            )}
-            {PDPHitSections.price && (
-              <motion.p
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: 1,
-                  transition: { delay: 1, framerMotionTransition },
-                }}
-                className="price"
-              >
-                <Price hit={hit} />
-              </motion.p>
             )}
           </div>
         </div>

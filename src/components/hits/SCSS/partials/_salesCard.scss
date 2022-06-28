@@ -8,7 +8,7 @@
   }
   .image-wrapper-sales {
     .infos_influencer {
-      @include influencerCard($white-color);
+      @include infosSalesCard($white-color);
     }
   }
   

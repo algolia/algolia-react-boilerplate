@@ -1,9 +1,8 @@
 @use '../../../../scss/partials/' as *;
 
 .filters-container{
-
     &__pricecontainer {
-        width: 80%;
+        width: 90%;
         margin: 1rem auto;
     
         &__prices {
@@ -21,6 +20,18 @@
 
   // Personalisation Slider price
   .rc-slider {
-    @include priceSlider($blue-algolia);
+    .rc-slider-track,
+    .rc-slider-track-1 {
+      background: $blue-algolia-custom-gradient;
+    }
+    .rc-slider-handle-1 {
+      border: solid 1px $blue-algolia;
+    }
+    .rc-slider-handle-2 {
+      border: solid 1px $blue-algolia;
+    }
+    .rc-slider-handle-dragging {
+      box-shadow: (0 0 0 3px $blue-algolia);
+    }
   }
 }
