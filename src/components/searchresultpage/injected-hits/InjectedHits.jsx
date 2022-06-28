@@ -17,6 +17,10 @@ const contentTypeComponentMap = {
 const InjectedHits = (props) => {
   // Get the regular hits
   const { hits } = useHits(props);
+  console.log(
+    '🚀 ~ file: InjectedHits.jsx ~ line 20 ~ InjectedHits ~ hits',
+    hits
+  );
 
   // Get custom data from rules
   const { items: ruleData } = useQueryRules(props);
@@ -42,7 +46,7 @@ const InjectedHits = (props) => {
 
     // Inject items
     setInjectedHits(injectContent(hits, itemsToInject));
-  }, [ruleData]);
+  }, [ruleData, hits]);
 
   return <CustomHits hits={injectedHits} />;
 };
