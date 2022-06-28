@@ -140,11 +140,11 @@ const NoResults = () => {
               </li>
               <div className="query-suggestion">
                 <Index indexId={suggestionsIndex} indexName={suggestionsIndex}>
-                  <Configure hitsPerPage={3} query="" />
+                  <Configure hitsPerPage={3} />
                   <QuerySuggestions />
-                  {/* Add this searchBox Invisible to refine when we click on a suggestion */}
-                  <CustomSearchBox queryChanged={getQueryState} />
                 </Index>
+                {/* Add this searchBox Invisible to refine when we click on a suggestion */}
+                <CustomSearchBox queryChanged={getQueryState} />
               </div>
               {lastId && (
                 <div>
@@ -198,24 +198,14 @@ export default SearchResultPage;
 // "This searchbox is virtual and will not appear in the DOM. The goal of this virtual searchbox is to refine the app by changing the query state
 // in the main IS instance when clicking on QS when we're in the noResult component"
 function CustomSearchBox(props) {
-  const { refine, query } = useSearchBox(props);
-  const { queryChanged } = props;
-  const refineFunction = (queryValue) => {
-    refine(queryValue);
-  };
-  useEffect(() => {
-    refineFunction(queryChanged);
-  }, [query]);
+  // const { refine, query } = useSearchBox(props);
+  // const { queryChanged } = props;
+  // const refineFunction = (queryValue) => {
+  //   refine(queryValue);
+  // };
+  // useEffect(() => {
+  //   refineFunction(queryChanged);
+  // }, [queryChanged]);
 
-  return (
-    <form noValidate action="" role="search" className="search-box-invisible">
-      <input
-        type="search"
-        value={query}
-        onChange={(event) => {
-          refine(event.currentTarget.value);
-        }}
-      />
-    </form>
-  );
+  return '';
 }

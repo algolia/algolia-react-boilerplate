@@ -40,6 +40,9 @@ function CustomSearchBox(props) {
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
+  // Query changed for suggestions in no results
+  const { queryChanged } = props;
+
   // LEFT IN FOR REFACTO PURPOSES
   // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   // router hook to navigate using a function
@@ -49,6 +52,7 @@ function CustomSearchBox(props) {
 
   // Get array of rules from Recoil
   const rulesApplied = useSetRecoilState(rulesAtom);
+  console.log(queryChanged);
 
   const refineFunction = (query) => {
     // Empty array of rules on each Keystrokes
@@ -66,7 +70,6 @@ function CustomSearchBox(props) {
         autoComplete="off"
         onSubmit={(event) => {
           event.preventDefault();
-
           setQueryState(query);
           useStoreQueryToLocalStorage(query);
           navigate('/search');
