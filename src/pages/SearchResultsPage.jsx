@@ -34,6 +34,9 @@ import { queryAtom } from '../config/searchboxConfig';
 import QuerySuggestions from '@/components/federatedSearch/components/QuerySuggestions';
 import Banner from '@/components/banners/Banner';
 
+// Import SearchBox
+import CustomSearchBox from '@/components/searchbox/SearchBox';
+
 // Import Persona State from recoil
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 
@@ -48,9 +51,6 @@ import { AnimatePresence } from 'framer-motion';
 
 const SrpLaptop = lazy(() =>
   import('@/components/searchresultpage/srpLaptop/SrpLaptop')
-);
-const SrpMobile = lazy(() =>
-  import('@/components/searchresultpage/srpMobile/SrpMobile')
 );
 
 const SearchResultPage = ({ setIsMounted }) => {
@@ -140,9 +140,9 @@ const NoResults = () => {
                 <Index indexId={suggestionsIndex} indexName={suggestionsIndex}>
                   <Configure hitsPerPage={3} query="" />
                   <QuerySuggestions />
+                  {/* Add this searchBox Invisible to refine when we click on a suggestion */}
+                  <CustomSearchBox query={getQueryState} />
                 </Index>
-                {/* Add this searchBox Invisible to refine when we click on a suggestion */}
-                {/* <CustomSearchBox query={getQueryState} /> */}
               </div>
               {lastId && (
                 <div>
@@ -151,13 +151,13 @@ const NoResults = () => {
                     viewed:
                   </p>
                   <div className="recommend">
-                    {/* <RelatedProducts
+                    <RelatedProducts
                       recommendClient={recommendClient}
                       indexName={index}
                       objectIDs={[lastId]}
                       itemComponent={RelatedItem}
                       maxRecommendations={5}
-                    /> */}
+                    />
                   </div>
                 </div>
               )}
