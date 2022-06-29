@@ -6,12 +6,12 @@ import { useHierarchicalMenu } from 'react-instantsearch-hooks-web';
 const CustomHierarchicalMenu = (props) => {
   const { items, refine } = useHierarchicalMenu(props);
   const { title } = props;
-  console.log('Je Passe la');
+  // console.log('Je Passe la');
   // console.log(props);
-  console.log(
-    '🚀 ~ file: Hierarchical.jsx ~ line 8 ~ CustomHierarchicalMenu ~ items',
-    items
-  );
+  // console.log(
+  //   '🚀 ~ file: Hierarchical.jsx ~ line 8 ~ CustomHierarchicalMenu ~ items',
+  //   items
+  // );
   // const { itemsData } = props;
   // console.log(
   //   '🚀 ~ file: Hierarchical.jsx ~ line 9 ~ CustomHierarchicalMenu ~ itemsData',
