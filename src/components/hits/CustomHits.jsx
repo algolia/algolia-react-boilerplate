@@ -8,17 +8,25 @@ import React, { useState, useEffect } from 'react';
 import { Hit } from './Hits';
 // TODO: Skeleton here
 const CustomHits = ({ hits }) => {
+  const [hitsLoaded, setHitsLoaded] = useState(false)
 
   useEffect(() => {
-    console.log(hits);
+    if (hits.length > 0) {
+      setHitsLoaded(true)
+    }
   }, [hits]);
-  console.log("hi");
+
+  const renderHitsOrSkeleton = (args) => {
+    const {hit, i} = args;
+    if (hitsLoaded) { 
+      <Hit hit={hit} key={i} /> } else {<div className="" style={{width: "100px", height: "200px", backgroundColor: "red"}}></div>}
+  }
 
   return (
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
         {hits.map((hit, i) => {
-          return <Hit hit={hit} key={i} />;
+          return renderHitsOrSkeleton({hit, i});
         })}
       </ul>
     </div>

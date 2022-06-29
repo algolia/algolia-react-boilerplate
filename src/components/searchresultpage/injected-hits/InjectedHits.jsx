@@ -13,18 +13,18 @@ export const InjectedHits = connectHits(
 );
 
 const CustomInjectedHit = ({ injectedHits }) => {
-  const [hitLoaded, setHitLoaded] = useState(false);
+  const [hitsLoaded, setHitsLoaded] = useState(false);
 
   useEffect(() => {
     if (injectedHits.length > 0) {
-      setHitLoaded(true)
+      setHitsLoaded(true)
     }
   }, [injectedHits]);
 
   const renderHit = (args) => {
     const {props, Hit, index} = args;
 
-    if (hitLoaded) {
+    if (hitsLoaded) {
       return <Hit {...props} index={index} key={index} />
     } else {
       return <div className="" style={{width: "100px", height: "200px", backgroundColor: "red"}}></div>
