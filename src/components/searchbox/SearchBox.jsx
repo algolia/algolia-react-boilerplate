@@ -52,7 +52,6 @@ function CustomSearchBox(props) {
 
   // Get array of rules from Recoil
   const rulesApplied = useSetRecoilState(rulesAtom);
-  console.log(queryChanged);
 
   const refineFunction = (query) => {
     // Empty array of rules on each Keystrokes

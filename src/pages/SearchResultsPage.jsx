@@ -105,6 +105,7 @@ const SearchResultPage = ({ setIsMounted }) => {
 
 // This is rendered when there are no results to display
 const NoResults = () => {
+  console.log('NoResults');
   //Get the query
   const getQueryState = useRecoilValue(queryAtom);
   const getSearches = localStorage.getItem('objectId');
@@ -144,8 +145,8 @@ const NoResults = () => {
                   <QuerySuggestions />
                 </Index>
                 {/* Add this searchBox Invisible to refine when we click on a suggestion */}
-                <CustomSearchBox queryChanged={getQueryState} />
               </div>
+              <CustomSearchBox queryChanged={getQueryState} />
               {lastId && (
                 <div>
                   <p className="no-results__infos__p">
@@ -175,14 +176,12 @@ function NoResultsHandler(props) {
   const { hits } = useHits(props);
   const [length, setLength] = useState(0);
 
-  // Do you want to show banner on SRP? This boolean tells us yes or no
-  const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
-  // Handle screen resize
   useEffect(() => {
+    console.log('NoResultsHandler', hits.length);
     setLength(hits.length);
   }, [hits]);
 
-  return length < 0 ? (
+  return length > 0 ? (
     <Suspense fallback={<div style={{ height: '2004px' }}></div>}>
       <div>
         <SrpLaptop />
@@ -201,21 +200,22 @@ function CustomSearchBox(props) {
   const { refine, query } = useSearchBox(props);
   const { queryChanged } = props;
   const refineFunction = (queryValue) => {
+    console.log(
+      '🚀 ~ file: SearchResultsPage.jsx ~ line 204 ~ refineFunction ~ queryValue',
+      queryValue
+    );
+
     refine(queryValue);
   };
   useEffect(() => {
     refineFunction(queryChanged);
-    console.log(
-      '🚀 ~ file: SearchResultsPage.jsx ~ line 204 ~ refineFunction ~ queryValue',
-      queryChanged
-    );
   }, [queryChanged]);
 
   return (
-    <form noValidate action="" role="search" className="">
+    <form noValidate action="" role="search" className="search-box-invisible">
       <input
         type="search"
-        value={queryChanged}
+        value={query}
         onChange={(event) => {
           refine(event.currentTarget.value);
         }}
