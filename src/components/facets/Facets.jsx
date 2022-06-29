@@ -5,13 +5,15 @@ import { ColorRefinementList } from '@algolia/react-instantsearch-widget-color-r
 // Import Algolia
 import {
   DynamicWidgets,
-  useRefinementList
+  useRefinementList,
 } from 'react-instantsearch-hooks-web';
 
 // Import magnifying glass svg, and price slider component
 import { Glass } from '@/assets/svg/SvgIndex';
 
 // Import components
+import PriceSlider from './PriceSlider';
+import CustomHierarchicalMenu from './Hierarchical';
 
 // Import list of Attributes/Facets
 import { refinements } from '@/config/refinementsConfig';
@@ -77,26 +79,36 @@ function GenericRefinementList(props) {
   );
 }
 
-const CustomColorRefinement = ({
-  title,
-  attribute,
-  separator,
-  layout,
-  shape,
-}) => {
+// const CustomColorRefinement = ({
+//   title,
+//   attribute,
+//   separator,
+//   layout,
+//   shape,
+// }) => {
+//   return (
+//     <div className="color-refinement">
+//       <h3>{title}</h3>
+//       <ColorRefinementList
+//         limit={16}
+//         attribute={attribute}
+//         separator={separator}
+//         layout={layout}
+//         shape={shape}
+//       />
+//     </div>
+//   );
+// };
+
+// ColorRefinementList custom for Hooks
+function CustomColorRefinement(props) {
+  const { items, refine, searchForItems } = useRefinementList(props);
   return (
-    <div className="color-refinement">
-      <h3>{title}</h3>
-      <ColorRefinementList
-        limit={16}
-        attribute={attribute}
-        separator={separator}
-        layout={layout}
-        shape={shape}
-      />
+    <div>
+      <h1>Colour</h1>
     </div>
   );
-};
+}
 
 const Facets = () => {
   return (
@@ -105,15 +117,15 @@ const Facets = () => {
         {refinements.map((e, i) => {
           const { type, currency, label, options } = e;
           switch (type) {
-            // case 'price':
-            //   return (
-            //     <PriceSlider
-            //       attribute={options.attribute}
-            //       title={label}
-            //       currency={currency}
-            //       key={i}
-            //     />
-            //   );
+            case 'price':
+              return (
+                <PriceSlider
+                  attribute={options.attribute}
+                  title={label}
+                  currency={currency}
+                  key={i}
+                />
+              );
             // case 'colour':
             //   return (
             //     <CustomColorRefinement
@@ -125,14 +137,14 @@ const Facets = () => {
             //       shape={Shape.Circle}
             //     />
             //   );
-            // case 'hierarchical':
-            //   return (
-            //     <CustomHierarchicalMenu
-            //       attributes={options.attribute}
-            //       title={label}
-            //       key={i}
-            //     />
-            //   );
+            case 'hierarchical':
+              return (
+                <CustomHierarchicalMenu
+                  attributes={options.attribute}
+                  title={label}
+                  key={i}
+                />
+              );
             default:
               return (
                 <GenericRefinementList
