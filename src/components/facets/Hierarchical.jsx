@@ -5,7 +5,7 @@ import { useHierarchicalMenu } from 'react-instantsearch-hooks-web';
 // eg. Categories > Mens > Clothing > Jackets
 function CustomHierarchicalMenu(props) {
   const { items, refine, title } = useHierarchicalMenu(props);
-  const {itemsData} = props;
+  const { itemsData } = props;
   return (
     <div className="filters-container-hierarchical">
       <div className="filters-container-hierarchical__title">
@@ -13,6 +13,11 @@ function CustomHierarchicalMenu(props) {
       </div>
       <ul className="filters-container-hierarchical__content">
         {items.map((item) => {
+          console.log(
+            '🚀 ~ file: Hierarchical.jsx ~ line 47 ~ {items.map ~ item',
+            item.data
+          );
+
           return (
             <li
               className="filters-container-hierarchical__content__list"
@@ -37,7 +42,10 @@ function CustomHierarchicalMenu(props) {
               {/* If there are items within the 'item' object, then display them */}
               {item.data && (
                 <div className="filters-container-hierarchical__content__list-isOpened">
-                  <CustomHierarchicalMenu itemsData={item.data} refine={refine} />
+                  <CustomHierarchicalMenu
+                    itemsData={item.data}
+                    refine={refine}
+                  />
                 </div>
               )}
             </li>

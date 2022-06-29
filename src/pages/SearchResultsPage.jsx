@@ -32,9 +32,12 @@ import { queryAtom } from '../config/searchboxConfig';
 // Import Components
 import QuerySuggestions from '@/components/federatedSearch/components/QuerySuggestions';
 import SrpLaptop from '@/components/searchresultpage/srpLaptop/SrpLaptop';
+import Banner from '@/components/banners/Banner';
 
 // Config suggestions
 import { indexNames } from '@/config/algoliaEnvConfig';
+// Import Banner State from recoil
+import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 
 // Federated congif from recoil
 import {
@@ -162,9 +165,12 @@ const NoResults = () => {
 };
 
 const NoResultsHandler = () => {
+  // Do you want to show banner on SRP? This boolean tells us yes or no
+  const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
   const hits = useRecoilValue(hitsNumber);
   return hits > 0 ? (
     <div>
+      {shouldDisplayBanners && <Banner />}
       <SrpLaptop />
     </div>
   ) : (
