@@ -64,17 +64,17 @@ const TrendingFacetValues = ({ items, refine }) => {
     <div className="trending-facet-container">
       {
         recommendations.length > 0 && (
-          <div class="filters-container">
-            <div class="filters-container__title">
+          <div className="filters-container">
+            <div className="filters-container__title">
               <h4>{facetValuesTitle}</h4>
             </div>
-            <div class="filters-container__list">
+            <div className="filters-container__list">
             </div>
-            <ul class="filters-container__content">
+            <ul className="filters-container__content">
               {
-                recommendations.map(trendingFacetValue => {
+                recommendations.map((trendingFacetValue, i) => {
                   return (
-                    <TrendingFacetsItem trendingFacetValue={trendingFacetValue} />
+                    <TrendingFacetsItem trendingFacetValue={trendingFacetValue} key={`${i}${trendingFacetValue}`} />
                   )
                 })
               }

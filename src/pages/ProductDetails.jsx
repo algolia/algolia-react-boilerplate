@@ -215,7 +215,7 @@ const ProductDetails = () => {
             {/* Add to cart button which sends an Insights API call to Algolia but only if there is no size filter */}
             {!PDPHitSections.sizeFilter && (
               <motion.button
-                class="add-to-cart"
+                className="add-to-cart"
                 onClick={() => {
                   triggerAlert('Sending add to cart event to Algolia'),
                     useSendAlgoliaEvent(

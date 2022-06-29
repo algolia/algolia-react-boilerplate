@@ -102,7 +102,7 @@ const SrpLaptop = () => {
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
-        {shouldHaveTrendingProductsValue && queryState === "" && state?.type !== 'context' && (
+        {false && queryState === "" && (
           <TrendingProducts facetName={facetName} facetValue={facetValue} />
         )}
       </div>
@@ -168,7 +168,7 @@ const SrpLaptop = () => {
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
 
 
-          {shouldInjectContent ? (
+          {false ? (
             <Suspense fallback={<SkeletonLoader />}>
               <Index indexName={injectedContentIndex}>
                 <Configure hitsPerPage={1} page={0} />

@@ -2,15 +2,22 @@
 
 // Import InstantSearch Functionality
 import { connectHits } from 'react-instantsearch-dom';
+import React, { useState, useEffect } from 'react';
+
 
 import { Hit } from './Hits';
-
+// TODO: Skeleton here
 const CustomHits = ({ hits }) => {
+
+  useEffect(() => {
+    console.log(hits);
+  }, [hits]);
+  console.log("hi");
+
   return (
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
         {hits.map((hit, i) => {
-          // Wrap the hit info in an animation, and click functionality to view the product
           return <Hit hit={hit} key={i} />;
         })}
       </ul>

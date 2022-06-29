@@ -1,6 +1,6 @@
 const FacetsSkeletonLoader = () => {
     return (
-        <div class="filters-container">
+        <div className="filters-container">
             {/* <div class="filters-container__title">
                 <h3>Brand</h3>
                 <div>
