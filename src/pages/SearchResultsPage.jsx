@@ -182,7 +182,7 @@ function NoResultsHandler(props) {
     setLength(hits.length);
   }, [hits]);
 
-  return length > 0 ? (
+  return length < 0 ? (
     <Suspense fallback={<div style={{ height: '2004px' }}></div>}>
       <div>
         <SrpLaptop />
@@ -198,14 +198,28 @@ export default SearchResultPage;
 // "This searchbox is virtual and will not appear in the DOM. The goal of this virtual searchbox is to refine the app by changing the query state
 // in the main IS instance when clicking on QS when we're in the noResult component"
 function CustomSearchBox(props) {
-  // const { refine, query } = useSearchBox(props);
-  // const { queryChanged } = props;
-  // const refineFunction = (queryValue) => {
-  //   refine(queryValue);
-  // };
-  // useEffect(() => {
-  //   refineFunction(queryChanged);
-  // }, [queryChanged]);
+  const { refine, query } = useSearchBox(props);
+  const { queryChanged } = props;
+  const refineFunction = (queryValue) => {
+    refine(queryValue);
+  };
+  useEffect(() => {
+    refineFunction(queryChanged);
+    console.log(
+      '🚀 ~ file: SearchResultsPage.jsx ~ line 204 ~ refineFunction ~ queryValue',
+      queryChanged
+    );
+  }, [queryChanged]);
 
-  return '';
+  return (
+    <form noValidate action="" role="search" className="">
+      <input
+        type="search"
+        value={queryChanged}
+        onChange={(event) => {
+          refine(event.currentTarget.value);
+        }}
+      />
+    </form>
+  );
 }
