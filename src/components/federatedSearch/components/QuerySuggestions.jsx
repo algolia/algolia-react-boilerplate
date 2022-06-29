@@ -15,7 +15,6 @@ import { queryAtom } from '@/config/searchboxConfig';
 
 function QuerySuggestions(props) {
   const { hits } = useHits(props);
-  // console.log(hits.query);
   // router hook to navigate using a function
   const navigate = useNavigate();
   // Recoil State - update query in searchBar

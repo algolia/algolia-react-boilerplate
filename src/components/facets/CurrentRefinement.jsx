@@ -71,7 +71,7 @@ function CurrentRefinements(props) {
         if (item.attribute.includes(colourHexa)) {
           return (
             <li key={item.label}>
-              {item.items ? (
+              {item.refinements ? (
                 <>
                   <CurrentRefinementGeneral item={item} colourHexa={true} />
                 </>

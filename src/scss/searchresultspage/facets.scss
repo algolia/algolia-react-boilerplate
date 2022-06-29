@@ -65,18 +65,20 @@
     &__list {
       &__button-filter {
         display: flex;
-        @include facetsFilter($white-color,
+        @include facetsFilter(
+          $white-color,
           $main-color,
           $main-color,
-          $blue-algolia );
+          $blue-algolia
+        );
 
-        >p {
+        > p {
           font-weight: 300;
         }
 
         &::before {
           position: absolute;
-          content: "";
+          content: '';
           top: 0;
           right: 0;
           bottom: 0;
@@ -94,17 +96,35 @@
         }
 
         &:hover {
-
           p,
           span {
             color: $white-color;
             transition: color 0.3s ease-in-out;
           }
         }
-
       }
     }
-
+  }
+  &__content-color {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+    &__list {
+      display: flex;
+      .color-name {
+        input {
+          display: flex;
+          justify-content: center;
+        }
+        p {
+          text-transform: capitalize;
+          margin-top: 0.6rem;
+          font-size: 0.6rem;
+          text-align: center;
+        }
+      }
+    }
   }
 
   .refined-filter {
@@ -131,7 +151,7 @@
     display: flex;
     justify-content: space-between;
 
-    >* {
+    > * {
       &:empty {
         display: none;
       }
@@ -159,12 +179,14 @@
     &__list {
       &__button-filter {
         display: flex;
-        @include facetsFilter($white-color,
+        @include facetsFilter(
+          $white-color,
           $main-color,
           $main-color,
-          $blue-algolia );
+          $blue-algolia
+        );
 
-        >p {
+        > p {
           font-weight: 300;
         }
 
@@ -173,11 +195,11 @@
         }
       }
 
-      :hover>p {
+      :hover > p {
         color: $white-color;
       }
 
-      :hover>span {
+      :hover > span {
         color: $white-color;
       }
 
@@ -190,7 +212,7 @@
           width: 97%;
         }
 
-        &:hover>button {
+        &:hover > button {
           @include facetsHierarchicalHover($blue-algolia);
         }
       }
@@ -252,8 +274,10 @@
 
   .ais-ColorRefinementList-items {
     display: grid;
-    grid-template-columns: repeat(auto-fit,
-        minmax(var(--items-column-width), 1fr));
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(var(--items-column-width), 1fr)
+    );
     gap: var(--items-gap);
   }
 
@@ -324,7 +348,8 @@
       visibility 0s linear var(--transition-duration);
   }
 
-  .ais-ColorRefinementList-item.ais-ColorRefinementList-itemRefined .ais-ColorRefinementList-refinedIcon {
+  .ais-ColorRefinementList-item.ais-ColorRefinementList-itemRefined
+    .ais-ColorRefinementList-refinedIcon {
     transform: scale(1);
     visibility: visible;
     opacity: 1;
@@ -333,8 +358,7 @@
   }
 }
 
-
-// Mobile & tablet 
+// Mobile & tablet
 
 .srp-container__facets-mobile {
   position: absolute;

@@ -13,7 +13,6 @@ function CustomHierarchicalMenu(props) {
       </div>
       <ul className="filters-container-hierarchical__content">
         {items.map((item) => {
-          // console.log(item);
           return (
             <li
               className="filters-container-hierarchical__content__list"

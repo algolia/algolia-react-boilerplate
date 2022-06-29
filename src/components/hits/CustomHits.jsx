@@ -17,7 +17,6 @@ function CustomHits(props) {
   const hitsState = useRecoilValue(hitsAtom);
 
   // Decide whether to use hits from hook or props
-  // console.log(hits.length);
   useEffect(() => {
     // Check the props for the hits
     if (props.hits != undefined) {
@@ -29,9 +28,7 @@ function CustomHits(props) {
     else setHits(hookHits);
   }, [props]);
 
-  useEffect(() => {
-    // console.log(hitsState.length);
-  }, [hitsState]);
+  useEffect(() => {}, [hitsState]);
 
   return (
     <div className="ais-InfiniteHits">

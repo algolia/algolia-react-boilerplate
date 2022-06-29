@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-// Widget Algolia ColorRefinementList
-import { ColorRefinementList } from '@algolia/react-instantsearch-widget-color-refinement-list';
 // Import Algolia
 import {
   DynamicWidgets,
@@ -12,8 +10,8 @@ import {
 import { Glass } from '@/assets/svg/SvgIndex';
 
 // Import components
-import PriceSlider from './PriceSlider';
 import CustomHierarchicalMenu from './Hierarchical';
+import PriceSlider from './PriceSlider';
 
 // Import list of Attributes/Facets
 import { refinements } from '@/config/refinementsConfig';
@@ -103,9 +101,50 @@ function GenericRefinementList(props) {
 // ColorRefinementList custom for Hooks
 function CustomColorRefinement(props) {
   const { items, refine, searchForItems } = useRefinementList(props);
+  const { title, options } = props;
+
   return (
-    <div>
-      <h1>Colour</h1>
+    <div className="filters-container">
+      <div className="filters-container__title">
+        <h3>{title}</h3>
+      </div>
+      <ul className="filters-container__content-color">
+        {items.map((item) => {
+          const color = item.value.split(';')[1];
+          return (
+            <li
+              className="filters-container__content-color__list"
+              key={item.value}
+            >
+              <div className="color-name">
+                <input
+                  className={`filters-container__content__list__button-filter ${
+                    item.isRefined ? 'refined-filter' : ''
+                  }`}
+                  style={{
+                    backgroundColor: color,
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
+                  }}
+                  type="button"
+                  href="#"
+                  value={`${item.isRefined ? '✓' : ''}`}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    refine(item.value);
+                  }}
+                >
+                  {/* <span className="filters-container__content__list__refinement-count">
+                  {item.count}
+                </span> */}
+                </input>
+                <p>{item.label.split(';')[0]}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
@@ -126,17 +165,14 @@ const Facets = () => {
                   key={i}
                 />
               );
-            // case 'colour':
-            //   return (
-            //     <CustomColorRefinement
-            //       key={i}
-            //       title={label}
-            //       attribute={options.attribute}
-            //       separator=";"
-            //       layout={Layout.Grid}
-            //       shape={Shape.Circle}
-            //     />
-            //   );
+            case 'colour':
+              return (
+                <CustomColorRefinement
+                  attribute={options.attribute}
+                  key={i}
+                  title={label}
+                />
+              );
             case 'hierarchical':
               return (
                 <CustomHierarchicalMenu
