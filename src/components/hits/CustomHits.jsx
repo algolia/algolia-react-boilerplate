@@ -25,6 +25,8 @@ const CustomHits = ({ hits }) => {
     }
   }
 
+  
+
   return (
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
