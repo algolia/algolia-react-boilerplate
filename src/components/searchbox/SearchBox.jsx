@@ -1,7 +1,7 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
 
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
@@ -59,6 +59,10 @@ function CustomSearchBox(props) {
     setQueryState(query);
     refine(query);
   };
+
+  useEffect(() => {
+    refine(queryState);
+  }, [queryState]);
 
   return (
     <div className="searchbox">

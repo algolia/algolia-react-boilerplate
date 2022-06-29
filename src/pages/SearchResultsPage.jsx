@@ -15,6 +15,8 @@ import SkeletonLoader from '@/components/hits/HitsSkeletonLoader';
 // Algolia search client
 import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
 import ClipLoader from 'react-spinners/ClipLoader';
+import connectStats from 'instantsearch.js/es/connectors/stats/connectStats';
+import { useConnector } from 'react-instantsearch-hooks-web';
 
 // define the client for using Recommend
 const recommendClient = algoliarecommend(
@@ -34,10 +36,12 @@ import {
 // Recoil state to directly access results
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { queryAtom } from '../config/searchboxConfig';
+import { hitsNumber } from '@/config/hitsConfig';
 
 // Import Components
 import QuerySuggestions from '@/components/federatedSearch/components/QuerySuggestions';
 import Banner from '@/components/banners/Banner';
+import { CustomStats } from '@/components/searchresultpage/Stats';
 
 // Import Persona State from recoil
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
@@ -51,9 +55,7 @@ import {
 } from '@/config/federatedConfig';
 import { AnimatePresence } from 'framer-motion';
 
-const SrpLaptop = lazy(() =>
-  import('@/components/searchresultpage/srpLaptop/SrpLaptop')
-);
+import SrpLaptop from '@/components/searchresultpage/srpLaptop/SrpLaptop';
 
 const SearchResultPage = ({ setIsMounted }) => {
   const [srpIsLoaded, setSrpIsLoaded] = useState(false);
@@ -95,6 +97,7 @@ const SearchResultPage = ({ setIsMounted }) => {
 
   return (
     <div ref={srpMounted} className="srp">
+      <VistualCustomStats />
       <NoResultsHandler
         srpIsLoaded={srpIsLoaded}
         setSrpIsLoaded={setSrpIsLoaded}
@@ -139,13 +142,15 @@ const NoResults = () => {
                 </span>
               </li>
               <div className="query-suggestion">
-                <Index indexId={suggestionsIndex} indexName={suggestionsIndex}>
-                  <Configure hitsPerPage={3} />
+                <Index
+                  indexId="suggestions-no-results"
+                  indexName={suggestionsIndex}
+                >
+                  <Configure hitsPerPage={3} query="" />
                   <QuerySuggestions />
                 </Index>
                 {/* Add this searchBox Invisible to refine when we click on a suggestion */}
               </div>
-              <CustomSearchBox queryChanged={getQueryState} />
               {lastId && (
                 <div>
                   <p className="no-results__infos__p">
@@ -171,48 +176,33 @@ const NoResults = () => {
   );
 };
 
-function NoResultsHandler(props) {
-  const { hits } = useHits(props);
-  const [length, setLength] = useState(0);
-
-  useEffect(() => {
-    setLength(hits.length);
-  }, [hits]);
-
-  return length > 0 ? (
-    <Suspense fallback={<div style={{ height: '2004px' }}></div>}>
-      <div>
-        <SrpLaptop />
-      </div>
-    </Suspense>
+const NoResultsHandler = () => {
+  const hits = useRecoilValue(hitsNumber);
+  return hits > 0 ? (
+    <div>
+      <SrpLaptop />
+    </div>
   ) : (
     <NoResults />
   );
-}
+};
 
 export default SearchResultPage;
 
-// "This searchbox is virtual and will not appear in the DOM. The goal of this virtual searchbox is to refine the app by changing the query state
+// "This Stats component is virtual and will not appear in the DOM. The goal of this virtual searchbox is to refine the app by changing the query state
 // in the main IS instance when clicking on QS when we're in the noResult component"
-function CustomSearchBox(props) {
-  const { refine, query } = useSearchBox(props);
-  const { queryChanged } = props;
-  const refineFunction = (queryValue) => {
-    refine(queryValue);
-  };
-  useEffect(() => {
-    refineFunction(queryChanged);
-  }, [queryChanged]);
+// This is for building the stats info that is displayed above the items in the search results page
+function useStats(props) {
+  return useConnector(connectStats, props);
+}
 
-  return (
-    <form noValidate action="" role="search" className="search-box-invisible">
-      <input
-        type="search"
-        value={query}
-        onChange={(event) => {
-          refine(event.currentTarget.value);
-        }}
-      />
-    </form>
-  );
+function VistualCustomStats(props) {
+  const setNumberHits = useSetRecoilState(hitsNumber);
+  const { nbHits } = useStats(props);
+
+  useEffect(() => {
+    setNumberHits(nbHits);
+  }, [nbHits]);
+
+  return '';
 }

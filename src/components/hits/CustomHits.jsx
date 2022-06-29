@@ -4,14 +4,20 @@
 import { useEffect, useState } from 'react';
 import { useHits } from 'react-instantsearch-hooks-web';
 
+import { useRecoilValue } from 'recoil';
+
+import { hitsAtom } from '@/config/hitsConfig';
+
 import { Hit } from './Hits';
 
 function CustomHits(props) {
   // If hits were not provided via props, we will use the ones from the IS hook (see footnote)
   const { hits: hookHits } = useHits(props);
   const [hits, setHits] = useState([]);
+  const hitsState = useRecoilValue(hitsAtom);
 
   // Decide whether to use hits from hook or props
+  // console.log(hits.length);
   useEffect(() => {
     // Check the props for the hits
     if (props.hits != undefined) {
@@ -22,6 +28,10 @@ function CustomHits(props) {
     // Use the hook
     else setHits(hookHits);
   }, [props]);
+
+  useEffect(() => {
+    // console.log(hitsState.length);
+  }, [hitsState]);
 
   return (
     <div className="ais-InfiniteHits">
