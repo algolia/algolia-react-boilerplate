@@ -105,7 +105,6 @@ const SearchResultPage = ({ setIsMounted }) => {
 
 // This is rendered when there are no results to display
 const NoResults = () => {
-  console.log('NoResults');
   //Get the query
   const getQueryState = useRecoilValue(queryAtom);
   const getSearches = localStorage.getItem('objectId');
@@ -177,7 +176,6 @@ function NoResultsHandler(props) {
   const [length, setLength] = useState(0);
 
   useEffect(() => {
-    console.log('NoResultsHandler', hits.length);
     setLength(hits.length);
   }, [hits]);
 
@@ -200,11 +198,6 @@ function CustomSearchBox(props) {
   const { refine, query } = useSearchBox(props);
   const { queryChanged } = props;
   const refineFunction = (queryValue) => {
-    console.log(
-      '🚀 ~ file: SearchResultsPage.jsx ~ line 204 ~ refineFunction ~ queryValue',
-      queryValue
-    );
-
     refine(queryValue);
   };
   useEffect(() => {

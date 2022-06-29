@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-// import { connectRefinementList } from 'react-instantsearch-dom';
-import { useRefinementList } from 'react-instantsearch-hooks-web';
+
 import { useTrendingFacets } from '@algolia/recommend-react';
+import { useRefinementList } from 'react-instantsearch-hooks-web';
+
 import { useRecoilValue } from 'recoil';
 
+import { mainIndex, recommendClient } from '@/config/algoliaEnvConfig';
 import '@algolia/ui-components-horizontal-slider-theme';
-import { recommendClient, mainIndex } from '@/config/algoliaEnvConfig';
 
 import { trendingConfig } from '@/config/trendingConfig';
 

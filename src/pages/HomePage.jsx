@@ -4,8 +4,8 @@
 // Algolia search client
 
 // framer-motion
-import { AnimatePresence, motion } from 'framer-motion';
-import React, { lazy, Suspense, useRef, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { lazy, Suspense, useEffect, useRef } from 'react';
 
 // recoil import
 import { useRecoilValue } from 'recoil';
@@ -14,8 +14,7 @@ import { useRecoilValue } from 'recoil';
 import homepage_1 from '../assets/homepage/homepage_1.png';
 import homepage_2 from '../assets/homepage/homepage_2.png';
 
-import Loader from '@/components/loader/Loader';
-import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
+import { mainIndex } from '@/config/algoliaEnvConfig';
 import { framerMotionPage } from '@/config/animationConfig';
 
 // should carousel be shown or not and config for carousel
@@ -23,8 +22,8 @@ import { carouselConfig } from '@/config/carouselConfig';
 
 //  should federated search be shown or not
 import {
-  shouldHaveFederatedSearch,
   shouldHaveCarousels,
+  shouldHaveFederatedSearch,
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
@@ -66,9 +65,6 @@ const HomePage = ({ setIsMounted }) => {
     };
   }, []);
 
-  // Prevent body from scrolling when panel is open
-  // usePreventScrolling(isFederatedOpen);
-
   return (
     // Framer motion wrapper
     <div
@@ -88,20 +84,20 @@ const HomePage = ({ setIsMounted }) => {
       {isFederated && isFederatedOpen && (
         <AnimatePresence>
           {/* Loads federated search if isFederated is true */}
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={''}>
             <FederatedSearch />
           </Suspense>
         </AnimatePresence>
       )}
 
       {/* Load custom banners */}
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={''}>
         <CustomHomeBanners />
       </Suspense>
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
-          <Suspense key={i} fallback={<Loader />}>
+          <Suspense key={i} fallback={''}>
             <HomeCarousel context={carousel.context} title={carousel.title} />
           </Suspense>
         ))}
@@ -110,7 +106,7 @@ const HomePage = ({ setIsMounted }) => {
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
         {shouldHaveTrendingProductsValue && (
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={''}>
             <Trending filter={null} />
           </Suspense>
         )}

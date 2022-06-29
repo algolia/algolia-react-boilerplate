@@ -1,8 +1,7 @@
 // This is in the Search Results Page for both laptop and mobile windows
 
 // Import InstantSearch Functionality
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHits } from 'react-instantsearch-hooks-web';
 
 import { Hit } from './Hits';
@@ -23,8 +22,6 @@ function CustomHits(props) {
     // Use the hook
     else setHits(hookHits);
   }, [props]);
-
-  // const { setSrpIsLoaded } = props;
 
   return (
     <div className="ais-InfiniteHits">

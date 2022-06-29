@@ -1,23 +1,17 @@
 import { useState } from 'react';
 
+// Widget Algolia ColorRefinementList
+import { ColorRefinementList } from '@algolia/react-instantsearch-widget-color-refinement-list';
 // Import Algolia
-// eslint-disable-next-line import/order
 import {
   DynamicWidgets,
-  useRefinementList,
+  useRefinementList
 } from 'react-instantsearch-hooks-web';
-import {
-  ColorRefinementList,
-  Layout,
-  Shape,
-} from '@algolia/react-instantsearch-widget-color-refinement-list';
 
 // Import magnifying glass svg, and price slider component
 import { Glass } from '@/assets/svg/SvgIndex';
 
 // Import components
-import PriceSlider from './PriceSlider';
-import CustomHierarchicalMenu from './Hierarchical';
 
 // Import list of Attributes/Facets
 import { refinements } from '@/config/refinementsConfig';
@@ -26,7 +20,9 @@ import { refinements } from '@/config/refinementsConfig';
 function GenericRefinementList(props) {
   const { items, refine, searchForItems } = useRefinementList(props);
   const { title, options } = props;
+  // With this state you can hide or not facets
   const [showFacet, setShowFacet] = useState(false);
+  // With this state you can search for items in facets
   const [searchInput, setSearchInput] = useState(false);
 
   return (
@@ -35,7 +31,6 @@ function GenericRefinementList(props) {
         <h3>{title}</h3>
         {/* If the facet is searchable, show the magnifying glass which will open or close the search input */}
         {options.searchable && (
-          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
           <div
             onClick={() => {
               setSearchInput(!searchInput);
@@ -60,8 +55,9 @@ function GenericRefinementList(props) {
         {items.map((item) => (
           <li className="filters-container__content__list" key={item.value}>
             <button
-              className={`filters-container__content__list__button-filter ${item.isRefined ? 'refined-filter' : ''
-                }`}
+              className={`filters-container__content__list__button-filter ${
+                item.isRefined ? 'refined-filter' : ''
+              }`}
               type="button"
               href="#"
               onClick={(event) => {
@@ -105,9 +101,7 @@ const CustomColorRefinement = ({
 const Facets = () => {
   return (
     <div>
-      <DynamicWidgets
-        maxValuesPerFacet={500}
-      >
+      <DynamicWidgets maxValuesPerFacet={500}>
         {refinements.map((e, i) => {
           const { type, currency, label, options } = e;
           switch (type) {

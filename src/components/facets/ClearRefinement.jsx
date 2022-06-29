@@ -5,6 +5,7 @@ function CustomClearRefinements(props) {
   const { canRefine, refine } = useClearRefinements(props);
 
   // if there are refinements, show the button
+  // Clear refinements with the refinement to ' '
   return canRefine ? (
     <button
       className="button-clear-refinement"

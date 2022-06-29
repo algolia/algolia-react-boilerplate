@@ -1,16 +1,21 @@
+// Import the custom hits to display in the SRP
 import CustomHits from '@/components/hits/CustomHits';
+// Import the config files we'll need to import
+import { useRecoilValue } from 'recoil';
 import { indexNames } from '@/config/algoliaEnvConfig';
 import { queryAtom } from '@/config/searchboxConfig';
-import { lazy, useState } from 'react';
-import { useEffect } from 'react';
+
+import { lazy, useEffect, useState } from 'react';
+// Algolia
 import {
   useHits,
   useInstantSearch,
   useQueryRules,
 } from 'react-instantsearch-hooks-web';
-import { useRecoilValue } from 'recoil';
-import injectContent from './injectContent';
 
+// Components
+import injectContent from './injectContent';
+// Components lazy loaded
 const NoCtaCard = lazy(() => import('@/components/hits/NoCtaCard'));
 const SalesCard = lazy(() => import('@/components/hits/SalesCard'));
 const InfluencerCard = lazy(() => import('@/components/hits/InfluencerCard'));
