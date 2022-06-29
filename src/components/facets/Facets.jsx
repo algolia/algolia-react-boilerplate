@@ -106,14 +106,13 @@ const Facets = () => {
         maxValuesPerFacet={500}
       >
         {refinements.map((e, i) => {
-          const { type, currency, label, options } = e;
+          const { type, label, options } = e;
           switch (type) {
             case 'price':
               return (
                 <PriceSlider
                   attribute={options.attribute}
                   title={label}
-                  currency={currency}
                   key={i}
                 />
               );
@@ -126,6 +125,7 @@ const Facets = () => {
                   separator=";"
                   layout={Layout.Grid}
                   shape={Shape.Circle}
+                  transformItems={(items) => console.log("hi")}
                 />
               );
             case 'hierarchical':
