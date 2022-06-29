@@ -69,12 +69,12 @@ function WrappedTrendingFacetValues(props) {
   return (
     <div className="trending-facet-container">
       {recommendations.length > 0 && (
-        <div class="filters-container">
-          <div class="filters-container__title">
+        <div className="filters-container">
+          <div className="filters-container__title">
             <h4>{facetValuesTitle}</h4>
           </div>
-          <div class="filters-container__list"></div>
-          <ul class="filters-container__content">
+          <div className="filters-container__list"></div>
+          <ul className="filters-container__content">
             {recommendations.map((trendingFacetValue, i) => {
               return (
                 <TrendingFacetsItem

@@ -57,7 +57,8 @@ function CustomSearchBox(props) {
   };
 
   useEffect(() => {
-    refine(queryState);
+    console.log(queryState);
+    // refine(queryState);
   }, [queryState]);
 
   return (

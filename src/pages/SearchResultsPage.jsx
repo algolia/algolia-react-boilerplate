@@ -14,7 +14,7 @@ import { RelatedProducts } from '@algolia/recommend-react';
 // Algolia search client
 import { mainIndex, searchClientCreds } from '@/config/algoliaEnvConfig';
 import connectStats from 'instantsearch.js/es/connectors/stats/connectStats';
-import { useConnector } from 'react-instantsearch-hooks-web';
+import { useHits } from 'react-instantsearch-hooks-web';
 
 // define the client for using Recommend
 const recommendClient = algoliarecommend(
@@ -85,7 +85,6 @@ const SearchResultPage = ({ setIsMounted }) => {
 
   return (
     <div ref={srpMounted} className="srp">
-      <VistualCustomStats />
       <NoResultsHandler
         srpIsLoaded={srpIsLoaded}
         setSrpIsLoaded={setSrpIsLoaded}
@@ -164,11 +163,11 @@ const NoResults = () => {
   );
 };
 
-const NoResultsHandler = () => {
+function NoResultsHandler(props) {
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
-  const hits = useRecoilValue(hitsNumber);
-  return hits > 0 ? (
+  const { hits } = useHits(props);
+  return hits.length > 0 ? (
     <div>
       {shouldDisplayBanners && <Banner />}
       <SrpLaptop />
@@ -176,24 +175,6 @@ const NoResultsHandler = () => {
   ) : (
     <NoResults />
   );
-};
+}
 
 export default SearchResultPage;
-
-// "This Stats component is virtual and will not appear in the DOM. The goal of this virtual searchbox is to refine the app by changing the query state
-// in the main IS instance when clicking on QS when we're in the noResult component"
-// This is for building the stats info that is displayed above the items in the search results page
-function useStats(props) {
-  return useConnector(connectStats, props);
-}
-
-function VistualCustomStats(props) {
-  const setNumberHits = useSetRecoilState(hitsNumber);
-  const { nbHits } = useStats(props);
-
-  useEffect(() => {
-    setNumberHits(nbHits);
-  }, [nbHits]);
-
-  return '';
-}

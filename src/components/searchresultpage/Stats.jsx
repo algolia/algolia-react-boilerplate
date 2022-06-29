@@ -11,13 +11,8 @@ export function useStats(props) {
 }
 
 export function CustomStats(props) {
-  const setNumberHits = useSetRecoilState(hitsNumber);
   const { processingTimeMS, nbHits, nbSortedHits, areHitsSorted } =
     useStats(props);
-
-  useEffect(() => {
-    setNumberHits(nbHits);
-  }, [nbHits]);
 
   return (
     <div className="stats-infos">
