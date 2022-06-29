@@ -50,25 +50,55 @@ Here is an example of how one might define an asset, which indicates how to use 
 ```js
 {
   banner: {
-    // REQUIRED description of this asset generator, for documentation purposes
+    // REQUIRED description of this asset generator
     _description: "Generates the banner data",
 
     // Property definition: key is the name, value is the description
     title: "Banner name",
 
     // Optional property definition (MUST include the description attribute)
-    color: { optional: true, description: "Optional banner's color" },
+    color: { optional: true, description: "The banner's color" },
 
     // Property with a default value (MUST include the description attribute)
     content: { default: "Check out our promotion!", description: "The banner's text" },
 
     // Property with type constraints (MUST include the description attribute)
-    height: { type: "number", description: "The height of the image"},
+    // To see al supported types, refer to [this documentation](https://github.com/SBoudrias/Inquirer.js#prompt-types)
+    repeatTimes: { type: "number", description: "How many times to repeat the image"},
 
-    // Shorthand optional property definition: key ends with a "?" character
+    // Shorthand optional property definition: key ends with an "?" character
     "image?": "Optional image link",
+
+    // Adds a property with subproperties
+    size: subproperties({
+      width: { type: "number", description: "Image width"},
+
+      height: { type: "number", description: "Image height"}
+    }),
+
+    // Any fields prefixed by the "_" character are called meta-properties, and won't be treated as properties. They are only used for internal computation purposes
+
+    // This meta-property allows you to always have these fields be directly added to the final object
+    // It's like adding properties with constant values
+    _add: { assetType: "homepage-banner" }
   }
 }
 ```
 
 > Note that it would be redundant to mark a field as optional and provide a default value, as the optional value would already allow the user to skip explicitly defining the value.
+
+You may also refer to the [inquirer question documentation](https://github.com/SBoudrias/Inquirer.js#question) for more property options the likes of "default" and "type".
+
+> A good example is the `validate` option, which allows you to reject some input and have the user type it in again; as well as the `choices` option, which when combined with the `list` type allows you to predefine the allowed values for each property.
+
+#### Supported types
+
+- `input`: A text field
+- `number`: A number field
+
+## Development Fonts
+
+Guides used to build this script:
+
+- https://medium.com/skilllane/build-an-interactive-cli-application-with-node-js-commander-inquirer-and-mongoose-76dc76c726b6
+- https://www.youtube.com/watch?v=_oHByo8tiEY
