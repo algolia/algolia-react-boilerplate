@@ -9,6 +9,7 @@ import { recommendClient, mainIndex } from '@/config/algoliaEnvConfig';
 import { trendingConfig } from '@/config/trendingConfig';
 
 const TrendingFacetValues = ({ items, refine }) => {
+  const [recommendationsLoaded, setRecommendationsLoaded] = useState(false)
 
   const index = useRecoilValue(mainIndex);
   const { facetValuesAttribute, facetValuesTitle, maxFacetValuesRecommendations } = trendingConfig
@@ -19,6 +20,10 @@ const TrendingFacetValues = ({ items, refine }) => {
     facetName: facetValuesAttribute,
     maxRecommendations: maxFacetValuesRecommendations
   });
+
+  useEffect(() => {
+    setRecommendationsLoaded(recommendations.length > 0)
+  }, [recommendations]);
 
   const TrendingFacetsItem = ({ trendingFacetValue }) => {
 
@@ -73,9 +78,11 @@ const TrendingFacetValues = ({ items, refine }) => {
             <ul className="filters-container__content">
               {
                 recommendations.map((trendingFacetValue, i) => {
-                  return (
-                    <TrendingFacetsItem trendingFacetValue={trendingFacetValue} key={`${i}${trendingFacetValue}`} />
-                  )
+                  if (recommendationsLoaded) {
+                    return <TrendingFacetsItem trendingFacetValue={trendingFacetValue} key={`${i}${trendingFacetValue}`} />
+                  } else {
+                    return <div className="" key={i + "loader"} style={{width: "200px", height: "300px", backgroundColor: "green"}}></div>
+                  }
                 })
               }
             </ul>

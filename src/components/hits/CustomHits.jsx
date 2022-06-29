@@ -11,27 +11,18 @@ const CustomHits = ({ hits }) => {
   const [hitsLoaded, setHitsLoaded] = useState(false);
 
   useEffect(() => {
-    if (hits.length > 0) {
-      setHitsLoaded(true)
-    }
+      setHitsLoaded(hits.length > 0)
   }, [hits]);
-
-  const renderHitsOrSkeleton = (args) => {
-    const {hit, i} = args;
-    if (hitsLoaded) { 
-      return <Hit hit={hit} key={i} /> 
-    } else {
-      return <div className="" key={i + "loader"} style={{width: "200px", height: "300px", backgroundColor: "red"}}></div>
-    }
-  }
-
   
-
   return (
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
         {hits.map((hit, i) => {
-          return renderHitsOrSkeleton({hit, i});
+          if (hitsLoaded) { 
+            return <Hit hit={hit} key={i} /> 
+          } else {
+            return <div className="" key={i + "loader"} style={{width: "200px", height: "300px", backgroundColor: "red"}}></div>
+          }
         })}
       </ul>
     </div>
