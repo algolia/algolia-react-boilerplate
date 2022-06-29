@@ -8,7 +8,7 @@ import React, { useState, useEffect } from 'react';
 import { Hit } from './Hits';
 // TODO: Skeleton here
 const CustomHits = ({ hits }) => {
-  const [hitsLoaded, setHitsLoaded] = useState(false)
+  const [hitsLoaded, setHitsLoaded] = useState(false);
 
   useEffect(() => {
     if (hits.length > 0) {
@@ -19,7 +19,10 @@ const CustomHits = ({ hits }) => {
   const renderHitsOrSkeleton = (args) => {
     const {hit, i} = args;
     if (hitsLoaded) { 
-      <Hit hit={hit} key={i} /> } else {<div className="" style={{width: "100px", height: "200px", backgroundColor: "red"}}></div>}
+      return <Hit hit={hit} key={i} /> 
+    } else {
+      return <div className="" key={i + "loader"} style={{width: "200px", height: "300px", backgroundColor: "red"}}></div>
+    }
   }
 
   return (
