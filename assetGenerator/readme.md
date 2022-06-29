@@ -92,11 +92,6 @@ You may also refer to the [inquirer question documentation](https://github.com/S
 
 > A good example is the `validate` option, which allows you to reject some input and have the user type it in again; as well as the `choices` option, which when combined with the `list` type allows you to predefine the allowed values for each property.
 
-#### Supported types
-
-- `input`: A text field
-- `number`: A number field
-
 ## Development Fonts
 
 Guides used to build this script:
