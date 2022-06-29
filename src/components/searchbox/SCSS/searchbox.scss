@@ -4,7 +4,7 @@
 @use '../../../scss/partials' as *;
 
 .searchbox-container {
-  width: 40%;
+  width: 50%;
   position: relative;
   display: flex;
   align-items: center;
@@ -29,7 +29,7 @@
       }
 
       &__input {
-        @include searchBoxSimple($white-color, $grey-light-color-80);
+        @include searchBoxInput($white-color, $grey-light-color-80);
         
         &::placeholder{
           color: $grey-dark-color;

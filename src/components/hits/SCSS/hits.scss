@@ -15,12 +15,22 @@
     grid-row-gap: 1rem;
     .srpItem {
       position: relative;
-      @include hits-individual(
+      @include hit(
         $main-color,
         $blue-algolia,
         $blue-algolia,
         $blue-algolia
       );
+  
+      .productName{
+        @include productName()
+      }
+      .price{
+        @include price($blue-algolia)
+      }
+      .brand{
+        @include brand($main-color);
+      }
       .ranking-formula {
         position: absolute;
         background-color: transparent;

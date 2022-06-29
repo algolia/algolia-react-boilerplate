@@ -96,10 +96,7 @@
           transition: all 0.2s ease-in-out;
 
           p {
-            font-family: $main-font;
-            text-decoration: none;
-            display: flex;
-            color: $white-color;
+           @include p-text($white-color);
             transition: all 0.2s ease-in-out;
           }
 

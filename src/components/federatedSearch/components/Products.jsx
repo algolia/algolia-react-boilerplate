@@ -54,7 +54,7 @@ const Hits = ({ hits }) => {
                 </div>
                 <div className="infos">
                   <p className="brand">{get(hit, brand)}</p>
-                  <p className="name">{get(hit, productName)}</p>
+                  <p className="productName">{get(hit, productName)}</p>
                   <p className="price">
                     <Price hit={hit} />
                   </p>

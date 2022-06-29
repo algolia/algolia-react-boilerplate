@@ -49,10 +49,6 @@
     font-family: $main-font;
   }
   
-  h3 {
-    text-transform: uppercase;
-  }
-  
   .hidden{
     @include hidden;
   }

@@ -8,13 +8,16 @@
 // ------------------------------------------
 
 .recommend {
-  margin: 2rem 4rem;
+  margin: 2rem 2rem;
+
+  .title{
+    @include title($blue-algolia)
+  }
 
   .auc-Recommend-list {
     display: flex;
     flex-wrap: nowrap;
     gap: 0.5rem;
-    // display: -webkit-box;
     padding: 1rem 0rem;
     list-style-type: none;
     align-items: center;
@@ -27,24 +30,31 @@
     font-size: 1.5rem;
   }
 
-  h3 {
-    color: #207def;
-    font-size: 2rem;
-    font-weight: 800;
-  }
-
   .auc-Recommend-item {
     width: 15%;
   }
 
   .relatedItem {
-    @include hits-individual($main-color,
+    @include hit($main-color,
       $blue-algolia,
       $blue-algolia,
       $blue-algolia );
+
+      &__infos{
+        @include productName($grey-dark-color);
+
+        .brand{
+          @include brand($main-color);
+        }
+        .price {
+          @include price($blue-algolia)
+        }
+      }
   }
 }
 
 // ------------------------------------------
-// FBT
+// TRENDING
 // ------------------------------------------
+
+

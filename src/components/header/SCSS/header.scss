@@ -5,9 +5,9 @@
 // ------------------------------------------
 .header {
   text-align: center;
-  box-shadow: 0 0 20px $white-color;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
   padding: 2rem 0;
-  background: $grey-light-color;
+  background-color: $background-color;
   .container {
     .container__header-top {
       align-items: center;
@@ -26,12 +26,9 @@
       &__title {
         min-width: 20%;
         h1 {
-          font-size: 0.8rem;
-
-          line-height: 0;
-          text-transform: uppercase;
-          font-weight: bold;
-          letter-spacing: 2px;
+         @include title($purple-algolia);
+         font-size: 1.2rem;
+         text-transform: capitalize;
         }
       }
     }
@@ -46,33 +43,11 @@
           p {
             position: relative;
             transition: 0.2 ease-in-out;
-            &::before {
-              content: '';
-              position: absolute;
-              background-color: $grey-dark-color;
-              height: 1px;
-              width: 100%;
-              bottom: -0.5rem;
-              transform-origin: center center;
-              transform: scaleX(0);
-              transition: transform 0.4s;
-            }
-            &:hover::before {
-              transition: 0.2 ease-in-out;
-              transform-origin: center center;
-              transform: scaleX(1);
-            }
+            @include p-text($main-color, 800);
+            @include underliningAnimation($purple-algolia)
           }
           .selected {
-            &::before {
-              content: '';
-              position: absolute;
-              background-color: $grey-dark-color;
-              height: 1px;
-              width: 100%;
-              bottom: -0.5rem;
-              transform: scaleX(1);
-            }
+            @include selectedNavItem($purple-algolia)
           }
         }
       }
@@ -84,14 +59,10 @@
       }
     }
   }
-
 }
 
 
-.select-component {
-  width: 20%;
-  margin: 0 0.5rem 1rem auto;
-}
+
 
 // MOBILE & TABLET
 .header{

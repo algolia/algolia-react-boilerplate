@@ -24,9 +24,9 @@
         height: 100%;
         &:empty{display: none;}
         li{
-            color: white;
-            font-weight: bold;
+            @include p-text($white-color);
             font-size: 0.8rem;
+            font-weight: bold;
         }
     }
 

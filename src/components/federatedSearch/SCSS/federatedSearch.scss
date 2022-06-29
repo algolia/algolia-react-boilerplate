@@ -6,8 +6,8 @@
     position: absolute;
     background-color: $background-color;
     z-index: 40;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 
-   
     &__wrapper{
         display: flex;
         align-items: flex-start;
@@ -30,6 +30,7 @@
        width: 5px; 
     }
 }
+
 .closeFederated {
     position: absolute;
     top: -2rem;
@@ -40,7 +41,7 @@
 //Recent searches
 .recentSearches{
     &__title{
-        @include title($main-color)
+        @include title($blue-algolia)
     }
     &__items{
         li{
@@ -62,15 +63,12 @@
 // Suggestion
 .suggestions{
     &__title{
-        @include title($main-color)
+        @include title($blue-algolia)
     }
     &__items{
         li{
             .ais-Highlight-highlighted{
-                font-style: normal;
-            }
-            .ais-Highlight-nonHighlighted {
-                font-style: italic;
+                @include highlight($blue-algolia)
             }
             display: flex;
             align-items: center;
@@ -90,7 +88,7 @@
 // Categories
 .categories{
     &__title{
-        @include title($main-color)
+        @include title($blue-algolia)
     }
     &__items{
         li{
@@ -112,10 +110,9 @@
 
 // Products
 .products{
-   
     &__title{
-        @include title($main-color);
-      margin-left: 1rem;
+        @include title($blue-algolia);
+        margin-left: 1rem;
     }
     &__items{
         display: flex;
@@ -128,7 +125,11 @@
         display: flex;
         align-items: flex-start;
         gap: 0.5rem;
-        width: 47%;
+        width: 32%;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+        transition: box-shadow 0.3s ease-in-out;
+        padding: 2rem 1rem;
+        border-radius: 0.5rem;
         cursor: pointer;
         .image-wrapper{
             max-width: 30%;
@@ -137,21 +138,19 @@
             }
         }
         .infos{
-            text-transform: capitalize;
+            .productName{
+               @include productName($grey-dark-color)
+            }
             
             .brand{
-                color: $grey-dark-color;
-                font-weight: bold;
-                font-size: 0.8rem;
+               @include brand($main-color)
             }
             .price{
-                color: $blue-algolia;
-                font-size: 0.8rem;
-                font-weight: bold;
+               @include price($blue-algolia)
             }
         }
         &:hover{
-            background-color: $grey-dark-color-20;
+           @include hitHoverEffect()
         }
     }
 
@@ -167,7 +166,7 @@
 // Articles
 .articles{
     &__title{
-        @include title($main-color)
+        @include title($blue-algolia)
     }
     &__item{
         .image-wrapper{
@@ -177,27 +176,18 @@
             }
         }
         .title{
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+            @include p-text($main-color);
+            font-size: 0.8rem
         }
         .date{
-            font-size: 0.8rem;
-            text-align: right;
-            margin-bottom: 0.5rem;
+            @include p-text($main-color);
+            font-size: 0.6rem
         }
         .subtitle{
+            @include p-text($grey-light-color);
+            @include truncateText(3, 2);
             font-size: 0.8rem;
-            overflow:hidden;
-            max-height: 8rem;
-            -webkit-box-orient: vertical;
-            display: block;
-            display: -webkit-box;
-            text-overflow: ellipsis;
-            -webkit-line-clamp: 4;
-        }
-        &:hover{
-            background-color: $grey-dark-color-20;
+            font-weight: 300;
         }
     }
 }

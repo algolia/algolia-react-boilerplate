@@ -21,5 +21,5 @@ export const currencySymbolAtom = atom({
 // ------------------------------------------
 export const shouldDisplayCurrency = atom({
   key: 'shouldDisplayCurrency',
-  default: false,
+  default: true,
 });

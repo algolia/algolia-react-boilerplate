@@ -1,26 +1,25 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { lazy, useState, Suspense } from 'react';
-import { Pagination, Configure, Index } from 'react-instantsearch-dom';
+import { lazy, Suspense, useState } from 'react';
+import { Configure, Index, Pagination } from 'react-instantsearch-dom';
 import { lazily } from 'react-lazily';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
-import SkeletonLoader from '../../hits/components/HitsSkeletonLoader';
 import FacetsSkeletonLoader from '@/components/facets/components/FacetsSkeletonLoader';
-import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/components/InfluencerCard';
 import NoCtaCard from '@/components/hits/components/NoCtaCard';
 import SalesCard from '@/components/hits/components/SalesCard';
-import Redirect from '@/components/redirects/Redirect';
+import { Hit } from '@/components/hits/Hits';
 import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
 import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
-import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
+import Redirect from '@/components/redirects/Redirect';
+import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import {
-  shouldHaveStats,
   shouldHaveInjectedHits,
   shouldHaveSorts,
-  shouldHaveTrendingProducts,
+  shouldHaveStats,
   shouldHaveTrendingFacets,
+  shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
@@ -28,6 +27,7 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { customDataByType } from '@/utils';
+import SkeletonLoader from '../../hits/components/HitsSkeletonLoader';
 
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/components/ClearRefinement')

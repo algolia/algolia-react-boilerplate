@@ -26,7 +26,7 @@ const RelatedItem = ({ item }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   // Get hit attribute from config file
-  const { image, category, productName, objectID } = hitsConfig;
+  const { image, category, productName, objectID, brand } = hitsConfig;
 
   return (
     <div className="relatedItem">
@@ -44,14 +44,15 @@ const RelatedItem = ({ item }) => {
         </div>
       </div>
       <div className="relatedItem__infos">
-        <h3>
-          <Highlight hit={item} attribute={productName} />
-        </h3>
-        <div className="relatedItem__infos__down">
-          <p className="relatedItem__infos__down__price">
-            <Price hit={item} />
-          </p>
+        <div className="relatedItem__infosUp">
+          <p className="brand">{item[brand]}</p>
+          <h3 className="productName">
+            <Highlight hit={item} attribute={productName} />
+          </h3>
         </div>
+        <p className="price">
+          <Price hit={item} />
+        </p>
       </div>
     </div>
   );

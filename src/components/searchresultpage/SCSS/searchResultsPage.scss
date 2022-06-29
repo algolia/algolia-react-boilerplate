@@ -67,7 +67,7 @@
 .ais-Pagination {
   display: flex;
   justify-content: center;
-  @include pagination($blue-algolia);
+  @include pagination($blue-algolia-custom-gradient);
 }
 
 // ------------------------------------------

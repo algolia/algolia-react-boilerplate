@@ -41,25 +41,32 @@
 }
 
 // ------------------------------------------
-// Search Boxs
+// SearchBox
 // ------------------------------------------
 
-@mixin searchBoxSimple($background, $border-color) {
+@mixin searchBoxInput($background, $border-color) {
   width: 100%;
-  border-radius: 8px;
-  padding: 0.6rem 3rem;
+  border-radius: 3rem;
+  padding: 0.4rem 3rem;
   height: 100%;
   background-color: $background;
+  border: 1px solid $border-color;
   transition: 0.2s ease-in-out;
+
+  &::placeholder{
+    font-size: 0.8rem;
+  }
 }
 
 // ------------------------------------------
 // Fonts, Title, p,....
 // ------------------------------------------
-@mixin title($text-color) {
+@mixin title($text-color: $blue-algolia) {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  color: $text-color;
+  text-transform: uppercase;
 }
 
 @mixin p-text($text-color: 'black', $font-weight: 500) {
@@ -75,6 +82,38 @@
 // Header
 // ------------------------------------------
 
+@mixin underliningAnimation($underline-color) {
+  &::before {
+    content: '';
+    position: absolute;
+    background-color: $underline-color;
+    height: 2px;
+    border-radius: 3rem;
+    width: 100%;
+    bottom: -0.5rem;
+    transform-origin: center center;
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+  &:hover::before {
+    transition: 0.2 ease-in-out;
+    transform-origin: center center;
+    transform: scaleX(1);
+  }
+}
+
+@mixin selectedNavItem($underline-color){
+  &::before {
+    content: '';
+    position: absolute;
+    background-color: $underline-color;
+    height: 2px;
+    width: 100%;
+    bottom: -0.5rem;
+    transform: scaleX(1);
+  }
+}
+
 // ------------------------------------------
 // SearchBox
 // ------------------------------------------
@@ -82,6 +121,38 @@
 // ------------------------------------------
 // Carousel
 // ------------------------------------------
+
+@mixin carouselWrapper {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  scroll-behavior: smooth;
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  grid-auto-columns: 20%;
+  grid-auto-flow: column;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+
+  @include scrollBar()
+
+}
+
+@mixin scrollBar{
+  &::-webkit-scrollbar{
+    background-color: $grey-light-color;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    box-shadow: inset 0px 28px 0px $background-color;
+    width: 100%;
+    height: 30px;
+    
+  }
+  &::-webkit-scrollbar-thumb{
+    background-color: $blue-algolia;
+    box-shadow: inset 0px 28px 0px $background-color;
+  }
+  
+}
 
 // ------------------------------------------
 // SearchResult Page
@@ -111,21 +182,34 @@
 // ------------------------------------------
 // Pagination Widget
 // ------------------------------------------
-@mixin pagination($back-color) {
+@mixin pagination($background-color) {
   .ais-Pagination-list {
     margin-top: 2rem;
     display: flex;
     .ais-Pagination-item {
-      border: 1px solid $back-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $background-color;
       padding: 0.8rem;
-      border-radius: 0.5rem;
+      border-radius: 3rem;
       margin-right: 1rem;
-      background-color: $back-color;
-      color: white;
+      background: $background-color;
+      height: 15px;
+      width: 15px;
+      span, a{
+        font-size: 0.8rem;
+        color: $white-color;
+      }
     }
     .ais-Pagination-item--selected {
-      color: $back-color;
-      background-color: white;
+      background: white;
+
+      a,span{
+        color: $blue-algolia;
+      }
+
+     
     }
   }
 }
@@ -158,7 +242,7 @@
 // ------------------------------------------
 // Hits
 // ------------------------------------------
-@mixin hits-individual($title-color, $price-color, $highlight-color, $shadow) {
+@mixin hit($title-color, $price-color, $highlight-color, $shadow) {
   width: 100%;
   display: block;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
@@ -167,33 +251,13 @@
   border-radius: 0.5rem;
 
   &__imgWrapper, .image-wrapper {
-    position: relative;
     overflow: hidden;
     margin: 1rem;
     img {
-      max-width: 100%;
-      height: 100%;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
+      @include productImage()
     }
     &__heart {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      svg {
-        cursor: pointer;
-        width: 12px;
-        path {
-          fill: $grey-dark-color;
-        }
-      }
-    }
-    svg {
-      position: absolute;
-      top: -8rem;
-      right: 0;
-      width: 3.5rem;
+      @include heartIcon($blue-algolia)
     }
     .mainImage-opacity {
       animation: fadeOutImage 0.7s forwards ease-in-out;
@@ -207,30 +271,84 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    height: 5rem;
+    height: 7rem;
     width: 100%;
     margin: 1rem 0;
-    h3 {
-      font-weight: 300;
-      font-size: 0.8rem;
-      text-align: center;
-      margin: 0 auto;
-      text-transform: capitalize;
-      .ais-Highlight-nonHighlighted {
-        color: $title-color;
-      }
-      .ais-Highlight-highlighted {
-        @include highlight($highlight-color);
-      }
-    }
-    &__down {
-      margin: 0 auto;
-      text-align: center;
-      p {
-        color: $price-color;
-        font-weight: 400;
-        font-size: 1rem;
-      }
+  }
+  &__infosUp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.1rem;
+  }
+}
+
+@mixin hitHoverEffect {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+@mixin productImage {
+  width: clamp(8rem, 10rem, 12rem);
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+@mixin productName($productName-color: $grey-dark-color) {
+  font-weight: 300;
+  font-size: 0.8rem;
+  margin: 0 auto;
+  text-transform: capitalize;
+  .ais-Highlight-nonHighlighted {
+    color: $productName-color;
+  }
+  .ais-Highlight-highlighted {
+    @include highlight($blue-algolia);
+  }
+}
+
+@mixin brand($brand-color: $main-color) {
+  color: $brand-color;
+  font-weight: 700;
+  font-size: 0.6rem;
+  text-transform: capitalize;
+}
+
+@mixin price($price-color: $blue-algolia) {
+  color: $price-color;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+@mixin highlight($highlight-color : $blue-algolia) {
+  color: $highlight-color;
+  font-style: normal;
+  font-weight: 600;
+}
+
+@mixin truncateText($height: 5, $nbOfLines: 4) {
+  overflow:hidden;
+  max-height: $height;
+  -webkit-box-orient: vertical;
+  display: block;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $nbOfLines;
+  
+}
+
+@mixin heartIcon($fill-color: $grey-dark-color ) {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  svg {
+    cursor: pointer;
+    width: 0.8rem;
+    path {
+      fill: $fill-color;
     }
   }
 }
@@ -253,11 +371,7 @@
   }
 }
 
-@mixin highlight($highlight-color) {
-  color: $highlight-color;
-  font-style: normal;
-  font-weight: 600;
-}
+
 
 
 
