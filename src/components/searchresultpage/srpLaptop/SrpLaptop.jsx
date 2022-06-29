@@ -1,11 +1,10 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { lazy, useState, Suspense } from 'react';
-import { Pagination, Configure, Index } from 'react-instantsearch-dom';
+import { lazy, Suspense, useState } from 'react';
+import { Configure, Index, Pagination } from 'react-instantsearch-dom';
 import { lazily } from 'react-lazily';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
-import SkeletonLoader from '../../hits/HitsSkeletonLoader';
 import FacetsSkeletonLoader from '@/components/facets/FacetsSkeletonLoader';
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
@@ -14,13 +13,13 @@ import SalesCard from '@/components/hits/SalesCard';
 import Redirect from '@/components/redirects/Redirect';
 import WrappedTrendingFacetValues from '@/components/trending/TrendingFacetValues';
 import TrendingProducts from '@/components/trending/TrendingProducts';
-import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
+import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import {
-  shouldHaveStats,
   shouldHaveInjectedHits,
   shouldHaveSorts,
-  shouldHaveTrendingProducts,
+  shouldHaveStats,
   shouldHaveTrendingFacets,
+  shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
@@ -28,6 +27,7 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { customDataByType } from '@/utils';
+import SkeletonLoader from '../../hits/HitsSkeletonLoader';
 
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/ClearRefinement')
@@ -102,23 +102,20 @@ const SrpLaptop = () => {
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
-        {shouldHaveTrendingProductsValue && queryState === "" && (
+        {shouldHaveTrendingProductsValue && queryState === '' && (
           <TrendingProducts facetName={facetName} facetValue={facetValue} />
         )}
       </div>
-      <div
-        className='srp-active srp-container'
-      >
+      <div className="srp-active srp-container">
         <div className="srp-container__facets">
           <Suspense fallback={<FacetsSkeletonLoader />}>
-
             {/* Render Recommend component - Trending Facets */}
             {/* Change config in /config/trendingConfig.js */}
             <div className="">
               {shouldHaveTrendingFacetsValue && (
                 <WrappedTrendingFacetValues
                   attribute="brand"
-                  facetName={"brand"}
+                  facetName={'brand'}
                   limit={500}
                   facetValue={facetValue}
                 />
@@ -166,7 +163,6 @@ const SrpLaptop = () => {
             getRankingInfo={true}
           />
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
-
 
           {shouldInjectContent ? (
             <Suspense fallback={<SkeletonLoader />}>
