@@ -32,6 +32,7 @@ yarn gen banner --name Black Friday Promo --banner https://unsplash.com/photos/K
 The assets that can be generated are defined in the `assetTemplate.js` file. They are as follows:
 
 - `banner`: Generates the custom data JSON to be returned by a banner rule
+- `injectedNoCta`: Generates the custom data JSON to be returned by a injected no-Cta rule
 
 ## Customizing & Creating Asset Definitions
 
