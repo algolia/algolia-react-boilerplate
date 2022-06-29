@@ -1,14 +1,12 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
-
 import { memo, useEffect } from 'react';
 
 // Algolia Import
-import { connectSearchBox } from 'react-instantsearch-dom';
 import { useSearchBox } from 'react-instantsearch-hooks-web';
 
 // Import navigate function to route to results page on search submit
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Import Recoil
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -17,17 +15,15 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Glass } from '@/assets/svg/SvgIndex';
 import SearchInCategory from './components/SearchInCategory';
 
+import { rulesAtom } from '@/config/appliedRulesConfig';
 import {
+  isSearchInCategory,
   queryAtom,
   searchBoxAtom,
   simplePlaceholderAtom,
-  isSearchInCategory,
 } from '@/config/searchboxConfig';
-import { rulesAtom } from '@/config/appliedRulesConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
-
-import { categorySelectionAtom } from '@/config/headerConfig';
 
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';

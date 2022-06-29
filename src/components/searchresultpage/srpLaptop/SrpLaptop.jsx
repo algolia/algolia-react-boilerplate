@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
 import { Hit } from '@/components/hits/Hits';
+
 import SkeletonLoader from '@/components/hits/HitsSkeletonLoader';
 import Redirect from '@/components/redirects/Redirect';
 import WrappedTrendingFacetValues from '@/components/trending/TrendingFacetValues';
@@ -19,7 +20,7 @@ import {
   shouldHaveSorts,
   shouldHaveStats,
   shouldHaveTrendingFacets,
-  shouldHaveTrendingProducts,
+  shouldHaveTrendingProducts
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';

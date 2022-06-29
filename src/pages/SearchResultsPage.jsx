@@ -3,18 +3,16 @@
 // It also renders different search results components depending on screen size
 
 // import React functionality
-import { memo, useEffect, lazy, Suspense, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // To display if no results
 // Recommend
-import { RelatedProducts } from '@algolia/recommend-react';
-import algoliarecommend from '@algolia/recommend';
 import RelatedItem from '@/components/recommend/RelatedProducts';
-import SkeletonLoader from '@/components/hits/HitsSkeletonLoader';
+import algoliarecommend from '@algolia/recommend';
+import { RelatedProducts } from '@algolia/recommend-react';
 
 // Algolia search client
-import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
-import ClipLoader from 'react-spinners/ClipLoader';
+import { mainIndex, searchClientCreds } from '@/config/algoliaEnvConfig';
 import connectStats from 'instantsearch.js/es/connectors/stats/connectStats';
 import { useConnector } from 'react-instantsearch-hooks-web';
 
@@ -24,38 +22,25 @@ const recommendClient = algoliarecommend(
   searchClientCreds.APIKey
 );
 
-import Loader from '@/components/loader/Loader';
-
-import {
-  useSearchBox,
-  useHits,
-  Configure,
-  Index,
-} from 'react-instantsearch-hooks-web';
+import { Configure, Index } from 'react-instantsearch-hooks-web';
 
 // Recoil state to directly access results
+import { hitsNumber } from '@/config/hitsConfig';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { queryAtom } from '../config/searchboxConfig';
-import { hitsNumber } from '@/config/hitsConfig';
 
 // Import Components
 import QuerySuggestions from '@/components/federatedSearch/components/QuerySuggestions';
-import Banner from '@/components/banners/Banner';
-import { CustomStats } from '@/components/searchresultpage/Stats';
-
-// Import Persona State from recoil
-import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
+import SrpLaptop from '@/components/searchresultpage/srpLaptop/SrpLaptop';
 
 // Config suggestions
 import { indexNames } from '@/config/algoliaEnvConfig';
 
+// Federated congif from recoil
 import {
   federatedSearchConfig,
   shouldHaveOpenFederatedSearch,
 } from '@/config/federatedConfig';
-import { AnimatePresence } from 'framer-motion';
-
-import SrpLaptop from '@/components/searchresultpage/srpLaptop/SrpLaptop';
 
 const SearchResultPage = ({ setIsMounted }) => {
   const [srpIsLoaded, setSrpIsLoaded] = useState(false);
