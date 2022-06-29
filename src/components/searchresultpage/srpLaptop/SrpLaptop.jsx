@@ -106,9 +106,9 @@ const SrpLaptop = () => {
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
-        {/* {shouldHaveTrendingProductsValue && queryState === '' && (
+        {shouldHaveTrendingProductsValue && queryState === '' && (
           <TrendingProducts facetName={facetName} facetValue={facetValue} />
-        )} */}
+        )}
       </div>
       <div className="srp-active srp-container">
         <div className="srp-container__facets">
@@ -116,14 +116,14 @@ const SrpLaptop = () => {
             {/* Render Recommend component - Trending Facets */}
             {/* Change config in /config/trendingConfig.js */}
             <div className="">
-              {/* {shouldHaveTrendingFacetsValue && (
+              {shouldHaveTrendingFacetsValue && (
                 <WrappedTrendingFacetValues
                   attribute="brand"
                   facetName={'brand'}
                   limit={500}
                   facetValue={facetValue}
                 />
-              )} */}
+              )}
             </div>
             <GenericRefinementList />
           </Suspense>
