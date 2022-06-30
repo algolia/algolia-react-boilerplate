@@ -177,6 +177,7 @@
 
   &__content {
     &__list {
+      width: 95%;
       &__button-filter {
         display: flex;
         @include facetsFilter(

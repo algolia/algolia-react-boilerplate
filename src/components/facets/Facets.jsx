@@ -10,7 +10,7 @@ import {
 import { Glass } from '@/assets/svg/SvgIndex';
 
 // Import components
-import CustomHierarchicalMenu from './Hierarchical';
+import HierarchicalMenu from './Hierarchical';
 import PriceSlider from './PriceSlider';
 
 // Import list of Attributes/Facets
@@ -176,7 +176,7 @@ const Facets = () => {
               );
             case 'hierarchical':
               return (
-                <CustomHierarchicalMenu
+                <HierarchicalMenu
                   attributes={options.attribute}
                   title={label}
                   key={i}
