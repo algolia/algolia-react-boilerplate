@@ -88,20 +88,21 @@ const HomePage = ({ setIsMounted }) => {
       {isFederated && isFederatedOpen && (
         <AnimatePresence>
           {/* Loads federated search if isFederated is true */}
-          <Suspense fallback={<Loader />}>
+          {/* take out loaders */}
+          <Suspense fallback={<br />}>
             <FederatedSearch />
           </Suspense>
         </AnimatePresence>
       )}
 
       {/* Load custom banners */}
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<br />}>
         <CustomHomeBanners />
       </Suspense>
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
-          <Suspense key={i} fallback={<Loader />}>
+          <Suspense key={i} fallback={<br />}>
             <HomeCarousel context={carousel.context} title={carousel.title} />
           </Suspense>
         ))}
@@ -110,7 +111,7 @@ const HomePage = ({ setIsMounted }) => {
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
         {shouldHaveTrendingProductsValue && (
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<br />}>
             <Trending filter={null} />
           </Suspense>
         )}

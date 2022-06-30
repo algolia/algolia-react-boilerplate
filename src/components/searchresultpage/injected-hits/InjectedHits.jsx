@@ -21,23 +21,13 @@ const CustomInjectedHit = ({ injectedHits }) => {
     }
   }, [injectedHits]);
 
-  const renderHit = (args) => {
-    const {props, Hit, index} = args;
-
-    if (hitsLoaded) {
-      return <Hit {...props} index={index} key={index} />
-    } else {
-      return <div className="" style={{width: "100px", height: "200px", backgroundColor: "red"}}></div>
-    }
-  }
-
   return (
     <div
       className={cx('')}
     >
       <div className={cx('list')}>
-          {injectedHits.map(({ props, type, Hit }, index) => {
-            return renderHit({props, type, Hit, index});
+          {injectedHits.map(({ props, Hit }, index) => {
+            return <div className="" key={index}>{hitsLoaded ? <Hit {...props} {...{index}}  /> : <CustomSkeleton type="hit" />}</div>
           })}
       </div>
     </div>

@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 
 
 import { Hit } from './Hits';
+import CustomSkeleton from '../skeletons/CustomSkeleton';
 // TODO: Skeleton here
 const CustomHits = ({ hits }) => {
   const [hitsLoaded, setHitsLoaded] = useState(false);
@@ -18,11 +19,7 @@ const CustomHits = ({ hits }) => {
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
         {hits.map((hit, i) => {
-          if (hitsLoaded) { 
-            return <Hit hit={hit} key={i} /> 
-          } else {
-            return <div className="" key={i + "loader"} style={{width: "200px", height: "300px", backgroundColor: "red"}}></div>
-          }
+          return <div key={i}>{hitsLoaded ? <Hit hit={hit} key={i + "customhit" + Math.random} /> : <CustomSkeleton type="hit" />}</div>
         })}
       </ul>
     </div>

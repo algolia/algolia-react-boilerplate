@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
 import SkeletonLoader from '../../hits/HitsSkeletonLoader';
-import FacetsSkeletonLoader from '@/components/facets/FacetsSkeletonLoader';
 import { Hit } from '@/components/hits/Hits';
 import InfluencerCard from '@/components/hits/InfluencerCard';
 import NoCtaCard from '@/components/hits/NoCtaCard';
@@ -110,7 +109,7 @@ const SrpLaptop = () => {
         className='srp-active srp-container'
       >
         <div className="srp-container__facets">
-          <Suspense fallback={<FacetsSkeletonLoader />}>
+          <Suspense fallback={<SkeletonLoader type={"facet"} />}>
 
             {/* Render Recommend component - Trending Facets */}
             {/* Change config in /config/trendingConfig.js */}
@@ -169,7 +168,7 @@ const SrpLaptop = () => {
 
 
           {false ? (
-            <Suspense fallback={<SkeletonLoader />}>
+            <Suspense fallback={<SkeletonLoader type={"hit"} />}>
               <Index indexName={injectedContentIndex}>
                 <Configure hitsPerPage={1} page={0} />
               </Index>
@@ -211,7 +210,7 @@ const SrpLaptop = () => {
               />
             </Suspense>
           ) : (
-            <Suspense fallback={<SkeletonLoader />}>
+            <Suspense fallback={<SkeletonLoader type={"hit"}/>}>
               <CustomHitsComponent />
             </Suspense>
           )}
