@@ -101,7 +101,11 @@ const SrpLaptop = () => {
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
+<<<<<<< HEAD
         {shouldHaveTrendingProductsValue && queryState === '' && (
+=======
+        {shouldHaveTrendingProductsValue && queryState === "" && state?.type !== 'context' && (
+>>>>>>> 7266ef68632e62f9d60e5c44fad440cae551b114
           <TrendingProducts facetName={facetName} facetValue={facetValue} />
         )}
       </div>
