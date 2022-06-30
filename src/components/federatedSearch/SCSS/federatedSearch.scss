@@ -6,7 +6,7 @@
     position: absolute;
     background-color: $background-color;
     z-index: 40;
-    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 5px;
 
     &__wrapper{
         display: flex;
@@ -41,7 +41,7 @@
 //Recent searches
 .recentSearches{
     &__title{
-        @include title($blue-algolia)
+        @include titleH3($purple-algolia)
     }
     &__items{
         li{
@@ -50,25 +50,22 @@
             gap: 0.5rem;
             text-transform: capitalize;
             cursor: pointer;
-            p{
-                font-size: 0.8rem;
-                &:hover{
-                    font-weight: bold;
+                p{
+                    @include p-text-federated($main-color)
                 }
-            }
-        }
+         }
     }
 }
 
 // Suggestion
 .suggestions{
     &__title{
-        @include title($blue-algolia)
+        @include titleH3($purple-algolia)
     }
     &__items{
         li{
             .ais-Highlight-highlighted{
-                @include highlight($blue-algolia)
+                @include highlight($purple-algolia)
             }
             display: flex;
             align-items: center;
@@ -76,10 +73,7 @@
             text-transform: capitalize;
             cursor: pointer;
             p{
-                font-size: 0.8rem;
-                &:hover{
-                    font-weight: bold;
-                }
+                @include p-text-federated($main-color)
             }
         }
     }
@@ -88,7 +82,7 @@
 // Categories
 .categories{
     &__title{
-        @include title($blue-algolia)
+        @include titleH3($purple-algolia)
     }
     &__items{
         li{
@@ -99,10 +93,7 @@
             cursor: pointer;
             
             p{
-                font-size: 0.8rem;
-                &:hover{
-                    font-weight: bold;
-                }
+                @include p-text-federated($main-color)
             }
         }
     }
@@ -111,7 +102,7 @@
 // Products
 .products{
     &__title{
-        @include title($blue-algolia);
+        @include titleH3($purple-algolia);
         margin-left: 1rem;
     }
     &__items{
@@ -146,7 +137,7 @@
                @include brand($main-color)
             }
             .price{
-               @include price($blue-algolia)
+               @include price($purple-algolia)
             }
         }
         &:hover{
@@ -166,7 +157,7 @@
 // Articles
 .articles{
     &__title{
-        @include title($blue-algolia)
+        @include titleH3($purple-algolia)
     }
     &__item{
         .image-wrapper{

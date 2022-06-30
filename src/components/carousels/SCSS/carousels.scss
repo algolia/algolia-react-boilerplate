@@ -1,12 +1,12 @@
 // ------------------------------------------
 // Home Carousel
 // ------------------------------------------
-@use '../../../scss//partials' as *;
+@use '../../../scss/partials' as *;
 
 .home-carousel {
   margin: 2rem 2rem;
   .title{
-    @include title($blue-algolia)
+    @include titleH3($purple-algolia)
   }
   .carousel {
     .inner-carousel {
@@ -14,9 +14,9 @@
     
       .item {
       @include hit( $main-color,
-      $blue-algolia,
-      $blue-algolia,
-      $blue-algolia);
+      $purple-algolia,
+      $purple-algolia,
+      $purple-algolia);
 
       .brand{
         @include brand($main-color)
@@ -25,7 +25,7 @@
         @include productName($grey-dark-color)
       }
       .price{
-        @include price($blue-algolia)
+        @include price($purple-algolia)
       }
       &__infosUp{
         display: flex;
@@ -47,7 +47,7 @@
 .home-carousel-mobile{
   margin: 2rem 1rem;
   h3 {
-    color: $blue-algolia;
+    color: $purple-algolia;
     font-size: 1.2rem;
     font-weight: 800;
   }
@@ -88,7 +88,7 @@
           text-transform: capitalize;
         }
         .price {
-          color: $blue-algolia;
+          color: $purple-algolia;
           font-size: 1.2rem;
           font-weight: 600;   
         }

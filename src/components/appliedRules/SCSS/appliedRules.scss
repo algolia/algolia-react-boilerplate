@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: $blue-algolia-custom-gradient;
+    background: $purple-algolia-custom-gradient;
     width: 100%;
     z-index: 999;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
@@ -96,7 +96,7 @@
       }
   }
   input:checked + .slider {
-    background: $blue-algolia-custom-gradient;
+    background: $purple-algolia-custom-gradient;
   }
   
   input:checked + .slider:before {

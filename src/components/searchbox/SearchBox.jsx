@@ -1,7 +1,7 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
 
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 // Algolia Import
 import { connectSearchBox } from 'react-instantsearch-dom';
@@ -33,11 +33,13 @@ import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
 
 //Import scope SCSS
 import './SCSS/searchBox.scss';
+import useOutsideClick from '@/hooks/useOutsideClick';
 
 const SearchBoxSimple = ({ refine, currentRefinement }) => {
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
-  const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
+  const [searchboxIsActive, setSearchboxIsActive] = useState(false);
+  const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
@@ -47,6 +49,8 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   const navigate = useNavigate();
   // Get states of React Router
   const { state } = useLocation();
+
+  useOutsideClick(searchboxRef, () => setSearchboxIsActive(false));
 
   // Get array of rules from Recoil
   const rulesApplied = useSetRecoilState(rulesAtom);
@@ -59,7 +63,9 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   };
 
   return (
-    <div className="searchbox">
+    <div
+      className={searchboxIsActive ? 'searchbox-active searchbox' : 'searchbox'}
+    >
       <form
         className="searchbox__form"
         action=""
@@ -81,7 +87,10 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
           type="search"
           value={queryState ? queryState : ''}
           placeholder={simplePlaceholder}
-          onClick={() => setIsFederatedOpen(true)}
+          onClick={() => {
+            setIsFederatedOpen(true);
+            setSearchboxIsActive(true);
+          }}
           onChange={(event) => {
             refineFunction(event.currentTarget.value);
           }}

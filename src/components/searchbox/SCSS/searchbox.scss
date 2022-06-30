@@ -4,14 +4,16 @@
 @use '../../../scss/partials' as *;
 
 .searchbox-container {
-  width: 50%;
+  min-width: 40%;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 0.5rem;
   .searchbox {
-    width: 90%;
+    width: 40%;
+    will-change: width;
+    transition: width 0.2s cubic-bezier(.73,0,.12,1.50);
     &__form {
       margin: 1rem auto;
       width: 100%;
@@ -27,40 +29,19 @@
           fill: $main-color;
         }
       }
-
       &__input {
         @include searchBoxInput($white-color, $grey-light-color-80);
-        
-        &::placeholder{
-          color: $grey-dark-color;
-        }
-        &:focus {
-          outline: none;
-        }
-        &::-webkit-search-cancel-button {
-          // If you want display or not cross in searchbox
-          -webkit-appearance: none;
-          height: 1em;
-          width: 1em;
-          border-radius: 50em;
-          background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
-            no-repeat 50% 50%;
-          background-size: contain;
-          cursor: pointer;
-        }
-       
       }
-
     }
           &__category{
             position: absolute;
-            max-width:60%;
+            width: clamp(20%, 40%, 60%);
             height: 100%;
             top: 0;
             right:0rem;
-            border-radius: 0 8px 8px 0;
+            border-radius: 2px 3rem 3rem 2px;
             padding: 0.5rem 1rem;
-            background: $blue-algolia-custom-gradient;
+            background: $purple-algolia-custom-gradient;
             display: flex;
             justify-content: center;
             gap: 0.5rem;
@@ -71,9 +52,8 @@
               cursor: pointer;
             }
            p{
-             
-             font-size: 0.8rem;
-             color: $white-color;
+             @include p-text($white-color);
+             font-size: 0.7rem;
            }
            svg {
              border: 1px solid #000000;
@@ -90,6 +70,12 @@
 
            }
         }
+  }
+
+  .searchbox-active{
+    width: 100%;
+    will-change: width;
+    transition: width 0.2s cubic-bezier(.73,0,.12,1.50);
   }
        
 }

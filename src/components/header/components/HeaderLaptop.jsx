@@ -49,6 +49,14 @@ const HeaderLaptop = () => {
   return (
     <div className="container">
       <div className="container__header-top">
+        {displayDemoTour && (
+          <button className="open-tour__button" onClick={() => setIsOpen(true)}>
+            Open Tour
+          </button>
+        )}
+        <div className="container__header-top__title">
+          <h1>Demo BoilerPlate</h1>
+        </div>
         <div className="container__header-top__logo">
           <Link
             to="/"
@@ -64,22 +72,11 @@ const HeaderLaptop = () => {
             {/* Add possibility to change the Logo */}
             <img src={logo} alt="" />
           </Link>
-          {displayDemoTour && (
-            <button
-              className="open-tour__button"
-              onClick={() => setIsOpen(true)}
-            >
-              Open Tour
-            </button>
-          )}
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container">
           <CustomSearchBox />
           {displayVoiceSearch && <CustomVoiceSearchComponent />}
-        </div>
-        <div className="container__header-top__title">
-          <h1>Demo BoilerPlate</h1>
         </div>
       </div>
       <div className="container__header-nav">

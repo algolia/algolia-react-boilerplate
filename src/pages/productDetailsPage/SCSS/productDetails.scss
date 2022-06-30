@@ -25,7 +25,6 @@
     }
     .imageWrapper {
       width: 50%;
-
       margin: 0 auto;
       overflow: hidden;
       img {
@@ -58,41 +57,43 @@
       display: flex;
       flex-direction: column;
       padding: 2rem;
-      // gap: 1rem;
+      gap: 1rem;
       .brand {
-        color: $grey-dark-color;
-        font-weight: bold;
+        @include brand($main-color);
         font-size: 1.2rem;
         text-transform: capitalize;
       }
       .name {
-        text-transform: capitalize;
+        @include productName($grey-dark-color)
       }
       .color {
-        margin-top: 1rem;
-        text-transform: capitalize;
-        font-style: italic;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        p{
+          @include colorName($main-color)
+        }
       }
       .add-to-cart {
-        @include btn($blue-algolia-custom-gradient, $white-color);
+        @include btn($purple-algolia-custom-gradient, $white-color);
         margin-top: 5rem;
         gap: 1rem;
-        width: 30%;
+        width: 8rem;
         &:hover{
-          @include btn-hover($blue-algolia-custom-gradient, $white-color);
+          @include btn-hover($purple-algolia-custom-gradient, $white-color);
           gap: 1.5rem;
         }
         svg{
           width: 12px;
         }
         p{
-          color: $white-color;
+          @include p-text($white-color);
+          font-size: 0.8rem;
         }
         
       }
       .price {
-        color: $blue-algolia;
-        font-weight: bold;
+        @include price($purple-algolia);
         font-size: 2rem;
       }
       .sizes {
@@ -119,11 +120,6 @@
         }
       }
     }
-  }
-  .addToCartBtn{
-  
-   
-  
   }
 }
 // MOBILE & TABLET

@@ -16,17 +16,22 @@
       justify-content: space-between;
       margin-bottom: 1rem;
       &__logo {
-        width: 20%;
-        text-align: start;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         img {
-          width: 80%;
+          margin: 0 auto;
+          width: 70%;
           height: 100%;
         }
       }
       &__title {
-        min-width: 20%;
+        min-width: 40%;
+        display: flex;
+        justify-content: flex-start;
         h1 {
-         @include title($purple-algolia);
+         @include titleH3($purple-algolia);
          font-size: 1.2rem;
          text-transform: capitalize;
         }

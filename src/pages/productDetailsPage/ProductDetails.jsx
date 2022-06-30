@@ -265,7 +265,7 @@ const ProductDetails = () => {
       >
         {shouldHaveRelatedProductsValue && (
           <div>
-            <h3>Related Products</h3>
+            <h3 className="title">Related Products</h3>
             <RelatedProducts
               recommendClient={recommendClient}
               indexName={index}
@@ -277,7 +277,7 @@ const ProductDetails = () => {
         )}
         {shouldHaveFbtProductsValue && (
           <div>
-            <h3>Frequently Bought Together</h3>
+            <h3 className="title">Frequently Bought Together</h3>
             <FrequentlyBoughtTogether
               recommendClient={recommendClient}
               indexName={index}

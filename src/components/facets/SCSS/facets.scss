@@ -50,9 +50,11 @@
         display: flex;
         @include facetsFilter('transparent',
           $main-color,
-          $blue-algolia );
+          $purple-algolia );
 
-        >p {
+        > p {
+          @include p-text($main-color);
+          font-size: 0.8rem;
           font-weight: 300;
         }
 
@@ -63,7 +65,7 @@
           right: 0;
           bottom: 0;
           left: 0;
-          background: $blue-algolia;
+          background: $purple-algolia;
           z-index: -1;
           transition: opacity 0.3s ease-in-out;
           opacity: 0;
@@ -76,7 +78,6 @@
         }
 
         &:hover {
-
           p,
           span {
             color: $white-color;
@@ -90,11 +91,12 @@
   }
 
   .refined-filter {
-    @include refinedFacet($blue-algolia-custom-gradient, $white-color);
+    @include refinedFacet($purple-algolia-custom-gradient, $white-color);
 
     p,
     span {
-      color: $white-color;
+      @include p-text($white-color);
+      font-size: 0.8rem;
     }
   }
 

@@ -15,7 +15,7 @@
   overflow: scroll;
 
   h2 {
-    font-weight: bold;
+    @include titleH2($purple-algolia)
   }
 }
 
@@ -61,8 +61,15 @@
     }
   }
 }
-.search-terms {
+
+
+.demoGuideHelpers {
   margin-bottom: 1rem;
+  h3 {
+    @include titleH3($main-color);
+    font-size: 1rem;
+    text-transform: capitalize;
+  }
   &__infos {
     margin: 1rem 0;
     &__titles {
@@ -70,15 +77,12 @@
       align-items: flex-start;
       justify-content: flex-start;
       gap: 0.3rem;
-      // margin-left: 2rem;
-      h3 {
-        font-size: 0.9rem
-      }
       span {
         font-size: 0.7rem;
-        color: $blue-algolia;
+        color: $purple-algolia;
       }
       p {
+        @include p-text($main-color);
         font-size: 0.7rem;
       }
     }

@@ -1,7 +1,3 @@
-// TODO: 1. homepagebannerthree is declared as its own component, but also in HomeBanners?
-//       2. Why is the order of banners wrong?
-// This page builds the various banners that are used on the Homepage
-
 // NB: we need React declared for the Fragments used here
 import { Fragment } from 'react';
 // This component will be wrapped in connectQueryRules (https://www.algolia.com/doc/api-reference/widgets/query-rule-custom-data/react/#connector)
@@ -13,46 +9,13 @@ import { Link } from 'react-router-dom';
 //Import scope SCSS
 import './SCSS/HomeBanner.scss';
 
-// This component renders a different banner based on the props passed to it.
-//The props are passed through the Dashboard in rules section.
-const HomeBanners = ({ items }) => {
+const HomeBanner = ({ items }) => {
   return items.map(
-    (
-      {
-        type,
-        title,
-        subtitle,
-        button1,
-        LinkButton1,
-        button2,
-        LinkButton2,
-        imgUrl1,
-        imgUrl2,
-        imgUrl3,
-      },
-      index
-    ) => {
-      if (type === 'HomeBannerOne') {
-        return (
-          <Fragment key={index}>
-            <BannerOne
-              imgUrl1={imgUrl1}
-              title={title}
-              subtitle={subtitle}
-              imgUrl2={imgUrl2}
-              imgUrl3={imgUrl3}
-              LinkButton1={LinkButton1}
-              button1={button1}
-              LinkButton2={LinkButton2}
-              button2={button2}
-            />
-          </Fragment>
-        );
-      }
+    ({ type, title, subtitle, button1, LinkButton1, imgUrl1 }, index) => {
       if (type === 'HomeBannerTwo') {
         return (
           <Fragment key={index}>
-            <BannerTwo
+            <HomeBannerComponent
               imgUrl1={imgUrl1}
               title={title}
               subtitle={subtitle}
@@ -66,42 +29,13 @@ const HomeBanners = ({ items }) => {
   );
 };
 
-const BannerOne = ({
+const HomeBannerComponent = ({
   imgUrl1,
   title,
   subtitle,
-  imgUrl2,
-  imgUrl3,
   LinkButton1,
   button1,
-  LinkButton2,
-  button2,
 }) => (
-  <div
-    className="home-banner-container"
-    style={{
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.45)), url(${imgUrl1})`,
-    }}
-    key={index}
-  >
-    <div className="home-banner-container__infos">
-      <h1>{title}</h1>
-      <h2>{subtitle}</h2>
-    </div>
-    <div className="home-banner-container__image-one">
-      <img src={imgUrl2} alt="" />
-    </div>
-    <div className="home-banner-container__image-two">
-      <img src={imgUrl3} alt="" />
-      <div className="home-banner-container__buttons">
-        <Link to={LinkButton1}>{button1}</Link>
-        <Link to={LinkButton2}>{button2}</Link>
-      </div>
-    </div>
-  </div>
-);
-
-const BannerTwo = ({ imgUrl1, title, subtitle, LinkButton1, button1 }) => (
   <div className="home-banner3-container">
     <div className="home-banner3-container__image">
       <img src={imgUrl1} alt="" />
@@ -125,6 +59,6 @@ const BannerTwo = ({ imgUrl1, title, subtitle, LinkButton1, button1 }) => (
   </div>
 );
 
-const CustomHomeBanners = connectQueryRules(HomeBanners);
+const CustomHomeBanners = connectQueryRules(HomeBanner);
 
 export default CustomHomeBanners;

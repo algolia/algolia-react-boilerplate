@@ -34,14 +34,14 @@
           display: flex;
           @include facetsFilter('transparent',
             $main-color,
-            $blue-algolia );
+            $purple-algolia );
   
           >p {
             font-weight: 300;
           }
   
           &:hover {
-            @include facetsHover($blue-algolia-custom-gradient);
+            @include facetsHover($purple-algolia-custom-gradient);
           }
         }
   
@@ -63,14 +63,14 @@
           }
   
           &:hover>button {
-            @include facetsHover($blue-algolia-custom-gradient);
+            @include facetsHover($purple-algolia-custom-gradient);
           }
         }
       }
     }
   
     .refined-filter {
-      @include refinedFacet($blue-algolia-custom-gradient, $white-color);
+      @include refinedFacet($purple-algolia-custom-gradient, $white-color);
   
       p,
       span {
