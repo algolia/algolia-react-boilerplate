@@ -62,8 +62,6 @@ export const Main = () => {
 
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
-      {/* Comment until Hooks Update */}
-      {/* <CustomStateResults /> */}
       <div className="visible">
         <Header />
         <DemoGuideOpener />

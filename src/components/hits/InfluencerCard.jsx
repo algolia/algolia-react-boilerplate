@@ -2,11 +2,6 @@
 
 // Import framer motion
 import { motion } from 'framer-motion';
-
-// Import functionality from InstantSearch
-// eslint-disable-next-line no-unused-vars
-// import { connectStateResults } from 'react-instantsearch-dom';
-
 // Import framer Motion config
 import { framerMotionHits } from '@/config/animationConfig';
 
