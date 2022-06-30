@@ -7,7 +7,7 @@ import { memo, useState } from 'react';
 import { connectSearchBox } from 'react-instantsearch-dom';
 
 // Import navigate function to route to results page on search submit
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Import Recoil
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -16,24 +16,21 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Glass } from '@/assets/svg/SvgIndex';
 import SearchInCategory from './components/SearchInCategory';
 
+import { rulesAtom } from '@/config/appliedRulesConfig';
 import {
+  isSearchInCategory,
   queryAtom,
   searchBoxAtom,
   simplePlaceholderAtom,
-  isSearchInCategory,
 } from '@/config/searchboxConfig';
-import { rulesAtom } from '@/config/appliedRulesConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
-
-import { categorySelectionAtom } from '@/config/headerConfig';
 
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
 
 //Import scope SCSS
 import './SCSS/searchBox.scss';
-import useOutsideClick from '@/hooks/useOutsideClick';
 
 const SearchBoxSimple = ({ refine, currentRefinement }) => {
   // Recoil State
