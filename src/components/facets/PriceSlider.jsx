@@ -40,9 +40,6 @@ function PriceSlider(props) {
     }
   }, [start]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedRefine = useCallback(debounce(refineFunction, 100), []);
-
   return (
     <div className="filters-container">
       <div className="filters-container__title">
@@ -66,7 +63,7 @@ function PriceSlider(props) {
               setMinSlider(e[0]);
               setMaxSlider(e[1]);
               setChange(true);
-              debouncedRefine(e[0], e[1]);
+              setTimeout(refineFunction(e[0], e[1]), 100);
             }
           }}
         />
