@@ -155,6 +155,7 @@ const Facets = () => {
       <DynamicWidgets maxValuesPerFacet={500}>
         {refinements.map((e, i) => {
           const { type, currency, label, options } = e;
+          console.log(options.attribute);
           switch (type) {
             case 'price':
               return (
