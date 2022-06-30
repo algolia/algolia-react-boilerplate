@@ -17,16 +17,6 @@ yarn gen banner
 
 The `gen` command initializes an **interactive session**, where you will be prompted for the necessary info to generate the asset's data.
 
-You may alternatively avoid the interactive session and use the one liner command, which requires you to already know exactly which data to provide.
-
-In the banner case, it might look something like this:
-
-```bash
-yarn gen banner --name Black Friday Promo --banner https://unsplash.com/photos/KzidBAES-uE
-```
-
-> You can also use a combination of one liner and interactive session, by providing only part of the necessary fields in the command.
-
 ## Available Assets
 
 The assets that can be generated are defined in the `assetTemplate.js` file. They are as follows:
