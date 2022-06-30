@@ -24,6 +24,20 @@ The assets that can be generated are defined in the `assetTemplate.js` file. The
 - `banner`: Generates the custom data JSON to be returned by a banner rule
 - `injectedNoCta`: Generates the custom data JSON to be returned by a injected no-Cta rule
 
+## Directly Generating Rules
+
+You may also generate a rule directly, as long as you're able to provide the rule's trigger as a JSON. The generated rule will simply return the asset you created as custom data.
+
+In order to do that, you have to pass the `-c` or `--create-rule` option when calling the command, like so:
+
+```bash
+yarn gen banner -c
+```
+
+You will be prompted for an API key with rule writing privileges. **The script will store that api key in the `assetGenerator/.env` file, so make sure that this file is included in your `.gitignore`**!
+
+You will also be allowed to provide a description for the rule.
+
 ## Customizing & Creating Asset Definitions
 
 Our script was built to be wonderfully simple to extend and edit. All the assets it's able to generate have their syntax defined in the `assetTemplate.js` file.
