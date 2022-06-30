@@ -55,15 +55,9 @@ function CurrentRefinements(props) {
                   <CurrentRefinementGeneral item={item} />
                 </>
               ) : (
-                <a
-                  href={createURL(item.value)}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    refine(item.value);
-                  }}
-                >
-                  {displayPrice(item, currencySymbol, refinementPriceLabels)}
-                </a>
+                <>
+                  <CurrentRefinementGeneral item={item} />
+                </>
               )}
             </li>
           );

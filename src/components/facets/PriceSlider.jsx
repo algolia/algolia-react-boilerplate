@@ -6,19 +6,17 @@ import { useState, useCallback, useEffect } from 'react';
 // rc-slider
 import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { connectRange } from 'react-instantsearch-dom';
+import { useRange } from 'react-instantsearch-hooks-web';
 // import Currency from recoil
 import { useRecoilValue } from 'recoil';
 import { currencySymbolAtom } from '@/config/currencyConfig';
 
-const RangeSlider = ({
-  min,
-  max,
-  canRefine,
-  currentRefinement,
-  refine,
-  title,
-}) => {
+function PriceSlider(props) {
+  const { range, canRefine, refine, start } = useRange(props);
+  const { min, max } = range;
+  const minValue = min;
+  const maxValue = max;
+  const { title } = props;
   const [minSlider, setMinSlider] = useState(min);
   const [maxSlider, setMaxSlider] = useState(max);
   const [change, setChange] = useState(false);
@@ -26,14 +24,21 @@ const RangeSlider = ({
 
   useEffect(() => {
     if (canRefine) {
-      setMinSlider(currentRefinement.min);
-      setMaxSlider(currentRefinement.max);
+      setMinSlider(minValue);
+      setMaxSlider(maxValue);
     }
-  }, [currentRefinement.min, currentRefinement.max, canRefine]);
+  }, [minValue, maxValue, canRefine]);
 
   const refineFunction = (minValue, maxValue) => {
-    refine({ min: minValue, max: maxValue });
+    refine([minValue, maxValue]);
   };
+
+  useEffect(() => {
+    if (start[0] === -Infinity && start[1] === Infinity) {
+      setMinSlider(minValue);
+      setMaxSlider(maxValue);
+    }
+  }, [start]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedRefine = useCallback(debounce(refineFunction, 100), []);
@@ -68,8 +73,6 @@ const RangeSlider = ({
       </div>
     </div>
   );
-};
-
-const PriceSlider = connectRange(RangeSlider);
+}
 
 export default PriceSlider;
