@@ -12,7 +12,7 @@ import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
 // Import logo URL for header
-import { logoUrl } from '@/config/headerConfig';
+import logo from '@/assets/logo/logo.webp';
 
 //Import config for federatedSearch
 import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
@@ -61,9 +61,8 @@ const HeaderMobile = ({ mobile, tablet }) => {
       <div className="container__header-top">
         {/* Hamburger button to open or close the menu dropdown */}
         <div
-          className={`${
-            isMenuOpen ? 'hamburger-active' : 'hamburger-inactive'
-          } hamburger`}
+          className={`${isMenuOpen ? 'hamburger-active' : 'hamburger-inactive'
+            } hamburger`}
           onClick={() => {
             setIsMenuOpen(!isMenuOpen);
           }}
@@ -81,7 +80,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
               federated(false);
             }}
           >
-            <img src={logoUrl} alt="" />
+            <img src={logo} alt="" />
           </Link>
         </div>
         {/* For a search box Simple center */}

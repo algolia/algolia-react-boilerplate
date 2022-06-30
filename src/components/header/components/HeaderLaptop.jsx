@@ -14,7 +14,8 @@ import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
-import { logoUrl, categorySelectionAtom } from '@/config/headerConfig';
+import { categorySelectionAtom } from '@/config/headerConfig';
+import logo from '@/assets/logo/logo.webp';
 
 import { shouldShowDemoTour } from '@/config/demoTourConfig';
 
@@ -51,6 +52,7 @@ const HeaderLaptop = () => {
         <div className="container__header-top__logo">
           <Link
             to="/"
+            aria-label="link to home"
             onClick={() => {
               setQueryState('');
               federated(false);
@@ -60,7 +62,7 @@ const HeaderLaptop = () => {
             }}
           >
             {/* Add possibility to change the Logo */}
-            <img src={logoUrl} alt="" />
+            <img src={logo} alt="" />
           </Link>
           {displayDemoTour && (
             <button

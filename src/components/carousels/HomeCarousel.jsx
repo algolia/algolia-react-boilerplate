@@ -18,7 +18,7 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 
 // In case of img loading error
-import { logoUrl as placeHolderError } from '@/config/headerConfig';
+import * as placeHolderError from '@/assets/logo/logo.webp';
 
 import { framerMotionTransition } from '@/config/animationConfig';
 

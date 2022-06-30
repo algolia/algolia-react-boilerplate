@@ -11,8 +11,8 @@ import { lazy, Suspense, useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 
 // Import screenShot/ images for the homepage
-import homepage_1 from '../assets/homepage/homepage_1.png';
-import homepage_2 from '../assets/homepage/homepage_2.png';
+import homepage_1 from '@/assets/homepage/homepage_1.webp';
+import homepage_2 from '@/assets/homepage/homepage_2.webp';
 
 import { mainIndex } from '@/config/algoliaEnvConfig';
 import { framerMotionPage } from '@/config/animationConfig';
