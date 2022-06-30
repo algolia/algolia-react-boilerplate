@@ -207,7 +207,7 @@
       &-isOpened {
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        margin-left: 0.5rem;
 
         .filters-container-hierarchical {
           width: 97%;

@@ -7,7 +7,7 @@ const HierarchicalList = (props) => {
   const { items, refine } = props;
 
   return (
-    <>
+    <ul className="filters-container-hierarchical__content">
       {items.map((item) => {
         return (
           <li
@@ -39,7 +39,7 @@ const HierarchicalList = (props) => {
           </li>
         );
       })}
-    </>
+    </ul>
   );
 };
 
@@ -51,14 +51,12 @@ function HierarchicalMenu(props) {
       <div className="filters-container-hierarchical__title">
         <h3>{title}</h3>
       </div>
-      <ul className="filters-container-hierarchical__content">
-        <HierarchicalList
-          items={items}
-          onNavigate={onNavigate}
-          createURL={createURL}
-          refine={refine}
-        />
-      </ul>
+      <HierarchicalList
+        items={items}
+        onNavigate={onNavigate}
+        createURL={createURL}
+        refine={refine}
+      />
     </div>
   );
 }
