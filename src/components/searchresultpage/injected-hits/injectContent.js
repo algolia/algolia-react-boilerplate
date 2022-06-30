@@ -6,7 +6,10 @@ export default function injectContent(originalHits, content) {
   // For each content to be injected
   for (const item of content) {
     // Default position to inject to, if "position" not specified
-    item.position ??= 3;
+    if (item.type === 'salesCard') {
+      item.position ??= 3;
+    }
+    item.position ??= 7;
 
     // Also make sure it has some ID to be used as a React map key
     item.objectID ??= `injected-content-${JSON.stringify(item)}`;
