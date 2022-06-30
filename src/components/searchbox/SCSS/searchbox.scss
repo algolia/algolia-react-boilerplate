@@ -35,12 +35,12 @@
     }
           &__category{
             position: absolute;
-            width: clamp(20%, 40%, 60%);
+            width: clamp(20%, 40%, 50%);
             height: 100%;
             top: 0;
             right:0rem;
             border-radius: 2px 3rem 3rem 2px;
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 1rem;
             background: $purple-algolia-custom-gradient;
             display: flex;
             justify-content: center;
