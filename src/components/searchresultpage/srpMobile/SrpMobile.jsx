@@ -177,6 +177,7 @@ const SrpMobile = () => {
             <TrendingFacetValues
               facetName={facetName}
               facetValue={facetValue}
+               attribute="brand"
             />
           )}
         </div>
