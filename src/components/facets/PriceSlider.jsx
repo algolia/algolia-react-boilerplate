@@ -12,16 +12,23 @@ import { useRecoilValue } from 'recoil';
 import { currencySymbolAtom } from '@/config/currencyConfig';
 
 function PriceSlider(props) {
+  // Import const from hooks
   const { range, canRefine, refine, start } = useRange(props);
+  // Define the min and max values for the slider
   const { min, max } = range;
+  // Rename the value for our usage
   const minValue = min;
   const maxValue = max;
+  // Props
   const { title } = props;
+  // Set the state of the slider
   const [minSlider, setMinSlider] = useState(min);
   const [maxSlider, setMaxSlider] = useState(max);
   const [change, setChange] = useState(false);
+  // Call the currency configuration
   const currency = useRecoilValue(currencySymbolAtom);
 
+  // If the slider is ready to work set the values
   useEffect(() => {
     if (canRefine) {
       setMinSlider(minValue);
@@ -29,10 +36,13 @@ function PriceSlider(props) {
     }
   }, [minValue, maxValue, canRefine]);
 
+  // Refinement function
   const refineFunction = (minValue, maxValue) => {
     refine([minValue, maxValue]);
   };
 
+
+// Reset function te reset the slider
   useEffect(() => {
     if (start[0] === -Infinity && start[1] === Infinity) {
       setMinSlider(minValue);

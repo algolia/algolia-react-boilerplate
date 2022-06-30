@@ -6,7 +6,6 @@ import { useRecoilValue } from 'recoil';
 // import config file for state of facets
 import { currencySymbolAtom } from '@/config/currencyConfig';
 import { hitsConfig } from '@/config/hitsConfig';
-import { refinementPriceLabels } from '@/config/refinementsConfig';
 
 // Function to display the price in a right format for the currentRefinement
 const displayPrice = (i, currencySymbol, refinementPriceLabels) => {
