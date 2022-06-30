@@ -28,7 +28,7 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
-
+import useOutsideClick from '@/hooks/useOutsideClick';
 //Import scope SCSS
 import './SCSS/searchBox.scss';
 
