@@ -44,7 +44,7 @@ const CustomHitsComponent = lazy(() =>
 import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
 
 //Import scope SCSS
-import '../SCSS/searchresultspage.scss';
+import '../SCSS/searchResultsPage.scss';
 
 const SrpLaptop = () => {
   // Recoil & React states
