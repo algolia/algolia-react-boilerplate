@@ -1,7 +1,7 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
 
-import { memo, useState } from 'react';
+import { memo, useState, useEffect } from 'react';
 
 // Algolia Import
 import { useSearchBox } from 'react-instantsearch-hooks-web';
