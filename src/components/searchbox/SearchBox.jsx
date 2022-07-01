@@ -30,7 +30,7 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
 import useOutsideClick from '@/hooks/useOutsideClick';
 //Import scope SCSS
-import './SCSS/searchBox.scss';
+import './SCSS/searchbox.scss';
 
 function CustomSearchBox(props) {
   const { refine, query } = useSearchBox(props);
