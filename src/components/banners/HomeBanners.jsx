@@ -7,7 +7,7 @@ import { useQueryRules } from 'react-instantsearch-hooks-web';
 import { Link } from 'react-router-dom';
 
 //Import scope SCSS
-import './SCSS/HomeBanner.scss';
+import './SCSS/HomeBanner';
 
 // This component renders a different banner based on the props passed to it.
 //The props are passed through the Dashboard in rules section.
