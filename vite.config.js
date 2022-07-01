@@ -1,10 +1,9 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import htmlPurge from 'vite-plugin-html-purgecss'
 import path from 'path';
 
 export default defineConfig({
-  plugins: [react(), htmlPurge()],
+  plugins: [react()],
   build: {
     rollupOptions: {
       external: ['/react-instantsearch-core']
