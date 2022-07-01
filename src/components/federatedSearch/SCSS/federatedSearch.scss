@@ -1,0 +1,247 @@
+@use '../../../scss/partials' as *;
+
+.federatedSearch{
+    width: 100%;
+    padding: 2rem;
+    position: absolute;
+    background-color: $background-color;
+    z-index: 40;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 5px;
+
+    &__wrapper{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    &__left{
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    &__middle{
+        width: 100%;
+    }
+    &__right{
+        width: 25%;
+    }
+
+    .chevronRight{
+       width: 5px; 
+    }
+}
+
+.closeFederated {
+    position: absolute;
+    top: -2rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+//Recent searches
+.recentSearches{
+    &__title{
+        @include titleH3($purple-algolia)
+    }
+    &__items{
+        li{
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: capitalize;
+            cursor: pointer;
+                p{
+                    @include p-text-federated($main-color)
+                }
+         }
+    }
+}
+
+// Suggestion
+.suggestions{
+    &__title{
+        @include titleH3($purple-algolia)
+    }
+    &__items{
+        li{
+            .ais-Highlight-highlighted{
+                @include highlight($purple-algolia)
+            }
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: capitalize;
+            cursor: pointer;
+            p{
+                @include p-text-federated($main-color)
+            }
+        }
+    }
+}
+
+// Categories
+.categories{
+    &__title{
+        @include titleH3($purple-algolia)
+    }
+    &__items{
+        li{
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: capitalize;
+            cursor: pointer;
+            
+            p{
+                @include p-text-federated($main-color)
+            }
+        }
+    }
+}
+
+// Products
+.products{
+    &__title{
+        @include titleH3($purple-algolia);
+        margin-left: 1rem;
+    }
+    &__items{
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        padding: 1rem;
+       
+    }
+    &__item{
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        width: 32%;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+        transition: box-shadow 0.3s ease-in-out;
+        padding: 2rem 1rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        .image-wrapper{
+            max-width: 30%;
+            img{
+                width: 100%;
+            }
+        }
+        .infos{
+            .productName{
+               @include productName($grey-dark-color)
+            }
+            
+            .brand{
+               @include brand($main-color)
+            }
+            .price{
+               @include price($purple-algolia)
+            }
+        }
+        &:hover{
+           @include hitHoverEffect()
+        }
+    }
+
+    &__btn{
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        cursor: pointer;
+    }
+}
+
+// Articles
+.articles{
+    &__title{
+        @include titleH3($purple-algolia)
+    }
+    &__item{
+        .image-wrapper{
+            width: 100%;
+            img{
+                width: 100%;
+            }
+        }
+        .title{
+            @include p-text($main-color);
+            font-size: 0.8rem
+        }
+        .date{
+            @include p-text($main-color);
+            font-size: 0.6rem
+        }
+        .subtitle{
+            @include p-text($grey-light-color);
+            @include truncateText(3, 2);
+            font-size: 0.8rem;
+            font-weight: 300;
+        }
+    }
+}
+
+
+// MOBILE & TABLET 
+.federatedSearch-mobile{
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+    position: absolute;
+    background-color: $background-color;
+    z-index: 40;
+    
+
+.federatedSearch__wrapper-mobile{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+
+    .products{
+        &__title{
+            margin: 0;
+        }
+        &__items{
+            flex-wrap: nowrap;
+            display: -webkit-box;
+            overflow-x: scroll;
+            padding: 1rem 0rem;
+            list-style-type: none;
+        }
+        &__item{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: stretch;
+
+            .image-wrapper{
+                max-width: 60%;
+            }
+            .infos{
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+                .name{
+                    font-size: 0.8rem;
+                    text-align: center;
+                }
+            }
+        }
+    }
+    .chevronRight{
+        width: 5px; 
+     }
+       
+}
+.closeFederated{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+}

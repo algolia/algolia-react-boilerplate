@@ -1,50 +1,50 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { lazy, useState, Suspense } from 'react';
-import { Pagination, Configure, Index } from 'react-instantsearch-dom';
-import { lazily } from 'react-lazily';
+import { lazy, Suspense, useState } from 'react';
+
+// eslint-disable-next-line import/order
+import { Configure, Index, Pagination } from 'react-instantsearch-hooks-web';
+
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
-import SkeletonLoader from '../../hits/HitsSkeletonLoader';
-import FacetsSkeletonLoader from '@/components/facets/FacetsSkeletonLoader';
 import { Hit } from '@/components/hits/Hits';
-import InfluencerCard from '@/components/hits/InfluencerCard';
-import NoCtaCard from '@/components/hits/NoCtaCard';
-import SalesCard from '@/components/hits/SalesCard';
+
+import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
+import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
+import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
 import Redirect from '@/components/redirects/Redirect';
-import WrappedTrendingFacetValues from '@/components/trending/TrendingFacetValues';
-import TrendingProducts from '@/components/trending/TrendingProducts';
-import { mainIndex, indexNames } from '@/config/algoliaEnvConfig';
+import CustomSortBy from '@/components/sortBy/SortBy';
+import { CustomStats } from '@/components/stats/Stats';
+import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import {
-  shouldHaveStats,
   shouldHaveInjectedHits,
   shouldHaveSorts,
-  shouldHaveTrendingProducts,
+  shouldHaveStats,
   shouldHaveTrendingFacets,
+  shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
-import { customDataByType } from '@/utils';
 
 const CustomClearRefinements = lazy(() =>
-  import('@/components/facets/ClearRefinement')
+  import('@/components/facets/components/ClearRefinement')
 );
 const CustomCurrentRefinements = lazy(() =>
-  import('@/components/facets/CurrentRefinement')
+  import('@/components/facets/components/CurrentRefinement')
 );
 
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
-const CustomHitsComponent = lazy(() => import('@/components/hits/CustomHits'));
-const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
-const { CustomStats } = lazily(() =>
-  import('@/components/searchresultpage/Stats')
+const CustomHitsComponent = lazy(() =>
+  import('@/components/hits/components/CustomHits')
 );
-const { InjectedHits } = lazily(() =>
-  import('@/components/searchresultpage/injected-hits')
-);
+
+import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
+
+//Import scope SCSS
+import '../SCSS/searchResultsPage.scss';
 
 const SrpLaptop = () => {
   // Recoil & React states
@@ -102,23 +102,22 @@ const SrpLaptop = () => {
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
-        {shouldHaveTrendingProductsValue && queryState === "" && state?.type !== 'context' && (
-          <TrendingProducts facetName={facetName} facetValue={facetValue} />
-        )}
+        {shouldHaveTrendingProductsValue &&
+          queryState === '' &&
+          state?.type !== 'context' && (
+            <TrendingProducts facetName={facetName} facetValue={facetValue} />
+          )}
       </div>
-      <div
-        className='srp-active srp-container'
-      >
+      <div className="srp-active srp-container">
         <div className="srp-container__facets">
-          <Suspense fallback={<FacetsSkeletonLoader />}>
-
+          <Suspense fallback={''}>
             {/* Render Recommend component - Trending Facets */}
             {/* Change config in /config/trendingConfig.js */}
             <div className="">
               {shouldHaveTrendingFacetsValue && (
                 <WrappedTrendingFacetValues
                   attribute="brand"
-                  facetName={"brand"}
+                  facetName={'brand'}
                   limit={500}
                   facetValue={facetValue}
                 />
@@ -165,56 +164,22 @@ const SrpLaptop = () => {
             query={queryState && queryState}
             getRankingInfo={true}
           />
-          {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
-
-
           {shouldInjectContent ? (
             <Suspense fallback={<SkeletonLoader />}>
+              {/* Load results for the injection index, so that we can later access them via the useInstantSearch hook, with the scopedResults property */}
               <Index indexName={injectedContentIndex}>
                 <Configure hitsPerPage={1} page={0} />
               </Index>
-              <InjectedHits
-                hitComponent={Hit}
-                slots={({ resultsByIndex }) => {
-                  const { noCta, salesCard } = customDataByType(
-                    resultsByIndex?.[index]?.userData
-                  );
-                  // eslint-disable-next-line no-lone-blocks
-                  {
-                    // eslint-disable-next-line no-unused-expressions
-                    salesCard && setInjected(true);
-                  }
-                  return [
-                    {
-                      getHits: () => [noCta],
-                      injectAt: noCta ? noCta.position : null,
-                      slotComponent: NoCtaCard,
-                    },
-                    {
-                      getHits: () => [salesCard],
-                      injectAt: salesCard ? salesCard.position : null,
-                      slotComponent: SalesCard,
-                    },
-                    {
-                      injectAt: ({ position }) => position === 2,
-                      // eslint-disable-next-line no-shadow
-                      getHits: ({ resultsByIndex }) => {
-                        setInjected(true);
-                        return resultsByIndex[injectedContentIndex]
-                          ? resultsByIndex[injectedContentIndex].hits || []
-                          : [];
-                      },
-                      slotComponent: InfluencerCard,
-                    },
-                  ];
-                }}
-              />
+              {/* Injected content*/}
+              <InjectedHits hitComponent={Hit} />
             </Suspense>
           ) : (
+            // If you defined to don't display the injected content it will display the custom hits
             <Suspense fallback={<SkeletonLoader />}>
               <CustomHitsComponent />
             </Suspense>
           )}
+
           <Pagination />
           <Redirect />
         </div>

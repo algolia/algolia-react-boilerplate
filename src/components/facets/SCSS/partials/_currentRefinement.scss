@@ -1,0 +1,30 @@
+@use '../../../../scss/partials/' as *;
+
+.refinement-container {
+  display: flex;
+  margin: 1rem 0;
+  height: fit-content;
+  &:empty {
+    display: none;
+  }
+
+  &__refinementsInner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .refinement-container__refinements {
+    margin-right: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    &:empty {
+      display: none;
+    }
+  }
+  a {
+    @include btn($purple-algolia-custom-gradient, $white-color);
+    text-transform: capitalize;
+  }
+}
+

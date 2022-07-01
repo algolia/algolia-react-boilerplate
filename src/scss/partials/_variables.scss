@@ -1,0 +1,44 @@
+// Colors
+$main-color: rgb(0, 0, 0);
+$red-color: rgb(181, 31, 41);
+$grey-dark-color: rgb(102, 102, 102);
+$grey-light-color: rgb(221, 221, 221);
+$white-color: rgb(255, 255, 255);
+$blue-algolia: rgb(32,125,239);
+$purple-algolia: #5568fe;
+$orange-color: rgb(216, 123, 51);
+
+// Background Color:
+$background-color: rgb(249, 249, 249);
+
+// Colors Opacity
+// Grey Dark Color Opacity
+$grey-dark-color-80: rgba($grey-dark-color, 0.8);
+$grey-dark-color-60: rgba($grey-dark-color, 0.6);
+$grey-dark-color-40: rgba($grey-dark-color, 0.4);
+$grey-dark-color-20: rgba($grey-dark-color, 0.2);
+
+// Grey Light Color Opacity
+$grey-light-color-80: rgba($grey-light-color, 0.8);
+$grey-light-color-60: rgba($grey-light-color, 0.6);
+$grey-light-color-40: rgba($grey-light-color, 0.4);
+$grey-light-color-20: rgba($grey-light-color, 0.2);
+
+
+// Colors gradient
+$purple-algolia-custom-gradient: linear-gradient(60deg, rgba(85,104,254,1) 0%, rgba(131,145,255,1) 100%);
+$purple-algolia-custom-reverse-gradient: linear-gradient(99deg, rgba(84,104,255,0.3) 31%, rgba(255,255,255,1) 100%);
+$purple-algolia-custom-reverse-gradient-30: linear-gradient(99deg, rgba(84,104,255,0.3) 31%, rgba(255,255,255,0.3) 100%);
+$purple-algolia-custom-gradient-overlay: linear-gradient(60deg, rgba(85,104,254,0.5) 0%, rgba(131,145,255,0.3) 100%);
+
+
+// ------------------------------------------
+// Spaces
+$four-rem-spaces: 4rem;
+$three-half-rem-spaces: 3.5rem;
+$three-rem-spaces: 3rem;
+$two-half-rem-spaces: 2.5rem;
+$two-rem-spaces: 2rem;
+$one-half-rem-spaces: 1.5rem;
+$one-rem-spaces: 1rem;
+$half-rem-spaces: 0.5rem;

@@ -1,0 +1,37 @@
+@use '../../../scss/partials' as *;
+
+.wrap {
+    position: fixed;
+    position: fixed;
+    bottom: 0rem;
+    right: 1rem;
+    width: 100%;
+    padding-left: 1.4em;
+    padding-right: 1.4em;
+    z-index: 1000;
+  
+    &-up{
+      bottom: 7rem;
+    }
+  }
+  
+  .demoGuide__alert {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    width: fit-content;
+    font-family: $main-font;
+    font-weight: bold;
+    color: white;
+    background: $purple-algolia;
+    opacity: 0.8;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 3px;
+    
+    &-close {
+      cursor: pointer;
+    }
+  }

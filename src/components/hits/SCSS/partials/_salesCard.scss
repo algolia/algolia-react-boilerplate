@@ -1,0 +1,14 @@
+@use '../../../../scss/partials/' as *;
+
+// ------------------------------------------
+// SalesCard
+// ------------------------------------------
+.image-wrapper-sales {
+    @include salesCard($white-color);
+  }
+  .image-wrapper-sales {
+    .infos_influencer {
+      @include infosSalesCard($white-color);
+    }
+  }
+  

@@ -1,5 +1,8 @@
 import React from 'react';
 
+//Import scope SCSS
+import './SCSS/loader.scss';
+
 const Loader = () => {
   return (
     <div className="loader">

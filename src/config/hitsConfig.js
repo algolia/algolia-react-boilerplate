@@ -22,7 +22,7 @@ export const hitsConfig = {
   genderFilter: 'genderFilter',
   hierarchicalCategories: 'hierarchicalCategories',
   sizeFilter: 'sizeFilter',
-  price: 'price',
+  price: 'unformated_price',
   image: 'img_optimised',
   imageAlt: 'imageAlt',
   hierarchicalCategoriesLvl0: 'hierarchicalCategories.lvl0',
@@ -73,4 +73,10 @@ export const hitsAtom = atom({
 export const hitAtom = atom({
   key: 'hitAtom', // unique ID (with respect to other atoms/selectors)
   default: {}, // default value (aka initial value)
+});
+
+// Please ignore this atom
+export const hitsNumber = atom({
+  key: 'hitsNumber', // unique ID (with respect to other atoms/selectors)
+  default: 1, // default value (aka initial value)
 });

@@ -1,30 +1,27 @@
 // Render the navigation menu in the header
 
 // React Router
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 // Recoil Header State
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import Config for the header
 import { categoryPageFilterAttribute } from '@/config/categoryConfig';
-import {
-  linksHeader,
-  selectorNavigationRef,
-} from '@/config/headerConfig';
-import SelectPersona from '../personnaSelect/SelectPersona';
+import { linksHeader, selectorNavigationRef } from '@/config/headerConfig';
+import SelectPersona from './personnaSelect/SelectPersona';
 
 //import language selector component
-import LanguageSelect from '../languagesSelect/LanguageSelect';
+import LanguageSelect from './languagesSelect/LanguageSelect';
 
 // import segment selector component
-import SelectSegment from '../segmentSelect/selectSegment';
+import SelectSegment from './segmentSelect/selectSegment';
 
 // Import Recoil config
 import {
+  shouldHaveLanguages,
   shouldHavePersona,
   shouldHaveSegments,
-  shouldHaveLanguages,
 } from '@/config/featuresConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
@@ -73,10 +70,11 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   return (
     <ul
-      className={`${isMenuOpen
-        ? 'container-mobile__navList-items'
-        : 'container__header-nav__links'
-        } `}
+      className={`${
+        isMenuOpen
+          ? 'container-mobile__navList-items'
+          : 'container__header-nav__links'
+      } `}
     >
       {links.map((link, i) => (
         <li
@@ -113,7 +111,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           <p
             className={
               highlightingCat() === link.name.toLowerCase() ||
-                state?.name === link.name
+              state?.name === link.name
                 ? 'selected'
                 : ''
             }

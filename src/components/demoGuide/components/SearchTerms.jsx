@@ -30,13 +30,13 @@ const SearchTerms = () => {
   };
 
   return (
-    <div className="search-terms">
+    <div className="demoGuideHelpers">
       <h3>Search Terms</h3>
-      <div className="search-terms__infos">
+      <div className="demoGuideHelpers__infos">
         {searchTermsConfig.map(
           (item, i) =>
             item.details && (
-              <div key={i} className="search-terms__infos__titles">
+              <div key={i} className="demoGuideHelpers__infos__titles">
                 <span>{item.label}:</span>
                 <p>{item.details}</p>
               </div>

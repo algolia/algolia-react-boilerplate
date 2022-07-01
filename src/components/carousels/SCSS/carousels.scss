@@ -1,0 +1,100 @@
+// ------------------------------------------
+// Home Carousel
+// ------------------------------------------
+@use '../../../scss/partials' as *;
+
+.home-carousel {
+  margin: 2rem 2rem;
+  .title{
+    @include titleH3($purple-algolia)
+  }
+  .carousel {
+    .inner-carousel {
+      @include carouselWrapper();
+    
+      .item {
+      @include hit( $main-color,
+      $purple-algolia,
+      $purple-algolia,
+      $purple-algolia);
+
+      .brand{
+        @include brand($main-color)
+      }
+      .productName{
+        @include productName($grey-dark-color)
+      }
+      .price{
+        @include price($purple-algolia)
+      }
+      &__infosUp{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.1rem;
+      }
+      }
+      }
+
+    }
+  }
+
+
+
+
+// MOBILE & TABLET
+
+.home-carousel-mobile{
+  margin: 2rem 1rem;
+  h3 {
+    color: $purple-algolia;
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+  .carousel {
+    cursor: grab;
+    overflow: scroll;
+
+    &__imageWrapper{
+      max-width: 100%;
+      img {
+        width: 100%;
+        height: 70%;
+        pointer-events: none;
+        object-fit: cover;
+      }
+    }
+    .inner-carousel {
+      display: flex;
+      .item {
+        min-width: 30%;
+        padding: 1rem;
+        position: relative;
+      
+
+        &__infos{   
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        height: 8rem;
+        .name {
+          color: $main-color;
+          font-size: 0.8rem;
+          text-align: center;
+          margin-top: 1rem;
+          text-transform: capitalize;
+        }
+        .price {
+          color: $purple-algolia;
+          font-size: 1.2rem;
+          font-weight: 600;   
+        }
+      }
+      }
+
+    }
+  }
+}
