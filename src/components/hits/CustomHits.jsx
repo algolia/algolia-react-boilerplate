@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Hit } from './Hits';
 import CustomSkeleton from '../skeletons/CustomSkeleton';
-// TODO: Skeleton here
+
 const CustomHits = ({ hits }) => {
   const [hitsLoaded, setHitsLoaded] = useState(false);
 

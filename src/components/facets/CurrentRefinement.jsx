@@ -1,4 +1,4 @@
-// TODO: not sure exactly how this works
+// TODO: not sure exactly how this works - Ben
 // Component that renders the Current Refinements (icons above the products)
 
 // Recoil State

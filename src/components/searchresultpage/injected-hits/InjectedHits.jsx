@@ -5,7 +5,7 @@ import { connectInjectedHits } from './connectInjectedHits';
 import React, { useState, useEffect } from 'react';
 
 const cx = createClassNames('InfiniteHits');
-// TODO: Skeleton here
+
 export const InjectedHits = connectHits(
   connectInjectedHits(({ injectedHits }) => (
     <CustomInjectedHit injectedHits={injectedHits} />
