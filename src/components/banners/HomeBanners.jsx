@@ -1,7 +1,7 @@
 // NB: we need React declared for the Fragments used here
 import { Fragment } from 'react';
 // This component will be wrapped in connectQueryRules (https://www.algolia.com/doc/api-reference/widgets/query-rule-custom-data/react/#connector)
-import { connectQueryRules } from 'react-instantsearch-dom';
+import { useQueryRules } from 'react-instantsearch-hooks-web';
 
 // Imports from router
 import { Link } from 'react-router-dom';
@@ -9,7 +9,10 @@ import { Link } from 'react-router-dom';
 //Import scope SCSS
 import './SCSS/HomeBanner.scss';
 
-const HomeBanner = ({ items }) => {
+// This component renders a different banner based on the props passed to it.
+//The props are passed through the Dashboard in rules section.
+function CustomHomeBanners(props) {
+  const { items } = useQueryRules(props);
   return items.map(
     ({ type, title, subtitle, button1, LinkButton1, imgUrl1 }, index) => {
       if (type === 'HomeBannerTwo') {
@@ -27,7 +30,7 @@ const HomeBanner = ({ items }) => {
       }
     }
   );
-};
+}
 
 const HomeBannerComponent = ({
   imgUrl1,
@@ -58,7 +61,5 @@ const HomeBannerComponent = ({
     </div>
   </div>
 );
-
-const CustomHomeBanners = connectQueryRules(HomeBanner);
 
 export default CustomHomeBanners;

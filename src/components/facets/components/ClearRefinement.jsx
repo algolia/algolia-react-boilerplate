@@ -1,18 +1,20 @@
 // Component for clearing the selected refinements on Search Results
-import { connectCurrentRefinements } from 'react-instantsearch-dom';
+import { useClearRefinements } from 'react-instantsearch-hooks-web';
 
-const ClearRefinements = ({ items, refine }) =>
+function CustomClearRefinements(props) {
+  const { canRefine, refine } = useClearRefinements(props);
+
   // if there are refinements, show the button
-  items.length ? (
+  // Clear refinements with the refinement to ' '
+  return canRefine ? (
     <button
       className="button-clear-refinement"
-      onClick={() => refine(items)}
-      disabled={!items.length}
+      onClick={() => refine('')}
+      // disabled={!items}
     >
       Clear all refinements
     </button>
   ) : null;
-
-const CustomClearRefinements = connectCurrentRefinements(ClearRefinements);
+}
 
 export default CustomClearRefinements;

@@ -4,7 +4,7 @@
 import { memo, useState } from 'react';
 
 // Algolia Import
-import { connectSearchBox } from 'react-instantsearch-dom';
+import { useSearchBox } from 'react-instantsearch-hooks-web';
 
 // Import navigate function to route to results page on search submit
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -32,13 +32,17 @@ import useOutsideClick from '@/hooks/useOutsideClick';
 //Import scope SCSS
 import './SCSS/searchBox.scss';
 
-const SearchBoxSimple = ({ refine, currentRefinement }) => {
+function CustomSearchBox(props) {
+  const { refine, query } = useSearchBox(props);
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
   const [searchboxIsActive, setSearchboxIsActive] = useState(false);
   const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
+
+  // Query changed for suggestions in no results
+  const { queryChanged } = props;
 
   // LEFT IN FOR REFACTO PURPOSES
   // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
@@ -70,8 +74,8 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
         autoComplete="off"
         onSubmit={(event) => {
           event.preventDefault();
-          setQueryState(currentRefinement);
-          useStoreQueryToLocalStorage(currentRefinement);
+          setQueryState(query);
+          useStoreQueryToLocalStorage(query);
           navigate('/search');
           // set the Navigation category to 'All', which is at index 0
           // LEFT IN FOR REFACTO PURPOSES
@@ -97,8 +101,6 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
       </form>
     </div>
   );
-};
-
-const CustomSearchBox = connectSearchBox(SearchBoxSimple);
+}
 
 export default memo(CustomSearchBox);

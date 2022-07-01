@@ -1,18 +1,20 @@
 // This is the Search Results Page that you'll see on a normal computer screen
 import { lazy, Suspense, useState } from 'react';
-import { Configure, Index, Pagination } from 'react-instantsearch-dom';
-import { lazily } from 'react-lazily';
+
+// eslint-disable-next-line import/order
+import { Configure, Index, Pagination } from 'react-instantsearch-hooks-web';
+
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
-import FacetsSkeletonLoader from '@/components/facets/components/FacetsSkeletonLoader';
-import InfluencerCard from '@/components/hits/components/InfluencerCard';
-import NoCtaCard from '@/components/hits/components/NoCtaCard';
-import SalesCard from '@/components/hits/components/SalesCard';
 import { Hit } from '@/components/hits/Hits';
+
+import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
 import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
 import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
 import Redirect from '@/components/redirects/Redirect';
+import CustomSortBy from '@/components/sortBy/SortBy';
+import { CustomStats } from '@/components/stats/Stats';
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import {
   shouldHaveInjectedHits,
@@ -26,8 +28,6 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
-import { customDataByType } from '@/utils';
-import SkeletonLoader from '../../hits/components/HitsSkeletonLoader';
 
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/components/ClearRefinement')
@@ -40,11 +40,8 @@ const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
 const CustomHitsComponent = lazy(() =>
   import('@/components/hits/components/CustomHits')
 );
-const CustomSortBy = lazy(() => import('@/components/sortBy/SortBy'));
-const { CustomStats } = lazily(() => import('@/components/stats/Stats'));
-const { InjectedHits } = lazily(() =>
-  import('@/components/hits/components/injected-hits')
-);
+
+import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
 
 //Import scope SCSS
 import '../SCSS/searchresultspage.scss';
@@ -113,7 +110,7 @@ const SrpLaptop = () => {
       </div>
       <div className="srp-active srp-container">
         <div className="srp-container__facets">
-          <Suspense fallback={<FacetsSkeletonLoader />}>
+          <Suspense fallback={''}>
             {/* Render Recommend component - Trending Facets */}
             {/* Change config in /config/trendingConfig.js */}
             <div className="">
@@ -167,55 +164,22 @@ const SrpLaptop = () => {
             query={queryState && queryState}
             getRankingInfo={true}
           />
-          {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
-
           {shouldInjectContent ? (
             <Suspense fallback={<SkeletonLoader />}>
+              {/* Load results for the injection index, so that we can later access them via the useInstantSearch hook, with the scopedResults property */}
               <Index indexName={injectedContentIndex}>
                 <Configure hitsPerPage={1} page={0} />
               </Index>
-              <InjectedHits
-                hitComponent={Hit}
-                slots={({ resultsByIndex }) => {
-                  const { noCta, salesCard } = customDataByType(
-                    resultsByIndex?.[index]?.userData
-                  );
-                  // eslint-disable-next-line no-lone-blocks
-                  {
-                    // eslint-disable-next-line no-unused-expressions
-                    salesCard && setInjected(true);
-                  }
-                  return [
-                    {
-                      getHits: () => [noCta],
-                      injectAt: noCta ? noCta.position : null,
-                      slotComponent: NoCtaCard,
-                    },
-                    {
-                      getHits: () => [salesCard],
-                      injectAt: salesCard ? salesCard.position : null,
-                      slotComponent: SalesCard,
-                    },
-                    {
-                      injectAt: ({ position }) => position === 2,
-                      // eslint-disable-next-line no-shadow
-                      getHits: ({ resultsByIndex }) => {
-                        setInjected(true);
-                        return resultsByIndex[injectedContentIndex]
-                          ? resultsByIndex[injectedContentIndex].hits || []
-                          : [];
-                      },
-                      slotComponent: InfluencerCard,
-                    },
-                  ];
-                }}
-              />
+              {/* Injected content*/}
+              <InjectedHits hitComponent={Hit} />
             </Suspense>
           ) : (
+            // If you defined to don't display the injected content it will display the custom hits
             <Suspense fallback={<SkeletonLoader />}>
               <CustomHitsComponent />
             </Suspense>
           )}
+
           <Pagination />
           <Redirect />
         </div>

@@ -1,11 +1,11 @@
 // This is for showing the voicesearch feature in the search bar
 
-import { useEffect, memo } from 'react';
+import { memo, useEffect } from 'react';
 // Algolia Import
 import { VoiceSearch } from 'react-instantsearch-dom';
 // Import Recoil
-import { useSetRecoilState } from 'recoil';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+import { useSetRecoilState } from 'recoil';
 
 // Import Config for recoil from file as a component
 import { queryAtom } from '@/config/searchboxConfig';

@@ -1,10 +1,10 @@
 // Render the navigation menu in the header
 
 // React Router
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 // Recoil Header State
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import Config for the header
 import { categoryPageFilterAttribute } from '@/config/categoryConfig';
@@ -19,9 +19,9 @@ import SelectSegment from './segmentSelect/selectSegment';
 
 // Import Recoil config
 import {
+  shouldHaveLanguages,
   shouldHavePersona,
   shouldHaveSegments,
-  shouldHaveLanguages,
 } from '@/config/featuresConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {

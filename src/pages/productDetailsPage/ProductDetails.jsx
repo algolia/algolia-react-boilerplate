@@ -4,8 +4,8 @@
 // Recommend
 import algoliarecommend from '@algolia/recommend';
 import {
-  RelatedProducts,
   FrequentlyBoughtTogether,
+  RelatedProducts,
 } from '@algolia/recommend-react';
 
 // framer-motion
@@ -17,20 +17,20 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import Price from '@/components/hits/components/Price.jsx';
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
-import { searchClientCreds, mainIndex } from '@/config/algoliaEnvConfig';
+import { mainIndex, searchClientCreds } from '@/config/algoliaEnvConfig';
 import {
   framerMotionPage,
   framerMotionTransition,
 } from '@/config/animationConfig';
 
 // In case of img loading error
+import * as placeHolderError from '@/assets/logo/logo.webp';
 import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 import {
-  shouldHaveRelatedProducts,
   shouldHaveFbtProducts,
+  shouldHaveRelatedProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
-import * as placeHolderError from '@/assets/logo/logo.webp';
 
 // Import components
 
@@ -233,7 +233,7 @@ const ProductDetails = () => {
             )}
             {!PDPHitSections.sizeFilter && (
               <motion.button
-                class="add-to-cart"
+                className="add-to-cart"
                 onClick={() => {
                   triggerAlert('Sending add to cart event to Algolia'),
                     useSendAlgoliaEvent(

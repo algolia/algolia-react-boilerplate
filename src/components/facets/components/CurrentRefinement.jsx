@@ -1,15 +1,13 @@
 // TODO: not sure exactly how this works
 // Component that renders the Current Refinements (icons above the products)
-
+import { useCurrentRefinements } from 'react-instantsearch-hooks-web';
 // Recoil State
-import { connectCurrentRefinements } from 'react-instantsearch-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
-
+import { useRecoilValue } from 'recoil';
 // import config file for state of facets
 import { currencySymbolAtom } from '@/config/currencyConfig';
-import { refinementPriceLabels } from '@/config/refinementsConfig';
 import { hitsConfig } from '@/config/hitsConfig';
 
+// Function to display the price in a right format for the currentRefinement
 const displayPrice = (i, currencySymbol, refinementPriceLabels) => {
   const { moreThan, lessThan } = refinementPriceLabels;
 
@@ -34,19 +32,16 @@ const displayPrice = (i, currencySymbol, refinementPriceLabels) => {
   );
 };
 
+// Function to display the color_refinement_list in a right format for the color-refinement
 const displayColor = (i) => {
   const newColorRefinement = i.split(';')[0];
   return newColorRefinement;
 };
 
-const CurrentRefinements = ({ items, refine, createURL }) => {
+function CurrentRefinements(props) {
+  const { items, refine, createURL } = useCurrentRefinements(props);
   const { colourHexa } = hitsConfig;
   const currencySymbol = useRecoilValue(currencySymbolAtom);
-
-  items = items.filter(
-    (item, index, array) =>
-      array.findIndex((t) => t.attribute == item.attribute) == index
-  );
 
   return (
     <div className="refinement-container__refinements">
@@ -59,23 +54,17 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
                   <CurrentRefinementGeneral item={item} />
                 </>
               ) : (
-                <a
-                  href={createURL(item.value)}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    refine(item.value);
-                  }}
-                >
-                  {displayPrice(item, currencySymbol, refinementPriceLabels)}
-                </a>
+                <>
+                  <CurrentRefinementGeneral item={item} />
+                </>
               )}
             </>
           );
         }
         if (item.attribute.includes(colourHexa)) {
           return (
-            <>
-              {item.items ? (
+            <li key={item.label}>
+              {item.refinements ? (
                 <>
                   <CurrentRefinementGeneral item={item} colourHexa={true} />
                 </>
@@ -90,10 +79,9 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
                   {displayColor(item)}
                 </a>
               )}
-            </>
+            </li>
           );
         }
-
         return (
           <>
             {item.items ? (
@@ -101,42 +89,36 @@ const CurrentRefinements = ({ items, refine, createURL }) => {
                 <CurrentRefinementGeneral item={item} />
               </>
             ) : (
-              <a
-                href={createURL(item.value)}
-                onClick={(event) => {
-                  event.preventDefault();
-                  refine(item.value);
-                }}
-              >
-                {item.label}
-              </a>
+              <CurrentRefinementGeneral item={item} />
             )}
           </>
         );
       })}
     </div>
   );
-};
+}
 
-const CurrentRefinementGeneral = ({ item, colourHexa }) => {
+function CurrentRefinementGeneral(props) {
+  const { refine } = useCurrentRefinements(props);
+  const { item, colourHexa } = props;
   return (
     <ul className="refinement-container__refinementsInner">
-      {item.items.map((nested) => (
-        <li key={nested.label}>
-          <a
-            onClick={(event) => {
-              event.preventDefault();
-              refine(nested.value);
-            }}
-          >
-            {colourHexa ? displayColor(nested.label) : nested.label}
-          </a>
-        </li>
-      ))}
+      {item.refinements.map((nested) => {
+        return (
+          <li key={nested.label}>
+            <a
+              onClick={(event) => {
+                event.preventDefault();
+                refine(nested);
+              }}
+            >
+              {colourHexa ? displayColor(nested.label) : nested.label}
+            </a>
+          </li>
+        );
+      })}
     </ul>
   );
-};
+}
 
-const CustomCurrentRefinements = connectCurrentRefinements(CurrentRefinements);
-
-export default CustomCurrentRefinements;
+export default CurrentRefinements;

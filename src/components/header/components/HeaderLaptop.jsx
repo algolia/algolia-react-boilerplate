@@ -6,15 +6,14 @@ import { useTour } from '@reactour/tour';
 // React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
-import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 //Import config for federatedSearch
 import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
-import { categorySelectionAtom } from '@/config/headerConfig';
 import logo from '@/assets/logo/logo.webp';
 
 import { shouldShowDemoTour } from '@/config/demoTourConfig';
@@ -24,7 +23,6 @@ import { shouldShowDemoTour } from '@/config/demoTourConfig';
 import CustomSearchBox from '@/components/searchbox/SearchBox';
 
 // Import VoiceSearchComponent
-import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 
 import { rulesAtom } from '@/config/appliedRulesConfig';
@@ -35,10 +33,6 @@ const HeaderLaptop = () => {
 
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
-
-  const categorySelection = useRecoilValue(categorySelectionAtom);
-  // LEFT IN FOR REFACTO PURPOSES
-  // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
 
   // Define value to display voiceSearch
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
@@ -76,7 +70,7 @@ const HeaderLaptop = () => {
         {/* For a search box Simple center */}
         <div className="searchbox-container">
           <CustomSearchBox />
-          {displayVoiceSearch && <CustomVoiceSearchComponent />}
+          {/* {displayVoiceSearch && <CustomVoiceSearchComponent />} */}
         </div>
       </div>
       <div className="container__header-nav">

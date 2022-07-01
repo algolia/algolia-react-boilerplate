@@ -1,8 +1,9 @@
 // This is for displaying the SortBy widget, eg Price asc/desc
+import { useSortBy } from 'react-instantsearch-hooks-web';
 
-import { connectSortBy } from 'react-instantsearch-dom';
-
-const SortBy = ({ refine, items }) => {
+function CustomSortBy(props) {
+  const { refine } = useSortBy(props);
+  const { items } = props;
   return (
     <div>
       <select
@@ -19,8 +20,6 @@ const SortBy = ({ refine, items }) => {
       </select>
     </div>
   );
-};
-
-const CustomSortBy = connectSortBy(SortBy);
+}
 
 export default CustomSortBy;

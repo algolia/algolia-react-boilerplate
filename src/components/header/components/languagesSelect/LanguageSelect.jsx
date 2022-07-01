@@ -10,8 +10,8 @@ import Select from 'react-select';
 import { useSetRecoilState } from 'recoil';
 
 // Import configuration
-import { languagesConfig, styles } from '@/config/languagesConfig';
 import { linksHeader } from '@/config/headerConfig';
+import { languagesConfig, styles } from '@/config/languagesConfig';
 
 //Import main index atom
 import { mainIndex } from '@/config/algoliaEnvConfig';

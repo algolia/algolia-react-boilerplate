@@ -1,6 +1,4 @@
-import { Configure, connectHits, Index } from 'react-instantsearch-dom';
-
-// Import Framer Motion
+import { Configure, Index, useHits } from 'react-instantsearch-hooks-web';
 
 // React Router
 import { useNavigate } from 'react-router-dom';
@@ -34,7 +32,7 @@ const HomeCarousel = ({ context, title }) => {
   const userToken = useRecoilValue(personaSelectedAtom);
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
 
-  const { tablet, mobile } = useScreenSize();
+  const { mobile } = useScreenSize();
   return (
     <div className={`${mobile ? 'home-carousel-mobile' : 'home-carousel'}`}>
       <Index indexId={title} indexName={index}>
@@ -45,14 +43,18 @@ const HomeCarousel = ({ context, title }) => {
           userToken={userToken}
           query={''}
         />
-        <CustomHitsCarousel title={title} />
+        <Carousel title={title} />
       </Index>
     </div>
   );
 };
 
 // This carousel is used inside of HomeCarousel
-const Carousel = ({ hits, title }) => {
+
+function Carousel(props) {
+  const { hits } = useHits(props);
+  const { title } = props;
+
   // Navigate is used by React Router
   const navigate = useNavigate();
 
@@ -100,7 +102,6 @@ const Carousel = ({ hits, title }) => {
       </div>
     </>
   );
-};
-const CustomHitsCarousel = connectHits(Carousel);
+}
 
 export default HomeCarousel;

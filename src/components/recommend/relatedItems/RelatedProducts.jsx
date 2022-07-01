@@ -4,7 +4,7 @@
 import { hitsConfig } from '@/config/hitsConfig';
 
 //  Import highlight widget from InstantSearch library
-import { Highlight } from 'react-instantsearch-dom';
+import { Highlight } from 'react-instantsearch-hooks-web';
 
 // Import heart svg
 import { Heart } from '@/assets/svg/SvgIndex';
@@ -16,8 +16,8 @@ import { hitAtom } from '@/config/hitsConfig';
 import { useSetRecoilState } from 'recoil';
 
 // React-router import
-import { useNavigate } from 'react-router-dom';
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
+import { useNavigate } from 'react-router-dom';
 
 //Import scope SCSS
 import '../SCSS/recommend.scss';

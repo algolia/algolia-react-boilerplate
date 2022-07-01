@@ -1,9 +1,9 @@
-const Badge = ({title}) => {
-    return (
-      <div className="badge">
-        <p>{title}</p>
-      </div>
-    );
-  };
+const Badge = ({ title }) => {
+  return (
+    <div className="badge">
+      <p>{title}</p>
+    </div>
+  );
+};
 
-  export default Badge;
+export default Badge;

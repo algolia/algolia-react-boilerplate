@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
-import { connectRefinementList } from 'react-instantsearch-dom';
+
 import { useTrendingFacets } from '@algolia/recommend-react';
+import { useRefinementList } from 'react-instantsearch-hooks-web';
+
 import { useRecoilValue } from 'recoil';
 
+import { mainIndex, recommendClient } from '@/config/algoliaEnvConfig';
 import '@algolia/ui-components-horizontal-slider-theme';
-import { recommendClient, mainIndex } from '@/config/algoliaEnvConfig';
 
 import { trendingConfig } from '@/config/trendingConfig';
 
-const TrendingFacetValues = ({ items, refine }) => {
+function WrappedTrendingFacetValues(props) {
+  const { items, refine } = useRefinementList(props);
+
   const index = useRecoilValue(mainIndex);
   const {
     facetValuesAttribute,
@@ -66,15 +70,18 @@ const TrendingFacetValues = ({ items, refine }) => {
   return (
     <div className="trending-facet-container">
       {recommendations.length > 0 && (
-        <div class="filters-container">
-          <div class="filters-container__title">
+        <div className="filters-container">
+          <div className="filters-container__title">
             <h3>{facetValuesTitle}</h3>
           </div>
-          <div class="filters-container__list"></div>
-          <ul class="filters-container__content">
-            {recommendations.map((trendingFacetValue) => {
+          <div className="filters-container__list"></div>
+          <ul className="filters-container__content">
+            {recommendations.map((trendingFacetValue, i) => {
               return (
-                <TrendingFacetsItem trendingFacetValue={trendingFacetValue} />
+                <TrendingFacetsItem
+                  key={i}
+                  trendingFacetValue={trendingFacetValue}
+                />
               );
             })}
           </ul>
@@ -82,8 +89,6 @@ const TrendingFacetValues = ({ items, refine }) => {
       )}
     </div>
   );
-};
-
-const WrappedTrendingFacetValues = connectRefinementList(TrendingFacetValues);
+}
 
 export default WrappedTrendingFacetValues;

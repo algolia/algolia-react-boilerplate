@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { framerMotionTransition } from '@/config/animationConfig';
 
-import { Highlight } from 'react-instantsearch-dom';
+import { Highlight } from 'react-instantsearch-hooks-web';
 
 import { Heart } from '@/assets/svg/SvgIndex';
 
@@ -21,7 +21,7 @@ import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
 import { hitAtom } from '@/config/hitsConfig';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
 
 // React-router import

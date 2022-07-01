@@ -1,16 +1,15 @@
 // Renders the Hierarchical facets
-import { connectHierarchicalMenu } from 'react-instantsearch-dom';
+import { useHierarchicalMenu } from 'react-instantsearch-hooks-web';
 
 // This component is recursive, to allow subcategories to be displayed
 // eg. Categories > Mens > Clothing > Jackets
-const Hierarchical = ({ items, refine, createURL, title }) => {
+const HierarchicalList = (props) => {
+  // Receive the props and put in variables
+  const { items, refine } = props;
   return (
-    <div className="filters-container-hierarchical">
-      <div className="filters-container-hierarchical__title">
-        <h3>{title}</h3>
-      </div>
-      <ul className="filters-container-hierarchical__content">
-        {items.map((item) => (
+    <ul className="filters-container-hierarchical__content">
+      {items.map((item) => {
+        return (
           <li
             className="filters-container-hierarchical__content__list"
             key={item.value}
@@ -31,23 +30,38 @@ const Hierarchical = ({ items, refine, createURL, title }) => {
                 {item.count}
               </span>
             </button>
-            {/* If there are items within the 'item' object, then display them */}
-            {item.items && (
+            {/* If there are items within the 'data' object, then display them */}
+            {/* recursive data with the same component */}
+            {item.data && (
               <div className="filters-container-hierarchical__content__list-isOpened">
-                <Hierarchical
-                  items={item.items}
-                  refine={refine}
-                  createURL={createURL}
-                />
+                <HierarchicalList items={item.data} refine={refine} />
               </div>
             )}
           </li>
-        ))}
-      </ul>
-    </div>
+        );
+      })}
+    </ul>
   );
 };
 
-const CustomHierarchicalMenu = connectHierarchicalMenu(Hierarchical);
+// General component which use the React IS Hooks
+function HierarchicalMenu(props) {
+  const { title } = props;
+  // Define the props from hook function
+  const { items, onNavigate, createURL, refine } = useHierarchicalMenu(props);
+  return (
+    <div className="filters-container-hierarchical">
+      <div className="filters-container-hierarchical__title">
+        <h3>{title}</h3>
+      </div>
+      <HierarchicalList
+        items={items}
+        onNavigate={onNavigate}
+        createURL={createURL}
+        refine={refine}
+      />
+    </div>
+  );
+}
 
-export default CustomHierarchicalMenu;
+export default HierarchicalMenu;

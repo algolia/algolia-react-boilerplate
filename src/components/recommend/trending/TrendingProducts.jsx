@@ -6,7 +6,8 @@ import { useRecoilValue } from 'recoil';
 // styles for Recommend HorizontalSlider
 import '@algolia/ui-components-horizontal-slider-theme';
 
-import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
+import RelatedItem from '../relatedItems/RelatedProducts';
+
 import { mainIndex, recommendClient } from '@/config/algoliaEnvConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { trendingConfig } from '@/config/trendingConfig';

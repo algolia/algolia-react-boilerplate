@@ -1,42 +1,52 @@
 // Render the Price Slider used in the Refinement List
 // Import Debounce
-import debounce from 'lodash.debounce';
-import { useState, useCallback, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // https://www.npmjs.com/package/rc-slider
 // rc-slider
 import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { connectRange } from 'react-instantsearch-dom';
+import { useRange } from 'react-instantsearch-hooks-web';
 // import Currency from recoil
-import { useRecoilValue } from 'recoil';
 import { currencySymbolAtom } from '@/config/currencyConfig';
+import { useRecoilValue } from 'recoil';
 
-const RangeSlider = ({
-  min,
-  max,
-  canRefine,
-  currentRefinement,
-  refine,
-  title,
-}) => {
+function PriceSlider(props) {
+  // Import const from hooks
+  const { range, canRefine, refine, start } = useRange(props);
+  // Define the min and max values for the slider
+  const { min, max } = range;
+  // Rename the value for our usage
+  const minValue = min;
+  const maxValue = max;
+  // Props
+  const { title } = props;
+  // Set the state of the slider
   const [minSlider, setMinSlider] = useState(min);
   const [maxSlider, setMaxSlider] = useState(max);
   const [change, setChange] = useState(false);
+  // Call the currency configuration
   const currency = useRecoilValue(currencySymbolAtom);
 
+  // If the slider is ready to work set the values
   useEffect(() => {
     if (canRefine) {
-      setMinSlider(currentRefinement.min);
-      setMaxSlider(currentRefinement.max);
+      setMinSlider(minValue);
+      setMaxSlider(maxValue);
     }
-  }, [currentRefinement.min, currentRefinement.max, canRefine]);
+  }, [minValue, maxValue, canRefine]);
 
+  // Refinement function
   const refineFunction = (minValue, maxValue) => {
-    refine({ min: minValue, max: maxValue });
+    refine([minValue, maxValue]);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedRefine = useCallback(debounce(refineFunction, 100), []);
+  // Reset function te reset the slider
+  useEffect(() => {
+    if (start[0] === -Infinity && start[1] === Infinity) {
+      setMinSlider(minValue);
+      setMaxSlider(maxValue);
+    }
+  }, [start]);
 
   return (
     <div className="filters-container">
@@ -61,15 +71,13 @@ const RangeSlider = ({
               setMinSlider(e[0]);
               setMaxSlider(e[1]);
               setChange(true);
-              debouncedRefine(e[0], e[1]);
+              setTimeout(refineFunction(e[0], e[1]), 100);
             }
           }}
         />
       </div>
     </div>
   );
-};
-
-const PriceSlider = connectRange(RangeSlider);
+}
 
 export default PriceSlider;

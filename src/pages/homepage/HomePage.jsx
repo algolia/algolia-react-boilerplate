@@ -1,11 +1,9 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
 
-// Algolia search client
-
 // framer-motion
-import { AnimatePresence, motion } from 'framer-motion';
-import React, { lazy, Suspense, useRef, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { lazy, Suspense, useEffect, useRef } from 'react';
 
 // recoil import
 import { useRecoilValue } from 'recoil';
@@ -14,7 +12,6 @@ import { useRecoilValue } from 'recoil';
 import homepage_1 from '@/assets/homepage/homepage_1.webp';
 import homepage_2 from '@/assets/homepage/homepage_2.webp';
 
-import Loader from '@/components/loader/Loader';
 import { mainIndex } from '@/config/algoliaEnvConfig';
 import { framerMotionPage } from '@/config/animationConfig';
 
@@ -23,8 +20,8 @@ import { carouselConfig } from '@/config/carouselConfig';
 
 //  should federated search be shown or not
 import {
-  shouldHaveFederatedSearch,
   shouldHaveCarousels,
+  shouldHaveFederatedSearch,
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
@@ -68,9 +65,6 @@ const HomePage = ({ setIsMounted }) => {
     };
   }, []);
 
-  // Prevent body from scrolling when panel is open
-  // usePreventScrolling(isFederatedOpen);
-
   return (
     // Framer motion wrapper
     <div
@@ -103,7 +97,7 @@ const HomePage = ({ setIsMounted }) => {
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
-          <Suspense key={i} fallback={<Loader />}>
+          <Suspense key={i} fallback={''}>
             <HomeCarousel context={carousel.context} title={carousel.title} />
           </Suspense>
         ))}
@@ -112,7 +106,7 @@ const HomePage = ({ setIsMounted }) => {
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
         {shouldHaveTrendingProductsValue && (
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={''}>
             <Trending filter={null} />
           </Suspense>
         )}

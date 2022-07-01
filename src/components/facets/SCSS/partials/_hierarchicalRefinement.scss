@@ -29,7 +29,16 @@
     }
   
     &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+
       &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-left: 0.5rem;
         &__button-filter {
           display: flex;
           @include facetsFilter('transparent',

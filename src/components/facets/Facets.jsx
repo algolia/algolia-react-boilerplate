@@ -1,20 +1,18 @@
 import { useState } from 'react';
 
 // Import Algolia
-// eslint-disable-next-line import/order
-import { DynamicWidgets, connectRefinementList } from 'react-instantsearch-dom';
 import {
-  ColorRefinementList,
-  Layout,
-  Shape,
-} from '@algolia/react-instantsearch-widget-color-refinement-list';
+  DynamicWidgets,
+  useRefinementList,
+} from 'react-instantsearch-hooks-web';
 
 // Import magnifying glass svg, and price slider component
 import { Glass } from '@/assets/svg/SvgIndex';
 
 // Import components
+
+import HierarchicalMenu from './components/Hierarchical';
 import PriceSlider from './components/PriceSlider';
-import CustomHierarchicalMenu from './components/Hierarchical';
 
 // Import list of Attributes/Facets
 import { refinements } from '@/config/refinementsConfig';
@@ -23,7 +21,13 @@ import { refinements } from '@/config/refinementsConfig';
 import './SCSS/facets.scss';
 
 // expects an attribute which is an array of items
-const RefinementList = ({ title, items, refine, searchForItems, options }) => {
+
+function GenericRefinementList(props) {
+  const { items, refine, searchForItems } = useRefinementList(props);
+  const { title, options } = props;
+  // With this state you can hide or not facets
+  const [showFacet, setShowFacet] = useState(false);
+  // With this state you can search for items in facets
   const [searchInput, setSearchInput] = useState(false);
 
   return (
@@ -32,7 +36,6 @@ const RefinementList = ({ title, items, refine, searchForItems, options }) => {
         <h3>{title}</h3>
         {/* If the facet is searchable, show the magnifying glass which will open or close the search input */}
         {options.searchable && (
-          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
           <div
             onClick={() => {
               setSearchInput(!searchInput);
@@ -77,30 +80,79 @@ const RefinementList = ({ title, items, refine, searchForItems, options }) => {
       </ul>
     </div>
   );
-};
+}
 
-const GenericRefinementList = connectRefinementList(RefinementList);
+// const CustomColorRefinement = ({
+//   title,
+//   attribute,
+//   separator,
+//   layout,
+//   shape,
+// }) => {
+//   return (
+//     <div className="color-refinement">
+//       <h3>{title}</h3>
+//       <ColorRefinementList
+//         limit={16}
+//         attribute={attribute}
+//         separator={separator}
+//         layout={layout}
+//         shape={shape}
+//       />
+//     </div>
+//   );
+// };
 
-const CustomColorRefinement = ({
-  title,
-  attribute,
-  separator,
-  layout,
-  shape,
-}) => {
+// ColorRefinementList custom for Hooks
+function CustomColorRefinement(props) {
+  const { items, refine, searchForItems } = useRefinementList(props);
+  const { title, options } = props;
+
   return (
-    <div className="color-refinement">
-      <h3>{title}</h3>
-      <ColorRefinementList
-        limit={16}
-        attribute={attribute}
-        separator={separator}
-        layout={layout}
-        shape={shape}
-      />
+    <div className="filters-container">
+      <div className="filters-container__title">
+        <h3>{title}</h3>
+      </div>
+      <ul className="filters-container__content-color">
+        {items.map((item) => {
+          const color = item.value.split(';')[1];
+          return (
+            <li
+              className="filters-container__content-color__list"
+              key={item.value}
+            >
+              <div className="color-name">
+                <input
+                  className={`filters-container__content__list__button-filter ${
+                    item.isRefined ? 'refined-filter' : ''
+                  }`}
+                  style={{
+                    backgroundColor: color,
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
+                  }}
+                  type="button"
+                  href="#"
+                  value={`${item.isRefined ? '✓' : ''}`}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    refine(item.value);
+                  }}
+                >
+                  {/* <span className="filters-container__content__list__refinement-count">
+                  {item.count}
+                </span> */}
+                </input>
+                <p>{item.label.split(';')[0]}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
-};
+}
 
 const Facets = () => {
   return (
@@ -121,17 +173,14 @@ const Facets = () => {
             case 'colour':
               return (
                 <CustomColorRefinement
+                  attribute={options.attribute}
                   key={i}
                   title={label}
-                  attribute={options.attribute}
-                  separator=";"
-                  layout={Layout.Grid}
-                  shape={Shape.Circle}
                 />
               );
             case 'hierarchical':
               return (
-                <CustomHierarchicalMenu
+                <HierarchicalMenu
                   attributes={options.attribute}
                   title={label}
                   key={i}

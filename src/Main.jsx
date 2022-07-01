@@ -1,17 +1,17 @@
-import { InstantSearch } from 'react-instantsearch-dom';
+import { InstantSearch } from 'react-instantsearch-hooks-web';
 
 // application state from config file
 import { searchClient } from './config/algoliaEnvConfig';
 
 // Framer-Motion
 import { AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // React router
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
-// Recoil states & values
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+//Recoil states & values
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Import help navigation state & config
 
@@ -20,26 +20,25 @@ import { isRulesSwitchToggle } from './config/appliedRulesConfig';
 import { mainIndex } from './config/algoliaEnvConfig';
 
 // // Allows logging and manipulation of algolia results etc.
-import CustomStateResults from './components/stateResults/stateResults';
 
 // Import Pages and static components
-import Header from '@/components/header/Header';
+import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import DemoGuide from '@/components/demoGuide/DemoGuide';
+import Header from '@/components/header/Header';
+import Footer from './components/footer/Footer';
 import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
 import HomePage from './pages/homepage/HomePage';
 import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
-import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import ProductDetails from './pages/productDetailsPage/ProductDetails';
-import Footer from './components/footer/Footer';
 import CustomAppliedRules from './components/appliedRules/AppliedRules';
 
 // Custom hook to prevent body from scrolling
-import usePreventScrolling from './hooks/usePreventScrolling';
 import {
   isDemoGuideOpen,
-  shouldShowDemoGuide,
   shouldShowAlert,
+  shouldShowDemoGuide,
 } from '@/config/demoGuideConfig';
+import usePreventScrolling from './hooks/usePreventScrolling';
 
 export const Main = () => {
   const index = useRecoilValue(mainIndex);
@@ -62,7 +61,6 @@ export const Main = () => {
 
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
-      <CustomStateResults />
       <div className="visible">
         <Header />
         <DemoGuideOpener />

@@ -13,7 +13,7 @@ import SalesCard from '@/components/hits/components/SalesCard';
 import Loader from '@/components/loader/Loader';
 
 // eslint-disable-next-line import/order
-import { Configure, Index } from 'react-instantsearch-dom';
+import { Index, Configure } from 'react-instantsearch-hooks-web';
 
 // import framer motion
 
@@ -153,7 +153,7 @@ const SrpMobile = () => {
         <div className="refinement-container">
           <Suspense fallback={<Loader />}>
             <CustomCurrentRefinements />
-            <CustomClearRefinements />
+            {/* <CustomClearRefinements /> */}
           </Suspense>
         </div>
         <Configure
@@ -196,48 +196,14 @@ const SrpMobile = () => {
             <Index indexName={injectedContentIndex}>
               <Configure hitsPerPage={1} page={0} />
             </Index>
-            <InjectedHits
-              hitComponent={Hit}
-              slots={({ resultsByIndex }) => {
-                const { noCta, salesCard } = customDataByType(
-                  resultsByIndex?.[index]?.userData
-                );
-                // eslint-disable-next-line no-lone-blocks
-                {
-                  // eslint-disable-next-line no-unused-expressions
-                  salesCard && setInjected(true);
-                }
-                return [
-                  {
-                    getHits: () => [noCta],
-                    injectAt: noCta ? noCta.position : null,
-                    slotComponent: NoCtaCard,
-                  },
-                  {
-                    getHits: () => [salesCard],
-                    injectAt: salesCard ? salesCard.position : null,
-                    slotComponent: SalesCard,
-                  },
-                  {
-                    injectAt: ({ position }) => position === 2,
-                    // eslint-disable-next-line no-shadow
-                    getHits: ({ resultsByIndex }) => {
-                      setInjected(true);
-                      return resultsByIndex[injectedContentIndex]
-                        ? resultsByIndex[injectedContentIndex].hits || []
-                        : [];
-                    },
-                    slotComponent: InfluencerCard,
-                  },
-                ];
-              }}
-            />
+            <InjectedHits hitComponent={Hit} />
           </Suspense>
         ) : (
           <Suspense fallback={<Loader />}>
             <CustomHitsComponent />
           </Suspense>
         )}
+
         <Redirect />
       </div>
     </div>

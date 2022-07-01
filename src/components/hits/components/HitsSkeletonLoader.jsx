@@ -1,4 +1,3 @@
-import React from 'react';
 import useScreenSize from '@/hooks/useScreenSize';
 
 const SkeletonLoader = () => {
@@ -15,10 +14,11 @@ const SkeletonLoader = () => {
       <div className="skeleton__hits">
         {/* <div className="skeleton__sortBy"></div> */}
         <div
-          className={`${tablet || mobile
-            ? 'skeleton-mobile__hitsList'
-            : 'skeleton__hitsList'
-            }`}
+          className={`${
+            tablet || mobile
+              ? 'skeleton-mobile__hitsList'
+              : 'skeleton__hitsList'
+          }`}
         >
           <div className="skeleton__hit">
             <div className="skeleton__hit-top"></div>

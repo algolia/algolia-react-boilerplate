@@ -35,6 +35,7 @@ export const refinements = [
       attribute: hitsConfig.brand,
       // when searchable is enabled, you can search for a specific value of that facet. Ex: Here you can search for a specific brand
       searchable: true,
+      limit: 5,
     },
   },
   {

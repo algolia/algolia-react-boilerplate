@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 // Algolia's imports
-import { connectHits, Highlight } from 'react-instantsearch-dom';
+import { useHits, Highlight } from 'react-instantsearch-hooks-web';
 
 // components import
 import { ChevronRight } from '@/assets/svg/SvgIndex';
@@ -13,7 +13,8 @@ import { useNavigate, createSearchParams } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
-const Suggestions = ({ hits }) => {
+function QuerySuggestions(props) {
+  const { hits } = useHits(props);
   // router hook to navigate using a function
   const navigate = useNavigate();
   // Recoil State - update query in searchBar
@@ -45,8 +46,6 @@ const Suggestions = ({ hits }) => {
       </ul>
     </div>
   );
-};
-
-const QuerySuggestions = connectHits(Suggestions);
+}
 
 export default memo(QuerySuggestions);

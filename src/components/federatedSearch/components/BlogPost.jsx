@@ -2,14 +2,16 @@
 import { memo } from 'react';
 
 // Algolia
-import { connectHits } from 'react-instantsearch-dom';
+import { useHits } from 'react-instantsearch-hooks-web';
+
 import { useRecoilValue } from 'recoil';
 
 import { contentArticlesConfig } from '@/config/hitsConfig';
 
 import get from 'lodash/get';
 
-const ArticlesItems = ({ hits }) => {
+function Articles(props) {
+  const { hits } = useHits(props);
   const { image, date, title, headings } = useRecoilValue(
     contentArticlesConfig
   );
@@ -35,7 +37,6 @@ const ArticlesItems = ({ hits }) => {
       })}
     </div>
   );
-};
+}
 
-const Articles = connectHits(ArticlesItems);
 export default memo(Articles);
