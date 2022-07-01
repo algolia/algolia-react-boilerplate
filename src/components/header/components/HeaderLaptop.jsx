@@ -6,15 +6,14 @@ import { useTour } from '@reactour/tour';
 // React Router
 import { Link } from 'react-router-dom';
 // Recoil Header State
-import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 //Import config for federatedSearch
 import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
-import { categorySelectionAtom } from '@/config/headerConfig';
 import logo from '@/assets/logo/logo.webp';
 
 import { shouldShowDemoTour } from '@/config/demoTourConfig';
@@ -24,7 +23,6 @@ import { shouldShowDemoTour } from '@/config/demoTourConfig';
 import CustomSearchBox from '@/components/searchbox/SearchBox';
 
 // Import VoiceSearchComponent
-import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 
 import { rulesAtom } from '@/config/appliedRulesConfig';
@@ -36,10 +34,6 @@ const HeaderLaptop = () => {
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
-  const categorySelection = useRecoilValue(categorySelectionAtom);
-  // LEFT IN FOR REFACTO PURPOSES
-  // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
-
   // Define value to display voiceSearch
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
   const displayDemoTour = useRecoilValue(shouldShowDemoTour);
@@ -49,6 +43,14 @@ const HeaderLaptop = () => {
   return (
     <div className="container">
       <div className="container__header-top">
+        {displayDemoTour && (
+          <button className="open-tour__button" onClick={() => setIsOpen(true)}>
+            Open Tour
+          </button>
+        )}
+        <div className="container__header-top__title">
+          <h1>Demo BoilerPlate</h1>
+        </div>
         <div className="container__header-top__logo">
           <Link
             to="/"
@@ -64,22 +66,11 @@ const HeaderLaptop = () => {
             {/* Add possibility to change the Logo */}
             <img src={logo} alt="" />
           </Link>
-          {displayDemoTour && (
-            <button
-              className="open-tour__button"
-              onClick={() => setIsOpen(true)}
-            >
-              Open Tour
-            </button>
-          )}
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container">
           <CustomSearchBox />
           {/* {displayVoiceSearch && <CustomVoiceSearchComponent />} */}
-        </div>
-        <div className="container__header-top__title">
-          <h1>Demo BoilerPlate</h1>
         </div>
       </div>
       <div className="container__header-nav">

@@ -4,6 +4,9 @@
 
 import { useQueryRules } from 'react-instantsearch-hooks-web';
 
+//SCSS import
+import './SCSS/banner.scss';
+
 function Banner(props) {
   const { items } = useQueryRules(props);
   return (

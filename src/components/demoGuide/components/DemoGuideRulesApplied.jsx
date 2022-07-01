@@ -5,12 +5,12 @@ const DemoGuideRulesApplied = () => {
   const [isSwitchToggle, setIsSwitchToggle] =
     useRecoilState(isRulesSwitchToggle);
   return (
-    <div className="search-terms">
+    <div className="demoGuideHelpers">
       <h3>Applied rules</h3>
-      <div className="search-terms__infos">
+      <div className="demoGuideHelpers__infos">
         {appliedRulesInformations.map((item, i) => {
           return (
-            <div key={i} className="search-terms__infos__titles">
+            <div key={i} className="demoGuideHelpers__infos__titles">
               <span>{item.span}:</span>
               <p>{item.details}</p>
             </div>

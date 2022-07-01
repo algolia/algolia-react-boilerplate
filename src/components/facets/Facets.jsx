@@ -10,13 +10,18 @@ import {
 import { Glass } from '@/assets/svg/SvgIndex';
 
 // Import components
-import HierarchicalMenu from './Hierarchical';
-import PriceSlider from './PriceSlider';
+
+import HierarchicalMenu from './components/Hierarchical';
+import PriceSlider from './components/PriceSlider';
 
 // Import list of Attributes/Facets
 import { refinements } from '@/config/refinementsConfig';
 
+//Import scope SCSS
+import './SCSS/facets.scss';
+
 // expects an attribute which is an array of items
+
 function GenericRefinementList(props) {
   const { items, refine, searchForItems } = useRefinementList(props);
   const { title, options } = props;

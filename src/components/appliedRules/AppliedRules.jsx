@@ -11,6 +11,9 @@ import { uniq } from 'lodash';
 import { mainIndex, searchClient } from '@/config/algoliaEnvConfig';
 import { rulesAtom } from '@/config/appliedRulesConfig';
 
+//Import scope SCSS
+import './SCSS/appliedRules.scss';
+
 function CustomAppliedRules(props) {
   const { results } = useInstantSearch(props);
   const [rules, setRules] = useRecoilState(rulesAtom);

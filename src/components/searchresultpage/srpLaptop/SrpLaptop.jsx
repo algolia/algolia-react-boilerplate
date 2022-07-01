@@ -1,6 +1,5 @@
 // This is the Search Results Page that you'll see on a normal computer screen
 import { lazy, Suspense, useState } from 'react';
-import { lazily } from 'react-lazily';
 
 // eslint-disable-next-line import/order
 import { Configure, Index, Pagination } from 'react-instantsearch-hooks-web';
@@ -10,10 +9,12 @@ import { useRecoilValue } from 'recoil';
 // Import Components
 import { Hit } from '@/components/hits/Hits';
 
-import SkeletonLoader from '@/components/hits/HitsSkeletonLoader';
+import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
+import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
+import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
 import Redirect from '@/components/redirects/Redirect';
-import WrappedTrendingFacetValues from '@/components/trending/TrendingFacetValues';
-import TrendingProducts from '@/components/trending/TrendingProducts';
+import CustomSortBy from '@/components/sortBy/SortBy';
+import { CustomStats } from '@/components/stats/Stats';
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import {
   shouldHaveInjectedHits,
@@ -29,21 +30,21 @@ import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
 
 const CustomClearRefinements = lazy(() =>
-  import('@/components/facets/ClearRefinement')
+  import('@/components/facets/components/ClearRefinement')
 );
 const CustomCurrentRefinements = lazy(() =>
-  import('@/components/facets/CurrentRefinement')
+  import('@/components/facets/components/CurrentRefinement')
 );
 
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
-const CustomHitsComponent = lazy(() => import('@/components/hits/CustomHits'));
-const CustomSortBy = lazy(() => import('@/components/searchresultpage/SortBy'));
-const { CustomStats } = lazily(() =>
-  import('@/components/searchresultpage/Stats')
+const CustomHitsComponent = lazy(() =>
+  import('@/components/hits/components/CustomHits')
 );
-const InjectedHits = lazy(() =>
-  import('@/components/searchresultpage/injected-hits/InjectedHits')
-);
+
+import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
+
+//Import scope SCSS
+import '../SCSS/searchResultsPage.scss';
 
 const SrpLaptop = () => {
   // Recoil & React states

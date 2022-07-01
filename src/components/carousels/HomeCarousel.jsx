@@ -1,8 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
-import { useHits, Configure, Index } from 'react-instantsearch-hooks-web';
-
-// Import Framer Motion
-import { motion } from 'framer-motion';
+import { Configure, Index, useHits } from 'react-instantsearch-hooks-web';
 
 // React Router
 import { useNavigate } from 'react-router-dom';
@@ -12,22 +8,23 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig';
-import { hitsConfig, hitAtom } from '@/config/hitsConfig';
 import { hitsPerCarousel } from '@/config/carouselConfig';
+import { hitAtom, hitsConfig } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 
 // In case of img loading error
 import * as placeHolderError from '@/assets/logo/logo.webp';
 
-import { framerMotionTransition } from '@/config/animationConfig';
-
 import useScreenSize from '@/hooks/useScreenSize';
 
 import get from 'lodash/get';
 
 // import Price component
-import Price from '@/components/price/price.jsx';
+import Price from '@/components/hits/components/Price.jsx';
+
+//Import scope SCSS
+import './SCSS/carousels.scss';
 
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ context, title }) => {
@@ -35,7 +32,7 @@ const HomeCarousel = ({ context, title }) => {
   const userToken = useRecoilValue(personaSelectedAtom);
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
 
-  const { tablet, mobile } = useScreenSize();
+  const { mobile } = useScreenSize();
   return (
     <div className={`${mobile ? 'home-carousel-mobile' : 'home-carousel'}`}>
       <Index indexId={title} indexName={index}>
@@ -53,51 +50,24 @@ const HomeCarousel = ({ context, title }) => {
 };
 
 // This carousel is used inside of HomeCarousel
+
 function Carousel(props) {
   const { hits } = useHits(props);
   const { title } = props;
-  // Handle carousel effects when grabbing it
-  const [width, setWidth] = useState(0);
 
   // Navigate is used by React Router
   const navigate = useNavigate();
 
   // Hits are imported by Recoil
   const hitState = useSetRecoilState(hitAtom);
-  const { objectID, image, productName } = hitsConfig;
+  const { objectID, image, productName, brand } = hitsConfig;
 
-  // Used by Framer Motion
-  const carousel = useRef();
-  useEffect(() => {
-    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
-  }, [hits]);
   return (
     <>
-      <h3>{title}</h3>
+      <h3 className="title">{title}</h3>
       {/* This div declares the outer reference for the framer motion */}
-      <motion.div
-        ref={carousel}
-        className="carousel"
-        whileTap={{ cursor: 'grabbing' }}
-      >
-        {/* This div declares the parameters for the carousel dragging effect */}
-        <motion.div
-          // ADD THAT TO NEW FILE ABOUT ANIMATION IN CONFIG
-          drag="x"
-          dragConstraints={{ right: 0, left: -width }}
-          dragTransition={
-            ({
-              min: 0,
-              max: 100,
-              velocity: 0,
-              power: 1,
-              bounceStiffness: 10,
-              bounceDamping: 1,
-            },
-              framerMotionTransition)
-          }
-          className="inner-carousel"
-        >
+      <div className="carousel">
+        <div className="inner-carousel">
           {/* Display the hits in the carousel */}
           {hits.map((hit, i) => {
             return (
@@ -117,7 +87,10 @@ function Carousel(props) {
                     navigate(`/search/${hit[objectID]}`);
                   }}
                 >
-                  <p className="name">{get(hit, productName)}</p>
+                  <div className="item__infosUp">
+                    <p className="brand">{get(hit, brand)}</p>
+                    <h3 className="productName">{get(hit, productName)}</h3>
+                  </div>
                   <p className="price">
                     <Price hit={hit} />
                   </p>
@@ -125,8 +98,8 @@ function Carousel(props) {
               </div>
             );
           })}
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </>
   );
 }

@@ -1,39 +1,24 @@
-// TODO: 1. homepagebannerthree is declared as its own component, but also in HomeBanners?
-//       2. Why is the order of banners wrong?
-// This page builds the various banners that are used on the Homepage
-
 // NB: we need React declared for the Fragments used here
-import { Fragment, memo } from 'react';
+import { Fragment } from 'react';
 // This component will be wrapped in connectQueryRules (https://www.algolia.com/doc/api-reference/widgets/query-rule-custom-data/react/#connector)
 import { useQueryRules } from 'react-instantsearch-hooks-web';
 
 // Imports from router
 import { Link } from 'react-router-dom';
 
+//Import scope SCSS
+import './SCSS/homeBanner.scss';
+
 // This component renders a different banner based on the props passed to it.
 //The props are passed through the Dashboard in rules section.
 function CustomHomeBanners(props) {
   const { items } = useQueryRules(props);
   return items.map(
-    (
-      {
-        type,
-        title,
-        subtitle,
-        button1,
-        LinkButton1,
-        button2,
-        LinkButton2,
-        imgUrl1,
-        imgUrl2,
-        imgUrl3,
-      },
-      index
-    ) => {
+    ({ type, title, subtitle, button1, LinkButton1, imgUrl1 }, index) => {
       if (type === 'HomeBannerTwo') {
         return (
           <Fragment key={index}>
-            <BannerTwo
+            <HomeBannerComponent
               imgUrl1={imgUrl1}
               title={title}
               subtitle={subtitle}
@@ -47,9 +32,13 @@ function CustomHomeBanners(props) {
   );
 }
 
-export default memo(CustomHomeBanners);
-
-const BannerTwo = ({ imgUrl1, title, subtitle, LinkButton1, button1 }) => (
+const HomeBannerComponent = ({
+  imgUrl1,
+  title,
+  subtitle,
+  LinkButton1,
+  button1,
+}) => (
   <div className="home-banner3-container">
     <div className="home-banner3-container__image">
       <img src={imgUrl1} alt="" />
@@ -72,3 +61,5 @@ const BannerTwo = ({ imgUrl1, title, subtitle, LinkButton1, button1 }) => (
     </div>
   </div>
 );
+
+export default CustomHomeBanners;

@@ -1,0 +1,58 @@
+@use './variables' as *;
+@use './fonts' as *;
+@use './mixin' as *;
+// Use BEM, to naming class
+// https://css-tricks.com/bem-101/
+/* Block component */ // .btn {}
+/* Element that depends upon the block */ // .btn__price {}
+/* Modifier that changes the style of the block */ // .btn--orange {}
+// .btn--big {}
+// Main Styling
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+  }
+  html {
+    // overflow-x: hidden !important;
+    // overflow: auto;
+    font-size: 16px;
+  }
+  body {
+    overflow: auto;
+    background-color: $background-color;
+    font-family: $main-font;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  span,
+  input,
+  input::placeholder,
+  span {
+    font-family: $main-font;
+    color: $main-color;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  li,
+  ul {
+    list-style: none;
+    color: $main-color;
+    font-family: $main-font;
+  }
+  
+  .hidden{
+    @include hidden;
+  }
+  
+  .visible{
+    @include visible
+  }

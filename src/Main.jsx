@@ -25,16 +25,18 @@ import { mainIndex } from './config/algoliaEnvConfig';
 import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import DemoGuide from '@/components/demoGuide/DemoGuide';
 import Header from '@/components/header/Header';
-import CustomAppliedRules from './components/appliedRules/AppliedRules';
 import Footer from './components/footer/Footer';
 import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
-import HomePage from './pages/HomePage';
-import ProductDetails from './pages/ProductDetails';
-import SearchResultsPage from './pages/SearchResultsPage';
+import HomePage from './pages/homepage/HomePage';
+import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
+import ProductDetails from './pages/productDetailsPage/ProductDetails';
+import CustomAppliedRules from './components/appliedRules/AppliedRules';
 
 // Custom hook to prevent body from scrolling
 import {
-  isDemoGuideOpen, shouldShowAlert, shouldShowDemoGuide
+  isDemoGuideOpen,
+  shouldShowAlert,
+  shouldShowDemoGuide,
 } from '@/config/demoGuideConfig';
 import usePreventScrolling from './hooks/usePreventScrolling';
 

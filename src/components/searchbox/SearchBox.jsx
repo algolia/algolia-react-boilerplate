@@ -1,6 +1,7 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
-import { memo, useEffect } from 'react';
+
+import { memo, useState } from 'react';
 
 // Algolia Import
 import { useSearchBox } from 'react-instantsearch-hooks-web';
@@ -27,12 +28,16 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
+import useOutsideClick from '@/hooks/useOutsideClick';
+//Import scope SCSS
+import './SCSS/searchbox.scss';
 
 function CustomSearchBox(props) {
   const { refine, query } = useSearchBox(props);
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
-  const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
+  const [searchboxIsActive, setSearchboxIsActive] = useState(false);
+  const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
@@ -45,6 +50,8 @@ function CustomSearchBox(props) {
   const navigate = useNavigate();
   // Get states of React Router
   const { state } = useLocation();
+
+  useOutsideClick(searchboxRef, () => setSearchboxIsActive(false));
 
   // Get array of rules from Recoil
   const rulesApplied = useSetRecoilState(rulesAtom);
@@ -61,7 +68,9 @@ function CustomSearchBox(props) {
   }, [queryState]);
 
   return (
-    <div className="searchbox">
+    <div
+      className={searchboxIsActive ? 'searchbox-active searchbox' : 'searchbox'}
+    >
       <form
         className="searchbox__form"
         action=""
@@ -83,7 +92,10 @@ function CustomSearchBox(props) {
           type="search"
           value={queryState ? queryState : ''}
           placeholder={simplePlaceholder}
-          onClick={() => setIsFederatedOpen(true)}
+          onClick={() => {
+            setIsFederatedOpen(true);
+            setSearchboxIsActive(true);
+          }}
           onChange={(event) => {
             refineFunction(event.currentTarget.value);
           }}

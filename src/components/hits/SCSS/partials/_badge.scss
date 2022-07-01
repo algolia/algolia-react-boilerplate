@@ -1,0 +1,41 @@
+@use '../../../../scss/partials' as *;
+
+// ------------------------------------------
+// Badges
+// ------------------------------------------
+
+.badge {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    background-color: $purple-algolia;
+    padding: 0 0.3rem;
+    border-radius: 0.2rem;
+    p {
+      color: $white-color;
+      font-weight: 500;
+    }
+  }
+  .button-ranking-container {
+    display: flex;
+    align-items: center;
+    .ranking-formula-button {
+      display: block;
+      height: 0.8rem;
+      width: 0.8rem;
+      border-radius: 50%;
+      border: 1px solid $purple-algolia;
+    }
+    p {
+      visibility: hidden;
+      cursor: pointer;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.5s linear;
+      font-size: 0.6rem;
+      margin-left: 0.6rem;
+    }
+    &:hover p {
+      visibility: visible;
+      opacity: 1;
+    }
+  }

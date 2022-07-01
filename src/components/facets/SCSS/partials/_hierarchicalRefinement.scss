@@ -1,0 +1,89 @@
+// ------------------------------------------
+// Hierarchical Refinement List
+// ------------------------------------------
+
+@use '../../../../scss/partials/' as *;
+
+.filters-container-hierarchical {
+    font-family: $main-font;
+    width: 100%;
+  
+      >* {
+        &:empty {
+          display: none;
+        }
+      }
+  
+      h3 {
+       @include facetsTitle($main-color)
+      }
+  
+      svg {
+        width: 25px;
+        cursor: pointer;
+      }
+    
+  
+    &__list {
+      margin: 0.8rem 0;
+    }
+  
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+
+      &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-left: 0.5rem;
+        &__button-filter {
+          display: flex;
+          @include facetsFilter('transparent',
+            $main-color,
+            $purple-algolia );
+  
+          >p {
+            font-weight: 300;
+          }
+  
+          &:hover {
+            @include facetsHover($purple-algolia-custom-gradient);
+          }
+        }
+  
+        :hover>p {
+          color: $white-color;
+        }
+  
+        :hover>span {
+          color: $white-color;
+        }
+  
+        &-isOpened {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+  
+          .filters-container-hierarchical {
+            width: 97%;
+          }
+  
+          &:hover>button {
+            @include facetsHover($purple-algolia-custom-gradient);
+          }
+        }
+      }
+    }
+  
+    .refined-filter {
+      @include refinedFacet($purple-algolia-custom-gradient, $white-color);
+  
+      p,
+      span {
+        color: $white-color;
+      }
+    }
+  }

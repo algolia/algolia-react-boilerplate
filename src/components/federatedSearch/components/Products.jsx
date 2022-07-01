@@ -5,7 +5,7 @@ import { useHits } from 'react-instantsearch-hooks-web';
 
 // Component import
 import { ChevronRight } from '@/assets/svg/SvgIndex';
-import Price from '@/components/price/price.jsx';
+import Price from '@/components/hits/components/Price.jsx';
 
 // Recoil import
 import { hitAtom } from '@/config/hitsConfig';
@@ -55,7 +55,7 @@ function Products(props) {
                 </div>
                 <div className="infos">
                   <p className="brand">{get(hit, brand)}</p>
-                  <p className="name">{get(hit, productName)}</p>
+                  <p className="productName">{get(hit, productName)}</p>
                   <p className="price">
                     <Price hit={hit} />
                   </p>

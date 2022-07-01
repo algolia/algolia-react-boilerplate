@@ -160,6 +160,7 @@ export const styles = {
     borderRadius: '0.3rem',
     padding: '0rem',
     cursor: 'pointer',
+    fontWeight: 'bold'
   }),
   menuList: () => ({}),
   input: () => ({
@@ -180,9 +181,11 @@ export const styles = {
   placeholder: () => ({
     fontFamily: "'Poppins', sans-serif",
     cursor: 'pointer',
+    fontWeight: 'bold'
   }),
   valueContainer: () => ({
     cursor: 'pointer',
+    fontWeight: 'bold'
   }),
   option: () => {
     return {
@@ -192,6 +195,7 @@ export const styles = {
       cursor: 'pointer',
       borderRadius: '0.3rem',
       fontSize: '1rem',
+
       '&:hover': {
         backgroundColor: 'black',
         color: 'white',
@@ -203,6 +207,7 @@ export const styles = {
     textTransform: 'capitalize',
     cursor: 'pointer',
     fontSize: '1rem',
+    fontWeight: 800,
   }),
   dropdownIndicator: () => ({
     color: 'black',
