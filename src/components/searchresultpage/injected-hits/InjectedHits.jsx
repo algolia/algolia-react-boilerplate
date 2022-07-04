@@ -27,7 +27,7 @@ const CustomInjectedHit = ({ injectedHits }) => {
     >
       <div className={cx('list')}>
           {injectedHits.map(({ props, Hit }, index) => {
-            return <div className="" key={index}>{hitsLoaded ? <Hit {...props} {...{index}}  /> : <CustomSkeleton type="hit" />}</div>
+            return <div key={index}>{hitsLoaded ? <Hit {...props} {...{index}}  /> : <CustomSkeleton type="hit" />}</div>
           })}
       </div>
     </div>

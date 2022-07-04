@@ -113,16 +113,14 @@ const SrpLaptop = () => {
 
             {/* Render Recommend component - Trending Facets */}
             {/* Change config in /config/trendingConfig.js */}
-            <div className="">
-              {shouldHaveTrendingFacetsValue && (
-                <WrappedTrendingFacetValues
-                  attribute="brand"
-                  facetName={"brand"}
-                  limit={500}
-                  facetValue={facetValue}
-                />
-              )}
-            </div>
+            {shouldHaveTrendingFacetsValue && (
+              <WrappedTrendingFacetValues
+                attribute="brand"
+                facetName={"brand"}
+                limit={500}
+                facetValue={facetValue}
+              />
+            )}
             <GenericRefinementList />
           </Suspense>
         </div>

@@ -125,7 +125,6 @@ const Facets = () => {
                   separator=";"
                   layout={Layout.Grid}
                   shape={Shape.Circle}
-                  transformItems={(items) => console.log("hi")}
                 />
               );
             case 'hierarchical':

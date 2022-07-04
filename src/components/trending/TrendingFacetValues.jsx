@@ -86,7 +86,7 @@ const TrendingFacetValues = ({ items, refine }) => {
                         key={`${i}${trendingFacetValue}`} 
                       />
                     ) : (
-                      <div className="" key={i + "loader"} style={{width: "200px", height: "300px", backgroundColor: "green"}}></div>
+                      <CustomSkeleton type="facet" />
                     )
                   )
                 })
