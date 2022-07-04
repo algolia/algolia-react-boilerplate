@@ -7,10 +7,10 @@ import { atom } from 'recoil';
 // Define what values are going to be displayed in the language selector
 export const languagesConfig = [
   { value: 'English', label: 'English' },
-  {
-    value: 'German',
-    label: 'German',
-  },
+  // {
+  //   value: 'German',
+  //   label: 'German',
+  // },
   {
     value: 'French',
     label: 'French',
@@ -57,7 +57,7 @@ export const languageSwitchConfig = {
     ],
   },
   FR: {
-    index: 'flagship_fashion_price_desc',
+    index: 'flagship_fashion',
     currency: '€',
     linksHeader: [
       {
@@ -92,42 +92,42 @@ export const languageSwitchConfig = {
       },
     ],
   },
-  GER: {
-    index: 'flagship_fashion_ger',
-    currency: '€',
-    linksHeader: [
-      {
-        name: 'All',
-        type: 'filter',
-        filter: '',
-        url: '/search',
-      },
-      {
-        name: 'Herren',
-        type: 'filter',
-        filter: 'Herren',
-        url: '/herren',
-      },
-      {
-        name: 'Damen',
-        type: 'filter',
-        filter: 'Damen',
-        url: '/damen',
-      },
-      {
-        name: 'Home',
-        type: 'filter',
-        filter: 'Home',
-        url: '/home',
-      },
-      {
-        name: 'Summer 22 Collection',
-        type: 'context',
-        context: 'Summer 22 Collection',
-        url: '/summer-22-collection',
-      },
-    ],
-  },
+  // GER: {
+  //   index: 'flagship_fashion',
+  //   currency: '€',
+  //   linksHeader: [
+  //     {
+  //       name: 'All',
+  //       type: 'filter',
+  //       filter: '',
+  //       url: '/search',
+  //     },
+  //     {
+  //       name: 'Herren',
+  //       type: 'filter',
+  //       filter: 'Herren',
+  //       url: '/herren',
+  //     },
+  //     {
+  //       name: 'Damen',
+  //       type: 'filter',
+  //       filter: 'Damen',
+  //       url: '/damen',
+  //     },
+  //     {
+  //       name: 'Home',
+  //       type: 'filter',
+  //       filter: 'Home',
+  //       url: '/home',
+  //     },
+  //     {
+  //       name: 'Summer 22 Collection',
+  //       type: 'context',
+  //       context: 'Summer 22 Collection',
+  //       url: '/summer-22-collection',
+  //     },
+  //   ],
+  // },
 };
 
 // Please ignore this atom - DO NOT TOUCH
@@ -160,7 +160,7 @@ export const styles = {
     borderRadius: '0.3rem',
     padding: '0rem',
     cursor: 'pointer',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   }),
   menuList: () => ({}),
   input: () => ({
@@ -181,11 +181,11 @@ export const styles = {
   placeholder: () => ({
     fontFamily: "'Poppins', sans-serif",
     cursor: 'pointer',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   }),
   valueContainer: () => ({
     cursor: 'pointer',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   }),
   option: () => {
     return {

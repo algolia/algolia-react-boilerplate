@@ -20,11 +20,16 @@ import { mainIndex } from '@/config/algoliaEnvConfig';
 import { currencySymbolAtom } from '@/config/currencyConfig';
 import { languageSwitchConfig } from '@/config/languagesConfig';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 const LanguageSelect = memo(() => {
   // Get index & currency atom to use it in the switch statement
   const setCurrency = useSetRecoilState(currencySymbolAtom);
   const index = useSetRecoilState(mainIndex);
   const navigationLinks = useSetRecoilState(linksHeader);
+  // Use the translator
+  const { i18n } = useTranslation();
 
   const handleChangeOfLanguage = (e) => {
     switch (e.value) {
@@ -32,16 +37,13 @@ const LanguageSelect = memo(() => {
         index(languageSwitchConfig.EN.index);
         setCurrency(languageSwitchConfig.EN.currency);
         navigationLinks(languageSwitchConfig.EN.linksHeader);
+        i18n.changeLanguage('en');
         break;
       case 'French':
         index(languageSwitchConfig.FR.index);
         setCurrency(languageSwitchConfig.FR.currency);
         navigationLinks(languageSwitchConfig.FR.linksHeader);
-        break;
-      case 'German':
-        index(languageSwitchConfig.GER.index);
-        setCurrency(languageSwitchConfig.GER.currency);
-        navigationLinks(languageSwitchConfig.GER.linksHeader);
+        i18n.changeLanguage('fr');
         break;
     }
   };
