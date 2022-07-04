@@ -31,6 +31,7 @@
   - [Style](#-style)
   - [Debounce](#-debounce)
   - [Lazy Loading](#-lazy-loading)
+  - [React i18](#-Translation)
 - [Develop on this project](#️-develop-on-this-project)
   - [Before use please install](#-before-use-please-install)
 
@@ -382,6 +383,10 @@ We use the React library Suspense and lazy to load components when needed, and a
 
 - https://reactjs.org/docs/code-splitting.html#reactlazy
 - https://www.npmjs.com/package/react-lazily
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Translation</h3>
+
+We use the React library [React i18n](https://react.i18next.com/), to translate all the code part like Button, Title,.... And you have the Select option to switch between the languages. To start it's always in english if you don't have any other language, you can just put false in the Translation Config option.
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⌨️ Develop on this project</h2>
 
