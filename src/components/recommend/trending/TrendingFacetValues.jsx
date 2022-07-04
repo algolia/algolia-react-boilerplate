@@ -9,9 +9,11 @@ import { mainIndex, recommendClient } from '@/config/algoliaEnvConfig';
 import '@algolia/ui-components-horizontal-slider-theme';
 
 import { trendingConfig } from '@/config/trendingConfig';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
 function WrappedTrendingFacetValues(props) {
   const { items, refine } = useRefinementList(props);
+  const [recommendationsLoaded, setRecommendationsLoaded] = useState(false);
 
   const index = useRecoilValue(mainIndex);
   const {
@@ -26,6 +28,10 @@ function WrappedTrendingFacetValues(props) {
     facetName: facetValuesAttribute,
     maxRecommendations: maxFacetValuesRecommendations,
   });
+
+  useEffect(() => {
+    setRecommendationsLoaded(recommendations.length > 0)
+  }, [recommendations]);
 
   const TrendingFacetsItem = ({ trendingFacetValue }) => {
     // trendingFacet prop comes from Recommend, it is not a refinementList item, but we need a refinementList item to do things like refine.
@@ -70,23 +76,32 @@ function WrappedTrendingFacetValues(props) {
   return (
     <div className="trending-facet-container">
       {recommendations.length > 0 && (
-        <div className="filters-container">
-          <div className="filters-container__title">
-            <h3>{facetValuesTitle}</h3>
+          <div className="filters-container">
+            <div className="filters-container__title">
+              <h4>{facetValuesTitle}</h4>
+            </div>
+            <div className="filters-container__list">
+            </div>
+            <ul className="filters-container__content">
+              {
+                recommendations.map((trendingFacetValue, i) => {
+                  return  (
+                    recommendationsLoaded ? (
+                      <TrendingFacetsItem 
+                        trendingFacetValue={trendingFacetValue} 
+                        key={`${i}${trendingFacetValue}`} 
+                      />
+                    ) : (
+                      <div key={i + "facetItem"}>
+                        <CustomSkeleton type="facet" />
+                      </div>
+                    )
+                  )
+                })
+              }
+            </ul>
           </div>
-          <div className="filters-container__list"></div>
-          <ul className="filters-container__content">
-            {recommendations.map((trendingFacetValue, i) => {
-              return (
-                <TrendingFacetsItem
-                  key={i}
-                  trendingFacetValue={trendingFacetValue}
-                />
-              );
-            })}
-          </ul>
-        </div>
-      )}
+        )}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import React from 'react';
 import useScreenSize from '@/hooks/useScreenSize';
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 

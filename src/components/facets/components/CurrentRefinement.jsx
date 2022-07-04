@@ -1,4 +1,3 @@
-// TODO: not sure exactly how this works
 // Component that renders the Current Refinements (icons above the products)
 import { useCurrentRefinements } from 'react-instantsearch-hooks-web';
 // Recoil State
