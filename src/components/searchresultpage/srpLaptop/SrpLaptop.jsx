@@ -7,10 +7,9 @@ import { Configure, Index, Pagination } from 'react-instantsearch-hooks-web';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
-import SkeletonLoader from '../../hits/HitsSkeletonLoader';
+import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
 import { Hit } from '@/components/hits/Hits';
 
-import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
 import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
 import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
 import Redirect from '@/components/redirects/Redirect';

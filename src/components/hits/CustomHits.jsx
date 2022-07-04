@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 
 
 import { Hit } from './Hits';
-import CustomSkeleton from '../skeletons/CustomSkeleton';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
 const CustomHits = ({ hits }) => {
   const [hitsLoaded, setHitsLoaded] = useState(false);

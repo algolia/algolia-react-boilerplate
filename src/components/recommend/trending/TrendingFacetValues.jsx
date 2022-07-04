@@ -92,7 +92,9 @@ function WrappedTrendingFacetValues(props) {
                         key={`${i}${trendingFacetValue}`} 
                       />
                     ) : (
-                      <CustomSkeleton type="facet" />
+                      <div key={i + "facetItem"}>
+                        <CustomSkeleton type="facet" />
+                      </div>
                     )
                   )
                 })
