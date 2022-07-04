@@ -3,8 +3,7 @@
 // ------------------------------------------
 @use '../../../../scss/partials/' as *;
 
-
-.filters-container{
+.filters-container {
   &__content-color {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -13,6 +12,7 @@
     &__list {
       display: flex;
       .color-name {
+        cursor: pointer;
         input {
           display: flex;
           justify-content: center;
