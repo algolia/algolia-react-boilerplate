@@ -1,25 +1,24 @@
-import { useRef, useEffect, memo } from 'react';
+import { memo, useEffect } from 'react';
 
 // Algolias's import
-import { Configure, Index } from 'react-instantsearch-dom';
+import { Configure, Index } from 'react-instantsearch-hooks-web';
 
 // framer motion
-import { motion } from 'framer-motion';
 import { framerMotionFederatedContainer } from '@/config/animationConfig';
 
 // import from Recoil
-import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Config
-import { searchClient, indexNames } from '@/config/algoliaEnvConfig';
+import { indexNames, searchClient } from '@/config/algoliaEnvConfig';
 
 // Show or unshow sections in federated (product, suggestions, categories, articles, recent searches)
 // categories import is here to choose which attribute you want to show as category
 import {
-  federatedSearchConfig,
   federatedCategoriesAttribute,
-  shouldHaveOpenFederatedSearch,
   federatedRef,
+  federatedSearchConfig,
+  shouldHaveOpenFederatedSearch,
 } from '@/config/federatedConfig';
 
 // Sharing query to general state
@@ -41,12 +40,15 @@ import useOutsideClickTwoConditionals from '@/hooks/useOutsideClickTwoConditions
 import useScreenSize from '@/hooks/useScreenSize';
 
 // Components imports
-import RecentSearches from './components/RecentSearches';
-import QuerySuggestions from './components/QuerySuggestions';
+import Redirect from '@/components/redirects/Redirect';
+import Articles from './components/BlogPost';
 import Category from './components/Category';
 import Products from './components/Products';
-import Articles from './components/BlogPost';
-import Redirect from '@/components/redirects/Redirect';
+import QuerySuggestions from './components/QuerySuggestions';
+import RecentSearches from './components/RecentSearches';
+
+//Import scope SCSS
+import './SCSS/federatedSearch.scss';
 
 const FederatedSearch = () => {
   // Recoil & States
@@ -146,6 +148,7 @@ const FederatedSearch = () => {
               userToken={personaSelect}
               optionalFilters={segmentSelect}
               enablePersonalization={true}
+              query={query}
             />
             <Products />
           </div>

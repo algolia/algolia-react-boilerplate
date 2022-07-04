@@ -1,11 +1,11 @@
 import { memo } from 'react';
 
 // Algolia's imports
-import { connectHits } from 'react-instantsearch-dom';
+import { useHits } from 'react-instantsearch-hooks-web';
 
 // Component import
 import { ChevronRight } from '@/assets/svg/SvgIndex';
-import Price from '@/components/price/price.jsx';
+import Price from '@/components/hits/components/Price.jsx';
 
 // Recoil import
 import { hitAtom } from '@/config/hitsConfig';
@@ -19,7 +19,8 @@ import { useNavigate } from 'react-router-dom';
 
 import get from 'lodash/get';
 
-const Hits = ({ hits }) => {
+function Products(props) {
+  const { hits } = useHits(props);
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
 
@@ -54,7 +55,7 @@ const Hits = ({ hits }) => {
                 </div>
                 <div className="infos">
                   <p className="brand">{get(hit, brand)}</p>
-                  <p className="name">{get(hit, productName)}</p>
+                  <p className="productName">{get(hit, productName)}</p>
                   <p className="price">
                     <Price hit={hit} />
                   </p>
@@ -72,8 +73,6 @@ const Hits = ({ hits }) => {
       </div>
     </div>
   );
-};
-
-const Products = connectHits(Hits);
+}
 
 export default memo(Products);

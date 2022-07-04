@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
-import { connectStateResults } from 'react-instantsearch-dom';
+// import { connectStateResults } from 'react-instantsearch-dom';
+import { useInstantSearch } from 'react-instantsearch-hooks-web';
+
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Used for avoiding duplicates
@@ -9,7 +11,11 @@ import { uniq } from 'lodash';
 import { mainIndex, searchClient } from '@/config/algoliaEnvConfig';
 import { rulesAtom } from '@/config/appliedRulesConfig';
 
-const AppliedRules = ({ searchResults }) => {
+//Import scope SCSS
+import './SCSS/appliedRules.scss';
+
+function CustomAppliedRules(props) {
+  const { results } = useInstantSearch(props);
   const [rules, setRules] = useRecoilState(rulesAtom);
   // Init API request to get rules by their IDs
   const indexName = useRecoilValue(mainIndex);
@@ -19,8 +25,8 @@ const AppliedRules = ({ searchResults }) => {
   // Store it in an array handled by recoil
   useEffect(() => {
     let rulesStorage = [];
-    if (searchResults?.appliedRules !== null) {
-      let rulesApplied = searchResults?.appliedRules;
+    if (results?.appliedRules !== null) {
+      let rulesApplied = results?.appliedRules;
       rulesApplied?.map((rule) => {
         index.getRule(rule.objectID).then((e) => {
           rulesStorage.push(e.description);
@@ -30,7 +36,7 @@ const AppliedRules = ({ searchResults }) => {
         });
       });
     }
-  }, [searchResults.appliedRules, setRules]);
+  }, [results.appliedRules, setRules]);
 
   // Create an array without duplicates
   const uniqRules = uniq(rules);
@@ -44,8 +50,6 @@ const AppliedRules = ({ searchResults }) => {
       </ul>
     </div>
   );
-};
-
-const CustomAppliedRules = connectStateResults(AppliedRules);
+}
 
 export default CustomAppliedRules;

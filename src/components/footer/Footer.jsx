@@ -2,9 +2,12 @@
 // NB it is normally (and currently) a screenshot image, stored in assets
 import footer from '@/assets/homepage/footer.webp';
 
+//Import scope SCSS
+import './SCSS/footer.scss';
+
 const Footer = (props) => {
   return (
-    <div>
+    <div className="footer">
       <img src={footer} alt="" />
     </div>
   );

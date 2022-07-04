@@ -28,15 +28,15 @@ const DemoGuideInjectedContent = () => {
     setAlertOpen(true);
     setAlert(content);
     setTimeout(() => setAlertOpen(false), 5000);
-  }
+  };
 
   return (
-    <div className="search-terms">
+    <div className="demoGuideHelpers">
       <h3>Injected Content</h3>
-      <div className="search-terms__infos">
+      <div className="demoGuideHelpers__infos">
         {DemoGuideInjectedContentConfig.map((item, i) => {
           return (
-            <div key={i} className="search-terms__infos__titles">
+            <div key={i} className="demoGuideHelpers__infos__titles">
               <span>{item.label}:</span>
               <p>{item.details}</p>
             </div>

@@ -1,13 +1,13 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
 
-import { memo } from 'react';
+import { memo, useState, useEffect } from 'react';
 
 // Algolia Import
-import { connectSearchBox } from 'react-instantsearch-dom';
+import { useSearchBox } from 'react-instantsearch-hooks-web';
 
 // Import navigate function to route to results page on search submit
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Import Recoil
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -16,27 +16,33 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Glass } from '@/assets/svg/SvgIndex';
 import SearchInCategory from './components/SearchInCategory';
 
+import { rulesAtom } from '@/config/appliedRulesConfig';
 import {
+  isSearchInCategory,
   queryAtom,
   searchBoxAtom,
   simplePlaceholderAtom,
-  isSearchInCategory,
 } from '@/config/searchboxConfig';
-import { rulesAtom } from '@/config/appliedRulesConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
-import { categorySelectionAtom } from '@/config/headerConfig';
-
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
+import useOutsideClick from '@/hooks/useOutsideClick';
+//Import scope SCSS
+import './SCSS/searchbox.scss';
 
-const SearchBoxSimple = ({ refine, currentRefinement }) => {
+function CustomSearchBox(props) {
+  const { refine, query } = useSearchBox(props);
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
-  const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
+  const [searchboxIsActive, setSearchboxIsActive] = useState(false);
+  const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
+
+  // Query changed for suggestions in no results
+  const { queryChanged } = props;
 
   // LEFT IN FOR REFACTO PURPOSES
   // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
@@ -44,6 +50,8 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
   const navigate = useNavigate();
   // Get states of React Router
   const { state } = useLocation();
+
+  useOutsideClick(searchboxRef, () => setSearchboxIsActive(false));
 
   // Get array of rules from Recoil
   const rulesApplied = useSetRecoilState(rulesAtom);
@@ -55,8 +63,14 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
     refine(query);
   };
 
+  useEffect(() => {
+    refine(queryState);
+  }, [queryState]);
+
   return (
-    <div className="searchbox">
+    <div
+      className={searchboxIsActive ? 'searchbox-active searchbox' : 'searchbox'}
+    >
       <form
         className="searchbox__form"
         action=""
@@ -64,8 +78,8 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
         autoComplete="off"
         onSubmit={(event) => {
           event.preventDefault();
-          setQueryState(currentRefinement);
-          useStoreQueryToLocalStorage(currentRefinement);
+          setQueryState(query);
+          useStoreQueryToLocalStorage(query);
           navigate('/search');
           // set the Navigation category to 'All', which is at index 0
           // LEFT IN FOR REFACTO PURPOSES
@@ -78,7 +92,10 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
           type="search"
           value={queryState ? queryState : ''}
           placeholder={simplePlaceholder}
-          onClick={() => setIsFederatedOpen(true)}
+          onClick={() => {
+            setIsFederatedOpen(true);
+            setSearchboxIsActive(true);
+          }}
           onChange={(event) => {
             refineFunction(event.currentTarget.value);
           }}
@@ -88,8 +105,6 @@ const SearchBoxSimple = ({ refine, currentRefinement }) => {
       </form>
     </div>
   );
-};
-
-const CustomSearchBox = connectSearchBox(SearchBoxSimple);
+}
 
 export default memo(CustomSearchBox);

@@ -88,6 +88,7 @@ export const styles = {
     textTransform: 'capitalize',
     cursor: 'pointer',
     fontSize: '1rem',
+    fontWeight: 800,
   }),
   dropdownIndicator: () => ({
     color: 'black',

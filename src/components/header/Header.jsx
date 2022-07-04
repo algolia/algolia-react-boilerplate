@@ -8,6 +8,9 @@ import useScreenSize from '@/hooks/useScreenSize';
 import HeaderLaptop from '@/components/header/components/HeaderLaptop';
 import HeaderMobile from '@/components/header/components/HeaderMobile';
 
+//Import scope SCSS
+import './SCSS/header.scss';
+
 const Header = () => {
   // Handle screen sizing & responsiveness with this hook
   const { mobile, tablet, laptopXS, laptop } = useScreenSize();

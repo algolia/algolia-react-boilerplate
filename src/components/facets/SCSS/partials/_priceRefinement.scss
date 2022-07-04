@@ -1,0 +1,37 @@
+@use '../../../../scss/partials/' as *;
+
+.filters-container{
+    &__pricecontainer {
+        width: 90%;
+        margin: 1rem auto;
+    
+        &__prices {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 1rem;
+    
+          p {
+            font-family: $main-font;
+            color: $purple-algolia;
+            font-weight: 600;
+          }
+        }
+      }
+
+  // Personalisation Slider price
+  .rc-slider {
+    .rc-slider-track,
+    .rc-slider-track-1 {
+      background: $purple-algolia-custom-gradient;
+    }
+    .rc-slider-handle-1 {
+      border: solid 1px $purple-algolia;
+    }
+    .rc-slider-handle-2 {
+      border: solid 1px $purple-algolia;
+    }
+    .rc-slider-handle-dragging {
+      box-shadow: (0 0 0 3px $purple-algolia);
+    }
+  }
+}

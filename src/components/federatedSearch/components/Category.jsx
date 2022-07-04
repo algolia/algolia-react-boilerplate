@@ -4,17 +4,17 @@ import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Algolia's imports
-import { connectRefinementList } from 'react-instantsearch-dom';
+import { useRefinementList } from 'react-instantsearch-hooks-web';
 
 // component import
 import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 import { federatedCategoriesAttribute } from '@/config/federatedConfig';
 
-const CategoryItems = ({ items }) => {
+function Category(props) {
+  const { items } = useRefinementList(props);
   // router hook to navigate using a function
   const navigate = useNavigate();
-
   return (
     <div className="categories">
       <h3 className="categories__title">Categories</h3>
@@ -37,8 +37,6 @@ const CategoryItems = ({ items }) => {
       </div>
     </div>
   );
-};
-
-const Category = connectRefinementList(CategoryItems);
+}
 
 export default memo(Category);

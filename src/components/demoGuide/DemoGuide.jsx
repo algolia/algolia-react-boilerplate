@@ -1,19 +1,18 @@
 import { useRef } from 'react';
-import { motion } from 'framer-motion';
 import { useRecoilValue } from 'recoil';
 
 //Import components
-import SearchTerms from './components/SearchTerms';
-import SearchBanners from './components/SearchBanners';
-import SearchPersona from './components/SearchPersona';
-import DemoGuideInjectedContent from './components/DemoGuideInjectedContent';
 import DemoGuideDynamicFilters from './components/DemoGuideDynamicFilters';
+import DemoGuideInjectedContent from './components/DemoGuideInjectedContent';
 import DemoGuideRedirect from './components/DemoGuideRedirect';
 import DemoGuideRulesApplied from './components/DemoGuideRulesApplied';
+import SearchBanners from './components/SearchBanners';
+import SearchPersona from './components/SearchPersona';
+import SearchTerms from './components/SearchTerms';
 
 //Import Hooks
-import useScreenSize from '@/hooks/useScreenSize';
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
+import useScreenSize from '@/hooks/useScreenSize';
 
 //Import custom transition for panel animations
 import { framerMotionTransition } from '@/config/animationConfig';
@@ -21,14 +20,17 @@ import { framerMotionTransition } from '@/config/animationConfig';
 // Import Reference for the Button that trigger the panel
 import {
   demoGuideBtnRef,
-  shouldShowSearchTerms,
-  shouldShowPersonas,
-  shouldShowInjectedContent,
-  shouldShowDynamicFilters,
-  shouldShowRedirects,
-  shouldShowBanners,
   shouldShowAppliedRulesSwitcher,
+  shouldShowBanners,
+  shouldShowDynamicFilters,
+  shouldShowInjectedContent,
+  shouldShowPersonas,
+  shouldShowRedirects,
+  shouldShowSearchTerms,
 } from '@/config/demoGuideConfig';
+
+//Import scope SCSS
+import './SCSS/demoGuide.scss';
 
 const DemoGuide = ({ setshowDemoGuide }) => {
   //Select Panel wrapper
