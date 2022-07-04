@@ -1,10 +1,10 @@
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 //Import the option pictogram component
 import { OptionDots } from '@/assets/svg/SvgIndex';
 
 //Import config from helped navigation
-import { isDemoGuideOpen, demoGuideBtnRef } from '@/config/demoGuideConfig';
+import { demoGuideBtnRef, isDemoGuideOpen } from '@/config/demoGuideConfig';
 
 export const DemoGuideOpener = () => {
   const demoGuideBtn = useSetRecoilState(demoGuideBtnRef);

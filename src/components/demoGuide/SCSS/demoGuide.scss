@@ -1,0 +1,104 @@
+// ------------------------------------------
+// Help Navigation
+// ------------------------------------------
+@use '../../../scss/partials' as *;
+
+.helpNavigation {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  min-width: 30%;
+  padding: 3rem 2rem;
+  background-color: $white-color;
+  z-index: 998;
+  overflow: scroll;
+
+  h2 {
+    @include titleH2($purple-algolia)
+  }
+}
+
+.helpNavigation-mobile{
+  min-width: 100%;
+}
+
+// SE menu btn/picto that helps navigate in the app
+
+.optionDots__wrapper {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  z-index: 999;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-active {
+    transform: rotate3d(0, 0, 1, -90deg);
+    transition: all 0.3s ease-in-out;
+
+    p{
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  p{
+    font-size: 0.6rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transition: all 0.3s ease-in-out;
+  }
+  svg {
+    width: 6px;
+    path {
+      fill: $purple-algolia;
+    }
+  }
+}
+
+
+.demoGuideHelpers {
+  margin-bottom: 1rem;
+  h3 {
+    @include titleH3($main-color);
+    font-size: 1rem;
+    text-transform: capitalize;
+  }
+  &__infos {
+    margin: 1rem 0;
+    &__titles {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 0.3rem;
+      span {
+        font-size: 0.7rem;
+        color: $purple-algolia;
+      }
+      p {
+        @include p-text($main-color);
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+.container-nav-help {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  &____items {
+    cursor: pointer;
+  }
+}
+
+

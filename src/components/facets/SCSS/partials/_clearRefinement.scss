@@ -1,0 +1,6 @@
+@use '../../../../scss/partials/' as *;
+
+.button-clear-refinement {
+    @include btn($purple-algolia-custom-gradient, $white-color);
+  }
+  

@@ -6,14 +6,14 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { framerMotionTransition } from '@/config/animationConfig';
 
-import { Highlight } from 'react-instantsearch-dom';
+import { Highlight } from 'react-instantsearch-hooks-web';
 
 import { Heart } from '@/assets/svg/SvgIndex';
 
 import { badgeCriteria } from '@/config/badgeConfig';
 
 // In case of img loading error
-import * as placeHolderError from '@/assets/logo/logo.webp'
+import * as placeHolderError from '@/assets/logo/logo.webp';
 
 import get from 'lodash/get';
 
@@ -21,18 +21,21 @@ import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
 import { hitAtom } from '@/config/hitsConfig';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
-import Badge from './Badge';
+import Badge from './components/Badge';
 
 //Import hook for store ID into local storage
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 
 // import Price component
-import Price from '@/components/price/price.jsx';
+import Price from '@/components/hits/components/Price.jsx';
+
+//Import scope SCSS
+import './SCSS/hits.scss';
 
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
@@ -40,7 +43,8 @@ const Hit = ({ hit }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   // Get hit attribute from config file
-  const { objectID, image, imageAlt, category, productName } = hitsConfig;
+  const { objectID, image, imageAlt, category, productName, brand } =
+    hitsConfig;
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
 
@@ -136,14 +140,15 @@ const Hit = ({ hit }) => {
           </div>
         </div>
         <div className="srpItem__infos">
-          <h3>
-            <Highlight hit={hit} attribute={productName} />
-          </h3>
-          <div className="srpItem__infos__down">
-            <p className="price">
-              <Price hit={hit} />
-            </p>
+          <div className="srpItem__infosUp">
+            <p className="brand">{get(hit, brand)}</p>
+            <h3 className="productName">
+              <Highlight hit={hit} attribute={productName} />
+            </h3>
           </div>
+          <p className="price">
+            <Price hit={hit} />
+          </p>
         </div>
       </>
     </motion.li>
