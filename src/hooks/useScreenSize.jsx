@@ -9,25 +9,28 @@ const useScreenSize = () => {
     tablet: undefined,
     mobile: undefined,
   });
+  
   useEffect(() => {
     const handleResize = () => {
       // Set screen size and return true or false
       setWindowSize({
-        laptop: window.innerWidth >= 1440 ? true : false,
-        laptopXS:
-          window.innerWidth > 768 && window.innerWidth < 1440 ? true : false,
-        tablet:
-          window.innerWidth >= 480 && window.innerWidth <= 768 ? true : false,
-        mobile: window.innerWidth < 480 ? true : false,
+        laptop: window.innerWidth >= 1440,
+        laptopXS: window.innerWidth > 768 && window.innerWidth < 1440,
+        tablet: window.innerWidth >= 480 && window.innerWidth <= 768,
+        mobile: window.innerWidth < 480,
       });
     };
+
     // Add event listener
     window.addEventListener('resize', handleResize);
+
     // Call handler right away so state gets updated with initial window size
     handleResize();
+
     // Remove event listener on cleanup
     return () => window.removeEventListener('resize', handleResize);
   }, []); // Empty array ensures that effect is only run on mount
+
   return windowSize;
 };
 
