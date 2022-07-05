@@ -14,7 +14,6 @@ import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 function WrappedTrendingFacetValues(props) {
   const { items, refine } = useRefinementList(props);
   const [recommendationsLoaded, setRecommendationsLoaded] = useState(false);
-  const [mergedItem, setMergedItem] = useState(null);
 
   const index = useRecoilValue(mainIndex);
   const {
@@ -35,14 +34,13 @@ function WrappedTrendingFacetValues(props) {
   }, [recommendations]);
 
   const TrendingFacetsItem = ({
-    trendingFacetValue,
-    setMergedItem,
-    mergedItem,
+    trendingFacetValue
   }) => {
     // trendingFacet prop comes from Recommend, it is not a refinementList item, but we need a refinementList item to do things like refine.
     // We look up the refinementList item which matches the current Recommend item (they are both facet values) and switch item.
     // Item is now the refinementList item, so we can access all of correct functionality like isRefined etc.
     const [isBusy, setBusy] = useState(true);
+    const [mergedItem, setMergedItem] = useState(null);
 
     useEffect(() => {
       if (items.length > 0) {
@@ -58,9 +56,8 @@ function WrappedTrendingFacetValues(props) {
       <>
         {mergedItem && !isBusy && (
           <button
-            className={`filters-container__content__list__button-filter ${
-              mergedItem.isRefined ? 'refined-filter' : ''
-            }`}
+            className={`filters-container__content__list__button-filter ${mergedItem.isRefined ? 'refined-filter' : ''
+              }`}
             type="button"
             href="#"
             onClick={(event) => {
@@ -82,7 +79,7 @@ function WrappedTrendingFacetValues(props) {
     <div className="trending-facet-container">
       {recommendations.length > 0 && (
         <div className="filters-container">
-          {mergedItem !== undefined && (
+          {recommendationsLoaded && (
             <div className="filters-container__title">
               <h3>{facetValuesTitle}</h3>
             </div>
@@ -92,8 +89,6 @@ function WrappedTrendingFacetValues(props) {
             {recommendations.map((trendingFacetValue, i) => {
               return recommendationsLoaded ? (
                 <TrendingFacetsItem
-                  setMergedItem={setMergedItem}
-                  mergedItem={mergedItem}
                   trendingFacetValue={trendingFacetValue}
                   key={`${i}${trendingFacetValue}`}
                 />
