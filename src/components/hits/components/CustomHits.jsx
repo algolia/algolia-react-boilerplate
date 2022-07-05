@@ -8,6 +8,7 @@ import { useRecoilValue } from 'recoil';
 
 import { hitsAtom } from '@/config/hitsConfig';
 
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 import { Hit } from '../Hits';
 
 function CustomHits(props) {
@@ -15,6 +16,7 @@ function CustomHits(props) {
   const { hits: hookHits } = useHits(props);
   const [hits, setHits] = useState([]);
   const hitsState = useRecoilValue(hitsAtom);
+  const [hitsLoaded, setHitsLoaded] = useState(false);
 
   // Decide whether to use hits from hook or props
   useEffect(() => {
@@ -30,6 +32,12 @@ function CustomHits(props) {
 
   useEffect(() => {}, [hitsState]);
 
+  useEffect(() => {
+    if (hits.length > 0) {
+      setHitsLoaded(true)
+    }
+  }, [hits]);
+
   return (
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
@@ -37,9 +45,9 @@ function CustomHits(props) {
           // Wrap the hit info in an animation, and click functionality to view the product
           if (hit._component != undefined) {
             // If the hit has a component property, use it instead of the default component
-            return <hit._component hit={hit} key={hit.objectID} />;
+            return hitsLoaded ? <hit._component hit={hit} key={hit.objectID} /> : <CustomSkeleton type="hit" />
           }
-          return <Hit hit={hit} key={hit.objectID} />;
+          return hitsLoaded ? <Hit hit={hit} key={hit.objectID} /> : <CustomSkeleton type="hit" />
           // Note: it's not good practice to use the item index as key, because that may cause the renderer
           // to think 2 different products are one and the same in case they change positions
         })}
