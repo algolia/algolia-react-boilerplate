@@ -54,6 +54,10 @@ import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 //Import scope SCSS
 import './SCSS/productDetails.scss';
 
+// Import translation
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 const ProductDetails = () => {
   // For alert on sending add to cart event
   const setAlert = useSetRecoilState(alertContent);
@@ -109,6 +113,12 @@ const ProductDetails = () => {
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1];
 
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'pdp',
+  });
+
   return (
     // Product Display Page parent container, including attributes for framer motion
     <div
@@ -131,7 +141,7 @@ const ProductDetails = () => {
           onClick={() => navigate(-1)}
         >
           <ChevronLeft />
-          <p>Back to search</p>
+          <p>{t('buttonBack')}</p>
         </div>
         <div
           initial={{
@@ -205,7 +215,7 @@ const ProductDetails = () => {
 
             {PDPHitSections.sizeFilter && get(hit, sizeFilter)?.length > 0 && (
               <div className="sizes">
-                <p>Available size(s):</p>
+                <p>{t('availableSize')}</p>
                 <div className="sizeList">
                   {get(hit, sizeFilter).map((size, i) => (
                     <div className="size" key={i}>
@@ -246,7 +256,7 @@ const ProductDetails = () => {
                 }}
               >
                 <i className="fa-solid fa-shopping-cart"></i>
-                <p>Add to cart</p>
+                <p>{t('addToCartButton')}</p>
               </motion.button>
             )}
           </div>
@@ -265,7 +275,7 @@ const ProductDetails = () => {
       >
         {shouldHaveRelatedProductsValue && (
           <div>
-            <h3 className="title">Related Products</h3>
+            <h3 className="title">{t('relatedTitle')}</h3>
             <RelatedProducts
               recommendClient={recommendClient}
               indexName={index}
@@ -277,7 +287,7 @@ const ProductDetails = () => {
         )}
         {shouldHaveFbtProductsValue && (
           <div>
-            <h3 className="title">Frequently Bought Together</h3>
+            <h3 className="title">{t('fbtTitle')}</h3>
             <FrequentlyBoughtTogether
               recommendClient={recommendClient}
               indexName={index}

@@ -3,15 +3,25 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { useNavigate } from 'react-router-dom';
 import { CloseButton } from '@/assets/svg/SvgIndex';
 import { useRecoilValue } from 'recoil';
+
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 const SearchInCategory = ({ state }) => {
   // navigate is used by React Router
   const navigate = useNavigate();
+
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'srp',
+  });
 
   if (state?.type === 'filter' && state?.action !== null) {
     return (
       <div className="searchbox__category">
         <p>
-          Search in{' '}
+          {t('searchInCategory')}{' '}
           {state.action
             .split(':')[1]
             .split('>')
@@ -32,7 +42,9 @@ const SearchInCategory = ({ state }) => {
   } else if (state?.type === 'context') {
     return (
       <div className="searchbox__category">
-        <p> Search in {state.action}</p>
+        <p>
+          {t('searchInCategory')} {state.action}
+        </p>
         <span
           onClick={() => {
             navigate('/search');

@@ -26,6 +26,15 @@ const resources = {
       srp: {
         titleTrendingProducts: 'Trending Products',
         titleTrendingFacets: 'Trending Brands',
+        stats: 'results found in',
+        searchInCategory: 'Search in',
+      },
+      pdp: {
+        fbtTitle: 'Frequently Bought Together',
+        relatedTitle: 'Related Products',
+        addToCartButton: 'Add to Cart',
+        buttonBack: 'Back to search',
+        availableSize: 'Available Size:',
       },
       searchBox: {
         placeHolder: 'Search...',
@@ -52,6 +61,15 @@ const resources = {
       srp: {
         titleTrendingProducts: 'Produits tendances',
         titleTrendingFacets: 'Marques Tendances',
+        stats: 'résultats trouvé en',
+        searchInCategory: 'Recherche dans',
+      },
+      pdp: {
+        fbtTitle: 'Fréquemment acheté ensemble',
+        relatedTitle: 'Produits connexes',
+        buttonBack: 'Revenir aux recherches',
+        addToCartButton: 'Ajouter au panier',
+        availableSize: 'Taille disponibles:',
       },
       searchBox: {
         placeHolder: 'Rechercher...',
