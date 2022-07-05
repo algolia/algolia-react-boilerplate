@@ -388,6 +388,8 @@ We use the React library Suspense and lazy to load components when needed, and a
 
 We use the React library [React i18n](https://react.i18next.com/), to translate all the code part like Button, Title,.... And you have the Select option to switch between the languages. To start it's always in english if you don't have any other language, you can just put false in the Translation Config option.
 
+- You have to use this feature configure your others language index, and make sure you have the correct facet translation for example
+
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⌨️ Develop on this project</h2>
 
 To run this project locally, install the dependencies and run the local server:
