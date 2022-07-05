@@ -7,6 +7,8 @@
 // The attribute uses filter syntax https://www.algolia.com/doc/api-reference/api-parameters/filters/
 // The title is used to show above each carousel to indicate what it shows
 // ------------------------------------------
+//If you use translation please write your title in different language and respect the
+// title+language combination
 
 export const carouselConfig = [
   {

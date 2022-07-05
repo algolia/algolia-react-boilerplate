@@ -14,6 +14,8 @@ import { useSetRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
 function QuerySuggestions(props) {
+  //Get title
+  const { title } = props;
   const { hits } = useHits(props);
   // router hook to navigate using a function
   const navigate = useNavigate();
@@ -21,7 +23,7 @@ function QuerySuggestions(props) {
   const setQueryState = useSetRecoilState(queryAtom);
   return (
     <div className="suggestions">
-      <h3 className="suggestions__title">SUGGESTIONS</h3>
+      <h3 className="suggestions__title">{title}</h3>
       <ul className="suggestions__items">
         {hits.map((hit, index) => {
           return (

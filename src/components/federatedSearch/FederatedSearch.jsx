@@ -39,6 +39,9 @@ import useOutsideClickTwoConditionals from '@/hooks/useOutsideClickTwoConditions
 // Check screensize for responsiveness
 import useScreenSize from '@/hooks/useScreenSize';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 // Components imports
 import Redirect from '@/components/redirects/Redirect';
 import Articles from './components/BlogPost';
@@ -71,8 +74,13 @@ const FederatedSearch = () => {
   // Get screen size
   const { mobile, tablet } = useScreenSize();
 
-  // Custom hook
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'federated',
+  });
 
+  // Custom hook
   useOutsideClickTwoConditionals(
     containerFederated,
     searchboxRef,
@@ -110,7 +118,7 @@ const FederatedSearch = () => {
       transition={framerMotionFederatedContainer.transition}
     >
       <span className="closeFederated" onClick={() => setIsFederated(false)}>
-        &lsaquo; Return to Homepage
+        &lsaquo; {t('buttonReturn')}
       </span>
       <div
         className={`${
@@ -121,7 +129,9 @@ const FederatedSearch = () => {
       >
         <div className="federatedSearch__left">
           {/* If don't want this sections go into config file  */}
-          {showRecentSearches && !mobile && !tablet && <RecentSearches />}
+          {showRecentSearches && !mobile && !tablet && (
+            <RecentSearches title={t('recentSearches')} />
+          )}
           {/* If don't want this sections go into config file  */}
           {showQuerySuggestions && (
             <Index searchClient={searchClient} indexName={suggestionsIndex}>
@@ -131,12 +141,15 @@ const FederatedSearch = () => {
                 userToken={personaSelect}
                 enablePersonalization={true}
               />
-              <QuerySuggestions />
+              <QuerySuggestions title={t('suggestions')} />
             </Index>
           )}
           {/* If don't want this sections go into config file  */}
           {showCategories && !mobile && !tablet && (
-            <Category attribute={federatedCategoriesAttribute} />
+            <Category
+              attribute={federatedCategoriesAttribute}
+              title={t('categories')}
+            />
           )}
         </div>
         {/* If don't want this sections go into config file  */}
@@ -150,7 +163,12 @@ const FederatedSearch = () => {
               enablePersonalization={true}
               query={query}
             />
-            <Products />
+            <Products
+              products={t('products')}
+              productsBefore={t('productsBefore')}
+              buttonShowAll={t('buttonShowAll')}
+              noResults={t('noResults')}
+            />
           </div>
         )}
         {/* If don't want this sections go into config file  */}
@@ -158,7 +176,7 @@ const FederatedSearch = () => {
           <div className="articles federatedSearch__right">
             <Index indexName={articlesIndex}>
               <Configure hitsPerPage={1} query={query} />
-              <Articles />
+              <Articles titleArticles={t('articles')} />
             </Index>
           </div>
         )}

@@ -27,6 +27,8 @@ function Products(props) {
   const personaSelected = useRecoilValue(personaSelectedAtom);
   const query = useRecoilValue(queryAtom);
 
+  //Get title, props
+  const { products, productsBefore, buttonShowAll, noResults } = props;
   // Get hit attribute from config file
   const { objectID, image, productName, brand } = hitsConfig;
 
@@ -34,9 +36,9 @@ function Products(props) {
     <div className="products">
       <div className="products__header">
         {personaSelected !== '' && query === '' ? (
-          <h3 className="products__title">Recommended for you</h3>
+          <h3 className="products__title">{productsBefore}</h3>
         ) : (
-          <h3 className="products__title">Products</h3>
+          <h3 className="products__title">{products}</h3>
         )}
       </div>
       <ul className="products__items">
@@ -64,12 +66,12 @@ function Products(props) {
             );
           })
         ) : (
-          <span className="no-results__infos">No Results Found</span>
+          <span className="no-results__infos">{noResults}</span>
         )}
       </ul>
       <div className="products__btn" onClick={() => {}}>
         <ChevronRight />
-        <p onClick={() => navigate('/search')}>SHOW ALL PRODUCTS</p>
+        <p onClick={() => navigate('/search')}>{buttonShowAll}</p>
       </div>
     </div>
   );
