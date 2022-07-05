@@ -6,8 +6,6 @@ import { framerMotionHits } from '@/config/animationConfig';
 
 // Display an image, within a framer-motion wrapper
 const NoCtaCard = ({ hit }) => {
-  const style = {height: "100%"}
-  
   return (
     <motion.li
       variants={framerMotionHits}
@@ -15,7 +13,7 @@ const NoCtaCard = ({ hit }) => {
       animate="show"
       className="hit-list"
     >
-      <img src={hit.image.desktop_url} alt="" {...{style}}/>
+      <img src={hit.image.desktop_url} alt=""/>
     </motion.li>
   );
 };
