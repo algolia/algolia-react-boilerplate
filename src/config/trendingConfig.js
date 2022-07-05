@@ -5,8 +5,6 @@
 export const trendingConfig = {
   // Title for trending products carousel
   productsTitle: 'Trending Products',
-  // Title for trending facet values refinement list
-  facetValuesTitle: 'Trending Brands',
   // Attribute on which you've trained trending facet values
   facetValuesAttribute: 'brand',
   // The maximum number of trending products to retrieve/display

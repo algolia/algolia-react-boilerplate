@@ -12,14 +12,22 @@ import { mainIndex, recommendClient } from '@/config/algoliaEnvConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { trendingConfig } from '@/config/trendingConfig';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 // Trending provides a carousel of trending products, filtered if needed by any facet
 const TrendingProducts = ({ facetName, facetValue }) => {
   // define the client for using Recommend
 
   const index = useRecoilValue(mainIndex);
-  const { threshold, productsTitle, maxProductsRecommendations } =
-    trendingConfig;
+  const { threshold, maxProductsRecommendations } = trendingConfig;
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
+
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'srp',
+  });
 
   return (
     <div>
@@ -29,7 +37,9 @@ const TrendingProducts = ({ facetName, facetValue }) => {
         itemComponent={RelatedItem}
         maxRecommendations={maxProductsRecommendations}
         view={HorizontalSlider}
-        headerComponent={() => <h3 className="title">{productsTitle}</h3>}
+        headerComponent={() => (
+          <h3 className="title">{t('titleTrendingProducts')}</h3>
+        )}
         threshold={threshold}
         facetName={facetName}
         facetValue={facetValue}

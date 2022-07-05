@@ -23,6 +23,10 @@ const resources = {
         buttonShowAll: 'Show all products',
         noResults: 'No Results Found',
       },
+      srp: {
+        titleTrendingProducts: 'Trending Products',
+        titleTrendingFacets: 'Trending Brands',
+      },
       searchBox: {
         placeHolder: 'Search...',
       },
@@ -44,6 +48,10 @@ const resources = {
         buttonReturn: "Retour page d'acceuil",
         buttonShowAll: 'Voir tous les produits',
         noResults: 'Aucun résultat trouvé',
+      },
+      srp: {
+        titleTrendingProducts: 'Produits tendances',
+        titleTrendingFacets: 'Marques Tendances',
       },
       searchBox: {
         placeHolder: 'Rechercher...',

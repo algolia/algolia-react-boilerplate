@@ -10,15 +10,15 @@ import '@algolia/ui-components-horizontal-slider-theme';
 
 import { trendingConfig } from '@/config/trendingConfig';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 function WrappedTrendingFacetValues(props) {
   const { items, refine } = useRefinementList(props);
 
   const index = useRecoilValue(mainIndex);
-  const {
-    facetValuesAttribute,
-    facetValuesTitle,
-    maxFacetValuesRecommendations,
-  } = trendingConfig;
+  const { facetValuesAttribute, maxFacetValuesRecommendations } =
+    trendingConfig;
 
   const { recommendations } = useTrendingFacets({
     recommendClient,
@@ -67,12 +67,18 @@ function WrappedTrendingFacetValues(props) {
     );
   };
 
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'srp',
+  });
+
   return (
     <div className="trending-facet-container">
       {recommendations.length > 0 && (
         <div className="filters-container">
           <div className="filters-container__title">
-            <h3>{facetValuesTitle}</h3>
+            <h3>{t('titleTrendingFacets')}</h3>
           </div>
           <div className="filters-container__list"></div>
           <ul className="filters-container__content">
