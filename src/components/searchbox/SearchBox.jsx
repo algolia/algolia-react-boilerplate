@@ -67,7 +67,6 @@ function CustomSearchBox(props) {
     refine(queryState);
   }, [queryState]);
 
-  // console.log(state.type);
   return (
     <div
       // Comment it because we don't use it anymore
