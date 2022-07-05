@@ -110,13 +110,13 @@ const SrpLaptop = () => {
       </div>
       <div className="srp-active srp-container">
         <div className="srp-container__facets">
-          <Suspense fallback={<SkeletonLoader type={"facet"} />}>
+          <Suspense fallback={<SkeletonLoader type={'facet'} />}>
             {/* Render Recommend component - Trending Facets */}
             {/* Change config in /config/trendingConfig.js */}
             {shouldHaveTrendingFacetsValue && (
               <WrappedTrendingFacetValues
                 attribute="brand"
-                facetName={"brand"}
+                facetName={'brand'}
                 limit={500}
                 facetValue={facetValue}
               />
@@ -162,11 +162,11 @@ const SrpLaptop = () => {
             query={queryState && queryState}
             getRankingInfo={true}
           />
-          
+
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
 
           {shouldInjectContent ? (
-            <Suspense fallback={<SkeletonLoader type={"hit"} />}>
+            <Suspense fallback={<SkeletonLoader type={'hit'} />}>
               <Index indexName={injectedContentIndex}>
                 <Configure hitsPerPage={1} page={0} />
               </Index>
@@ -174,7 +174,7 @@ const SrpLaptop = () => {
               <InjectedHits hitComponent={Hit} />
             </Suspense>
           ) : (
-            <Suspense fallback={<SkeletonLoader type={"hit"}/>}>
+            <Suspense fallback={<SkeletonLoader type={'hit'} />}>
               <CustomHitsComponent />
             </Suspense>
           )}
