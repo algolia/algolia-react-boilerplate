@@ -7,14 +7,17 @@
 // The attribute uses filter syntax https://www.algolia.com/doc/api-reference/api-parameters/filters/
 // The title is used to show above each carousel to indicate what it shows
 // ------------------------------------------
+
 export const carouselConfig = [
   {
     context: 'homepage-carousel-one',
-    title: 'Our Bags Collection',
+    titleEn: 'Our Bags Collection',
+    titleFr: 'Notre Collection de sacs',
   },
   {
     context: 'homepage-carousel-two',
-    title: 'Our Best Hoodies',
+    titleEn: 'Our Best Hoodies',
+    titleFr: 'Nos meilleurs sweats',
   },
 ];
 

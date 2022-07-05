@@ -8,7 +8,8 @@ const resources = {
   en: {
     translation: {
       homePage: {
-        headerTop: 'Search for anything',
+        headerCarousel1: 'Our Bags Collection',
+        headerCarousel2: 'Our Best Hoodies',
       },
       header: {
         topHeader: {
@@ -39,7 +40,8 @@ const resources = {
   fr: {
     translation: {
       homePage: {
-        headerTop: 'Rercherchez quelque chose',
+        headerCarousel1: 'Notre collection de sacs',
+        headerCarousel2: 'Nos plus beaux sweat',
       },
       header: {
         topHeader: {

@@ -98,7 +98,11 @@ const HomePage = ({ setIsMounted }) => {
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
           <Suspense key={i} fallback={''}>
-            <HomeCarousel context={carousel.context} title={carousel.title} />
+            <HomeCarousel
+              context={carousel.context}
+              titleEn={carousel.titleEn}
+              titleFr={carousel.titleFr}
+            />
           </Suspense>
         ))}
 

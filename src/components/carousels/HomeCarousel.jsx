@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Recoil
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { LanguageSelectedAtom } from '@/config/languagesConfig';
 
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig';
@@ -27,7 +28,7 @@ import Price from '@/components/hits/components/Price.jsx';
 import './SCSS/carousels.scss';
 
 // Build the Carousel for use on the Homepage
-const HomeCarousel = ({ context, title }) => {
+const HomeCarousel = ({ context, titleEn, titleFr }) => {
   const index = useRecoilValue(mainIndex);
   const userToken = useRecoilValue(personaSelectedAtom);
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
@@ -35,7 +36,7 @@ const HomeCarousel = ({ context, title }) => {
   const { mobile } = useScreenSize();
   return (
     <div className={`${mobile ? 'home-carousel-mobile' : 'home-carousel'}`}>
-      <Index indexId={title} indexName={index}>
+      <Index indexId={titleEn} indexName={index}>
         <Configure
           hitsPerPage={hitsPerCarousel}
           ruleContexts={context}
@@ -43,7 +44,7 @@ const HomeCarousel = ({ context, title }) => {
           userToken={userToken}
           query={''}
         />
-        <Carousel title={title} />
+        <Carousel titleEn={titleEn} titleFr={titleFr} />
       </Index>
     </div>
   );
@@ -52,8 +53,9 @@ const HomeCarousel = ({ context, title }) => {
 // This carousel is used inside of HomeCarousel
 
 function Carousel(props) {
+  const LanguageSelected = useRecoilValue(LanguageSelectedAtom);
   const { hits } = useHits(props);
-  const { title } = props;
+  const { titleEn, titleFr } = props;
 
   // Navigate is used by React Router
   const navigate = useNavigate();
@@ -64,7 +66,8 @@ function Carousel(props) {
 
   return (
     <>
-      <h3 className="title">{title}</h3>
+      {LanguageSelected === 'English' && <h3 className="title">{titleEn}</h3>}
+      {LanguageSelected === 'French' && <h3 className="title">{titleFr}</h3>}
       {/* This div declares the outer reference for the framer motion */}
       <div className="carousel">
         <div className="inner-carousel">
