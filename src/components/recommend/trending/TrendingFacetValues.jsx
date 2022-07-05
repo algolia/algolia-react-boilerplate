@@ -14,6 +14,7 @@ import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 function WrappedTrendingFacetValues(props) {
   const { items, refine } = useRefinementList(props);
   const [recommendationsLoaded, setRecommendationsLoaded] = useState(false);
+  const [mergedItem, setMergedItem] = useState(null);
 
   const index = useRecoilValue(mainIndex);
   const {
@@ -30,15 +31,19 @@ function WrappedTrendingFacetValues(props) {
   });
 
   useEffect(() => {
-    setRecommendationsLoaded(recommendations.length > 0)
+    setRecommendationsLoaded(recommendations.length > 0);
   }, [recommendations]);
 
-  const TrendingFacetsItem = ({ trendingFacetValue }) => {
+  const TrendingFacetsItem = ({
+    trendingFacetValue,
+    setMergedItem,
+    mergedItem,
+  }) => {
     // trendingFacet prop comes from Recommend, it is not a refinementList item, but we need a refinementList item to do things like refine.
     // We look up the refinementList item which matches the current Recommend item (they are both facet values) and switch item.
     // Item is now the refinementList item, so we can access all of correct functionality like isRefined etc.
     const [isBusy, setBusy] = useState(true);
-    const [mergedItem, setMergedItem] = useState();
+
     useEffect(() => {
       if (items.length > 0) {
         let newItems = items.filter(
@@ -76,32 +81,31 @@ function WrappedTrendingFacetValues(props) {
   return (
     <div className="trending-facet-container">
       {recommendations.length > 0 && (
-          <div className="filters-container">
+        <div className="filters-container">
+          {mergedItem !== undefined && (
             <div className="filters-container__title">
-              <h4>{facetValuesTitle}</h4>
+              <h3>{facetValuesTitle}</h3>
             </div>
-            <div className="filters-container__list">
-            </div>
-            <ul className="filters-container__content">
-              {
-                recommendations.map((trendingFacetValue, i) => {
-                  return  (
-                    recommendationsLoaded ? (
-                      <TrendingFacetsItem 
-                        trendingFacetValue={trendingFacetValue} 
-                        key={`${i}${trendingFacetValue}`} 
-                      />
-                    ) : (
-                      <div key={i + "facetItem"}>
-                        <CustomSkeleton type="facet" />
-                      </div>
-                    )
-                  )
-                })
-              }
-            </ul>
-          </div>
-        )}
+          )}
+          <div className="filters-container__list"></div>
+          <ul className="filters-container__content">
+            {recommendations.map((trendingFacetValue, i) => {
+              return recommendationsLoaded ? (
+                <TrendingFacetsItem
+                  setMergedItem={setMergedItem}
+                  mergedItem={mergedItem}
+                  trendingFacetValue={trendingFacetValue}
+                  key={`${i}${trendingFacetValue}`}
+                />
+              ) : (
+                <div key={i + 'facetItem'}>
+                  <CustomSkeleton type="facet" />
+                </div>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
