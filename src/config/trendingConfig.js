@@ -1,3 +1,4 @@
+import { atom } from "recoil";
 // Config to customise trending. There are two kinds:
 // Trending products: shown on homepage, results page and category pages
 // Trending facet values: shown on results pages
@@ -14,3 +15,9 @@ export const trendingConfig = {
   // Recommendations confidence score (between 0 and 100). Only recommendations with a greater score are returned.
   threshold: 2
 };
+
+
+export const mergedItemsTrendingFacets = atom({
+  key: 'mergedItemsTrendingFacets', // unique ID (with respect to other atoms/selectors)
+  default: [], // default value (aka initial value)
+})

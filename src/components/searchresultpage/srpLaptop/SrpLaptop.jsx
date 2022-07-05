@@ -7,9 +7,9 @@ import { Configure, Index, Pagination } from 'react-instantsearch-hooks-web';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 // Import Components
+import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
 import { Hit } from '@/components/hits/Hits';
 
-import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
 import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
 import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
 import Redirect from '@/components/redirects/Redirect';
@@ -110,19 +110,17 @@ const SrpLaptop = () => {
       </div>
       <div className="srp-active srp-container">
         <div className="srp-container__facets">
-          <Suspense fallback={''}>
+          <Suspense fallback={<SkeletonLoader type={"facet"} />}>
             {/* Render Recommend component - Trending Facets */}
             {/* Change config in /config/trendingConfig.js */}
-            <div className="">
-              {shouldHaveTrendingFacetsValue && (
-                <WrappedTrendingFacetValues
-                  attribute="brand"
-                  facetName={'brand'}
-                  limit={500}
-                  facetValue={facetValue}
-                />
-              )}
-            </div>
+            {shouldHaveTrendingFacetsValue && (
+              <WrappedTrendingFacetValues
+                attribute="brand"
+                facetName={"brand"}
+                limit={500}
+                facetValue={facetValue}
+              />
+            )}
             <GenericRefinementList />
           </Suspense>
         </div>
@@ -164,9 +162,11 @@ const SrpLaptop = () => {
             query={queryState && queryState}
             getRankingInfo={true}
           />
+          
+          {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
+
           {shouldInjectContent ? (
-            <Suspense fallback={<SkeletonLoader />}>
-              {/* Load results for the injection index, so that we can later access them via the useInstantSearch hook, with the scopedResults property */}
+            <Suspense fallback={<SkeletonLoader type={"hit"} />}>
               <Index indexName={injectedContentIndex}>
                 <Configure hitsPerPage={1} page={0} />
               </Index>
@@ -174,8 +174,7 @@ const SrpLaptop = () => {
               <InjectedHits hitComponent={Hit} />
             </Suspense>
           ) : (
-            // If you defined to don't display the injected content it will display the custom hits
-            <Suspense fallback={<SkeletonLoader />}>
+            <Suspense fallback={<SkeletonLoader type={"hit"}/>}>
               <CustomHitsComponent />
             </Suspense>
           )}

@@ -82,27 +82,6 @@ function GenericRefinementList(props) {
   );
 }
 
-// const CustomColorRefinement = ({
-//   title,
-//   attribute,
-//   separator,
-//   layout,
-//   shape,
-// }) => {
-//   return (
-//     <div className="color-refinement">
-//       <h3>{title}</h3>
-//       <ColorRefinementList
-//         limit={16}
-//         attribute={attribute}
-//         separator={separator}
-//         layout={layout}
-//         shape={shape}
-//       />
-//     </div>
-//   );
-// };
-
 // ColorRefinementList custom for Hooks
 function CustomColorRefinement(props) {
   const { items, refine, searchForItems } = useRefinementList(props);
@@ -131,6 +110,7 @@ function CustomColorRefinement(props) {
                     width: '30px',
                     height: '30px',
                     borderRadius: '50%',
+                    cursor: 'pointer',
                   }}
                   type="button"
                   href="#"
@@ -159,14 +139,13 @@ const Facets = () => {
     <div>
       <DynamicWidgets maxValuesPerFacet={500}>
         {refinements.map((e, i) => {
-          const { type, currency, label, options } = e;
+          const { type, label, options } = e;
           switch (type) {
             case 'price':
               return (
                 <PriceSlider
                   attribute={options.attribute}
                   title={label}
-                  currency={currency}
                   key={i}
                 />
               );

@@ -82,16 +82,13 @@ const HomePage = ({ setIsMounted }) => {
       ref={HomePage}
     >
       {isFederated && isFederatedOpen && (
-        <AnimatePresence>
-          {/* Loads federated search if isFederated is true */}
-          <Suspense fallback={''}>
-            <FederatedSearch />
-          </Suspense>
-        </AnimatePresence>
+        <Suspense>
+          <FederatedSearch />
+        </Suspense>
       )}
 
       {/* Load custom banners */}
-      <Suspense fallback={''}>
+      <Suspense>
         <CustomHomeBanners />
       </Suspense>
 
@@ -110,7 +107,7 @@ const HomePage = ({ setIsMounted }) => {
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
         {shouldHaveTrendingProductsValue && (
-          <Suspense fallback={''}>
+          <Suspense>
             <Trending filter={null} />
           </Suspense>
         )}
