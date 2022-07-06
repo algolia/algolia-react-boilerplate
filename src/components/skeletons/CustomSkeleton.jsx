@@ -1,3 +1,5 @@
+import '@/components/hits/SCSS/skeleton.scss';
+
 const CustomSkeleton = ({type}) => {
     switch(type) {
         case "hit":
