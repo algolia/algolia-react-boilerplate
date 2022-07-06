@@ -1,8 +1,9 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
 
+import { useState } from 'react';
+
 // Recommend
-import algoliarecommend from '@algolia/recommend';
 import {
   FrequentlyBoughtTogether,
   RelatedProducts,
@@ -11,13 +12,13 @@ import {
 // framer-motion
 import { motion } from 'framer-motion';
 import get from 'lodash/get';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 
 import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import Price from '@/components/hits/components/Price.jsx';
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
-import { mainIndex, searchClientCreds } from '@/config/algoliaEnvConfig';
+import { mainIndex, searchClient, recommendClient } from '@/config/algoliaEnvConfig';
 import {
   framerMotionPage,
   framerMotionTransition,
@@ -31,14 +32,6 @@ import {
   shouldHaveRelatedProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
-
-// Import components
-
-// Algolia search client
-
-// React router import
-
-// Recoil import
 
 import { hitAtom, hitsConfig, PDPHitSections } from '@/config/hitsConfig';
 
@@ -66,8 +59,34 @@ const ProductDetails = () => {
     setTimeout(() => setAlertOpen(false), 5000);
   };
 
+  // location in order to access current objectID
+  const location = useLocation();
+
+  // access the main index from recoil state
+  const indexName = useRecoilValue(mainIndex);
+
   // access the hit component from recoil state
-  const hit = useRecoilValue(hitAtom);
+  const [hit, setHit] = useRecoilState(hitAtom);
+
+  const [readyToLoad, setReadyToLoad] = useState(false)
+
+  // if there is no stored hit
+  if (Object.keys(hit).length === 0) {
+    // get the object ID from URL
+    const currentObjectID = location.pathname.split('/')[2]
+
+    // initialise the API client
+    const index = searchClient.initIndex(indexName)
+
+    // Find the hit by Object ID through Algolia
+    index.search('', { facetFilters: `objectID:${currentObjectID}` }).then(({ hits }) => {
+      if (hits.length && hits.length > 0) {
+        // Set the hit atom
+        setHit(hits[0])
+        setReadyToLoad(true)
+      }
+    });
+  }
 
   // personalisation user token
   const userToken = useRecoilValue(personaSelectedAtom);
@@ -87,12 +106,6 @@ const ProductDetails = () => {
 
   // navigate is used by react router
   const navigate = useNavigate();
-
-  // define the client for using Recommend
-  const recommendClient = algoliarecommend(
-    searchClientCreds.appID,
-    searchClientCreds.APIKey
-  );
 
   const { tablet, mobile } = useRecoilValue(windowSize);
 
@@ -120,14 +133,12 @@ const ProductDetails = () => {
       transition={framerMotionPage.transition}
     >
       <div
-        className={`${
-          mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
-        }`}
+        className={`${mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
+          }`}
       >
         <div
-          className={`${
-            mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
-          }`}
+          className={`${mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+            }`}
           onClick={() => navigate(-1)}
         >
           <ChevronLeft />
@@ -253,7 +264,7 @@ const ProductDetails = () => {
         </div>
       </div>
       {/* Render two Recommend components - Related Products, Frequently Bought Together */}
-      <div
+      {readyToLoad && <div
         className="recommend"
         initial={{
           opacity: 0,
@@ -287,7 +298,7 @@ const ProductDetails = () => {
             />
           </div>
         )}
-      </div>
+      </div>}
     </div>
   );
 };
