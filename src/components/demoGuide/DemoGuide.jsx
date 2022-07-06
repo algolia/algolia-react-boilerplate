@@ -12,7 +12,7 @@ import SearchTerms from './components/SearchTerms';
 
 //Import Hooks
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
-import useScreenSize from '@/hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize';
 
 //Import custom transition for panel animations
 import { framerMotionTransition } from '@/config/animationConfig';
@@ -53,7 +53,7 @@ const DemoGuide = ({ setshowDemoGuide }) => {
   const demoGuideBtn = useRecoilValue(demoGuideBtnRef);
 
   //Listen for screen resize
-  const { tablet, mobile } = useScreenSize();
+  const { tablet, mobile } = useRecoilValue(windowSize);
 
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(demoGuide, demoGuideBtn, () =>

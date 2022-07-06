@@ -1,23 +1,34 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
 
+import { useEffect, useState } from 'react';
+
 // Recommend
-import algoliarecommend from '@algolia/recommend';
 import {
-  FrequentlyBoughtTogether,
-  RelatedProducts,
+  useRelatedProducts,
+  useFrequentlyBoughtTogether,
 } from '@algolia/recommend-react';
+
+// Slider for recommend
+import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
+
+// styles for Recommend HorizontalSlider
+import '@algolia/ui-components-horizontal-slider-theme';
 
 // framer-motion
 import { motion } from 'framer-motion';
 import get from 'lodash/get';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 
 import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import Price from '@/components/hits/components/Price.jsx';
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
-import { mainIndex, searchClientCreds } from '@/config/algoliaEnvConfig';
+import {
+  mainIndex,
+  searchClient,
+  recommendClient,
+} from '@/config/algoliaEnvConfig';
 import {
   framerMotionPage,
   framerMotionTransition,
@@ -32,21 +43,13 @@ import {
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
-// Import components
-
-// Algolia search client
-
-// React router import
-
-// Recoil import
-
 import { hitAtom, hitsConfig, PDPHitSections } from '@/config/hitsConfig';
 
 // Used to send insights event on add to cart
 import { personaSelectedAtom } from '@/config/personaConfig';
 
 // Custom hooks
-import useScreenSize from '@/hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize';
 
 // Send an insights event to algolia
 import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
@@ -70,8 +73,40 @@ const ProductDetails = () => {
     setTimeout(() => setAlertOpen(false), 5000);
   };
 
+  // location in order to access current objectID
+  const location = useLocation();
+
+  // access the main index from recoil state
+  const indexName = useRecoilValue(mainIndex);
+
   // access the hit component from recoil state
-  const hit = useRecoilValue(hitAtom);
+  const [hit, setHit] = useRecoilState(hitAtom);
+
+  const [readyToLoad, setReadyToLoad] = useState(false);
+
+  // current Object ID from URL
+  const currentObjectID = location.pathname.split('/')[2];
+
+  // if there is no stored hit
+  useEffect(() => {
+    if (Object.keys(hit).length === 0) {
+      // initialise the API client
+      const index = searchClient.initIndex(indexName);
+
+      // Find the hit by Object ID through Algolia
+      index
+        .search('', { facetFilters: `objectID:${currentObjectID}` })
+        .then(({ hits }) => {
+          if (hits.length && hits.length > 0) {
+            // Set the hit atom
+            setHit(hits[0]);
+            setReadyToLoad(true);
+          }
+        });
+    } else {
+      setReadyToLoad(true);
+    }
+  }, []);
 
   // personalisation user token
   const userToken = useRecoilValue(personaSelectedAtom);
@@ -92,13 +127,7 @@ const ProductDetails = () => {
   // navigate is used by react router
   const navigate = useNavigate();
 
-  // define the client for using Recommend
-  const recommendClient = algoliarecommend(
-    searchClientCreds.appID,
-    searchClientCreds.APIKey
-  );
-
-  const { tablet, mobile } = useScreenSize();
+  const { tablet, mobile } = useRecoilValue(windowSize);
 
   // Get hit attribute from config file
   const {
@@ -117,6 +146,18 @@ const ProductDetails = () => {
   // Use the translator
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
+  });
+
+  const { recommendations: fbtRecommendations } = useFrequentlyBoughtTogether({
+    recommendClient,
+    indexName,
+    objectIDs: [currentObjectID],
+  });
+
+  const { recommendations: relatedRecommendations } = useRelatedProducts({
+    recommendClient,
+    indexName,
+    objectIDs: [currentObjectID],
   });
 
   return (
@@ -263,41 +304,37 @@ const ProductDetails = () => {
         </div>
       </div>
       {/* Render two Recommend components - Related Products, Frequently Bought Together */}
-      <div
-        className="recommend"
-        initial={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: 1,
-          transition: { delay: 1, framerMotionTransition },
-        }}
-      >
-        {shouldHaveRelatedProductsValue && (
-          <div>
-            <h3 className="title">{t('relatedTitle')}</h3>
-            <RelatedProducts
-              recommendClient={recommendClient}
-              indexName={index}
-              objectIDs={[hit[objectID]]}
-              itemComponent={RelatedItem}
-              maxRecommendations={5}
-            />
-          </div>
-        )}
-        {shouldHaveFbtProductsValue && (
-          <div>
-            <h3 className="title">{t('fbtTitle')}</h3>
-            <FrequentlyBoughtTogether
-              recommendClient={recommendClient}
-              indexName={index}
-              objectIDs={[hit[objectID]]}
-              itemComponent={RelatedItem}
-              maxRecommendations={5}
-            />
-          </div>
-        )}
-      </div>
+      {readyToLoad && (
+        <div
+          className="recommend"
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+            transition: { delay: 1, framerMotionTransition },
+          }}
+        >
+          {shouldHaveRelatedProductsValue && relatedRecommendations.length > 0 && (
+            <div>
+              <h3 className="title">{t('relatedTitle')}</h3>
+              <HorizontalSlider
+                itemComponent={RelatedItem}
+                items={relatedRecommendations}
+              />
+            </div>
+          )}
+          {shouldHaveFbtProductsValue && fbtRecommendations.length > 0 && (
+            <div>
+              <h3 className="title">{t('fbtTitle')}</h3>
+              <HorizontalSlider
+                itemComponent={RelatedItem}
+                items={fbtRecommendations}
+              />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

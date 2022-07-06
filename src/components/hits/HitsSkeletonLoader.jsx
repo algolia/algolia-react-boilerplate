@@ -1,9 +1,10 @@
 import React from 'react';
-import useScreenSize from '@/hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize';
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
+import { useRecoilValue } from 'recoil';
 
 const SkeletonLoader = ({type}) => {
-  const { tablet, mobile } = useScreenSize();
+  const { tablet, mobile } = useRecoilValue(windowSize);;
 
   // Change this number to render more placeholders on the SRP loader
   const resultsNumber = 20;

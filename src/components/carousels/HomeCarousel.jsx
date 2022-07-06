@@ -17,12 +17,11 @@ import { segmentSelectedAtom } from '@/config/segmentConfig';
 // In case of img loading error
 import * as placeHolderError from '@/assets/logo/logo.webp';
 
-import useScreenSize from '@/hooks/useScreenSize';
-
 import get from 'lodash/get';
 
 // import Price component
 import Price from '@/components/hits/components/Price.jsx';
+import { windowSize } from '@/hooks/useScreenSize';
 
 //Import scope SCSS
 import './SCSS/carousels.scss';
@@ -33,7 +32,8 @@ const HomeCarousel = ({ context, titleEn, titleFr }) => {
   const userToken = useRecoilValue(personaSelectedAtom);
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
 
-  const { mobile } = useScreenSize();
+  const { mobile } = useRecoilValue(windowSize);
+
   return (
     <div className={`${mobile ? 'home-carousel-mobile' : 'home-carousel'}`}>
       <Index indexId={titleEn} indexName={index}>

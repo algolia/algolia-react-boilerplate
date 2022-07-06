@@ -37,7 +37,7 @@ import { selectorNavigationRef } from '@/config/headerConfig';
 // Check if user is clecking outside an element
 import useOutsideClickTwoConditionals from '@/hooks/useOutsideClickTwoConditions';
 // Check screensize for responsiveness
-import useScreenSize from '@/hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize';
 
 //Use Translation
 import { useTranslation } from 'react-i18next';
@@ -72,7 +72,7 @@ const FederatedSearch = () => {
     useRecoilState(federatedRef);
 
   // Get screen size
-  const { mobile, tablet } = useScreenSize();
+  const { mobile, tablet } = useRecoilValue(windowSize);
 
   // Import const translation
   // Use the translator

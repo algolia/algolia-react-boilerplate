@@ -2,7 +2,8 @@
 import { memo } from 'react';
 
 // Import Hook for a Sticky Header
-import useScreenSize from '@/hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize';
+import { useRecoilValue } from 'recoil';
 
 // Import 2 kind of Headers
 import HeaderLaptop from '@/components/header/components/HeaderLaptop';
@@ -13,7 +14,7 @@ import './SCSS/header.scss';
 
 const Header = () => {
   // Handle screen sizing & responsiveness with this hook
-  const { mobile, tablet, laptopXS, laptop } = useScreenSize();
+  const { mobile, tablet, laptopXS, laptop } = useRecoilValue(windowSize);
 
   // Render the Header for Laptop or Mobile, depending on the size of the screen
   return (
