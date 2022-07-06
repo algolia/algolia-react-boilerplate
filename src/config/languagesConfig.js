@@ -160,10 +160,11 @@ export const styles = {
     borderRadius: '0.3rem',
     padding: '0rem',
     cursor: 'pointer',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   }),
   menuList: () => ({}),
   input: () => ({
+    display: 'none',
     position: 'absolute',
     width: '100%',
     cursor: 'pointer',
@@ -181,11 +182,11 @@ export const styles = {
   placeholder: () => ({
     fontFamily: "'Poppins', sans-serif",
     cursor: 'pointer',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   }),
   valueContainer: () => ({
     cursor: 'pointer',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   }),
   option: () => {
     return {
