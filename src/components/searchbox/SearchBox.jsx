@@ -1,7 +1,7 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
 
-import { memo, useState, useEffect } from 'react';
+import { memo, useState } from 'react';
 
 // Algolia Import
 import { useSearchBox } from 'react-instantsearch-hooks-web';
@@ -41,11 +41,6 @@ function CustomSearchBox(props) {
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
-  // Query changed for suggestions in no results
-  const { queryChanged } = props;
-
-  // LEFT IN FOR REFACTO PURPOSES
-  // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
   // router hook to navigate using a function
   const navigate = useNavigate();
   // Get states of React Router
@@ -59,13 +54,9 @@ function CustomSearchBox(props) {
   const refineFunction = (query) => {
     // Empty array of rules on each Keystrokes
     rulesApplied([]);
+    // Refine query in all the app through recoil
     setQueryState(query);
-    refine(query);
   };
-
-  useEffect(() => {
-    refine(queryState);
-  }, [queryState]);
 
   return (
     <div
@@ -81,9 +72,6 @@ function CustomSearchBox(props) {
           setQueryState(query);
           useStoreQueryToLocalStorage(query);
           navigate('/search');
-          // set the Navigation category to 'All', which is at index 0
-          // LEFT IN FOR REFACTO PURPOSES
-          // setUnderlineCategory(0);
         }}
       >
         <input

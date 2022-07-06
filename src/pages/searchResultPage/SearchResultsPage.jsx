@@ -5,19 +5,33 @@
 // import React functionality
 import { useEffect, useRef, useState } from 'react';
 
+// import IS hook
+import { useHits } from 'react-instantsearch-hooks-web';
+
 // Recoil state to directly access results
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 // Import Components
-import { NoResultsHandler } from '@/components/searchresultpage/srpLaptop/Noresult';
+import SrpLaptop from '@/components/searchresultpage/srpLaptop/SrpLaptop';
+import { NoResults } from '@/components/searchresultpage/srpLaptop/Noresult';
+import Banner from '@/components/banners/Banner';
 
 // Federated congif from recoil
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 
-const SearchResultPage = ({ setIsMounted }) => {
-  const [srpIsLoaded, setSrpIsLoaded] = useState(false);
+const SearchResultPage = ({ setIsMounted, props }) => {
+  const [pageReady, setPageReady] = useState(false);
+  const [nbOfHits, setNbOfHits] = useState(1);
+
+  // Do you want to show banner on SRP? This boolean tells us yes or no
+  const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
+
   // Close federated and set value false for return without it
   const setFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
+
+  // import IS hook
+  const { hits } = useHits(props);
 
   useEffect(() => {
     setFederatedOpen(false);
@@ -38,8 +52,9 @@ const SearchResultPage = ({ setIsMounted }) => {
 
   // This will run one time after the component mounts
   useEffect(() => {
-    const onPageLoad = () => {
+    const onPageLoad = (e) => {
       setUseSkeleton(false);
+      setPageReady(true);
     };
 
     // Check if the page has already loaded
@@ -52,13 +67,21 @@ const SearchResultPage = ({ setIsMounted }) => {
     }
   }, []);
 
+  useEffect(() => {
+    setNbOfHits(hits.length);
+  }, [hits]);
+
   return (
-    <div ref={srpMounted} className="srp">
-      <NoResultsHandler
-        srpIsLoaded={srpIsLoaded}
-        setSrpIsLoaded={setSrpIsLoaded}
-      />
-    </div>
+    <>
+      {nbOfHits === 0 && pageReady ? (
+        <NoResults />
+      ) : (
+        <>
+          {shouldDisplayBanners && <Banner />}
+          <SrpLaptop />
+        </>
+      )}
+    </>
   );
 };
 
