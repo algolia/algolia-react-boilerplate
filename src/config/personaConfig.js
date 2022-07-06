@@ -51,6 +51,7 @@ export const styles = {
   }),
   menuList: () => ({}),
   input: () => ({
+    display: 'none',
     position: 'absolute',
     width: '100%',
     cursor: 'pointer',
