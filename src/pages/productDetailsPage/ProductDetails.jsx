@@ -1,13 +1,20 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Recommend
 import {
-  FrequentlyBoughtTogether,
-  RelatedProducts,
+  useRelatedProducts,
+  useFrequentlyBoughtTogether
 } from '@algolia/recommend-react';
+
+
+// Slider for recommend
+import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
+
+// styles for Recommend HorizontalSlider
+import '@algolia/ui-components-horizontal-slider-theme';
 
 // framer-motion
 import { motion } from 'framer-motion';
@@ -70,23 +77,27 @@ const ProductDetails = () => {
 
   const [readyToLoad, setReadyToLoad] = useState(false)
 
+  // current Object ID from URL
+  const currentObjectID = location.pathname.split('/')[2]
+
   // if there is no stored hit
-  if (Object.keys(hit).length === 0) {
-    // get the object ID from URL
-    const currentObjectID = location.pathname.split('/')[2]
+  useEffect(() => {
+    if (Object.keys(hit).length === 0) {
+      // initialise the API client
+      const index = searchClient.initIndex(indexName)
 
-    // initialise the API client
-    const index = searchClient.initIndex(indexName)
-
-    // Find the hit by Object ID through Algolia
-    index.search('', { facetFilters: `objectID:${currentObjectID}` }).then(({ hits }) => {
-      if (hits.length && hits.length > 0) {
-        // Set the hit atom
-        setHit(hits[0])
-        setReadyToLoad(true)
-      }
-    });
-  }
+      // Find the hit by Object ID through Algolia
+      index.search('', { facetFilters: `objectID:${currentObjectID}` }).then(({ hits }) => {
+        if (hits.length && hits.length > 0) {
+          // Set the hit atom
+          setHit(hits[0])
+          setReadyToLoad(true)
+        }
+      });
+    } else {
+      setReadyToLoad(true)
+    }
+  }, [])
 
   // personalisation user token
   const userToken = useRecoilValue(personaSelectedAtom);
@@ -121,6 +132,18 @@ const ProductDetails = () => {
   } = hitsConfig;
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1];
+
+  const { recommendations: fbtRecommendations } = useFrequentlyBoughtTogether({
+    recommendClient,
+    indexName,
+    objectIDs: [currentObjectID],
+  });
+
+  const { recommendations: relatedRecommendations } = useRelatedProducts({
+    recommendClient,
+    indexName,
+    objectIDs: [currentObjectID],
+  });
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -274,28 +297,16 @@ const ProductDetails = () => {
           transition: { delay: 1, framerMotionTransition },
         }}
       >
-        {shouldHaveRelatedProductsValue && (
+        {shouldHaveRelatedProductsValue && relatedRecommendations.length > 0 && (
           <div>
             <h3 className="title">Related Products</h3>
-            <RelatedProducts
-              recommendClient={recommendClient}
-              indexName={index}
-              objectIDs={[hit[objectID]]}
-              itemComponent={RelatedItem}
-              maxRecommendations={5}
-            />
+            <HorizontalSlider itemComponent={RelatedItem} items={relatedRecommendations} />
           </div>
         )}
-        {shouldHaveFbtProductsValue && (
+        {shouldHaveFbtProductsValue && fbtRecommendations.length > 0 && (
           <div>
             <h3 className="title">Frequently Bought Together</h3>
-            <FrequentlyBoughtTogether
-              recommendClient={recommendClient}
-              indexName={index}
-              objectIDs={[hit[objectID]]}
-              itemComponent={RelatedItem}
-              maxRecommendations={5}
-            />
+            <HorizontalSlider itemComponent={RelatedItem} items={fbtRecommendations} />
           </div>
         )}
       </div>}
