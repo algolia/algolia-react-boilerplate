@@ -1,11 +1,12 @@
-import { InstantSearch } from 'react-instantsearch-hooks-web';
+import { useState } from 'react';
+
+import { Configure, InstantSearch } from 'react-instantsearch-hooks-web';
 
 // application state from config file
 import { searchClient } from './config/algoliaEnvConfig';
 
 // Framer-Motion
 import { AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
 
 // React router
 import { Route, Routes, useLocation } from 'react-router-dom';
@@ -14,30 +15,27 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Import help navigation state & config
-
-import { isRulesSwitchToggle } from './config/appliedRulesConfig';
-
 import { mainIndex } from './config/algoliaEnvConfig';
-
-// // Allows logging and manipulation of algolia results etc.
-
-// Import Pages and static components
-import AlertNavigation from '@/components/demoGuide/AlertNavigation';
-import DemoGuide from '@/components/demoGuide/DemoGuide';
-import Header from '@/components/header/Header';
-import Footer from './components/footer/Footer';
-import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
-import HomePage from './pages/homepage/HomePage';
-import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
-import ProductDetails from './pages/productDetailsPage/ProductDetails';
-import CustomAppliedRules from './components/appliedRules/AppliedRules';
-
-// Custom hook to prevent body from scrolling
+import { isRulesSwitchToggle } from './config/appliedRulesConfig';
+import { queryAtom } from './config/searchboxConfig';
 import {
   isDemoGuideOpen,
   shouldShowAlert,
   shouldShowDemoGuide,
 } from '@/config/demoGuideConfig';
+
+// Import Pages and static components
+import AlertNavigation from '@/components/demoGuide/AlertNavigation';
+import DemoGuide from '@/components/demoGuide/DemoGuide';
+import Header from '@/components/header/Header';
+import CustomAppliedRules from './components/appliedRules/AppliedRules';
+import Footer from './components/footer/Footer';
+import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
+import HomePage from './pages/homepage/HomePage';
+import ProductDetails from './pages/productDetailsPage/ProductDetails';
+import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
+
+// Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
 
 export const Main = () => {
@@ -45,6 +43,8 @@ export const Main = () => {
 
   const [isMounted, setIsMounted] = useState(false);
   const location = useLocation();
+
+  const queryState = useRecoilValue(queryAtom);
 
   // Should the alert badges for the demo guide be shown
   const shouldShowAlertAtom = useRecoilValue(shouldShowAlert);
@@ -62,6 +62,7 @@ export const Main = () => {
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
       <div className="visible">
+        <Configure query={queryState} />
         <Header />
         <DemoGuideOpener />
         <AnimatePresence>

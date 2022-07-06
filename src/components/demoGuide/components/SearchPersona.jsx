@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 // Import the Select widget (https://react-select.com/home)
 import Select from 'react-select';
 
@@ -15,18 +13,11 @@ import { styles, searchPersonaInformations } from '@/config/demoGuideConfig';
 
 import { personaSelectedAtom, personaConfig } from '@/config/personaConfig';
 
-import { categorySelectionAtom } from '@/config/headerConfig';
-
 const SearchPersona = () => {
-  // Recoil State - update query in searchBar
   const setPersonaSelect = useSetRecoilState(personaSelectedAtom);
-  // Recoil State - set the category to 'All'
-  // LEFT IN FOR REFACTO PURPOSES
-  // const setUnderlineCategory = useSetRecoilState(categorySelectionAtom);
+
   const setAlert = useSetRecoilState(alertContent);
   const setAlertOpen = useSetRecoilState(isAlertOpen);
-  // router hook to navigate using a function
-  const navigate = useNavigate();
 
   const triggerAlert = (content) => {
     setAlertOpen(true);

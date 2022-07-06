@@ -1,8 +1,12 @@
-import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
+// import IS hook
+import { Index, Configure } from 'react-instantsearch-hooks-web';
 
-// To display if no results
+// Import recoil function
+import { useRecoilValue } from 'recoil';
+
 // Recommend
 import algoliarecommend from '@algolia/recommend';
+import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
 import { RelatedProducts } from '@algolia/recommend-react';
 
 // Algolia search client
@@ -14,17 +18,11 @@ const recommendClient = algoliarecommend(
   searchClientCreds.APIKey
 );
 
-import { Configure, Index, useHits } from 'react-instantsearch-hooks-web';
-
 // Recoil state to directly access results
-import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 import { queryAtom } from '@/config/searchboxConfig';
-import { useRecoilValue } from 'recoil';
 
 // Import Components
-import Banner from '@/components/banners/Banner';
 import QuerySuggestions from '@/components/federatedSearch/components/QuerySuggestions';
-import SrpLaptop from './SrpLaptop';
 
 // Config suggestions
 import { indexNames } from '@/config/algoliaEnvConfig';
@@ -102,18 +100,4 @@ const NoResults = () => {
   );
 };
 
-function NoResultsHandler(props) {
-  // Do you want to show banner on SRP? This boolean tells us yes or no
-  const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
-  const { hits } = useHits(props);
-  return hits.length > 0 ? (
-    <div>
-      {shouldDisplayBanners && <Banner />}
-      <SrpLaptop />
-    </div>
-  ) : (
-    <NoResults />
-  );
-}
-
-export { NoResults, NoResultsHandler };
+export { NoResults };
