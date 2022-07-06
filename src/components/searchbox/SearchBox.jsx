@@ -22,6 +22,7 @@ import {
   queryAtom,
   searchBoxAtom,
   simplePlaceholderAtom,
+  searchBoxIsActive,
 } from '@/config/searchboxConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
@@ -33,11 +34,12 @@ import useOutsideClick from '@/hooks/useOutsideClick';
 import './SCSS/searchbox.scss';
 
 function CustomSearchBox(props) {
-  const { refine, query } = useSearchBox(props);
+  const { query } = useSearchBox(props);
+
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
-  const [searchboxIsActive, setSearchboxIsActive] = useState(false);
-  const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom);
+  const [sbIsActive, setSbIsActive] = useRecoilState(searchBoxIsActive);
+  // const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
   const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
@@ -45,8 +47,6 @@ function CustomSearchBox(props) {
   const navigate = useNavigate();
   // Get states of React Router
   const { state } = useLocation();
-
-  useOutsideClick(searchboxRef, () => setSearchboxIsActive(false));
 
   // Get array of rules from Recoil
   const rulesApplied = useSetRecoilState(rulesAtom);
@@ -59,9 +59,7 @@ function CustomSearchBox(props) {
   };
 
   return (
-    <div
-      className={searchboxIsActive ? 'searchbox-active searchbox' : 'searchbox'}
-    >
+    <div className={sbIsActive ? 'searchbox-active searchbox' : 'searchbox'}>
       <form
         className="searchbox__form"
         action=""
@@ -76,13 +74,13 @@ function CustomSearchBox(props) {
       >
         <input
           className="searchbox__form__input"
-          ref={setSearchBoxRef}
+          // ref={setSearchBoxRef}
           type="search"
           value={queryState ? queryState : ''}
           placeholder={simplePlaceholder}
           onClick={() => {
             setIsFederatedOpen(true);
-            setSearchboxIsActive(true);
+            setSbIsActive(true);
           }}
           onChange={(event) => {
             refineFunction(event.currentTarget.value);
