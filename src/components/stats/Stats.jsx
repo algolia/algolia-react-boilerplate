@@ -2,6 +2,9 @@
 import connectStats from 'instantsearch.js/es/connectors/stats/connectStats';
 import { useConnector } from 'react-instantsearch-hooks-web';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 export function useStats(props) {
   return useConnector(connectStats, props);
 }
@@ -9,6 +12,12 @@ export function useStats(props) {
 export function CustomStats(props) {
   const { processingTimeMS, nbHits, nbSortedHits, areHitsSorted } =
     useStats(props);
+
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'srp',
+  });
 
   return (
     <div className="stats-infos">
@@ -24,7 +33,7 @@ export function CustomStats(props) {
         <div className="stats-infos__list">
           <span>{nbHits.toLocaleString()}</span>
           <p>
-            results found in <span>{processingTimeMS.toLocaleString()} ms</span>
+            {t('stats')} <span>{processingTimeMS.toLocaleString()} ms</span>
           </p>
         </div>
       )}

@@ -15,10 +15,12 @@ function Articles(props) {
   const { image, date, title, headings } = useRecoilValue(
     contentArticlesConfig
   );
+  //get title
+  const { titleArticles } = props;
 
   return (
     <div className="articles__wrapper">
-      <h3 className="articles__title">ARTICLES</h3>
+      <h3 className="articles__title">{titleArticles}</h3>
       {hits.map((hit, index) => {
         return (
           <div key={index} className="articles__item">

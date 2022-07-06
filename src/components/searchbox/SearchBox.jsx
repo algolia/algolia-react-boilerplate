@@ -69,7 +69,10 @@ function CustomSearchBox(props) {
 
   return (
     <div
-      className={searchboxIsActive ? 'searchbox-active searchbox' : 'searchbox'}
+      // Comment it because we don't use it anymore
+      className={`searchbox ${state?.type ? ' searchboxCategory' : ''} ${
+        searchboxIsActive ? 'searchbox-active' : ''
+      }`}
     >
       <form
         className="searchbox__form"

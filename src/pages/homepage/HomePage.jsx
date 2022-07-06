@@ -82,9 +82,9 @@ const HomePage = ({ setIsMounted }) => {
       ref={HomePage}
     >
       {isFederated && isFederatedOpen && (
-          <Suspense>
-            <FederatedSearch />
-          </Suspense>
+        <Suspense>
+          <FederatedSearch />
+        </Suspense>
       )}
 
       {/* Load custom banners */}
@@ -94,8 +94,12 @@ const HomePage = ({ setIsMounted }) => {
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
-          <Suspense key={i}>
-            <HomeCarousel context={carousel.context} title={carousel.title} />
+          <Suspense key={i} fallback={''}>
+            <HomeCarousel
+              context={carousel.context}
+              titleEn={carousel.titleEn}
+              titleFr={carousel.titleFr}
+            />
           </Suspense>
         ))}
 

@@ -11,16 +11,16 @@ import '@algolia/ui-components-horizontal-slider-theme';
 import { trendingConfig } from '@/config/trendingConfig';
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 function WrappedTrendingFacetValues(props) {
   const { items, refine } = useRefinementList(props);
   const [recommendationsLoaded, setRecommendationsLoaded] = useState(false);
 
   const index = useRecoilValue(mainIndex);
-  const {
-    facetValuesAttribute,
-    facetValuesTitle,
-    maxFacetValuesRecommendations,
-  } = trendingConfig;
+  const { facetValuesAttribute, maxFacetValuesRecommendations } =
+    trendingConfig;
 
   const { recommendations } = useTrendingFacets({
     recommendClient,
@@ -33,9 +33,7 @@ function WrappedTrendingFacetValues(props) {
     setRecommendationsLoaded(recommendations.length > 0);
   }, [recommendations]);
 
-  const TrendingFacetsItem = ({
-    trendingFacetValue
-  }) => {
+  const TrendingFacetsItem = ({ trendingFacetValue }) => {
     // trendingFacet prop comes from Recommend, it is not a refinementList item, but we need a refinementList item to do things like refine.
     // We look up the refinementList item which matches the current Recommend item (they are both facet values) and switch item.
     // Item is now the refinementList item, so we can access all of correct functionality like isRefined etc.
@@ -56,8 +54,9 @@ function WrappedTrendingFacetValues(props) {
       <>
         {mergedItem && !isBusy && (
           <button
-            className={`filters-container__content__list__button-filter ${mergedItem.isRefined ? 'refined-filter' : ''
-              }`}
+            className={`filters-container__content__list__button-filter ${
+              mergedItem.isRefined ? 'refined-filter' : ''
+            }`}
             type="button"
             href="#"
             onClick={(event) => {
@@ -75,13 +74,19 @@ function WrappedTrendingFacetValues(props) {
     );
   };
 
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'srp',
+  });
+
   return (
     <div className="trending-facet-container">
       {recommendations.length > 0 && (
         <div className="filters-container">
           {recommendationsLoaded && (
             <div className="filters-container__title">
-              <h3>{facetValuesTitle}</h3>
+              <h3>{t('titleTrendingFacets')}</h3>
             </div>
           )}
           <div className="filters-container__list"></div>

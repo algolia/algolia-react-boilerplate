@@ -13,11 +13,13 @@ import { federatedCategoriesAttribute } from '@/config/federatedConfig';
 
 function Category(props) {
   const { items } = useRefinementList(props);
+  //Get title
+  const { title } = props;
   // router hook to navigate using a function
   const navigate = useNavigate();
   return (
     <div className="categories">
-      <h3 className="categories__title">Categories</h3>
+      <h3 className="categories__title">{title}</h3>
       <div className="categories__wrapper">
         <ul className="categories__items">
           {items.map((hit) => (

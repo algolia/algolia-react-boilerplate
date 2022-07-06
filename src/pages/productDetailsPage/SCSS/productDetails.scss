@@ -64,33 +64,32 @@
         text-transform: capitalize;
       }
       .name {
-        @include productName($grey-dark-color)
+        @include productName($grey-dark-color);
       }
       .color {
         display: flex;
         align-items: center;
         gap: 1rem;
-        p{
-          @include colorName($main-color)
+        p {
+          @include colorName($main-color);
         }
       }
       .add-to-cart {
         @include btn($purple-algolia-custom-gradient, $white-color);
         margin-top: 5rem;
         gap: 1rem;
-        width: 8rem;
-        &:hover{
+        width: 10rem;
+        &:hover {
           @include btn-hover($purple-algolia-custom-gradient, $white-color);
           gap: 1.5rem;
         }
-        svg{
+        svg {
           width: 12px;
         }
-        p{
+        p {
           @include p-text($white-color);
           font-size: 0.8rem;
         }
-        
       }
       .price {
         @include price($purple-algolia);
