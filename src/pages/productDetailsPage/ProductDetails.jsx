@@ -1,23 +1,31 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
 
+import { useEffect, useState } from 'react';
+
 // Recommend
-import algoliarecommend from '@algolia/recommend';
 import {
-  FrequentlyBoughtTogether,
-  RelatedProducts,
+  useRelatedProducts,
+  useFrequentlyBoughtTogether
 } from '@algolia/recommend-react';
+
+
+// Slider for recommend
+import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
+
+// styles for Recommend HorizontalSlider
+import '@algolia/ui-components-horizontal-slider-theme';
 
 // framer-motion
 import { motion } from 'framer-motion';
 import get from 'lodash/get';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 
 import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import Price from '@/components/hits/components/Price.jsx';
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
-import { mainIndex, searchClientCreds } from '@/config/algoliaEnvConfig';
+import { mainIndex, searchClient, recommendClient } from '@/config/algoliaEnvConfig';
 import {
   framerMotionPage,
   framerMotionTransition,
@@ -31,14 +39,6 @@ import {
   shouldHaveRelatedProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
-
-// Import components
-
-// Algolia search client
-
-// React router import
-
-// Recoil import
 
 import { hitAtom, hitsConfig, PDPHitSections } from '@/config/hitsConfig';
 
@@ -66,8 +66,38 @@ const ProductDetails = () => {
     setTimeout(() => setAlertOpen(false), 5000);
   };
 
+  // location in order to access current objectID
+  const location = useLocation();
+
+  // access the main index from recoil state
+  const indexName = useRecoilValue(mainIndex);
+
   // access the hit component from recoil state
-  const hit = useRecoilValue(hitAtom);
+  const [hit, setHit] = useRecoilState(hitAtom);
+
+  const [readyToLoad, setReadyToLoad] = useState(false)
+
+  // current Object ID from URL
+  const currentObjectID = location.pathname.split('/')[2]
+
+  // if there is no stored hit
+  useEffect(() => {
+    if (Object.keys(hit).length === 0) {
+      // initialise the API client
+      const index = searchClient.initIndex(indexName)
+
+      // Find the hit by Object ID through Algolia
+      index.search('', { facetFilters: `objectID:${currentObjectID}` }).then(({ hits }) => {
+        if (hits.length && hits.length > 0) {
+          // Set the hit atom
+          setHit(hits[0])
+          setReadyToLoad(true)
+        }
+      });
+    } else {
+      setReadyToLoad(true)
+    }
+  }, [])
 
   // personalisation user token
   const userToken = useRecoilValue(personaSelectedAtom);
@@ -88,12 +118,6 @@ const ProductDetails = () => {
   // navigate is used by react router
   const navigate = useNavigate();
 
-  // define the client for using Recommend
-  const recommendClient = algoliarecommend(
-    searchClientCreds.appID,
-    searchClientCreds.APIKey
-  );
-
   const { tablet, mobile } = useRecoilValue(windowSize);
 
   // Get hit attribute from config file
@@ -109,6 +133,18 @@ const ProductDetails = () => {
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1];
 
+  const { recommendations: fbtRecommendations } = useFrequentlyBoughtTogether({
+    recommendClient,
+    indexName,
+    objectIDs: [currentObjectID],
+  });
+
+  const { recommendations: relatedRecommendations } = useRelatedProducts({
+    recommendClient,
+    indexName,
+    objectIDs: [currentObjectID],
+  });
+
   return (
     // Product Display Page parent container, including attributes for framer motion
     <div
@@ -120,14 +156,12 @@ const ProductDetails = () => {
       transition={framerMotionPage.transition}
     >
       <div
-        className={`${
-          mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
-        }`}
+        className={`${mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
+          }`}
       >
         <div
-          className={`${
-            mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
-          }`}
+          className={`${mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+            }`}
           onClick={() => navigate(-1)}
         >
           <ChevronLeft />
@@ -253,7 +287,7 @@ const ProductDetails = () => {
         </div>
       </div>
       {/* Render two Recommend components - Related Products, Frequently Bought Together */}
-      <div
+      {readyToLoad && <div
         className="recommend"
         initial={{
           opacity: 0,
@@ -263,31 +297,19 @@ const ProductDetails = () => {
           transition: { delay: 1, framerMotionTransition },
         }}
       >
-        {shouldHaveRelatedProductsValue && (
+        {shouldHaveRelatedProductsValue && relatedRecommendations.length > 0 && (
           <div>
             <h3 className="title">Related Products</h3>
-            <RelatedProducts
-              recommendClient={recommendClient}
-              indexName={index}
-              objectIDs={[hit[objectID]]}
-              itemComponent={RelatedItem}
-              maxRecommendations={5}
-            />
+            <HorizontalSlider itemComponent={RelatedItem} items={relatedRecommendations} />
           </div>
         )}
-        {shouldHaveFbtProductsValue && (
+        {shouldHaveFbtProductsValue && fbtRecommendations.length > 0 && (
           <div>
             <h3 className="title">Frequently Bought Together</h3>
-            <FrequentlyBoughtTogether
-              recommendClient={recommendClient}
-              indexName={index}
-              objectIDs={[hit[objectID]]}
-              itemComponent={RelatedItem}
-              maxRecommendations={5}
-            />
+            <HorizontalSlider itemComponent={RelatedItem} items={fbtRecommendations} />
           </div>
         )}
-      </div>
+      </div>}
     </div>
   );
 };

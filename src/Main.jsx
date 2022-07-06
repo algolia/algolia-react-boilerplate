@@ -44,7 +44,6 @@ export const Main = () => {
   const index = useRecoilValue(mainIndex);
 
   const [isMounted, setIsMounted] = useState(false);
-  // const [index, setIndex] = useState(mainIndex);
   const location = useLocation();
 
   // Should the alert badges for the demo guide be shown
