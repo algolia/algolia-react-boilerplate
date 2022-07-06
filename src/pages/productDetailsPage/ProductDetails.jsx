@@ -46,7 +46,7 @@ import { hitAtom, hitsConfig, PDPHitSections } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 
 // Custom hooks
-import useScreenSize from '@/hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize';
 
 // Send an insights event to algolia
 import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
@@ -94,7 +94,7 @@ const ProductDetails = () => {
     searchClientCreds.APIKey
   );
 
-  const { tablet, mobile } = useScreenSize();
+  const { tablet, mobile } = useRecoilValue(windowSize);
 
   // Get hit attribute from config file
   const {

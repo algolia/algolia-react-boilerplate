@@ -3,6 +3,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 // Recoil State Management
 import { RecoilRoot } from 'recoil';
 
+// Resize component listens for screen size change to display UI accordingly
+import ScreenResizer from './utils/ScreenResizer';
+
 // SCSS import
 import './scss/index.scss';
 
@@ -13,6 +16,7 @@ const App = () => {
   return (
     <RecoilRoot>
       <Router>
+        <ScreenResizer />
         <Main />
       </Router>
     </RecoilRoot>
