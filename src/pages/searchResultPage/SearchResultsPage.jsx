@@ -21,7 +21,6 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 
 const SearchResultPage = ({ setIsMounted, props }) => {
-  const [pageReady, setPageReady] = useState(false);
   const [nbOfHits, setNbOfHits] = useState(1);
 
   // Do you want to show banner on SRP? This boolean tells us yes or no
@@ -48,32 +47,13 @@ const SearchResultPage = ({ setIsMounted, props }) => {
     };
   }, []);
 
-  const [useSkeleton, setUseSkeleton] = useState(true);
-
-  // This will run one time after the component mounts
-  useEffect(() => {
-    const onPageLoad = (e) => {
-      setUseSkeleton(false);
-      setPageReady(true);
-    };
-
-    // Check if the page has already loaded
-    if (document.readyState === 'complete') {
-      onPageLoad();
-    } else {
-      window.addEventListener('load', onPageLoad);
-      // Remove the event listener when component unmounts
-      return () => window.removeEventListener('load', onPageLoad);
-    }
-  }, []);
-
   useEffect(() => {
     setNbOfHits(hits.length);
   }, [hits]);
 
   return (
     <>
-      {nbOfHits === 0 && pageReady ? (
+      {nbOfHits === 0 && srpMounted ? (
         <NoResults />
       ) : (
         <>
