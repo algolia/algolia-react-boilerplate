@@ -5,40 +5,52 @@ import { useTour } from '@reactour/tour';
 
 // React Router
 import { Link } from 'react-router-dom';
-// Recoil Header State
-import { queryAtom } from '@/config/searchboxConfig';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+
+// Recoil State
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+
+// Import SearchBox config
+import {
+  queryAtom,
+  searchBoxAtom,
+  searchBoxIsActive,
+} from '@/config/searchboxConfig';
 
 //Import config for federatedSearch
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+
+// Import voiceSearch config
 import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
-import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+// Import Demo tour config
+import { shouldShowDemoTour } from '@/config/demoTourConfig';
+
+// Import applied rules config
+import { rulesAtom } from '@/config/appliedRulesConfig';
+
+// Custom Hooks
+import useOutsideClick from '@/hooks/useOutsideClick';
 
 import logo from '@/assets/logo/logo.webp';
 
-import { shouldShowDemoTour } from '@/config/demoTourConfig';
-
-// Import SearchBox
-// Rename customSearchbox
+// Import Components
 import CustomSearchBox from '@/components/searchbox/SearchBox';
-
-// Import VoiceSearchComponent
+import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
-
-import { rulesAtom } from '@/config/appliedRulesConfig';
 
 const HeaderLaptop = () => {
   // React Tour
   const { setIsOpen } = useTour();
 
+  const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom);
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
-
-  // Define value to display voiceSearch
+  const setSbIsActive = useSetRecoilState(searchBoxIsActive);
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
   const displayDemoTour = useRecoilValue(shouldShowDemoTour);
-
   const rulesApplied = useSetRecoilState(rulesAtom);
+
+  useOutsideClick(searchboxRef, () => setSbIsActive(false));
 
   return (
     <div className="container">
@@ -68,9 +80,9 @@ const HeaderLaptop = () => {
           </Link>
         </div>
         {/* For a search box Simple center */}
-        <div className="searchbox-container">
+        <div className="searchbox-container" ref={setSearchBoxRef}>
           <CustomSearchBox />
-          {/* {displayVoiceSearch && <CustomVoiceSearchComponent />} */}
+          {displayVoiceSearch && <CustomVoiceSearchComponent />}
         </div>
       </div>
       <div className="container__header-nav">
