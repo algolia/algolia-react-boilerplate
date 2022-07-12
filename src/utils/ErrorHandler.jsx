@@ -28,6 +28,34 @@ function SearchErrorToast() {
   }, [use]);
 
   useEffect(() => {
+    (function(open) {
+        XMLHttpRequest.prototype.open = function(m, u, a, us, p) {
+            this.addEventListener('readystatechange', function() {
+                if ((typeof this.response === typeof "") && this.response.length > 0) {
+                    let res = JSON.parse(this.response)
+                    res.url = this.responseURL
+                    Boolean(res.message) && setError(res)
+                }
+            }, false);
+    
+            open.call(this, m, u, a, us, p);
+        };
+      })(XMLHttpRequest.prototype.open)
+
+      return () => {
+        (function(open) {
+            XMLHttpRequest.prototype.open = function(m, u, a, us, p) {
+                this.removeEventListener('readystatechange', function() {
+                }, false);
+        
+
+                open.call(this, m, u, a, us, p);
+            };
+          })(XMLHttpRequest.prototype.open)
+      }
+    }, []);
+
+  useEffect(() => {
     // if there is an error, we activate the modal
     setModalActive(Boolean(error))
   }, [error]);
@@ -43,8 +71,11 @@ function SearchErrorToast() {
     <CustomModal isActive={modalActive} setActive={setModalActive}>
       <div className="error-modal-container">
         <div className="error-modal-content">
-            <h5>{error.name} {error.status}</h5>
-            <p>{error.message}</p>
+            <h5>{error.status} {error.name || "Error"}</h5>
+            <strong><p>{error.message}</p></strong>
+            {error.url && (
+                <p><strong>URL:</strong> {error.url}</p>
+            )}
         </div>
       </div>
     </CustomModal>

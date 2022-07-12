@@ -31,7 +31,7 @@
 
 .Modal {
     position: relative;
-    max-height: 200px;
+    max-height: 400px;
     display: flex;
     align-items: center;
 }
@@ -40,14 +40,19 @@
     background-color: white;
     border-radius: 12px;
     padding: 20px;
-    width: 300px;
+    width: 400px;
     height: 100%;
     display: flex;
     align-items: center;
+
+    p { 
+        width: 90%;
+        word-wrap: break-word;
+    }
 }
 
 @media only screen and (min-width: 800px) {
     .ModalContent {
-        width: 360px;
+        width: 660px;
     }
   }

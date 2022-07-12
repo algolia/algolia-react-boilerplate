@@ -130,7 +130,7 @@ You can configure your tour by adjusting the `steps` const, also found in `confi
 
 This feature will guide you to see what in the configuration is failing. We render the InstantSearch api errors in a modal.
 
-You can turn this feature off by switching `showNetworkErorrs` default value to `false` in `config/demoGuideConfig`
+You can turn this feature off by switching `showNetworkErorrs` default value to `false` in `config/demoGuideConfig`.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Insights</h3>
 
