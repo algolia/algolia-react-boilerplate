@@ -1,3 +1,5 @@
+// To close the modal simply click on the grey background
+
 const CustomModal = (props) => {
     const { 
         position = "static",

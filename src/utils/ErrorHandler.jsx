@@ -36,12 +36,14 @@ function SearchErrorToast() {
     return null;
   }
 
+  // To close the modal simply click on the grey background
+
   return (
     // pass state down to custom modal to display and close it 
     <CustomModal isActive={modalActive} setActive={setModalActive}>
       <div className="error-modal-container">
         <div className="error-modal-content">
-            <h5>{error.name}</h5>
+            <h5>{error.name} {error.status}</h5>
             <p>{error.message}</p>
         </div>
       </div>
