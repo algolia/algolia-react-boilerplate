@@ -37,11 +37,10 @@ function SearchErrorToast() {
   return (
     <CustomModal isActive={modalActive} setActive={setModalActive}>
       <div className="error-modal-container">
-        <div className="BasketContent">
+        <div className="error-modal-content">
             <h5>{error.name}</h5>
             <p>{error.message}</p>
         </div>
-
       </div>
     </CustomModal>
   );
