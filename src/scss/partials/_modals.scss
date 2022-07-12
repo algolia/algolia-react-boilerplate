@@ -1,0 +1,58 @@
+.error-modal-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-modal-content {
+    width: 80%;
+}
+
+.error-modal-content > h5 {
+    text-align: center;
+    font-size: 18px;
+    color: red;
+}
+
+.Overlay {
+    position: fixed;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 900;
+    display: flex;
+    padding-top: 120px;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.Modal {
+    position: relative;
+    max-height: 400px;
+    display: flex;
+    align-items: center;
+}
+
+.ModalContent {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    width: 400px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    p { 
+        width: 90%;
+        word-wrap: break-word;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .ModalContent {
+        width: 660px;
+    }
+  }
