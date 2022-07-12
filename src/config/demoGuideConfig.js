@@ -9,6 +9,12 @@ export const shouldShowDemoGuide = atom({
   default: true,
 });
 
+// Should we show the network errors in the demo - might want to switch this to false when demo-ing to a client
+export const showNetworkErorrs = atom({
+  key: 'showNetworkErorrs',
+  default: true,
+});
+
 // This atom represents whether the alerts should be shown or not when something in the demo guide is triggered
 export const shouldShowAlert = atom({
   key: 'shouldShowAlert',

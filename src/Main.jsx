@@ -22,6 +22,7 @@ import {
   isDemoGuideOpen,
   shouldShowAlert,
   shouldShowDemoGuide,
+  showNetworkErorrs
 } from '@/config/demoGuideConfig';
 
 // Import Pages and static components
@@ -37,11 +38,13 @@ import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
+import SearchErrorToast from './utils/ErrorHandler';
 
 export const Main = () => {
   const index = useRecoilValue(mainIndex);
 
   const [isMounted, setIsMounted] = useState(false);
+  
   const location = useLocation();
 
   const queryState = useRecoilValue(queryAtom);
@@ -52,15 +55,23 @@ export const Main = () => {
   // Show rules applied panel when switch on in the demo guide panel
   const isRulesSwitchToggleChecked = useRecoilValue(isRulesSwitchToggle);
 
-  // Should the feature of guided panel for SE should be in this app
+  // Show the feature of guided panel for SE should be in this app
   const shouldShowNavigation = useRecoilValue(shouldShowDemoGuide);
+
   // State that show/hide the panel if click on the guide btn
   const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
+
+  // Value that shows Network Errors to Guide you to the correct Configuration
+  const isNetworkErorrs = useRecoilValue(showNetworkErorrs);
+
+
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
 
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
+      {isNetworkErorrs && <SearchErrorToast />}
+
       <div className="visible">
         <Configure query={queryState} />
         <Header />
