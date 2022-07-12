@@ -11,6 +11,7 @@
   - [ Recommend](#--recommend)
   - [ Styling](#--styling)
   - [ Demo Guide](#--demo-guide)
+  - [ Network Error Messages](#--network-error-messages)
   - [ Languages](#--languages)
   - [ Banners](#--banners)
   - [ Segments](#--segments)
@@ -123,6 +124,13 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
 This app offers the ability to present a guided tour to the user, highlighting different elements and explaining them. The feature is currently in BETA, and is subject to change. It is on by default; it can be turned off by going to `config/demoTourConfig` and setting the `default` value of `shouldShowDemoTour` to `false`.
 
 You can configure your tour by adjusting the `steps` const, also found in `config/demoTourConfig`.
+
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Network Error Messages</h3>
+
+This feature will guide you to see what in the configuration is failing. We render the InstantSearch api errors in a modal.
+
+You can turn this feature off by switching `showNetworkErorrs` default value to `false` in `config/demoGuideConfig`
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Insights</h3>
 
@@ -283,10 +291,10 @@ Then, you can visit `config/personaConfig` and update the `value`s to match the 
 The current user stories are:
 
 - Younger male 'Stephen James', likes Basketball and he lives in NYC.
-  -Likes **Sneakers**, size 24, also likes **tracksuit**
+  -Likes **Sneakers**, size 24, also likes **tracksuit**
 
 - Older female: 'Elizabeth Aniston', likes fashion and she lives in Paris.
-  -Likes **black** dresses, size M, also likes blue jeans
+  -Likes **black** dresses, size M, also likes blue jeans
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 💉 Injected Content</h3>
 
