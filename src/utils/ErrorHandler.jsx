@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CustomModal from '@/components/modals/CustomModal';
 import { useInstantSearch } from 'react-instantsearch-hooks-web';
 
+// This component listens for instantSearch API errors and logs them in a modal
 function SearchErrorToast() {
   const { use } = useInstantSearch();
   const [error, setError] = useState(null);
@@ -27,6 +28,7 @@ function SearchErrorToast() {
   }, [use]);
 
   useEffect(() => {
+    // if there is an error, we activate the modal
     setModalActive(Boolean(error))
   }, [error]);
 
@@ -35,6 +37,7 @@ function SearchErrorToast() {
   }
 
   return (
+    // pass state down to custom modal to display and close it 
     <CustomModal isActive={modalActive} setActive={setModalActive}>
       <div className="error-modal-container">
         <div className="error-modal-content">
