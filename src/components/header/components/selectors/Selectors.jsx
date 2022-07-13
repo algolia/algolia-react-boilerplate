@@ -79,6 +79,7 @@ const SelectItem = ({ label, value, type, alertContent, setSelectedValue }) => {
   const index = useSetRecoilState(mainIndex);
   const navigationLinks = useSetRecoilState(linksHeader);
 
+  // Recoil state for alert
   const setAlert = useSetRecoilState(alertContentAtom);
   const setAlertOpen = useSetRecoilState(isAlertOpen);
 
