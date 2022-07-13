@@ -19,7 +19,7 @@ const CustomHits = ({ hits }) => {
     <div className="ais-InfiniteHits">
       <ul className="ais-InfiniteHits-list">
         {hits.map((hit, i) => {
-          return <div key={i}>{hitsLoaded ? <Hit hit={hit} key={i + "customhit" + Math.random} /> : <CustomSkeleton type="hit" />}</div>
+          return <div key={i + "customhit" + Math.random}>{hitsLoaded ? <Hit hit={hit} /> : <CustomSkeleton type="hit" />}</div>
         })}
       </ul>
     </div>

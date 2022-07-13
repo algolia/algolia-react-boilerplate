@@ -45,9 +45,9 @@ function CustomHits(props) {
           // Wrap the hit info in an animation, and click functionality to view the product
           if (hit._component != undefined) {
             // If the hit has a component property, use it instead of the default component
-            return hitsLoaded ? <hit._component hit={hit} key={hit.objectID} /> : <CustomSkeleton type="hit" />
+            return <div key={hit.objectID}>{hitsLoaded ? <hit._component hit={hit}  /> : <CustomSkeleton type="hit" />}</div> 
           }
-          return hitsLoaded ? <Hit hit={hit} key={hit.objectID} /> : <CustomSkeleton type="hit" />
+          return <div key={hit.objectID}>{hitsLoaded ? <Hit hit={hit}  /> : <CustomSkeleton type="hit" />}</div> 
           // Note: it's not good practice to use the item index as key, because that may cause the renderer
           // to think 2 different products are one and the same in case they change positions
         })}
