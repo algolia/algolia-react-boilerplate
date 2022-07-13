@@ -62,17 +62,19 @@ export const alertContent = atom({
 // Search Terms Config
 // ------------------------------------------
 export const searchTermsConfig = [
-  { value: '', label: 'Choose' },
+  { value: '', label: 'Choose', type: 'search terms' },
   {
     value: 'bag',
     label: 'Bag',
     alertContent: 'The category Bags is boosted.',
     details: 'The category Bags will be boosted.',
+    type: 'search terms'
   },
   {
     value: 'dress',
     label: 'Dress',
     alertContent: 'You are searching in dress category',
+    type: 'search terms'
   },
 ];
 
@@ -140,18 +142,20 @@ export const shouldShowInjectedContent = atom({
 
 // What would be the content of the select in this section
 export const DemoGuideInjectedContentConfig = [
-  { value: '', label: 'Choose' },
+  { value: '', label: 'Choose', type: 'injected content' },
   {
     value: 'Nike',
     label: 'Nike',
     alertContent: 'You are displaying an injected content coupon for Nike',
     details: 'Will display injected content coupon for Nike',
+    type: 'injected content'
   },
   {
     value: 'Women',
     label: 'Women',
     alertContent: 'You are displaying an injected content ad with Gigi Hadid',
     details: 'Will display injected content ad with Gigi Hadid',
+    type: 'injected content'
   },
 ];
 
@@ -168,13 +172,14 @@ export const shouldShowDynamicFilters = atom({
 
 // What would be the content of the select in this section
 export const DemoGuideDynamicFiltersConfig = [
-  { value: '', label: 'Choose' },
+  { value: '', label: 'Choose', type: 'dynamic filters' },
   {
     value: 'Sandals',
     label: 'Sandals',
     alertContent:
       'This is changing the facets ordering to return size facet first',
     details: 'Will change the facets ordering to return size facet first',
+    type: 'dynamic filters'
   },
 ];
 
@@ -191,12 +196,13 @@ export const shouldShowRedirects = atom({
 
 // What would be the content of the select in this section
 export const DemoGuideRedirectConfig = [
-  { value: '', label: 'Choose' },
+  { value: '', label: 'Choose', type: 'redirect' }, 
   {
     value: 'Faq',
     label: 'FAQ',
     alertContent: "Redirecting the user to Algolia's homepage",
     details: "Will redirect the user to Algolia's homepage",
+    type: 'redirect'
   },
 ];
 
@@ -214,114 +220,46 @@ export const shouldShowBanners = atom({
 
 // What would be the content of the select in this section
 export const searchBannersConfig = [
-  { value: '', label: 'Choose' },
-  {
-    value: 'algolia',
-    label: 'Algolia',
-    alertContent: 'Displaying an Algolia Banner',
-    details: 'Will display an Algolia Banner',
-  },
+  { value: '', label: 'Choose', type: 'banner' },
+  // {
+  //   value: 'algolia',
+  //   label: 'Algolia',
+  //   alertContent: 'Displaying an Algolia Banner',
+  //   details: 'Will display an Algolia Banner',
+  //   type: 'banner'
+
+  // },
   {
     value: 'help',
     label: 'Help',
     alertContent: 'Displaying an Help banner',
     details: 'Will display an Help banner',
+    type: 'banner'
   },
   {
     value: 'woman',
     label: 'Woman',
     alertContent: 'Displaying a Woman banner',
     details: 'Will display a Woman banner',
+    type: 'banner'
   },
 ];
 
 // Please ignore this atom - DON'T TOUCH THIS
 export const searchPersonaSelectedAtom = atom({
   key: 'searchPersonaSelectedAtom', // unique ID (with respect to other atoms/selectors)
-  default: 'anon', // default value (aka initial value)
+  default: '', // default value (aka initial value)
 });
 
 // Please ignore this atom - DON'T TOUCH THIS
 export const searchTermsSelectedAtom = atom({
   key: 'searchTermsSelectedAtom', // unique ID (with respect to other atoms/selectors)
-  default: 'anon', // default value (aka initial value)
+  default: '', // default value (aka initial value)
 });
 
 // Please ignore this atom - DON'T TOUCH THIS
 export const searchBannersSelectedAtom = atom({
   key: 'searchBannersSelectedAtom', // unique ID (with respect to other atoms/selectors)
-  default: 'anon', // default value (aka initial value)
+  default: '', // default value (aka initial value)
 });
 
-// Styles for persona selection dropdown, please ignore - DON'T TOUCH THIS
-export const styles = {
-  container: () => ({
-    border: 'none',
-    position: 'relative',
-    cursor: 'pointer',
-  }),
-  control: () => ({
-    border: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '1rem',
-    cursor: 'pointer',
-  }),
-  menu: () => ({
-    position: 'absolute',
-    marginTop: '1rem',
-    background: 'white',
-    width: '100%',
-    zIndex: '10',
-    boxShadow: '0px 3px 5px 1px rgba(50, 50, 50, 0.25);',
-    borderRadius: '0.3rem',
-    padding: '0rem',
-    cursor: 'pointer',
-  }),
-  menuList: () => ({}),
-  input: () => ({
-    position: 'absolute',
-    width: '100%',
-    cursor: 'pointer',
-    '&input': {
-      cursor: 'pointer',
-    },
-  }),
-  indicatorSeparator: () => ({
-    display: 'none',
-  }),
-  indicatorContainer: () => ({
-    color: 'black',
-    cursor: 'pointer',
-  }),
-  placeholder: () => ({
-    fontFamily: "'Poppins', sans-serif",
-    cursor: 'pointer',
-  }),
-  valueContainer: () => ({
-    cursor: 'pointer',
-  }),
-  option: () => {
-    return {
-      textTransform: 'capitalize',
-      fontFamily: "'Poppins', sans-serif",
-      padding: '0.5rem',
-      cursor: 'pointer',
-      borderRadius: '0.3rem',
-      fontSize: '1rem',
-      '&:hover': {
-        backgroundColor: 'black',
-        color: 'white',
-      },
-    };
-  },
-  singleValue: () => ({
-    fontFamily: "'Poppins', sans-serif",
-    textTransform: 'capitalize',
-    cursor: 'pointer',
-    fontSize: '1rem',
-  }),
-  dropdownIndicator: () => ({
-    color: 'black',
-  }),
-};

@@ -1,4 +1,10 @@
+// Local scss partials
+@use './partials/index';
+
 @use '../../../scss/partials' as *;
+
+
+
 
 // ------------------------------------------
 // Header
@@ -41,9 +47,9 @@
       &__links {
         display: flex;
         justify-content: center;
+        gap: 2rem;
         li {
           z-index: 50;
-          margin-left: $two-rem-spaces;
           cursor: pointer;
           p {
             position: relative;
@@ -60,7 +66,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 0.5rem;
+        gap: 2rem;
       }
     }
   }
