@@ -31,7 +31,7 @@ import {
   shouldHaveTrendingFacets,
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
-import { personaSelectedAtom } from '@/config/personaConfig';
+import { personalizationImpact, personaSelectedAtom, personaSelectedFiltersAtom } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
@@ -87,6 +87,7 @@ const SrpMobile = () => {
 
   // Persona
   const userToken = useRecoilValue(personaSelectedAtom);
+  const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom);
 
   // Segments
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
@@ -116,9 +117,8 @@ const SrpMobile = () => {
       <div
         role="menu"
         tabIndex={0}
-        className={`${
-          isMenuOpen ? 'facets-slider-active' : 'facets-slider-inactive'
-        } facets-slider`}
+        className={`${isMenuOpen ? 'facets-slider-active' : 'facets-slider-inactive'
+          } facets-slider`}
         onClick={() => {
           setIsMenuOpen(!isMenuOpen);
         }}
@@ -159,8 +159,10 @@ const SrpMobile = () => {
         <Configure
           hitsPerPage={injected ? hitsPerPageInjected : hitsPerPageNotInjected}
           analytics={false}
-          userToken={userToken}
           enablePersonalization={true}
+          userToken={userToken}
+          personalizationImpact={personalizationImpact}
+          personalizationFilters={personalizationFilters}
           filters={
             state?.type === 'filter' && state?.action !== null
               ? state.action
@@ -179,7 +181,7 @@ const SrpMobile = () => {
             <TrendingFacetValues
               facetName={facetName}
               facetValue={facetValue}
-               attribute="brand"
+              attribute="brand"
             />
           )}
         </div>

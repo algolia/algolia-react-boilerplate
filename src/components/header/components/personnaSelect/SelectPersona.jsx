@@ -14,10 +14,14 @@ import { useRecoilState } from 'recoil';
 import {
   personaConfig,
   personaSelectedAtom,
+  personaSelectedFiltersAtom,
   styles,
 } from '@/config/personaConfig';
 
 const SelectPersona = () => {
+
+  const [personaSelectedFiltersSelected, setPersonaSelectedFilters] = useRecoilState(personaSelectedFiltersAtom)
+
   const [personaSelected, setPersonaSelect] =
     useRecoilState(personaSelectedAtom);
 
@@ -33,6 +37,7 @@ const SelectPersona = () => {
       placeholder="No Persona"
       onChange={(e) => {
         setPersonaSelect(e.value);
+        setPersonaSelectedFilters(e.personalizationFilters)
       }}
     />
   );
