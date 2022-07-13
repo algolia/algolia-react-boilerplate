@@ -9,6 +9,7 @@ import { useSetRecoilState } from 'recoil';
 //import configuration
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
+import { personaSelectedFiltersAtom } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 // Changing index & currency through the app
 import { currencySymbolAtom } from '@/config/currencyConfig';
@@ -64,6 +65,7 @@ export const Selectors = ({ props }) => {
             type={item.type}
             key={item.label}
             alertContent={item.alertContent}
+            personalizationFilters={item.personalizationFilters}
             setSelectedValue={setSelectedValue}
           />
         ))}
@@ -72,9 +74,18 @@ export const Selectors = ({ props }) => {
   );
 };
 
-const SelectItem = ({ label, value, type, alertContent, setSelectedValue }) => {
+const SelectItem = ({
+  label,
+  value,
+  type,
+  alertContent,
+  setSelectedValue,
+  personalizationFilters,
+}) => {
   const setSegmentSelect = useSetRecoilState(segmentSelectedAtom);
   const setPersonaSelect = useSetRecoilState(personaSelectedAtom);
+  const [personaSelectedFiltersSelected, setPersonaSelectedFilters] =
+    useRecoilState(personaSelectedFiltersAtom);
   // Recoil State - update query in searchBar
   const setQueryState = useSetRecoilState(queryAtom);
   // Get index & currency atom to use it in the switch statement
@@ -115,13 +126,14 @@ const SelectItem = ({ label, value, type, alertContent, setSelectedValue }) => {
   // router hook to navigate using a function
   const navigate = useNavigate();
 
-  const handleClick = (type, value, alertContent) => {
+  const handleClick = (type, value, alertContent, personalizationFilters) => {
     switch (type) {
       case 'segment':
         setSegmentSelect(value);
         break;
       case 'persona':
         setPersonaSelect(value);
+        setPersonaSelectedFilters(personalizationFilters);
         break;
       case 'language':
         handleChangeOfLanguage(value);
@@ -149,7 +161,7 @@ const SelectItem = ({ label, value, type, alertContent, setSelectedValue }) => {
     <li
       className="selectorsWrapper__listItem"
       onClick={() => {
-        handleClick(type, value, alertContent);
+        handleClick(type, value, alertContent, personalizationFilters);
         setSelectedValue(label);
       }}
     >
