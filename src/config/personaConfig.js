@@ -9,8 +9,9 @@ export const personalizationImpact = 98
 // This const defines the personas available for personalisation
 // The labels will show in a dropdown in the navigation
 // The values are what is sent as the userToken to Algolia
-// Add or remove objects to this array as you see fit
-// Just make sure you have events and profiles for your values
+// The personalizationFilters will fake perso profiles at query time so you don't need to send events
+// You do however need to have perso feature enabled on the plan, and the strategy created
+// Add or remove objects to the personaConfig array as you see fit
 // ------------------------------------------
 export const personaConfig = [
   { value: 'anon', label: 'No Persona', description: 'Anonymous user', personalizationFilters: [] },
@@ -18,13 +19,13 @@ export const personaConfig = [
     value: 'stephen_james',
     label: 'Stephen',
     description: 'Stephen James is a man who likes sports shoes',
-    personalizationFilters: []
+    personalizationFilters: ["genderFilter:men<score=1>", "hierarchicalCategories.lvl2:'Mens > Shoes'<score=1>"]
   },
   {
     value: 'elizabeth_aniston',
     label: 'Elizabeth',
     description: 'Elizabeth is a woman who likes blue dresses',
-    personalizationfilters: []
+    personalizationfilters: ["colour:blue<score=1>", "genderFilter:women<score=1>", "hierarchicalCategories.lvl2:'Womens > Clothing > Dresses'<score=1>"]
   },
 ];
 
