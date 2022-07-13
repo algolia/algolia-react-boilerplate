@@ -45,8 +45,8 @@ const HomeBannerComponent = ({
         src={imgUrl1}
         alt="homeBanner"
         fetchpriority="high"
-        width="3014"
-        height="1324"
+        width="1121"
+        height="466"
       />
       <div className="overlay"></div>
     </div>
