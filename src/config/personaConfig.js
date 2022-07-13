@@ -15,13 +15,13 @@ export const personalizationImpact = 98
 // ------------------------------------------
 export const personaConfig = [
 
-  { value: '', label: 'No Persona', description: 'Anonymous user', type: 'persona', personalizationFilters: [] },
+  { value: 'anon', label: 'No Persona', description: 'Anonymous user', type: 'persona', personalizationFilters: [] },
 
   {
     value: 'stephen_james',
     label: 'Stephen',
     description: 'Stephen James is a man who likes sports shoes',
-    type: 'persona', 
+    type: 'persona',
     personalizationFilters: ["genderFilter:men<score=1>", "hierarchicalCategories.lvl2:'Mens > Shoes'<score=1>"]
 
   },
@@ -29,7 +29,7 @@ export const personaConfig = [
     value: 'elizabeth_aniston',
     label: 'Elizabeth',
     description: 'Elizabeth is a woman who likes blue dresses',
-    type: 'persona', 
+    type: 'persona',
     personalizationFilters: ["colour:blue<score=1>", "genderFilter:women<score=1>", "hierarchicalCategories.lvl2:'Womens > Clothing > Dresses'<score=1>"]
   },
 ];
