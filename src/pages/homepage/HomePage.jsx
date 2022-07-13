@@ -82,9 +82,9 @@ const HomePage = ({ setIsMounted }) => {
       ref={HomePage}
     >
       {isFederated && isFederatedOpen && (
-          <Suspense>
-            <FederatedSearch />
-          </Suspense>
+        <Suspense>
+          <FederatedSearch />
+        </Suspense>
       )}
 
       {/* Load custom banners */}
@@ -109,9 +109,13 @@ const HomePage = ({ setIsMounted }) => {
         )}
       </div>
 
-      {homepage_1 ? <img src={homepage_1} alt="" /> : null}
+      {homepage_1 ? (
+        <img src={homepage_1} alt="homepage1" width="3014" height="1324" />
+      ) : null}
 
-      {homepage_2 && <img src={homepage_2} alt="" />}
+      {homepage_2 && (
+        <img src={homepage_2} alt="homepage1" width="3014" height="1324" />
+      )}
     </div>
   );
 };
