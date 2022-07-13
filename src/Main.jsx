@@ -22,7 +22,7 @@ import {
   isDemoGuideOpen,
   shouldShowAlert,
   shouldShowDemoGuide,
-  showNetworkErorrs
+  showNetworkErorrs,
 } from '@/config/demoGuideConfig';
 
 // Import Pages and static components
@@ -44,7 +44,7 @@ export const Main = () => {
   const index = useRecoilValue(mainIndex);
 
   const [isMounted, setIsMounted] = useState(false);
-  
+
   const location = useLocation();
 
   const queryState = useRecoilValue(queryAtom);
@@ -63,7 +63,6 @@ export const Main = () => {
 
   // Value that shows Network Errors to Guide you to the correct Configuration
   const isNetworkErorrs = useRecoilValue(showNetworkErorrs);
-
 
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
