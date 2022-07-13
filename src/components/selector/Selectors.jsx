@@ -38,7 +38,7 @@ export const Selectors = ({ props }) => {
   const [menuActive, setMenuActive] = useState(false);
   const [selectedValue, setSelectedValue] = useState(props[0].label);
   const selectorBtn = useRef();
-
+  console.log(props);
   useOutsideClick(selectorBtn.current, () => setMenuActive(false));
 
   return (
@@ -84,8 +84,9 @@ const SelectItem = ({
 }) => {
   const setSegmentSelect = useSetRecoilState(segmentSelectedAtom);
   const setPersonaSelect = useSetRecoilState(personaSelectedAtom);
-  const [personaSelectedFiltersSelected, setPersonaSelectedFilters] =
-    useRecoilState(personaSelectedFiltersAtom);
+  const setPersonaSelectedFilters = useSetRecoilState(
+    personaSelectedFiltersAtom
+  );
   // Recoil State - update query in searchBar
   const setQueryState = useSetRecoilState(queryAtom);
   // Get index & currency atom to use it in the switch statement
@@ -132,6 +133,7 @@ const SelectItem = ({
         setSegmentSelect(value);
         break;
       case 'persona':
+        console.log(personalizationFilters, value);
         setPersonaSelect(value);
         setPersonaSelectedFilters(personalizationFilters);
         break;

@@ -21,7 +21,8 @@ export const personaConfig = [
     value: 'stephen_james',
     label: 'Stephen',
     description: 'Stephen James is a man who likes sports shoes',
-    type: 'persona', personalizationFilters: ["genderFilter:men<score=1>", "hierarchicalCategories.lvl2:'Mens > Shoes'<score=1>"]
+    type: 'persona', 
+    personalizationFilters: ["genderFilter:men<score=1>", "hierarchicalCategories.lvl2:'Mens > Shoes'<score=1>"]
 
   },
   {
@@ -29,7 +30,7 @@ export const personaConfig = [
     label: 'Elizabeth',
     description: 'Elizabeth is a woman who likes blue dresses',
     type: 'persona', 
-    personalizationfilters: ["colour:blue<score=1>", "genderFilter:women<score=1>", "hierarchicalCategories.lvl2:'Womens > Clothing > Dresses'<score=1>"]
+    personalizationFilters: ["colour:blue<score=1>", "genderFilter:women<score=1>", "hierarchicalCategories.lvl2:'Womens > Clothing > Dresses'<score=1>"]
   },
 ];
 
