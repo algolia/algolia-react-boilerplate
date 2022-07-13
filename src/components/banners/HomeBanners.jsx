@@ -41,7 +41,13 @@ const HomeBannerComponent = ({
 }) => (
   <div className="home-banner3-container">
     <div className="home-banner3-container__image">
-      <img src={imgUrl1} alt="" />
+      <img
+        src={imgUrl1}
+        alt="homeBanner"
+        fetchpriority="high"
+        width="3014"
+        height="1324"
+      />
       <div className="overlay"></div>
     </div>
     <div className="home-banner3-container__infos">

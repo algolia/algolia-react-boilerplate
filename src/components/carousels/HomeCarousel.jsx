@@ -77,6 +77,8 @@ function Carousel(props) {
                     src={get(hit, image)}
                     alt={get(hit, productName)}
                     onError={(e) => (e.currentTarget.src = placeHolderError)}
+                    width="400"
+                    height="577"
                   />
                 </div>
                 <div
