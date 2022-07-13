@@ -6,14 +6,16 @@ import { atom } from 'recoil';
 
 // Define what values are going to be displayed in the language selector
 export const languagesConfig = [
-  { value: 'English', label: 'English' },
+  { value: 'English', label: 'English', type: 'language' },
   {
     value: 'German',
     label: 'German',
+    type: 'language'
   },
   {
     value: 'French',
     label: 'French',
+    type: 'language'
   },
 ];
 

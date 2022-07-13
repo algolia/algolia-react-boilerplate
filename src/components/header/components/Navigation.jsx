@@ -23,6 +23,16 @@ import {
   shouldHavePersona,
   shouldHaveSegments,
 } from '@/config/featuresConfig';
+import { Selectors } from './selectors/Selectors';
+
+// Import segment configuration
+import {
+  segmentConfig,
+  segmentSelectedAtom,
+  styles,
+} from '@/config/segmentConfig';
+import { personaConfig } from '@/config/personaConfig';
+import { languagesConfig } from '@/config/languagesConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
@@ -130,19 +140,28 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         ref={selectorsNavigation}
       >
         {shouldShowPersonasAtom && (
+          // <li>
+          //   <SelectPersona />
+          // </li>
           <li>
-            <SelectPersona />
+            <Selectors props={personaConfig} />
           </li>
         )}
         {shouldShowSegmentsAtom && (
+          // <li>
+          //   <SelectSegment />
+          // </li>
           <li>
-            <SelectSegment />
+            <Selectors props={segmentConfig} />
           </li>
         )}
         {/* Display the language select component */}
         {shouldShowLanguageSelected && (
+          // <li>
+          //   <LanguageSelect />
+          // </li>
           <li>
-            <LanguageSelect />
+            <Selectors props={languagesConfig} />
           </li>
         )}
       </div>

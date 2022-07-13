@@ -10,14 +10,14 @@ import { atom } from 'recoil';
 // Add or remove objects to this array as you see fit
 // ------------------------------------------
 export const segmentConfig = [
-  { value: '', label: 'No Segment' },
+  { value: '', label: 'No Segment', type: 'segment' },
   {
     value: ['hierarchicalCategories.lvl0:Womens'],
-    label: 'Female Segment',
+    label: 'Female Segment', type: 'segment'
   },
   {
     value: ['hierarchicalCategories.lvl0:Mens'],
-    label: 'Male Segment',
+    label: 'Male Segment', type: 'segment'
   },
 ];
 

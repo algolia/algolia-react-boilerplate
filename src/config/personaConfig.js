@@ -11,16 +11,18 @@ import { atom } from 'recoil';
 // Just make sure you have events and profiles for your values
 // ------------------------------------------
 export const personaConfig = [
-  { value: 'anon', label: 'No Persona', description: 'Anonymous user' },
+  { value: '', label: 'No Persona', description: 'Anonymous user', type: 'persona' },
   {
     value: 'stephen_james',
     label: 'Stephen',
     description: 'Stephen James is a man who likes sports shoes',
+    type: 'persona'
   },
   {
     value: 'elizabeth_aniston',
     label: 'Elizabeth',
     description: 'Elizabeth is a woman who likes blue dresses',
+    type: 'persona'
   },
 ];
 
