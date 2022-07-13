@@ -1,7 +1,7 @@
 import { Selectors } from '@/components/header/components/selectors/Selectors';
 
 // Import configuration
-import { searchBannersConfig, styles } from '@/config/demoGuideConfig';
+import { searchBannersConfig } from '@/config/demoGuideConfig';
 
 const SearchBanners = () => {
   return (
