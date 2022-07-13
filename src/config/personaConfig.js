@@ -3,6 +3,8 @@
 // ------------------------------------------
 import { atom } from 'recoil';
 
+export const personalizationImpact = 98
+
 // ------------------------------------------
 // This const defines the personas available for personalisation
 // The labels will show in a dropdown in the navigation
@@ -11,18 +13,37 @@ import { atom } from 'recoil';
 // Just make sure you have events and profiles for your values
 // ------------------------------------------
 export const personaConfig = [
-  { value: 'anon', label: 'No Persona', description: 'Anonymous user' },
+  { value: 'anon', label: 'No Persona', description: 'Anonymous user', personalizationFilters: [] },
   {
     value: 'stephen_james',
     label: 'Stephen',
     description: 'Stephen James is a man who likes sports shoes',
+    personalizationFilters: []
   },
   {
     value: 'elizabeth_aniston',
     label: 'Elizabeth',
     description: 'Elizabeth is a woman who likes blue dresses',
+    personalizationfilters: []
   },
 ];
+
+// Please ignore this atom
+export const personaSelectedAtom = atom({
+  key: 'personaSelected', // unique ID (with respect to other atoms/selectors)
+  default: personaConfig[0].value, // default value (aka initial value)
+});
+
+export const personaSelectedFiltersAtom = atom({
+  key: 'personaFiltersSelected', // unique ID (with respect to other atoms/selectors)
+  default: personaConfig[0].personalizationFilters, // default value (aka initial value)
+});
+
+// Please ignore this atom
+export const isPersonaMenuOpen = atom({
+  key: 'isPersonaMenuOpen', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
 
 // Styles for persona selection dropdown, please ignore
 export const styles = {
@@ -98,15 +119,3 @@ export const styles = {
     color: 'black',
   }),
 };
-
-// Please ignore this atom
-export const personaSelectedAtom = atom({
-  key: 'personaSelected', // unique ID (with respect to other atoms/selectors)
-  default: personaConfig[0].value, // default value (aka initial value)
-});
-
-// Please ignore this atom
-export const isPersonaMenuOpen = atom({
-  key: 'isPersonaMenuOpen', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
-});
