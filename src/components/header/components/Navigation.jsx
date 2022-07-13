@@ -16,7 +16,7 @@ import {
   shouldHavePersona,
   shouldHaveSegments,
 } from '@/config/featuresConfig';
-import { Selectors } from './selectors/Selectors';
+import { Selectors } from '../../selector/Selectors';
 
 // Import segment configuration
 import { segmentConfig } from '@/config/segmentConfig';

@@ -30,6 +30,9 @@ import { ChevronDown } from '@/assets/svg/SvgIndex';
 // import Custom Hook
 import useOutsideClick from '@/hooks/useOutsideClick';
 
+// import scoped CSS
+import './selectors.scss';
+
 export const Selectors = ({ props }) => {
   const [menuActive, setMenuActive] = useState(false);
   const [selectedValue, setSelectedValue] = useState(props[0].label);

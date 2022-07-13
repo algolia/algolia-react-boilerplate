@@ -1,4 +1,4 @@
-import { Selectors } from '@/components/header/components/selectors/Selectors';
+import { Selectors } from '@/components/selector/Selectors';
 
 // Import configuration
 import { searchBannersConfig } from '@/config/demoGuideConfig';
