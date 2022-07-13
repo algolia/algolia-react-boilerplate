@@ -32,9 +32,14 @@ function SearchErrorToast() {
         XMLHttpRequest.prototype.open = function(m, u, a, us, p) {
             this.addEventListener('readystatechange', function() {
                 if ((typeof this.response === typeof "") && this.response.length > 0) {
+                  try {
                     let res = JSON.parse(this.response)
                     res.url = this.responseURL
                     Boolean(res.message) && setError(res)
+                  } catch (err) {
+                    // 👇️ SyntaxError: Unexpected end of JSON input
+                    // console.log('error', err, this.response);
+                  }
                 }
             }, false);
     
