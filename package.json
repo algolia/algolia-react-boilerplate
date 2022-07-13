@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/algolia/algolia-react-boilerplate#readme",
   "dependencies": {
+    "3.0.0": "^3.0.0",
     "@algolia/react-instantsearch-widget-color-refinement-list": "^1.4.5",
     "@algolia/recommend": "^4.12.2",
     "@algolia/recommend-react": "^1.4.0",
@@ -81,7 +82,7 @@
     "husky": "^7.0.4",
     "prettier": "^2.5.1",
     "react-hot-loader": "^4.13.0",
-    "vite": "2.7.13",
+    "vite": "^3.0.0",
     "vite-plugin-svgr": "^1.0.1"
   }
 }
