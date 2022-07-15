@@ -102,13 +102,15 @@ const HomePage = ({ setIsMounted }) => {
 
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
-      <div className="recommend">
-        {shouldHaveTrendingProductsValue && (
-          <Suspense>
-            <Trending filter={null} />
-          </Suspense>
-        )}
-      </div>
+      {carouselLoaded && (
+        <div className="recommend">
+          {shouldHaveTrendingProductsValue && (
+            <Suspense>
+              <Trending filter={null} />
+            </Suspense>
+          )}
+        </div>
+      )}
 
       {homepage_1 && carouselLoaded && (
         <div className="homepage__imageWrapper">

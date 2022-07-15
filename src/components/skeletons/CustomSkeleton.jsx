@@ -28,6 +28,9 @@ const CustomSkeleton = ({ type }) => {
     case 'homepage':
       return <div className="skeleton__homepage"></div>;
       break;
+    case 'logo':
+      return <div className="skeleton__logo"></div>;
+      break;
   }
 };
 

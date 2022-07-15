@@ -24,6 +24,7 @@ import {
   shouldShowDemoGuide,
   showNetworkErorrs,
 } from '@/config/demoGuideConfig';
+import { isCarouselLoaded } from './config/carouselConfig';
 
 // Import Pages and static components
 import AlertNavigation from '@/components/demoGuide/AlertNavigation';
@@ -49,6 +50,9 @@ export const Main = () => {
   const location = useLocation();
 
   const queryState = useRecoilValue(queryAtom);
+
+  // Check if Carousels are ready & loaded on the homepage
+  const carouselLoaded = useRecoilValue(isCarouselLoaded);
 
   // Should the alert badges for the demo guide be shown
   const shouldShowAlertAtom = useRecoilValue(shouldShowAlert);
@@ -94,7 +98,7 @@ export const Main = () => {
             {/* objectID is the unique identifier for an algolia record */}
             <Route path="/search/:objectID" element={<ProductDetails />} />
           </Routes>
-          {isMounted && <Footer />}
+          {carouselLoaded && <Footer />}
         </AnimatePresence>
         {shouldShowAlertAtom && <AlertNavigation />}
         {isRulesSwitchToggleChecked && <CustomAppliedRules />}

@@ -6,7 +6,7 @@ import { Configure, Index, useHits } from 'react-instantsearch-hooks-web';
 import { useNavigate } from 'react-router-dom';
 
 // Recoil
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
 
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig';
@@ -14,6 +14,7 @@ import { hitsPerCarousel } from '@/config/carouselConfig';
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
+import { isCarouselLoaded } from '@/config/carouselConfig';
 
 // In case of img loading error
 import * as placeHolderError from '@/assets/logo/logo.webp';
@@ -27,18 +28,13 @@ import { windowSize } from '@/hooks/useScreenSize';
 //Import scope SCSS
 import './SCSS/carousels.scss';
 import CustomSkeleton from '../skeletons/CustomSkeleton';
-import { useEffect } from 'react';
 
 // Build the Carousel for use on the Homepage
-const HomeCarousel = ({
-  context,
-  title,
-  carouselLoaded,
-  setCarouselLoaded,
-}) => {
+const HomeCarousel = ({ context, title }) => {
   const index = useRecoilValue(mainIndex);
   const userToken = useRecoilValue(personaSelectedAtom);
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
+  const carouselLoaded = useRecoilValue(isCarouselLoaded);
 
   const { mobile } = useRecoilValue(windowSize);
 
@@ -52,8 +48,8 @@ const HomeCarousel = ({
           userToken={userToken}
           query={''}
         />
-        {carouselLoaded === false && <CustomSkeleton type="hit" />}
-        <Carousel title={title} setCarouselLoaded={setCarouselLoaded} />
+
+        <Carousel title={title} />
       </Index>
     </div>
   );
@@ -63,7 +59,9 @@ const HomeCarousel = ({
 
 function Carousel(props) {
   const { hits } = useHits(props);
-  const { title, setCarouselLoaded } = props;
+  const { title } = props;
+  const [carouselLoaded, setIsCarouselLoaded] =
+    useRecoilState(isCarouselLoaded);
 
   // Navigate is used by React Router
   const navigate = useNavigate();
@@ -77,6 +75,7 @@ function Carousel(props) {
       <h3 className="title">{title}</h3>
       {/* This div declares the outer reference for the framer motion */}
       <div className="carousel">
+        {carouselLoaded === false && <CustomSkeleton type="hit" />}
         <div className="inner-carousel">
           {/* Display the hits in the carousel */}
           {hits.map((hit, i) => {
@@ -89,7 +88,7 @@ function Carousel(props) {
                     onError={(e) => (e.currentTarget.src = placeHolderError)}
                     width="400"
                     height="577"
-                    onLoad={() => setCarouselLoaded(true)}
+                    onLoad={() => setIsCarouselLoaded(true)}
                   />
                 </div>
                 <div
