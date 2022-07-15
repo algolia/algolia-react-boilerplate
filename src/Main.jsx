@@ -39,6 +39,7 @@ import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
 import SearchErrorToast from './utils/ErrorHandler';
+import CustomSkeleton from './components/skeletons/CustomSkeleton';
 
 export const Main = () => {
   const index = useRecoilValue(mainIndex);

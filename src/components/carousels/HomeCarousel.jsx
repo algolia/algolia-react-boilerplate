@@ -27,10 +27,15 @@ import { windowSize } from '@/hooks/useScreenSize';
 //Import scope SCSS
 import './SCSS/carousels.scss';
 import CustomSkeleton from '../skeletons/CustomSkeleton';
+import { useEffect } from 'react';
 
 // Build the Carousel for use on the Homepage
-const HomeCarousel = ({ context, title }) => {
-  const [carouselLoaded, setCarouselLoaded] = useState(false);
+const HomeCarousel = ({
+  context,
+  title,
+  carouselLoaded,
+  setCarouselLoaded,
+}) => {
   const index = useRecoilValue(mainIndex);
   const userToken = useRecoilValue(personaSelectedAtom);
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
