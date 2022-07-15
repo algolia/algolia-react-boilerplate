@@ -1,5 +1,5 @@
 // Render the Header component in Main.jsx, for large screen sizes
-
+import { useState } from 'react';
 // React Tour
 import { useTour } from '@reactour/tour';
 
@@ -37,8 +37,10 @@ import logo from '@/assets/logo/logo.webp';
 import CustomSearchBox from '@/components/searchbox/SearchBox';
 import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
 const HeaderLaptop = () => {
+  const [isLogoLoaded, setIsLogoLoaded] = useState(false);
   // React Tour
   const { setIsOpen } = useTour();
 
@@ -76,7 +78,8 @@ const HeaderLaptop = () => {
             }}
           >
             {/* Add possibility to change the Logo */}
-            <img src={logo} alt="" />
+            <img src={logo} alt="" onLoad={() => setIsLogoLoaded(true)} />
+            {isLogoLoaded === false && <CustomSkeleton type="logo" />}
           </Link>
         </div>
         {/* For a search box Simple center */}
