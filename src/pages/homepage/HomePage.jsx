@@ -77,16 +77,15 @@ const HomePage = ({ setIsMounted }) => {
   return (
     // Framer motion wrapper
     <div className="homepage" ref={HomePage}>
-      {/* Load custom banners */}
-      {/* <Suspense> */}
-      <CustomHomeBanners />
-      {/* </Suspense> */}
-
       {isFederated && isFederatedOpen && (
         <Suspense>
           <FederatedSearch />
         </Suspense>
       )}
+      {/* Load custom banners */}
+      {/* <Suspense> */}
+      <CustomHomeBanners />
+      {/* </Suspense> */}
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
