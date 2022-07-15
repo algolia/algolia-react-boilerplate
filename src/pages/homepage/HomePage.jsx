@@ -2,8 +2,6 @@
 // By default it contains some banners and carousels
 import { useState } from 'react';
 
-// framer-motion
-import { AnimatePresence } from 'framer-motion';
 import { lazy, Suspense, useEffect, useRef } from 'react';
 
 // recoil import
@@ -29,9 +27,10 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
 // components import
-const CustomHomeBanners = lazy(() =>
-  import('@/components/banners/HomeBanners')
-);
+// const CustomHomeBanners = lazy(() =>
+//   import('@/components/banners/HomeBanners')
+// );
+import CustomHomeBanners from '@/components/banners/HomeBanners';
 
 const FederatedSearch = lazy(() =>
   import('@/components/federatedSearch/FederatedSearch')
@@ -49,6 +48,8 @@ import './homepage.scss';
 const HomePage = ({ setIsMounted }) => {
   // Get the main index
   const index = useRecoilValue(mainIndex);
+
+  const [carouselLoaded, setCarouselLoaded] = useState(false);
 
   const [isHomepage1Loaded, setHomepage1Loaded] = useState(false);
   const [isHomepage2Loaded, setHomepage2Loaded] = useState(false);
@@ -75,35 +76,27 @@ const HomePage = ({ setIsMounted }) => {
 
   return (
     // Framer motion wrapper
-    <div
-      className="homepage"
-      // initial state
-      initial={framerMotionPage.initial}
-      // actual animation
-      animate={framerMotionPage.animate}
-      // everything the animation needs to function
-      variants={framerMotionPage}
-      // what to do when unmounted
-      exit={framerMotionPage.exit}
-      // duration, smoothness etc.
-      transition={framerMotionPage.transition}
-      ref={HomePage}
-    >
+    <div className="homepage" ref={HomePage}>
+      {/* Load custom banners */}
+      {/* <Suspense> */}
+      <CustomHomeBanners />
+      {/* </Suspense> */}
+
       {isFederated && isFederatedOpen && (
         <Suspense>
           <FederatedSearch />
         </Suspense>
       )}
 
-      {/* Load custom banners */}
-      <Suspense>
-        <CustomHomeBanners />
-      </Suspense>
-
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
           <Suspense key={i}>
-            <HomeCarousel context={carousel.context} title={carousel.title} />
+            <HomeCarousel
+              context={carousel.context}
+              title={carousel.title}
+              setCarouselLoaded={setCarouselLoaded}
+              carouselLoaded={carouselLoaded}
+            />
           </Suspense>
         ))}
 
@@ -117,7 +110,7 @@ const HomePage = ({ setIsMounted }) => {
         )}
       </div>
 
-      {homepage_1 && (
+      {homepage_1 && carouselLoaded && (
         <div className="homepage__imageWrapper">
           {isHomepage1Loaded === false && <CustomSkeleton type="banner" />}
           <img
@@ -130,7 +123,7 @@ const HomePage = ({ setIsMounted }) => {
         </div>
       )}
 
-      {homepage_2 && (
+      {homepage_2 && carouselLoaded && (
         <div className="homepage__imageWrapper">
           {isHomepage2Loaded === false && <CustomSkeleton type="banner" />}
           <img

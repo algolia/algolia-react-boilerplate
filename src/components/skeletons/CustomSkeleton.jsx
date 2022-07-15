@@ -25,6 +25,9 @@ const CustomSkeleton = ({ type }) => {
     case 'carousel':
       return <div className="skeleton__carousel"></div>;
       break;
+    case 'homepage':
+      return <div className="skeleton__homepage"></div>;
+      break;
   }
 };
 
