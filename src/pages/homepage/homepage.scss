@@ -1,0 +1,8 @@
+@use '../../scss/partials/' as *;
+
+.homepage{
+    &__imageWrapper{
+        position: relative;
+        min-height: 50vh;
+    }
+}
