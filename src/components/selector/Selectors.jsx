@@ -38,6 +38,7 @@ export const Selectors = ({ props }) => {
   const [menuActive, setMenuActive] = useState(false);
   const [selectedValue, setSelectedValue] = useState(props[0].label);
   const selectorBtn = useRef();
+
   useOutsideClick(selectorBtn.current, () => setMenuActive(false));
 
   return (
