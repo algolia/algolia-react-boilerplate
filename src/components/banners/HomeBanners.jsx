@@ -42,12 +42,16 @@ const HomeBannerComponent = ({
 }) => {
   const [isBannerLoaded, setIsBannerLoaded] = useState(false);
 
+  //Preload image
+  const img = new Image();
+  img.src = imgUrl1;
+
   return (
     <div className="home-banner3-container">
       <div className="home-banner3-container__image">
         {isBannerLoaded === false && <CustomSkeleton type="banner" />}
         <img
-          src={imgUrl1}
+          src={img.src}
           alt="homeBanner"
           fetchpriority="high"
           width="1121"

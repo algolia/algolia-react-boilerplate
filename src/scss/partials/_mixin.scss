@@ -167,6 +167,7 @@
   grid-auto-flow: column;
   overflow-x: auto;
   padding: 0.5rem 0;
+  height: 100%;
 
   @include scrollBar()
 
