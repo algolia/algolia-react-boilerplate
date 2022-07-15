@@ -1,5 +1,5 @@
 // NB: we need React declared for the Fragments used here
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 // This component will be wrapped in connectQueryRules (https://www.algolia.com/doc/api-reference/widgets/query-rule-custom-data/react/#connector)
 import { useQueryRules } from 'react-instantsearch-hooks-web';
 
@@ -41,17 +41,21 @@ const HomeBannerComponent = ({
   button1,
 }) => {
   const [isBannerLoaded, setIsBannerLoaded] = useState(false);
+  const [banner, setBanner] = useState(null);
 
-  //Preload image
-  const img = new Image();
-  img.src = imgUrl1;
+  useEffect(() => {
+    //Preload image
+    const img = new Image();
+    img.src = imgUrl1;
+    setBanner(img.src);
+  }, []);
 
   return (
     <div className="home-banner3-container">
       <div className="home-banner3-container__image">
         {isBannerLoaded === false && <CustomSkeleton type="banner" />}
         <img
-          src={img.src}
+          src={banner}
           alt="homeBanner"
           fetchpriority="high"
           width="1121"
