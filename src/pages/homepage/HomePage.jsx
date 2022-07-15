@@ -1,5 +1,6 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
+import { useState } from 'react';
 
 // framer-motion
 import { AnimatePresence } from 'framer-motion';
@@ -25,6 +26,7 @@ import {
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
 // components import
 const CustomHomeBanners = lazy(() =>
@@ -41,9 +43,15 @@ const Trending = lazy(() =>
   import('@/components/recommend/trending/TrendingProducts')
 );
 
+// Import scoped SCSS
+import './homepage.scss';
+
 const HomePage = ({ setIsMounted }) => {
   // Get the main index
   const index = useRecoilValue(mainIndex);
+
+  const [isHomepage1Loaded, setHomepage1Loaded] = useState(false);
+  const [isHomepage2Loaded, setHomepage2Loaded] = useState(false);
 
   // Boolean value which determines if federated search is shown or not, default is false
   const isFederated = useRecoilValue(shouldHaveFederatedSearch);
@@ -109,12 +117,30 @@ const HomePage = ({ setIsMounted }) => {
         )}
       </div>
 
-      {homepage_1 ? (
-        <img src={homepage_1} alt="homepage1" width="3014" height="1324" />
-      ) : null}
+      {homepage_1 && (
+        <div className="homepage__imageWrapper">
+          {isHomepage1Loaded === false && <CustomSkeleton type="banner" />}
+          <img
+            src={homepage_1}
+            alt="homepage1"
+            width="3014"
+            height="1324"
+            onLoad={() => setHomepage1Loaded(true)}
+          />
+        </div>
+      )}
 
       {homepage_2 && (
-        <img src={homepage_2} alt="homepage1" width="3014" height="1324" />
+        <div className="homepage__imageWrapper">
+          {isHomepage2Loaded === false && <CustomSkeleton type="banner" />}
+          <img
+            src={homepage_2}
+            alt="homepage1"
+            width="3014"
+            height="1324"
+            onLoad={() => setHomepage2Loaded(true)}
+          />
+        </div>
       )}
     </div>
   );

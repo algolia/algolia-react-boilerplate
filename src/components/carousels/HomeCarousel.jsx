@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Configure, Index, useHits } from 'react-instantsearch-hooks-web';
 
 // React Router
@@ -24,9 +26,11 @@ import { windowSize } from '@/hooks/useScreenSize';
 
 //Import scope SCSS
 import './SCSS/carousels.scss';
+import CustomSkeleton from '../skeletons/CustomSkeleton';
 
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ context, title }) => {
+  const [carouselLoaded, setCarouselLoaded] = useState(false);
   const index = useRecoilValue(mainIndex);
   const userToken = useRecoilValue(personaSelectedAtom);
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
@@ -43,7 +47,8 @@ const HomeCarousel = ({ context, title }) => {
           userToken={userToken}
           query={''}
         />
-        <Carousel title={title} />
+        {carouselLoaded === false && <CustomSkeleton type="hit" />}
+        <Carousel title={title} setCarouselLoaded={setCarouselLoaded} />
       </Index>
     </div>
   );
@@ -53,7 +58,7 @@ const HomeCarousel = ({ context, title }) => {
 
 function Carousel(props) {
   const { hits } = useHits(props);
-  const { title } = props;
+  const { title, setCarouselLoaded } = props;
 
   // Navigate is used by React Router
   const navigate = useNavigate();
@@ -79,6 +84,7 @@ function Carousel(props) {
                     onError={(e) => (e.currentTarget.src = placeHolderError)}
                     width="400"
                     height="577"
+                    onLoad={() => setCarouselLoaded(true)}
                   />
                 </div>
                 <div

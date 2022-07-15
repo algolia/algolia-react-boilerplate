@@ -4,7 +4,9 @@
 @use '../../../scss/partials' as *;
 
 .home-carousel {
+  position: relative;
   margin: 2rem 2rem;
+  // min-height: 10vh;
   .title{
     @include titleH3($purple-algolia)
   }
