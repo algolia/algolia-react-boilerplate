@@ -113,27 +113,24 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           </p>
         </li>
       ))}
-      <div
-        className="container__header-nav-selectors"
-        ref={selectorsNavigation}
-      >
+      <li className="container__header-nav-selectors" ref={selectorsNavigation}>
         {shouldShowPersonasAtom && (
-          <li>
+          <div>
             <Selectors props={personaConfig} />
-          </li>
+          </div>
         )}
         {shouldShowSegmentsAtom && (
-          <li>
+          <div>
             <Selectors props={segmentConfig} />
-          </li>
+          </div>
         )}
         {/* Display the language select component */}
         {shouldShowLanguageSelected && (
-          <li>
+          <div>
             <Selectors props={languagesConfig} />
-          </li>
+          </div>
         )}
-      </div>
+      </li>
     </ul>
   );
 };
