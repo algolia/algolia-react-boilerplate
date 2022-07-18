@@ -113,10 +113,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           </p>
         </li>
       ))}
-      <div
-        className="container__header-nav-selectors"
-        ref={selectorsNavigation}
-      >
+      <ul className="container__header-nav-selectors" ref={selectorsNavigation}>
         {shouldShowPersonasAtom && (
           <li>
             <Selectors props={personaConfig} />
@@ -133,7 +130,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
             <Selectors props={languagesConfig} />
           </li>
         )}
-      </div>
+      </ul>
     </ul>
   );
 };
