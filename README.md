@@ -163,6 +163,8 @@ You can turn on sorts by going to `config/featuresConfig` and setting the `defau
 
 You can then define your sorts by going to `config/sortByConfig` and adjusting the values in the export called `sortBy`.
 
+To sort by Price ascending or descending please configure the dashboard by creating a new virtual replica and name it exactly like the main index name and add `_price_asc` or `_price_desc`. Please see `config/sortByConfig`
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Carousels</h3>
 
 You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveCarousels` to true.
