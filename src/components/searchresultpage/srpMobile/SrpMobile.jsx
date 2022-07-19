@@ -35,7 +35,6 @@ import { personalizationImpact, personaSelectedAtom, personaSelectedFiltersAtom 
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
-import { customDataByType } from '@/utils';
 
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/components/ClearRefinement')
