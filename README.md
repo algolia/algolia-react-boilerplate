@@ -1,5 +1,8 @@
 # React Boilerplate for Custom Demos
 
+[![Deploy To Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/algolia/algolia-react-boilerplate)
+
+
 - [Get started](#️-get-started)
 - [Structure](#️-structure)
 - [Features Config](#-features-config)
