@@ -151,9 +151,9 @@ const SrpLaptop = () => {
             </Suspense>
           </div>
           <Configure
-            // hitsPerPage={
-            //   injected ? hitsPerPageInjected : hitsPerPageNotInjected
-            // }
+            hitsPerPage={
+              injected ? hitsPerPageInjected : hitsPerPageNotInjected
+            }
             analytics={false}
             enablePersonalization={true}
             userToken={userToken}
@@ -185,8 +185,6 @@ const SrpLaptop = () => {
               <CustomHitsComponent />
             </Suspense>
           )}
-
-          {/* <Pagination /> */}
           <Redirect />
         </div>
       </div>
