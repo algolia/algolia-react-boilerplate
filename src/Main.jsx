@@ -40,12 +40,9 @@ import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
 import SearchErrorToast from './utils/ErrorHandler';
-import CustomSkeleton from './components/skeletons/CustomSkeleton';
 
 export const Main = () => {
   const index = useRecoilValue(mainIndex);
-
-  const [isMounted, setIsMounted] = useState(false);
 
   const location = useLocation();
 
@@ -89,11 +86,11 @@ export const Main = () => {
           <Routes key={location.pathname} location={location}>
             <Route
               path="/"
-              element={<HomePage setIsMounted={setIsMounted} />}
+              element={<HomePage />}
             />
             <Route
               path="/search"
-              element={<SearchResultsPage setIsMounted={setIsMounted} />}
+              element={<SearchResultsPage />}
             />
             {/* objectID is the unique identifier for an algolia record */}
             <Route path="/search/:objectID" element={<ProductDetails />} />
