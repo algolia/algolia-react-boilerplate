@@ -45,10 +45,7 @@ const Trending = lazy(() =>
 // Import scoped SCSS
 import './homepage.scss';
 
-const HomePage = ({ setIsMounted }) => {
-  // Get the main index
-  const index = useRecoilValue(mainIndex);
-
+const HomePage = () => {
   const [carouselLoaded, setCarouselLoaded] = useState(false);
 
   const [isHomepage1Loaded, setHomepage1Loaded] = useState(false);
@@ -65,15 +62,6 @@ const HomePage = ({ setIsMounted }) => {
     shouldHaveTrendingProducts
   );
 
-  useEffect(() => {
-    HomePage.current = true;
-    setIsMounted(HomePage.current);
-    return () => {
-      HomePage.current = false;
-      setIsMounted(HomePage.current);
-    };
-  }, []);
-
   return (
     // Framer motion wrapper
     <div className="homepage" ref={HomePage}>
@@ -89,7 +77,7 @@ const HomePage = ({ setIsMounted }) => {
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
-          <Suspense key={i}>
+          <Suspense key={i} fallback={<CustomSkeleton type="banner" />}>
             <HomeCarousel
               context={carousel.context}
               title={carousel.title}
