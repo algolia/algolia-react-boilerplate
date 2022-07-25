@@ -8,7 +8,7 @@ import { framerMotionHits } from '@/config/animationConfig';
 // Display the name, the category and the background image, wrapped in a framer motion div
 const InfluencerCard = ({ hit }) => {
   return (
-    <motion.li
+    <motion.div
       layout
       variants={framerMotionHits}
       initial={framerMotionHits.initial}
@@ -26,7 +26,7 @@ const InfluencerCard = ({ hit }) => {
         <h3>{hit.influencer.name}</h3>
         <h4>{hit.category}</h4>
       </div>
-    </motion.li>
+    </motion.div>
   );
 };
 

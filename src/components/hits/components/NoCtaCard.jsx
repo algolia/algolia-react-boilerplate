@@ -7,14 +7,14 @@ import { framerMotionHits } from '@/config/animationConfig';
 // Display an image, within a framer-motion wrapper
 const NoCtaCard = ({ hit }) => {
   return (
-    <motion.li
+    <motion.div
       variants={framerMotionHits}
       initial="hidden"
       animate="show"
       className="hit-list"
     >
-      <img src={hit.image.desktop_url} alt=""/>
-    </motion.li>
+      <img src={hit.image.desktop_url} alt="" />
+    </motion.div>
   );
 };
 

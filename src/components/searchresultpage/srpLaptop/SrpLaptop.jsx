@@ -24,7 +24,11 @@ import {
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
-import { personalizationImpact, personaSelectedAtom, personaSelectedFiltersAtom } from '@/config/personaConfig';
+import {
+  personalizationImpact,
+  personaSelectedAtom,
+  personaSelectedFiltersAtom,
+} from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
@@ -147,9 +151,9 @@ const SrpLaptop = () => {
             </Suspense>
           </div>
           <Configure
-            hitsPerPage={
-              injected ? hitsPerPageInjected : hitsPerPageNotInjected
-            }
+            // hitsPerPage={
+            //   injected ? hitsPerPageInjected : hitsPerPageNotInjected
+            // }
             analytics={false}
             enablePersonalization={true}
             userToken={userToken}
@@ -182,7 +186,7 @@ const SrpLaptop = () => {
             </Suspense>
           )}
 
-          <Pagination />
+          {/* <Pagination /> */}
           <Redirect />
         </div>
       </div>
