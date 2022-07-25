@@ -24,7 +24,11 @@ import {
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
-import { personalizationImpact, personaSelectedAtom, personaSelectedFiltersAtom } from '@/config/personaConfig';
+import {
+  personalizationImpact,
+  personaSelectedAtom,
+  personaSelectedFiltersAtom,
+} from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
@@ -181,8 +185,6 @@ const SrpLaptop = () => {
               <CustomHitsComponent />
             </Suspense>
           )}
-
-          <Pagination />
           <Redirect />
         </div>
       </div>

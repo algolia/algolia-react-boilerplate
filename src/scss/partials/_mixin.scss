@@ -417,6 +417,9 @@
 // ------------------------------------------
 @mixin salesCard($text-color) {
   position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0.5rem;
   &__infos {
     position: absolute;
     padding: 0 0.6rem;

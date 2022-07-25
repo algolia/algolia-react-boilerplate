@@ -7,7 +7,7 @@ import { framerMotionHits } from '@/config/animationConfig';
 // SALES CARD
 const SalesCard = ({ hit }) => {
   return (
-    <motion.li
+    <motion.div
       layout
       variants={framerMotionHits}
       initial={framerMotionHits.initial}
@@ -24,7 +24,7 @@ const SalesCard = ({ hit }) => {
         <p>{hit.coupon}</p>
         <h3>{hit.title}</h3>
       </div>
-    </motion.li>
+    </motion.div>
   );
 };
 

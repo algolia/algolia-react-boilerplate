@@ -75,7 +75,7 @@ const Hit = ({ hit }) => {
   const promoted = hit?._rankingInfo?.promoted;
 
   return (
-    <motion.li
+    <motion.div
       layout
       variants={framerMotionHits}
       initial={framerMotionHits.initial}
@@ -151,7 +151,7 @@ const Hit = ({ hit }) => {
           </p>
         </div>
       </>
-    </motion.li>
+    </motion.div>
   );
 };
 
