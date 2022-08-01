@@ -8,8 +8,7 @@ const resources = {
   en: {
     translation: {
       homePage: {
-        headerCarousel1: 'Our Bags Collection',
-        headerCarousel2: 'Our Best Hoodies',
+        titleCarousels: ['Notre collection de sacs', 'Nos plus beaux sweat'],
       },
       federated: {
         recentSearches: 'Recent Searches',
@@ -44,8 +43,41 @@ const resources = {
   fr: {
     translation: {
       homePage: {
-        headerCarousel1: 'Notre collection de sacs',
-        headerCarousel2: 'Nos plus beaux sweat',
+        titleCarousels: ['Notre collection de sacs', 'Nos plus beaux sweat'],
+      },
+      federated: {
+        recentSearches: 'Recherches Récentes',
+        suggestions: 'Suggestions',
+        categories: 'Categories',
+        products: 'Produits',
+        articles: 'Articles',
+        productsBefore: 'Recommendé pour vous',
+        buttonReturn: "Retour page d'acceuil",
+        buttonShowAll: 'Voir tous les produits',
+        noResults: 'Aucun résultat trouvé',
+      },
+      srp: {
+        titleTrendingProducts: 'Produits tendances',
+        titleTrendingFacets: 'Marques Tendances',
+        stats: 'résultats trouvé en',
+        searchInCategory: 'Recherche dans',
+      },
+      pdp: {
+        fbtTitle: 'Fréquemment acheté ensemble',
+        relatedTitle: 'Produits connexes',
+        buttonBack: 'Revenir aux recherches',
+        addToCartButton: 'Ajouter au panier',
+        availableSize: 'Taille disponibles:',
+      },
+      searchBox: {
+        placeHolder: 'Rechercher...',
+      },
+    },
+  },
+  ger: {
+    translation: {
+      homePage: {
+        titleCarousels: ['Notre collection de sacs', 'Nos plus beaux sweat'],
       },
       federated: {
         recentSearches: 'Recherches Récentes',
@@ -82,6 +114,7 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
+    returnObjects: true,
     lng: 'en', // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
     // you can use the i18n.changeLanguage function to change the language manually: https://www.i18next.com/overview/api#changelanguage
     // if you're using a language detector, do not define the lng option

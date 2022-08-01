@@ -32,6 +32,9 @@ import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 // );
 import CustomHomeBanners from '@/components/banners/HomeBanners';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 const FederatedSearch = lazy(() =>
   import('@/components/federatedSearch/FederatedSearch')
 );
@@ -62,6 +65,12 @@ const HomePage = () => {
     shouldHaveTrendingProducts
   );
 
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'homePage',
+  });
+
   return (
     // Framer motion wrapper
     <div className="homepage" ref={HomePage}>
@@ -80,7 +89,7 @@ const HomePage = () => {
           <Suspense key={i} fallback={<CustomSkeleton type="banner" />}>
             <HomeCarousel
               context={carousel.context}
-              title={carousel.title}
+              title={t('titleCarousels')[i]}
               setCarouselLoaded={setCarouselLoaded}
               carouselLoaded={carouselLoaded}
             />

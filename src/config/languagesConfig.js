@@ -94,42 +94,42 @@ export const languageSwitchConfig = {
       },
     ],
   },
-  // GER: {
-  //   index: 'flagship_fashion',
-  //   currency: '€',
-  //   linksHeader: [
-  //     {
-  //       name: 'All',
-  //       type: 'filter',
-  //       filter: '',
-  //       url: '/search',
-  //     },
-  //     {
-  //       name: 'Herren',
-  //       type: 'filter',
-  //       filter: 'Herren',
-  //       url: '/herren',
-  //     },
-  //     {
-  //       name: 'Damen',
-  //       type: 'filter',
-  //       filter: 'Damen',
-  //       url: '/damen',
-  //     },
-  //     {
-  //       name: 'Home',
-  //       type: 'filter',
-  //       filter: 'Home',
-  //       url: '/home',
-  //     },
-  //     {
-  //       name: 'Summer 22 Collection',
-  //       type: 'context',
-  //       context: 'Summer 22 Collection',
-  //       url: '/summer-22-collection',
-  //     },
-  //   ],
-  // },
+  GER: {
+    index: 'flagship_fashion',
+    currency: '€',
+    linksHeader: [
+      {
+        name: 'All',
+        type: 'filter',
+        filter: '',
+        url: '/search',
+      },
+      {
+        name: 'Herren',
+        type: 'filter',
+        filter: 'Herren',
+        url: '/herren',
+      },
+      {
+        name: 'Damen',
+        type: 'filter',
+        filter: 'Damen',
+        url: '/damen',
+      },
+      {
+        name: 'Home',
+        type: 'filter',
+        filter: 'Home',
+        url: '/home',
+      },
+      {
+        name: 'Summer 22 Collection',
+        type: 'context',
+        context: 'Summer 22 Collection',
+        url: '/summer-22-collection',
+      },
+    ],
+  },
 };
 
 // Please ignore this atom - DO NOT TOUCH

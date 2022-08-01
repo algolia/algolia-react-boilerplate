@@ -31,7 +31,7 @@ import { windowSize } from '@/hooks/useScreenSize';
 import './SCSS/carousels.scss';
 
 // Build the Carousel for use on the Homepage
-const HomeCarousel = ({ context, titleEn, titleFr }) => {
+const HomeCarousel = ({ context, title }) => {
   const index = useRecoilValue(mainIndex);
   const userToken = useRecoilValue(personaSelectedAtom);
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
@@ -41,7 +41,7 @@ const HomeCarousel = ({ context, titleEn, titleFr }) => {
 
   return (
     <div className={`${mobile ? 'home-carousel-mobile' : 'home-carousel'}`}>
-      <Index indexId={titleEn} indexName={index}>
+      <Index indexId={title} indexName={index}>
         <Configure
           hitsPerPage={hitsPerCarousel}
           ruleContexts={context}
@@ -49,7 +49,7 @@ const HomeCarousel = ({ context, titleEn, titleFr }) => {
           userToken={userToken}
           query={''}
         />
-        <Carousel titleEn={titleEn} titleFr={titleFr} />
+        <Carousel title={title} />
       </Index>
     </div>
   );
@@ -60,7 +60,7 @@ const HomeCarousel = ({ context, titleEn, titleFr }) => {
 function Carousel(props) {
   const LanguageSelected = useRecoilValue(LanguageSelectedAtom);
   const { hits } = useHits(props);
-  const { titleEn, titleFr } = props;
+  const { title } = props;
   const [width, setWidth] = useState(0);
 
   // Navigate is used by React Router
@@ -77,8 +77,7 @@ function Carousel(props) {
 
   return (
     <>
-      {LanguageSelected === 'English' && <h3 className="title">{titleEn}</h3>}
-      {LanguageSelected === 'French' && <h3 className="title">{titleFr}</h3>}
+      <h3 className="title">{title}</h3>
       {/* This div declares the outer reference for the framer motion */}
       <motion.div
         ref={carousel}
