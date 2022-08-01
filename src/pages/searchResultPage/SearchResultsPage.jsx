@@ -20,7 +20,7 @@ import Banner from '@/components/banners/Banner';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 
-const SearchResultPage = ({ setIsMounted, props }) => {
+const SearchResultPage = ({ props }) => {
   const [nbOfHits, setNbOfHits] = useState(1);
 
   // Do you want to show banner on SRP? This boolean tells us yes or no
@@ -40,10 +40,8 @@ const SearchResultPage = ({ setIsMounted, props }) => {
   const srpMounted = useRef(false);
   useEffect(() => {
     srpMounted.current = true;
-    setIsMounted(srpMounted.current);
     return () => {
       srpMounted.current = false;
-      setIsMounted(srpMounted.current);
     };
   }, []);
 
