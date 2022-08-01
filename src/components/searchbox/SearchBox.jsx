@@ -21,11 +21,13 @@ import {
   isSearchInCategory,
   queryAtom,
   searchBoxAtom,
-  simplePlaceholderAtom,
   searchBoxIsActive,
 } from '@/config/searchboxConfig';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+
+//Use Translation
+import { useTranslation } from 'react-i18next';
 
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
@@ -40,7 +42,6 @@ function CustomSearchBox(props) {
   const [queryState, setQueryState] = useRecoilState(queryAtom);
   const [sbIsActive, setSbIsActive] = useRecoilState(searchBoxIsActive);
   // const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
-  const [simplePlaceholder] = useRecoilState(simplePlaceholderAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
   // router hook to navigate using a function
@@ -50,6 +51,12 @@ function CustomSearchBox(props) {
 
   // Get array of rules from Recoil
   const rulesApplied = useSetRecoilState(rulesAtom);
+
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'searchBox',
+  });
 
   const refineFunction = (query) => {
     // Empty array of rules on each Keystrokes
@@ -77,7 +84,7 @@ function CustomSearchBox(props) {
           // ref={setSearchBoxRef}
           type="search"
           value={queryState ? queryState : ''}
-          placeholder={simplePlaceholder}
+          placeholder={t('placeHolder')}
           onClick={() => {
             setIsFederatedOpen(true);
             setSbIsActive(true);

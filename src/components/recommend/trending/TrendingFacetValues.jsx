@@ -30,10 +30,16 @@ function WrappedTrendingFacetValues(props) {
     maxRecommendations: maxFacetValuesRecommendations,
   });
 
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'srp',
+  });
+
   useEffect(() => {
     setRecommendationsLoaded(recommendations.length > 0);
   }, [recommendations]);
-  
+
   return (
     <div className="trending-facet-container">
       {recommendations.length > 0 && (
