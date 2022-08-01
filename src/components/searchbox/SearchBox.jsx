@@ -65,8 +65,14 @@ function CustomSearchBox(props) {
     setQueryState(query);
   };
 
+  console.log(isSearchInCategory);
+
   return (
-    <div className={sbIsActive ? 'searchbox-active searchbox' : 'searchbox'}>
+    <div
+      className={`searchbox ${sbIsActive ? 'searchbox-active' : ''} ${
+        state && isSearchInCategory ? 'searchbox-category' : ''
+      }`}
+    >
       <form
         className="searchbox__form"
         action=""

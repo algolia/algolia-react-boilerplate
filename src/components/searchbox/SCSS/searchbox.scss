@@ -9,7 +9,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
   gap: 1rem;
   .searchbox {
     width: 40%;
@@ -79,5 +78,8 @@
     width: 100%;
     will-change: width;
     transition: width 0.2s cubic-bezier(0.73, 0, 0.12, 1.5);
+  }
+  .searchbox-category{
+    width: 80%;
   }
 }
