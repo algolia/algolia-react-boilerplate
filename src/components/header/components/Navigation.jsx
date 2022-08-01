@@ -9,13 +9,6 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 // Import Config for the header
 import { categoryPageFilterAttribute } from '@/config/categoryConfig';
 import { linksHeader, selectorNavigationRef } from '@/config/headerConfig';
-import SelectPersona from './personnaSelect/SelectPersona';
-
-//import language selector component
-import LanguageSelect from './languagesSelect/LanguageSelect';
-
-// import segment selector component
-import SelectSegment from './segmentSelect/selectSegment';
 
 // Import Recoil config
 import {
@@ -23,16 +16,16 @@ import {
   shouldHavePersona,
   shouldHaveSegments,
 } from '@/config/featuresConfig';
+import { Selectors } from '../../selector/Selectors';
+
+// Import segment configuration
+import { segmentConfig } from '@/config/segmentConfig';
+import { personaConfig } from '@/config/personaConfig';
+import { languagesConfig } from '@/config/languagesConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
-  // LEFT IN FOR REFACTO PURPOSES
-  // const [categorySelectionState, setCategorySelectionState] = useRecoilState(
-  //   categorySelectionAtom
-  // );
-
-  // const searchCategoryState = useRecoilState(searchCategoryStateAtom);
 
   // navigate is used by React Router
   const navigate = useNavigate();
@@ -115,37 +108,29 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
                 ? 'selected'
                 : ''
             }
-            onClick={() => {
-              // find the index of the new state
-              // LEFT IN FOR REFACTO PURPOSES
-              // setCategorySelectionState(link.filter);
-            }}
           >
             {link.name}
           </p>
         </li>
       ))}
-      <div
-        className="container__header-nav-selectors"
-        ref={selectorsNavigation}
-      >
+      <li className="container__header-nav-selectors" ref={selectorsNavigation}>
         {shouldShowPersonasAtom && (
-          <li>
-            <SelectPersona />
-          </li>
+          <div>
+            <Selectors props={personaConfig} />
+          </div>
         )}
         {shouldShowSegmentsAtom && (
-          <li>
-            <SelectSegment />
-          </li>
+          <div>
+            <Selectors props={segmentConfig} />
+          </div>
         )}
         {/* Display the language select component */}
         {shouldShowLanguageSelected && (
-          <li>
-            <LanguageSelect />
-          </li>
+          <div>
+            <Selectors props={languagesConfig} />
+          </div>
         )}
-      </div>
+      </li>
     </ul>
   );
 };

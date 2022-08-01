@@ -1,8 +1,7 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
+import { useState } from 'react';
 
-// framer-motion
-import { AnimatePresence } from 'framer-motion';
 import { lazy, Suspense, useEffect, useRef } from 'react';
 
 // recoil import
@@ -25,11 +24,13 @@ import {
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
 // components import
-const CustomHomeBanners = lazy(() =>
-  import('@/components/banners/HomeBanners')
-);
+// const CustomHomeBanners = lazy(() =>
+//   import('@/components/banners/HomeBanners')
+// );
+import CustomHomeBanners from '@/components/banners/HomeBanners';
 
 const FederatedSearch = lazy(() =>
   import('@/components/federatedSearch/FederatedSearch')
@@ -41,9 +42,14 @@ const Trending = lazy(() =>
   import('@/components/recommend/trending/TrendingProducts')
 );
 
-const HomePage = ({ setIsMounted }) => {
-  // Get the main index
-  const index = useRecoilValue(mainIndex);
+// Import scoped SCSS
+import './homepage.scss';
+
+const HomePage = () => {
+  const [carouselLoaded, setCarouselLoaded] = useState(false);
+
+  const [isHomepage1Loaded, setHomepage1Loaded] = useState(false);
+  const [isHomepage2Loaded, setHomepage2Loaded] = useState(false);
 
   // Boolean value which determines if federated search is shown or not, default is false
   const isFederated = useRecoilValue(shouldHaveFederatedSearch);
@@ -56,66 +62,68 @@ const HomePage = ({ setIsMounted }) => {
     shouldHaveTrendingProducts
   );
 
-  useEffect(() => {
-    HomePage.current = true;
-    setIsMounted(HomePage.current);
-    return () => {
-      HomePage.current = false;
-      setIsMounted(HomePage.current);
-    };
-  }, []);
-
   return (
     // Framer motion wrapper
-    <div
-      className="homepage"
-      // initial state
-      initial={framerMotionPage.initial}
-      // actual animation
-      animate={framerMotionPage.animate}
-      // everything the animation needs to function
-      variants={framerMotionPage}
-      // what to do when unmounted
-      exit={framerMotionPage.exit}
-      // duration, smoothness etc.
-      transition={framerMotionPage.transition}
-      ref={HomePage}
-    >
+    <div className="homepage" ref={HomePage}>
       {isFederated && isFederatedOpen && (
         <Suspense>
           <FederatedSearch />
         </Suspense>
       )}
-
       {/* Load custom banners */}
-      <Suspense>
-        <CustomHomeBanners />
-      </Suspense>
+      {/* <Suspense> */}
+      <CustomHomeBanners />
+      {/* </Suspense> */}
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
-          <Suspense key={i} fallback={''}>
+          <Suspense key={i} fallback={<CustomSkeleton type="banner" />}>
             <HomeCarousel
               context={carousel.context}
-              titleEn={carousel.titleEn}
-              titleFr={carousel.titleFr}
+              title={carousel.title}
+              setCarouselLoaded={setCarouselLoaded}
+              carouselLoaded={carouselLoaded}
             />
           </Suspense>
         ))}
 
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
-      <div className="recommend">
-        {shouldHaveTrendingProductsValue && (
-          <Suspense>
-            <Trending filter={null} />
-          </Suspense>
-        )}
-      </div>
+      {carouselLoaded && (
+        <div className="recommend">
+          {shouldHaveTrendingProductsValue && (
+            <Suspense>
+              <Trending filter={null} />
+            </Suspense>
+          )}
+        </div>
+      )}
 
-      {homepage_1 ? <img src={homepage_1} alt="" /> : null}
+      {homepage_1 && carouselLoaded && (
+        <div className="homepage__imageWrapper">
+          {isHomepage1Loaded === false && <CustomSkeleton type="banner" />}
+          <img
+            src={homepage_1}
+            alt="homepage1"
+            width="3014"
+            height="1324"
+            onLoad={() => setHomepage1Loaded(true)}
+          />
+        </div>
+      )}
 
-      {homepage_2 && <img src={homepage_2} alt="" />}
+      {homepage_2 && carouselLoaded && (
+        <div className="homepage__imageWrapper">
+          {isHomepage2Loaded === false && <CustomSkeleton type="banner" />}
+          <img
+            src={homepage_2}
+            alt="homepage1"
+            width="3014"
+            height="1324"
+            onLoad={() => setHomepage2Loaded(true)}
+          />
+        </div>
+      )}
     </div>
   );
 };

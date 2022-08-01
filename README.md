@@ -1,5 +1,8 @@
 # React Boilerplate for Custom Demos
 
+[![Deploy To Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/algolia/algolia-react-boilerplate)
+
+
 - [Get started](#️-get-started)
 - [Structure](#️-structure)
 - [Features Config](#-features-config)
@@ -11,6 +14,7 @@
   - [ Recommend](#--recommend)
   - [ Styling](#--styling)
   - [ Demo Guide](#--demo-guide)
+  - [ Network Error Messages](#--network-error-messages)
   - [ Languages](#--languages)
   - [ Banners](#--banners)
   - [ Segments](#--segments)
@@ -125,6 +129,13 @@ This app offers the ability to present a guided tour to the user, highlighting d
 
 You can configure your tour by adjusting the `steps` const, also found in `config/demoTourConfig`.
 
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Network Error Messages</h3>
+
+This feature will guide you to see what in the configuration is failing. We render the InstantSearch api errors in a modal.
+
+You can turn this feature off by switching `showNetworkErorrs` default value to `false` in `config/demoGuideConfig`.
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Insights</h3>
 
 On the product details page, if you have chosen not to show the size filter, you will see an add to cart button. By clicking this button, an event will be sent to algolia using the Insights API and an alert will be shown to the user.
@@ -155,6 +166,8 @@ You can turn on voice search by going to `config/featuresConfig` and setting the
 You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveSorts` to true.
 
 You can then define your sorts by going to `config/sortByConfig` and adjusting the values in the export called `sortBy`.
+
+To sort by Price ascending or descending please configure the dashboard by creating a new virtual replica and name it exactly like the main index name and add `_price_asc` or `_price_desc`. Please see `config/sortByConfig`
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Carousels</h3>
 
@@ -277,17 +290,21 @@ To have the best UI, we defined the no results page with 3 parts:
 
 [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/)
 
-To configure personalisation please first make sure you have user profiles created in Algolia with their respective user tokens.
+To configure personalisation please first make sure you have the Personalization feature enabled on your plan, and that you have the correct strategy created. For example, if you want to boost colour: blue for a persona, you need to make sure that colour is in your strategy as a facet.
 
-Then, you can visit `config/personaConfig` and update the `value`s to match the user tokens you need to send. The `description` will also show up in the demo guide component.
+Then, you can visit `config/personaConfig` and update the `value`s to match the user tokens you need to send, and update the personalizationFilters array to contain the attributes and values you want to boost for each persona. The `description` will also show up in the demo guide component.
+
+You can also adjust the personalizationImpact number in `config/personaConfig` to control how much personalization applies to the results where personalization is turned on.
+
+Personalization is currently active by default in the search results page, and in the main section (normally products) of the federated search.
 
 The current user stories are:
 
 - Younger male 'Stephen James', likes Basketball and he lives in NYC.
-  -Likes **Sneakers**, size 24, also likes **tracksuit**
+  -Likes **Sneakers**, size 24, also likes **tracksuit**
 
 - Older female: 'Elizabeth Aniston', likes fashion and she lives in Paris.
-  -Likes **black** dresses, size M, also likes blue jeans
+  -Likes **black** dresses, size M, also likes blue jeans
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 💉 Injected Content</h3>
 

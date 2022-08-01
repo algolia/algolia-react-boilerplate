@@ -1,5 +1,7 @@
-import { Configure, Index, useHits } from 'react-instantsearch-hooks-web';
+import { useState, useRef, useEffect } from 'react';
 
+import { Configure, Index, useHits } from 'react-instantsearch-hooks-web';
+import { motion } from 'framer-motion';
 // React Router
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +15,8 @@ import { hitsPerCarousel } from '@/config/carouselConfig';
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
+import { isCarouselLoaded } from '@/config/carouselConfig';
+import { framerMotionTransition } from '@/config/animationConfig';
 
 // In case of img loading error
 import * as placeHolderError from '@/assets/logo/logo.webp';
@@ -31,6 +35,7 @@ const HomeCarousel = ({ context, titleEn, titleFr }) => {
   const index = useRecoilValue(mainIndex);
   const userToken = useRecoilValue(personaSelectedAtom);
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
+  const carouselLoaded = useRecoilValue(isCarouselLoaded);
 
   const { mobile } = useRecoilValue(windowSize);
 
@@ -56,21 +61,49 @@ function Carousel(props) {
   const LanguageSelected = useRecoilValue(LanguageSelectedAtom);
   const { hits } = useHits(props);
   const { titleEn, titleFr } = props;
+  const [width, setWidth] = useState(0);
 
   // Navigate is used by React Router
   const navigate = useNavigate();
 
   // Hits are imported by Recoil
   const hitState = useSetRecoilState(hitAtom);
-  const { objectID, image, productName, brand } = hitsConfig;
+  const { objectID, image, productName } = hitsConfig;
+  const carousel = useRef();
+
+  useEffect(() => {
+    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+  }, [hits]);
 
   return (
     <>
       {LanguageSelected === 'English' && <h3 className="title">{titleEn}</h3>}
       {LanguageSelected === 'French' && <h3 className="title">{titleFr}</h3>}
       {/* This div declares the outer reference for the framer motion */}
-      <div className="carousel">
-        <div className="inner-carousel">
+      <motion.div
+        ref={carousel}
+        className="carousel"
+        whileTap={{ cursor: 'grabbing' }}
+      >
+        {/* This div declares the parameters for the carousel dragging effect */}
+        <motion.div
+          // ADD THAT TO NEW FILE ABOUT ANIMATION IN CONFIG
+          draggable
+          drag="x"
+          dragConstraints={{ right: 0, left: -width }}
+          dragTransition={
+            ({
+              min: 0,
+              max: 100,
+              velocity: 0,
+              power: 1,
+              bounceStiffness: 10,
+              bounceDamping: 1,
+            },
+            framerMotionTransition)
+          }
+          className="inner-carousel"
+        >
           {/* Display the hits in the carousel */}
           {hits.map((hit, i) => {
             return (
@@ -90,10 +123,7 @@ function Carousel(props) {
                     navigate(`/search/${hit[objectID]}`);
                   }}
                 >
-                  <div className="item__infosUp">
-                    <p className="brand">{get(hit, brand)}</p>
-                    <h3 className="productName">{get(hit, productName)}</h3>
-                  </div>
+                  <p className="name">{get(hit, productName)}</p>
                   <p className="price">
                     <Price hit={hit} />
                   </p>
@@ -101,8 +131,8 @@ function Carousel(props) {
               </div>
             );
           })}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </>
   );
 }

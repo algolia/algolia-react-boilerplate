@@ -1,5 +1,8 @@
 @use '../../../scss/partials' as *;
 
+
+
+
 // ------------------------------------------
 // Header
 // ------------------------------------------
@@ -10,16 +13,25 @@
   background-color: $background-color;
   .container {
     .container__header-top {
+      position: relative;
+
       align-items: center;
       padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       margin-bottom: 1rem;
+      a{
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
       &__logo {
         width: 100%;
+        min-height: 7rem;
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
         img {
           margin: 0 auto;
           width: 70%;
@@ -30,6 +42,7 @@
         min-width: 40%;
         display: flex;
         justify-content: flex-start;
+        min-height: 5rem;
         h1 {
          @include titleH3($purple-algolia);
          font-size: 1.2rem;
@@ -41,9 +54,9 @@
       &__links {
         display: flex;
         justify-content: center;
+        gap: 2rem;
         li {
           z-index: 50;
-          margin-left: $two-rem-spaces;
           cursor: pointer;
           p {
             position: relative;
@@ -60,7 +73,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 0.5rem;
+        gap: 2rem;
       }
     }
   }

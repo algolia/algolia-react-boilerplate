@@ -25,7 +25,7 @@ import {
 import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig';
 
 // Import Persona State from recoil
-import { personaSelectedAtom } from '@/config/personaConfig';
+import { personalizationImpact, personaSelectedAtom, personaSelectedFiltersAtom } from '@/config/personaConfig';
 
 // Import Segment State from recoil
 import { segmentSelectedAtom } from '@/config/segmentConfig';
@@ -54,8 +54,11 @@ import RecentSearches from './components/RecentSearches';
 import './SCSS/federatedSearch.scss';
 
 const FederatedSearch = () => {
-  // Recoil & States
+  // Persona
   const personaSelect = useRecoilValue(personaSelectedAtom);
+  const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom);
+
+
   const segmentSelect = useRecoilValue(segmentSelectedAtom);
   const setIsFederated = useSetRecoilState(shouldHaveOpenFederatedSearch);
   const searchboxRef = useRecoilValue(searchBoxAtom);
@@ -107,9 +110,8 @@ const FederatedSearch = () => {
 
   return (
     <div
-      className={`${
-        mobile || tablet ? 'federatedSearch-mobile' : 'federatedSearch'
-      }`}
+      className={`${mobile || tablet ? 'federatedSearch-mobile' : 'federatedSearch'
+        }`}
       ref={setContainerFederated}
       variants={framerMotionFederatedContainer}
       initial={framerMotionFederatedContainer.initial}
@@ -121,11 +123,10 @@ const FederatedSearch = () => {
         &lsaquo; {t('buttonReturn')}
       </span>
       <div
-        className={`${
-          mobile || tablet
-            ? 'federatedSearch__wrapper-mobile'
-            : 'federatedSearch__wrapper'
-        }`}
+        className={`${mobile || tablet
+          ? 'federatedSearch__wrapper-mobile'
+          : 'federatedSearch__wrapper'
+          }`}
       >
         <div className="federatedSearch__left">
           {/* If don't want this sections go into config file  */}
@@ -140,6 +141,8 @@ const FederatedSearch = () => {
                 query={query}
                 userToken={personaSelect}
                 enablePersonalization={true}
+                personalizationImpact={personalizationImpact}
+                personalizationFilters={personalizationFilters}
               />
               <QuerySuggestions title={t('suggestions')} />
             </Index>
@@ -158,9 +161,11 @@ const FederatedSearch = () => {
             <Configure
               filters=""
               hitsPerPage={6}
-              userToken={personaSelect}
-              optionalFilters={segmentSelect}
               enablePersonalization={true}
+              userToken={personaSelect}
+              personalizationImpact={personalizationImpact}
+              personalizationFilters={personalizationFilters}
+              optionalFilters={segmentSelect}
               query={query}
             />
             <Products

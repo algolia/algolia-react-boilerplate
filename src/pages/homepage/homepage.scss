@@ -1,0 +1,10 @@
+@use '../../scss/partials/' as *;
+
+.homepage{
+    width: 100%;
+    height: 100%;
+    &__imageWrapper{
+        position: relative;
+        min-height: 50vh;
+    }
+}

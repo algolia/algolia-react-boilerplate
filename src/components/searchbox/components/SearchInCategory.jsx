@@ -1,8 +1,6 @@
-// Component for the searchbox being used when a category is selected eg. 'Mens'
-import { queryAtom } from '@/config/searchboxConfig';
+// Component for the searchbox being used when a category is selected eg. 'Mens'xz
 import { useNavigate } from 'react-router-dom';
 import { CloseButton } from '@/assets/svg/SvgIndex';
-import { useRecoilValue } from 'recoil';
 
 //Use Translation
 import { useTranslation } from 'react-i18next';

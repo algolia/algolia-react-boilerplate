@@ -9,6 +9,7 @@ import { lazy, useEffect, useState } from 'react';
 // Algolia
 import {
   useHits,
+  useInfiniteHits,
   useInstantSearch,
   useQueryRules,
 } from 'react-instantsearch-hooks-web';
@@ -34,7 +35,7 @@ const contentTypeComponentMap = {
 // This component renders the custom query hits, but also injects them with content from rule data or the injection Index
 const InjectedHits = (props) => {
   // Get the regular hits
-  const { hits } = useHits(props);
+  const { hits } = useInfiniteHits(props);
 
   // Get custom data from rules
   const { items: ruleData } = useQueryRules(props);

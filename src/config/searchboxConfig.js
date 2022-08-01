@@ -23,3 +23,10 @@ export const searchBoxAtom = atom({
   key: 'searchBoxAtom', // unique ID (with respect to other atoms/selectors)
   default: '', // default value (aka initial value)
 });
+// Please ignore this atom
+export const searchBoxIsActive = atom({
+  key: 'searchBoxIsActive', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
+
+

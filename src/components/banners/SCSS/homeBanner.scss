@@ -6,9 +6,10 @@
   position: relative;
 
   &__image {
-    height: 50vh;
+    max-height: 50vh;
     width: 100%;
     position: relative;
+    overflow: hidden;
     z-index: 1;
 
     .overlay {
@@ -16,10 +17,10 @@
     }
 
     img {
-      width: 100%;
+      width: 60%;
       height: 100%;
+      margin: 1rem auto;
       object-fit: contain;
-      object-position: center 1.5rem;
     }
   }
 

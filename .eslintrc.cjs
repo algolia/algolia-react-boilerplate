@@ -1,16 +1,13 @@
 // eslint-disable-next-line import/no-commonjs
 module.exports = {
-<<<<<<< HEAD
-  // Comment the Algolia EsLint Config too strict
-  // extends: ['algolia', 'algolia/react'],
-=======
-  extends: [
-    'algolia',
-    'algolia/react',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-  ],
->>>>>>> 1f8924f474a3b6d217a12320fda15868c9a9165d
+
+  // extends: [
+  //   'algolia',
+  //   'algolia/react',
+  //   'plugin:react/recommended',
+  //   'plugin:react/jsx-runtime',
+  // ],
+
   parser: '@babel/eslint-parser',
   rules: {
     'import/prefer-default-export': 'off',
