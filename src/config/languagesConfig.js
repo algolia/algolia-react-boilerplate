@@ -10,12 +10,12 @@ export const languagesConfig = [
   {
     value: 'German',
     label: 'German',
-    type: 'language'
+    type: 'language',
   },
   {
     value: 'French',
     label: 'French',
-    type: 'language'
+    type: 'language',
   },
 ];
 
@@ -59,7 +59,7 @@ export const languageSwitchConfig = {
     ],
   },
   FR: {
-    index: 'flagship_fashion_price_desc',
+    index: 'flagship_fashion',
     currency: '€',
     linksHeader: [
       {
@@ -95,7 +95,7 @@ export const languageSwitchConfig = {
     ],
   },
   GER: {
-    index: 'flagship_fashion_ger',
+    index: 'flagship_fashion',
     currency: '€',
     linksHeader: [
       {
@@ -137,4 +137,3 @@ export const LanguageSelectedAtom = atom({
   key: 'LanguageSelected', // unique ID (with respect to other atoms/selectors)
   default: 'English', // default value (aka initial value)
 });
-

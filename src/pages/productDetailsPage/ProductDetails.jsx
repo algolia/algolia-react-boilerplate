@@ -6,9 +6,8 @@ import { useEffect, useState } from 'react';
 // Recommend
 import {
   useRelatedProducts,
-  useFrequentlyBoughtTogether
+  useFrequentlyBoughtTogether,
 } from '@algolia/recommend-react';
-
 
 // Slider for recommend
 import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
@@ -25,7 +24,11 @@ import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import Price from '@/components/hits/components/Price.jsx';
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
-import { mainIndex, searchClient, recommendClient } from '@/config/algoliaEnvConfig';
+import {
+  mainIndex,
+  searchClient,
+  recommendClient,
+} from '@/config/algoliaEnvConfig';
 import {
   framerMotionPage,
   framerMotionTransition,
@@ -54,6 +57,10 @@ import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 //Import scope SCSS
 import './SCSS/productDetails.scss';
 
+// Import translation
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 const ProductDetails = () => {
   // For alert on sending add to cart event
   const setAlert = useSetRecoilState(alertContent);
@@ -75,29 +82,31 @@ const ProductDetails = () => {
   // access the hit component from recoil state
   const [hit, setHit] = useRecoilState(hitAtom);
 
-  const [readyToLoad, setReadyToLoad] = useState(false)
+  const [readyToLoad, setReadyToLoad] = useState(false);
 
   // current Object ID from URL
-  const currentObjectID = location.pathname.split('/')[2]
+  const currentObjectID = location.pathname.split('/')[2];
 
   // if there is no stored hit
   useEffect(() => {
     if (Object.keys(hit).length === 0) {
       // initialise the API client
-      const index = searchClient.initIndex(indexName)
+      const index = searchClient.initIndex(indexName);
 
       // Find the hit by Object ID through Algolia
-      index.search('', { facetFilters: `objectID:${currentObjectID}` }).then(({ hits }) => {
-        if (hits.length && hits.length > 0) {
-          // Set the hit atom
-          setHit(hits[0])
-          setReadyToLoad(true)
-        }
-      });
+      index
+        .search('', { facetFilters: `objectID:${currentObjectID}` })
+        .then(({ hits }) => {
+          if (hits.length && hits.length > 0) {
+            // Set the hit atom
+            setHit(hits[0]);
+            setReadyToLoad(true);
+          }
+        });
     } else {
-      setReadyToLoad(true)
+      setReadyToLoad(true);
     }
-  }, [])
+  }, []);
 
   // personalisation user token
   const userToken = useRecoilValue(personaSelectedAtom);
@@ -133,6 +142,12 @@ const ProductDetails = () => {
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1];
 
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'pdp',
+  });
+
   const { recommendations: fbtRecommendations } = useFrequentlyBoughtTogether({
     recommendClient,
     indexName,
@@ -156,16 +171,18 @@ const ProductDetails = () => {
       transition={framerMotionPage.transition}
     >
       <div
-        className={`${mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
-          }`}
+        className={`${
+          mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
+        }`}
       >
         <div
-          className={`${mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
-            }`}
+          className={`${
+            mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+          }`}
           onClick={() => navigate(-1)}
         >
           <ChevronLeft />
-          <p>Back to search</p>
+          <p>{t('buttonBack')}</p>
         </div>
         <div
           initial={{
@@ -239,7 +256,7 @@ const ProductDetails = () => {
 
             {PDPHitSections.sizeFilter && get(hit, sizeFilter)?.length > 0 && (
               <div className="sizes">
-                <p>Available size(s):</p>
+                <p>{t('availableSize')}</p>
                 <div className="sizeList">
                   {get(hit, sizeFilter).map((size, i) => (
                     <div className="size" key={i}>
@@ -280,36 +297,44 @@ const ProductDetails = () => {
                 }}
               >
                 <i className="fa-solid fa-shopping-cart"></i>
-                <p>Add to cart</p>
+                <p>{t('addToCartButton')}</p>
               </motion.button>
             )}
           </div>
         </div>
       </div>
       {/* Render two Recommend components - Related Products, Frequently Bought Together */}
-      {readyToLoad && <div
-        className="recommend"
-        initial={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: 1,
-          transition: { delay: 1, framerMotionTransition },
-        }}
-      >
-        {shouldHaveRelatedProductsValue && relatedRecommendations.length > 0 && (
-          <div>
-            <h3 className="title">Related Products</h3>
-            <HorizontalSlider itemComponent={RelatedItem} items={relatedRecommendations} />
-          </div>
-        )}
-        {shouldHaveFbtProductsValue && fbtRecommendations.length > 0 && (
-          <div>
-            <h3 className="title">Frequently Bought Together</h3>
-            <HorizontalSlider itemComponent={RelatedItem} items={fbtRecommendations} />
-          </div>
-        )}
-      </div>}
+      {readyToLoad && (
+        <div
+          className="recommend"
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+            transition: { delay: 1, framerMotionTransition },
+          }}
+        >
+          {shouldHaveRelatedProductsValue && relatedRecommendations.length > 0 && (
+            <div>
+              <h3 className="title">{t('relatedTitle')}</h3>
+              <HorizontalSlider
+                itemComponent={RelatedItem}
+                items={relatedRecommendations}
+              />
+            </div>
+          )}
+          {shouldHaveFbtProductsValue && fbtRecommendations.length > 0 && (
+            <div>
+              <h3 className="title">{t('fbtTitle')}</h3>
+              <HorizontalSlider
+                itemComponent={RelatedItem}
+                items={fbtRecommendations}
+              />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

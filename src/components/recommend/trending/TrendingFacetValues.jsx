@@ -12,22 +12,28 @@ import { trendingConfig } from '@/config/trendingConfig';
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 import TrendingFacetsItem from '@/components/recommend/trending/TrendingFacetsItem';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 function WrappedTrendingFacetValues(props) {
   const { items, refine } = useRefinementList(props);
   const [recommendationsLoaded, setRecommendationsLoaded] = useState(false);
 
   const index = useRecoilValue(mainIndex);
-  const {
-    facetValuesAttribute,
-    facetValuesTitle,
-    maxFacetValuesRecommendations,
-  } = trendingConfig;
+  const { facetValuesAttribute, maxFacetValuesRecommendations } =
+    trendingConfig;
 
   const { recommendations } = useTrendingFacets({
     recommendClient,
     indexName: index,
     facetName: facetValuesAttribute,
     maxRecommendations: maxFacetValuesRecommendations,
+  });
+
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'srp',
   });
 
   useEffect(() => {
@@ -40,7 +46,7 @@ function WrappedTrendingFacetValues(props) {
         <div className="filters-container">
           {recommendationsLoaded && (
             <div className="filters-container__title">
-              <h3>{facetValuesTitle}</h3>
+              <h3>{t('titleTrendingFacets')}</h3>
             </div>
           )}
           <div className="filters-container__list"></div>
@@ -50,7 +56,7 @@ function WrappedTrendingFacetValues(props) {
                 <TrendingFacetsItem
                   trendingFacetValue={trendingFacetValue}
                   key={`${i}${trendingFacetValue}`}
-                  {...{items, refine}}
+                  {...{ items, refine }}
                 />
               ) : (
                 <div key={i + 'facetItem'}>

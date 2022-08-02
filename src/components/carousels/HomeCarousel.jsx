@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Recoil
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { LanguageSelectedAtom } from '@/config/languagesConfig';
 
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig';
@@ -48,7 +49,6 @@ const HomeCarousel = ({ context, title }) => {
           userToken={userToken}
           query={''}
         />
-
         <Carousel title={title} />
       </Index>
     </div>
@@ -58,9 +58,9 @@ const HomeCarousel = ({ context, title }) => {
 // This carousel is used inside of HomeCarousel
 
 function Carousel(props) {
+  const LanguageSelected = useRecoilValue(LanguageSelectedAtom);
   const { hits } = useHits(props);
   const { title } = props;
-  
   const [width, setWidth] = useState(0);
 
   // Navigate is used by React Router
@@ -76,8 +76,8 @@ function Carousel(props) {
   }, [hits]);
 
   return (
-<>
-      <h3>{title}</h3>
+    <>
+      <h3 className="title">{title}</h3>
       {/* This div declares the outer reference for the framer motion */}
       <motion.div
         ref={carousel}
@@ -99,7 +99,7 @@ function Carousel(props) {
               bounceStiffness: 10,
               bounceDamping: 1,
             },
-              framerMotionTransition)
+            framerMotionTransition)
           }
           className="inner-carousel"
         >

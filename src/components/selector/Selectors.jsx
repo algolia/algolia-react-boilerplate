@@ -34,6 +34,9 @@ import useOutsideClick from '@/hooks/useOutsideClick';
 // import scoped CSS
 import './selectors.scss';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 export const Selectors = ({ props }) => {
   const [menuActive, setMenuActive] = useState(false);
   const [selectedValue, setSelectedValue] = useState(props[0].label);
@@ -98,22 +101,28 @@ const SelectItem = ({
   const setAlert = useSetRecoilState(alertContentAtom);
   const setAlertOpen = useSetRecoilState(isAlertOpen);
 
+  // Use the translator
+  const { i18n } = useTranslation();
+
   const handleChangeOfLanguage = (e) => {
     switch (e) {
       case 'English':
         index(languageSwitchConfig.EN.index);
         setCurrency(languageSwitchConfig.EN.currency);
         navigationLinks(languageSwitchConfig.EN.linksHeader);
+        i18n.changeLanguage('en');
         break;
       case 'French':
         index(languageSwitchConfig.FR.index);
         setCurrency(languageSwitchConfig.FR.currency);
         navigationLinks(languageSwitchConfig.FR.linksHeader);
+        i18n.changeLanguage('fr');
         break;
       case 'German':
         index(languageSwitchConfig.GER.index);
         setCurrency(languageSwitchConfig.GER.currency);
         navigationLinks(languageSwitchConfig.GER.linksHeader);
+        i18n.changeLanguage('ger');
         break;
     }
   };
