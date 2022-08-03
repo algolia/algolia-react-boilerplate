@@ -37,45 +37,72 @@ const PersonaScore = (props) => {
     setCategoriesArray([]);
     //Process the results for each attribute
     const treatResults = () => {
+      console.log('treatResults');
       // For Attribute Color
       if (resultsScore.hasOwnProperty(colour)) {
-        setColourArray([...colourArray, resultsScore.colour]);
+        if (colourArray.length > 0) {
+          setColourArray([...colourArray, resultsScore.colour]);
+        }
+        setColourArray([resultsScore.colour]);
       }
       // For Attribute Gender
       if (resultsScore.hasOwnProperty(genderFilter)) {
-        setGenderArray([...genderArray, resultsScore.genderFilter]);
+        if (genderArray.length > 0) {
+          setGenderArray([...genderArray, resultsScore.genderFilter]);
+        }
+        setGenderArray([resultsScore.genderFilter]);
       }
       // For Attribute Hierarchical level 0
       if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl0)) {
+        if (hierarchical0Array.length > 0) {
+          sethierarchical0Array([
+            ...hierarchical0Array,
+            resultsScore[hierarchicalCategoriesLvl0.toString()],
+          ]);
+        }
         sethierarchical0Array([
-          ...hierarchical0Array,
           resultsScore[hierarchicalCategoriesLvl0.toString()],
         ]);
       }
       // For Attribute Hierarchical level 1
       if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl1)) {
-        sethierarchical1Array([
-          ...hierarchical1Array,
+        if (hierarchical1Array.length > 0) {
+          sethierarchical1Array([
+            ...hierarchical1Array,
+            resultsScore[hierarchicalCategoriesLvl1.toString()],
+          ]);
+        }
+        sethierarchical0Array([
           resultsScore[hierarchicalCategoriesLvl1.toString()],
         ]);
       }
       // For Attribute Hierarchical level 2
-      if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl2)) {
+      if (hierarchical2Array.length > 0) {
         sethierarchical2Array([
           ...hierarchical2Array,
           resultsScore[hierarchicalCategoriesLvl2.toString()],
         ]);
       }
+      sethierarchical2Array([
+        resultsScore[hierarchicalCategoriesLvl2.toString()],
+      ]);
       // For Attribute Category
       if (resultsScore.hasOwnProperty(category)) {
-        sethierarchical2Array([...categoryArray, resultsScore.category]);
+        if (categoryArray.length > 0) {
+          setCategoryArray([...categoryArray, resultsScore.category]);
+        }
+        setCategoryArray([resultsScore.colour]);
       }
       // For Attribute Brand
       if (resultsScore.hasOwnProperty(brand)) {
-        setBrandArray([...brandArray, resultsScore.brand]);
+        if (brandArray.length > 0) {
+          setBrandArray([...brandArray, resultsScore.brand]);
+        }
+        setBrandArray([resultsScore.brand]);
       }
     };
     treatResults();
+    console.log(genderArray);
   }, [resultsScore, personaName]);
 
   return (
