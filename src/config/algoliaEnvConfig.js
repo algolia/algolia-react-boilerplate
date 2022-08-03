@@ -11,6 +11,8 @@ import aa from 'search-insights';
 export const searchClientCreds = {
   APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
   appID: '853MYZ81KY',
+  // Used to get the Persona Strat and score if you haven't got one you have to create one in you API Keys
+  // https://www.algolia.com/doc/rest-api/personalization/#get-the-current-personalization-strategy
   recommendApi: '4983f1e3449111609c1e7688209b787b'
 };
 
