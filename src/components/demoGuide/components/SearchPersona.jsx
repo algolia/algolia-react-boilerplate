@@ -3,8 +3,8 @@ import { Selectors } from '@/components/selector/Selectors';
 import { useEffect } from 'react';
 // Import configuration
 import {
-  searchPersonaInformations,
   scorePersonadAtom,
+  searchPersonaInformations,
 } from '@/config/demoGuideConfig';
 
 import { personaConfig, personaSelectedAtom } from '@/config/personaConfig';
@@ -18,19 +18,19 @@ import { shouldHavePersona } from '@/config/featuresConfig';
 const SearchPersona = () => {
   //Recoil to display ot not persona
   const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
+  //Get userToken of persona
   const selectedUserToken = useRecoilValue(personaSelectedAtom);
   //Call recoil state to set it with fetching results
   const setScorePersona = useSetRecoilState(scorePersonadAtom);
-  console.log(selectedUserToken);
   useEffect(() => {
     if (shouldShowPersonasAtom && selectedUserToken !== 'anon') {
       //Fetch Algolia results API for Persona
-      const url = `https://personalization.eu.algolia.com/1/profiles/personalization/elizabeth_aniston?X-Algolia-API-Key=${searchClientCreds.recommendApi}&X-Algolia-Application-Id=${searchClientCreds.appID}`;
+      const url = `https://personalization.eu.algolia.com/1/profiles/personalization/${selectedUserToken}?X-Algolia-API-Key=${searchClientCreds.recommendApi}&X-Algolia-Application-Id=${searchClientCreds.appID}`;
       const fetchData = async () => {
         try {
           const response = await fetch(url);
           const json = await response.json();
-          setScorePersona(json);
+          setScorePersona(json.scores);
         } catch (error) {
           console.log('error', error);
         }

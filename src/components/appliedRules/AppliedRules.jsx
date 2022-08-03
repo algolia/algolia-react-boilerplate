@@ -25,10 +25,7 @@ function CustomAppliedRules(props) {
   //Get score from Persona
   const resultsScore = useRecoilValue(scorePersonadAtom);
   const personaName = useRecoilValue(personaSelectedName);
-  console.log(
-    '🚀 ~ file: AppliedRules.jsx ~ line 28 ~ CustomAppliedRules ~ personaName',
-    personaName
-  );
+
   // Init API request to get rules by their IDs
   const indexName = useRecoilValue(mainIndex);
   const index = searchClient.initIndex(indexName);

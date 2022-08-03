@@ -1,23 +1,23 @@
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
 
 // React-router
-import { useNavigate, createSearchParams } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 
 // import Recoil States
 import { useSetRecoilState } from 'recoil';
 
 //import configuration
-import { segmentSelectedAtom } from '@/config/segmentConfig';
 import {
   personaSelectedAtom,
+  personaSelectedFiltersAtom,
   personaSelectedName,
 } from '@/config/personaConfig';
-import { personaSelectedFiltersAtom } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
+import { segmentSelectedAtom } from '@/config/segmentConfig';
 // Changing index & currency through the app
 import { currencySymbolAtom } from '@/config/currencyConfig';
-import { languageSwitchConfig } from '@/config/languagesConfig';
 import { linksHeader } from '@/config/headerConfig';
+import { languageSwitchConfig } from '@/config/languagesConfig';
 
 // handle Alert config
 import {
@@ -147,13 +147,11 @@ const SelectItem = ({
     alertContent,
     personalizationFilters
   ) => {
-    console.log('je change', type);
     switch (type) {
       case 'segment':
         setSegmentSelect(value);
         break;
       case 'persona':
-        console.log('je clique');
         setPersonaSelect(value);
         setPersonaSelectedFilters(personalizationFilters);
         setPersonaSelectedName(label);
