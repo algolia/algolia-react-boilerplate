@@ -25,7 +25,6 @@ const PersonaScore = (props) => {
   const [categoriesArray, setCategoriesArray] = useState([]);
 
   useEffect(() => {
-    console.log('Here');
     //Reset array after change persona or reload
     setColourArray([]);
     setGenderArray([]);
@@ -102,7 +101,6 @@ const PersonaScore = (props) => {
       }
     };
     treatResults();
-    console.log(genderArray);
   }, [resultsScore, personaName]);
 
   return (
