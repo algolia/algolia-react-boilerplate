@@ -36,7 +36,6 @@ const PersonaScore = (props) => {
     setCategoriesArray([]);
     //Process the results for each attribute
     const treatResults = () => {
-      console.log('treatResults');
       // For Attribute Color
       if (resultsScore.hasOwnProperty(colour)) {
         if (colourArray.length > 0) {
