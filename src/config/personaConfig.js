@@ -3,7 +3,7 @@
 // ------------------------------------------
 import { atom } from 'recoil';
 
-export const personalizationImpact = 98
+export const personalizationImpact = 98;
 
 // ------------------------------------------
 // This const defines the personas available for personalisation
@@ -14,27 +14,36 @@ export const personalizationImpact = 98
 // Add or remove objects to the personaConfig array as you see fit
 // ------------------------------------------
 export const personaConfig = [
-
-  { value: 'anon', label: 'No Persona', description: 'Anonymous user', type: 'persona', personalizationFilters: [] },
+  {
+    value: 'anon',
+    label: 'No Persona',
+    description: 'Anonymous user',
+    type: 'persona',
+    personalizationFilters: [],
+  },
 
   {
     value: 'stephen_james',
     label: 'Stephen',
     description: 'Stephen James is a man who likes sports shoes',
     type: 'persona',
-    personalizationFilters: ["genderFilter:men<score=1>", "hierarchicalCategories.lvl2:'Mens > Shoes'<score=1>"]
-
+    personalizationFilters: [
+      'genderFilter:men<score=1>',
+      "hierarchicalCategories.lvl2:'Mens > Shoes'<score=1>",
+    ],
   },
   {
     value: 'elizabeth_aniston',
     label: 'Elizabeth',
     description: 'Elizabeth is a woman who likes blue dresses',
     type: 'persona',
-    personalizationFilters: ["colour:blue<score=1>", "genderFilter:women<score=1>", "hierarchicalCategories.lvl2:'Womens > Clothing > Dresses'<score=1>"]
+    personalizationFilters: [
+      'colour:blue<score=1>',
+      'genderFilter:women<score=1>',
+      "hierarchicalCategories.lvl2:'Womens > Clothing > Dresses'<score=1>",
+    ],
   },
 ];
-
-
 
 // Please ignore this atom
 export const personaSelectedAtom = atom({
@@ -42,18 +51,19 @@ export const personaSelectedAtom = atom({
   default: personaConfig[0].value, // default value (aka initial value)
 });
 
+// Please ignore this atom
+export const personaSelectedName = atom({
+  key: 'personaSelectedName', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
 
 export const personaSelectedFiltersAtom = atom({
   key: 'personaFiltersSelected', // unique ID (with respect to other atoms/selectors)
   default: personaConfig[0].personalizationFilters, // default value (aka initial value)
 });
 
-
 // Please ignore this atom
 export const isPersonaMenuOpen = atom({
   key: 'isPersonaMenuOpen', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
 });
-
-
-

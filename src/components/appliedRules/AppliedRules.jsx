@@ -10,13 +10,25 @@ import { uniq } from 'lodash';
 // Config import
 import { mainIndex, searchClient } from '@/config/algoliaEnvConfig';
 import { rulesAtom } from '@/config/appliedRulesConfig';
+import { scorePersonadAtom } from '@/config/demoGuideConfig';
+import { personaSelectedName } from '@/config/personaConfig';
 
 //Import scope SCSS
 import './SCSS/appliedRules.scss';
 
+//Import PersonaScore Component
+import PersonaScore from './PersonaScore';
+
 function CustomAppliedRules(props) {
   const { results } = useInstantSearch(props);
   const [rules, setRules] = useRecoilState(rulesAtom);
+  //Get score from Persona
+  const resultsScore = useRecoilValue(scorePersonadAtom);
+  const personaName = useRecoilValue(personaSelectedName);
+  console.log(
+    '🚀 ~ file: AppliedRules.jsx ~ line 28 ~ CustomAppliedRules ~ personaName',
+    personaName
+  );
   // Init API request to get rules by their IDs
   const indexName = useRecoilValue(mainIndex);
   const index = searchClient.initIndex(indexName);
@@ -43,11 +55,13 @@ function CustomAppliedRules(props) {
 
   return (
     <div className="appliedRules">
-      <ul className="appliedRules__list">
-        {uniqRules.map((rule, i) => (
-          <li key={i}>{rule}</li>
-        ))}
-      </ul>
+      {resultsScore && (
+        <PersonaScore resultsScore={resultsScore} personaName={personaName} />
+      )}
+      <ul className="appliedRules__list"></ul>
+      {uniqRules.map((rule, i) => (
+        <li key={i}>{rule}</li>
+      ))}
     </div>
   );
 }

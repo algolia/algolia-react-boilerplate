@@ -11,6 +11,7 @@ import aa from 'search-insights';
 export const searchClientCreds = {
   APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
   appID: '853MYZ81KY',
+  recommendApi: '4983f1e3449111609c1e7688209b787b'
 };
 
 // This export is a single instance Algolia API client

@@ -8,7 +8,10 @@ import { useSetRecoilState } from 'recoil';
 
 //import configuration
 import { segmentSelectedAtom } from '@/config/segmentConfig';
-import { personaSelectedAtom } from '@/config/personaConfig';
+import {
+  personaSelectedAtom,
+  personaSelectedName,
+} from '@/config/personaConfig';
 import { personaSelectedFiltersAtom } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 // Changing index & currency through the app
@@ -87,6 +90,7 @@ const SelectItem = ({
 }) => {
   const setSegmentSelect = useSetRecoilState(segmentSelectedAtom);
   const setPersonaSelect = useSetRecoilState(personaSelectedAtom);
+  const setPersonaSelectedName = useSetRecoilState(personaSelectedName);
   const setPersonaSelectedFilters = useSetRecoilState(
     personaSelectedFiltersAtom
   );
@@ -136,14 +140,23 @@ const SelectItem = ({
   // router hook to navigate using a function
   const navigate = useNavigate();
 
-  const handleClick = (type, value, alertContent, personalizationFilters) => {
+  const handleClick = (
+    label,
+    type,
+    value,
+    alertContent,
+    personalizationFilters
+  ) => {
+    console.log('je change', type);
     switch (type) {
       case 'segment':
         setSegmentSelect(value);
         break;
       case 'persona':
+        console.log('je clique');
         setPersonaSelect(value);
         setPersonaSelectedFilters(personalizationFilters);
+        setPersonaSelectedName(label);
         break;
       case 'language':
         handleChangeOfLanguage(value);
@@ -171,7 +184,7 @@ const SelectItem = ({
     <li
       className="selectorsWrapper__listItem"
       onClick={() => {
-        handleClick(type, value, alertContent, personalizationFilters);
+        handleClick(label, type, value, alertContent, personalizationFilters);
         setSelectedValue(label);
       }}
     >
