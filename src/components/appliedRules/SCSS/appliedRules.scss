@@ -39,6 +39,11 @@
       font-weight: bold;
     }
   }
+  li {
+    @include p-text($main-color);
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
 }
 
 @keyframes showRules {

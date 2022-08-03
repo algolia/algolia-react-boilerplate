@@ -52,7 +52,7 @@ function CustomAppliedRules(props) {
 
   return (
     <div className="appliedRules">
-      {resultsScore && (
+      {resultsScore && personaName !== 'No Persona' && (
         <PersonaScore resultsScore={resultsScore} personaName={personaName} />
       )}
       <ul className="appliedRules__list"></ul>
