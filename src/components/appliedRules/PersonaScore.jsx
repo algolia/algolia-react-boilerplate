@@ -15,14 +15,7 @@ const PersonaScore = (props) => {
     brand,
     categories,
   } = hitsConfig;
-  // const [colourArray, setColourArray] = useState([]);
-  // const [genderArray, setGenderArray] = useState([]);
-  // const [hierarchical0Array, sethierarchical0Array] = useState([]);
-  // const [hierarchical1Array, sethierarchical1Array] = useState([]);
-  // const [hierarchical2Array, sethierarchical2Array] = useState([]);
-  // const [categoryArray, setCategoryArray] = useState([]);
-  // const [brandArray, setBrandArray] = useState([]);
-  // const [categoriesArray, setCategoriesArray] = useState([]);
+
   const [scorePersona, setScorePersona] = useState({
     color: [],
     brand: [],
@@ -34,9 +27,12 @@ const PersonaScore = (props) => {
     categories: [],
   });
 
+  const handleNewPersona = (newParams, newPersona) => {
+    return {...newPersona, ...newParams}
+  }
+
   useEffect(() => {
-    //Reset array after change persona or reload
-    setScorePersona({
+    const newPersona = {
       color: [],
       brand: [],
       gender: [],
@@ -45,92 +41,83 @@ const PersonaScore = (props) => {
       hierarchical2: [],
       category: [],
       categories: [],
-    });
-    //Process the results for each attribute
-    const treatResults = () => {
-      console.log(resultsScore);
-      // For Attribute Color
-      if (resultsScore.hasOwnProperty(colour)) {
-        if (scorePersona.color.length > 0) {
-          setScorePersona({
-            ...scorePersona,
-            color: [...scorePersona.color, resultsScore.colour],
-          });
-        }
-        console.log('if color', resultsScore.colour);
-        setScorePersona({ ...scorePersona, color: [resultsScore.colour] });
-        console.log(scorePersona);
-      }
-      // For Attribute Gender
-      if (resultsScore.hasOwnProperty(genderFilter)) {
-        if (scorePersona.gender.length > 0) {
-          setScorePersona({
-            ...scorePersona,
-            gender: [...scorePersona.gender, resultsScore.genderFilter],
-          });
-        }
-        setScorePersona({
-          ...scorePersona,
-          gender: [resultsScore.genderFilter],
-        });
-      }
-      // For Attribute Hierarchical level 0
-      // if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl0)) {
-      //   if (hierarchical0Array.length > 0) {
-      //     sethierarchical0Array([
-      //       ...hierarchical0Array,
-      //       resultsScore[hierarchicalCategoriesLvl0.toString()],
-      //     ]);
-      //   }
-      //   sethierarchical0Array([
-      //     resultsScore[hierarchicalCategoriesLvl0.toString()],
-      //   ]);
-      // }
-      // For Attribute Hierarchical level 1
-      // if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl1)) {
-      //   if (hierarchical1Array.length > 0) {
-      //     sethierarchical1Array([
-      //       ...hierarchical1Array,
-      //       resultsScore[hierarchicalCategoriesLvl1.toString()],
-      //     ]);
-      //   }
-      //   sethierarchical0Array([
-      //     resultsScore[hierarchicalCategoriesLvl1.toString()],
-      //   ]);
-      // }
-      // For Attribute Hierarchical level 2\
-      if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl2)) {
-        if (scorePersona.hierarchical2.length > 0) {
-          setScorePersona({
-            ...scorePersona,
-            hierarchical2: [
-              ...scorePersona.hierarchical2,
-              resultsScore[hierarchicalCategoriesLvl2.toString()],
-            ],
-          });
-        }
-        setScorePersona({
-          ...scorePersona,
-          hierarchical2: resultsScore[hierarchicalCategoriesLvl2.toString()],
-        });
-      }
-      // For Attribute Category
-      // if (resultsScore.hasOwnProperty(category)) {
-      //   if (categoryArray.length > 0) {
-      //     setCategoryArray([...categoryArray, resultsScore.category]);
-      //   }
-      //   setCategoryArray([resultsScore.colour]);
-      // }
-      // For Attribute Brand
-      // if (resultsScore.hasOwnProperty(brand)) {
-      //   if (brandArray.length > 0) {
-      //     setBrandArray([...brandArray, resultsScore.brand]);
-      //   }
-      //   setBrandArray([resultsScore.brand]);
-      // }
-    };
-    treatResults();
-  }, [resultsScore, personaName]);
+    }
+
+    treatResults(newPersona);
+  }, [resultsScore]);
+
+
+  //Process the results for each attribute
+  const treatResults = (newPersona) => {
+    let newState = newPersona
+
+    // For Attribute Color
+    if (resultsScore.hasOwnProperty(colour)) {
+      newState = handleNewPersona({ color: [resultsScore.colour] }, newState)
+    }
+
+    // For Attribute Gender
+    if (resultsScore.hasOwnProperty(genderFilter)) {
+      newState = handleNewPersona({ gender: [resultsScore.genderFilter]}, newState)
+    }
+    // For Attribute Hierarchical level 0
+    // if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl0)) {
+    //   if (hierarchical0Array.length > 0) {
+    //     sethierarchical0Array([
+    //       ...hierarchical0Array,
+    //       resultsScore[hierarchicalCategoriesLvl0.toString()],
+    //     ]);
+    //   }
+    //   sethierarchical0Array([
+    //     resultsScore[hierarchicalCategoriesLvl0.toString()],
+    //   ]);
+    // }
+    // For Attribute Hierarchical level 1
+    // if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl1)) {
+    //   if (hierarchical1Array.length > 0) {
+    //     sethierarchical1Array([
+    //       ...hierarchical1Array,
+    //       resultsScore[hierarchicalCategoriesLvl1.toString()],
+    //     ]);
+    //   }
+    //   sethierarchical0Array([
+    //     resultsScore[hierarchicalCategoriesLvl1.toString()],
+    //   ]);
+    // }
+    // For Attribute Hierarchical level 2\
+    // if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl2)) {
+    //   if (scorePersona.hierarchical2.length > 0) {
+    //     setScorePersona({
+    //       ...scorePersona,
+    //       hierarchical2: [
+    //         ...scorePersona.hierarchical2,
+    //         resultsScore[hierarchicalCategoriesLvl2.toString()],
+    //       ],
+    //     });
+    //   }
+    //   setScorePersona({
+    //     ...scorePersona,
+    //     hierarchical2: resultsScore[hierarchicalCategoriesLvl2.toString()],
+    //   });
+    // }
+    // For Attribute Category
+    // if (resultsScore.hasOwnProperty(category)) {
+    //   if (categoryArray.length > 0) {
+    //     setCategoryArray([...categoryArray, resultsScore.category]);
+    //   }
+    //   setCategoryArray([resultsScore.colour]);
+    // }
+    // For Attribute Brand
+    // if (resultsScore.hasOwnProperty(brand)) {
+    //   if (brandArray.length > 0) {
+    //     setBrandArray([...brandArray, resultsScore.brand]);
+    //   }
+    //   setBrandArray([resultsScore.brand]);
+    // }
+
+    setScorePersona(newState)
+  };
+
 
   return (
     <div className="appliedRules__persona">
