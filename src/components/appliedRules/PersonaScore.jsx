@@ -15,89 +15,119 @@ const PersonaScore = (props) => {
     brand,
     categories,
   } = hitsConfig;
-  const [colourArray, setColourArray] = useState([]);
-  const [genderArray, setGenderArray] = useState([]);
-  const [hierarchical0Array, sethierarchical0Array] = useState([]);
-  const [hierarchical1Array, sethierarchical1Array] = useState([]);
-  const [hierarchical2Array, sethierarchical2Array] = useState([]);
-  const [categoryArray, setCategoryArray] = useState([]);
-  const [brandArray, setBrandArray] = useState([]);
-  const [categoriesArray, setCategoriesArray] = useState([]);
+  // const [colourArray, setColourArray] = useState([]);
+  // const [genderArray, setGenderArray] = useState([]);
+  // const [hierarchical0Array, sethierarchical0Array] = useState([]);
+  // const [hierarchical1Array, sethierarchical1Array] = useState([]);
+  // const [hierarchical2Array, sethierarchical2Array] = useState([]);
+  // const [categoryArray, setCategoryArray] = useState([]);
+  // const [brandArray, setBrandArray] = useState([]);
+  // const [categoriesArray, setCategoriesArray] = useState([]);
+  const [scorePersona, setScorePersona] = useState({
+    color: [],
+    brand: [],
+    gender: [],
+    hierarchical0: [],
+    hierarchical1: [],
+    hierarchical2: [],
+    category: [],
+    categories: [],
+  });
 
   useEffect(() => {
     //Reset array after change persona or reload
-    setColourArray([]);
-    setGenderArray([]);
-    sethierarchical0Array([]);
-    sethierarchical1Array([]);
-    sethierarchical2Array([]);
-    setCategoryArray([]);
-    setBrandArray([]);
-    setCategoriesArray([]);
+    setScorePersona({
+      color: [],
+      brand: [],
+      gender: [],
+      hierarchical0: [],
+      hierarchical1: [],
+      hierarchical2: [],
+      category: [],
+      categories: [],
+    });
     //Process the results for each attribute
     const treatResults = () => {
+      console.log(resultsScore);
       // For Attribute Color
       if (resultsScore.hasOwnProperty(colour)) {
-        if (colourArray.length > 0) {
-          setColourArray([...colourArray, resultsScore.colour]);
+        if (scorePersona.color.length > 0) {
+          setScorePersona({
+            ...scorePersona,
+            color: [...scorePersona.color, resultsScore.colour],
+          });
         }
-        setColourArray([resultsScore.colour]);
+        console.log('if color', resultsScore.colour);
+        setScorePersona({ ...scorePersona, color: [resultsScore.colour] });
+        console.log(scorePersona);
       }
       // For Attribute Gender
       if (resultsScore.hasOwnProperty(genderFilter)) {
-        if (genderArray.length > 0) {
-          setGenderArray([...genderArray, resultsScore.genderFilter]);
+        if (scorePersona.gender.length > 0) {
+          setScorePersona({
+            ...scorePersona,
+            gender: [...scorePersona.gender, resultsScore.genderFilter],
+          });
         }
-        setGenderArray([resultsScore.genderFilter]);
+        setScorePersona({
+          ...scorePersona,
+          gender: [resultsScore.genderFilter],
+        });
       }
       // For Attribute Hierarchical level 0
-      if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl0)) {
-        if (hierarchical0Array.length > 0) {
-          sethierarchical0Array([
-            ...hierarchical0Array,
-            resultsScore[hierarchicalCategoriesLvl0.toString()],
-          ]);
-        }
-        sethierarchical0Array([
-          resultsScore[hierarchicalCategoriesLvl0.toString()],
-        ]);
-      }
+      // if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl0)) {
+      //   if (hierarchical0Array.length > 0) {
+      //     sethierarchical0Array([
+      //       ...hierarchical0Array,
+      //       resultsScore[hierarchicalCategoriesLvl0.toString()],
+      //     ]);
+      //   }
+      //   sethierarchical0Array([
+      //     resultsScore[hierarchicalCategoriesLvl0.toString()],
+      //   ]);
+      // }
       // For Attribute Hierarchical level 1
-      if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl1)) {
-        if (hierarchical1Array.length > 0) {
-          sethierarchical1Array([
-            ...hierarchical1Array,
-            resultsScore[hierarchicalCategoriesLvl1.toString()],
-          ]);
+      // if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl1)) {
+      //   if (hierarchical1Array.length > 0) {
+      //     sethierarchical1Array([
+      //       ...hierarchical1Array,
+      //       resultsScore[hierarchicalCategoriesLvl1.toString()],
+      //     ]);
+      //   }
+      //   sethierarchical0Array([
+      //     resultsScore[hierarchicalCategoriesLvl1.toString()],
+      //   ]);
+      // }
+      // For Attribute Hierarchical level 2\
+      if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl2)) {
+        if (scorePersona.hierarchical2.length > 0) {
+          setScorePersona({
+            ...scorePersona,
+            hierarchical2: [
+              ...scorePersona.hierarchical2,
+              resultsScore[hierarchicalCategoriesLvl2.toString()],
+            ],
+          });
         }
-        sethierarchical0Array([
-          resultsScore[hierarchicalCategoriesLvl1.toString()],
-        ]);
+        setScorePersona({
+          ...scorePersona,
+          hierarchical2: resultsScore[hierarchicalCategoriesLvl2.toString()],
+        });
       }
-      // For Attribute Hierarchical level 2
-      if (hierarchical2Array.length > 0) {
-        sethierarchical2Array([
-          ...hierarchical2Array,
-          resultsScore[hierarchicalCategoriesLvl2.toString()],
-        ]);
-      }
-      sethierarchical2Array([
-        resultsScore[hierarchicalCategoriesLvl2.toString()],
-      ]);
       // For Attribute Category
-      if (resultsScore.hasOwnProperty(category)) {
-        if (categoryArray.length > 0) {
-          setCategoryArray([...categoryArray, resultsScore.category]);
-        }
-        setCategoryArray([resultsScore.colour]);
-      }
+      // if (resultsScore.hasOwnProperty(category)) {
+      //   if (categoryArray.length > 0) {
+      //     setCategoryArray([...categoryArray, resultsScore.category]);
+      //   }
+      //   setCategoryArray([resultsScore.colour]);
+      // }
       // For Attribute Brand
-      if (resultsScore.hasOwnProperty(brand)) {
-        if (brandArray.length > 0) {
-          setBrandArray([...brandArray, resultsScore.brand]);
-        }
-        setBrandArray([resultsScore.brand]);
-      }
+      // if (resultsScore.hasOwnProperty(brand)) {
+      //   if (brandArray.length > 0) {
+      //     setBrandArray([...brandArray, resultsScore.brand]);
+      //   }
+      //   setBrandArray([resultsScore.brand]);
+      // }
     };
     treatResults();
   }, [resultsScore, personaName]);
@@ -106,8 +136,8 @@ const PersonaScore = (props) => {
     <div className="appliedRules__persona">
       <h3>{personaName}'s affinities</h3>
       <ul className="scoreList">
-        {genderArray.length > 0 &&
-          genderArray.map((gender) => {
+        {scorePersona.gender.length > 0 &&
+          scorePersona.gender.map((gender) => {
             {
               return (
                 <li className="scoreList__item">
@@ -124,7 +154,7 @@ const PersonaScore = (props) => {
               );
             }
           })}
-        {hierarchical0Array.length > 0 &&
+        {/* {hierarchical0Array.length > 0 &&
           hierarchical0Array.map((hier) => {
             {
               return (
@@ -141,8 +171,8 @@ const PersonaScore = (props) => {
                 </li>
               );
             }
-          })}
-        {hierarchical1Array.length > 0 &&
+          })} */}
+        {/* {hierarchical1Array.length > 0 &&
           hierarchical1Array.map((hier) => {
             {
               return (
@@ -160,8 +190,9 @@ const PersonaScore = (props) => {
               );
             }
           })}
-        {hierarchical2Array.length > 0 &&
-          hierarchical2Array.map((hier) => {
+          */}
+        {scorePersona.hierarchical2.length > 0 &&
+          scorePersona.hierarchical2.map((hier) => {
             {
               return (
                 <li className="scoreList__item">
@@ -178,8 +209,8 @@ const PersonaScore = (props) => {
               );
             }
           })}
-        {colourArray.length > 0 &&
-          colourArray.map((colour) => {
+        {scorePersona.color.length > 0 &&
+          scorePersona.color.map((colour) => {
             {
               return (
                 <li className="scoreList__item">
@@ -206,7 +237,7 @@ const PersonaScore = (props) => {
               );
             }
           })}
-        {categoryArray.length > 0 &&
+        {/* {categoryArray.length > 0 &&
           categoryArray.map((categ) => {
             {
               return (
@@ -259,7 +290,7 @@ const PersonaScore = (props) => {
                 </li>
               );
             }
-          })}
+          })} */}
       </ul>
     </div>
   );
