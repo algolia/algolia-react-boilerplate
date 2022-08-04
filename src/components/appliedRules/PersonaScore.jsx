@@ -167,7 +167,6 @@ const PersonaScore = (props) => {
           })}
         {scorePersona.color.length > 0 &&
           Object.entries(scorePersona.color[0]).map((color) => {
-            console.log(color);
             return (
               <li className="scoreList__item">
                 <p>Colors:{color[0]}</p>
