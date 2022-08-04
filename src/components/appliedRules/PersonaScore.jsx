@@ -28,8 +28,8 @@ const PersonaScore = (props) => {
   });
 
   const handleNewPersona = (newParams, newPersona) => {
-    return {...newPersona, ...newParams}
-  }
+    return { ...newPersona, ...newParams };
+  };
 
   useEffect(() => {
     const newPersona = {
@@ -41,243 +41,205 @@ const PersonaScore = (props) => {
       hierarchical2: [],
       category: [],
       categories: [],
-    }
+    };
 
     treatResults(newPersona);
   }, [resultsScore]);
 
-
   //Process the results for each attribute
   const treatResults = (newPersona) => {
-    let newState = newPersona
+    let newState = newPersona;
 
     // For Attribute Color
     if (resultsScore.hasOwnProperty(colour)) {
-      newState = handleNewPersona({ color: [resultsScore.colour] }, newState)
+      newState = handleNewPersona({ color: [resultsScore.colour] }, newState);
     }
 
     // For Attribute Gender
     if (resultsScore.hasOwnProperty(genderFilter)) {
-      newState = handleNewPersona({ gender: [resultsScore.genderFilter]}, newState)
+      newState = handleNewPersona(
+        { gender: [resultsScore.genderFilter] },
+        newState
+      );
     }
     // For Attribute Hierarchical level 0
-    // if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl0)) {
-    //   if (hierarchical0Array.length > 0) {
-    //     sethierarchical0Array([
-    //       ...hierarchical0Array,
-    //       resultsScore[hierarchicalCategoriesLvl0.toString()],
-    //     ]);
-    //   }
-    //   sethierarchical0Array([
-    //     resultsScore[hierarchicalCategoriesLvl0.toString()],
-    //   ]);
-    // }
+    if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl0)) {
+      newState = handleNewPersona(
+        {
+          hierarchical0: [resultsScore[hierarchicalCategoriesLvl0.toString()]],
+        },
+        newState
+      );
+    }
     // For Attribute Hierarchical level 1
-    // if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl1)) {
-    //   if (hierarchical1Array.length > 0) {
-    //     sethierarchical1Array([
-    //       ...hierarchical1Array,
-    //       resultsScore[hierarchicalCategoriesLvl1.toString()],
-    //     ]);
-    //   }
-    //   sethierarchical0Array([
-    //     resultsScore[hierarchicalCategoriesLvl1.toString()],
-    //   ]);
-    // }
+    if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl1)) {
+      newState = handleNewPersona(
+        {
+          hierarchical1: [resultsScore[hierarchicalCategoriesLvl1.toString()]],
+        },
+        newState
+      );
+    }
     // For Attribute Hierarchical level 2\
-    // if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl2)) {
-    //   if (scorePersona.hierarchical2.length > 0) {
-    //     setScorePersona({
-    //       ...scorePersona,
-    //       hierarchical2: [
-    //         ...scorePersona.hierarchical2,
-    //         resultsScore[hierarchicalCategoriesLvl2.toString()],
-    //       ],
-    //     });
-    //   }
-    //   setScorePersona({
-    //     ...scorePersona,
-    //     hierarchical2: resultsScore[hierarchicalCategoriesLvl2.toString()],
-    //   });
-    // }
-    // For Attribute Category
-    // if (resultsScore.hasOwnProperty(category)) {
-    //   if (categoryArray.length > 0) {
-    //     setCategoryArray([...categoryArray, resultsScore.category]);
-    //   }
-    //   setCategoryArray([resultsScore.colour]);
-    // }
+    if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl2)) {
+      newState = handleNewPersona(
+        {
+          hierarchical2: [resultsScore[hierarchicalCategoriesLvl2.toString()]],
+        },
+        newState
+      );
+    }
     // For Attribute Brand
-    // if (resultsScore.hasOwnProperty(brand)) {
-    //   if (brandArray.length > 0) {
-    //     setBrandArray([...brandArray, resultsScore.brand]);
-    //   }
-    //   setBrandArray([resultsScore.brand]);
-    // }
+    if (resultsScore.hasOwnProperty(brand)) {
+      newState = handleNewPersona({ brand: [resultsScore.brand] }, newState);
+    }
 
-    setScorePersona(newState)
+    setScorePersona(newState);
   };
-
 
   return (
     <div className="appliedRules__persona">
       <h3>{personaName}'s affinities</h3>
       <ul className="scoreList">
         {scorePersona.gender.length > 0 &&
-          scorePersona.gender.map((gender) => {
-            {
-              return (
-                <li className="scoreList__item">
-                  <p>Gender : {Object.keys(gender)}</p>
-                  <div className="scoreBar">
-                    <div
-                      className="scoreBar__in hierarchical1"
-                      style={{ width: `${Object.values(gender)}%` }}
-                    >
-                      <p>score: {Object.values(gender)}.</p>
-                    </div>
+          Object.entries(scorePersona.gender[0]).map((cat) => {
+            return (
+              <li className="scoreList__item">
+                <p>Gender : {cat[0]}</p>
+                <div className="scoreBar">
+                  <div
+                    className="scoreBar__in colorGender"
+                    style={{ width: `${cat[1]}%` }}
+                  >
+                    <p>score: {cat[1]}.</p>
                   </div>
-                </li>
-              );
-            }
+                </div>
+              </li>
+            );
           })}
-        {/* {hierarchical0Array.length > 0 &&
-          hierarchical0Array.map((hier) => {
-            {
-              return (
-                <li className="scoreList__item">
-                  <p>HierarchicalCategories : {Object.keys(hier)}</p>
-                  <div className="scoreBar">
-                    <div
-                      className="scoreBar__in hierarchical2"
-                      style={{ width: `${Object.values(hier)}%` }}
-                    >
-                      <p>score {Object.values(hier)}.</p>
-                    </div>
+        {scorePersona.hierarchical0.length > 0 &&
+          Object.entries(scorePersona.hierarchical0[0]).map((cat) => {
+            return (
+              <li className="scoreList__item">
+                <p>HierarchicalCategories : {cat[0]}</p>
+                <div className="scoreBar">
+                  <div
+                    className="scoreBar__in hierarchical1"
+                    style={{ width: `${cat[1]}%` }}
+                  >
+                    <p>score: {cat[1]}.</p>
                   </div>
-                </li>
-              );
-            }
-          })} */}
-        {/* {hierarchical1Array.length > 0 &&
-          hierarchical1Array.map((hier) => {
-            {
-              return (
-                <li className="scoreList__item">
-                  <p>HierarchicalCategories : {Object.keys(hier)}</p>
-                  <div className="scoreBar">
-                    <div
-                      className="scoreBar__in hierarchical2"
-                      style={{ width: `${Object.values(hier)}%` }}
-                    >
-                      <p>score {Object.values(hier)}.</p>
-                    </div>
-                  </div>
-                </li>
-              );
-            }
+                </div>
+              </li>
+            );
           })}
-          */}
+        {scorePersona.hierarchical1.length > 0 &&
+          Object.entries(scorePersona.hierarchical1[0]).map((cat) => {
+            return (
+              <li className="scoreList__item">
+                <p>HierarchicalCategories : {cat[0]}</p>
+                <div className="scoreBar">
+                  <div
+                    className="scoreBar__in hierarchical2"
+                    style={{ width: `${cat[1]}%` }}
+                  >
+                    <p>score: {cat[1]}.</p>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
         {scorePersona.hierarchical2.length > 0 &&
-          scorePersona.hierarchical2.map((hier) => {
-            {
-              return (
-                <li className="scoreList__item">
-                  <p>HierarchicalCategories : {Object.keys(hier)}</p>
-                  <div className="scoreBar">
-                    <div
-                      className="scoreBar__in hierarchical2"
-                      style={{ width: `${Object.values(hier)}%` }}
-                    >
-                      <p>score {Object.values(hier)}.</p>
-                    </div>
+          Object.entries(scorePersona.hierarchical2[0]).map((cat) => {
+            return (
+              <li className="scoreList__item">
+                <p>HierarchicalCategories : {cat[0]}</p>
+                <div className="scoreBar">
+                  <div
+                    className="scoreBar__in hierarchical3"
+                    style={{ width: `${cat[1]}%` }}
+                  >
+                    <p>score: {cat[1]}.</p>
                   </div>
-                </li>
-              );
-            }
+                </div>
+              </li>
+            );
           })}
         {scorePersona.color.length > 0 &&
-          scorePersona.color.map((colour) => {
-            {
-              return (
-                <li className="scoreList__item">
-                  <p>Colors: {Object.keys(colour)}</p>
-                  <div className="scoreBar">
-                    <div
-                      className="scoreBar__in colorBlack"
-                      style={{
-                        width: `${Object.values(colour)}%`,
-                        background: `
-                      linear-gradient(
-                        60deg,
-                        ${Object.keys(colour)} 16%,
-                        rgba(27, 27, 27, 1) 79%,
-                        rgba(249, 249, 249, 0.0970982142857143) 100%
-                      )
-                      `,
-                      }}
-                    >
-                      <p>score {Object.values(colour)}.</p>
-                    </div>
+          Object.entries(scorePersona.color[0]).map((color) => {
+            console.log(color);
+            return (
+              <li className="scoreList__item">
+                <p>Colors:{color[0]}</p>
+                <div className="scoreBar">
+                  <div
+                    className="scoreBar__in colorBlack"
+                    style={{
+                      width: `${color[1]}%`,
+                      background: `
+                        linear-gradient(
+                          60deg,
+                          ${color[0]} 16%,
+                          rgba(27, 27, 27, 1) 79%,
+                          rgba(249, 249, 249, 0.0970982142857143) 100%
+                        )
+                        `,
+                    }}
+                  >
+                    <p>score {color[1]}.</p>
                   </div>
-                </li>
-              );
-            }
+                </div>
+              </li>
+            );
           })}
-        {/* {categoryArray.length > 0 &&
-          categoryArray.map((categ) => {
-            {
-              return (
-                <li className="scoreList__item">
-                  <p>Category: {Object.keys(categ)}</p>
-                  <div className="scoreBar">
-                    <div
-                      className="scoreBar__in colorCamo"
-                      style={{ width: `${Object.values(categ)}%` }}
-                    >
-                      <p>score {Object.values(categ)}.</p>
-                    </div>
+        {scorePersona.category.length > 0 &&
+          Object.entries(scorePersona.category[0]).map((cat) => {
+            return (
+              <li className="scoreList__item">
+                <p>Category : {cat[0]}</p>
+                <div className="scoreBar">
+                  <div
+                    className="scoreBar__in colorCategory"
+                    style={{ width: `${cat[1]}%` }}
+                  >
+                    <p>score: {cat[1]}.</p>
                   </div>
-                </li>
-              );
-            }
+                </div>
+              </li>
+            );
           })}
-        {brandArray.length > 0 &&
-          brandArray.map((brand) => {
-            {
-              return (
-                <li className="scoreList__item">
-                  <p>Brand: {Object.keys(brand)}</p>
-                  <div className="scoreBar">
-                    <div
-                      className="scoreBar__in colorGrey"
-                      style={{ width: `${Object.values(brand)}%` }}
-                    >
-                      <p>score {Object.values(brand)}.</p>
-                    </div>
+        {scorePersona.brand.length > 0 &&
+          Object.entries(scorePersona.brand[0]).map((cat) => {
+            return (
+              <li className="scoreList__item">
+                <p>Brand : {cat[0]}</p>
+                <div className="scoreBar">
+                  <div
+                    className="scoreBar__in colorBrand"
+                    style={{ width: `${cat[1]}%` }}
+                  >
+                    <p>score: {cat[1]}.</p>
                   </div>
-                </li>
-              );
-            }
+                </div>
+              </li>
+            );
           })}
-        {categoriesArray.length > 0 &&
-          categoriesArray.map((cat) => {
-            {
-              return (
-                <li className="scoreList__item">
-                  <p>Categories: {Object.keys(cat)}</p>
-                  <div className="scoreBar">
-                    <div
-                      className="scoreBar__in colorGrey"
-                      style={{ width: `${Object.values(cat)}%` }}
-                    >
-                      <p>score {Object.values(cat)}.</p>
-                    </div>
+        {scorePersona.categories.length > 0 &&
+          Object.entries(scorePersona.categories[0]).map((cat) => {
+            return (
+              <li className="scoreList__item">
+                <p>Categories : {cat[0]}</p>
+                <div className="scoreBar">
+                  <div
+                    className="scoreBar__in colorCategories"
+                    style={{ width: `${cat[1]}%` }}
+                  >
+                    <p>score: {cat[1]}.</p>
                   </div>
-                </li>
-              );
-            }
-          })} */}
+                </div>
+              </li>
+            );
+          })}
       </ul>
     </div>
   );

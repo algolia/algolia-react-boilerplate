@@ -103,9 +103,9 @@
           width: 80%;
           background: linear-gradient(
             60deg,
-            rgb(250, 179, 0) 16%,
+            rgba(50, 163, 0, 1) 16%,
             rgba(27, 27, 27, 1) 79%,
-            rgba(249, 249, 249, 0.0970982142857143) 100%
+            rgba(0, 0, 0, 1) 100%
           );
         }
         .hierarchical2 {
@@ -113,6 +113,15 @@
           background: linear-gradient(
             60deg,
             rgb(253, 0, 0) 16%,
+            rgba(27, 27, 27, 1) 79%,
+            rgba(249, 249, 249, 0.0970982142857143) 100%
+          );
+        }
+        .hierarchical3 {
+          width: 50%;
+          background: linear-gradient(
+            60deg,
+            rgb(207, 0, 253) 16%,
             rgba(27, 27, 27, 1) 79%,
             rgba(249, 249, 249, 0.0970982142857143) 100%
           );
@@ -126,7 +135,7 @@
             rgba(249, 249, 249, 0.0970982142857143) 100%
           );
         }
-        .colorCamo {
+        .colorGender {
           width: 15%;
           background: linear-gradient(
             60deg,
@@ -135,11 +144,29 @@
             rgba(249, 249, 249, 0.0970982142857143) 100%
           );
         }
-        .colorGrey {
+        .colorCategory {
           width: 10%;
           background: linear-gradient(
             60deg,
             rgba(0, 0, 0, 1) 16%,
+            rgba(27, 27, 27, 1) 79%,
+            rgba(249, 249, 249, 0.0970982142857143) 100%
+          );
+        }
+        .colorBrand {
+          width: 10%;
+          background: linear-gradient(
+            60deg,
+            rgb(220, 112, 4) 16%,
+            rgba(27, 27, 27, 1) 79%,
+            rgba(249, 249, 249, 0.0970982142857143) 100%
+          );
+        }
+        .colorCategories {
+          width: 10%;
+          background: linear-gradient(
+            60deg,
+            rgb(227, 220, 8) 16%,
             rgba(27, 27, 27, 1) 79%,
             rgba(249, 249, 249, 0.0970982142857143) 100%
           );
