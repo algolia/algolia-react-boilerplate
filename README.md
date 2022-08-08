@@ -378,9 +378,6 @@ It is then as simple as adding in your HTML the correct fontawesome tags i.e. `<
 
 [Slider](https://slider-react-component.vercel.app/)
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🖲 Select Menus</h3>
-
-[React-Select](https://www.npmjs.com/package/react-select)
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎨 Style</h3>
 
