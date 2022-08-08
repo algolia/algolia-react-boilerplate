@@ -128,6 +128,10 @@ export const searchPersonaInformations = personaConfig.map((persona) => {
   };
 });
 
+export const isPersonnaEventToggle = atom({
+  key: 'isPersonnaEventToggle',
+  default: true,
+});
 // ------------------------------------------
 // Injected Content Guide Config
 // Injected content allow to select query that are triggering

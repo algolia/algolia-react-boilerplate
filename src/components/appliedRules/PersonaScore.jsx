@@ -2,8 +2,16 @@ import { useEffect, useState } from 'react';
 
 import { hitsConfig } from '@/config/hitsConfig';
 
+//Recoil to display ot not persona
+import { useRecoilValue } from 'recoil';
+
+import { isPersonnaEventToggle } from '@/config/demoGuideConfig';
+
 const PersonaScore = (props) => {
   const { resultsScore, personaName } = props;
+
+  const isSwitchToggle = useRecoilValue(isPersonnaEventToggle);
+
   const {
     colour,
     hierarchicalCategoriesLvl0,
@@ -45,6 +53,10 @@ const PersonaScore = (props) => {
 
     treatResults(newPersona);
   }, [resultsScore]);
+
+  useEffect(() => {
+    console.log(isSwitchToggle);
+  }, [isSwitchToggle]);
 
   //Process the results for each attribute
   const treatResults = (newPersona) => {
@@ -98,84 +110,86 @@ const PersonaScore = (props) => {
   };
 
   return (
-    <div className="appliedRules__persona">
-      <h3>{personaName}'s affinities</h3>
-      <ul className="scoreList">
-        {scorePersona.gender.length > 0 &&
-          Object.entries(scorePersona.gender[0]).map((cat) => {
-            return (
-              <li className="scoreList__item">
-                <p>Gender : {cat[0]}</p>
-                <div className="scoreBar">
-                  <div
-                    className="scoreBar__in colorGender"
-                    style={{ width: `${cat[1]}%` }}
-                  >
-                    <p>score: {cat[1]}.</p>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        {scorePersona.hierarchical0.length > 0 &&
-          Object.entries(scorePersona.hierarchical0[0]).map((cat) => {
-            return (
-              <li className="scoreList__item">
-                <p>HierarchicalCategories : {cat[0]}</p>
-                <div className="scoreBar">
-                  <div
-                    className="scoreBar__in hierarchical1"
-                    style={{ width: `${cat[1]}%` }}
-                  >
-                    <p>score: {cat[1]}.</p>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        {scorePersona.hierarchical1.length > 0 &&
-          Object.entries(scorePersona.hierarchical1[0]).map((cat) => {
-            return (
-              <li className="scoreList__item">
-                <p>HierarchicalCategories : {cat[0]}</p>
-                <div className="scoreBar">
-                  <div
-                    className="scoreBar__in hierarchical2"
-                    style={{ width: `${cat[1]}%` }}
-                  >
-                    <p>score: {cat[1]}.</p>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        {scorePersona.hierarchical2.length > 0 &&
-          Object.entries(scorePersona.hierarchical2[0]).map((cat) => {
-            return (
-              <li className="scoreList__item">
-                <p>HierarchicalCategories : {cat[0]}</p>
-                <div className="scoreBar">
-                  <div
-                    className="scoreBar__in hierarchical3"
-                    style={{ width: `${cat[1]}%` }}
-                  >
-                    <p>score: {cat[1]}.</p>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        {scorePersona.color.length > 0 &&
-          Object.entries(scorePersona.color[0]).map((color) => {
-            return (
-              <li className="scoreList__item">
-                <p>Colors:{color[0]}</p>
-                <div className="scoreBar">
-                  <div
-                    className="scoreBar__in colorBlack"
-                    style={{
-                      width: `${color[1]}%`,
-                      background: `
+    <>
+      {isSwitchToggle ? (
+        <div className="appliedRules__persona">
+          <h3>{personaName}'s affinities</h3>
+          <ul className="scoreList">
+            {scorePersona.gender.length > 0 &&
+              Object.entries(scorePersona.gender[0]).map((cat) => {
+                return (
+                  <li className="scoreList__item">
+                    <p>Gender : {cat[0]}</p>
+                    <div className="scoreBar">
+                      <div
+                        className="scoreBar__in colorGender"
+                        style={{ width: `${cat[1]}%` }}
+                      >
+                        <p>score: {cat[1]}.</p>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            {scorePersona.hierarchical0.length > 0 &&
+              Object.entries(scorePersona.hierarchical0[0]).map((cat) => {
+                return (
+                  <li className="scoreList__item">
+                    <p>HierarchicalCategories : {cat[0]}</p>
+                    <div className="scoreBar">
+                      <div
+                        className="scoreBar__in hierarchical1"
+                        style={{ width: `${cat[1]}%` }}
+                      >
+                        <p>score: {cat[1]}.</p>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            {scorePersona.hierarchical1.length > 0 &&
+              Object.entries(scorePersona.hierarchical1[0]).map((cat) => {
+                return (
+                  <li className="scoreList__item">
+                    <p>HierarchicalCategories : {cat[0]}</p>
+                    <div className="scoreBar">
+                      <div
+                        className="scoreBar__in hierarchical2"
+                        style={{ width: `${cat[1]}%` }}
+                      >
+                        <p>score: {cat[1]}.</p>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            {scorePersona.hierarchical2.length > 0 &&
+              Object.entries(scorePersona.hierarchical2[0]).map((cat) => {
+                return (
+                  <li className="scoreList__item">
+                    <p>HierarchicalCategories : {cat[0]}</p>
+                    <div className="scoreBar">
+                      <div
+                        className="scoreBar__in hierarchical3"
+                        style={{ width: `${cat[1]}%` }}
+                      >
+                        <p>score: {cat[1]}.</p>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            {scorePersona.color.length > 0 &&
+              Object.entries(scorePersona.color[0]).map((color) => {
+                return (
+                  <li className="scoreList__item">
+                    <p>Colors:{color[0]}</p>
+                    <div className="scoreBar">
+                      <div
+                        className="scoreBar__in colorBlack"
+                        style={{
+                          width: `${color[1]}%`,
+                          background: `
                         linear-gradient(
                           60deg,
                           ${color[0]} 16%,
@@ -183,64 +197,68 @@ const PersonaScore = (props) => {
                           rgba(249, 249, 249, 0.0970982142857143) 100%
                         )
                         `,
-                    }}
-                  >
-                    <p>score {color[1]}.</p>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        {scorePersona.category.length > 0 &&
-          Object.entries(scorePersona.category[0]).map((cat) => {
-            return (
-              <li className="scoreList__item">
-                <p>Category : {cat[0]}</p>
-                <div className="scoreBar">
-                  <div
-                    className="scoreBar__in colorCategory"
-                    style={{ width: `${cat[1]}%` }}
-                  >
-                    <p>score: {cat[1]}.</p>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        {scorePersona.brand.length > 0 &&
-          Object.entries(scorePersona.brand[0]).map((cat) => {
-            return (
-              <li className="scoreList__item">
-                <p>Brand : {cat[0]}</p>
-                <div className="scoreBar">
-                  <div
-                    className="scoreBar__in colorBrand"
-                    style={{ width: `${cat[1]}%` }}
-                  >
-                    <p>score: {cat[1]}.</p>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        {scorePersona.categories.length > 0 &&
-          Object.entries(scorePersona.categories[0]).map((cat) => {
-            return (
-              <li className="scoreList__item">
-                <p>Categories : {cat[0]}</p>
-                <div className="scoreBar">
-                  <div
-                    className="scoreBar__in colorCategories"
-                    style={{ width: `${cat[1]}%` }}
-                  >
-                    <p>score: {cat[1]}.</p>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-      </ul>
-    </div>
+                        }}
+                      >
+                        <p>score {color[1]}.</p>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            {scorePersona.category.length > 0 &&
+              Object.entries(scorePersona.category[0]).map((cat) => {
+                return (
+                  <li className="scoreList__item">
+                    <p>Category : {cat[0]}</p>
+                    <div className="scoreBar">
+                      <div
+                        className="scoreBar__in colorCategory"
+                        style={{ width: `${cat[1]}%` }}
+                      >
+                        <p>score: {cat[1]}.</p>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            {scorePersona.brand.length > 0 &&
+              Object.entries(scorePersona.brand[0]).map((cat) => {
+                return (
+                  <li className="scoreList__item">
+                    <p>Brand : {cat[0]}</p>
+                    <div className="scoreBar">
+                      <div
+                        className="scoreBar__in colorBrand"
+                        style={{ width: `${cat[1]}%` }}
+                      >
+                        <p>score: {cat[1]}.</p>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            {scorePersona.categories.length > 0 &&
+              Object.entries(scorePersona.categories[0]).map((cat) => {
+                return (
+                  <li className="scoreList__item">
+                    <p>Categories : {cat[0]}</p>
+                    <div className="scoreBar">
+                      <div
+                        className="scoreBar__in colorCategories"
+                        style={{ width: `${cat[1]}%` }}
+                      >
+                        <p>score: {cat[1]}.</p>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+          </ul>
+        </div>
+      ) : (
+        ''
+      )}
+    </>
   );
 };
 
