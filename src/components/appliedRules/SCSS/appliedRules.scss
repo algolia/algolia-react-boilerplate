@@ -29,7 +29,6 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
-    margin-top: 1rem;
     &:empty {
       display: none;
     }
@@ -68,11 +67,13 @@
     flex-direction: column;
     gap: 0.5rem;
     margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 
     &__item {
       display: flex;
       flex-direction: column;
       gap: 0.3rem;
+      margin-top: 0.5rem;
 
       p {
         @include p-text($main-color, bold);
@@ -173,6 +174,12 @@
         }
       }
     }
+  }
+}
+
+.appliedRules__list {
+  li {
+    margin: 0.5rem 0;
   }
 }
 

@@ -55,10 +55,11 @@ function CustomAppliedRules(props) {
       {resultsScore && personaName !== 'No Persona' && (
         <PersonaScore resultsScore={resultsScore} personaName={personaName} />
       )}
-      <ul className="appliedRules__list"></ul>
-      {uniqRules.map((rule, i) => (
-        <li key={i}>{rule}</li>
-      ))}
+      <ul className="appliedRules__list">
+        {uniqRules.map((rule, i) => (
+          <li key={i}>{rule}</li>
+        ))}
+      </ul>
     </div>
   );
 }
