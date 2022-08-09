@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 // https://www.npmjs.com/package/rc-slider
 // rc-slider
-import { Range } from 'rc-slider';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { useRange } from 'react-instantsearch-hooks-web';
 // import Currency from recoil
@@ -62,7 +62,8 @@ function PriceSlider(props) {
             {maxSlider} {currency}
           </p>
         </div>
-        <Range
+        <Slider
+          range
           min={min}
           max={max}
           value={change ? [minSlider, maxSlider] : [min, max]}
