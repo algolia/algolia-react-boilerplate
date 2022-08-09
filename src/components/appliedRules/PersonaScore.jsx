@@ -151,7 +151,7 @@ const PersonaScore = (props) => {
       });
       setScorePersona(newState);
     }
-  }, [isSwitchToggle]);
+  }, [isSwitchToggle, resultsScore]);
 
   //Process the results for each attribute
   const treatResults = (newPersona) => {
