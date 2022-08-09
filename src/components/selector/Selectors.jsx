@@ -1,20 +1,23 @@
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
 
 // React-router
-import { useNavigate, createSearchParams } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 
 // import Recoil States
 import { useSetRecoilState } from 'recoil';
 
 //import configuration
-import { segmentSelectedAtom } from '@/config/segmentConfig';
-import { personaSelectedAtom } from '@/config/personaConfig';
-import { personaSelectedFiltersAtom } from '@/config/personaConfig';
+import {
+  personaSelectedAtom,
+  personaSelectedFiltersAtom,
+  personaSelectedName,
+} from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
+import { segmentSelectedAtom } from '@/config/segmentConfig';
 // Changing index & currency through the app
 import { currencySymbolAtom } from '@/config/currencyConfig';
-import { languageSwitchConfig } from '@/config/languagesConfig';
 import { linksHeader } from '@/config/headerConfig';
+import { languageSwitchConfig } from '@/config/languagesConfig';
 
 // handle Alert config
 import {
@@ -87,6 +90,7 @@ const SelectItem = ({
 }) => {
   const setSegmentSelect = useSetRecoilState(segmentSelectedAtom);
   const setPersonaSelect = useSetRecoilState(personaSelectedAtom);
+  const setPersonaSelectedName = useSetRecoilState(personaSelectedName);
   const setPersonaSelectedFilters = useSetRecoilState(
     personaSelectedFiltersAtom
   );
@@ -136,7 +140,13 @@ const SelectItem = ({
   // router hook to navigate using a function
   const navigate = useNavigate();
 
-  const handleClick = (type, value, alertContent, personalizationFilters) => {
+  const handleClick = (
+    label,
+    type,
+    value,
+    alertContent,
+    personalizationFilters
+  ) => {
     switch (type) {
       case 'segment':
         setSegmentSelect(value);
@@ -144,6 +154,7 @@ const SelectItem = ({
       case 'persona':
         setPersonaSelect(value);
         setPersonaSelectedFilters(personalizationFilters);
+        setPersonaSelectedName(label);
         break;
       case 'language':
         handleChangeOfLanguage(value);
@@ -171,7 +182,7 @@ const SelectItem = ({
     <li
       className="selectorsWrapper__listItem"
       onClick={() => {
-        handleClick(type, value, alertContent, personalizationFilters);
+        handleClick(label, type, value, alertContent, personalizationFilters);
         setSelectedValue(label);
       }}
     >
