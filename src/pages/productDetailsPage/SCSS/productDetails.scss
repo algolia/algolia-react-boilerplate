@@ -94,6 +94,11 @@
       .price {
         @include price($purple-algolia);
         font-size: 2rem;
+        strike {
+            margin-right: 0.5rem;
+            color: $grey-dark-color;
+            text-decoration: line-through
+          }
       }
       .sizes {
         font-weight: bold;
