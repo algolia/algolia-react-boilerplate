@@ -53,7 +53,7 @@
     "react": "18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^11.17.4",
-    "react-instantsearch-core": "^6.29.0",
+    "react-instantsearch-core": "^6.31.1",
     "react-instantsearch-dom": "6.22.0",
     "react-instantsearch-hooks-web": "^6.25.0",
     "react-lazily": "^0.9.1",
