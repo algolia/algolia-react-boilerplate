@@ -8,7 +8,7 @@ const resources = {
   en: {
     translation: {
       homePage: {
-        titleCarousels: ['Notre collection de sacs', 'Nos plus beaux sweat'],
+        titleCarousels: ['Our Bags Collection', 'Our Best Hoodies'],
       },
       federated: {
         recentSearches: 'Recent Searches',
@@ -77,7 +77,10 @@ const resources = {
   ger: {
     translation: {
       homePage: {
-        titleCarousels: ['Unsere Taschenkollektion', 'Unsere schönsten Sweatshirts'],
+        titleCarousels: [
+          'Unsere Taschenkollektion',
+          'Unsere schönsten Sweatshirts',
+        ],
       },
       federated: {
         recentSearches: 'Letzte Suchen',
@@ -86,7 +89,7 @@ const resources = {
         products: 'Produkte',
         articles: 'Artikel',
         productsBefore: 'Für dich empfohlen',
-        buttonReturn: "Zurück zur Startseite",
+        buttonReturn: 'Zurück zur Startseite',
         buttonShowAll: 'Alle Produkte anzeigen',
         noResults: 'Keine Einträge gefunden',
       },
