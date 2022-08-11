@@ -148,17 +148,22 @@ const ProductDetails = () => {
     keyPrefix: 'pdp',
   });
 
-  const { recommendations: fbtRecommendations } = useFrequentlyBoughtTogether({
-    recommendClient,
-    indexName,
-    objectIDs: [currentObjectID],
-  });
 
-  const { recommendations: relatedRecommendations } = useRelatedProducts({
-    recommendClient,
-    indexName,
-    objectIDs: [currentObjectID],
-  });
+  if (shouldHaveFbtProductsValue) {
+    const { recommendations: fbtRecommendations } = useFrequentlyBoughtTogether({
+      recommendClient,
+      indexName,
+      objectIDs: [currentObjectID],
+    });
+  }
+
+  if (shouldHaveRelatedProductsValue) {
+    const { recommendations: relatedRecommendations } = useRelatedProducts({
+      recommendClient,
+      indexName,
+      objectIDs: [currentObjectID],
+    });
+  }
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -171,14 +176,12 @@ const ProductDetails = () => {
       transition={framerMotionPage.transition}
     >
       <div
-        className={`${
-          mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
-        }`}
+        className={`${mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
+          }`}
       >
         <div
-          className={`${
-            mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
-          }`}
+          className={`${mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+            }`}
           onClick={() => navigate(-1)}
         >
           <ChevronLeft />
