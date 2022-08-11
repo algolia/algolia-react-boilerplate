@@ -21,9 +21,9 @@ import { queryAtom } from './config/searchboxConfig';
 import {
   isDemoGuideOpen,
   shouldShowAlert,
-  shouldShowDemoGuide,
   showNetworkErorrs,
 } from '@/config/demoGuideConfig';
+import { shouldHaveDemoGuide } from '@/config/featuresConfig';
 import { isCarouselLoaded } from './config/carouselConfig';
 
 // Import Pages and static components
@@ -57,10 +57,10 @@ export const Main = () => {
   // Show rules applied panel when switch on in the demo guide panel
   const isRulesSwitchToggleChecked = useRecoilValue(isRulesSwitchToggle);
 
-  // Show the feature of guided panel for SE should be in this app
-  const shouldShowNavigation = useRecoilValue(shouldShowDemoGuide);
+  // Show guided panel for SE
+  const shouldHaveDemoGuideAtom = useRecoilValue(shouldHaveDemoGuide);
 
-  // State that show/hide the panel if click on the guide btn
+  // Show/hide the panel if click on the guide btn
   const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
 
   // Value that shows Network Errors to Guide you to the correct Configuration
@@ -69,6 +69,7 @@ export const Main = () => {
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
 
+
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
       {isNetworkErorrs && <SearchErrorToast />}
@@ -76,9 +77,9 @@ export const Main = () => {
       <div className="visible">
         <Configure query={queryState} />
         <Header />
-        <DemoGuideOpener />
+        {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
         <AnimatePresence>
-          {showDemoGuide && shouldShowNavigation && (
+          {showDemoGuide && (
             <DemoGuide setshowDemoGuide={setshowDemoGuide} />
           )}
         </AnimatePresence>

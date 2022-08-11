@@ -8,6 +8,14 @@ import { atom } from 'recoil';
 // TODO: add perso and other features here including what to have on federated
 // ------------------------------------------
 
+
+// Should we show the demo guide in this demo
+export const shouldHaveDemoGuide = atom({
+  key: 'shouldHaveDemoGuide',
+  default: true,
+});
+
+
 // Should the segment selector be displayed on the screen
 export const shouldHaveSegments = atom({
   key: 'shouldHaveSegments', // unique ID (with respect to other atoms/selectors)

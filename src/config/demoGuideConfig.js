@@ -3,12 +3,6 @@ import { atom } from 'recoil';
 // import personaConfig for displaying in the guide
 import { personaConfig } from './personaConfig';
 
-// Should we show the demo guide in this demo
-export const shouldShowDemoGuide = atom({
-  key: 'shouldShowDemoGuide',
-  default: true,
-});
-
 // Should we show the network errors in the demo - might want to switch this to false when demo-ing to a client
 export const showNetworkErorrs = atom({
   key: 'showNetworkErorrs',
