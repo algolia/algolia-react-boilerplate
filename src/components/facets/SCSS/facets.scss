@@ -4,6 +4,15 @@
 // Global scss partials
 @use '../../../scss/partials' as *;
 
+.no-facets {
+  padding: 2rem 0;
+  text-align: center;
+
+  a {
+    color: $purple-algolia;
+  }
+}
+
 .filters-container {
   font-family: $main-font;
   width: 100%;
@@ -48,6 +57,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+
     &__list {
       &__button-filter {
         display: flex;
@@ -55,7 +65,7 @@
           $main-color,
           $purple-algolia );
 
-        > p {
+        >p {
           @include p-text($main-color);
           font-size: 0.8rem;
           font-weight: 300;
@@ -81,6 +91,7 @@
         }
 
         &:hover {
+
           p,
           span {
             color: $white-color;

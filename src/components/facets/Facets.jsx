@@ -4,6 +4,7 @@ import { useState } from 'react';
 import {
   DynamicWidgets,
   useRefinementList,
+  useInstantSearch
 } from 'react-instantsearch-hooks-web';
 
 // Import magnifying glass svg, and price slider component
@@ -25,8 +26,7 @@ import './SCSS/facets.scss';
 function GenericRefinementList(props) {
   const { items, refine, searchForItems } = useRefinementList(props);
   const { title, options } = props;
-  // With this state you can hide or not facets
-  const [showFacet, setShowFacet] = useState(false);
+
   // With this state you can search for items in facets
   const [searchInput, setSearchInput] = useState(false);
 
@@ -60,9 +60,8 @@ function GenericRefinementList(props) {
         {items.map((item) => (
           <li className="filters-container__content__list" key={item.value}>
             <button
-              className={`filters-container__content__list__button-filter ${
-                item.isRefined ? 'refined-filter' : ''
-              }`}
+              className={`filters-container__content__list__button-filter ${item.isRefined ? 'refined-filter' : ''
+                }`}
               type="button"
               href="#"
               onClick={(event) => {
@@ -102,9 +101,8 @@ function CustomColorRefinement(props) {
             >
               <div className="color-name">
                 <input
-                  className={`filters-container__content__list__button-filter ${
-                    item.isRefined ? 'refined-filter' : ''
-                  }`}
+                  className={`filters-container__content__list__button-filter ${item.isRefined ? 'refined-filter' : ''
+                    }`}
                   style={{
                     backgroundColor: color,
                     width: '30px',
@@ -135,50 +133,57 @@ function CustomColorRefinement(props) {
 }
 
 const Facets = () => {
+  const { results } = useInstantSearch()
+  const facets = results.renderingContent.facetOrdering.facets.order
+
   return (
     <div>
-      <DynamicWidgets maxValuesPerFacet={500}>
-        {refinements.map((e, i) => {
-          const { type, label, options } = e;
-          switch (type) {
-            case 'price':
-              return (
-                <PriceSlider
-                  attribute={options.attribute}
-                  title={label}
-                  key={i}
-                />
-              );
-            case 'colour':
-              return (
-                <CustomColorRefinement
-                  attribute={options.attribute}
-                  key={i}
-                  title={label}
-                />
-              );
-            case 'hierarchical':
-              return (
-                <HierarchicalMenu
-                  attributes={options.attribute}
-                  title={label}
-                  key={i}
-                />
-              );
-            default:
-              return (
-                <GenericRefinementList
-                  searchable={options?.searchable}
-                  key={i}
-                  limit={options?.limit}
-                  attribute={options.attribute}
-                  title={label}
-                  options={options}
-                />
-              );
-          }
-        })}
-      </DynamicWidgets>
+      {facets && facets.length === 0 && <h3 className='no-facets'>No normal facets returned, check facet ordering section of your dashboard. <a href='https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react-hooks/#configuring-your-facet-display-using-the-dashboard'>Docs</a></h3>}
+
+      {facets.length > 0 && (
+        <DynamicWidgets maxValuesPerFacet={500}>
+          {refinements.map((e, i) => {
+            const { type, label, options } = e;
+            switch (type) {
+              case 'price':
+                return (
+                  <PriceSlider
+                    attribute={options.attribute}
+                    title={label}
+                    key={i}
+                  />
+                );
+              case 'colour':
+                return (
+                  <CustomColorRefinement
+                    attribute={options.attribute}
+                    key={i}
+                    title={label}
+                  />
+                );
+              case 'hierarchical':
+                return (
+                  <HierarchicalMenu
+                    attributes={options.attribute}
+                    title={label}
+                    key={i}
+                  />
+                );
+              default:
+                return (
+                  <GenericRefinementList
+                    searchable={options?.searchable}
+                    key={i}
+                    limit={options?.limit}
+                    attribute={options.attribute}
+                    title={label}
+                    options={options}
+                  />
+                );
+            }
+          })}
+        </DynamicWidgets>
+      )}
     </div>
   );
 };
