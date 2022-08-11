@@ -138,9 +138,9 @@ const Facets = () => {
 
   return (
     <div>
-      {facets && facets.length === 0 && <h3 className='no-facets'>No normal facets returned, check facet ordering section of your dashboard. <a href='https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react-hooks/#configuring-your-facet-display-using-the-dashboard'>Docs</a></h3>}
+      {facets?.length === 0 && <h3 className='no-facets'>No normal facets returned, check facet ordering section of your dashboard. <a href='https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react-hooks/#configuring-your-facet-display-using-the-dashboard'>Docs</a></h3>}
 
-      {facets.length > 0 && (
+      {facets?.length > 0 && (
         <DynamicWidgets maxValuesPerFacet={500}>
           {refinements.map((e, i) => {
             const { type, label, options } = e;
