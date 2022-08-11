@@ -16,7 +16,7 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 // Changing index & currency through the app
 import { currencySymbolAtom } from '@/config/currencyConfig';
-import { linksHeader } from '@/config/headerConfig';
+import { linksHeader } from '@/config/navigationConfig';
 import { languageSwitchConfig } from '@/config/languagesConfig';
 
 // handle Alert config

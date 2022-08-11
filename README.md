@@ -268,9 +268,11 @@ The ability to control the facets which get displayed including their order. Whe
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Category Pages</h3>
 
-In order to configure Category Pages, first got to `config/categoryConfig` and edit the value for `categoryPageFilterAttribute`. This represents the attribute you will filter on to create your individual category pages.
+In order to configure Category Pages, go to `config/navigationConfig`. 
 
-Next, go to `config/headerConfig`. From there you can add links in the Navigation tab, if they are a category page, the type must be `filter`, and the value for `filter` must match the value of the category you are filtering on to create the resulting page.
+Edit the value for `categoryPageFilterAttribute`. This represents the attribute you will filter on to create your individual category pages.
+
+Then you can adjust the linksHeader atom. The value for `filter` must match the value of the category you are filtering on to create the resulting page.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Collection Pages</h3>
 

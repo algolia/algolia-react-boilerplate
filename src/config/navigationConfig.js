@@ -2,12 +2,18 @@
 // Configuration for the header
 // ------------------------------------------
 import { atom } from 'recoil';
+
+// ------------------------------------------
+// This exported attribute name is used to generate results for Category pages
+// It will create a filter which will be used when a category page link is clicked on
+// Please refer to linksHeader to define the category page values which will be filtered
+// ------------------------------------------
+export const categoryPageFilterAttribute = 'hierarchicalCategories.lvl0';
+
 // ------------------------------------------
 // This const defines the navigation aspect of the header
 // The name is for display purposes for each navigation title
 // The filter is the value to filter on to show results for the linked category page
-// The filter value should directly correspond to the attribute you're filtering on
-// See categoryConfig to define the attribute matching these values correctly
 // The url should be the lower case URL friendly version of the filter value
 // ------------------------------------------
 export const linksHeader = atom({
@@ -50,10 +56,3 @@ export const categorySelectionAtom = atom({
   key: 'categorySelectionAtom',
   default: null,
 });
-
-// This is the state of the 'state' from SearchInCategory.jsx
-// It is used to persist the category underline on refresh
-// export const searchCategoryStateAtom = atom({
-//   key: 'searchCategoryStateAtom',
-//   default: null
-// })
