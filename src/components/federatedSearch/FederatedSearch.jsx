@@ -31,7 +31,7 @@ import { personalizationImpact, personaSelectedAtom, personaSelectedFiltersAtom 
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 
 // Import refs for modal closing functionality
-import { selectorNavigationRef } from '@/config/headerConfig';
+import { selectorNavigationRef } from '@/config/navigationConfig';
 
 // hook import
 // Check if user is clecking outside an element
