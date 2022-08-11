@@ -1,5 +1,5 @@
 // Component for building and showing prices in the correct format
-// It currently has functionality for £ $ € and defaults to putting the currency symbol first
+// It should automatically place the currency symbol in the correct place but can be easily modified
 
 // Recoil
 import { useRecoilValue } from 'recoil';
@@ -59,7 +59,8 @@ const PriceBuilder = ({ hit }) => {
   const isOnSale = get(hit, onSale);
   const salePrice = get(hit, onSalePrice);
 
-  // Check if the currency should be on the right, ie: if it is Euros
+  // Check if the currency should be on the right, ie: if it is Euros.
+  // You can add other currencies to this function if you want them on the right of your price
   const isCurrencyRight = '€' === currencySymbol;
   // Variable used to show the correct price depending on the item being 'on sale' or not
   const userPaysPrice = isOnSale ? salePrice : hitPrice;
