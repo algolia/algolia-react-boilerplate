@@ -11,6 +11,7 @@ import get from 'lodash/get';
 import {
   currencySymbolAtom,
   shouldDisplayCurrency,
+  // TODO: Add fallback for varying types of currency number separators
   // shouldInvertPriceSeparators,
 } from '@/config/currencyConfig';
 
@@ -20,7 +21,7 @@ const convertSeparators = (price) => {
   return price.replace(/[,.]/g, (m) => (m === ',' ? '.' : ','));
 };
 
-// TODO: Add fallback for varying types of currency numbers
+// TODO: Add fallback for varying types of currency number separators
 // EG:
 // different inputs = '10,000.56' '10.000,56' '10' '10,00'
 // first detect which currency
@@ -52,6 +53,7 @@ const PriceBuilder = ({ hit }) => {
   const currencySymbol = useRecoilValue(currencySymbolAtom);
   const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
+  // TODO: Add fallback for varying types of currency number separators
   // const invertedPriceSeparators = useRecoilValue(shouldInvertPriceSeparators);
 
   // get the values from the data in hitsConfig
@@ -60,8 +62,10 @@ const PriceBuilder = ({ hit }) => {
   const salePrice = get(hit, onSalePrice);
 
   // Check if the currency should be on the right, ie: if it is Euros.
-  // You can add other currencies to this function if you want them on the right of your price
-  const isCurrencyRight = '€' === currencySymbol;
+  // You can add other currencies to this array if you want them on the right of your price
+  const rightCurrencies = ['€', 'kr'];
+
+  const isCurrencyRight = rightCurrencies.includes(currencySymbol);
   // Variable used to show the correct price depending on the item being 'on sale' or not
   const userPaysPrice = isOnSale ? salePrice : hitPrice;
 
