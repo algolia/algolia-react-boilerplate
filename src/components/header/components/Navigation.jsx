@@ -77,7 +77,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           onClick={() => {
             // Set query to nothing when clicking on a category
             setQueryState('');
-            if (link.name !== 'All') {
+            if (link.filter.length > 0) {
               if (link.type === 'filter') {
                 navigate(`/search`, {
                   state: {
