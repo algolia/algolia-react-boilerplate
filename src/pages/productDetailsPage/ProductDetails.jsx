@@ -148,13 +148,17 @@ const ProductDetails = () => {
     keyPrefix: 'pdp',
   });
 
-
+  let fbtRecommendationsProducts;
+  let relatedRecommendationsProducts;
   if (shouldHaveFbtProductsValue) {
-    const { recommendations: fbtRecommendations } = useFrequentlyBoughtTogether({
-      recommendClient,
-      indexName,
-      objectIDs: [currentObjectID],
-    });
+    const { recommendations: fbtRecommendations } = useFrequentlyBoughtTogether(
+      {
+        recommendClient,
+        indexName,
+        objectIDs: [currentObjectID],
+      }
+    );
+    fbtRecommendationsProducts = fbtRecommendations;
   }
 
   if (shouldHaveRelatedProductsValue) {
@@ -163,6 +167,7 @@ const ProductDetails = () => {
       indexName,
       objectIDs: [currentObjectID],
     });
+    relatedRecommendationsProducts = relatedRecommendations;
   }
 
   return (
@@ -176,12 +181,14 @@ const ProductDetails = () => {
       transition={framerMotionPage.transition}
     >
       <div
-        className={`${mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
-          }`}
+        className={`${
+          mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
+        }`}
       >
         <div
-          className={`${mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
-            }`}
+          className={`${
+            mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+          }`}
           onClick={() => navigate(-1)}
         >
           <ChevronLeft />
@@ -318,21 +325,22 @@ const ProductDetails = () => {
             transition: { delay: 1, framerMotionTransition },
           }}
         >
-          {shouldHaveRelatedProductsValue && relatedRecommendations.length > 0 && (
-            <div>
-              <h3 className="title">{t('relatedTitle')}</h3>
-              <HorizontalSlider
-                itemComponent={RelatedItem}
-                items={relatedRecommendations}
-              />
-            </div>
-          )}
-          {shouldHaveFbtProductsValue && fbtRecommendations.length > 0 && (
+          {shouldHaveRelatedProductsValue &&
+            relatedRecommendationsProducts.length > 0 && (
+              <div>
+                <h3 className="title">{t('relatedTitle')}</h3>
+                <HorizontalSlider
+                  itemComponent={RelatedItem}
+                  items={relatedRecommendationsProducts}
+                />
+              </div>
+            )}
+          {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 0 && (
             <div>
               <h3 className="title">{t('fbtTitle')}</h3>
               <HorizontalSlider
                 itemComponent={RelatedItem}
-                items={fbtRecommendations}
+                items={fbtRecommendationsProducts}
               />
             </div>
           )}
