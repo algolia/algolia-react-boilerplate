@@ -16,6 +16,7 @@
 .filters-container {
   font-family: $main-font;
   width: 100%;
+  border-bottom: 1px solid $grey-border-light-color;
 
   &__title {
     width: 100%;
@@ -23,7 +24,7 @@
     justify-content: space-between;
 
     h3 {
-      @include facetsTitle($main-color)
+      @include facetsTitle($main-color);
     }
 
     svg {
@@ -61,11 +62,9 @@
     &__list {
       &__button-filter {
         display: flex;
-        @include facetsFilter('transparent',
-          $main-color,
-          $purple-algolia );
+        @include facetsFilter('transparent', $main-color, $purple-algolia);
 
-        >p {
+        > p {
           @include p-text($main-color);
           font-size: 0.8rem;
           font-weight: 300;
@@ -73,7 +72,7 @@
 
         &::before {
           position: absolute;
-          content: "";
+          content: '';
           top: 0;
           right: 0;
           bottom: 0;
@@ -91,17 +90,20 @@
         }
 
         &:hover {
-
           p,
           span {
             color: $white-color;
             transition: color 0.3s ease-in-out;
           }
         }
-
       }
     }
-
+  }
+  &__button {
+    font-family: $main-font;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 0.3rem;
   }
 
   .refined-filter {
@@ -113,12 +115,9 @@
       font-size: 0.8rem;
     }
   }
-
-
 }
 
-
-// Mobile & tablet 
+// Mobile & tablet
 .srp-container__facets-mobile {
   position: absolute;
   top: 0;

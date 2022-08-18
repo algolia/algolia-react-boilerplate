@@ -4,7 +4,7 @@ import { useState } from 'react';
 import {
   DynamicWidgets,
   useRefinementList,
-  useInstantSearch
+  useInstantSearch,
 } from 'react-instantsearch-hooks-web';
 
 // Import magnifying glass svg, and price slider component
@@ -24,8 +24,21 @@ import './SCSS/facets.scss';
 // expects an attribute which is an array of items
 
 function GenericRefinementList(props) {
-  const { items, refine, searchForItems } = useRefinementList(props);
+  const {
+    items,
+    refine,
+    searchForItems,
+    canToggleShowMore,
+    isShowingMore,
+    toggleShowMore,
+  } = useRefinementList(props);
+  console.log(
+    '🚀 ~ file: Facets.jsx ~ line 35 ~ GenericRefinementList ~ isShowingMore',
+    isShowingMore
+  );
+
   const { title, options } = props;
+  const { showMoreFunction } = options;
 
   // With this state you can search for items in facets
   const [searchInput, setSearchInput] = useState(false);
@@ -60,8 +73,9 @@ function GenericRefinementList(props) {
         {items.map((item) => (
           <li className="filters-container__content__list" key={item.value}>
             <button
-              className={`filters-container__content__list__button-filter ${item.isRefined ? 'refined-filter' : ''
-                }`}
+              className={`filters-container__content__list__button-filter ${
+                item.isRefined ? 'refined-filter' : ''
+              }`}
               type="button"
               href="#"
               onClick={(event) => {
@@ -77,6 +91,16 @@ function GenericRefinementList(props) {
           </li>
         ))}
       </ul>
+      {showMoreFunction && (
+        <button
+          className="filters-container__button"
+          onClick={() => {
+            toggleShowMore();
+          }}
+        >
+          {isShowingMore ? 'Show Less' : 'Show More'}
+        </button>
+      )}
     </div>
   );
 }
@@ -101,8 +125,9 @@ function CustomColorRefinement(props) {
             >
               <div className="color-name">
                 <input
-                  className={`filters-container__content__list__button-filter ${item.isRefined ? 'refined-filter' : ''
-                    }`}
+                  className={`filters-container__content__list__button-filter ${
+                    item.isRefined ? 'refined-filter' : ''
+                  }`}
                   style={{
                     backgroundColor: color,
                     width: '30px',
@@ -133,12 +158,20 @@ function CustomColorRefinement(props) {
 }
 
 const Facets = () => {
-  const { results } = useInstantSearch()
-  const facets = results.renderingContent.facetOrdering.facets.order
+  const { results } = useInstantSearch();
+  const facets = results.renderingContent.facetOrdering.facets.order;
 
   return (
     <div>
-      {facets?.length === 0 && <h3 className='no-facets'>No normal facets returned, check facet ordering section of your dashboard. <a href='https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react-hooks/#configuring-your-facet-display-using-the-dashboard'>Docs</a></h3>}
+      {facets?.length === 0 && (
+        <h3 className="no-facets">
+          No normal facets returned, check facet ordering section of your
+          dashboard.{' '}
+          <a href="https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react-hooks/#configuring-your-facet-display-using-the-dashboard">
+            Docs
+          </a>
+        </h3>
+      )}
 
       {facets?.length > 0 && (
         <DynamicWidgets maxValuesPerFacet={500}>
@@ -178,6 +211,7 @@ const Facets = () => {
                     attribute={options.attribute}
                     title={label}
                     options={options}
+                    showMore={options?.showMoreFunction}
                   />
                 );
             }

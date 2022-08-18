@@ -36,6 +36,7 @@ export const refinements = [
       // when searchable is enabled, you can search for a specific value of that facet. Ex: Here you can search for a specific brand
       searchable: true,
       limit: 5,
+      showMoreFunction: true,
     },
   },
   {
@@ -58,6 +59,7 @@ export const refinements = [
     options: {
       attribute: hitsConfig.sizeFilter,
       limit: 8,
+      showMoreFunction: false,
     },
   },
 ];
@@ -71,4 +73,4 @@ export const refinementPriceLabels = {
 export const refinementsAtom = atom({
   key: 'refinementsAtom', // unique ID (with respect to other atoms/selectors)
   default: [], // default value (aka initial value)
-})
+});
