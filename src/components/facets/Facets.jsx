@@ -8,7 +8,7 @@ import {
 } from 'react-instantsearch-hooks-web';
 
 // Import magnifying glass svg, and price slider component
-import { Glass } from '@/assets/svg/SvgIndex';
+import { ChevronDown, ChevronUp, Glass } from '@/assets/svg/SvgIndex';
 
 // Import components
 
@@ -94,7 +94,15 @@ function GenericRefinementList(props) {
             toggleShowMore();
           }}
         >
-          {isShowingMore ? 'Show Less' : 'Show More'}
+          {isShowingMore ? (
+            <div className="filters-container__button__content">
+              Show Less <ChevronUp />
+            </div>
+          ) : (
+            <div className="filters-container__button__content">
+              Show More <ChevronDown />
+            </div>
+          )}
         </button>
       )}
     </div>

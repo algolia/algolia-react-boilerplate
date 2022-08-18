@@ -101,9 +101,17 @@
   }
   &__button {
     font-family: $main-font;
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 300;
+    padding: 0.5rem;
+    &__content {
+      display: flex;
+      align-items: center;
+      svg {
+        width: 1rem;
+        margin-left: 0.8rem
+      }
+    }
   }
 
   .refined-filter {
