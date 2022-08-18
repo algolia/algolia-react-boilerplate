@@ -88,22 +88,24 @@ function GenericRefinementList(props) {
         ))}
       </ul>
       {showMoreFunction && (
-        <button
-          className="filters-container__button"
-          onClick={() => {
-            toggleShowMore();
-          }}
-        >
-          {isShowingMore ? (
-            <div className="filters-container__button__content">
-              Show Less <ChevronUp />
-            </div>
-          ) : (
-            <div className="filters-container__button__content">
-              Show More <ChevronDown />
-            </div>
-          )}
-        </button>
+        <div className="filters-container__button-container">
+          <button
+            className="filters-container__button-container__button"
+            onClick={() => {
+              toggleShowMore();
+            }}
+          >
+            {isShowingMore ? (
+              <div className="filters-container__button-container__button__content">
+                Show Less <ChevronUp />
+              </div>
+            ) : (
+              <div className="filters-container__button-container__button__content">
+                Show More <ChevronDown />
+              </div>
+            )}
+          </button>
+        </div>
       )}
     </div>
   );

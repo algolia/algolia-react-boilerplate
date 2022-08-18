@@ -99,17 +99,22 @@
       }
     }
   }
-  &__button {
-    font-family: $main-font;
-    font-size: 0.8rem;
-    font-weight: 300;
-    padding: 0.5rem;
-    &__content {
-      display: flex;
-      align-items: center;
-      svg {
-        width: 1rem;
-        margin-left: 0.8rem
+  &__button-container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    &__button {
+      font-family: $main-font;
+      font-size: 0.8rem;
+      font-weight: 300;
+      padding: 0.5rem;
+      &__content {
+        display: flex;
+        align-items: center;
+        svg {
+          width: 1rem;
+          margin-left: 0.8rem;
+        }
       }
     }
   }
