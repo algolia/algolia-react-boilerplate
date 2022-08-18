@@ -32,10 +32,6 @@ function GenericRefinementList(props) {
     isShowingMore,
     toggleShowMore,
   } = useRefinementList(props);
-  console.log(
-    '🚀 ~ file: Facets.jsx ~ line 35 ~ GenericRefinementList ~ isShowingMore',
-    isShowingMore
-  );
 
   const { title, options } = props;
   const { showMoreFunction } = options;
