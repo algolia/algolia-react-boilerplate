@@ -77,22 +77,22 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           onClick={() => {
             // Set query to nothing when clicking on a category
             setQueryState('');
-            if (link.filter.length > 0) {
-              if (link.type === 'filter') {
+            if (link.type === 'filter') {
+              if (link.filter.length > 0){
                 navigate(`/search`, {
                   state: {
                     type: link.type,
                     action: `${categoryPageFilterAttribute}:'${link.filter}'`,
                   },
                 });
-              } else if (link.type === 'context') {
-                navigate(`/search`, {
-                  state: { type: link.type, action: link.context },
+              } else {
+                navigate('/search', {
+                  state: { type: link.type, name: link.name, action: null },
                 });
               }
-            } else {
-              navigate('/search', {
-                state: { type: link.type, name: link.name, action: null },
+            } else if (link.type === 'context') {
+              navigate(`/search`, {
+                state: { type: link.type, action: link.context },
               });
             }
             // Only used for Mobile view
