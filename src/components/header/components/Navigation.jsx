@@ -75,24 +75,18 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           onClick={() => {
             // Set query to nothing when clicking on a category
             setQueryState('');
-            if (link.name !== 'All') {
-              if (link.type === 'filter') {
-                navigate(`/search`, {
-                  state: {
-                    type: link.type,
-                    action: `${categoryPageFilterAttribute}:'${link.filter}'`,
-                  },
-                });
-              } else if (link.type === 'context') {
-                navigate(`/search`, {
-                  state: { type: link.type, action: link.context },
-                });
-              }
-            } else {
-              navigate('/search', {
-                state: { type: link.type, name: link.name, action: null },
-              });
+
+            //Build action based on link type, then navigate
+            let action = null;
+            if (link.type === 'filter' && (link.filter?.length > 0)) {
+              action = `${categoryPageFilterAttribute}:'${link.filter}'`;
+            } else if (link.type === 'context') {
+              action = link.context;
             }
+            navigate(`/search`, {
+              state: { type: link.type, name: link.name, action: action },
+            });
+            
             // Only used for Mobile view
             if (tablet || mobile) {
               setIsMenuOpen(false);
