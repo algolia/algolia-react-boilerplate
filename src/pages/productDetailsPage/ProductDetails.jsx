@@ -151,23 +151,21 @@ const ProductDetails = () => {
   let fbtRecommendationsProducts;
   let relatedRecommendationsProducts;
   if (shouldHaveFbtProductsValue) {
-    const { recommendations: fbtRecommendations } = useFrequentlyBoughtTogether(
-      {
-        recommendClient,
-        indexName,
-        objectIDs: [currentObjectID],
-      }
-    );
-    fbtRecommendationsProducts = fbtRecommendations;
-  }
-
-  if (shouldHaveRelatedProductsValue) {
-    const { recommendations: relatedRecommendations } = useRelatedProducts({
+    const { recommendations } = useFrequentlyBoughtTogether({
       recommendClient,
       indexName,
       objectIDs: [currentObjectID],
     });
-    relatedRecommendationsProducts = relatedRecommendations;
+    fbtRecommendationsProducts = recommendations;
+  }
+
+  if (shouldHaveRelatedProductsValue) {
+    const { recommendations } = useRelatedProducts({
+      recommendClient,
+      indexName,
+      objectIDs: [currentObjectID],
+    });
+    relatedRecommendationsProducts = recommendations;
   }
 
   return (
