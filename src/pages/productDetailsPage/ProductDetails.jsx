@@ -127,11 +127,10 @@ const ProductDetails = () => {
   // navigate is used by react router
   const navigate = useNavigate();
 
-  const { tablet, mobile } = useRecoilValue(windowSize);
+  const { isDesktop } = useRecoilValue(windowSize);
 
   // Get hit attribute from config file
   const {
-    objectID,
     image,
     productName,
     brand,
@@ -163,7 +162,7 @@ const ProductDetails = () => {
   return (
     // Product Display Page parent container, including attributes for framer motion
     <div
-      className={`${mobile || tablet ? 'pdp-mobile' : ''} pdp`}
+      className={`${!isDesktop ? 'pdp-mobile' : ''} pdp`}
       variants={framerMotionPage}
       initial={framerMotionPage.initial}
       animate={framerMotionPage.animate}
@@ -172,12 +171,12 @@ const ProductDetails = () => {
     >
       <div
         className={`${
-          mobile || tablet ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
+          !isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
         }`}
       >
         <div
           className={`${
-            mobile || tablet ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+            !isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
           }`}
           onClick={() => navigate(-1)}
         >
@@ -192,7 +191,7 @@ const ProductDetails = () => {
             opacity: 1,
             transition: { framerMotionTransition },
           }}
-          className={`${mobile || tablet ? 'pdp-mobile__left' : 'pdp__left'}`}
+          className={`${!isDesktop ? 'pdp-mobile__left' : 'pdp__left'}`}
         >
           <div
             className="container"
@@ -219,7 +218,7 @@ const ProductDetails = () => {
           </div>
         </div>
         <div
-          className={`${mobile || tablet ? 'pdp-mobile__right' : 'pdp__right'}`}
+          className={`${!isDesktop ? 'pdp-mobile__right' : 'pdp__right'}`}
         >
           <div
             className="pdp__right__infos"

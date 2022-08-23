@@ -522,9 +522,6 @@
 // Hamburger menu
 @mixin hamburger-menu {
   display: flex;
-  position: absolute;
-  top: 1.5rem;
-  left: 1.1rem;
   height: fit-content;
   flex-direction: column;
   z-index: 999;

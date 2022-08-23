@@ -19,7 +19,7 @@
       padding: 0 2rem;
       display: flex;
       justify-content: space-between;
-      margin-bottom: 1rem;
+
       a{
         position: relative;
         width: 100%;
@@ -34,7 +34,7 @@
         overflow: hidden;
         img {
           margin: 0 auto;
-          width: 70%;
+          width: 90%;
           height: 100%;
         }
       }
@@ -42,13 +42,17 @@
         min-width: 40%;
         display: flex;
         justify-content: flex-start;
+        align-items: center;
         min-height: 5rem;
         h1 {
-         @include titleH3($purple-algolia);
-         font-size: 1.2rem;
-         text-transform: capitalize;
+          @include titleH3($purple-algolia);
+          font-size: 1.1rem;
+          text-transform: capitalize;
+          margin: 0px;
         }
       }
+
+
     }
     .container__header-nav {
       &__links {
@@ -118,7 +122,7 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 1rem;
-      margin-top: 3rem;
+      margin-top: 8rem;
       padding: 1rem;
 
       li {
@@ -151,3 +155,4 @@
     @include hamburger-menu-inactive;
   }
 }
+

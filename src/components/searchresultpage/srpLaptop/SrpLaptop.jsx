@@ -1,20 +1,22 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense } from 'react';
 
 // eslint-disable-next-line import/order
-import { Configure, Index, Pagination } from 'react-instantsearch-hooks-web';
+import { Configure, Index } from 'react-instantsearch-hooks-web';
 
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
+import { windowSize } from '@/hooks/useScreenSize';
+
 // Import Components
 import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
 import { Hit } from '@/components/hits/Hits';
-
 import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
 import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
 import Redirect from '@/components/redirects/Redirect';
 import CustomSortBy from '@/components/sortBy/SortBy';
 import { CustomStats } from '@/components/stats/Stats';
+
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import {
   shouldHaveInjectedHits,
@@ -54,7 +56,7 @@ const SrpLaptop = () => {
   // Recoil & React states
   const stats = useRecoilValue(shouldHaveStats);
   const queryState = useRecoilValue(queryAtom);
-  const [injected, setInjected] = useState(false);
+  const { isDesktop, mobile } = useRecoilValue(windowSize);
 
   // Should show injected content or not
   // Defined in config file
@@ -65,7 +67,7 @@ const SrpLaptop = () => {
   const { injectedContentIndex } = useRecoilValue(indexNames);
 
   // Define Stat Const
-  const { hitsPerPageNotInjected, hitsPerPageInjected } = hitsPerPage;
+  const { hitsPerPageNotInjected } = hitsPerPage;
 
   // Define Price Sort By Const
   const { labelIndex } = useRecoilValue(sortBy);
@@ -113,22 +115,24 @@ const SrpLaptop = () => {
             <TrendingProducts facetName={facetName} facetValue={facetValue} />
           )}
       </div>
-      <div className="srp-active srp-container">
-        <div className="srp-container__facets">
-          <Suspense fallback={<SkeletonLoader type={'facet'} />}>
-            {/* Render Recommend component - Trending Facets */}
-            {/* Change config in /config/trendingConfig.js */}
-            {shouldHaveTrendingFacetsValue && (
-              <WrappedTrendingFacetValues
-                attribute="brand"
-                facetName={'brand'}
-                limit={500}
-                facetValue={facetValue}
-              />
-            )}
-            <GenericRefinementList />
-          </Suspense>
-        </div>
+      <div className={`srp-active srp-container`}>
+        {isDesktop && (
+          <div className="srp-container__facets">
+            <Suspense fallback={<SkeletonLoader type={'facet'} />}>
+              {/* Render Recommend component - Trending Facets */}
+              {/* Change config in /config/trendingConfig.js */}
+              {shouldHaveTrendingFacetsValue && (
+                <WrappedTrendingFacetValues
+                  attribute="brand"
+                  facetName={'brand'}
+                  limit={500}
+                  facetValue={facetValue}
+                />
+              )}
+              <GenericRefinementList />
+            </Suspense>
+          </div>
+        )}
         <div className="srp-container__hits">
           {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
           <div className="srp-container__stats-sort">
@@ -151,9 +155,7 @@ const SrpLaptop = () => {
             </Suspense>
           </div>
           <Configure
-            hitsPerPage={
-              injected ? hitsPerPageInjected : hitsPerPageNotInjected
-            }
+            hitsPerPage={hitsPerPageNotInjected}
             analytics={false}
             enablePersonalization={true}
             userToken={userToken}

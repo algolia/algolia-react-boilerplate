@@ -11,7 +11,7 @@
   justify-content: flex-end;
   gap: 1rem;
   .searchbox {
-    width: 40%;
+    width: 80%;
     will-change: width;
     transition: width 0.2s cubic-bezier(0.73, 0, 0.12, 1.5);
     &__form {

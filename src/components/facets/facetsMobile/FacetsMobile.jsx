@@ -1,6 +1,5 @@
 // Renders Facets component for mobile viewport
 // import framer motion
-import { motion } from 'framer-motion';
 import { framerMotionTransition } from '@/config/animationConfig';
 
 import GenericRefinementList from '@/components/facets/Facets';

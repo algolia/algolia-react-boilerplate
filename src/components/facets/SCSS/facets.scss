@@ -14,7 +14,7 @@
     justify-content: space-between;
 
     h3 {
-      @include facetsTitle($main-color)
+      @include facetsTitle($main-color);
     }
 
     svg {
@@ -51,9 +51,7 @@
     &__list {
       &__button-filter {
         display: flex;
-        @include facetsFilter('transparent',
-          $main-color,
-          $purple-algolia );
+        @include facetsFilter('transparent', $main-color, $purple-algolia);
 
         > p {
           @include p-text($main-color);
@@ -63,7 +61,7 @@
 
         &::before {
           position: absolute;
-          content: "";
+          content: '';
           top: 0;
           right: 0;
           bottom: 0;
@@ -87,10 +85,8 @@
             transition: color 0.3s ease-in-out;
           }
         }
-
       }
     }
-
   }
 
   .refined-filter {
@@ -101,23 +97,5 @@
       @include p-text($white-color);
       font-size: 0.8rem;
     }
-  }
-
-
-}
-
-
-// Mobile & tablet 
-.srp-container__facets-mobile {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50vh;
-  background-color: $background-color;
-  z-index: 998;
-  padding: 3rem 1rem;
-
-  .filters-container {
-    margin-top: 2rem;
   }
 }

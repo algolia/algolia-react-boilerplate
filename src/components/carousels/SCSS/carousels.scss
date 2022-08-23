@@ -91,7 +91,7 @@
     .inner-carousel {
       display: flex;
       .item {
-        min-width: 30%;
+        min-width: 50%;
         padding: 1rem;
         position: relative;
       
@@ -103,7 +103,7 @@
         align-items: center;
         justify-content: space-between;
         cursor: pointer;
-        height: 8rem;
+        height: 7rem;
         .name {
           color: $main-color;
           font-size: 0.8rem;
