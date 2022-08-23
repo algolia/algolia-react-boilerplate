@@ -9,11 +9,14 @@ const ScreenResizer = () => {
 
     const handleResize = () => {
       // Set screen size and return true or false
+      const view = Math.min(screen.width, window.innerWidth)
+
       setWindowSize({
-        laptop: window.innerWidth >= 1440,
-        laptopXS: window.innerWidth > 768 && window.innerWidth < 1440,
-        tablet: window.innerWidth >= 480 && window.innerWidth <= 768,
-        mobile: window.innerWidth < 480,
+        laptop: view >= 1440,
+        laptopXS: view > 820 && view < 1440,
+        tablet: view >= 480 && view <= 820,
+        mobile: view < 480,
+        isDesktop: (view >= 1440) || (view > 768 && view < 1440)
       });
     };
   

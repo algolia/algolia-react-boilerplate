@@ -56,7 +56,7 @@ const SearchResultPage = ({ props }) => {
       ) : (
         <>
           {shouldDisplayBanners && <Banner />}
-          <SrpLaptop />
+          {<SrpLaptop />}
         </>
       )}
     </>

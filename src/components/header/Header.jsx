@@ -14,13 +14,12 @@ import './SCSS/header.scss';
 
 const Header = () => {
   // Handle screen sizing & responsiveness with this hook
-  const { mobile, tablet, laptopXS, laptop } = useRecoilValue(windowSize);
+  const { isDesktop, tablet, mobile } = useRecoilValue(windowSize);
 
   // Render the Header for Laptop or Mobile, depending on the size of the screen
   return (
     <header className="header">
-      {(laptop || laptopXS) && <HeaderLaptop />}
-      {(tablet || mobile) && <HeaderMobile tablet={tablet} mobile={mobile} />}
+      {isDesktop ? <HeaderLaptop /> : <HeaderMobile tablet={tablet} mobile={mobile} />}
     </header>
   );
 };

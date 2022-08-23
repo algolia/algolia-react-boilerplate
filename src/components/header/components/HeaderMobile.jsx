@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Recoil Header State
-import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 // eslint-disable-next-line import/order
 import { queryAtom } from '@/config/searchboxConfig';
@@ -14,28 +14,16 @@ import { queryAtom } from '@/config/searchboxConfig';
 // Import logo URL for header
 import logo from '@/assets/logo/logo.webp';
 
-//Import config for federatedSearch
-import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
-
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
-//Import config from helped navigation
-import { isDemoGuideOpen } from '@/config/demoGuideConfig';
-
 // Import framer motion
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 // Import SearchBox
 // eslint-disable-next-line import/order
 import CustomSearchBox from '@/components/searchbox/SearchBox';
 
-// Import VoiceSearchComponent
-import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
-// import SelectPersona from '../personnaSelect/SelectPersona';
-
-//Import the option pictogram component
-import { OptionDots } from '@/assets/svg/SvgIndex';
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from '@/hooks/usePreventScrolling';
@@ -46,12 +34,6 @@ const HeaderMobile = ({ mobile, tablet }) => {
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Define value to display voiceSearch
-  const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
-
-  // Showing or hiding help navigation menu
-  const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
 
   // Prevent body from scrolling when panel is open
   usePreventScrolling(isMenuOpen);

@@ -33,13 +33,15 @@
         pointer-events: none;
         z-index: 99;
         transition: all 0.2s ease-in-out;
+        margin-top: 3rem;
     }
-
+ 
     .active{
         pointer-events: all;
         opacity: 1;
         top: 3rem;
         transition: all 0.3s ease-in-out;
+        margin-top: 4rem !important;
     }
 
     &__listItem{

@@ -2,9 +2,10 @@
 
 // Import InstantSearch Functionality
 import { useEffect, useState, useRef } from 'react';
-import { useHits, useInfiniteHits } from 'react-instantsearch-hooks-web';
+import { useInfiniteHits } from 'react-instantsearch-hooks-web';
 
 import { useRecoilValue } from 'recoil';
+import { windowSize } from '@/hooks/useScreenSize';
 
 import { hitsAtom } from '@/config/hitsConfig';
 
@@ -14,6 +15,7 @@ import { Hit } from '../Hits';
 function CustomHits(props) {
   // If hits were not provided via props, we will use the ones from the IS hook (see footnote)
   const { hits: hookHits, isLastPage, showMore } = useInfiniteHits(props);
+  const { mobile, tablet } = useRecoilValue(windowSize);
 
   const [hits, setHits] = useState([]);
   const hitsState = useRecoilValue(hitsAtom);
@@ -60,7 +62,15 @@ function CustomHits(props) {
 
   return (
     <div className="ais-InfiniteHits">
-      <ul className="ais-InfiniteHits-list">
+      <ul
+        className={`ais-InfiniteHits-list ${
+          mobile
+            ? 'ais-InfiniteHits-list-mobile'
+            : tablet
+            ? 'ais-InfiniteHits-list-tablet'
+            : ''
+        }`}
+      >
         {hits.map((hit) => {
           // Wrap the hit info in an animation, and click functionality to view the product
           if (hit._component != undefined) {

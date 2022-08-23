@@ -21,14 +21,14 @@
         $purple-algolia,
         $purple-algolia
       );
-  
-      .productName{
-        @include productName()
+
+      .productName {
+        @include productName();
       }
-      .price{
-        @include price($purple-algolia)
+      .price {
+        @include price($purple-algolia);
       }
-      .brand{
+      .brand {
         @include brand($main-color);
       }
       .ranking-formula {
@@ -50,6 +50,14 @@
       box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
         rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     }
+  }
+
+  .ais-InfiniteHits-list-mobile {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .ais-InfiniteHits-list-tablet {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

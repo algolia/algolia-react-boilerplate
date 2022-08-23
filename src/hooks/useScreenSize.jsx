@@ -8,5 +8,6 @@ export const windowSize = atom({
     laptopXS: undefined,
     tablet: undefined,
     mobile: undefined,
+    isDesktop: undefined
   }, // default value (aka initial value)
 });

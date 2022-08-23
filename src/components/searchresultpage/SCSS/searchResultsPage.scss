@@ -3,7 +3,6 @@
 // ------------------------------------------
 @use '../../../scss/partials' as *;
 
-
 // ------------------------------------------
 // Container
 // ------------------------------------------
@@ -147,71 +146,19 @@
   opacity: 1;
 }
 
-
-
-// ------------------------------------------
-// SRP Container Mobile & tablet
-// ------------------------------------------
-
-.srp-container-mobile {
-  width: 95%;
-  margin: 1rem auto;
-  display: flex;
-  gap: 3rem;
-  position: relative;
-
-  .srp-container__stats-sort {
-    margin: 1rem 0;
-  }
-
-  .srp-container__hits {
-    .ais-InfiniteHits {
-      .ais-InfiniteHits-list {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-  }
-
-  .refinement-container {
-    margin: 3rem 0;
-  }
-
-  .facets-slider {
-    left: 1rem;
-    top: 3rem;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    display: flex;
-    position: absolute;
-    height: fit-content;
-    z-index: 999;
-    transition: 0.2s ease-in-out;
-    cursor: pointer;
-
-    p {
-      font-size: 0.8rem;
-    }
-
-    svg {
-      // margin-top: 0.5rem;
-      width: 8px;
-      transition: transform 0.3s ease-in-out;
-    }
-  }
-
-  .facets-slider-active {}
-
-  .facets-slider-inactive {
-    z-index: 950;
-  }
-}
-
 // ------------------------------------------
 // Search box invisible
 // ------------------------------------------
 .search-box-invisible {
   display: none;
+}
+
+@media only screen and (max-width: 480px) {
+  .uic-HorizontalSlider-list {
+    gap: 6.5rem !important;
+
+    li {
+      width: fit-content;
+    }
+  }
 }

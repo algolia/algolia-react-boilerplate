@@ -99,25 +99,6 @@
       }
     }
   }
-  &__button-container {
-    display: flex;
-    justify-content: center;
-    margin: 1rem 0;
-    &__button {
-      font-family: $main-font;
-      font-size: 0.8rem;
-      font-weight: 300;
-      padding: 0.5rem;
-      &__content {
-        display: flex;
-        align-items: center;
-        svg {
-          width: 1rem;
-          margin-left: 0.8rem;
-        }
-      }
-    }
-  }
 
   .refined-filter {
     @include refinedFacet($purple-algolia-custom-gradient, $white-color);
@@ -127,20 +108,5 @@
       @include p-text($white-color);
       font-size: 0.8rem;
     }
-  }
-}
-
-// Mobile & tablet
-.srp-container__facets-mobile {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50vh;
-  background-color: $background-color;
-  z-index: 998;
-  padding: 3rem 1rem;
-
-  .filters-container {
-    margin-top: 2rem;
   }
 }
