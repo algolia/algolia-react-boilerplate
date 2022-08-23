@@ -147,17 +147,25 @@ const ProductDetails = () => {
     keyPrefix: 'pdp',
   });
 
-  const { recommendations: fbtRecommendations } = useFrequentlyBoughtTogether({
-    recommendClient,
-    indexName,
-    objectIDs: [currentObjectID],
-  });
+  let fbtRecommendationsProducts;
+  let relatedRecommendationsProducts;
+  if (shouldHaveFbtProductsValue) {
+    const { recommendations } = useFrequentlyBoughtTogether({
+      recommendClient,
+      indexName,
+      objectIDs: [currentObjectID],
+    });
+    fbtRecommendationsProducts = recommendations;
+  }
 
-  const { recommendations: relatedRecommendations } = useRelatedProducts({
-    recommendClient,
-    indexName,
-    objectIDs: [currentObjectID],
-  });
+  if (shouldHaveRelatedProductsValue) {
+    const { recommendations } = useRelatedProducts({
+      recommendClient,
+      indexName,
+      objectIDs: [currentObjectID],
+    });
+    relatedRecommendationsProducts = recommendations;
+  }
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -314,21 +322,22 @@ const ProductDetails = () => {
             transition: { delay: 1, framerMotionTransition },
           }}
         >
-          {shouldHaveRelatedProductsValue && relatedRecommendations.length > 0 && (
-            <div>
-              <h3 className="title">{t('relatedTitle')}</h3>
-              <HorizontalSlider
-                itemComponent={RelatedItem}
-                items={relatedRecommendations}
-              />
-            </div>
-          )}
-          {shouldHaveFbtProductsValue && fbtRecommendations.length > 0 && (
+          {shouldHaveRelatedProductsValue &&
+            relatedRecommendationsProducts.length > 0 && (
+              <div>
+                <h3 className="title">{t('relatedTitle')}</h3>
+                <HorizontalSlider
+                  itemComponent={RelatedItem}
+                  items={relatedRecommendationsProducts}
+                />
+              </div>
+            )}
+          {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 0 && (
             <div>
               <h3 className="title">{t('fbtTitle')}</h3>
               <HorizontalSlider
                 itemComponent={RelatedItem}
-                items={fbtRecommendations}
+                items={fbtRecommendationsProducts}
               />
             </div>
           )}

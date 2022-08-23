@@ -3,12 +3,6 @@ import { atom } from 'recoil';
 // import personaConfig for displaying in the guide
 import { personaConfig } from './personaConfig';
 
-// Should we show the demo guide in this demo
-export const shouldShowDemoGuide = atom({
-  key: 'shouldShowDemoGuide',
-  default: true,
-});
-
 // Should we show the network errors in the demo - might want to switch this to false when demo-ing to a client
 export const showNetworkErorrs = atom({
   key: 'showNetworkErorrs',
@@ -68,13 +62,13 @@ export const searchTermsConfig = [
     label: 'Bag',
     alertContent: 'The category Bags is boosted.',
     details: 'The category Bags will be boosted.',
-    type: 'search terms'
+    type: 'search terms',
   },
   {
     value: 'dress',
     label: 'Dress',
     alertContent: 'You are searching in dress category',
-    type: 'search terms'
+    type: 'search terms',
   },
 ];
 
@@ -128,6 +122,10 @@ export const searchPersonaInformations = personaConfig.map((persona) => {
   };
 });
 
+export const isPersonnaEventToggle = atom({
+  key: 'isPersonnaEventToggle',
+  default: true,
+});
 // ------------------------------------------
 // Injected Content Guide Config
 // Injected content allow to select query that are triggering
@@ -148,14 +146,14 @@ export const DemoGuideInjectedContentConfig = [
     label: 'Nike',
     alertContent: 'You are displaying an injected content coupon for Nike',
     details: 'Will display injected content coupon for Nike',
-    type: 'injected content'
+    type: 'injected content',
   },
   {
     value: 'Women',
     label: 'Women',
     alertContent: 'You are displaying an injected content ad with Gigi Hadid',
     details: 'Will display injected content ad with Gigi Hadid',
-    type: 'injected content'
+    type: 'injected content',
   },
 ];
 
@@ -179,7 +177,7 @@ export const DemoGuideDynamicFiltersConfig = [
     alertContent:
       'This is changing the facets ordering to return size facet first',
     details: 'Will change the facets ordering to return size facet first',
-    type: 'dynamic filters'
+    type: 'dynamic filters',
   },
 ];
 
@@ -196,13 +194,13 @@ export const shouldShowRedirects = atom({
 
 // What would be the content of the select in this section
 export const DemoGuideRedirectConfig = [
-  { value: '', label: 'Choose', type: 'redirect' }, 
+  { value: '', label: 'Choose', type: 'redirect' },
   {
     value: 'Faq',
     label: 'FAQ',
     alertContent: "Redirecting the user to Algolia's homepage",
     details: "Will redirect the user to Algolia's homepage",
-    type: 'redirect'
+    type: 'redirect',
   },
 ];
 
@@ -234,20 +232,26 @@ export const searchBannersConfig = [
     label: 'Help',
     alertContent: 'Displaying an Help banner',
     details: 'Will display an Help banner',
-    type: 'banner'
+    type: 'banner',
   },
   {
     value: 'woman',
     label: 'Woman',
     alertContent: 'Displaying a Woman banner',
     details: 'Will display a Woman banner',
-    type: 'banner'
+    type: 'banner',
   },
 ];
 
 // Please ignore this atom - DON'T TOUCH THIS
 export const searchPersonaSelectedAtom = atom({
   key: 'searchPersonaSelectedAtom', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
+// Please ignore this atom - DON'T TOUCH THIS
+export const scorePersonadAtom = atom({
+  key: 'scorePersonadAtom', // unique ID (with respect to other atoms/selectors)
   default: '', // default value (aka initial value)
 });
 
@@ -262,4 +266,3 @@ export const searchBannersSelectedAtom = atom({
   key: 'searchBannersSelectedAtom', // unique ID (with respect to other atoms/selectors)
   default: '', // default value (aka initial value)
 });
-

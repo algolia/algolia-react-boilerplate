@@ -43,7 +43,7 @@
 
 1. Clone this repo under a new name for your own demo.
 
-2. Run `yarn install` in the root directory and `yarn start` to view your project on [http://localhost:3000](http://localhost:3000/)
+2. Run `yarn` in the root directory and `yarn start` to view your project on [http://localhost:5173](http://localhost:5173/)
 
 3. Visit `src/config` and adjust `algoliaEnvConfig` to point to your own app, indices and API keys. If you do not need an index which is present in that file i.e. for articles, please do not remove it, just leave it as is, and you can turn off the relevant feature in the next step.
 
@@ -268,9 +268,11 @@ The ability to control the facets which get displayed including their order. Whe
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Category Pages</h3>
 
-In order to configure Category Pages, first got to `config/categoryConfig` and edit the value for `categoryPageFilterAttribute`. This represents the attribute you will filter on to create your individual category pages.
+In order to configure Category Pages, go to `config/navigationConfig`. 
 
-Next, go to `config/headerConfig`. From there you can add links in the Navigation tab, if they are a category page, the type must be `filter`, and the value for `filter` must match the value of the category you are filtering on to create the resulting page.
+Edit the value for `categoryPageFilterAttribute`. This represents the attribute you will filter on to create your individual category pages.
+
+Then you can adjust the linksHeader atom. The value for `filter` must match the value of the category you are filtering on to create the resulting page.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Collection Pages</h3>
 
@@ -378,9 +380,6 @@ It is then as simple as adding in your HTML the correct fontawesome tags i.e. `<
 
 [Slider](https://slider-react-component.vercel.app/)
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🖲 Select Menus</h3>
-
-[React-Select](https://www.npmjs.com/package/react-select)
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎨 Style</h3>
 

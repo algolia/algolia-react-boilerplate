@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 // https://www.npmjs.com/package/rc-slider
 // rc-slider
-import { Range } from 'rc-slider';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { useRange } from 'react-instantsearch-hooks-web';
 // import Currency from recoil
@@ -26,6 +26,7 @@ function PriceSlider(props) {
   const [change, setChange] = useState(false);
   // Call the currency configuration
   const currency = useRecoilValue(currencySymbolAtom);
+  const isCurrencyRight = '€' === currency;
 
   // If the slider is ready to work set the values
   useEffect(() => {
@@ -40,7 +41,7 @@ function PriceSlider(props) {
     refine([minValue, maxValue]);
   };
 
-  // Reset function te reset the slider
+  // Reset function to reset the slider
   useEffect(() => {
     if (start[0] === -Infinity && start[1] === Infinity) {
       setMinSlider(minValue);
@@ -56,10 +57,14 @@ function PriceSlider(props) {
       <div className="filters-container__pricecontainer">
         <div className="filters-container__pricecontainer__prices">
           <p>
-            {minSlider} {currency}
+            {!isCurrencyRight && currency}
+            {minSlider}
+            {isCurrencyRight && currency}
           </p>
           <p>
-            {maxSlider} {currency}
+            {!isCurrencyRight && currency}
+            {maxSlider}
+            {isCurrencyRight && currency}
           </p>
         </div>
         <Range

@@ -355,6 +355,10 @@
   color: $price-color;
   font-weight: 700;
   font-size: 1rem;
+  strike {
+      color: $grey-dark-color;
+      text-decoration: line-through
+    }
 }
 
 @mixin colorName($color-name: $main-color) {

@@ -7,8 +7,7 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import Config for the header
-import { categoryPageFilterAttribute } from '@/config/categoryConfig';
-import { linksHeader, selectorNavigationRef } from '@/config/headerConfig';
+import { categoryPageFilterAttribute, linksHeader, selectorNavigationRef } from '@/config/navigationConfig';
 
 // Import Recoil config
 import {
@@ -63,11 +62,10 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   return (
     <ul
-      className={`${
-        isMenuOpen
-          ? 'container-mobile__navList-items'
-          : 'container__header-nav__links'
-      } `}
+      className={`${isMenuOpen
+        ? 'container-mobile__navList-items'
+        : 'container__header-nav__links'
+        } `}
     >
       {links.map((link, i) => (
         <li
@@ -77,24 +75,18 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           onClick={() => {
             // Set query to nothing when clicking on a category
             setQueryState('');
-            if (link.name !== 'All') {
-              if (link.type === 'filter') {
-                navigate(`/search`, {
-                  state: {
-                    type: link.type,
-                    action: `${categoryPageFilterAttribute}:'${link.filter}'`,
-                  },
-                });
-              } else if (link.type === 'context') {
-                navigate(`/search`, {
-                  state: { type: link.type, action: link.context },
-                });
-              }
-            } else {
-              navigate('/search', {
-                state: { type: link.type, name: link.name, action: null },
-              });
+
+            //Build action based on link type, then navigate
+            let action = null;
+            if (link.type === 'filter' && (link.filter?.length > 0)) {
+              action = `${categoryPageFilterAttribute}:'${link.filter}'`;
+            } else if (link.type === 'context') {
+              action = link.context;
             }
+            navigate(`/search`, {
+              state: { type: link.type, name: link.name, action: action },
+            });
+            
             // Only used for Mobile view
             if (tablet || mobile) {
               setIsMenuOpen(false);
@@ -104,7 +96,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           <p
             className={
               highlightingCat() === link.name.toLowerCase() ||
-              state?.name === link.name
+                state?.name === link.name
                 ? 'selected'
                 : ''
             }
