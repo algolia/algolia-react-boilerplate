@@ -15,7 +15,7 @@ export const categoryPageFilterAttribute = 'hierarchicalCategories.lvl0';
 // The name is for display purposes for each navigation title
 // The filter is the value to filter on to show results for the linked category page
 // The url should be the lower case URL friendly version of the filter value
-// Please use filterComplex type and moreComplexFilter attribute to use the filter with complexity
+// Please use rawFilter type and rawFilter attribute to pass your own filters directly to the API
 // https://www.algolia.com/doc/api-reference/api-parameters/filters/?client=javascript
 // ------------------------------------------
 export const linksHeader = atom({
@@ -43,7 +43,7 @@ export const linksHeader = atom({
       name: 'Womens and Accessories Even and Odd',
       type: 'filterComplex',
       filter: '',
-      moreComplexFilter:
+      rawFilter:
         "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
       url: '/annafield',
     },
