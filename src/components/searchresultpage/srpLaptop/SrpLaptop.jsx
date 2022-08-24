@@ -162,7 +162,7 @@ const SrpLaptop = () => {
             personalizationFilters={personalizationFilters}
             filters={
               (state?.type === 'filter' ||
-                state?.type === 'filterComplex') &&
+                state?.type === 'rawFilter') &&
               state?.action !== null
                 ? state.action
                 : ''
