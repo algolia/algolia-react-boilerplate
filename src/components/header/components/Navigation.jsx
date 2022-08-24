@@ -89,10 +89,10 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
               } else if (link.type === 'context') {
                 action = link.context;
               } else if (
-                link.type === 'filterComplex' &&
-                link.moreComplexFilter?.length > 0
+                link.type === 'rawFilter' &&
+                link.rawFilter?.length > 0
               ) {
-                action = `${link.moreComplexFilter}`;
+                action = `${link.rawFilter}`;
               }
               navigate(`/search`, {
                 state: { type: link.type, name: link.name, action: action },
