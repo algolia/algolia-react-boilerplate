@@ -1,12 +1,12 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 
 // eslint-disable-next-line import/order
 import { Configure, Index } from 'react-instantsearch-hooks-web';
 
+import { windowSize } from '@/hooks/useScreenSize';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { windowSize } from '@/hooks/useScreenSize';
 
 // Import Components
 import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
@@ -23,13 +23,13 @@ import {
   shouldHaveSorts,
   shouldHaveStats,
   shouldHaveTrendingFacets,
-  shouldHaveTrendingProducts,
+  shouldHaveTrendingProducts
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
 import {
   personalizationImpact,
   personaSelectedAtom,
-  personaSelectedFiltersAtom,
+  personaSelectedFiltersAtom
 } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
@@ -161,8 +161,7 @@ const SrpLaptop = () => {
             personalizationImpact={personalizationImpact}
             personalizationFilters={personalizationFilters}
             filters={
-              (state?.type === 'filter' ||
-                state?.type === 'rawFilter') &&
+              (state?.type === 'filter' || state?.type === 'rawFilter') &&
               state?.action !== null
                 ? state.action
                 : ''

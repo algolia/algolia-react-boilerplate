@@ -42,7 +42,7 @@ export const linksHeader = atom({
     // For an uilisation of your own made filter
     {
       name: 'Womens and Accessories Even and Odd',
-      type: 'filterComplex',
+      type: 'rawFilter',
       filter: '',
       rawFilter:
         "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
