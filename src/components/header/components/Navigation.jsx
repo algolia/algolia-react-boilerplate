@@ -7,7 +7,11 @@ import { queryAtom } from '@/config/searchboxConfig';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import Config for the header
-import { categoryPageFilterAttribute, linksHeader, selectorNavigationRef } from '@/config/navigationConfig';
+import {
+  categoryPageFilterAttribute,
+  linksHeader,
+  selectorNavigationRef,
+} from '@/config/navigationConfig';
 
 // Import Recoil config
 import {
@@ -62,49 +66,57 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   return (
     <ul
-      className={`${isMenuOpen
-        ? 'container-mobile__navList-items'
-        : 'container__header-nav__links'
-        } `}
+      className={`${
+        isMenuOpen
+          ? 'container-mobile__navList-items'
+          : 'container__header-nav__links'
+      } `}
     >
-      {links.map((link, i) => (
-        <li
-          id={link.name}
-          tabIndex="0"
-          key={link.url}
-          onClick={() => {
-            // Set query to nothing when clicking on a category
-            setQueryState('');
+      {links.map((link, i) => {
+        return (
+          <li
+            id={link.name}
+            tabIndex="0"
+            key={link.url}
+            onClick={() => {
+              // Set query to nothing when clicking on a category
+              setQueryState('');
 
-            //Build action based on link type, then navigate
-            let action = null;
-            if (link.type === 'filter' && (link.filter?.length > 0)) {
-              action = `${categoryPageFilterAttribute}:'${link.filter}'`;
-            } else if (link.type === 'context') {
-              action = link.context;
-            }
-            navigate(`/search`, {
-              state: { type: link.type, name: link.name, action: action },
-            });
-            
-            // Only used for Mobile view
-            if (tablet || mobile) {
-              setIsMenuOpen(false);
-            }
-          }}
-        >
-          <p
-            className={
-              highlightingCat() === link.name.toLowerCase() ||
-                state?.name === link.name
-                ? 'selected'
-                : ''
-            }
+              //Build action based on link type, then navigate
+              let action = null;
+              if (link.type === 'filter' && link.filter?.length > 0) {
+                action = `${categoryPageFilterAttribute}:'${link.filter}'`;
+              } else if (link.type === 'context') {
+                action = link.context;
+              } else if (
+                link.type === 'filterComplex' &&
+                link.moreComplexFilter?.length > 0
+              ) {
+                action = `${link.moreComplexFilter}`;
+              }
+              navigate(`/search`, {
+                state: { type: link.type, name: link.name, action: action },
+              });
+
+              // Only used for Mobile view
+              if (tablet || mobile) {
+                setIsMenuOpen(false);
+              }
+            }}
           >
-            {link.name}
-          </p>
-        </li>
-      ))}
+            <p
+              className={
+                highlightingCat() === link.name.toLowerCase() ||
+                state?.name === link.name
+                  ? 'selected'
+                  : ''
+              }
+            >
+              {link.name}
+            </p>
+          </li>
+        );
+      })}
       <li className="container__header-nav-selectors" ref={selectorsNavigation}>
         {shouldShowPersonasAtom && (
           <div>

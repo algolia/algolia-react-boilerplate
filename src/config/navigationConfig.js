@@ -37,6 +37,14 @@ export const linksHeader = atom({
       filter: 'Womens',
       url: '/womens',
     },
+    {
+      name: 'Womens and Accessories Even and Odd',
+      type: 'filterComplex',
+      filter: '',
+      moreComplexFilter:
+        "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
+      url: '/annafield',
+    },
     // This uses context from the Algolia dashboard, configured using Visual Editor
     {
       name: 'Accessories',
