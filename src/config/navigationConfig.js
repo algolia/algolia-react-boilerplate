@@ -15,6 +15,8 @@ export const categoryPageFilterAttribute = 'hierarchicalCategories.lvl0';
 // The name is for display purposes for each navigation title
 // The filter is the value to filter on to show results for the linked category page
 // The url should be the lower case URL friendly version of the filter value
+// Please use filterComplex type and moreComplexFilter attribute to use the filter with complexity
+// https://www.algolia.com/doc/api-reference/api-parameters/filters/?client=javascript
 // ------------------------------------------
 export const linksHeader = atom({
   key: 'linksHeader', // unique ID (with respect to other atoms/selectors)
