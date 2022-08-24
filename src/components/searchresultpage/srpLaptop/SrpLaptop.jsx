@@ -1,5 +1,5 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 
 // eslint-disable-next-line import/order
 import { Configure, Index } from 'react-instantsearch-hooks-web';
@@ -103,7 +103,6 @@ const SrpLaptop = () => {
     facetName = state.action.split(':')[0];
     facetValue = state.action.split(':')[1].replace(/['"]+/g, '');
   }
-
   return (
     <>
       {/* Render Recommend component - Trending Products Slider */}
@@ -162,7 +161,9 @@ const SrpLaptop = () => {
             personalizationImpact={personalizationImpact}
             personalizationFilters={personalizationFilters}
             filters={
-              state?.type === 'filter' && state?.action !== null
+              (state?.type === 'filter' ||
+                state?.type === 'rawFilter') &&
+              state?.action !== null
                 ? state.action
                 : ''
             }
