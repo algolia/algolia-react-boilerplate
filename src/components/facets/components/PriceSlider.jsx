@@ -24,6 +24,8 @@ function PriceSlider(props) {
   const [minSlider, setMinSlider] = useState(min);
   const [maxSlider, setMaxSlider] = useState(max);
   const [change, setChange] = useState(false);
+  const [priceInputMin, setPriceInputMin] = useState(null);
+  const [priceInputMax, setPriceInputMax] = useState(null);
   // Call the currency configuration
   const currency = useRecoilValue(currencySymbolAtom);
   const isCurrencyRight = '€' === currency;
@@ -35,10 +37,6 @@ function PriceSlider(props) {
       setMaxSlider(maxValue);
     }
   }, [minValue, maxValue, canRefine]);
-
-  useEffect(() => {
-    console.log(minSlider);
-  }, [minSlider]);
 
   // Refinement function
   const refineFunction = (minValue, maxValue) => {
@@ -52,13 +50,58 @@ function PriceSlider(props) {
       setMaxSlider(maxValue);
     }
   }, [start]);
-
   return (
     <div className="filters-container">
       <div className="filters-container__title">
         <h3>{title}</h3>
       </div>
       <div className="filters-container__pricecontainer">
+        <form
+          action=""
+          onSubmit={(e) => {
+            e.preventDefault();
+            setMinSlider(priceInputMin);
+            setMaxSlider(priceInputMax);
+            setChange(true);
+            refineFunction(priceInputMin, priceInputMax);
+          }}
+        >
+          <div className="filters-container__pricecontainer__inputs">
+            <p>Min:</p>
+            <input
+              type="number"
+              value={priceInputMin}
+              placeholder="Price"
+              onChange={(e) => {
+                setPriceInputMin(parseInt(e.target.value));
+              }}
+            />
+          </div>
+          <div className="filters-container__pricecontainer__inputs">
+            <p>Max:</p>
+            <input
+              type="number"
+              placeholder="Price"
+              value={priceInputMax}
+              onChange={(e) => {
+                setPriceInputMax(parseInt(e.target.value));
+              }}
+            />
+          </div>
+          <div className="filters-container__pricecontainer__button-container">
+            <button
+              className="filters-container__pricecontainer__button-container__button"
+              onClick={() => {
+                setMinSlider(priceInputMin);
+                setMaxSlider(priceInputMax);
+                setChange(true);
+                refineFunction(priceInputMin, priceInputMax);
+              }}
+            >
+              Valider
+            </button>
+          </div>
+        </form>
         <div className="filters-container__pricecontainer__prices">
           <p>
             {!isCurrencyRight && currency}
