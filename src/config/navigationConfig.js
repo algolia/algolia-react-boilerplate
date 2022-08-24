@@ -39,6 +39,7 @@ export const linksHeader = atom({
       filter: 'Womens',
       url: '/womens',
     },
+    // For an uilisation of your own made filter
     {
       name: 'Womens and Accessories Even and Odd',
       type: 'filterComplex',
