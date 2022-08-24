@@ -22,7 +22,7 @@ export const hitsConfig = {
   genderFilter: 'genderFilter',
   hierarchicalCategories: 'hierarchicalCategories',
   sizeFilter: 'sizeFilter',
-  price: 'price',
+  price: 'unformated_price',
   onSale: 'onSale',
   onSalePrice: 'onSalePrice',
   image: 'img_optimised',

@@ -12,9 +12,9 @@ import { useRecoilValue } from 'recoil';
 
 function PriceSlider(props) {
   // Import const from hooks
-  const { range, canRefine, refine, start } = useRange(props);
+  const { range: rangeHook, canRefine, refine, start } = useRange(props);
   // Define the min and max values for the slider
-  const { min, max } = range;
+  const { min, max } = rangeHook;
   // Rename the value for our usage
   const minValue = min;
   const maxValue = max;
@@ -35,6 +35,10 @@ function PriceSlider(props) {
       setMaxSlider(maxValue);
     }
   }, [minValue, maxValue, canRefine]);
+
+  useEffect(() => {
+    console.log(minSlider);
+  }, [minSlider]);
 
   // Refinement function
   const refineFunction = (minValue, maxValue) => {
@@ -67,7 +71,8 @@ function PriceSlider(props) {
             {isCurrencyRight && currency}
           </p>
         </div>
-        <Range
+        <Slider
+          range
           min={min}
           max={max}
           value={change ? [minSlider, maxSlider] : [min, max]}
