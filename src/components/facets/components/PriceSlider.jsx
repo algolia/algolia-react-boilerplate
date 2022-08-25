@@ -33,13 +33,6 @@ function PriceSlider(props) {
   const setNetworkErrors = useSetRecoilState(showNetworkErorrs);
 
   // If the slider is ready to work set the values
-  // useEffect(() => {
-  //   if (canRefine) {
-  //     setMinSlider(minValue);
-  //     setMaxSlider(maxValue);
-  //   }
-  // }, [minValue, maxValue, canRefine]);
-
   // Reset function to reset the slider
   useEffect(() => {
     if (start[0] === -Infinity && start[1] === Infinity) {
@@ -49,57 +42,57 @@ function PriceSlider(props) {
   }, [start]);
 
   useEffect(() => {
-    // console.log(minSlider, maxSlider);
     setChange(true);
-
-    if (maxSlider - 5 > minSlider) {
+    if (maxSlider - 6 <= minSlider) {
+      // console.log('if maxSlider');
+      setMaxSlider(minSlider + 6);
+    } else {
+      // console.log('else maxSlider');
+      // setNetworkErrors(false);
       handleRefinement();
+      // setTimeout(() => {
+      //   setNetworkErrors(true);
+      // }, 1000);
     }
   }, [maxSlider]);
 
   useEffect(() => {
-    // console.log(minSlider, maxSlider);
     setChange(true);
-    if (minSlider + 5 >= maxSlider) {
-      setMaxSlider(minSlider + 6);
+    if (minSlider + 6 >= maxSlider) {
+      // console.log('debut du if minSlider', minSlider);
+      let newMax = minSlider + 6;
+      // console.log('newMin', newMax);
+      setMaxSlider(newMax);
+      // console.log('fin du if minSlider', minSlider);
     } else {
-      setNetworkErrors(false)
+      // console.log('else minSlider', minSlider);
+      setNetworkErrors(false);
       handleRefinement();
-      setTimeout(() => {setNetworkErrors(true)}, 1000)
+      setTimeout(() => {
+        setNetworkErrors(true);
+      }, 1000);
     }
   }, [minSlider]);
 
+  useEffect(() => {
+    console.log('change', change, minSlider, maxSlider, min, max);
+  }, [change, start]);
+
   const handleRefinement = () => {
-    
+    // console.log('Handle refinement');
     let top = maxSlider;
     let bot = minSlider === 0 ? 1 : minSlider;
-    if (bot + 5 >= maxSlider) {
-      top = bot + 6;
-    }
+    // console.log('top', top);
+    // console.log('bot', bot);
+    // if (bot + 5 >= maxSlider) {
+    //   console.log('handleRefinement if');
+    //   top = bot + 6;
+    // }
     if (bot < top) {
-      console.log('minSlider < top', bot, top);
-      refine([parseInt(bot), parseInt(top)]);
+      // console.log('if handle', bot, top);
+      refine([bot, top]);
     }
   };
-
-  // useEffect(() => {
-  //   if (minSlider > maxSlider) {
-  //     if (maxSlider !== '') {
-  //       console.log('if');
-  //       // alert('Min Price can not be greater than Max Price');
-  //       setMaxSlider(minSlider + 1);
-  //       setChange(true);
-  //       console.log(minSlider, maxSlider);
-  //     }
-  //   } else if (isNaN(maxSlider)) {
-  //     console.log('else if');
-  //     setMaxSlider(0);
-  //   }
-  // }, [minSlider, maxSlider]);
-
-  // useEffect(() => {
-  //   console.log(minSlider, maxSlider);
-  // }, [minSlider, maxSlider]);
 
   return (
     <div className="filters-container">
@@ -163,9 +156,9 @@ function PriceSlider(props) {
           range
           min={min}
           max={max}
-          value={change ? [minSlider, maxSlider] : [min, max]}
+          // value={change ? [minSlider, maxSlider] : [min, max]}
           onChange={(e) => {
-            console.log(e[0], e[1]);
+            // console.log(change, minSlider, maxSlider, min, max);
             if (e[0] <= e[1]) {
               setMinSlider(e[0]);
               setMaxSlider(e[1]);
