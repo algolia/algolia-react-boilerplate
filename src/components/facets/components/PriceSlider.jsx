@@ -1,7 +1,7 @@
 // Render the Price Slider used in the Refinement List
 // Import Debounce
 import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 // https://www.npmjs.com/package/rc-slider
 // rc-slider
 import Slider from 'rc-slider';
@@ -15,7 +15,7 @@ import { showNetworkErorrs } from '@/config/demoGuideConfig';
 
 function PriceSlider(props) {
   // Import const from hooks
-  const { range: rangeHook, canRefine, refine, start } = useRange(props);
+  const { range: rangeHook, refine, start } = useRange(props);
   // Define the min and max values for the slider
   const { min, max } = rangeHook;
   // Rename the value for our usage
@@ -26,12 +26,12 @@ function PriceSlider(props) {
   // Set the state of the slider
   const [minSlider, setMinSlider] = useState(min);
   const [maxSlider, setMaxSlider] = useState(max);
-  const [change, setChange] = useState(false);
+
   // Call the currency configuration
   const currency = useRecoilValue(currencySymbolAtom);
   const isCurrencyRight = '€' === currency;
 
-  const setNetworkErrors = useSetRecoilState(showNetworkErorrs);
+  const [networkErrors, setNetworkErrors] = useRecoilState(showNetworkErorrs);
 
   // If the slider is ready to work set the values
   useEffect(() => {
@@ -43,30 +43,36 @@ function PriceSlider(props) {
 
   // Reset function of refinement with condition and refine
   useEffect(() => {
-    setChange(true);
-    if (maxSlider - 6 <= minSlider) {
-      setMaxSlider(minSlider + 6);
+    if (maxSlider - 2 <= minSlider) {
+      setMaxSlider(minSlider + 2);
     } else {
-      setNetworkErrors(false);
+      const isErrorsOn = networkErrors;
+      isErrorsOn && setNetworkErrors(false);
+
       handleRefinement();
-      setTimeout(() => {
-        setNetworkErrors(true);
-      }, 1000);
+
+      isErrorsOn &&
+        setTimeout(() => {
+          setNetworkErrors(true);
+        }, 1000);
     }
   }, [maxSlider]);
 
   // Reset function of refinement with condition and refine
   useEffect(() => {
-    setChange(true);
-    if (minSlider + 6 >= maxSlider) {
-      const newMax = minSlider + 6;
+    if (minSlider + 2 >= maxSlider) {
+      const newMax = minSlider + 2;
       setMaxSlider(newMax);
     } else {
-      setNetworkErrors(false);
+      const isErrorsOn = networkErrors;
+      isErrorsOn && setNetworkErrors(false);
+
       handleRefinement();
-      setTimeout(() => {
-        setNetworkErrors(true);
-      }, 1000);
+
+      isErrorsOn &&
+        setTimeout(() => {
+          setNetworkErrors(true);
+        }, 1000);
     }
   }, [minSlider]);
 
@@ -74,12 +80,8 @@ function PriceSlider(props) {
   const handleRefinement = () => {
     let top = maxSlider;
     let bot = minSlider === 0 ? 1 : minSlider;
-    if (bot + 5 >= maxSlider) {
-      top = bot + 6;
-    }
-    if (bot < top) {
-      refine([bot, top]);
-    }
+    if (bot + 1 >= maxSlider) top = bot + 2;
+    if (bot < top) refine([bot, top]);
   };
 
   return (
@@ -88,13 +90,7 @@ function PriceSlider(props) {
         <h3>{title}</h3>
       </div>
       <div className="filters-container__pricecontainer">
-        <form
-          action=""
-          onSubmit={(e) => {
-            e.preventDefault();
-            setChange(true);
-          }}
-        >
+        <form>
           <div className="filters-container__pricecontainer__inputs">
             <p>Min:</p>
             <input
@@ -118,12 +114,7 @@ function PriceSlider(props) {
             />
           </div>
           <div className="filters-container__pricecontainer__button-container">
-            <button
-              className="filters-container__pricecontainer__button-container__button"
-              onClick={() => {
-                setChange(true);
-              }}
-            >
+            <button className="filters-container__pricecontainer__button-container__button">
               Valider
             </button>
           </div>
@@ -149,7 +140,6 @@ function PriceSlider(props) {
             if (e[0] <= e[1]) {
               setMinSlider(e[0]);
               setMaxSlider(e[1]);
-              setChange(true);
             }
           }}
         />
