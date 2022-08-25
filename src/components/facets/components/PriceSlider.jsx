@@ -44,28 +44,22 @@ function PriceSlider(props) {
   useEffect(() => {
     setChange(true);
     if (maxSlider - 6 <= minSlider) {
-      // console.log('if maxSlider');
       setMaxSlider(minSlider + 6);
     } else {
-      // console.log('else maxSlider');
-      // setNetworkErrors(false);
+      setNetworkErrors(false);
       handleRefinement();
-      // setTimeout(() => {
-      //   setNetworkErrors(true);
-      // }, 1000);
+      setTimeout(() => {
+        setNetworkErrors(true);
+      }, 1000);
     }
   }, [maxSlider]);
 
   useEffect(() => {
     setChange(true);
     if (minSlider + 6 >= maxSlider) {
-      // console.log('debut du if minSlider', minSlider);
       let newMax = minSlider + 6;
-      // console.log('newMin', newMax);
       setMaxSlider(newMax);
-      // console.log('fin du if minSlider', minSlider);
     } else {
-      // console.log('else minSlider', minSlider);
       setNetworkErrors(false);
       handleRefinement();
       setTimeout(() => {
@@ -74,22 +68,13 @@ function PriceSlider(props) {
     }
   }, [minSlider]);
 
-  useEffect(() => {
-    console.log('change', change, minSlider, maxSlider, min, max);
-  }, [change, start]);
-
   const handleRefinement = () => {
-    // console.log('Handle refinement');
     let top = maxSlider;
     let bot = minSlider === 0 ? 1 : minSlider;
-    // console.log('top', top);
-    // console.log('bot', bot);
-    // if (bot + 5 >= maxSlider) {
-    //   console.log('handleRefinement if');
-    //   top = bot + 6;
-    // }
+    if (bot + 5 >= maxSlider) {
+      top = bot + 6;
+    }
     if (bot < top) {
-      // console.log('if handle', bot, top);
       refine([bot, top]);
     }
   };
@@ -156,7 +141,7 @@ function PriceSlider(props) {
           range
           min={min}
           max={max}
-          // value={change ? [minSlider, maxSlider] : [min, max]}
+          value={[minSlider, maxSlider]}
           onChange={(e) => {
             // console.log(change, minSlider, maxSlider, min, max);
             if (e[0] <= e[1]) {
