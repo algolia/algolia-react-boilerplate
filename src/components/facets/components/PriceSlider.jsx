@@ -6,10 +6,11 @@ import { useSetRecoilState } from 'recoil';
 // rc-slider
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+// Import the range function from IS hook
 import { useRange } from 'react-instantsearch-hooks-web';
 // import Currency from recoil
-import { currencySymbolAtom } from '@/config/currencyConfig';
 import { useRecoilValue } from 'recoil';
+import { currencySymbolAtom } from '@/config/currencyConfig';
 import { showNetworkErorrs } from '@/config/demoGuideConfig';
 
 function PriceSlider(props) {
@@ -33,7 +34,6 @@ function PriceSlider(props) {
   const setNetworkErrors = useSetRecoilState(showNetworkErorrs);
 
   // If the slider is ready to work set the values
-  // Reset function to reset the slider
   useEffect(() => {
     if (start[0] === -Infinity && start[1] === Infinity) {
       setMinSlider(minValue);
@@ -41,6 +41,7 @@ function PriceSlider(props) {
     }
   }, [start]);
 
+  // Reset function of refinement with condition and refine
   useEffect(() => {
     setChange(true);
     if (maxSlider - 6 <= minSlider) {
@@ -54,10 +55,11 @@ function PriceSlider(props) {
     }
   }, [maxSlider]);
 
+  // Reset function of refinement with condition and refine
   useEffect(() => {
     setChange(true);
     if (minSlider + 6 >= maxSlider) {
-      let newMax = minSlider + 6;
+      const newMax = minSlider + 6;
       setMaxSlider(newMax);
     } else {
       setNetworkErrors(false);
@@ -68,6 +70,7 @@ function PriceSlider(props) {
     }
   }, [minSlider]);
 
+  // Refinement function
   const handleRefinement = () => {
     let top = maxSlider;
     let bot = minSlider === 0 ? 1 : minSlider;
@@ -143,7 +146,6 @@ function PriceSlider(props) {
           max={max}
           value={[minSlider, maxSlider]}
           onChange={(e) => {
-            // console.log(change, minSlider, maxSlider, min, max);
             if (e[0] <= e[1]) {
               setMinSlider(e[0]);
               setMaxSlider(e[1]);
