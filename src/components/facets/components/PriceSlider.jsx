@@ -1,6 +1,7 @@
 // Render the Price Slider used in the Refinement List
 // Import Debounce
 import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 // https://www.npmjs.com/package/rc-slider
 // rc-slider
 import Slider from 'rc-slider';
@@ -9,6 +10,7 @@ import { useRange } from 'react-instantsearch-hooks-web';
 // import Currency from recoil
 import { currencySymbolAtom } from '@/config/currencyConfig';
 import { useRecoilValue } from 'recoil';
+import { showNetworkErorrs } from '@/config/demoGuideConfig';
 
 function PriceSlider(props) {
   // Import const from hooks
@@ -28,18 +30,15 @@ function PriceSlider(props) {
   const currency = useRecoilValue(currencySymbolAtom);
   const isCurrencyRight = '€' === currency;
 
-  // If the slider is ready to work set the values
-  useEffect(() => {
-    if (canRefine) {
-      setMinSlider(minValue);
-      setMaxSlider(maxValue);
-    }
-  }, [minValue, maxValue, canRefine]);
+  const setNetworkErrors = useSetRecoilState(showNetworkErorrs);
 
-  // Refinement function
-  const refineFunction = (minValue, maxValue) => {
-    refine([minValue, maxValue]);
-  };
+  // If the slider is ready to work set the values
+  // useEffect(() => {
+  //   if (canRefine) {
+  //     setMinSlider(minValue);
+  //     setMaxSlider(maxValue);
+  //   }
+  // }, [minValue, maxValue, canRefine]);
 
   // Reset function to reset the slider
   useEffect(() => {
@@ -50,16 +49,57 @@ function PriceSlider(props) {
   }, [start]);
 
   useEffect(() => {
-    if (minSlider > maxSlider) {
-      console.log('if');
-      setMaxSlider('');
-      setChange(true);
-      console.log(minSlider, maxSlider);
-    } else if (isNaN(maxSlider)) {
-      console.log('else if');
-      setMaxSlider(0);
+    // console.log(minSlider, maxSlider);
+    setChange(true);
+
+    if (maxSlider - 5 > minSlider) {
+      handleRefinement();
     }
-  }, [minSlider, maxSlider]);
+  }, [maxSlider]);
+
+  useEffect(() => {
+    // console.log(minSlider, maxSlider);
+    setChange(true);
+    if (minSlider + 5 >= maxSlider) {
+      setMaxSlider(minSlider + 6);
+    } else {
+      setNetworkErrors(false)
+      handleRefinement();
+      setTimeout(() => {setNetworkErrors(true)}, 1000)
+    }
+  }, [minSlider]);
+
+  const handleRefinement = () => {
+    
+    let top = maxSlider;
+    let bot = minSlider === 0 ? 1 : minSlider;
+    if (bot + 5 >= maxSlider) {
+      top = bot + 6;
+    }
+    if (bot < top) {
+      console.log('minSlider < top', bot, top);
+      refine([parseInt(bot), parseInt(top)]);
+    }
+  };
+
+  // useEffect(() => {
+  //   if (minSlider > maxSlider) {
+  //     if (maxSlider !== '') {
+  //       console.log('if');
+  //       // alert('Min Price can not be greater than Max Price');
+  //       setMaxSlider(minSlider + 1);
+  //       setChange(true);
+  //       console.log(minSlider, maxSlider);
+  //     }
+  //   } else if (isNaN(maxSlider)) {
+  //     console.log('else if');
+  //     setMaxSlider(0);
+  //   }
+  // }, [minSlider, maxSlider]);
+
+  // useEffect(() => {
+  //   console.log(minSlider, maxSlider);
+  // }, [minSlider, maxSlider]);
 
   return (
     <div className="filters-container">
@@ -72,17 +112,16 @@ function PriceSlider(props) {
           onSubmit={(e) => {
             e.preventDefault();
             setChange(true);
-            refineFunction(minSlider, maxSlider);
           }}
         >
           <div className="filters-container__pricecontainer__inputs">
             <p>Min:</p>
             <input
               type="number"
-              value={minSlider || ''}
-              placeholder="Price"
+              placeholder={0}
+              value={minSlider}
               onChange={(e) => {
-                setMinSlider(parseInt(e.target.value) || 0);
+                setMinSlider(parseInt(e.target.value));
               }}
             />
           </div>
@@ -90,7 +129,7 @@ function PriceSlider(props) {
             <p>Max:</p>
             <input
               type="number"
-              placeholder="Price"
+              placeholder={100}
               value={maxSlider}
               onChange={(e) => {
                 setMaxSlider(parseInt(e.target.value));
@@ -102,7 +141,6 @@ function PriceSlider(props) {
               className="filters-container__pricecontainer__button-container__button"
               onClick={() => {
                 setChange(true);
-                refineFunction(minSlider, maxSlider);
               }}
             >
               Valider
@@ -112,12 +150,12 @@ function PriceSlider(props) {
         <div className="filters-container__pricecontainer__prices">
           <p>
             {!isCurrencyRight && currency}
-            {minSlider}
+            {minSlider || 0}
             {isCurrencyRight && currency}
           </p>
           <p>
             {!isCurrencyRight && currency}
-            {maxSlider}
+            {maxSlider || 100}
             {isCurrencyRight && currency}
           </p>
         </div>
@@ -127,11 +165,11 @@ function PriceSlider(props) {
           max={max}
           value={change ? [minSlider, maxSlider] : [min, max]}
           onChange={(e) => {
-            if (e[0] !== e[1]) {
+            console.log(e[0], e[1]);
+            if (e[0] <= e[1]) {
               setMinSlider(e[0]);
               setMaxSlider(e[1]);
               setChange(true);
-              setTimeout(refineFunction(e[0], e[1]), 100);
             }
           }}
         />
