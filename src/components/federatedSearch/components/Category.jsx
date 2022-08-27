@@ -23,7 +23,6 @@ function Category(props) {
       <div className="categories__wrapper">
         <ul className="categories__items">
           {items.map((hit) => {
-            console.log(federatedCategoriesAttribute);
             return (
               <li
                 key={hit.label}
