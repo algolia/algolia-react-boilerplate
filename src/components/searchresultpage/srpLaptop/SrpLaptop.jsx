@@ -23,13 +23,13 @@ import {
   shouldHaveSorts,
   shouldHaveStats,
   shouldHaveTrendingFacets,
-  shouldHaveTrendingProducts
+  shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
 import {
   personalizationImpact,
   personaSelectedAtom,
-  personaSelectedFiltersAtom
+  personaSelectedFiltersAtom,
 } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
