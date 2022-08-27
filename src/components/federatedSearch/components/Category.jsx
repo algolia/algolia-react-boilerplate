@@ -22,19 +22,25 @@ function Category(props) {
       <h3 className="categories__title">{title}</h3>
       <div className="categories__wrapper">
         <ul className="categories__items">
-          {items.map((hit) => (
-            <li
-              key={hit.label}
-              onClick={() => {
-                navigate('/search', {
-                  state: `${federatedCategoriesAttribute}:"${hit.label}"`,
-                });
-              }}
-            >
-              <ChevronRight />
-              <p>{hit.label.split('>').pop()}</p>
-            </li>
-          ))}
+          {items.map((hit) => {
+            console.log(federatedCategoriesAttribute);
+            return (
+              <li
+                key={hit.label}
+                onClick={() => {
+                  navigate('/search', {
+                    state: {
+                      type: 'filter',
+                      action: `${federatedCategoriesAttribute}:"${hit.label}"`,
+                    },
+                  });
+                }}
+              >
+                <ChevronRight />
+                <p>{hit.label.split('>').pop()}</p>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

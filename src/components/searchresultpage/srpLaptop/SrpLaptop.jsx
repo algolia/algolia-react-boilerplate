@@ -23,13 +23,13 @@ import {
   shouldHaveSorts,
   shouldHaveStats,
   shouldHaveTrendingFacets,
-  shouldHaveTrendingProducts
+  shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
 import {
   personalizationImpact,
   personaSelectedAtom,
-  personaSelectedFiltersAtom
+  personaSelectedFiltersAtom,
 } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
@@ -103,6 +103,8 @@ const SrpLaptop = () => {
     facetName = state.action.split(':')[0];
     facetValue = state.action.split(':')[1].replace(/['"]+/g, '');
   }
+
+  console.log(state);
   return (
     <>
       {/* Render Recommend component - Trending Products Slider */}
