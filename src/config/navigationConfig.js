@@ -41,7 +41,7 @@ export const linksHeader = atom({
     },
     // For an uilisation of your own made filter
     {
-      name: 'Womens and Accessories Even and Odd',
+      name: 'Womens accessories by Even & Odd',
       type: 'rawFilter',
       filter: '',
       rawFilter:
