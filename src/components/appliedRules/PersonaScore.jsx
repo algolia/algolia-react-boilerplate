@@ -9,9 +9,11 @@ import { isPersonnaEventToggle } from '@/config/demoGuideConfig';
 
 import { personaSelectedFiltersAtom } from '@/config/personaConfig';
 
+import { windowSize } from '@/hooks/useScreenSize';
+
 const PersonaScore = (props) => {
   const { resultsScore, personaName } = props;
-
+  const { mobile } = useRecoilValue(windowSize);
   const isSwitchToggle = useRecoilValue(isPersonnaEventToggle);
 
   const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom);
@@ -215,7 +217,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>Gender : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in colorGender"
                         style={{ width: `${cat[1]}%` }}
@@ -231,7 +233,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>HierarchicalCategories : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in hierarchical1"
                         style={{ width: `${cat[1]}%` }}
@@ -247,7 +249,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>HierarchicalCategories : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in hierarchical2"
                         style={{ width: `${cat[1]}%` }}
@@ -263,7 +265,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>HierarchicalCategories : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in hierarchical3"
                         style={{ width: `${cat[1]}%` }}
@@ -279,7 +281,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>Colors:{color[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in colorBlack"
                         style={{
@@ -305,7 +307,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>Category : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in colorCategory"
                         style={{ width: `${cat[1]}%` }}
@@ -321,7 +323,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>Brand : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in colorBrand"
                         style={{ width: `${cat[1]}%` }}
@@ -337,7 +339,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>Categories : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in colorCategories"
                         style={{ width: `${cat[1]}%` }}
@@ -359,7 +361,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>Gender : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in colorGender"
                         style={{ width: `${cat[1]}%` }}
@@ -375,7 +377,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>HierarchicalCategories : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in hierarchical1"
                         style={{ width: `${cat[1]}%` }}
@@ -391,7 +393,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>HierarchicalCategories : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in hierarchical2"
                         style={{ width: `${cat[1]}%` }}
@@ -407,7 +409,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>HierarchicalCategories : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in hierarchical3"
                         style={{ width: `${cat[1]}%` }}
@@ -423,7 +425,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>Colors:{color[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in colorBlack"
                         style={{
@@ -449,7 +451,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>Category : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in colorCategory"
                         style={{ width: `${cat[1]}%` }}
@@ -465,7 +467,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>Brand : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in colorBrand"
                         style={{ width: `${cat[1]}%` }}
@@ -481,7 +483,7 @@ const PersonaScore = (props) => {
                 return (
                   <li className="scoreList__item">
                     <p>Categories : {cat[0]}</p>
-                    <div className="scoreBar">
+                    <div className={`scoreBar ${mobile && 'mobile-scoreBar'}`}>
                       <div
                         className="scoreBar__in colorCategories"
                         style={{ width: `${cat[1]}%` }}
