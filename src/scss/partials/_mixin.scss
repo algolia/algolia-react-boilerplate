@@ -76,13 +76,13 @@
 @mixin titleH1($text-color: $main-color) {
   color: $text-color;
   font-weight: 800;
-  font-size: 4rem;
+  font-size: clamp(1rem, -3.23rem + 10.88vw, 4rem)
 }
 
 @mixin titleH2($text-color: $main-color) {
   color:$text-color;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, -0.71rem + 0.94vw, 1.2rem)
 }
 
 @mixin titleH3($text-color: $purple-algolia) {
