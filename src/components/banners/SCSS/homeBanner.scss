@@ -41,7 +41,7 @@
     h2 {
      
       @include titleH2($white-color);
-      margin-top: -1rem;
+      margin-top: -0.5rem;
     }
   }
 
@@ -107,5 +107,30 @@
         transition: all 0.2s ease-in-out;
       }
     }
+  }
+}
+
+// MOBILE 
+.home-banner3-container {
+  &__infos-mobile{
+    position: absolute;
+    z-index: 20;
+    left: 1rem;
+    top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    h1 {
+      @include titleH1($white-color);
+      // font-size: 1rem;
+     }
+ 
+     h2 {
+      
+       @include titleH2($white-color);
+       margin-top: -0.5rem;
+      //  font-size: 1rem;
+      //  margin-top: 0rem;
+     }
   }
 }

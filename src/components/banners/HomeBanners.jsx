@@ -1,11 +1,18 @@
 // NB: we need React declared for the Fragments used here
 import { Fragment, useState, useEffect } from 'react';
+
+//recoil
+import { useRecoilValue } from 'recoil';
+
 // This component will be wrapped in connectQueryRules (https://www.algolia.com/doc/api-reference/widgets/query-rule-custom-data/react/#connector)
 import { useQueryRules } from 'react-instantsearch-hooks-web';
 
 // Imports from router
 import { Link } from 'react-router-dom';
 import CustomSkeleton from '../skeletons/CustomSkeleton';
+
+//Handling screen size for responsive
+import { windowSize } from '@/hooks/useScreenSize';
 
 //Import scope SCSS
 import './SCSS/homeBanner.scss';
@@ -42,6 +49,7 @@ const HomeBannerComponent = ({
 }) => {
   const [isBannerLoaded, setIsBannerLoaded] = useState(false);
   const [banner, setBanner] = useState(null);
+  const { mobile } = useRecoilValue(windowSize);
 
   useEffect(() => {
     //Preload image
@@ -64,7 +72,13 @@ const HomeBannerComponent = ({
         />
         <div className="overlay"></div>
       </div>
-      <div className="home-banner3-container__infos">
+      <div
+        className={
+          mobile
+            ? 'home-banner3-container__infos-mobile'
+            : 'home-banner3-container__infos'
+        }
+      >
         <h1>{title}</h1>
         <h2>{subtitle}</h2>
       </div>
