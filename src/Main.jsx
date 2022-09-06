@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Configure, InstantSearch } from 'react-instantsearch-hooks-web';
 
@@ -69,7 +69,6 @@ export const Main = () => {
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
 
-
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
       {isNetworkErorrs && <SearchErrorToast />}
@@ -79,20 +78,12 @@ export const Main = () => {
         <Header />
         {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
         <AnimatePresence>
-          {showDemoGuide && (
-            <DemoGuide setshowDemoGuide={setshowDemoGuide} />
-          )}
+          {showDemoGuide && <DemoGuide setshowDemoGuide={setshowDemoGuide} />}
         </AnimatePresence>
         <AnimatePresence initial={true}>
           <Routes key={location.pathname} location={location}>
-            <Route
-              path="/"
-              element={<HomePage />}
-            />
-            <Route
-              path="/search"
-              element={<SearchResultsPage />}
-            />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/search" element={<SearchResultsPage />} />
             {/* objectID is the unique identifier for an algolia record */}
             <Route path="/search/:objectID" element={<ProductDetails />} />
           </Routes>

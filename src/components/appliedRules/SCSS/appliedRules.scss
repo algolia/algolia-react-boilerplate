@@ -80,6 +80,7 @@
         font-weight: bold;
         font-size: 0.8rem;
       }
+
       .scoreBar {
         width: 50%;
         height: 1rem;
@@ -171,6 +172,14 @@
             rgba(27, 27, 27, 1) 79%,
             rgba(249, 249, 249, 0.0970982142857143) 100%
           );
+        }
+      }
+
+      .mobile-scoreBar {
+        width: 100%;
+
+        div {
+          min-width: 80px;
         }
       }
     }
