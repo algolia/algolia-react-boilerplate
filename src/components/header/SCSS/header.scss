@@ -12,9 +12,10 @@
   padding: 2rem 0;
   background-color: $background-color;
   .container {
+    width: 90%;
+    margin: 0 auto;
     .container__header-top {
       position: relative;
-
       align-items: center;
       padding: 0 2rem;
       display: flex;
@@ -39,11 +40,11 @@
         }
       }
       &__title {
-        width: 30%;
         display: flex;
         justify-content: flex-start;
         align-items: center;
         min-height: 5rem;
+        min-width: 40%;
         h1 {
           @include titleH2($purple-algolia);
           // font-size: 0.9rem;
@@ -55,10 +56,12 @@
 
     }
     .container__header-nav {
+      width: 100%;
       &__links {
         display: flex;
         justify-content: center;
-        gap: 2rem;
+        width: 100%;
+        gap: clamp(0.5rem, -1.12rem + 4.13vw ,2rem);
         li {
           z-index: 50;
           cursor: pointer;
@@ -66,6 +69,7 @@
             position: relative;
             transition: 0.2 ease-in-out;
             @include p-text($main-color, 800);
+            font-size: clamp(0.7rem, 0.25rem + 0.85vw , 1rem) ;
             @include underliningAnimation($purple-algolia)
           }
           .selected {
@@ -77,7 +81,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 2rem;
+        gap: clamp(0.5rem, -1.12rem + 4.13vw ,2rem);
       }
     }
   }
@@ -94,6 +98,7 @@
     padding: 0 1rem;
 
     &__title{
+      width: 30%;
       h1{
         display: none;
       }
