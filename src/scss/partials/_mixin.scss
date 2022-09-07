@@ -547,6 +547,7 @@
 
 @mixin hamburger-menu-inactive {
   transition: 0.3s ease-in-out;
+  width: 30%;
   :nth-child(1) {
     transform: rotateZ(0deg);
     transform: translateY(-0.2rem);

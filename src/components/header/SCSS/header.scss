@@ -39,14 +39,14 @@
         }
       }
       &__title {
-        min-width: 40%;
+        width: 30%;
         display: flex;
         justify-content: flex-start;
         align-items: center;
         min-height: 5rem;
         h1 {
-          @include titleH3($purple-algolia);
-          font-size: 1.1rem;
+          @include titleH2($purple-algolia);
+          // font-size: 0.9rem;
           text-transform: capitalize;
           margin: 0px;
         }
@@ -92,6 +92,12 @@
   .container__header-top {
     margin-top: 1rem;
     padding: 0 1rem;
+
+    &__title{
+      h1{
+        display: none;
+      }
+    }
   }
   .container__header-top__logo {
     width: 35% !important;
