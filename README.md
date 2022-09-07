@@ -2,7 +2,6 @@
 
 [![Deploy To Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/algolia/algolia-react-boilerplate)
 
-
 - [Get started](#️-get-started)
 - [Structure](#️-structure)
 - [Features Config](#-features-config)
@@ -39,7 +38,15 @@
 - [Develop on this project](#️-develop-on-this-project)
   - [Before use please install](#-before-use-please-install)
 
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">Pre-requisites</h2>
+Before proceeding, please make sure you have the following:
+
+- Node v16.0.0+ installed
+- Yarn installed
+
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
+
+[There are more visual step by step guides here](https://drive.google.com/drive/folders/19Bb4EPT7IMG8ziDUJlu3TG31KanSCJ0T?usp=sharing)
 
 1. Clone this repo under a new name for your own demo.
 
@@ -128,7 +135,6 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
 This app offers the ability to present a guided tour to the user, highlighting different elements and explaining them. The feature is currently in BETA, and is subject to change. It is on by default; it can be turned off by going to `config/demoTourConfig` and setting the `default` value of `shouldShowDemoTour` to `false`.
 
 You can configure your tour by adjusting the `steps` const, also found in `config/demoTourConfig`.
-
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Network Error Messages</h3>
 
@@ -268,7 +274,7 @@ The ability to control the facets which get displayed including their order. Whe
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Category Pages</h3>
 
-In order to configure Category Pages, go to `config/navigationConfig`. 
+In order to configure Category Pages, go to `config/navigationConfig`.
 
 Edit the value for `categoryPageFilterAttribute`. This represents the attribute you will filter on to create your individual category pages.
 
@@ -380,7 +386,6 @@ It is then as simple as adding in your HTML the correct fontawesome tags i.e. `<
 
 [Slider](https://slider-react-component.vercel.app/)
 
-
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🎨 Style</h3>
 
 [SCSS](https://sass-lang.com/)
@@ -402,18 +407,18 @@ We use the React library Suspense and lazy to load components when needed, and a
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Translation</h3>
 
-We use the React library [React i18n](https://react.i18next.com/), to translate all the content code part like Button, Title,.... 
-And you have the Select option to switch between the languages. 
+We use the React library [React i18n](https://react.i18next.com/), to translate all the content code part like Button, Title,....
+And you have the Select option to switch between the languages.
 To start it's by default in english if you don't have any other language, you can just put false in the Translation Config option.
 
-+ You have to use this feature configure your others language index, and make sure you have the correct facet translation for example
+- You have to use this feature configure your others language index, and make sure you have the correct facet translation for example
 
 1. First Step: Go into the translation file and configure languages expected by default you are in english. If no other language is expected let just english be the default, or modify the content.
 2. Second Step: Define the content translated in each language.
-3. Third Step: In the selector file don't forget to define the i18 language for example actually, we have only ger fr and en, but add for example jap for japanese :       
-      case 'Japanese':
-        ...
-        i18n.changeLanguage('jap');
+3. Third Step: In the selector file don't forget to define the i18 language for example actually, we have only ger fr and en, but add for example jap for japanese :  
+    case 'Japanese':
+   ...
+   i18n.changeLanguage('jap');
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⌨️ Develop on this project</h2>
 
