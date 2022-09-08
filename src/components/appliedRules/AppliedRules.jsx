@@ -2,10 +2,14 @@ import { useEffect } from 'react';
 // import { connectStateResults } from 'react-instantsearch-dom';
 import { useInstantSearch } from 'react-instantsearch-hooks-web';
 
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Used for avoiding duplicates
 import { uniq } from 'lodash';
+
+import useDebounce from '@/hooks/useDebounce';
+
+import { isRulesSwitchToggle } from '@/config/appliedRulesConfig';
 
 // Config import
 import { mainIndex, searchClient } from '@/config/algoliaEnvConfig';
@@ -26,6 +30,8 @@ function CustomAppliedRules(props) {
   const resultsScore = useRecoilValue(scorePersonadAtom);
   const personaName = useRecoilValue(personaSelectedName);
 
+  const setIsSwitchToggle = useSetRecoilState(isRulesSwitchToggle);
+
   // Init API request to get rules by their IDs
   const indexName = useRecoilValue(mainIndex);
   const index = searchClient.initIndex(indexName);
@@ -36,12 +42,11 @@ function CustomAppliedRules(props) {
     let rulesStorage = [];
     if (results?.appliedRules !== null) {
       let rulesApplied = results?.appliedRules;
+      console.log(rulesApplied);
       rulesApplied?.map((rule) => {
         index.getRule(rule.objectID).then((e) => {
           rulesStorage.push(e.description);
-          let mergedRules = [...rulesStorage, e.description];
-          setRules(mergedRules);
-          // setRules((previousRules) => [...previousRules, e.description]);
+          setRules((previousRules) => [...previousRules, e.description]);
         });
       });
     }
@@ -50,16 +55,31 @@ function CustomAppliedRules(props) {
   // Create an array without duplicates
   const uniqRules = uniq(rules);
 
+  const debouncedRules = useDebounce(uniqRules, 500);
+
   return (
     <div className="appliedRules">
-      {resultsScore && personaName !== 'No Persona' && (
-        <PersonaScore resultsScore={resultsScore} personaName={personaName} />
+      {debouncedRules.length && (
+        <div className="appliedRules__wp">
+          <span
+            className="appliedRules__closeBtn"
+            onClick={() => setIsSwitchToggle(false)}
+          >
+            x
+          </span>
+          {resultsScore && personaName !== 'No Persona' && (
+            <PersonaScore
+              resultsScore={resultsScore}
+              personaName={personaName}
+            />
+          )}
+          <ul className="appliedRules__list">
+            {debouncedRules.map((rule, i) => (
+              <li key={i}>{rule}</li>
+            ))}
+          </ul>
+        </div>
       )}
-      <ul className="appliedRules__list">
-        {uniqRules.map((rule, i) => (
-          <li key={i}>{rule}</li>
-        ))}
-      </ul>
     </div>
   );
 }
