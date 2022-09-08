@@ -82,6 +82,12 @@ function CustomAppliedRules(props) {
         </div>
       ) : (
         <div className="appliedRules__wp">
+          <span
+            className="appliedRules__closeBtn"
+            onClick={() => setIsSwitchToggle(false)}
+          >
+            x
+          </span>
           <p className="appliedRules__noResult">No rules are applied</p>
         </div>
       )}
