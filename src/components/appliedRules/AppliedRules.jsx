@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // import { connectStateResults } from 'react-instantsearch-dom';
 import { useInstantSearch } from 'react-instantsearch-hooks-web';
 
@@ -26,6 +26,7 @@ import PersonaScore from './PersonaScore';
 function CustomAppliedRules(props) {
   const { results } = useInstantSearch(props);
   const [rules, setRules] = useRecoilState(rulesAtom);
+  const [debounceRules, setDebounceRules] = useState([]);
   //Get score from Persona
   const resultsScore = useRecoilValue(scorePersonadAtom);
   const personaName = useRecoilValue(personaSelectedName);
@@ -42,24 +43,25 @@ function CustomAppliedRules(props) {
     let rulesStorage = [];
     if (results?.appliedRules !== null) {
       let rulesApplied = results?.appliedRules;
-      console.log(rulesApplied);
-      rulesApplied?.map((rule) => {
-        index.getRule(rule.objectID).then((e) => {
-          rulesStorage.push(e.description);
-          setRules((previousRules) => [...previousRules, e.description]);
+      if (rulesApplied) {
+        rulesApplied.map((rule) => {
+          index.getRule(rule.objectID).then((e) => {
+            rulesStorage.push(e.description);
+            setRules((previousRules) => [...previousRules, e.description]);
+          });
         });
-      });
+      }
     }
-  }, [results.appliedRules, setRules]);
+  }, [results.appliedRules]);
 
   // Create an array without duplicates
   const uniqRules = uniq(rules);
-
   const debouncedRules = useDebounce(uniqRules, 500);
+  console.log(debouncedRules);
 
   return (
     <div className="appliedRules">
-      {debouncedRules.length && (
+      {debouncedRules.length > 0 ? (
         <div className="appliedRules__wp">
           <span
             className="appliedRules__closeBtn"
@@ -78,6 +80,10 @@ function CustomAppliedRules(props) {
               <li key={i}>{rule}</li>
             ))}
           </ul>
+        </div>
+      ) : (
+        <div className="appliedRules__wp">
+          <p className="appliedRules__noResult">No rules are applied</p>
         </div>
       )}
     </div>

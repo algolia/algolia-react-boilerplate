@@ -35,6 +35,11 @@
     right: 1rem;
     cursor: pointer;
   }
+  &__noResult{
+      @include p-text($main-color);
+      font-size: 0.8rem;
+      font-weight: bold;
+  }
   &__list {
     // padding: 1rem;
     display: flex;
