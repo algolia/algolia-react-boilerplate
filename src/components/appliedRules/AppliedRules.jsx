@@ -56,7 +56,7 @@ function CustomAppliedRules(props) {
 
   // Create an array without duplicates
   const uniqRules = uniq(rules);
-  const debouncedRules = useDebounce(uniqRules, 500);
+  const debouncedRules = useDebounce(uniqRules, 300);
   console.log(debouncedRules);
 
   return (
