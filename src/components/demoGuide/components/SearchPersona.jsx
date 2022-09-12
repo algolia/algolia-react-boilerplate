@@ -33,7 +33,7 @@ const SearchPersona = () => {
   useEffect(() => {
     if (shouldShowPersonasAtom && selectedUserToken !== 'anon') {
       //Fetch Algolia results API for Persona
-      const url = `https://personalization.eu.algolia.com/1/profiles/personalization/${selectedUserToken}?X-Algolia-API-Key=${searchClientCreds.recommendApi}&X-Algolia-Application-Id=${searchClientCreds.appID}`;
+      const url = `https://personalization.eu.algolia.com/1/profiles/personalization/${selectedUserToken}?X-Algolia-API-Key=${searchClientCreds.personaStrategyAPIKey}&X-Algolia-Application-Id=${searchClientCreds.appID}`;
       const fetchData = async () => {
         try {
           const response = await fetch(url);
