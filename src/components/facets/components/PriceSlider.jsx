@@ -43,45 +43,49 @@ function PriceSlider(props) {
 
   // Reset function of refinement with condition and refine
   useEffect(() => {
-    if (maxSlider - 2 <= minSlider) {
-      setMaxSlider(minSlider + 2);
-    } else {
-      const isErrorsOn = networkErrors;
-      isErrorsOn && setNetworkErrors(false);
+    // if (maxSlider - 2 <= minSlider) {
+    //   setMaxSlider(minSlider + 2);
+    // } else {
+    //   const isErrorsOn = networkErrors;
+    //   isErrorsOn && setNetworkErrors(false);
 
-      handleRefinement();
+    //   // Issue here
+    //   handleRefinement();
 
-      isErrorsOn &&
-        setTimeout(() => {
-          setNetworkErrors(true);
-        }, 1000);
-    }
+    //   isErrorsOn &&
+    //     setTimeout(() => {
+    //       setNetworkErrors(true);
+    //     }, 1000);
+    // }
+    handleRefinement();
   }, [maxSlider]);
 
   // Reset function of refinement with condition and refine
   useEffect(() => {
-    if (minSlider + 2 >= maxSlider) {
-      const newMax = minSlider + 2;
-      setMaxSlider(newMax);
-    } else {
-      const isErrorsOn = networkErrors;
-      isErrorsOn && setNetworkErrors(false);
+    // if (minSlider + 2 >= maxSlider) {
+    //   const newMax = minSlider + 2;
+    //   setMaxSlider(newMax);
+    // } else {
+    //   const isErrorsOn = networkErrors;
+    //   isErrorsOn && setNetworkErrors(false);
 
-      handleRefinement();
+    //   handleRefinement();
 
-      isErrorsOn &&
-        setTimeout(() => {
-          setNetworkErrors(true);
-        }, 1000);
-    }
+    //   isErrorsOn &&
+    //     setTimeout(() => {
+    //       setNetworkErrors(true);
+    //     }, 1000);
+    // }
+    handleRefinement();
   }, [minSlider]);
 
   // Refinement function
   const handleRefinement = () => {
-    let top = maxSlider;
-    let bot = minSlider === 0 ? 1 : minSlider;
-    if (bot + 1 >= maxSlider) top = bot + 2;
-    if (bot < top) refine([bot, top]);
+    // let top = maxSlider;
+    // let bot = minSlider === 0 ? 1 : minSlider;
+    // if (bot + 1 >= maxSlider) top = bot + 2;
+    // if (bot < top) refine([bot, top]);
+    refine([minSlider, maxSlider]);
   };
 
   return (
@@ -90,7 +94,7 @@ function PriceSlider(props) {
         <h3>{title}</h3>
       </div>
       <div className="filters-container__pricecontainer">
-        <form>
+        {/* <form>
           <div className="filters-container__pricecontainer__inputs">
             <p>Min:</p>
             <input
@@ -118,7 +122,7 @@ function PriceSlider(props) {
               Valider
             </button>
           </div>
-        </form>
+        </form> */}
         <div className="filters-container__pricecontainer__prices">
           <p>
             {!isCurrencyRight && currency}

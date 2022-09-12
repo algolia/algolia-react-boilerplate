@@ -8,6 +8,7 @@ import { hitsConfig } from '@/config/hitsConfig';
 
 // Function to display the price in a right format for the currentRefinement
 const displayPrice = (i, currencySymbol, refinementPriceLabels) => {
+  console.log('Je suis la displayPrice');
   const { moreThan, lessThan } = refinementPriceLabels;
 
   // Split the label into an array to work on split
@@ -41,6 +42,7 @@ function CurrentRefinements(props) {
   const { items, refine, createURL } = useCurrentRefinements(props);
   const { colourHexa } = hitsConfig;
   const currencySymbol = useRecoilValue(currencySymbolAtom);
+  console.log('Je suis la la', items);
 
   return (
     <div className="refinement-container__refinements">

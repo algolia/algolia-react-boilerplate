@@ -9,17 +9,17 @@ import aa from 'search-insights';
 
 // ADJUST THE APIKEY AND APPID TO YOUR OWN
 export const searchClientCreds = {
-  APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
-  appID: '853MYZ81KY',
+  APIKey: '37ca4ea165c91a4205ada83bdca9689d',
+  appID: 'RSBCBF0EG8',
   // Used to get the Persona Strat and score if you haven't got one you have to create one in you API Keys
   // https://www.algolia.com/doc/rest-api/personalization/#get-the-current-personalization-strategy
-  recommendApi: '4983f1e3449111609c1e7688209b787b'
+  recommendApi: '4983f1e3449111609c1e7688209b787b',
 };
 
 // ADJUST THE DEFAULT VALUE TO YOUR MAIN INDEX
 export const mainIndex = atom({
   key: 'mainIndex', // unique ID (with respect to other atoms/selectors)
-  default: 'flagship_fashion', // default value (aka initial value)
+  default: 'wilko_demo', // default value (aka initial value)
 });
 
 // ADJUST THE VALUES FOR EACH INDEX NAME IF YOU HAVE THEM
