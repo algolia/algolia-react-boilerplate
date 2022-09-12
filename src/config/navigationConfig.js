@@ -34,7 +34,7 @@ export const linksHeader = atom({
       url: '/gardens',
     },
     {
-      name: 'Baking & DIY',
+      name: 'Baking & Decorating',
       type: 'filter',
       filter: 'Baking & Decorating',
       url: '/baking',
