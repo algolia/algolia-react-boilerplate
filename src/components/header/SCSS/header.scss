@@ -62,10 +62,11 @@
 .container__header-nav {
   margin: 0 auto;
   width: 70%;
-  padding: 2rem 3rem;
+  padding: 0.7rem 4rem;
   &__links {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 100%;
     gap: clamp(0.5rem, -1.12rem + 4.13vw, 2rem);
     li {

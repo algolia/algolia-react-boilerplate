@@ -124,7 +124,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           </div>
         )}
         {shouldShowSegmentsAtom && (
-          <div>
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <Selectors props={segmentConfig} />
           </div>
         )}
