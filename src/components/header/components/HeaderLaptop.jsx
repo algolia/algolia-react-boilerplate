@@ -1,7 +1,5 @@
 // Render the Header component in Main.jsx, for large screen sizes
 import { useState } from 'react';
-// React Tour
-import { useTour } from '@reactour/tour';
 
 // React Router
 import { Link } from 'react-router-dom';
@@ -41,15 +39,11 @@ import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
 const HeaderLaptop = () => {
   const [isLogoLoaded, setIsLogoLoaded] = useState(false);
-  // React Tour
-  const { setIsOpen } = useTour();
-
   const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom);
   const setQueryState = useSetRecoilState(queryAtom);
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
   const setSbIsActive = useSetRecoilState(searchBoxIsActive);
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
-  const displayDemoTour = useRecoilValue(shouldShowDemoTour);
   const rulesApplied = useSetRecoilState(rulesAtom);
 
   useOutsideClick(searchboxRef, () => setSbIsActive(false));
@@ -57,11 +51,6 @@ const HeaderLaptop = () => {
   return (
     <div className="container">
       <div className="container__header-top">
-        {displayDemoTour && (
-          <button className="open-tour__button" onClick={() => setIsOpen(true)}>
-            Open Tour
-          </button>
-        )}
         <div className="container__header-top__title">
           <h1>Demo BoilerPlate</h1>
         </div>
