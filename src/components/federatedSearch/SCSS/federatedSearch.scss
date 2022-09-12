@@ -175,7 +175,7 @@
             font-size: 0.6rem
         }
         .subtitle{
-            @include p-text($grey-light-color);
+            @include p-text($main-color);
             @include truncateText(3, 2);
             font-size: 0.8rem;
             font-weight: 300;
