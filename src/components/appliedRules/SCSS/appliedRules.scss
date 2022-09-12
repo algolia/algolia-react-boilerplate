@@ -5,24 +5,41 @@
 
 .appliedRules {
   position: fixed;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: rgba(19, 19, 19, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  width: 100%;
-  z-index: 997;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
   animation: 0.5s showRules ease-in forwards;
-  min-height: 5rem;
-  padding: 2rem;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -1rem);
+  width: 80%;
+  &__wp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(85, 104, 254, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(85, 104, 254, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    // border: 1px solid rgba(255, 255, 255, 0.18);
+   
+    
+    z-index: 997;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+      rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    min-height: 5rem;
+    padding: 2rem;
+  }
+
+  &__closeBtn{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+  }
+  &__noResult{
+      @include p-text($main-color);
+      font-size: 0.8rem;
+      font-weight: bold;
+  }
   &__list {
     // padding: 1rem;
     display: flex;
@@ -47,11 +64,11 @@
 
 @keyframes showRules {
   0% {
-    opacity: 0;
+    // opacity: 0;
     bottom: -5rem;
   }
   100% {
-    opacity: 1;
+    // opacity: 1;
     bottom: 0;
   }
 }

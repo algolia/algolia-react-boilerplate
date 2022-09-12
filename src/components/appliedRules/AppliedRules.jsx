@@ -1,11 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // import { connectStateResults } from 'react-instantsearch-dom';
 import { useInstantSearch } from 'react-instantsearch-hooks-web';
 
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Used for avoiding duplicates
 import { uniq } from 'lodash';
+
+import useDebounce from '@/hooks/useDebounce';
+
+import { isRulesSwitchToggle } from '@/config/appliedRulesConfig';
 
 // Config import
 import { mainIndex, searchClient } from '@/config/algoliaEnvConfig';
@@ -22,9 +26,12 @@ import PersonaScore from './PersonaScore';
 function CustomAppliedRules(props) {
   const { results } = useInstantSearch(props);
   const [rules, setRules] = useRecoilState(rulesAtom);
+  const [debounceRules, setDebounceRules] = useState([]);
   //Get score from Persona
   const resultsScore = useRecoilValue(scorePersonadAtom);
   const personaName = useRecoilValue(personaSelectedName);
+
+  const setIsSwitchToggle = useSetRecoilState(isRulesSwitchToggle);
 
   // Init API request to get rules by their IDs
   const indexName = useRecoilValue(mainIndex);
@@ -36,30 +43,54 @@ function CustomAppliedRules(props) {
     let rulesStorage = [];
     if (results?.appliedRules !== null) {
       let rulesApplied = results?.appliedRules;
-      rulesApplied?.map((rule) => {
-        index.getRule(rule.objectID).then((e) => {
-          rulesStorage.push(e.description);
-          let mergedRules = [...rulesStorage, e.description];
-          setRules(mergedRules);
-          // setRules((previousRules) => [...previousRules, e.description]);
+      if (rulesApplied) {
+        rulesApplied.map((rule) => {
+          index.getRule(rule.objectID).then((e) => {
+            rulesStorage.push(e.description);
+            setRules((previousRules) => [...previousRules, e.description]);
+          });
         });
-      });
+      }
     }
-  }, [results.appliedRules, setRules]);
+  }, [results.appliedRules]);
 
   // Create an array without duplicates
   const uniqRules = uniq(rules);
+  const debouncedRules = useDebounce(uniqRules, 300);
 
   return (
     <div className="appliedRules">
-      {resultsScore && personaName !== 'No Persona' && (
-        <PersonaScore resultsScore={resultsScore} personaName={personaName} />
+      {debouncedRules.length > 0 ? (
+        <div className="appliedRules__wp">
+          <span
+            className="appliedRules__closeBtn"
+            onClick={() => setIsSwitchToggle(false)}
+          >
+            x
+          </span>
+          {resultsScore && personaName !== 'No Persona' && (
+            <PersonaScore
+              resultsScore={resultsScore}
+              personaName={personaName}
+            />
+          )}
+          <ul className="appliedRules__list">
+            {debouncedRules.map((rule, i) => (
+              <li key={i}>{rule}</li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div className="appliedRules__wp">
+          <span
+            className="appliedRules__closeBtn"
+            onClick={() => setIsSwitchToggle(false)}
+          >
+            x
+          </span>
+          <p className="appliedRules__noResult">No rules are applied</p>
+        </div>
       )}
-      <ul className="appliedRules__list">
-        {uniqRules.map((rule, i) => (
-          <li key={i}>{rule}</li>
-        ))}
-      </ul>
     </div>
   );
 }
