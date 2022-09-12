@@ -12,13 +12,14 @@ import { atom } from 'recoil';
 // ------------------------------------------
 export const hitsConfig = {
   objectID: 'objectID',
-  productName: 'productType',
-  brand: 'brand',
+  productName: 'name',
+  brand: 'productType',
   category: 'category.lvl0',
   reviewScore: 'reviewScore',
   reviewCount: 'reviewCount',
   categories: 'categories',
   colour: 'colourFamily',
+  description: 'description',
   genderFilter: 'genderFilter',
   hierarchicalCategories: 'hierarchicalCategories',
   sizeFilter: 'size',
