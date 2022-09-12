@@ -43,8 +43,15 @@ const Hit = ({ hit }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   // Get hit attribute from config file
-  const { objectID, image, imageAlt, category, productName, brand } =
-    hitsConfig;
+  const {
+    objectID,
+    image,
+    imageAlt,
+    category,
+    productName,
+    brand,
+    productType,
+  } = hitsConfig;
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
 
@@ -141,10 +148,11 @@ const Hit = ({ hit }) => {
         </div>
         <div className="srpItem__infos">
           <div className="srpItem__infosUp">
-            <p className="brand">{get(hit, brand)}</p>
+            <p className="brand">{get(hit, productType)}</p>
             <h3 className="productName">
               <Highlight hit={hit} attribute={productName} />
             </h3>
+            <p className="brand">{get(hit, brand)}</p>
           </div>
           <p className="price">
             <Price hit={hit} />

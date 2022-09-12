@@ -13,7 +13,9 @@ import { atom } from 'recoil';
 export const hitsConfig = {
   objectID: 'objectID',
   productName: 'name',
-  brand: 'productType',
+  productType: 'productType',
+  brand: 'brand',
+  capacity: 'capacity',
   category: 'category.lvl0',
   reviewScore: 'reviewScore',
   reviewCount: 'reviewCount',

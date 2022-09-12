@@ -41,6 +41,18 @@ export const refinements = [
     },
   },
   {
+    type: 'list',
+    label: 'Capacity',
+    options: {
+      attribute: hitsConfig.capacity,
+      // when searchable is enabled, you can search for a specific value of that facet. Ex: Here you can search for a specific brand
+      searchable: true,
+      limit: 5,
+      // Show more function allow to click on show more button but you have to put a limit
+      showMoreFunction: true,
+    },
+  },
+  {
     type: 'colour',
     label: 'Colour',
     options: {

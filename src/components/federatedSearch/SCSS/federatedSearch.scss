@@ -41,7 +41,7 @@
 //Recent searches
 .recentSearches{
     &__title{
-        @include titleH3($purple-algolia)
+        @include titleH3($main-color)
     }
     &__items{
         li{
@@ -60,7 +60,7 @@
 // Suggestion
 .suggestions{
     &__title{
-        @include titleH3($purple-algolia)
+        @include titleH3($main-color)
     }
     &__items{
         li{
@@ -82,7 +82,7 @@
 // Categories
 .categories{
     &__title{
-        @include titleH3($purple-algolia)
+        @include titleH3($main-color)
     }
     &__items{
         li{
@@ -102,7 +102,7 @@
 // Products
 .products{
     &__title{
-        @include titleH3($purple-algolia);
+        @include titleH3($main-color);
         margin-left: 1rem;
     }
     &__items{
@@ -157,7 +157,7 @@
 // Articles
 .articles{
     &__title{
-        @include titleH3($purple-algolia)
+        @include titleH3($main-color)
     }
     &__item{
         .image-wrapper{
