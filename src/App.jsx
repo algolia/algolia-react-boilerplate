@@ -11,11 +11,14 @@ import './scss/index.scss';
 
 // Import Components
 import { Main } from './Main';
+import ScrollToTop from './config/scrollOnTop';
 
 const App = () => {
   return (
     <RecoilRoot>
       <Router>
+        {/* Add function from config file to scroll on top every change of page */}
+        <ScrollToTop />
         <ScreenResizer />
         <Main />
       </Router>
