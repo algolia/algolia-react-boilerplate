@@ -5,6 +5,7 @@
 
 .searchbox-container {
   min-width: 40%;
+  margin-right: 9rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -41,7 +42,7 @@
       right: 0rem;
       border-radius: 2px 3rem 3rem 2px;
       padding: 0.4rem 1rem;
-      background: $purple-algolia-custom-gradient;
+      background: #757575;
       display: flex;
       justify-content: center;
       gap: 0.5rem;

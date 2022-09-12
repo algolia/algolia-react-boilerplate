@@ -30,6 +30,7 @@ import { rulesAtom } from '@/config/appliedRulesConfig';
 import useOutsideClick from '@/hooks/useOutsideClick';
 
 import logo from '@/assets/logo/logo.webp';
+import headerRight from '@/assets/homepage/headerRight.png';
 
 // Import Components
 import CustomSearchBox from '@/components/searchbox/SearchBox';
@@ -75,9 +76,9 @@ const HeaderLaptop = () => {
           <CustomSearchBox />
           {displayVoiceSearch && <CustomVoiceSearchComponent />}
         </div>
-      </div>
-      <div className="container__header-nav">
-        <Navigation />
+        <div className="logo-on-right">
+          <img src={headerRight} alt="headerRight" />
+        </div>
       </div>
     </div>
   );

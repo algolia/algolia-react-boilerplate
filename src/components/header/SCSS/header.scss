@@ -1,42 +1,42 @@
 @use '../../../scss/partials' as *;
 
-
-
-
 // ------------------------------------------
 // Header
 // ------------------------------------------
 .header {
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-  padding: 2rem 0;
-  background-color: $background-color;
+  background-color: $main-color;
   .container {
-    width: 90%;
     margin: 0 auto;
     .container__header-top {
+      padding: 0 1rem;
       position: relative;
       align-items: center;
-      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
 
-      a{
+      a {
         position: relative;
         width: 100%;
         height: 100%;
       }
       &__logo {
-        width: 100%;
+        width: 20%;
         min-height: 7rem;
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        img {
-          margin: 0 auto;
-          width: 90%;
-          height: 100%;
+        a {
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          img {
+            margin-left: 2rem;
+            width: 40%;
+            height: 100%;
+          }
         }
       }
       &__title {
@@ -52,110 +52,111 @@
           margin: 0px;
         }
       }
-
-
-    }
-    .container__header-nav {
-      width: 100%;
-      &__links {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        gap: clamp(0.5rem, -1.12rem + 4.13vw ,2rem);
-        li {
-          z-index: 50;
-          cursor: pointer;
-          p {
-            position: relative;
-            transition: 0.2 ease-in-out;
-            @include p-text($main-color, 800);
-            font-size: clamp(0.7rem, 0.25rem + 0.85vw , 1rem) ;
-            @include underliningAnimation($purple-algolia)
-          }
-          .selected {
-            @include selectedNavItem($purple-algolia)
-          }
-        }
-      }
-      .container__header-nav-selectors{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: clamp(0.5rem, -1.12rem + 4.13vw ,2rem);
+      .logo-on-right {
+        margin-left: 2rem;
+        width: 10%;
       }
     }
   }
 }
-
-
-
-
-// MOBILE & TABLET
-.header{
-.container-mobile {
-  .container__header-top {
-    margin-top: 1rem;
-    padding: 0 1rem;
-
-    &__title{
-      width: 30%;
-      h1{
-        display: none;
+.container__header-nav {
+  margin: 0 auto;
+  width: 70%;
+  padding: 2rem 3rem;
+  &__links {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    gap: clamp(0.5rem, -1.12rem + 4.13vw, 2rem);
+    li {
+      z-index: 50;
+      cursor: pointer;
+      p {
+        position: relative;
+        transition: 0.2 ease-in-out;
+        @include p-text(#757575, 800);
+        font-size: clamp(0.7rem, 0.25rem + 0.85vw, 1rem);
+        @include underliningAnimation($main-color);
+      }
+      .selected {
+        @include selectedNavItem($main-color);
       }
     }
   }
-  .container__header-top__logo {
-    width: 35% !important;
-  }
-  .searchbox-container-mobile {
+  .container__header-nav-selectors {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    margin: 0 auto;
-
-    .ais-VoiceSearch {
-      right: 8%;
-    }
-  }
-
-  &__navList {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50vw;
-    height: 100vh;
-    z-index: 998;
-    background-color: $background-color;
-
-    ul {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-top: 8rem;
-      padding: 1rem;
-
-      li {
-        cursor: pointer;
-        p{
-          position: relative;
-        }
-      }
-      .selected {
-        &::before {
-          content: '';
-          position: absolute;
-          background-color: $grey-dark-color;
-          height: 1px;
-          width: 100%;
-          bottom: -0.5rem;
-          transform: scaleX(1);
-        }
-      }
-    }
+    gap: clamp(0.5rem, -1.12rem + 4.13vw, 2rem);
   }
 }
+
+// MOBILE & TABLET
+.header {
+  .container-mobile {
+    .container__header-top {
+      margin-top: 1rem;
+      padding: 0 1rem;
+
+      &__title {
+        width: 30%;
+        h1 {
+          display: none;
+        }
+      }
+    }
+    .container__header-top__logo {
+      width: 35% !important;
+    }
+    .searchbox-container-mobile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin: 0 auto;
+
+      .ais-VoiceSearch {
+        right: 8%;
+      }
+    }
+
+    &__navList {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50vw;
+      height: 100vh;
+      z-index: 998;
+      background-color: $background-color;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-top: 8rem;
+        padding: 1rem;
+
+        li {
+          cursor: pointer;
+          p {
+            position: relative;
+          }
+        }
+        .selected {
+          &::before {
+            content: '';
+            position: absolute;
+            background-color: $grey-dark-color;
+            height: 1px;
+            width: 100%;
+            bottom: -0.5rem;
+            transform: scaleX(1);
+          }
+        }
+      }
+    }
+  }
   .hamburger {
     @include hamburger-menu;
   }
@@ -166,4 +167,3 @@
     @include hamburger-menu-inactive;
   }
 }
-

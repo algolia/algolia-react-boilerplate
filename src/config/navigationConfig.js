@@ -8,7 +8,7 @@ import { atom } from 'recoil';
 // It will create a filter which will be used when a category page link is clicked on
 // Please refer to linksHeader to define the category page values which will be filtered
 // ------------------------------------------
-export const categoryPageFilterAttribute = 'hierarchicalCategories.lvl0';
+export const categoryPageFilterAttribute = 'category.lvl0';
 
 // ------------------------------------------
 // This const defines the navigation aspect of the header
@@ -28,33 +28,45 @@ export const linksHeader = atom({
       url: '/search',
     },
     {
-      name: 'Mens',
+      name: 'Gardens & Outdoor',
       type: 'filter',
-      filter: 'Mens',
-      url: '/mens',
+      filter: 'Garden & Outdoor Best Sellers',
+      url: '/gardens',
     },
     {
-      name: 'Womens',
+      name: 'Baking & DIY',
       type: 'filter',
-      filter: 'Womens',
-      url: '/womens',
+      filter: 'Baking & Decorating',
+      url: '/baking',
+    },
+    {
+      name: 'Home',
+      type: 'filter',
+      filter: 'Home',
+      url: '/home',
+    },
+    {
+      name: 'Cooking',
+      type: 'filter',
+      filter: 'Cooking Utensils',
+      url: '/cooking',
     },
     // For an uilisation of your own made filter
-    {
-      name: 'Womens accessories by Even & Odd',
-      type: 'rawFilter',
-      filter: '',
-      rawFilter:
-        "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
-      url: '/annafield',
-    },
+    // {
+    //   name: 'Womens accessories by Even & Odd',
+    //   type: 'rawFilter',
+    //   filter: '',
+    //   rawFilter:
+    //     "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
+    //   url: '/annafield',
+    // },
     // This uses context from the Algolia dashboard, configured using Visual Editor
-    {
-      name: 'Accessories',
-      type: 'context',
-      context: 'accessories',
-      url: '/accessories',
-    },
+    // {
+    //   name: 'Accessories',
+    //   type: 'context',
+    //   context: 'accessories',
+    //   url: '/accessories',
+    // },
   ],
 });
 

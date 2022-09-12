@@ -8,6 +8,7 @@ import { useRecoilValue } from 'recoil';
 // Import 2 kind of Headers
 import HeaderLaptop from '@/components/header/components/HeaderLaptop';
 import HeaderMobile from '@/components/header/components/HeaderMobile';
+import Navigation from '../header/components/Navigation';
 
 //Import scope SCSS
 import './SCSS/header.scss';
@@ -18,9 +19,18 @@ const Header = () => {
 
   // Render the Header for Laptop or Mobile, depending on the size of the screen
   return (
-    <header className="header">
-      {isDesktop ? <HeaderLaptop /> : <HeaderMobile tablet={tablet} mobile={mobile} />}
-    </header>
+    <div>
+      <header className="header">
+        {isDesktop ? (
+          <HeaderLaptop />
+        ) : (
+          <HeaderMobile tablet={tablet} mobile={mobile} />
+        )}
+      </header>
+      <div className="container__header-nav">
+        <Navigation />
+      </div>
+    </div>
   );
 };
 

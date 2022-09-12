@@ -47,6 +47,7 @@ const Trending = lazy(() =>
 
 // Import scoped SCSS
 import './homepage.scss';
+import imgBanner from '@/assets/homepage/homeBannerImage.webp';
 
 const HomePage = () => {
   const [carouselLoaded, setCarouselLoaded] = useState(false);
@@ -83,7 +84,7 @@ const HomePage = () => {
       {/* <Suspense> */}
       <CustomHomeBanners />
       {/* </Suspense> */}
-
+      <img src={imgBanner} alt="banner" />
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
           <Suspense key={i} fallback={<CustomSkeleton type="banner" />}>
