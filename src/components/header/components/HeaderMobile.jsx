@@ -66,9 +66,6 @@ const HeaderMobile = ({ mobile, tablet }) => {
           </Link>
         </div>
         {/* For a search box Simple center */}
-        <div className="container__header-top__title">
-          <h1>Demo BoilerPlate</h1>
-        </div>
       </div>
 
       <div className="searchbox-container searchbox-container-mobile">

@@ -53,9 +53,6 @@ const HeaderLaptop = () => {
   return (
     <div className="container">
       <div className="container__header-top">
-        <div className="container__header-top__title">
-          <h1>Demo BoilerPlate</h1>
-        </div>
         <div className="container__header-top__logo">
           <Link
             to="/"

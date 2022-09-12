@@ -87,7 +87,7 @@ export const Main = () => {
             {/* objectID is the unique identifier for an algolia record */}
             <Route path="/search/:objectID" element={<ProductDetails />} />
           </Routes>
-          {carouselLoaded && <Footer />}
+          <Footer />
         </AnimatePresence>
         {shouldShowAlertAtom && <AlertNavigation />}
         {isRulesSwitchToggleChecked && <CustomAppliedRules />}
