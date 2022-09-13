@@ -23,7 +23,7 @@
     }
   }
   a {
-    @include btn($purple-algolia-custom-gradient, $white-color);
+    @include btn($black-color, $white-color);
     text-transform: capitalize;
   }
 }

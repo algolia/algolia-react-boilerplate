@@ -258,7 +258,7 @@
     }
   }
   input:checked + .slider {
-    background: $purple-algolia-custom-gradient;
+    background: $main-color;
   }
 
   input:checked + .slider:before {

@@ -34,7 +34,7 @@
 }
 
 .refined-filter {
-  @include btn-hover($purple-algolia, $white-color);
+  @include btn-hover($main-color, $white-color);
 
   p,
   span {
@@ -51,7 +51,7 @@
   justify-content: space-between;
 
   .stats-infos {
-    @include stats($purple-algolia);
+    @include stats($main-color);
   }
 
   select {
@@ -66,7 +66,7 @@
 .ais-Pagination {
   display: flex;
   justify-content: center;
-  @include pagination($purple-algolia-custom-gradient);
+  @include pagination($main-color);
 }
 
 // ------------------------------------------
@@ -92,14 +92,14 @@
     margin-bottom: 2rem;
 
     &__span-query {
-      color: $purple-algolia;
+      color: $main-color;
       font-weight: 900;
     }
   }
 
   &__infos {
     &__span {
-      color: $purple-algolia;
+      color: $main-color;
     }
 
     .query-suggestion {
@@ -131,7 +131,7 @@
       margin-top: 1rem;
       span {
         font-weight: 700;
-        color: $purple-algolia;
+        color: $main-color;
       }
     }
   }

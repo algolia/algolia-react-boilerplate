@@ -19,28 +19,24 @@ export const personaConfig = [
     label: 'No Persona',
     description: 'Anonymous user',
     type: 'persona',
-    personalizationFilters: [],
+    personalizationFilters: [''],
   },
 
   {
-    value: 'stephen_james',
-    label: 'Stephen',
-    description: 'Stephen James is a man who likes sports shoes',
+    value: 'emma_james',
+    label: 'Emma',
+    description: 'Stephen James is a woman who likes DIY art',
     type: 'persona',
-    personalizationFilters: [
-      'genderFilter:men<score=1>',
-      "hierarchicalCategories.lvl2:'Mens > Shoes'<score=1>",
-    ],
+    personalizationFilters: ['category.lvl1: Home > Decorating & DIY'],
   },
   {
-    value: 'elizabeth_aniston',
-    label: 'Elizabeth',
-    description: 'Elizabeth is a woman who likes blue dresses',
+    value: 'john_aniston',
+    label: 'John',
+    description: 'John is a man who bought furnitures',
     type: 'persona',
     personalizationFilters: [
-      'colour:blue<score=1>',
-      'genderFilter:women<score=1>',
-      "hierarchicalCategories.lvl2:'Womens > Clothing > Dresses'<score=1>",
+      'category.lvl2: Home > Garden & Outdoor > Garden Furniture',
+      'category.lvl2: Home > Home > Home Furniture',
     ],
   },
 ];

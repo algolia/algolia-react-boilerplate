@@ -30,7 +30,7 @@ export const shouldHaveLanguages = atom({
 
 export const shouldHaveSorts = atom({
   key: 'shouldHaveSorts', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
+  default: true, // default value (aka initial value)
 });
 
 export const shouldHaveCarousels = atom({
@@ -50,12 +50,12 @@ export const shouldHaveStats = atom({
 
 export const shouldHaveInjectedBanners = atom({
   key: 'shouldHaveInjectedBanners',
-  default: false,
+  default: true,
 });
 
 export const shouldHavePersona = atom({
   key: 'shouldHavePersona',
-  default: false,
+  default: true,
 });
 
 // Make sure you create the injected content before turning this on, to avoid errors

@@ -65,7 +65,7 @@
     &__items{
         li{
             .ais-Highlight-highlighted{
-                @include highlight($purple-algolia)
+                @include highlight($main-color)
             }
             display: flex;
             align-items: center;

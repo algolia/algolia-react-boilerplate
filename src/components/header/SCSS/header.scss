@@ -6,7 +6,7 @@
 .header {
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-  background-color: $main-color;
+  background-color: $black-color;
   .container {
     margin: 0 auto;
     .container__header-top {
@@ -46,7 +46,7 @@
         min-height: 5rem;
         min-width: 40%;
         h1 {
-          @include titleH2($purple-algolia);
+          @include titleH2($main-color);
           // font-size: 0.9rem;
           text-transform: capitalize;
           margin: 0px;

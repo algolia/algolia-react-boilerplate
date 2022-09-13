@@ -8,7 +8,7 @@
     position: absolute;
     top: 0.5rem;
     left: 0.5rem;
-    background-color: $purple-algolia;
+    background-color: $main-color;
     padding: 0 0.3rem;
     border-radius: 0.2rem;
     p {
@@ -24,7 +24,7 @@
       height: 0.8rem;
       width: 0.8rem;
       border-radius: 50%;
-      border: 1px solid $purple-algolia;
+      border: 1px solid $main-color;
     }
     p {
       visibility: hidden;

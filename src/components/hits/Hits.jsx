@@ -155,7 +155,7 @@ const Hit = ({ hit }) => {
             <p className="brand">{get(hit, brand)}</p>
           </div>
           <p className="price">
-            <Price hit={hit} />
+            £<Price hit={hit} />
           </p>
         </div>
       </>

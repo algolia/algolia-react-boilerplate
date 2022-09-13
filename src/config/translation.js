@@ -36,7 +36,7 @@ const resources = {
         availableSize: 'Available Size:',
       },
       searchBox: {
-        placeHolder: 'Search...',
+        placeHolder: 'What are you looking for ?',
       },
     },
   },
