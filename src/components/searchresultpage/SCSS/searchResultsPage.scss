@@ -169,6 +169,7 @@
   &__filterPicto{
     position: relative;
     z-index: 901;
+    cursor: pointer;
     svg{
       width: 20px;
       height: auto;
@@ -189,10 +190,11 @@
   &__filterPicto-active{
     position: relative;
     z-index: 901;
+    cursor: pointer;
     svg{
       width: 20px;
       height: auto;
-      
+
       #ball1__wp{
         transition: all 0.3s ease-in-out;
         transform: translateX(10px);
