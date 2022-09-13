@@ -75,12 +75,12 @@
         }
       }
       .add-to-cart {
-        @include btn($purple-algolia-custom-gradient, $white-color);
+        @include btn($main-color, $white-color);
         margin-top: 5rem;
         gap: 1rem;
         width: 10rem;
         &:hover {
-          @include btn-hover($purple-algolia-custom-gradient, $white-color);
+          @include btn-hover($main-color, $white-color);
           gap: 1.5rem;
         }
         svg {
@@ -92,13 +92,13 @@
         }
       }
       .price {
-        @include price($purple-algolia);
+        @include price($main-color);
         font-size: 2rem;
         strike {
-            margin-right: 0.5rem;
-            color: $grey-dark-color;
-            text-decoration: line-through
-          }
+          margin-right: 0.5rem;
+          color: $grey-dark-color;
+          text-decoration: line-through;
+        }
       }
       .sizes {
         font-weight: bold;
@@ -154,6 +154,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      .price-pdp {
+        color: red;
+      }
     }
   }
   .auc-Recommend-container {

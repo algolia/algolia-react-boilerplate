@@ -137,7 +137,7 @@
                @include brand($main-color)
             }
             .price{
-               @include price($purple-algolia)
+               @include price($main-color)
             }
         }
         &:hover{

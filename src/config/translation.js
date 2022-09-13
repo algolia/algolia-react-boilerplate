@@ -8,7 +8,7 @@ const resources = {
   en: {
     translation: {
       homePage: {
-        titleCarousels: ['Our Bags Collection', 'Our Best Hoodies'],
+        titleCarousels: ['Our Wilko Products', 'Our Products less than £99'],
       },
       federated: {
         recentSearches: 'Recent Searches',

@@ -286,7 +286,7 @@ const ProductDetails = () => {
                 }}
                 className="price"
               >
-                <Price hit={hit} />
+                £<Price hit={hit}/>
               </motion.p>
             )}
             {!PDPHitSections.sizeFilter && (

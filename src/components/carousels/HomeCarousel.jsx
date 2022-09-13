@@ -124,7 +124,7 @@ function Carousel(props) {
                 >
                   <p className="name">{get(hit, productName)}</p>
                   <p className="price">
-                    <Price hit={hit} />
+                    £<Price hit={hit} />
                   </p>
                 </div>
               </div>
