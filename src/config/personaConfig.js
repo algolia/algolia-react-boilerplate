@@ -25,7 +25,7 @@ export const personaConfig = [
   {
     value: 'emma_james',
     label: 'Emma',
-    description: 'Stephen James is a woman who likes DIY art',
+    description: 'Emma James is a woman who likes DIY art',
     type: 'persona',
     personalizationFilters: ['category.lvl1: Home > Decorating & DIY'],
   },
