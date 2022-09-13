@@ -76,3 +76,9 @@ export const refinementsAtom = atom({
   key: 'refinementsAtom', // unique ID (with respect to other atoms/selectors)
   default: [], // default value (aka initial value)
 });
+
+// State to open facet panel on mobile
+export const isFacetPanelOpen = atom({
+  key: 'isFacetPanelOpen', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+});
