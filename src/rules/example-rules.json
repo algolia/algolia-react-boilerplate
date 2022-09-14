@@ -1,0 +1,345 @@
+[
+  {
+    "enabled": true,
+    "tags": [
+      "visual-editor"
+    ],
+    "description": "Shows accessories first",
+    "conditions": [
+      {
+        "anchoring": "is",
+        "pattern": "",
+        "alternatives": false,
+        "context": "accessories"
+      }
+    ],
+    "consequence": {
+      "params": {
+        "filters": "\"categories\":\"Accessories\""
+      },
+      "filterPromotes": true
+    },
+    "objectID": "qr-1651145630794"
+  },
+  {
+    "_metadata": {
+      "lastUpdate": 1651681412
+    },
+    "consequence": {
+      "userData": {
+        "type": "noCta",
+        "title": "",
+        "image": {
+          "desktop_url": "https://res.cloudinary.com/hugo-valla/image/upload/v1641220366/L_ptpbwc.png",
+          "mobile_url": "https://api.lorem.space/image/shoes?w-300&h-300"
+        },
+        "position": 7,
+        "isSalesCardDisplay": 6,
+        "gridSpanLaptop": 1,
+        "gridSpanMobile": 1,
+        "size": {
+          "width": 3,
+          "height": 1
+        }
+      },
+      "filterPromotes": true
+    },
+    "enabled": true,
+    "description": "Conditionless: Free return policy content is injected",
+    "objectID": "qr-1644582034227"
+  },
+  {
+    "_metadata": {
+      "lastUpdate": 1651681402
+    },
+    "consequence": {
+      "userData": {
+        "type": "HomeBannerTwo",
+        "title": "SALES DAY",
+        "subtitle": "20% OFF SITEWIDE",
+        "button1": "SHOP NOW",
+        "LinkButton1": "/search",
+        "button2": "SEE OUR BLOG",
+        "LinkButton2": "/blog",
+        "imgUrl1": "https://images.pexels.com/photos/5632364/pexels-photo-5632364.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "imgUrl2": "https://media.istockphoto.com/photos/online-shopping-and-fashion-store-website-with-add-to-cart-button-in-picture-id1287186681?k=20&m=1287186681&s=612x612&w=0&h=3adoMLrtaSs2DYHi6lFClTVZCRhNEw8BaHkp0V1Sxo4=",
+        "imgUrl3": "https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+      },
+      "filterPromotes": true
+    },
+    "enabled": true,
+    "description": "Conditionless: Banner is Injected on the homepage",
+    "objectID": "qr-1645197289062"
+  },
+  {
+    "_metadata": {
+      "lastUpdate": 1651675462
+    },
+    "conditions": [
+      {
+        "anchoring": "contains",
+        "pattern": "nike",
+        "alternatives": true
+      }
+    ],
+    "consequence": {
+      "userData": {
+        "type": "salesCard",
+        "title": "Receive an extra 20% off nike items",
+        "subtitle": "",
+        "coupon": "Code: NIKE20",
+        "image": {
+          "desktop_url": "https://static.dezeen.com/uploads/2021/03/lil-nas-x-mschf-nike-satan-shoes-blood-pentagram-bible-verse-design-fashion-footwear_dezeen_2364_col_3-scaled.jpg",
+          "mobile_url": "https://"
+        },
+        "position": 3,
+        "size": {
+          "width": 1,
+          "height": 1
+        }
+      },
+      "filterPromotes": true
+    },
+    "enabled": true,
+    "description": "Advertising content is injected",
+    "objectID": "qr-1649055462539"
+  },
+  {
+    "_metadata": {
+      "lastUpdate": 1651675410
+    },
+    "conditions": [
+      {
+        "anchoring": "contains",
+        "pattern": "help",
+        "alternatives": true
+      }
+    ],
+    "consequence": {
+      "userData": {
+        "type": "bannerSrp",
+        "title": "Need some help?",
+        "banner": "https://images.unsplash.com/photo-1599595344070-c456bea6ee98?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2220&q=80",
+        "link": "https://www.algolia.com/support/"
+      },
+      "filterPromotes": true
+    },
+    "enabled": true,
+    "description": "Banner is injected",
+    "objectID": "qr-1634719042792"
+  },
+  {
+    "_metadata": {
+      "lastUpdate": 1651675393
+    },
+    "conditions": [
+      {
+        "anchoring": "is",
+        "pattern": "faq",
+        "alternatives": false
+      }
+    ],
+    "consequence": {
+      "userData": {
+        "isRedirected": true,
+        "redirect": "https://www.algolia.com/",
+        "description": "Redirected to Algolia homepage"
+      },
+      "filterPromotes": true
+    },
+    "enabled": true,
+    "description": "Redirected to Algolia homepage",
+    "objectID": "qr-1634733813616"
+  },
+  {
+    "_metadata": {
+      "lastUpdate": 1651675329
+    },
+    "enabled": true,
+    "tags": [
+      "visual-editor"
+    ],
+    "description": "Facets are Re-ordering with size first",
+    "conditions": [
+      {
+        "anchoring": "contains",
+        "pattern": "sandals",
+        "alternatives": true
+      }
+    ],
+    "consequence": {
+      "params": {
+        "renderingContent": {
+          "facetOrdering": {
+            "facets": {
+              "order": [
+                "sizeFilter",
+                "colour",
+                "category",
+                "genderFilter"
+              ]
+            },
+            "values": {
+              "sizeFilter": {
+                "order": [
+                  "3",
+                  "3.5",
+                  "4",
+                  "4.5",
+                  "5",
+                  "5.5",
+                  "6",
+                  "6.5",
+                  "7",
+                  "7.5",
+                  "8",
+                  "8.5",
+                  "9",
+                  "9.5",
+                  "10",
+                  "10.5",
+                  "11",
+                  "11.5",
+                  "12",
+                  "12.5",
+                  "13",
+                  "13.5",
+                  "14",
+                  "14.5",
+                  "15",
+                  "15.5",
+                  "16",
+                  "16.5",
+                  "17",
+                  "18"
+                ],
+                "sortRemainingBy": "hidden"
+              },
+              "colour": {
+                "sortRemainingBy": "count"
+              },
+              "category": {
+                "sortRemainingBy": "count"
+              }
+            }
+          }
+        }
+      },
+      "filterPromotes": true
+    },
+    "objectID": "qr-1636138490838"
+  },
+  {
+    "_metadata": {
+      "lastUpdate": 1651675011
+    },
+    "enabled": true,
+    "tags": [
+      "visual-editor"
+    ],
+    "description": "Category Bags is boosted in HomePage Carousel",
+    "conditions": [
+      {
+        "anchoring": "is",
+        "pattern": "",
+        "alternatives": false,
+        "context": "homepage-carousel-one"
+      }
+    ],
+    "consequence": {
+      "params": {
+        "optionalFilters": [
+          "categories:Bags<score=1>"
+        ]
+      },
+      "filterPromotes": true
+    },
+    "objectID": "qr-1651497727816"
+  },
+  {
+    "_metadata": {
+      "lastUpdate": 1651674970
+    },
+    "enabled": true,
+    "tags": [
+      "visual-editor"
+    ],
+    "description": "Category Hoodies is boosted in HomePage Carousel",
+    "conditions": [
+      {
+        "anchoring": "is",
+        "pattern": "",
+        "alternatives": false,
+        "context": "homepage-carousel-two"
+      }
+    ],
+    "consequence": {
+      "params": {
+        "optionalFilters": [
+          "categories:Hoodies<score=1>"
+        ]
+      },
+      "filterPromotes": true
+    },
+    "objectID": "qr-1651497846486"
+  },
+  {
+    "_metadata": {
+      "lastUpdate": 1635267975
+    },
+    "enabled": true,
+    "tags": [
+      "visual-editor"
+    ],
+    "description": "facet ordering for categories",
+    "conditions": [
+      {
+        "anchoring": "is",
+        "pattern": "",
+        "alternatives": false,
+        "filters": "(\"categories\":\"Accessories\")"
+      }
+    ],
+    "consequence": {
+      "params": {
+        "renderingContent": {
+          "facetOrdering": {
+            "facets": {
+              "order": [
+                "hierarchicalCategories",
+                "brand",
+                "colour",
+                "unformated_price",
+                "categories",
+                "hierarchicalCategories.lvl0",
+                "hierarchicalCategories.lvl1"
+              ]
+            },
+            "values": {
+              "hierarchicalCategories": {
+                "sortRemainingBy": "count"
+              },
+              "brand": {
+                "sortRemainingBy": "count"
+              },
+              "colour": {
+                "sortRemainingBy": "count"
+              },
+              "unformated_price": {
+                "sortRemainingBy": "count"
+              },
+              "categories": {
+                "sortRemainingBy": "count"
+              },
+              "hierarchicalCategories.lvl0": {
+                "sortRemainingBy": "count"
+              }
+            }
+          }
+        }
+      },
+      "filterPromotes": true
+    },
+    "objectID": "qr-1635267861729"
+  }
+]

@@ -1,9 +1,17 @@
-/* eslint-disable import/prefer-default-export */
+// eslint-disable-next-line import/no-commonjs
 module.exports = {
-  extends: ['algolia', 'algolia/react'],
+
+  // extends: [
+  //   'algolia',
+  //   'algolia/react',
+  //   'plugin:react/recommended',
+  //   'plugin:react/jsx-runtime',
+  // ],
+
   parser: '@babel/eslint-parser',
   rules: {
     'import/prefer-default-export': 'off',
+    'import/no-unresolved': 'off',
   },
   plugins: ['react', 'import', 'jsx-a11y', 'react-hooks'], // here we include the plugins as well, this is like new abilities for ESLint
   parserOptions: {

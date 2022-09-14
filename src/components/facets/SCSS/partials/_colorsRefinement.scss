@@ -1,0 +1,29 @@
+// ------------------------------------------
+// Color Refinement List
+// ------------------------------------------
+@use '../../../../scss/partials/' as *;
+
+.filters-container {
+  &__content-color {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+    &__list {
+      display: flex;
+      .color-name {
+        cursor: pointer;
+        input {
+          display: flex;
+          justify-content: center;
+        }
+        p {
+          text-transform: capitalize;
+          margin-top: 0.6rem;
+          font-size: 0.6rem;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

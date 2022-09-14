@@ -1,63 +1,84 @@
 // Render the Header component in Main.jsx, for large screen sizes
+import { useState } from 'react';
 
 // React Router
 import { Link } from 'react-router-dom';
-// Recoil Header State
-import { useRecoilState, useSetRecoilState } from 'recoil';
 
-// Import Config for the header
-import { configAtom } from '../../../config/config';
+// Recoil State
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
-// eslint-disable-next-line import/order
-import { queryAtom } from '../../../config/searchbox';
+// Import SearchBox config
+import {
+  queryAtom,
+  searchBoxAtom,
+  searchBoxIsActive,
+} from '@/config/searchboxConfig';
 
 //Import config for federatedSearch
-import { isFederatedAtom, isVoiceSearch } from '../../../config/config';
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
-// Import SearchBox
-// eslint-disable-next-line import/order
-import CustomSearchBoxSimple from '../../searchbox/SearchBox';
+// Import voiceSearch config
+import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
-// Import VoiceSearchComponent
-import CustomVoiceSearchComponent from '../../voicesearch/VoiceSearch';
-import SelectPersona from '../personnaSelect/SelectPersona';
+// Import Demo tour config
+import { shouldShowDemoTour } from '@/config/demoTourConfig';
+
+// Import applied rules config
+import { rulesAtom } from '@/config/appliedRulesConfig';
+
+// Custom Hooks
+import useOutsideClick from '@/hooks/useOutsideClick';
+
+import logo from '@/assets/logo/logo.webp';
+
+// Import Components
+import CustomSearchBox from '@/components/searchbox/SearchBox';
+import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
 const HeaderLaptop = () => {
+  const [isLogoLoaded, setIsLogoLoaded] = useState(false);
+  const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom);
   const setQueryState = useSetRecoilState(queryAtom);
-  const federated = useSetRecoilState(isFederatedAtom);
-  // Define value to display voiceSearch
-  const displayVoiceSearch = useSetRecoilState(isVoiceSearch);
+  const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
+  const setSbIsActive = useSetRecoilState(searchBoxIsActive);
+  const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
+  const rulesApplied = useSetRecoilState(rulesAtom);
+
+  useOutsideClick(searchboxRef, () => setSbIsActive(false));
 
   return (
     <div className="container">
       <div className="container__header-top">
-        <div className="container__header-top__logo">
-          <Link
-            to="/"
-            onClick={() => {
-              setQueryState('');
-              federated(false);
-            }}
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
-              alt=""
-            />
-          </Link>
-        </div>
-        {/* For a search box Simple center */}
-        <div className="searchbox-container">
-          <CustomSearchBoxSimple />
-          {displayVoiceSearch && <CustomVoiceSearchComponent />}
-        </div>
         <div className="container__header-top__title">
           <h1>Demo BoilerPlate</h1>
         </div>
+        <div className="container__header-top__logo">
+          <Link
+            to="/"
+            aria-label="link to home"
+            onClick={() => {
+              setQueryState('');
+              federated(false);
+              rulesApplied([]);
+              // LEFT IN FOR REFACTO PURPOSES
+              // setUnderlineCategory(null);
+            }}
+          >
+            {/* Add possibility to change the Logo */}
+            <img src={logo} alt="" onLoad={() => setIsLogoLoaded(true)} />
+            {isLogoLoaded === false && <CustomSkeleton type="logo" />}
+          </Link>
+        </div>
+        {/* For a search box Simple center */}
+        <div className="searchbox-container" ref={setSearchBoxRef}>
+          <CustomSearchBox />
+          {displayVoiceSearch && <CustomVoiceSearchComponent />}
+        </div>
       </div>
-      <div className="container__header-bottom">
+      <div className="container__header-nav">
         <Navigation />
-        {/* <SelectPersona /> */}
       </div>
     </div>
   );

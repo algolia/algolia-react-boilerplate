@@ -1,0 +1,136 @@
+@use '../../../scss/partials' as *;
+
+// SCSS for the Home Banner
+// Big image and 2 little images
+.home-banner3-container {
+  position: relative;
+
+  &__image {
+    max-height: 50vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    .overlay {
+      @include overlay($purple-algolia-custom-gradient-overlay)
+    }
+
+    img {
+      width: 60%;
+      height: 100%;
+      margin: 1rem auto;
+      object-fit: contain;
+      min-height: 170px;
+    }
+  }
+
+  &__infos {
+    position: absolute;
+    z-index: 20;
+    left: 2rem;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+
+    h1 {
+     @include titleH1($white-color)
+    }
+
+    h2 {
+     
+      @include titleH2($white-color);
+      margin-top: -0.5rem;
+    }
+  }
+
+  &__buttons {
+    position: absolute;
+    z-index: 20;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+
+    &__circles {
+      display: flex;
+      border: 1px solid rgba($color: $white-color, $alpha: 0.2);
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        border: 1px solid rgba($color: $white-color, $alpha: 1);
+        transition: all 0.2s ease-in-out;
+      }
+
+      &__circles2 {
+        display: flex;
+        border: 1px solid rgba($color: $white-color, $alpha: 0.4);
+        border-radius: 50%;
+        width: 130px;
+        height: 130px;
+        margin: auto auto;
+        transition: all 0.2s ease-in-out;
+
+        &__circles3 {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba($color: $white-color, $alpha: 0.7);
+          border-radius: 50%;
+          width: 110px;
+          height: 110px;
+          margin: auto auto;
+          transition: all 0.2s ease-in-out;
+
+          p {
+           @include p-text($white-color);
+            transition: all 0.2s ease-in-out;
+          }
+
+        }
+      }
+    }
+
+    :hover {
+      div {
+        border: 1px solid rgba($color: $white-color, $alpha: 1);
+        transition: all 0.2s ease-in-out;
+      }
+
+      a {
+        transform: scale(0.9);
+        transition: all 0.2s ease-in-out;
+      }
+    }
+  }
+}
+
+// MOBILE 
+.home-banner3-container {
+  &__infos-mobile{
+    position: absolute;
+    z-index: 20;
+    left: 1rem;
+    top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    h1 {
+      @include titleH1($white-color);
+      // font-size: 1rem;
+     }
+ 
+     h2 {
+      
+       @include titleH2($white-color);
+       margin-top: -0.5rem;
+      //  font-size: 1rem;
+      //  margin-top: 0rem;
+     }
+  }
+}

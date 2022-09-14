@@ -1,0 +1,37 @@
+// ------------------------------------------
+// VoiceSearch
+// ------------------------------------------
+@use '../../../scss/partials' as *;
+
+.voiceSearch{
+    &__inactive{
+        width: 12px;
+        path{
+           
+           fill: $main-color;
+           transition: all 0.3s ease-in-out;
+        }
+    }
+
+    &__active{
+        width: 12px;
+        path{
+            animation: blink 2s infinite ease-in-out;
+            // fill: $purple-algolia;
+            transition: all 0.3s ease-in-out;
+        }
+    }
+}
+
+@keyframes blink {
+    0%{
+        fill: $main-color;
+    }
+    50%{
+        fill: $purple-algolia;
+    }
+    100%{
+        fill: $main-color;
+    }
+    
+}

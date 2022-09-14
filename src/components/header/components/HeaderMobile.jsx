@@ -6,50 +6,45 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Recoil Header State
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-
-// Import Config for the header
-// import { configAtom } from '../../../config/config';
+import { useSetRecoilState } from 'recoil';
 
 // eslint-disable-next-line import/order
-import { queryAtom } from '../../../config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
-//Import config for federatedSearch
-import { isFederatedAtom, isVoiceSearch } from '../../../config/config';
+// Import logo URL for header
+import logo from '@/assets/logo/logo.webp';
 
-// Import Screen Size Determining Hook
-import useScreenSize from '../../../hooks/useScreenSize';
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 // Import framer motion
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 // Import SearchBox
 // eslint-disable-next-line import/order
-import CustomSearchBoxSimple from '../../searchbox/SearchBox';
+import CustomSearchBox from '@/components/searchbox/SearchBox';
 
-// Import VoiceSearchComponent
-import CustomVoiceSearchComponent from '../../voicesearch/VoiceSearch';
 import Navigation from './Navigation';
-// import SelectPersona from '../personnaSelect/SelectPersona';
 
-const HeaderMobile = () => {
+// Custom hook to prevent body from scrolling
+import usePreventScrolling from '@/hooks/usePreventScrolling';
+
+const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
   const setQueryState = useSetRecoilState(queryAtom);
-  const federated = useSetRecoilState(isFederatedAtom);
+  const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Define value to display voiceSearch
-  const displayVoiceSearch = useRecoilValue(isVoiceSearch);
+  // Prevent body from scrolling when panel is open
+  usePreventScrolling(isMenuOpen);
 
   return (
     <div className="container container-mobile">
       <div className="container__header-top">
         {/* Hamburger button to open or close the menu dropdown */}
         <div
-          className={`${
-            isMenuOpen ? 'hamburger-active' : 'hamburger-inactive'
-          } hamburger`}
+          className={`${isMenuOpen ? 'hamburger-active' : 'hamburger-inactive'
+            } hamburger`}
           onClick={() => {
             setIsMenuOpen(!isMenuOpen);
           }}
@@ -67,10 +62,7 @@ const HeaderMobile = () => {
               federated(false);
             }}
           >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Algolia-logo.svg/1200px-Algolia-logo.svg.png"
-              alt=""
-            />
+            <img src={logo} alt="" />
           </Link>
         </div>
         {/* For a search box Simple center */}
@@ -80,15 +72,17 @@ const HeaderMobile = () => {
       </div>
 
       <div className="searchbox-container searchbox-container-mobile">
-        <CustomSearchBoxSimple />
+        <CustomSearchBox />
         {/* Display voicesearch if the  displayVoiceSearch config is set to true */}
-        {displayVoiceSearch && <CustomVoiceSearchComponent />}
+        {/* {displayVoiceSearch && <CustomVoiceSearchComponent />} */}
       </div>
       <AnimatePresence>
         {isMenuOpen && (
           <CategoriesMobile
             isMenuOpen={isMenuOpen}
             setIsMenuOpen={setIsMenuOpen}
+            mobile={mobile}
+            tablet={tablet}
           />
         )}
       </AnimatePresence>
@@ -96,16 +90,21 @@ const HeaderMobile = () => {
   );
 };
 
-const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen }) => {
+const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   return (
-    <motion.div
+    <div
       className="container-mobile__navList"
       initial={{ opacity: 0, x: -100 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -200 }}
     >
-      <Navigation isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-    </motion.div>
+      <Navigation
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        mobile={mobile}
+        tablet={tablet}
+      />
+    </div>
   );
 };
 

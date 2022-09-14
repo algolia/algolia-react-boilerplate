@@ -1,27 +1,25 @@
 // This component decides which type of Header to render
-import { useRef, memo } from 'react';
+import { memo } from 'react';
 
 // Import Hook for a Sticky Header
-import useStickyHeader from '../../hooks/useStickyHeader';
-import useScreenSize from '../../hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize';
+import { useRecoilValue } from 'recoil';
 
-// 
-import HeaderLaptop from './components/HeaderLaptop';
-import HeaderMobile from './components/HeaderMobile';
+// Import 2 kind of Headers
+import HeaderLaptop from '@/components/header/components/HeaderLaptop';
+import HeaderMobile from '@/components/header/components/HeaderMobile';
+
+//Import scope SCSS
+import './SCSS/header.scss';
 
 const Header = () => {
   // Handle screen sizing & responsiveness with this hook
-  const { mobile, tablet, laptopXS, laptop } = useScreenSize();
-  // Handle sticky Header
-  const elementRef = useRef(null);
-  const sticky = useStickyHeader(elementRef);
-  const headerClasses = `header ${sticky ? 'sticky' : ''}`;
+  const { isDesktop, tablet, mobile } = useRecoilValue(windowSize);
 
   // Render the Header for Laptop or Mobile, depending on the size of the screen
   return (
-    <header ref={elementRef} className={headerClasses}>
-      {(laptop || laptopXS) && <HeaderLaptop />}
-      {(tablet || mobile) && <HeaderMobile />}
+    <header className="header">
+      {isDesktop ? <HeaderLaptop /> : <HeaderMobile tablet={tablet} mobile={mobile} />}
     </header>
   );
 };

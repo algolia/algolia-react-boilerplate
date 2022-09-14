@@ -1,62 +1,80 @@
 import { memo } from 'react';
 
 // Algolia's imports
-import { connectHits } from 'react-instantsearch-dom';
+import { useHits } from 'react-instantsearch-hooks-web';
 
 // Component import
-import { ChevronRight } from '../../../assets/svg/SvgIndex';
+import { ChevronRight } from '@/assets/svg/SvgIndex';
+import Price from '@/components/hits/components/Price.jsx';
 
 // Recoil import
-import { hitAtom } from '../../../config/results';
+import { hitAtom } from '@/config/hitsConfig';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { hitsConfig } from '../../../config/hits';
+import { hitsConfig } from '@/config/hitsConfig';
+import { personaSelectedAtom } from '@/config/personaConfig';
+import { queryAtom } from '@/config/searchboxConfig';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
 
-const Hits = ({ hits }) => {
+import get from 'lodash/get';
+
+function Products(props) {
+  const { hits } = useHits(props);
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
 
+  const personaSelected = useRecoilValue(personaSelectedAtom);
+  const query = useRecoilValue(queryAtom);
+
+  //Get title, props
+  const { products, productsBefore, buttonShowAll, noResults } = props;
   // Get hit attribute from config file
-  const { price, objectID, image, productName, brand } =
-    useRecoilValue(hitsConfig);
+  const { objectID, image, productName, brand } = hitsConfig;
+
   return (
     <div className="products">
       <div className="products__header">
-        <h3 className="products__title">Products</h3>
+        {personaSelected !== '' && query === '' ? (
+          <h3 className="products__title">{productsBefore}</h3>
+        ) : (
+          <h3 className="products__title">{products}</h3>
+        )}
       </div>
       <ul className="products__items">
-        {hits.map((hit) => {
-          return (
-            <li
-              key={hit[objectID]}
-              className="products__item"
-              onClick={() => {
-                hitState(hit);
-                navigate(`/search/${hit[objectID]}`);
-              }}
-            >
-              <div className="image-wrapper">
-                <img src={hit[image]} alt="" />
-              </div>
-              <div className="infos">
-                <p className="brand">{hit[brand]}</p>
-                <p className="name">{hit[productName]}</p>
-                <p className="price">{hit[price]}</p>
-              </div>
-            </li>
-          );
-        })}
+        {hits.length ? (
+          hits.map((hit) => {
+            return (
+              <li key={hit[objectID]} className="products__item">
+                <div
+                  className="image-wrapper"
+                  onClick={() => {
+                    hitState(hit);
+                    navigate(`/search/${hit[objectID]}`);
+                  }}
+                >
+                  <img src={get(hit, image)} alt="" />
+                </div>
+                <div className="infos">
+                  <p className="brand">{get(hit, brand)}</p>
+                  <p className="productName">{get(hit, productName)}</p>
+                  <p className="price">
+                    <Price hit={hit} />
+                  </p>
+                </div>
+              </li>
+            );
+          })
+        ) : (
+          <span className="no-results__infos">{noResults}</span>
+        )}
       </ul>
       <div className="products__btn" onClick={() => {}}>
         <ChevronRight />
-        <p>SHOW ALL PRODUCTS</p>
+        <p onClick={() => navigate('/search')}>{buttonShowAll}</p>
       </div>
     </div>
   );
-};
-
-const Products = connectHits(Hits);
+}
 
 export default memo(Products);

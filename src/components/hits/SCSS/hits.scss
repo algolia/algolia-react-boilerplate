@@ -1,0 +1,68 @@
+// Global scss partials
+@use '../../../scss/partials' as *;
+
+// Local scss partials
+@use './partials/index';
+
+// ------------------------------------------
+// Hits
+// ------------------------------------------
+.ais-InfiniteHits {
+  .ais-InfiniteHits-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    .srpItem {
+      position: relative;
+      @include hit(
+        $main-color,
+        $purple-algolia,
+        $purple-algolia,
+        $purple-algolia
+      );
+
+      .productName {
+        @include productName();
+      }
+      .price {
+        @include price($purple-algolia);
+      }
+      .brand {
+        @include brand($main-color);
+      }
+      .ranking-formula {
+        position: absolute;
+        background-color: transparent;
+        display: grid;
+        width: 100%;
+        margin-left: 0.5rem;
+        p {
+          @include p-text($purple-algolia);
+          font-size: 0.6rem;
+          margin-top: 0.2rem;
+        }
+      }
+    }
+
+    .promotedItems {
+      border: 1px solid rgb(170, 183, 251);
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    }
+  }
+
+  .ais-InfiniteHits-list-mobile {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .ais-InfiniteHits-list-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.hit-list {
+  img {
+    height: 100%;
+  }
+}

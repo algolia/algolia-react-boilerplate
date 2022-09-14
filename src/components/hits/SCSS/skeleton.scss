@@ -1,0 +1,203 @@
+@use '../../../scss/partials' as *;
+
+.skeleton{
+    width: 95%;
+    height: 100%;
+    margin: 1rem auto;
+    display: flex;
+    gap: 3rem;
+    // position: absolute;
+    // right: 1rem;
+    // left: 1rem;
+    // top: -1rem;
+    // z-index: 1000;
+   
+   
+    &__facet {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      margin-bottom: 18px;
+
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        background-image: linear-gradient(
+          90deg,
+          rgba(#fff, 0) 0,
+          rgba(#fff, 0.2) 20%,
+          rgba(#fff, 0.5) 60%,
+          rgba(#fff, 0)
+        );
+        animation: shimmer 2.2s infinite;
+        content: '';
+      }
+      &-title {
+        width: 60%;
+        background-color: rgb(233, 233, 233);
+        border-radius: 4px;
+        height: 43px;
+      }
+      &-text {
+        width: 100%;
+        height: 24px;
+        margin: 10px 0;
+        background-color: rgb(233, 233, 233);
+        border-radius: 4px;
+      }
+
+    }
+    &__hit {
+      width: 83%;
+      position: relative;
+      flex-grow: 2;
+      padding: 0 1rem;
+      gap: 2rem;
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        background-image: linear-gradient(
+          90deg,
+          rgba(#fff, 0) 0,
+          rgba(#fff, 0.2) 20%,
+          rgba(#fff, 0.5) 60%,
+          rgba(#fff, 0)
+        );
+        animation: shimmer 2s infinite;
+        content: '';
+      }
+    }
+    &__sortBy{
+        width: 100%;
+        height: 2.5rem;
+        background-color: rgb(233, 233, 233);
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    &__hitsList{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-column-gap: 0.5rem;
+        grid-row-gap: 1rem;
+    }
+
+    // SKELETON HITS
+    &__hit{
+        // height: 27rem;
+        // height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        
+
+        &-top, &-bottom{
+            height: 100%;
+            width: 100%;
+            background-color: rgb(233, 233, 233);
+            border-radius: 0.3rem;
+        }
+
+        &-top{
+            height: 16rem;
+
+        }
+        &-bottom{
+            height: 8rem;
+        }
+
+    }
+
+    // SKELETON BANNER
+    &__banner{
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      transform: translateX(-100%);
+      background-image: linear-gradient(
+        90deg,
+        rgba(rgb(233, 233, 233), 0) 0,
+        rgba(rgb(233, 233, 233), 0.2) 20%,
+        rgba(rgb(233, 233, 233), 0.5) 60%,
+        rgba(rgb(233, 233, 233), 0)
+      );
+      animation: shimmer 2.2s infinite;
+      content: '';
+    }
+
+      // SKELETON HOMEPAGE
+      &__homepage{
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        background-image: linear-gradient(
+          90deg,
+          rgba(rgb(233, 233, 233), 0) 0,
+          rgba(rgb(233, 233, 233), 0.2) 20%,
+          rgba(rgb(233, 233, 233), 0.5) 60%,
+          rgba(rgb(233, 233, 233), 0)
+        );
+        animation: shimmer 2.2s infinite;
+        content: '';
+      }
+      // SKELETON LOGO
+      &__logo{
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        transform: translateX(-100%);
+        background-image: linear-gradient(
+          90deg,
+          rgba(rgb(233, 233, 233), 0) 0,
+          rgba(rgb(233, 233, 233), 0.2) 20%,
+          rgba(rgb(233, 233, 233), 0.5) 60%,
+          rgba(rgb(233, 233, 233), 0)
+        );
+        animation: shimmer 2.2s infinite;
+        content: '';
+      }
+
+}
+
+@keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  // MOBILE 
+  .skeleton-mobile{
+    width: 95%;
+    height: 100%;
+    margin: 1rem auto;
+    display: flex;
+    gap: 3rem;
+    &__facets{
+        display: none;
+    }
+    &__hitsList{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 0.5rem;
+        grid-row-gap: 1rem;
+    }
+  }

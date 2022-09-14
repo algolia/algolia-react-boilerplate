@@ -1,47 +1,27 @@
-import { useState, useEffect } from 'react';
-
-// Algolia import
-import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch } from 'react-instantsearch-dom';
-
 // React router
 import { BrowserRouter as Router } from 'react-router-dom';
-
 // Recoil State Management
 import { RecoilRoot } from 'recoil';
+
+// Resize component listens for screen size change to display UI accordingly
+import ScreenResizer from './utils/ScreenResizer';
 
 // SCSS import
 import './scss/index.scss';
 
-// application state from config file
-import { searchClient, indexName } from './config/appConfig';
-
 // Import Components
-import Loader from './components/loader/Loader';
-import { Main } from './Main.jsx';
-
-// Allows logging and manipulation of algolia results etc.
-import CustomStateResults from './components/stateResults/stateResults';
+import { Main } from './Main';
+import ScrollToTop from './config/scrollOnTop';
 
 const App = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoaded(true);
-    }, 3000);
-  }, []);
-
   return (
     <RecoilRoot>
-      <InstantSearch searchClient={search} indexName={indexName.index}>
-        <CustomStateResults />
-        <Router>
-          {isLoaded === false && <Loader isLoaded={isLoaded} />}
-          <Main isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
-        </Router>
-      </InstantSearch>
+      <Router>
+        {/* Add function from config file to scroll on top every change of page */}
+        <ScrollToTop />
+        <ScreenResizer />
+        <Main />
+      </Router>
     </RecoilRoot>
   );
 };

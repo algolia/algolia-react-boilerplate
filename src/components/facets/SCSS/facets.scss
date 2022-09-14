@@ -1,0 +1,131 @@
+// Local scss partials
+@use './partials/index';
+
+// Global scss partials
+@use '../../../scss/partials' as *;
+
+.no-facets {
+  padding: 2rem 0;
+  text-align: center;
+
+  a {
+    color: $purple-algolia;
+  }
+}
+
+.filters-container {
+  font-family: $main-font;
+  width: 100%;
+  border-bottom: 1px solid $grey-border-light-color;
+
+  &__title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      @include facetsTitle($main-color);
+    }
+
+    svg {
+      width: 25px;
+      cursor: pointer;
+    }
+  }
+
+  &__list {
+    margin: 0.8rem 0;
+
+    &__search-facet__hidden {
+      border: 1px solid #000;
+      text-decoration: none;
+      color: $main-color;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0.5rem 0;
+      padding: 0.8em;
+      font-size: 0.7rem;
+      background-color: #fff;
+      transition: all 0.4s ease-in-out;
+      text-transform: uppercase;
+      cursor: text;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &__list {
+      &__button-filter {
+        display: flex;
+        @include facetsFilter('transparent', $main-color, $purple-algolia);
+
+        > p {
+          @include p-text($main-color);
+          font-size: 0.8rem;
+          font-weight: 300;
+        }
+
+        &::before {
+          position: absolute;
+          content: '';
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background: $purple-algolia;
+          z-index: -1;
+          transition: opacity 0.3s ease-in-out;
+          opacity: 0;
+          border-radius: 2px;
+        }
+
+        &:hover::before {
+          opacity: 1;
+          transition: opacity 0.3s ease-in-out;
+        }
+
+        &:hover {
+          p,
+          span {
+            color: $white-color;
+            transition: color 0.3s ease-in-out;
+          }
+        }
+      }
+    }
+  }
+  &__button-container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    &__button {
+      font-family: $main-font;
+      font-size: 0.8rem;
+      font-weight: 300;
+      padding: 0.5rem;
+      &__content {
+        display: flex;
+        align-items: center;
+        svg {
+          width: 1rem;
+          margin-left: 0.8rem;
+        }
+      }
+    }
+  }
+
+  .refined-filter {
+    @include refinedFacet($purple-algolia-custom-gradient, $white-color);
+
+    p,
+    span {
+      @include p-text($white-color);
+      font-size: 0.8rem;
+    }
+  }
+}

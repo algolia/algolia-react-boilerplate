@@ -1,0 +1,85 @@
+// ------------------------------------------
+// SearchBox
+// ------------------------------------------
+@use '../../../scss/partials' as *;
+
+.searchbox-container {
+  min-width: 40%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  .searchbox {
+    width: 80%;
+    will-change: width;
+    transition: width 0.2s cubic-bezier(0.73, 0, 0.12, 1.5);
+    &__form {
+      margin: 1rem auto;
+      width: 100%;
+      display: flex;
+      position: relative;
+      svg {
+        width: 30px;
+        left: 1rem;
+        top: 0rem;
+        position: absolute;
+
+        path {
+          fill: $main-color;
+        }
+      }
+      &__input {
+        @include searchBoxInput($white-color, $grey-light-color-80);
+      }
+    }
+    &__category {
+      position: absolute;
+      width: clamp(20%, 40%, 50%);
+      height: 99%;
+      top: 0;
+      right: 0rem;
+      border-radius: 2px 3rem 3rem 2px;
+      padding: 0.4rem 1rem;
+      background: $purple-algolia-custom-gradient;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      align-items: center;
+      text-transform: capitalize;
+
+      span {
+        cursor: pointer;
+      }
+      p {
+        @include p-text($white-color);
+        font-size: 0.7rem;
+      }
+      svg {
+        border: 1px solid #000000;
+        background-color: #000000;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+      }
+
+      &__close-btn {
+        position: absolute;
+        top: -5px;
+        right: 30px;
+      }
+    }
+  }
+  .searchboxCategory {
+    width: 50%;
+  }
+
+  .searchbox-active {
+    width: 100%;
+    will-change: width;
+    transition: width 0.2s cubic-bezier(0.73, 0, 0.12, 1.5);
+  }
+  .searchbox-category {
+    width: 80%;
+  }
+}

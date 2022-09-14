@@ -1,31 +1,34 @@
 import { memo } from 'react';
 
 // Algolia's imports
-import { connectHits, Highlight } from 'react-instantsearch-dom';
+import { useHits, Highlight } from 'react-instantsearch-hooks-web';
 
 // components import
-import { ChevronRight } from '../../../assets/svg/SvgIndex';
+import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 // Router import
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
 // Recoil import
 import { useSetRecoilState } from 'recoil';
-import { queryAtom } from '../../../config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
-const Suggestions = ({ hits }) => {
+function QuerySuggestions(props) {
+  //Get title
+  const { title } = props;
+  const { hits } = useHits(props);
   // router hook to navigate using a function
   const navigate = useNavigate();
   // Recoil State - update query in searchBar
   const setQueryState = useSetRecoilState(queryAtom);
   return (
     <div className="suggestions">
-      <h3 className="suggestions__title">SUGGESTIONS</h3>
+      <h3 className="suggestions__title">{title}</h3>
       <ul className="suggestions__items">
-        {hits.map((hit) => {
+        {hits.map((hit, index) => {
           return (
             <li
-              key={hit.query}
+              key={index}
               className="suggestions__item"
               onClick={() => {
                 navigate({
@@ -45,8 +48,6 @@ const Suggestions = ({ hits }) => {
       </ul>
     </div>
   );
-};
-
-const QuerySuggestions = connectHits(Suggestions);
+}
 
 export default memo(QuerySuggestions);

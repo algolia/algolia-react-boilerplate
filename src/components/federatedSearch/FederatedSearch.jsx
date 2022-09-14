@@ -1,125 +1,193 @@
-import React, { useRef, memo } from 'react';
+import { memo, useEffect } from 'react';
 
 // Algolias's import
-import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, Configure } from 'react-instantsearch-dom';
+import { Configure, Index } from 'react-instantsearch-hooks-web';
 
 // framer motion
-import { motion } from 'framer-motion';
-import { framerMotionFederatedContainer } from '../../config/config';
+import { framerMotionFederatedContainer } from '@/config/animationConfig';
 
 // import from Recoil
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+
+// Config
+import { indexNames, searchClient } from '@/config/algoliaEnvConfig';
+
+// Show or unshow sections in federated (product, suggestions, categories, articles, recent searches)
+// categories import is here to choose which attribute you want to show as category
 import {
-  configAtom,
-  isFederatedAtom,
-  searchBoxAtom,
-  selectButtonAtom,
-} from '../../config/config';
-import { indexName, searchClient } from '../../config/appConfig';
-import {
+  federatedCategoriesAttribute,
+  federatedRef,
   federatedSearchConfig,
-  categories,
-} from '../../config/federatedConfig';
-import { queryAtom } from '../../config/searchbox';
+  shouldHaveOpenFederatedSearch,
+} from '@/config/federatedConfig';
+
+// Sharing query to general state
+import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig';
+
 // Import Persona State from recoil
-import { personaSelectedAtom } from '../../config/header';
+import { personalizationImpact, personaSelectedAtom, personaSelectedFiltersAtom } from '@/config/personaConfig';
+
+// Import Segment State from recoil
+import { segmentSelectedAtom } from '@/config/segmentConfig';
+
+// Import refs for modal closing functionality
+import { selectorNavigationRef } from '@/config/navigationConfig';
 
 // hook import
-import useOutsideClickConditional from '../../hooks/useOutsideClickConditional';
-import useScreenSize from '../../hooks/useScreenSize';
+// Check if user is clecking outside an element
+import useOutsideClickTwoConditionals from '@/hooks/useOutsideClickTwoConditions';
+// Check screensize for responsiveness
+import { windowSize } from '@/hooks/useScreenSize';
+
+//Use Translation
+import { useTranslation } from 'react-i18next';
 
 // Components imports
-import RecentSearches from './components/RecentSearches';
-import QuerySuggestions from './components/QuerySuggestions';
+import Redirect from '@/components/redirects/Redirect';
+import Articles from './components/BlogPost';
 import Category from './components/Category';
 import Products from './components/Products';
-import Articles from './components/BlogPost';
+import QuerySuggestions from './components/QuerySuggestions';
+import RecentSearches from './components/RecentSearches';
+
+//Import scope SCSS
+import './SCSS/federatedSearch.scss';
 
 const FederatedSearch = () => {
-  // Recoil & States
-  const personaSelect = useRecoilValue(personaSelectedAtom);
-  const setIsFederated = useSetRecoilState(isFederatedAtom);
-  const searchboxRef = useRecoilValue(searchBoxAtom);
-  const containerFederated = useRef('');
-  // Custom hook
-  useOutsideClickConditional(containerFederated, searchboxRef, () =>
-    setIsFederated(false)
-  );
-  const { mobile, tablet } = useScreenSize();
   // Persona
-  const userToken = personaSelect;
+  const personaSelect = useRecoilValue(personaSelectedAtom);
+  const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom);
 
-  //query
+
+  const segmentSelect = useRecoilValue(segmentSelectedAtom);
+  const setIsFederated = useSetRecoilState(shouldHaveOpenFederatedSearch);
+  const searchboxRef = useRecoilValue(searchBoxAtom);
   const query = useRecoilValue(queryAtom);
+
+  //Get reference for dropdowns in Navigation
+  const selector = useRecoilValue(selectorNavigationRef);
+
+  // Get Indexes Name
+  const { suggestionsIndex, articlesIndex } = useRecoilValue(indexNames);
+
+  // const containerFederated = useRef('');
+  const [containerFederated, setContainerFederated] =
+    useRecoilState(federatedRef);
+
+  // Get screen size
+  const { mobile, tablet } = useRecoilValue(windowSize);
+
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'federated',
+  });
+
+  // Custom hook
+  useOutsideClickTwoConditionals(
+    containerFederated,
+    searchboxRef,
+    selector,
+    () => setIsFederated(false)
+  );
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+      setIsFederated(false);
+    };
+  }, []);
 
   // Federated search configuration
   const {
-    isRecentSearch,
-    isQuerySuggestions,
-    isCategory,
-    isBlogPosts,
-    isProduct,
+    showRecentSearches,
+    showQuerySuggestions,
+    showCategories,
+    showBlogPosts,
+    showProducts,
   } = federatedSearchConfig;
-  // Algolia searchclient
-  const search = algoliasearch(searchClient.appID, searchClient.APIKey);
 
   return (
-    <motion.div
-      className="federatedSearch"
-      ref={containerFederated}
+    <div
+      className={`${mobile || tablet ? 'federatedSearch-mobile' : 'federatedSearch'
+        }`}
+      ref={setContainerFederated}
       variants={framerMotionFederatedContainer}
       initial={framerMotionFederatedContainer.initial}
       animate={framerMotionFederatedContainer.animate}
       exit={framerMotionFederatedContainer.exit}
       transition={framerMotionFederatedContainer.transition}
     >
+      <span className="closeFederated" onClick={() => setIsFederated(false)}>
+        &lsaquo; {t('buttonReturn')}
+      </span>
       <div
-        className={`${
-          mobile || tablet
-            ? 'federatedSearch__wrapper-mobile'
-            : 'federatedSearch__wrapper'
-        }`}
+        className={`${mobile || tablet
+          ? 'federatedSearch__wrapper-mobile'
+          : 'federatedSearch__wrapper'
+          }`}
       >
         <div className="federatedSearch__left">
-          {isRecentSearch && !mobile && !tablet && <RecentSearches />}
-          {isQuerySuggestions && (
-            <InstantSearch
-              searchClient={search}
-              indexName={indexName.indexSuggestion}
-            >
-              <Configure hitsPerPage={3} query={query} />
-              <QuerySuggestions />
-            </InstantSearch>
+          {/* If don't want this sections go into config file  */}
+          {showRecentSearches && !mobile && !tablet && (
+            <RecentSearches title={t('recentSearches')} />
           )}
-          {isCategory && !mobile && !tablet && (
-            <Category attribute={categories.attribute} />
+          {/* If don't want this sections go into config file  */}
+          {showQuerySuggestions && (
+            <Index searchClient={searchClient} indexName={suggestionsIndex}>
+              <Configure
+                hitsPerPage={3}
+                query={query}
+                userToken={personaSelect}
+                enablePersonalization={true}
+                personalizationImpact={personalizationImpact}
+                personalizationFilters={personalizationFilters}
+              />
+              <QuerySuggestions title={t('suggestions')} />
+            </Index>
+          )}
+          {/* If don't want this sections go into config file  */}
+          {showCategories && !mobile && !tablet && (
+            <Category
+              attribute={federatedCategoriesAttribute}
+              title={t('categories')}
+            />
           )}
         </div>
-        {isProduct && (
+        {/* If don't want this sections go into config file  */}
+        {showProducts && (
           <div className="federatedSearch__middle">
             <Configure
               filters=""
               hitsPerPage={6}
-              userToken={userToken}
-              // enablePersonalization={true}
+              enablePersonalization={true}
+              userToken={personaSelect}
+              personalizationImpact={personalizationImpact}
+              personalizationFilters={personalizationFilters}
+              optionalFilters={segmentSelect}
+              query={query}
             />
-            <Products />
+            <Products
+              products={t('products')}
+              productsBefore={t('productsBefore')}
+              buttonShowAll={t('buttonShowAll')}
+              noResults={t('noResults')}
+            />
           </div>
         )}
-        {isBlogPosts && !mobile && !tablet && (
+        {/* If don't want this sections go into config file  */}
+        {showBlogPosts && !mobile && !tablet && (
           <div className="articles federatedSearch__right">
-            <InstantSearch
-              searchClient={search}
-              indexName={indexName.indexBlog}
-            >
+            <Index indexName={articlesIndex}>
               <Configure hitsPerPage={1} query={query} />
-              <Articles />
-            </InstantSearch>
+              <Articles titleArticles={t('articles')} />
+            </Index>
           </div>
         )}
       </div>
-    </motion.div>
+      <Redirect />
+    </div>
   );
 };
 

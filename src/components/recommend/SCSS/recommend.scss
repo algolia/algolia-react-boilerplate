@@ -1,0 +1,60 @@
+// ------------------------------------------
+// RECOMMEND
+// ------------------------------------------
+@use '../../../scss/partials' as *;
+
+// ------------------------------------------
+// RELATED PRODUCT
+// ------------------------------------------
+
+.recommend {
+  margin: 2rem 2rem;
+
+  .title{
+    @include titleH3($purple-algolia)
+  }
+
+  .auc-Recommend-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    padding: 1rem 0rem;
+    list-style-type: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .auc-Recommend-title {
+    display: none;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .auc-Recommend-item {
+    width: 20%;
+  }
+
+  .relatedItem {
+    @include hit($main-color,
+      $purple-algolia,
+      $purple-algolia,
+      $purple-algolia );
+
+      &__infos{
+        @include productName($grey-dark-color);
+
+        .brand{
+          @include brand($main-color);
+        }
+        .price {
+          @include price($purple-algolia)
+        }
+      }
+  }
+}
+
+// ------------------------------------------
+// TRENDING
+// ------------------------------------------
+
+

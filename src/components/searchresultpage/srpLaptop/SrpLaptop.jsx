@@ -1,155 +1,196 @@
 // This is the Search Results Page that you'll see on a normal computer screen
+import { lazy, Suspense } from 'react';
 
-import { useState } from 'react';
 // eslint-disable-next-line import/order
-import { Pagination, Configure, Index } from 'react-instantsearch-dom';
+import { Configure, Index } from 'react-instantsearch-hooks-web';
 
+import { windowSize } from '@/hooks/useScreenSize';
 import { useLocation } from 'react-router-dom';
-
-// import framer motion
-import { motion } from 'framer-motion';
-import { framerMotionPage, framerMotionFacet } from '../../../config/config';
-
-// Recoil state to directly access results
-import { useRecoilState, useRecoilValue } from 'recoil';
-
-import { configAtom, isStats, isInjectedHits } from '../../../config/config';
-import { queryAtom } from '../../../config/searchbox';
-
-// Import Persona State from recoil
-import { personaSelectedAtom } from '../../../config/header';
+import { useRecoilValue } from 'recoil';
 
 // Import Components
-import CustomClearRefinements from '../../../components/facets/ClearRefinement';
-import CustomCurrentRefinements from '../../../components/facets/CurrentRefinement';
-import GenericRefinementList from '../../../components/facets/Facets';
-import CustomHitsComponent from '../../../components/hits/CustomHits';
-import GiftCard from '../../../components/hits/GiftCard';
-import { Hit } from '../../../components/hits/Hits';
-import InfluencerCard from '../../../components/hits/InfluencerCard';
-import NikeCard from '../../../components/hits/SalesCard';
-import CustomSortBy from '../../../components/searchresultpage/SortBy';
-import { CustomStats } from '../../../components/searchresultpage/Stats';
-import { InjectedHits } from '../../../components/searchresultpage/injected-hits';
+import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
+import { Hit } from '@/components/hits/Hits';
+import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
+import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
+import Redirect from '@/components/redirects/Redirect';
+import CustomSortBy from '@/components/sortBy/SortBy';
+import { CustomStats } from '@/components/stats/Stats';
 
-import { indexName, indexInfluencer } from '../../../config/appConfig';
+import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
+import {
+  shouldHaveInjectedHits,
+  shouldHaveSorts,
+  shouldHaveStats,
+  shouldHaveTrendingFacets,
+  shouldHaveTrendingProducts,
+} from '@/config/featuresConfig';
+import { hitsPerPage } from '@/config/hitsConfig';
+import {
+  personalizationImpact,
+  personaSelectedAtom,
+  personaSelectedFiltersAtom,
+} from '@/config/personaConfig';
+import { queryAtom } from '@/config/searchboxConfig';
+import { segmentSelectedAtom } from '@/config/segmentConfig';
+import { sortBy } from '@/config/sortByConfig';
 
-// Import Config File
-import { customDataByType } from '../../../utils';
+const CustomClearRefinements = lazy(() =>
+  import('@/components/facets/components/ClearRefinement')
+);
+const CustomCurrentRefinements = lazy(() =>
+  import('@/components/facets/components/CurrentRefinement')
+);
+
+const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
+const CustomHitsComponent = lazy(() =>
+  import('@/components/hits/components/CustomHits')
+);
+
+import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
+
+//Import scope SCSS
+import '../SCSS/searchResultsPage.scss';
 
 const SrpLaptop = () => {
   // Recoil & React states
-  const [config] = useRecoilState(configAtom);
-  const stats = useRecoilValue(isStats);
-  const injectedValue = useRecoilValue(isInjectedHits);
-  const [injected, setInjected] = useState(false);
+  const stats = useRecoilValue(shouldHaveStats);
   const queryState = useRecoilValue(queryAtom);
+  const { isDesktop, mobile } = useRecoilValue(windowSize);
+
+  // Should show injected content or not
+  // Defined in config file
+  const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
+
+  // Get indexes Value
+  const index = useRecoilValue(mainIndex);
+  const { injectedContentIndex } = useRecoilValue(indexNames);
 
   // Define Stat Const
-  const hitsPerPageNotInjected = config.hitsPerPage.numberNotInjected;
-  const hitsPerPageInjected = config.hitsPerPage.numberInjected;
+  const { hitsPerPageNotInjected } = hitsPerPage;
 
   // Define Price Sort By Const
-  const priceSortBy = config.sortBy.value;
-  const labelItems = config.sortBy.labelIndex;
+  const { labelIndex } = useRecoilValue(sortBy);
+
+  const shouldHaveSortsAtom = useRecoilValue(shouldHaveSorts);
 
   // Get states of React Router
   const { state } = useLocation();
-  const personaSelect = useRecoilValue(personaSelectedAtom);
+
   // Persona
-  const userToken = personaSelect;
+  const userToken = useRecoilValue(personaSelectedAtom);
+  const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom);
+
+  // Segments
+  const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
+
+  // Trending
+  const shouldHaveTrendingProductsValue = useRecoilValue(
+    shouldHaveTrendingProducts
+  );
+
+  // Trending
+  const shouldHaveTrendingFacetsValue = useRecoilValue(
+    shouldHaveTrendingFacets
+  );
+
+  // Related to next conditional
+  let facetName;
+  let facetValue;
+
+  // Trending needs to know if you are on category page
+  if (state?.type === 'filter' && state?.action !== null) {
+    facetName = state.action.split(':')[0];
+    facetValue = state.action.split(':')[1].replace(/['"]+/g, '');
+  }
   return (
-    <div className="srp-container">
-      <motion.div
-        variants={framerMotionFacet}
-        initial={framerMotionFacet.initial}
-        animate={framerMotionFacet.animate}
-        exit={framerMotionFacet.exit}
-        transition={framerMotionFacet.transition}
-        className="srp-container__facets"
-      >
-        <GenericRefinementList />
-      </motion.div>
-      <motion.div
-        className="srp-container__hits"
-        variants={framerMotionPage}
-        initial={framerMotionPage.initial}
-        animate={framerMotionPage.animate}
-        exit={framerMotionPage.exit}
-        transition={framerMotionPage.transition}
-      >
-        {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
-        <div className="srp-container__stats-sort">
-          {stats && <CustomStats />}
-          {priceSortBy && (
-            <CustomSortBy
-              items={labelItems}
-              defaultRefinement={indexName.index}
-            />
+    <>
+      {/* Render Recommend component - Trending Products Slider */}
+      {/* Change header and maxRecommendations in /config/trendingConfig.js */}
+      <div className="recommend">
+        {shouldHaveTrendingProductsValue &&
+          queryState === '' &&
+          state?.type !== 'context' && (
+            <TrendingProducts facetName={facetName} facetValue={facetValue} />
           )}
-        </div>
-        {/* Refinements, to the left of the items, including a list of currently selected refinements */}
-        <div className="refinement-container">
-          <CustomCurrentRefinements />
-          <CustomClearRefinements />
-        </div>
-        <Configure
-          hitsPerPage={injected ? hitsPerPageInjected : hitsPerPageNotInjected}
-          analytics={false}
-          userToken={userToken}
-          enablePersonalization={true}
-          filters={state ? state : ''}
-          query={queryState && queryState}
-        />
-        <Index indexName={indexInfluencer.index}>
-          <Configure hitsPerPage={1} page={0} />
-        </Index>
-        {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
-        {injectedValue ? (
-          <InjectedHits
-            hitComponent={Hit}
-            slots={({ resultsByIndex }) => {
-              const indexValue = indexName.index;
-              const indexInfluencerValue = indexInfluencer.index;
-              const { noCta, nikeCard } = customDataByType(
-                resultsByIndex?.[indexValue]?.userData
-              );
-              // eslint-disable-next-line no-lone-blocks
-              {
-                // eslint-disable-next-line no-unused-expressions
-                nikeCard && setInjected(true);
-              }
-              return [
-                {
-                  getHits: () => [noCta],
-                  injectAt: noCta ? noCta.position : null,
-                  slotComponent: GiftCard,
-                },
-                {
-                  getHits: () => [nikeCard],
-                  injectAt: nikeCard ? nikeCard.position : null,
-                  slotComponent: NikeCard,
-                },
-                {
-                  injectAt: ({ position }) => position === 2,
-                  // eslint-disable-next-line no-shadow
-                  getHits: ({ resultsByIndex }) => {
-                    setInjected(true);
-                    return resultsByIndex[indexInfluencerValue]
-                      ? resultsByIndex[indexInfluencerValue].hits || []
-                      : [];
-                  },
-                  slotComponent: InfluencerCard,
-                },
-              ];
-            }}
-          />
-        ) : (
-          <CustomHitsComponent />
+      </div>
+      <div className={`srp-active srp-container`}>
+        {isDesktop && (
+          <div className="srp-container__facets">
+            <Suspense fallback={<SkeletonLoader type={'facet'} />}>
+              {/* Render Recommend component - Trending Facets */}
+              {/* Change config in /config/trendingConfig.js */}
+              {shouldHaveTrendingFacetsValue && (
+                <WrappedTrendingFacetValues
+                  attribute="brand"
+                  facetName={'brand'}
+                  limit={500}
+                  facetValue={facetValue}
+                />
+              )}
+              <GenericRefinementList />
+            </Suspense>
+          </div>
         )}
-        <Pagination />
-      </motion.div>
-    </div>
+        <div className="srp-container__hits">
+          {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
+          <div className="srp-container__stats-sort">
+            {stats && (
+              <Suspense fallback={''}>
+                <CustomStats />
+              </Suspense>
+            )}
+            {shouldHaveSortsAtom && (
+              <Suspense fallback={''}>
+                <CustomSortBy items={labelIndex} defaultRefinement={index} />
+              </Suspense>
+            )}
+          </div>
+          {/* Refinements, to the left of the items, including a list of currently selected refinements */}
+          <div className="refinement-container">
+            <Suspense fallback={''}>
+              <CustomCurrentRefinements />
+              <CustomClearRefinements />
+            </Suspense>
+          </div>
+          <Configure
+            hitsPerPage={hitsPerPageNotInjected}
+            analytics={false}
+            enablePersonalization={true}
+            userToken={userToken}
+            personalizationImpact={personalizationImpact}
+            personalizationFilters={personalizationFilters}
+            filters={
+              (state?.type === 'filter' || state?.type === 'rawFilter') &&
+              state?.action !== null
+                ? state.action
+                : ''
+            }
+            optionalFilters={segmentOptionalFilters}
+            ruleContexts={state?.type === 'context' ? state.action : ''}
+            query={queryState}
+            getRankingInfo={true}
+          />
+
+          {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
+
+          {shouldInjectContent ? (
+            <Suspense fallback={<SkeletonLoader type={'hit'} />}>
+              <Index indexName={injectedContentIndex}>
+                <Configure hitsPerPage={1} page={0} />
+              </Index>
+              {/* Injected content*/}
+              <InjectedHits hitComponent={Hit} />
+            </Suspense>
+          ) : (
+            <Suspense fallback={<SkeletonLoader type={'hit'} />}>
+              <CustomHitsComponent />
+            </Suspense>
+          )}
+          <Redirect />
+        </div>
+      </div>
+    </>
   );
 };
 

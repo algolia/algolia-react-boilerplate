@@ -1,15 +1,15 @@
 import { memo } from 'react';
 
 // components import
-import { ChevronRight } from '../../../assets/svg/SvgIndex';
+import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
 // recoil import
 import { useSetRecoilState } from 'recoil';
-import { queryAtom } from '../../../config/searchbox';
+import { queryAtom } from '@/config/searchboxConfig';
 
-const RecentSearches = memo(() => {
+const RecentSearches = memo(({ title }) => {
   const getSearches = localStorage.getItem('recentSearches');
   const cleanSearches = JSON.parse(getSearches);
   // router hook to navigate using a function
@@ -20,7 +20,7 @@ const RecentSearches = memo(() => {
   if (cleanSearches && cleanSearches.length !== 0) {
     return (
       <div className="recentSearches">
-        <h3 className="recentSearches__title">Recent Searches</h3>
+        <h3 className="recentSearches__title">{title}</h3>
         <ul className="recentSearches__items">
           {cleanSearches
             .reverse()

@@ -1,0 +1,84 @@
+@use '../../../../scss/partials/' as *;
+
+.filters-container {
+  &__pricecontainer {
+    width: 90%;
+    margin: 1rem auto;
+
+    &__prices {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+
+      p {
+        font-family: $main-font;
+        color: $purple-algolia;
+        font-weight: 600;
+      }
+    }
+    &__inputs {
+      display: flex;
+      align-items: center;
+      margin: 0.5rem 0;
+      justify-content: space-between;
+      p {
+        font-family: $main-font;
+        font-size: 0.8rem;
+      }
+      input {
+        font-size: 0.8rem;
+        background-color: $purple-algolia;
+        border-radius: 9px;
+        width: 30%;
+        text-align: center;
+        margin-left: 1rem;
+        padding: 0.2rem;
+        color: $white-color;
+        font-weight: 600;
+      }
+      input::placeholder {
+        padding: 0;
+        font-family: $main-font;
+        font-size: 0.8rem;
+        color: $white-color;
+        font-weight: 600;
+      }
+      input:focus::placeholder {
+        color: transparent;
+      }
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+    &__button-container {
+      display: flex;
+      justify-content: center;
+      &__button {
+        background-color: $purple-algolia;
+        border-radius: 8px;
+        padding: 0.5rem;
+        color: $white-color;
+        font-weight: 600;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  // Personalisation Slider price
+  .rc-slider {
+    .rc-slider-track,
+    .rc-slider-track-1 {
+      background: $purple-algolia-custom-gradient;
+    }
+    .rc-slider-handle-1 {
+      border: solid 1px $purple-algolia;
+    }
+    .rc-slider-handle-2 {
+      border: solid 1px $purple-algolia;
+    }
+    .rc-slider-handle-dragging {
+      box-shadow: (0 0 0 3px $purple-algolia);
+    }
+  }
+}

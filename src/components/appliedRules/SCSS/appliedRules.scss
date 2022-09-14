@@ -1,0 +1,269 @@
+// ------------------------------------------
+// applied Rules
+// ------------------------------------------
+@use '../../../scss/partials' as *;
+
+.appliedRules {
+  position: fixed;
+  animation: 0.5s showRules ease-in forwards;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -1rem);
+  width: 80%;
+  &__wp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(85, 104, 254, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(85, 104, 254, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    // border: 1px solid rgba(255, 255, 255, 0.18);
+   
+    
+    z-index: 997;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+      rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    min-height: 5rem;
+    padding: 2rem;
+  }
+
+  &__closeBtn{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+  }
+  &__noResult{
+      @include p-text($main-color);
+      font-size: 0.8rem;
+      font-weight: bold;
+  }
+  &__list {
+    // padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    &:empty {
+      display: none;
+    }
+    li {
+      @include p-text($main-color);
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+  }
+  li {
+    @include p-text($main-color);
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+}
+
+@keyframes showRules {
+  0% {
+    // opacity: 0;
+    bottom: -5rem;
+  }
+  100% {
+    // opacity: 1;
+    bottom: 0;
+  }
+}
+
+// SCORE BAR
+.appliedRules__persona {
+  h3 {
+    @include p-text($main-color, 700);
+    font-size: 1.2rem;
+  }
+  .scoreList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+
+      p {
+        @include p-text($main-color, bold);
+        font-weight: bold;
+        font-size: 0.8rem;
+      }
+
+      .scoreBar {
+        width: 50%;
+        height: 1rem;
+        overflow: hidden;
+        border-radius: 3rem;
+        background-color: rgb(241, 241, 241);
+
+        &__in {
+          border-radius: 3rem;
+          height: 100%;
+          padding: 0 0.5rem;
+          display: flex;
+          align-items: center;
+          p {
+            @include p-text($white-color, 300);
+            font-size: 0.8rem;
+            padding-top: 0.2rem;
+          }
+        }
+
+        .hierarchical1 {
+          width: 80%;
+          background: linear-gradient(
+            60deg,
+            rgba(50, 163, 0, 1) 16%,
+            rgba(27, 27, 27, 1) 79%,
+            rgba(0, 0, 0, 1) 100%
+          );
+        }
+        .hierarchical2 {
+          width: 50%;
+          background: linear-gradient(
+            60deg,
+            rgb(253, 0, 0) 16%,
+            rgba(27, 27, 27, 1) 79%,
+            rgba(249, 249, 249, 0.0970982142857143) 100%
+          );
+        }
+        .hierarchical3 {
+          width: 50%;
+          background: linear-gradient(
+            60deg,
+            rgb(207, 0, 253) 16%,
+            rgba(27, 27, 27, 1) 79%,
+            rgba(249, 249, 249, 0.0970982142857143) 100%
+          );
+        }
+        .colorBlack {
+          width: 45%;
+          background: linear-gradient(
+            60deg,
+            rgb(22, 132, 0) 16%,
+            rgba(27, 27, 27, 1) 79%,
+            rgba(249, 249, 249, 0.0970982142857143) 100%
+          );
+        }
+        .colorGender {
+          width: 15%;
+          background: linear-gradient(
+            60deg,
+            rgb(12, 120, 251) 16%,
+            rgba(27, 27, 27, 1) 79%,
+            rgba(249, 249, 249, 0.0970982142857143) 100%
+          );
+        }
+        .colorCategory {
+          width: 10%;
+          background: linear-gradient(
+            60deg,
+            rgba(0, 0, 0, 1) 16%,
+            rgba(27, 27, 27, 1) 79%,
+            rgba(249, 249, 249, 0.0970982142857143) 100%
+          );
+        }
+        .colorBrand {
+          width: 10%;
+          background: linear-gradient(
+            60deg,
+            rgb(220, 112, 4) 16%,
+            rgba(27, 27, 27, 1) 79%,
+            rgba(249, 249, 249, 0.0970982142857143) 100%
+          );
+        }
+        .colorCategories {
+          width: 10%;
+          background: linear-gradient(
+            60deg,
+            rgb(227, 220, 8) 16%,
+            rgba(27, 27, 27, 1) 79%,
+            rgba(249, 249, 249, 0.0970982142857143) 100%
+          );
+        }
+      }
+
+      .mobile-scoreBar {
+        width: 100%;
+
+        div {
+          min-width: 80px;
+        }
+      }
+    }
+  }
+}
+
+.appliedRules__list {
+  li {
+    margin: 0.5rem 0;
+  }
+}
+
+// SWITCH BTN
+.appliedRules__toggle {
+  position: relative;
+  margin: 1rem 0;
+  padding: 1rem 0;
+  .switch {
+    position: relative;
+    display: block;
+    width: 2.6rem;
+    height: 1.2rem;
+    transition: transform 0.1s ease-in-out;
+
+    &:active {
+      transform: scale(0.96);
+      transition: transform 0.1s ease-in-out;
+    }
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+      border-radius: 3rem;
+
+      &::before {
+        position: absolute;
+        content: '';
+        height: 1.6rem;
+        width: 1.6rem;
+        top: -0.21rem;
+        left: -0.2rem;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        background: linear-gradient(160deg, #f1f4ff, #f9faff);
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+    }
+  }
+  input:checked + .slider {
+    background: $purple-algolia-custom-gradient;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(1.7rem);
+    -ms-transform: translateX(1.7rem);
+    transform: translateX(1.7rem);
+  }
+}
