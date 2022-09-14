@@ -435,6 +435,11 @@ brew install git-flow-avh
 git flow init
 ```
 
+The repository is working around 3 branches : 
+- `main` branch, this branch is created for you to be able to fork the project with features turned off
+- `develop` branch, this branch is our feature branch where we're adding new feature before pushing it into production
+- `production`branch, this branch is our stable production branch
+
 [Husky](https://typicode.github.io/husky/#/) 🐶
 
 ```sh
