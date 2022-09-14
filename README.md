@@ -44,11 +44,13 @@ Before proceeding, please make sure you have the following:
 - Node v16.0.0+ installed
 - Yarn installed
 
+
+
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
 
 [There are more visual step by step guides here](https://drive.google.com/drive/folders/19Bb4EPT7IMG8ziDUJlu3TG31KanSCJ0T?usp=sharing)
 
-1. Clone this repo under a new name for your own demo.
+1. Clone this repo under a new name for your own demo. You can use the `main` branch that has some features turned off for easier integration
 
 2. Run `yarn` in the root directory and `yarn start` to view your project on [http://localhost:5173](http://localhost:5173/)
 
@@ -434,6 +436,11 @@ On Mac 👇
 brew install git-flow-avh
 git flow init
 ```
+
+The repository is working around 3 branches : 
+- `main` branch, this branch is created for you to be able to fork the project with features turned off
+- `develop` branch, this branch is our feature branch where we're adding new feature before pushing it into production
+- `production`branch, this branch is our stable production branch
 
 [Husky](https://typicode.github.io/husky/#/) 🐶
 
