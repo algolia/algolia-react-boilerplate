@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/algolia/algolia-react-boilerplate#readme",
   "dependencies": {
-    "3.0.0": "^3.0.0",
     "@algolia/react-instantsearch-widget-color-refinement-list": "^1.4.5",
     "@algolia/recommend": "^4.12.2",
     "@algolia/recommend-react": "^1.4.0",
@@ -35,6 +34,7 @@
     "@emotion/react": "^11.9.0",
     "@fortawesome/fontawesome-free": "^6.1.1",
     "@vitejs/plugin-react": "^2.0.0",
+    "3.0.0": "^3.0.0",
     "algoliasearch": "4.14.2",
     "codesandbox": "^2.2.3",
     "css-loader": "^6.5.1",
