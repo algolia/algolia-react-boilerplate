@@ -46,7 +46,7 @@
         min-height: 5rem;
         min-width: 40%;
         h1 {
-          @include titleH2($purple-algolia);
+          @include titleH2($second-color);
           // font-size: 0.9rem;
           text-transform: capitalize;
           margin: 0px;
@@ -70,10 +70,10 @@
             transition: 0.2 ease-in-out;
             @include p-text($main-color, 800);
             font-size: clamp(0.7rem, 0.25rem + 0.85vw , 1rem) ;
-            @include underliningAnimation($purple-algolia)
+            @include underliningAnimation($second-color)
           }
           .selected {
-            @include selectedNavItem($purple-algolia)
+            @include selectedNavItem($second-color)
           }
         }
       }

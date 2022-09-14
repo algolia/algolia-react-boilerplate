@@ -41,7 +41,7 @@
 //Recent searches
 .recentSearches{
     &__title{
-        @include titleH3($purple-algolia)
+        @include titleH3($second-color)
     }
     &__items{
         li{
@@ -60,12 +60,12 @@
 // Suggestion
 .suggestions{
     &__title{
-        @include titleH3($purple-algolia)
+        @include titleH3($second-color)
     }
     &__items{
         li{
             .ais-Highlight-highlighted{
-                @include highlight($purple-algolia)
+                @include highlight($second-color)
             }
             display: flex;
             align-items: center;
@@ -82,7 +82,7 @@
 // Categories
 .categories{
     &__title{
-        @include titleH3($purple-algolia)
+        @include titleH3($second-color)
     }
     &__items{
         li{
@@ -102,7 +102,7 @@
 // Products
 .products{
     &__title{
-        @include titleH3($purple-algolia);
+        @include titleH3($second-color);
         margin-left: 1rem;
     }
     &__items{
@@ -137,7 +137,7 @@
                @include brand($main-color)
             }
             .price{
-               @include price($purple-algolia)
+               @include price($second-color)
             }
         }
         &:hover{
@@ -157,7 +157,7 @@
 // Articles
 .articles{
     &__title{
-        @include titleH3($purple-algolia)
+        @include titleH3($second-color)
     }
     &__item{
         .image-wrapper{

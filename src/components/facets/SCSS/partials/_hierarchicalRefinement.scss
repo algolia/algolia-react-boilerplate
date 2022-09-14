@@ -43,14 +43,14 @@
           display: flex;
           @include facetsFilter('transparent',
             $main-color,
-            $purple-algolia );
+            $second-color );
   
           >p {
             font-weight: 300;
           }
   
           &:hover {
-            @include facetsHover($purple-algolia-custom-gradient);
+            @include facetsHover($second-color-custom-gradient);
           }
         }
   
@@ -72,14 +72,14 @@
           }
   
           &:hover>button {
-            @include facetsHover($purple-algolia-custom-gradient);
+            @include facetsHover($second-color-custom-gradient);
           }
         }
       }
     }
   
     .refined-filter {
-      @include refinedFacet($purple-algolia-custom-gradient, $white-color);
+      @include refinedFacet($second-color-custom-gradient, $white-color);
   
       p,
       span {

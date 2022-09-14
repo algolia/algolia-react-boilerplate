@@ -17,16 +17,16 @@
       position: relative;
       @include hit(
         $main-color,
-        $purple-algolia,
-        $purple-algolia,
-        $purple-algolia
+        $second-color,
+        $second-color,
+        $second-color
       );
 
       .productName {
         @include productName();
       }
       .price {
-        @include price($purple-algolia);
+        @include price($second-color);
       }
       .brand {
         @include brand($main-color);
@@ -38,7 +38,7 @@
         width: 100%;
         margin-left: 0.5rem;
         p {
-          @include p-text($purple-algolia);
+          @include p-text($second-color);
           font-size: 0.6rem;
           margin-top: 0.2rem;
         }

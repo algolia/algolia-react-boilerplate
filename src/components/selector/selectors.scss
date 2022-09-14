@@ -50,7 +50,7 @@
       cursor: pointer;
 
       &:hover{
-        @include btn-hover($purple-algolia, $white-color)
+        @include btn-hover($second-color, $white-color)
       }
     }
 }

@@ -17,7 +17,7 @@
         width: 12px;
         path{
             animation: blink 2s infinite ease-in-out;
-            // fill: $purple-algolia;
+            // fill: $second-color;
             transition: all 0.3s ease-in-out;
         }
     }
@@ -28,7 +28,7 @@
         fill: $main-color;
     }
     50%{
-        fill: $purple-algolia;
+        fill: $second-color;
     }
     100%{
         fill: $main-color;

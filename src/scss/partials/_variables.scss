@@ -6,7 +6,7 @@ $grey-light-color: rgb(221, 221, 221);
 $grey-border-light-color: rgb(211, 212, 216);
 $white-color: rgb(255, 255, 255);
 $blue-algolia: rgb(32, 125, 239);
-$purple-algolia: #5568fe;
+$second-color: #5568fe;
 $orange-color: rgb(216, 123, 51);
 
 // Background Color:
@@ -26,22 +26,22 @@ $grey-light-color-40: rgba($grey-light-color, 0.4);
 $grey-light-color-20: rgba($grey-light-color, 0.2);
 
 // Colors gradient
-$purple-algolia-custom-gradient: linear-gradient(
+$second-color-custom-gradient: linear-gradient(
   60deg,
   rgba(85, 104, 254, 1) 0%,
   rgba(131, 145, 255, 1) 100%
 );
-$purple-algolia-custom-reverse-gradient: linear-gradient(
+$second-color-custom-reverse-gradient: linear-gradient(
   99deg,
   rgba(84, 104, 255, 0.3) 31%,
   rgba(255, 255, 255, 1) 100%
 );
-$purple-algolia-custom-reverse-gradient-30: linear-gradient(
+$second-color-custom-reverse-gradient-30: linear-gradient(
   99deg,
   rgba(84, 104, 255, 0.3) 31%,
   rgba(255, 255, 255, 0.3) 100%
 );
-$purple-algolia-custom-gradient-overlay: linear-gradient(
+$second-color-custom-gradient-overlay: linear-gradient(
   60deg,
   rgba(85, 104, 254, 0.5) 0%,
   rgba(131, 145, 255, 0.3) 100%

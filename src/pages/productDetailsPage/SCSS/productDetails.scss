@@ -75,12 +75,12 @@
         }
       }
       .add-to-cart {
-        @include btn($purple-algolia-custom-gradient, $white-color);
+        @include btn($second-color-custom-gradient, $white-color);
         margin-top: 5rem;
         gap: 1rem;
         width: 10rem;
         &:hover {
-          @include btn-hover($purple-algolia-custom-gradient, $white-color);
+          @include btn-hover($second-color-custom-gradient, $white-color);
           gap: 1.5rem;
         }
         svg {
@@ -92,7 +92,7 @@
         }
       }
       .price {
-        @include price($purple-algolia);
+        @include price($second-color);
         font-size: 2rem;
         strike {
             margin-right: 0.5rem;
