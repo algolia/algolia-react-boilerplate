@@ -200,7 +200,7 @@
         transform: translateX(10px);
         path{
           transition: all 0.3s ease-in-out;
-          fill: $purple-algolia
+          fill: $second-color
         }
       }
       #ball2__wp{
@@ -208,7 +208,7 @@
         transform: translateX(-10px);
         path{
           transition: all 0.3s ease-in-out;
-          fill: $purple-algolia
+          fill: $second-color
         }
        
       }
@@ -217,7 +217,7 @@
         transform: translateX(10px);
         path{
           transition: all 0.3s ease-in-out;
-          fill: $purple-algolia
+          fill: $second-color
         }
       }
     }
