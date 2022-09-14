@@ -1,6 +1,7 @@
 // Component for the searchbox being used when a category is selected eg. 'Mens'xz
 import { useNavigate } from 'react-router-dom';
 import { CloseButton } from '@/assets/svg/SvgIndex';
+import clamp from '@/utils/clampCalcFunction';
 
 //Use Translation
 import { useTranslation } from 'react-i18next';
@@ -8,7 +9,6 @@ import { useTranslation } from 'react-i18next';
 const SearchInCategory = ({ state }) => {
   // navigate is used by React Router
   const navigate = useNavigate();
-
   // Import const translation
   // Use the translator
   const { t } = useTranslation('translation', {
@@ -42,6 +42,22 @@ const SearchInCategory = ({ state }) => {
       <div className="searchbox__category">
         <p>
           {t('searchInCategory')} {state.action}
+        </p>
+        <span
+          onClick={() => {
+            navigate('/search');
+          }}
+          className="searchbox__category__close-btn"
+        >
+          <CloseButton />
+        </span>
+      </div>
+    );
+  } else if (state?.type === 'rawFilter') {
+    return (
+      <div className="searchbox__category searchbox__category-raw">
+        <p>
+          {t('searchInCategory')} {state.name}
         </p>
         <span
           onClick={() => {

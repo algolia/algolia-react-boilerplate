@@ -11,4 +11,6 @@ function clamp(minFontSize, maxFontSize, minScreenSize, maxScreenSize){
     // return output
 }
 
+// preferredValue = yAxisIntersection[rem] + (slope * 100)[vw]
+
 export default clamp
