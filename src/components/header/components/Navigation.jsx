@@ -22,11 +22,20 @@ import {
 import { Selectors } from '../../selector/Selectors';
 
 // Import segment configuration
-import { segmentConfig } from '@/config/segmentConfig';
-import { personaConfig } from '@/config/personaConfig';
 import { languagesConfig } from '@/config/languagesConfig';
+import { personaConfig } from '@/config/personaConfig';
+import { segmentConfig } from '@/config/segmentConfig';
+import { useState } from 'react';
 
-const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
+const Navigation = ({
+  isMenuOpen,
+  setIsMenuOpen,
+  mobile,
+  tablet,
+  setDisplaySubMenu,
+  categoryName,
+  setCategoryName,
+}) => {
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
 
@@ -63,7 +72,6 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   // Import the navigation links, as defined in the config
   const [links] = useRecoilState(linksHeader);
-
   return (
     <ul
       className={`${
@@ -103,6 +111,12 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
                 setIsMenuOpen(false);
               }
             }}
+            onMouseEnter={() => {
+              if (link.name !== 'All') {
+                setDisplaySubMenu(true);
+                setCategoryName(link);
+              }
+            }}
           >
             <p
               className={
@@ -124,7 +138,13 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           </div>
         )}
         {shouldShowSegmentsAtom && (
-          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
             <Selectors props={segmentConfig} />
           </div>
         )}

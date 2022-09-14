@@ -28,10 +28,10 @@ export const linksHeader = atom({
       url: '/search',
     },
     {
-      name: 'Gardens & Outdoor',
+      name: 'All Offers',
       type: 'filter',
-      filter: 'Garden & Outdoor Best Sellers',
-      url: '/gardens',
+      filter: 'All Offers',
+      url: '/alloffers',
     },
     {
       name: 'Baking & Decorating',
@@ -46,10 +46,10 @@ export const linksHeader = atom({
       url: '/home',
     },
     {
-      name: 'Cooking',
+      name: 'Student Essentials',
       type: 'filter',
-      filter: 'Cooking Utensils',
-      url: '/cooking',
+      filter: 'Student Essentials',
+      url: '/student',
     },
     // For an uilisation of your own made filter
     // {

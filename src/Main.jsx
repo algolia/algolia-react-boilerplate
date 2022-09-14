@@ -40,6 +40,7 @@ import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
 import SearchErrorToast from './utils/ErrorHandler';
+import SubMenu from './components/header/components/SubMenu';
 
 export const Main = () => {
   const index = useRecoilValue(mainIndex);
@@ -63,11 +64,16 @@ export const Main = () => {
   // Show/hide the panel if click on the guide btn
   const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
 
-  // Value that shows Network Errors to Guide you to the correct Configuration
+  // Value that shows Network Errors to Guide you to the co rrect Configuration
   const isNetworkErorrs = useRecoilValue(showNetworkErorrs);
+  // Display or not the submenu
+  const [displaySubMenu, setDisplaySubMenu] = useState(false);
 
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
+
+  // Set Name of navigation items
+  const [categoryName, setCategoryName] = useState(null);
 
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
@@ -75,7 +81,12 @@ export const Main = () => {
 
       <div className="visible">
         <Configure query={queryState} />
-        <Header />
+        <Header
+          setDisplaySubMenu={setDisplaySubMenu}
+          categoryName={categoryName}
+          setCategoryName={setCategoryName}
+        />
+        {displaySubMenu && <SubMenu categoryName={categoryName} setDisplaySubMenu={setDisplaySubMenu}/>}
         {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
         <AnimatePresence>
           {showDemoGuide && <DemoGuide setshowDemoGuide={setshowDemoGuide} />}

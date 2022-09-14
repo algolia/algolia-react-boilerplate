@@ -82,13 +82,13 @@ const NoResults = () => {
                     viewed:
                   </p>
                   <div className="recommend">
-                    <RelatedProducts
+                    {/* <RelatedProducts
                       recommendClient={recommendClient}
                       indexName={index}
                       objectIDs={[lastId]}
                       itemComponent={RelatedItem}
                       maxRecommendations={5}
-                    />
+                    /> */}
                   </div>
                 </div>
               )}

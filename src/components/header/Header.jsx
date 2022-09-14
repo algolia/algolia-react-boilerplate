@@ -13,7 +13,7 @@ import Navigation from '../header/components/Navigation';
 //Import scope SCSS
 import './SCSS/header.scss';
 
-const Header = () => {
+const Header = ({ setDisplaySubMenu, setCategoryName, categoryName }) => {
   // Handle screen sizing & responsiveness with this hook
   const { isDesktop, tablet, mobile } = useRecoilValue(windowSize);
 
@@ -28,7 +28,11 @@ const Header = () => {
         )}
       </header>
       <div className="container__header-nav">
-        <Navigation />
+        <Navigation
+          setDisplaySubMenu={setDisplaySubMenu}
+          setCategoryName={setCategoryName}
+          categoryName={categoryName}
+        />
       </div>
     </div>
   );

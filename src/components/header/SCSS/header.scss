@@ -168,3 +168,32 @@
     @include hamburger-menu-inactive;
   }
 }
+
+// Submenu
+.submenu-container {
+  z-index: 1000;
+  background-color: $white-color;
+  width: 60%;
+  padding: 3rem;
+  height: 40%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  &__ul {
+    &__li {
+      cursor: pointer;
+      color: #757575;
+      font-size: 1.2rem;
+      &:hover {
+        color: $black-color;
+      }
+    }
+  }
+  img {
+    width: 40%;
+    border-radius: 10px;
+  }
+}

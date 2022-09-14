@@ -19,7 +19,7 @@ export const shouldHaveDemoGuide = atom({
 // Should the segment selector be displayed on the screen
 export const shouldHaveSegments = atom({
   key: 'shouldHaveSegments', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 });
 
 // Should the language selector be displayed on the screen
