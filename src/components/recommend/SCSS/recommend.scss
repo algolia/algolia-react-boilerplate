@@ -11,7 +11,7 @@
   margin: 2rem 2rem;
 
   .title{
-    @include titleH3($purple-algolia)
+    @include titleH3($second-color)
   }
 
   .auc-Recommend-list {
@@ -36,9 +36,9 @@
 
   .relatedItem {
     @include hit($main-color,
-      $purple-algolia,
-      $purple-algolia,
-      $purple-algolia );
+      $second-color,
+      $second-color,
+      $second-color );
 
       &__infos{
         @include productName($grey-dark-color);
@@ -47,7 +47,7 @@
           @include brand($main-color);
         }
         .price {
-          @include price($purple-algolia)
+          @include price($second-color)
         }
       }
   }

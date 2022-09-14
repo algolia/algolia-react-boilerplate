@@ -12,7 +12,7 @@
 
       p {
         font-family: $main-font;
-        color: $purple-algolia;
+        color: $second-color;
         font-weight: 600;
       }
     }
@@ -27,7 +27,7 @@
       }
       input {
         font-size: 0.8rem;
-        background-color: $purple-algolia;
+        background-color: $second-color;
         border-radius: 9px;
         width: 30%;
         text-align: center;
@@ -55,7 +55,7 @@
       display: flex;
       justify-content: center;
       &__button {
-        background-color: $purple-algolia;
+        background-color: $second-color;
         border-radius: 8px;
         padding: 0.5rem;
         color: $white-color;
@@ -69,16 +69,16 @@
   .rc-slider {
     .rc-slider-track,
     .rc-slider-track-1 {
-      background: $purple-algolia-custom-gradient;
+      background: $second-color-custom-gradient;
     }
     .rc-slider-handle-1 {
-      border: solid 1px $purple-algolia;
+      border: solid 1px $second-color;
     }
     .rc-slider-handle-2 {
-      border: solid 1px $purple-algolia;
+      border: solid 1px $second-color;
     }
     .rc-slider-handle-dragging {
-      box-shadow: (0 0 0 3px $purple-algolia);
+      box-shadow: (0 0 0 3px $second-color);
     }
   }
 }

@@ -15,7 +15,7 @@
   overflow: scroll;
 
   h2 {
-    @include titleH2($purple-algolia)
+    @include titleH2($second-color)
   }
 }
 
@@ -57,7 +57,7 @@
   svg {
     width: 6px;
     path {
-      fill: $purple-algolia;
+      fill: $second-color;
     }
   }
 }
@@ -79,7 +79,7 @@
       gap: 0.3rem;
       span {
         font-size: 0.7rem;
-        color: $purple-algolia;
+        color: $second-color;
       }
       p {
         @include p-text($main-color);

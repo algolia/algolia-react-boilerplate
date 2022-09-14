@@ -10,9 +10,10 @@ import { atom } from 'recoil';
 
 
 // Should we show the demo guide in this demo
+// Demo guide is here to help you demo your POC. Before turning the feature ON you can configure it in demoGuideConfig.js
 export const shouldHaveDemoGuide = atom({
   key: 'shouldHaveDemoGuide',
-  default: true,
+  default: false,
 });
 
 // Make sure to go into segmentConfig.js to set everything up

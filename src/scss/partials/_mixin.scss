@@ -85,7 +85,7 @@
   font-size: clamp(1rem, -0.71rem + 0.94vw, 1.2rem)
 }
 
-@mixin titleH3($text-color: $purple-algolia) {
+@mixin titleH3($text-color: $second-color) {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -183,7 +183,7 @@
     
   }
   &::-webkit-scrollbar-thumb{
-    background-color: $purple-algolia;
+    background-color: $second-color;
     box-shadow: inset 0px 28px 0px $background-color;
   }
   
@@ -240,7 +240,7 @@
       background: white;
 
       a,span{
-        color: $purple-algolia;
+        color: $second-color;
       }
 
      
@@ -290,7 +290,7 @@
       @include productImage()
     }
     &__heart {
-      @include heartIcon($purple-algolia)
+      @include heartIcon($second-color)
     }
     .mainImage-opacity {
       animation: fadeOutImage 0.7s forwards ease-in-out;
@@ -340,7 +340,7 @@
     color: $productName-color;
   }
   .ais-Highlight-highlighted {
-    @include highlight($purple-algolia);
+    @include highlight($second-color);
   }
 }
 
@@ -351,7 +351,7 @@
   text-transform: capitalize;
 }
 
-@mixin price($price-color: $purple-algolia) {
+@mixin price($price-color: $second-color) {
   color: $price-color;
   font-weight: 700;
   font-size: 1rem;
@@ -367,7 +367,7 @@
   text-transform: capitalize;
 }
 
-@mixin highlight($highlight-color : $purple-algolia) {
+@mixin highlight($highlight-color : $second-color) {
   color: $highlight-color;
   font-style: normal;
   font-weight: 600;
@@ -539,7 +539,7 @@
   }
 
   &__line {
-    background-color: $purple-algolia;
+    background-color: $second-color;
     height: 2px;
     width: 1rem;
   }
