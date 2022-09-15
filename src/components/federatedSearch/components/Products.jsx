@@ -56,11 +56,15 @@ function Products(props) {
                   <img src={get(hit, image)} alt="" />
                 </div>
                 <div className="infos">
-                  <p className="brand">{get(hit, brand)}</p>
-                  <p className="productName">{get(hit, productName)}</p>
-                  <p className="price">
-                    <Price hit={hit} />
-                  </p>
+                  <div className="infos__prices">
+                    <div>
+                      <p className="brand">{get(hit, brand)}</p>
+                      <p className="productName">{get(hit, productName)}</p>
+                    </div>
+                    <p className="price">
+                      £ <Price hit={hit} />
+                    </p>
+                  </div>
                 </div>
               </li>
             );

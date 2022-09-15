@@ -4,7 +4,7 @@
 import { atom } from 'recoil';
 
 // This const defines the attribute used to show category suggestions if turned on
-export const federatedCategoriesAttribute = 'category.lvl0';
+export const federatedCategoriesAttribute = 'category.lvl2';
 
 // This const defines what sections should be shown in federated search or not
 // Adjust each value to true or false depending on what you wish to show

@@ -11,6 +11,13 @@ import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 import { federatedCategoriesAttribute } from '@/config/federatedConfig';
 
+const categoryArray = [
+  'Home Furnishings',
+  'Bathroom',
+  'Kitchen & Dining',
+  'Home Security',
+];
+
 function Category(props) {
   const { items } = useRefinementList(props);
   //Get title
@@ -19,24 +26,24 @@ function Category(props) {
   const navigate = useNavigate();
   return (
     <div className="categories">
-      <h3 className="categories__title">{title}</h3>
+      <h3 className="categories__title">Trending Searches</h3>
       <div className="categories__wrapper">
         <ul className="categories__items">
-          {items.map((hit) => {
+          {categoryArray.map((hit) => {
             return (
               <li
-                key={hit.label}
+                key={hit}
                 onClick={() => {
                   navigate('/search', {
                     state: {
                       type: 'filter',
-                      action: `${federatedCategoriesAttribute}:"${hit.label}"`,
+                      action: `${federatedCategoriesAttribute}:"Home > Home > ${hit}"`,
                     },
                   });
                 }}
               >
                 <ChevronRight />
-                <p>{hit.label.split('>').pop()}</p>
+                <p>{hit}</p>
               </li>
             );
           })}

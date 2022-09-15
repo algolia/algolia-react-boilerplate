@@ -11,6 +11,7 @@ import {
   categoryPageFilterAttribute,
   linksHeader,
   selectorNavigationRef,
+  subMenuOpen,
 } from '@/config/navigationConfig';
 
 // Import Recoil config
@@ -64,6 +65,7 @@ const Navigation = ({
 
   // Get references for dropdowns in Navigation
   const selectorsNavigation = useSetRecoilState(selectorNavigationRef);
+  const setSubmenu = useSetRecoilState(subMenuOpen);
 
   // Should show or not the sections
   const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
@@ -113,7 +115,7 @@ const Navigation = ({
             }}
             onMouseEnter={() => {
               if (link.name !== 'All') {
-                setDisplaySubMenu(true);
+                setSubmenu(true);
                 setCategoryName(link);
               }
             }}

@@ -28,28 +28,10 @@ export const linksHeader = atom({
       url: '/search',
     },
     {
-      name: 'All Offers',
-      type: 'filter',
-      filter: 'All Offers',
-      url: '/alloffers',
-    },
-    {
-      name: 'Baking & Decorating',
-      type: 'filter',
-      filter: 'Baking & Decorating',
-      url: '/baking',
-    },
-    {
       name: 'Home',
       type: 'filter',
       filter: 'Home',
       url: '/home',
-    },
-    {
-      name: 'Student Essentials',
-      type: 'filter',
-      filter: 'Student Essentials',
-      url: '/student',
     },
     // For an uilisation of your own made filter
     // {
@@ -78,4 +60,9 @@ export const selectorNavigationRef = atom({
 export const categorySelectionAtom = atom({
   key: 'categorySelectionAtom',
   default: null,
+});
+
+export const subMenuOpen = atom({
+  key: 'subMenuOpen',
+  default: false,
 });

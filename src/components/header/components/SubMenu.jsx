@@ -2,6 +2,10 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { subMenuOpen } from '@/config/navigationConfig';
+
+import { useSetRecoilState } from 'recoil';
+
 const objectForSubMenu = {
   AllOffers: [
     'Health & Beauty Offers',
@@ -122,11 +126,12 @@ const switchRenderFunction = (categoryName) => {
 
 const SubMenu = ({ categoryName, setDisplaySubMenu }) => {
   const subMenuReference = useRef();
+  const setSubmenu = useSetRecoilState(subMenuOpen);
   return (
     <div
       className="submenu-container"
       onMouseLeave={() => {
-        setDisplaySubMenu(false);
+        setSubmenu(false);
       }}
     >
       <ul className="submenu-container__ul">

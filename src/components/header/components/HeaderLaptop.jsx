@@ -38,6 +38,8 @@ import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
+import { subMenuOpen } from '@/config/navigationConfig';
+
 const HeaderLaptop = () => {
   const [isLogoLoaded, setIsLogoLoaded] = useState(false);
 
@@ -48,12 +50,18 @@ const HeaderLaptop = () => {
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
   const displayDemoTour = useRecoilValue(shouldShowDemoTour);
   const rulesApplied = useSetRecoilState(rulesAtom);
+  const setSubmenu = useSetRecoilState(subMenuOpen);
 
   useOutsideClick(searchboxRef, () => setSbIsActive(false));
 
   return (
     <div className="container">
-      <div className="container__header-top">
+      <div
+        className="container__header-top"
+        onMouseEnter={() => {
+          setSubmenu(false);
+        }}
+      >
         <div className="container__header-top__logo">
           <Link
             to="/"

@@ -23,6 +23,8 @@ import {
   shouldShowAlert,
   showNetworkErorrs,
 } from '@/config/demoGuideConfig';
+// Import Config for the header
+import { subMenuOpen } from '@/config/navigationConfig';
 import { shouldHaveDemoGuide } from '@/config/featuresConfig';
 import { isCarouselLoaded } from './config/carouselConfig';
 
@@ -55,6 +57,8 @@ export const Main = () => {
   // Should the alert badges for the demo guide be shown
   const shouldShowAlertAtom = useRecoilValue(shouldShowAlert);
 
+  const subMenuDisplay = useRecoilValue(subMenuOpen);
+
   // Show rules applied panel when switch on in the demo guide panel
   const isRulesSwitchToggleChecked = useRecoilValue(isRulesSwitchToggle);
 
@@ -86,7 +90,12 @@ export const Main = () => {
           categoryName={categoryName}
           setCategoryName={setCategoryName}
         />
-        {displaySubMenu && <SubMenu categoryName={categoryName} setDisplaySubMenu={setDisplaySubMenu}/>}
+        {subMenuDisplay && (
+          <SubMenu
+            categoryName={categoryName}
+            setDisplaySubMenu={setDisplaySubMenu}
+          />
+        )}
         {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
         <AnimatePresence>
           {showDemoGuide && <DemoGuide setshowDemoGuide={setshowDemoGuide} />}
