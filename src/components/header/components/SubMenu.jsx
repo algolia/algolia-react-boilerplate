@@ -40,7 +40,7 @@ const objectForSubMenu = {
 const switchRenderFunction = (categoryName) => {
   // navigate is used by React Router
   const navigate = useNavigate();
-
+  const setSubmenu = useSetRecoilState(subMenuOpen);
   switch (categoryName.name) {
     case 'All Offers':
       return objectForSubMenu.AllOffers.map((obj) => {
@@ -93,6 +93,7 @@ const switchRenderFunction = (categoryName) => {
                   action: `category.lvl1:'Home > ${obj}'`,
                 },
               });
+              setSubmenu(false);
             }}
           >
             {obj}
@@ -157,7 +158,7 @@ const SubMenu = ({ categoryName, setDisplaySubMenu }) => {
       )}
       {categoryName.name === 'Home' && (
         <img
-          src="https://play-lh.googleusercontent.com/rHIlOS9pb_qQ6H8DRmw6vzlth2CTWlXIpEuWa9nch-zhWn7zOE5-5RNZSlwfsGtlRiRF"
+          src="https://www.wilko.com/assets/bWFzdGVyfHJvb3R8NjQxMTF8aW1hZ2UvanBlZ3xoYWEvaDMxLzkyOTg3NTY3OTY0NDYvQkFVLTE5MDcyMi1TUy5qcGd8Njc0ZmRhZDkwYWUzZGI0MmFkY2Q5NTExNzQzMDZkNGQ3MWZlMWU1Yjk1OTU1ZDc0ZmJmNzZiOWY5YzA1NTA5ZQ==/BAU-190722-SS.jpg"
           alt=""
         />
       )}

@@ -27,7 +27,7 @@ export const personaConfig = [
     label: 'Emma',
     description: 'Emma James is a woman who likes DIY art',
     type: 'persona',
-    personalizationFilters: ['category.lvl1: Home > Decorating & DIY'],
+    personalizationFilters: ["'category.lvl1: Home > Pets'<score=1>"],
   },
   {
     value: 'john_aniston',
@@ -35,8 +35,7 @@ export const personaConfig = [
     description: 'John is a man who bought furnitures',
     type: 'persona',
     personalizationFilters: [
-      'category.lvl2: Home > Garden & Outdoor > Garden Furniture',
-      'category.lvl2: Home > Home > Home Furniture',
+      "'category.lvl2: Home > Garden & Outdoor > Garden Furniture'<score=1>",
     ],
   },
 ];
