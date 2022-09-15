@@ -16,6 +16,7 @@ const categoryArray = [
   'Bathroom',
   'Kitchen & Dining',
   'Home Security',
+  'Lighting'
 ];
 
 function Category(props) {
