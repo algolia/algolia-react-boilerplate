@@ -77,7 +77,7 @@
   }
 
   .refined-filter {
-    @include refinedFacet($main-color, $white-color);
+    @include refinedFacet($black-color, $white-color);
 
     p,
     span {
