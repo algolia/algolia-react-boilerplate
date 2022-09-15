@@ -44,11 +44,13 @@ Before proceeding, please make sure you have the following:
 - Node v16.0.0+ installed
 - Yarn installed
 
+
+
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
 
 [There are more visual step by step guides here](https://drive.google.com/drive/folders/19Bb4EPT7IMG8ziDUJlu3TG31KanSCJ0T?usp=sharing)
 
-1. Clone this repo under a new name for your own demo.
+1. Clone this repo under a new name for your own demo. You can use the `main` branch that has some features turned off for easier integration
 
 2. Run `yarn` in the root directory and `yarn start` to view your project on [http://localhost:5173](http://localhost:5173/)
 

@@ -1,6 +1,5 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
-
 import { useEffect, useState } from 'react';
 
 // Recommend
@@ -85,7 +84,7 @@ const ProductDetails = () => {
   const [readyToLoad, setReadyToLoad] = useState(false);
 
   // current Object ID from URL
-  const currentObjectID = location.pathname.split('/')[2];
+  const currentObjectID = location.pathname.split('/')[3];
 
   // if there is no stored hit
   useEffect(() => {
@@ -130,14 +129,8 @@ const ProductDetails = () => {
   const { isDesktop } = useRecoilValue(windowSize);
 
   // Get hit attribute from config file
-  const {
-    image,
-    productName,
-    brand,
-    sizeFilter,
-    colour,
-    colourHexa,
-  } = hitsConfig;
+  const { image, productName, brand, sizeFilter, colour, colourHexa } =
+    hitsConfig;
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1];
 
@@ -149,6 +142,7 @@ const ProductDetails = () => {
 
   let fbtRecommendationsProducts;
   let relatedRecommendationsProducts;
+
   if (shouldHaveFbtProductsValue) {
     const { recommendations } = useFrequentlyBoughtTogether({
       recommendClient,
@@ -177,16 +171,12 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-      <div
-        className={`${
-          !isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'
-        }`}
-      >
+      <div className={`${!isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'}`}>
         <div
-          className={`${
-            !isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
-          }`}
-          onClick={() => navigate(-1)}
+          className={`${!isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'}`}
+          onClick={() => {
+            navigate('/search');
+          }}
         >
           <ChevronLeft />
           <p>{t('buttonBack')}</p>
@@ -225,9 +215,7 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-        <div
-          className={`${!isDesktop ? 'pdp-mobile__right' : 'pdp__right'}`}
-        >
+        <div className={`${!isDesktop ? 'pdp-mobile__right' : 'pdp__right'}`}>
           <div
             className="pdp__right__infos"
             initial={{

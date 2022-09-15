@@ -11,6 +11,7 @@
 }
 
 .srp-container {
+  position: relative;
   width: 95%;
   height: 100%;
   margin: 1rem auto;
@@ -151,6 +152,95 @@
 // ------------------------------------------
 .search-box-invisible {
   display: none;
+}
+
+// ------------------------------------------
+// MOBILE
+// ------------------------------------------
+
+.srp-container-mobile, .srp-container{
+  position: relative;
+  width: 95%;
+  height: 100%;
+  margin: 1rem auto;
+  display: flex;
+  gap: 3rem;
+
+  &__filterPicto{
+    position: relative;
+    z-index: 901;
+    cursor: pointer;
+    svg{
+      width: 20px;
+      height: auto;
+    }
+    #ball1__wp{
+      transition: all 0.3s ease-in-out;
+     
+    }
+    #ball2__wp{
+      transition: all 0.3s ease-in-out;
+    
+    }
+    #ball3__wp{
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &__filterPicto-active{
+    position: relative;
+    z-index: 901;
+    cursor: pointer;
+    svg{
+      width: 20px;
+      height: auto;
+
+      #ball1__wp{
+        transition: all 0.3s ease-in-out;
+        transform: translateX(10px);
+        path{
+          transition: all 0.3s ease-in-out;
+          fill: $second-color
+        }
+      }
+      #ball2__wp{
+        transition: all 0.3s ease-in-out;
+        transform: translateX(-10px);
+        path{
+          transition: all 0.3s ease-in-out;
+          fill: $second-color
+        }
+       
+      }
+      #ball3__wp{
+        transition: all 0.3s ease-in-out;
+        transform: translateX(10px);
+        path{
+          transition: all 0.3s ease-in-out;
+          fill: $second-color
+        }
+      }
+    }
+    }
+
+  &__facets-mobile{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background: $background-color;
+    z-index: 900;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+  }
+  &__facets-mobile-active{
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0%);
+
+ 
+  }
 }
 
 @media only screen and (max-width: 480px) {

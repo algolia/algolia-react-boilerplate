@@ -50,10 +50,14 @@ function Products(props) {
                   className="image-wrapper"
                   onClick={() => {
                     hitState(hit);
-                    navigate(`/search/${hit[objectID]}`);
+                    navigate(`/search/product/${hit[objectID]}`);
                   }}
                 >
-                  <img src={get(hit, image)} alt="" />
+                  <img
+                    src={get(hit, image)}
+                    loading="lazy"
+                    alt={get(hit, productName)}
+                  />
                 </div>
                 <div className="infos">
                   <p className="brand">{get(hit, brand)}</p>

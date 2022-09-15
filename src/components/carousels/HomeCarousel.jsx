@@ -119,7 +119,7 @@ function Carousel(props) {
                   onClick={() => {
                     hitState(hit);
                     // navigate to the product show page
-                    navigate(`/search/${hit[objectID]}`);
+                    navigate(`/search/product/${hit[objectID]}`);
                   }}
                 >
                   <p className="name">{get(hit, productName)}</p>

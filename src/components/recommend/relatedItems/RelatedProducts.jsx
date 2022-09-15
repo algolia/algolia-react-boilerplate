@@ -34,11 +34,11 @@ const RelatedItem = ({ item }) => {
         className="relatedItem__imgWrapper"
         onClick={() => {
           hitState(item);
-          navigate(`/search/${item[objectID]}`);
+          navigate(`/search/product/${item[objectID]}`);
           useStoreIdToLocalStorage(item[objectID]);
         }}
       >
-        <img src={item[image]} alt={item[category]} />
+        <img src={item[image]} loading="lazy" alt={item[category]} />
         <div className="relatedItem__imgWrapper__heart">
           <Heart />
         </div>

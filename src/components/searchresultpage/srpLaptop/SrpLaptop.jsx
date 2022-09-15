@@ -6,7 +6,7 @@ import { Configure, Index } from 'react-instantsearch-hooks-web';
 
 import { windowSize } from '@/hooks/useScreenSize';
 import { useLocation } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Import Components
 import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
@@ -18,6 +18,7 @@ import CustomSortBy from '@/components/sortBy/SortBy';
 import { CustomStats } from '@/components/stats/Stats';
 
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
+import { isFacetPanelOpen } from '@/config/refinementsConfig';
 import {
   shouldHaveInjectedHits,
   shouldHaveSorts,
@@ -51,6 +52,8 @@ import InjectedHits from '@/components/hits/components/injected-hits/InjectedHit
 
 //Import scope SCSS
 import '../SCSS/searchResultsPage.scss';
+import { FilterPicto } from '@/assets/svg/SvgIndex';
+import { use } from 'i18next';
 
 const SrpLaptop = () => {
   // Recoil & React states
@@ -94,6 +97,10 @@ const SrpLaptop = () => {
     shouldHaveTrendingFacets
   );
 
+  // Handle the facet panel on mobile
+  const [isFacetsPanelOpen, setIsFacetsPanelOpen] =
+    useRecoilState(isFacetPanelOpen);
+
   // Related to next conditional
   let facetName;
   let facetValue;
@@ -114,27 +121,48 @@ const SrpLaptop = () => {
             <TrendingProducts facetName={facetName} facetValue={facetValue} />
           )}
       </div>
-      <div className={`srp-active srp-container`}>
-        {isDesktop && (
-          <div className="srp-container__facets">
-            <Suspense fallback={<SkeletonLoader type={'facet'} />}>
-              {/* Render Recommend component - Trending Facets */}
-              {/* Change config in /config/trendingConfig.js */}
-              {shouldHaveTrendingFacetsValue && (
-                <WrappedTrendingFacetValues
-                  attribute="brand"
-                  facetName={'brand'}
-                  limit={500}
-                  facetValue={facetValue}
-                />
-              )}
-              <GenericRefinementList />
-            </Suspense>
-          </div>
-        )}
+      <div
+        className={` ${
+          !isDesktop ? 'srp-container-mobile' : ''
+        } srp-active srp-container`}
+      >
+        <div
+          className={`${
+            !isDesktop
+              ? 'srp-container__facets-mobile'
+              : 'srp-container__facets'
+          } ${isFacetsPanelOpen ? 'srp-container__facets-mobile-active' : ''}`}
+        >
+          <Suspense fallback={<SkeletonLoader type={'facet'} />}>
+            {/* Render Recommend component - Trending Facets */}
+            {/* Change config in /config/trendingConfig.js */}
+            {shouldHaveTrendingFacetsValue && (
+              <WrappedTrendingFacetValues
+                attribute="brand"
+                facetName={'brand'}
+                limit={500}
+                facetValue={facetValue}
+              />
+            )}
+            <GenericRefinementList />
+          </Suspense>
+        </div>
+
         <div className="srp-container__hits">
           {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
           <div className="srp-container__stats-sort">
+            {!isDesktop && (
+              <div
+                className={
+                  isFacetsPanelOpen
+                    ? 'srp-container__filterPicto-active'
+                    : 'srp-container__filterPicto'
+                }
+                onClick={() => setIsFacetsPanelOpen(!isFacetsPanelOpen)}
+              >
+                <FilterPicto />
+              </div>
+            )}
             {stats && (
               <Suspense fallback={''}>
                 <CustomStats />

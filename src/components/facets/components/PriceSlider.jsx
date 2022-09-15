@@ -115,7 +115,7 @@ function PriceSlider(props) {
           </div>
           <div className="filters-container__pricecontainer__button-container">
             <button className="filters-container__pricecontainer__button-container__button">
-              Valider
+              Refine
             </button>
           </div>
         </form>
