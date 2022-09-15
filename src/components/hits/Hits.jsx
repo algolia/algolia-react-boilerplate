@@ -115,6 +115,7 @@ const Hit = ({ hit }) => {
               className={
                 shouldShowRankingInfo ? 'secondImage-opacity' : 'secondImage'
               }
+              loading="lazy"
               src={get(hit, imageAlt)}
               alt={get(hit, category)}
               onError={(e) => (e.currentTarget.src = placeHolderError)}
@@ -126,6 +127,7 @@ const Hit = ({ hit }) => {
                   ? 'mainImage-opacity'
                   : 'mainImage-visible'
               }
+              loading="lazy"
               src={get(hit, image)}
               key={2}
               alt={get(hit, category)}

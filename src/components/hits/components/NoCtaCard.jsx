@@ -13,7 +13,7 @@ const NoCtaCard = ({ hit }) => {
       animate="show"
       className="hit-list"
     >
-      <img src={hit.image.desktop_url} alt="" />
+      <img src={hit.image.desktop_url} loading="lazy" alt="" />
     </motion.div>
   );
 };

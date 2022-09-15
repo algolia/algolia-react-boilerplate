@@ -25,7 +25,7 @@ function Articles(props) {
         return (
           <div key={index} className="articles__item">
             <div className="image-wrapper">
-              <img src={get(hit, image)} alt="" />
+              <img src={get(hit, image)} loading="lazy" alt="blog post image" />
 
               <p className="date">{get(hit, date)}</p>
               <div className="overlay"></div>
