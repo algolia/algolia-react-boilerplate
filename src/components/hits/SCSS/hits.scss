@@ -15,18 +15,18 @@
     grid-row-gap: 1rem;
     .srpItem {
       position: relative;
-      @include hit(
-        $main-color,
-        $main-color,
-        $main-color,
-        $main-color
-      );
+      @include hit($main-color, $main-color, $main-color, $main-color);
 
       .productName {
         @include productName();
       }
       .price {
         @include price($main-color);
+      }
+      .price__container {
+        width: 100%;
+        display: flex;
+        justify-content: end;
       }
       .brand {
         @include brand($main-color);

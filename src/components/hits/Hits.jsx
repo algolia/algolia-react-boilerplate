@@ -154,9 +154,11 @@ const Hit = ({ hit }) => {
             </h3>
             <p className="brand">{get(hit, brand)}</p>
           </div>
-          <p className="price">
-            £<Price hit={hit} />
-          </p>
+          <div className='price__container'>
+            <p className="price">
+              £ <Price hit={hit} />
+            </p>
+          </div>
         </div>
       </>
     </motion.div>
