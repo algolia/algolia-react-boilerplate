@@ -53,6 +53,22 @@ const SearchInCategory = ({ state }) => {
         </span>
       </div>
     );
+  } else if (state?.type === 'rawFilter') {
+    return (
+      <div className="searchbox__category searchbox__category-raw">
+        <p>
+          {t('searchInCategory')} {state.name}
+        </p>
+        <span
+          onClick={() => {
+            navigate('/search');
+          }}
+          className="searchbox__category__close-btn"
+        >
+          <CloseButton />
+        </span>
+      </div>
+    );
   } else {
     return null;
   }

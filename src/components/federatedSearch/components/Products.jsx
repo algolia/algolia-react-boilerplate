@@ -50,7 +50,7 @@ function Products(props) {
                   className="image-wrapper"
                   onClick={() => {
                     hitState(hit);
-                    navigate(`/search/${hit[objectID]}`);
+                    navigate(`/search/product/${hit[objectID]}`);
                   }}
                 >
                   <img

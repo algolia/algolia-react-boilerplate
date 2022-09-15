@@ -34,7 +34,7 @@ const RelatedItem = ({ item }) => {
         className="relatedItem__imgWrapper"
         onClick={() => {
           hitState(item);
-          navigate(`/search/${item[objectID]}`);
+          navigate(`/search/product/${item[objectID]}`);
           useStoreIdToLocalStorage(item[objectID]);
         }}
       >

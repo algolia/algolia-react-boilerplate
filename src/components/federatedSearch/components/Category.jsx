@@ -17,6 +17,11 @@ function Category(props) {
   const { title } = props;
   // router hook to navigate using a function
   const navigate = useNavigate();
+
+  const slugify = (label) => {
+    const slug = label.replace(/>/g, '-').split(' ').join('');
+    return slug;
+  };
   return (
     <div className="categories">
       <h3 className="categories__title">{title}</h3>
@@ -27,7 +32,7 @@ function Category(props) {
               <li
                 key={hit.label}
                 onClick={() => {
-                  navigate('/search', {
+                  navigate(`/search/${slugify(hit.label)}`, {
                     state: {
                       type: 'filter',
                       action: `${federatedCategoriesAttribute}:"${hit.label}"`,

@@ -84,8 +84,12 @@ export const Main = () => {
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<HomePage />} />
             <Route path="/search" element={<SearchResultsPage />} />
+            <Route path="/search/:categories" element={<SearchResultsPage />} />
             {/* objectID is the unique identifier for an algolia record */}
-            <Route path="/search/:objectID" element={<ProductDetails />} />
+            <Route
+              path="/search/product/:objectID"
+              element={<ProductDetails />}
+            />
           </Routes>
           {carouselLoaded && <Footer />}
         </AnimatePresence>
