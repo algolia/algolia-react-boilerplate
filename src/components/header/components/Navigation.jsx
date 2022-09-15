@@ -94,7 +94,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
               ) {
                 action = `${link.rawFilter}`;
               }
-              navigate(`/search`, {
+              navigate(`/search${link.url}`, {
                 state: { type: link.type, name: link.name, action: action },
               });
 

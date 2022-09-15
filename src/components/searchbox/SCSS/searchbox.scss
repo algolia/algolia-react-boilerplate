@@ -53,7 +53,7 @@
       }
       p {
         @include p-text($white-color);
-        font-size: 0.7rem;
+        font-size: clamp(0.5rem, 0.17rem + 0.64vw, 0.75rem);
       }
       svg {
         border: 1px solid #000000;
@@ -68,6 +68,9 @@
         top: -5px;
         right: 30px;
       }
+    }
+    &__category-raw{
+      width: 60%;
     }
   }
   .searchboxCategory {

@@ -105,7 +105,7 @@ const Hit = ({ hit }) => {
           }}
           onClick={() => {
             hitState(hit);
-            navigate(`/search/${hit[objectID]}`);
+            navigate(`/search/product/${hit[objectID]}`);
             useStoreIdToLocalStorage(hit[objectID]);
           }}
         >
