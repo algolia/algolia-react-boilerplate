@@ -53,7 +53,11 @@ function Products(props) {
                     navigate(`/search/${hit[objectID]}`);
                   }}
                 >
-                  <img src={get(hit, image)} alt="" />
+                  <img
+                    src={get(hit, image)}
+                    loading="lazy"
+                    alt={get(hit, productName)}
+                  />
                 </div>
                 <div className="infos">
                   <p className="brand">{get(hit, brand)}</p>

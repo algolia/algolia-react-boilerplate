@@ -8,7 +8,7 @@ import './SCSS/footer.scss';
 const Footer = (props) => {
   return (
     <div className="footer">
-      <img src={footer} alt="" />
+      <img src={footer} loading="lazy" alt="" />
     </div>
   );
 };
