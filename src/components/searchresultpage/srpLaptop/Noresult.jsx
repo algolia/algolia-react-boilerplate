@@ -30,6 +30,8 @@ import { indexNames } from '@/config/algoliaEnvConfig';
 // Federated congif from recoil
 import { federatedSearchConfig } from '@/config/federatedConfig';
 
+import { shouldHaveRelatedProducts } from '@/config/featuresConfig';
+
 // This is rendered when there are no results to display
 const NoResults = () => {
   //Get the query
@@ -41,6 +43,10 @@ const NoResults = () => {
   const { suggestionsIndex } = useRecoilValue(indexNames);
   // Get the main index
   const index = useRecoilValue(mainIndex);
+
+  const shouldHaveRelatedProductsValue = useRecoilValue(
+    shouldHaveRelatedProducts
+  );
   return (
     <div className="no-results">
       <div className="no-results__infos">
@@ -81,15 +87,17 @@ const NoResults = () => {
                     Customers who searched <span>{getQueryState}</span> also
                     viewed:
                   </p>
-                  <div className="recommend">
-                    <RelatedProducts
-                      recommendClient={recommendClient}
-                      indexName={index}
-                      objectIDs={[lastId]}
-                      itemComponent={RelatedItem}
-                      maxRecommendations={5}
-                    />
-                  </div>
+                  {shouldHaveRelatedProductsValue && (
+                    <div className="recommend">
+                      <RelatedProducts
+                        recommendClient={recommendClient}
+                        indexName={index}
+                        objectIDs={[lastId]}
+                        itemComponent={RelatedItem}
+                        maxRecommendations={5}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </>
