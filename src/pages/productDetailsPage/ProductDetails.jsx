@@ -1,6 +1,5 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
-
 import { useEffect, useState } from 'react';
 
 // Recommend
@@ -149,6 +148,7 @@ const ProductDetails = () => {
 
   let fbtRecommendationsProducts;
   let relatedRecommendationsProducts;
+  
   if (shouldHaveFbtProductsValue) {
     const { recommendations } = useFrequentlyBoughtTogether({
       recommendClient,
@@ -183,10 +183,12 @@ const ProductDetails = () => {
         }`}
       >
         <div
-          className={`${
-            !isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
-          }`}
-          onClick={() => navigate(-1)}
+          className={`${!isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'
+            }`}
+          onClick={() => {
+            navigate('/search')
+          }
+          }
         >
           <ChevronLeft />
           <p>{t('buttonBack')}</p>
