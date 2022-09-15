@@ -19,6 +19,9 @@ function Banner(props) {
               className="banner-srp"
               // NB Inline style is necessary here due to how background images work
               style={{
+                backgroundSize: 'cover',
+                backgroundPosition: '25% 75%',
+                backgroundRepeat: 'no-repeat',
                 backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.45)), url(${item.banner})`,
               }}
             >
