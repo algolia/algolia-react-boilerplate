@@ -80,7 +80,7 @@
         gap: 1rem;
         width: 10rem;
         &:hover {
-          @include btn-hover($main-color, $white-color);
+          @include btn-hover(#757575, $white-color);
           gap: 1.5rem;
         }
         svg {
