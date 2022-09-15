@@ -103,9 +103,7 @@ const SrpLaptop = () => {
     facetName = state.action.split(':')[0];
     facetValue = state.action.split(':')[1].replace(/['"]+/g, '');
   }
-  useEffect(() => {
-    console.log(personalizationFilters);
-  }, [personalizationFilters]);
+
   return (
     <>
       {/* Render Recommend component - Trending Products Slider */}

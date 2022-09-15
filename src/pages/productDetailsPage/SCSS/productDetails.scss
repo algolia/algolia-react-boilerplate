@@ -75,7 +75,7 @@
         }
       }
       .add-to-cart {
-        @include btn($main-color, $white-color);
+        @include btn($black-color, $white-color);
         margin-top: 5rem;
         gap: 1rem;
         width: 10rem;

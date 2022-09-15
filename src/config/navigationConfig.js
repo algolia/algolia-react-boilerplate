@@ -8,7 +8,7 @@ import { atom } from 'recoil';
 // It will create a filter which will be used when a category page link is clicked on
 // Please refer to linksHeader to define the category page values which will be filtered
 // ------------------------------------------
-export const categoryPageFilterAttribute = 'category.lvl0';
+export const categoryPageFilterAttribute = 'category.lvl1';
 
 // ------------------------------------------
 // This const defines the navigation aspect of the header
@@ -30,7 +30,7 @@ export const linksHeader = atom({
     {
       name: 'Home',
       type: 'filter',
-      filter: 'Home',
+      filter: 'Home > Home',
       url: '/home',
     },
     // For an uilisation of your own made filter

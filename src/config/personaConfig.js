@@ -23,21 +23,18 @@ export const personaConfig = [
   },
 
   {
-    value: 'emma_james',
+    value: '',
     label: 'Emma',
     description: 'Emma James is a woman who likes DIY art',
     type: 'persona',
-    personalizationFilters: [
-      "category.lvl1:'Home > Pets'<score=1>",
-      'brand:Pawhut<score=1>',
-    ],
+    personalizationFilters: ["category.lvl1:'Home > Pets'<score=1>"],
   },
   {
-    value: 'john_aniston',
+    value: '',
     label: 'John',
     description: 'John is a man who bought furnitures',
     type: 'persona',
-    personalizationFilters: ['brand:Pawhut<score=5>'],
+    personalizationFilters: ["category.lvl1:'Home > Garden & Outdoor'<score=1>"],
   },
 ];
 
