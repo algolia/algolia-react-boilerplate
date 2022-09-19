@@ -1,6 +1,6 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 
 // Algolia Import
 import { useSearchBox } from 'react-instantsearch-hooks-web';
@@ -29,6 +29,8 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 //Use Translation
 import { useTranslation } from 'react-i18next';
+
+import { debounce } from 'lodash';
 
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
@@ -63,15 +65,21 @@ function CustomSearchBox(props) {
     keyPrefix: 'searchBox',
   });
 
-  const refineFunction = (query) => {
-    // Empty array of rules on each Keystrokes
-    rulesApplied([]);
-    // Refine query in all the app through recoil
-    setQueryState(query);
-
+  const debouncedSetQueryParams = useRef(
+    debounce((query) => {
     // Update the query URL param to the value of the new search
     searchParams.set('query', query)
     setSearchParams(searchParams)
+    }, 500)
+  ).current;
+
+  const refineFunction = (query) => {
+    // Empty array of rules on each Keystrokes
+    rulesApplied([]);
+
+    debouncedSetQueryParams(query)
+    // Refine query in all the app through recoil
+    setQueryState(query);
   };
 
   return (
