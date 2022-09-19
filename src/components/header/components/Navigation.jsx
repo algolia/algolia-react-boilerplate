@@ -1,16 +1,17 @@
 // Render the navigation menu in the header
 
 // React Router
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 // Recoil Header State
 import { queryAtom } from '@/config/searchboxConfig';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 
 // Import Config for the header
 import {
   categoryPageFilterAttribute,
   linksHeader,
   selectorNavigationRef,
+  navigationStateAtom
 } from '@/config/navigationConfig';
 
 // Import Recoil config
@@ -64,6 +65,10 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Import the navigation links, as defined in the config
   const [links] = useRecoilState(linksHeader);
 
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  const [navigationState, setNavigationState] = useRecoilState(navigationStateAtom);
+
   return (
     <ul
       className={`${
@@ -80,7 +85,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
             key={link.url}
             onClick={() => {
               // Set query to nothing when clicking on a category
-              setQueryState('');
+              // setQueryState('');
 
               //Build action based on link type, then navigate
               let action = null;
@@ -94,9 +99,15 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
               ) {
                 action = `${link.rawFilter}`;
               }
-              navigate(`/search${link.url}`, {
-                state: { type: link.type, name: link.name, action: action },
-              });
+
+              setNavigationState({ type: link.type, name: link.name, action: action })
+              searchParams.set('category', link.name)
+              navigate(
+                { 
+                  pathname: "/search",
+                  search: `?${searchParams}`,
+                }
+              )
 
               // Only used for Mobile view
               if (tablet || mobile) {
@@ -107,7 +118,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
             <p
               className={
                 highlightingCat() === link.name.toLowerCase() ||
-                state?.name === link.name
+                navigationState?.name === link.name
                   ? 'selected'
                   : ''
               }
