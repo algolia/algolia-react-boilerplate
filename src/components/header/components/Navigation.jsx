@@ -62,7 +62,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   const shouldShowLanguageSelected = useRecoilValue(shouldHaveLanguages);
 
   // Import the navigation links, as defined in the config
-  const [links] = useRecoilValue(linksHeader);
+  const links = useRecoilValue(linksHeader);
 
   return (
     <ul
