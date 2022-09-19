@@ -23,6 +23,7 @@ function WrappedTrendingFacetValues(props) {
   const { facetValuesAttribute, maxFacetValuesRecommendations } =
     trendingConfig;
 
+  // Hook which receives a list of trending facet values
   const { recommendations } = useTrendingFacets({
     recommendClient,
     indexName: index,
@@ -30,12 +31,12 @@ function WrappedTrendingFacetValues(props) {
     maxRecommendations: maxFacetValuesRecommendations,
   });
 
-  // Import const translation
-  // Use the translator
+  // Import and use translation
   const { t } = useTranslation('translation', {
     keyPrefix: 'srp',
   });
 
+  // Control state so we can render the recommend component only when we have received the recommendations
   useEffect(() => {
     setRecommendationsLoaded(recommendations.length > 0);
   }, [recommendations]);

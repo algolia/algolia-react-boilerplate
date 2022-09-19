@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-// import { connectStateResults } from 'react-instantsearch-dom';
+
 import { useInstantSearch } from 'react-instantsearch-hooks-web';
 
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -26,7 +26,7 @@ import PersonaScore from './PersonaScore';
 function CustomAppliedRules(props) {
   const { results } = useInstantSearch(props);
   const [rules, setRules] = useRecoilState(rulesAtom);
-  const [debounceRules, setDebounceRules] = useState([]);
+
   //Get score from Persona
   const resultsScore = useRecoilValue(scorePersonadAtom);
   const personaName = useRecoilValue(personaSelectedName);

@@ -11,7 +11,6 @@ import {
 import { ChevronDown, ChevronUp, Glass } from '@/assets/svg/SvgIndex';
 
 // Import components
-
 import HierarchicalMenu from './components/Hierarchical';
 import PriceSlider from './components/PriceSlider';
 
@@ -22,13 +21,11 @@ import { refinements } from '@/config/refinementsConfig';
 import './SCSS/facets.scss';
 
 // expects an attribute which is an array of items
-
 function GenericRefinementList(props) {
   const {
     items,
     refine,
     searchForItems,
-    canToggleShowMore,
     isShowingMore,
     toggleShowMore,
   } = useRefinementList(props);
@@ -113,8 +110,8 @@ function GenericRefinementList(props) {
 
 // ColorRefinementList custom for Hooks
 function CustomColorRefinement(props) {
-  const { items, refine, searchForItems } = useRefinementList(props);
-  const { title, options } = props;
+  const { items, refine } = useRefinementList(props);
+  const { title } = props;
 
   return (
     <div className="filters-container">
@@ -149,9 +146,6 @@ function CustomColorRefinement(props) {
                     refine(item.value);
                   }}
                 >
-                  {/* <span className="filters-container__content__list__refinement-count">
-                  {item.count}
-                </span> */}
                 </input>
                 <p>{item.label.split(';')[0]}</p>
               </div>

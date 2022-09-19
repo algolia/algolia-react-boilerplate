@@ -1,7 +1,7 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
 
-import { memo, useState } from 'react';
+import { memo } from 'react';
 
 // Algolia Import
 import { useSearchBox } from 'react-instantsearch-hooks-web';
@@ -20,7 +20,6 @@ import { rulesAtom } from '@/config/appliedRulesConfig';
 import {
   isSearchInCategory,
   queryAtom,
-  searchBoxAtom,
   searchBoxIsActive,
 } from '@/config/searchboxConfig';
 
@@ -31,7 +30,7 @@ import { useTranslation } from 'react-i18next';
 
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
-import useOutsideClick from '@/hooks/useOutsideClick';
+
 //Import scope SCSS
 import './SCSS/searchbox.scss';
 
@@ -52,8 +51,7 @@ function CustomSearchBox(props) {
   // Get array of rules from Recoil
   const rulesApplied = useSetRecoilState(rulesAtom);
 
-  // Import const translation
-  // Use the translator
+  // Import and use translation
   const { t } = useTranslation('translation', {
     keyPrefix: 'searchBox',
   });

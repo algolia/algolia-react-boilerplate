@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { hitsConfig } from '@/config/hitsConfig';
 
-//Recoil to display ot not persona
 import { useRecoilValue } from 'recoil';
 
 import { isPersonnaEventToggle } from '@/config/demoGuideConfig';
@@ -23,11 +22,8 @@ const PersonaScore = (props) => {
     hierarchicalCategoriesLvl0,
     hierarchicalCategoriesLvl1,
     hierarchicalCategoriesLvl2,
-    hierarchicalCategoriesLvl3,
     genderFilter,
-    category,
     brand,
-    categories,
   } = hitsConfig;
 
   const [scorePersona, setScorePersona] = useState({
