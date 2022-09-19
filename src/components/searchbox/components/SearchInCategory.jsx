@@ -5,22 +5,26 @@ import { CloseButton } from '@/assets/svg/SvgIndex';
 //Use Translation
 import { useTranslation } from 'react-i18next';
 
-const SearchInCategory = ({ state }) => {
+import { navigationStateAtom } from '@/config/navigationConfig';
+import { useRecoilState } from 'recoil';
+
+const SearchInCategory = () => {
+  const [navigationState, setNavigationState] = useRecoilState(navigationStateAtom);
+
   // navigate is used by React Router
   const navigate = useNavigate();
 
-  // Import const translation
-  // Use the translator
+  // Import and use translation
   const { t } = useTranslation('translation', {
     keyPrefix: 'srp',
   });
 
-  if (state?.type === 'filter' && state?.action !== null) {
+  if (navigationState?.type === 'filter' && navigationState?.action !== null) {
     return (
       <div className="searchbox__category">
         <p>
           {t('searchInCategory')}{' '}
-          {state.action
+          {navigationState.action
             .split(':')[1]
             .split('>')
             .pop()
@@ -29,6 +33,7 @@ const SearchInCategory = ({ state }) => {
         </p>
         <span
           onClick={() => {
+            setNavigationState({})
             navigate('/search');
           }}
           className="searchbox__category__close-btn"
@@ -37,14 +42,15 @@ const SearchInCategory = ({ state }) => {
         </span>
       </div>
     );
-  } else if (state?.type === 'context') {
+  } else if (navigationState?.type === 'context') {
     return (
       <div className="searchbox__category">
         <p>
-          {t('searchInCategory')} {state.action}
+          {t('searchInCategory')} {navigationState.action}
         </p>
         <span
           onClick={() => {
+            setNavigationState({})
             navigate('/search');
           }}
           className="searchbox__category__close-btn"
@@ -53,14 +59,15 @@ const SearchInCategory = ({ state }) => {
         </span>
       </div>
     );
-  } else if (state?.type === 'rawFilter') {
+  } else if (navigationState?.type === 'rawFilter') {
     return (
       <div className="searchbox__category searchbox__category-raw">
         <p>
-          {t('searchInCategory')} {state.name}
+          {t('searchInCategory')} {navigationState.name}
         </p>
         <span
           onClick={() => {
+            setNavigationState({})
             navigate('/search');
           }}
           className="searchbox__category__close-btn"

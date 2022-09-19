@@ -55,11 +55,14 @@ import '../SCSS/searchResultsPage.scss';
 import { FilterPicto } from '@/assets/svg/SvgIndex';
 import { use } from 'i18next';
 
+import { navigationStateAtom } from '@/config/navigationConfig';
+
 const SrpLaptop = () => {
   // Recoil & React states
   const stats = useRecoilValue(shouldHaveStats);
   const queryState = useRecoilValue(queryAtom);
   const { isDesktop, mobile } = useRecoilValue(windowSize);
+  const navigationState = useRecoilValue(navigationStateAtom);
 
   // Should show injected content or not
   // Defined in config file
@@ -106,9 +109,9 @@ const SrpLaptop = () => {
   let facetValue;
 
   // Trending needs to know if you are on category page
-  if (state?.type === 'filter' && state?.action !== null) {
-    facetName = state.action.split(':')[0];
-    facetValue = state.action.split(':')[1].replace(/['"]+/g, '');
+  if (navigationState?.type === 'filter' && navigationState?.action !== null) {
+    facetName = navigationState.action.split(':')[0];
+    facetValue = navigationState.action.split(':')[1].replace(/['"]+/g, '');
   }
   return (
     <>
@@ -117,7 +120,7 @@ const SrpLaptop = () => {
       <div className="recommend">
         {shouldHaveTrendingProductsValue &&
           queryState === '' &&
-          state?.type !== 'context' && (
+          navigationState?.type !== 'context' && (
             <TrendingProducts facetName={facetName} facetValue={facetValue} />
           )}
       </div>
@@ -189,13 +192,13 @@ const SrpLaptop = () => {
             personalizationImpact={personalizationImpact}
             personalizationFilters={personalizationFilters}
             filters={
-              (state?.type === 'filter' || state?.type === 'rawFilter') &&
-              state?.action !== null
-                ? state.action
+              (navigationState?.type === 'filter' || navigationState?.type === 'rawFilter') &&
+              navigationState?.action !== null
+                ? navigationState.action
                 : ''
             }
             optionalFilters={segmentOptionalFilters}
-            ruleContexts={state?.type === 'context' ? state.action : ''}
+            ruleContexts={navigationState?.type === 'context' ? navigationState.action : ''}
             query={queryState}
             getRankingInfo={true}
           />

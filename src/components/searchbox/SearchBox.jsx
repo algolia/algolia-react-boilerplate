@@ -1,16 +1,15 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
-
-import { memo, useState } from 'react';
+import { memo, useRef } from 'react';
 
 // Algolia Import
 import { useSearchBox } from 'react-instantsearch-hooks-web';
 
 // Import navigate function to route to results page on search submit
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 // Import Recoil
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import SVG from file as a component
 import { Glass } from '@/assets/svg/SvgIndex';
@@ -24,10 +23,14 @@ import {
   searchBoxIsActive,
 } from '@/config/searchboxConfig';
 
+import { navigationStateAtom } from '@/config/navigationConfig';
+
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
 //Use Translation
 import { useTranslation } from 'react-i18next';
+
+import { debounce } from 'lodash';
 
 // Custom Hooks
 import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
@@ -36,6 +39,10 @@ import useOutsideClick from '@/hooks/useOutsideClick';
 import './SCSS/searchbox.scss';
 
 function CustomSearchBox(props) {
+  const navigationState = useRecoilValue(navigationStateAtom);
+  // Handle URL search parameters through React Router
+  let [searchParams, setSearchParams] = useSearchParams();
+
   const { query } = useSearchBox(props);
 
   // Recoil State
@@ -58,9 +65,19 @@ function CustomSearchBox(props) {
     keyPrefix: 'searchBox',
   });
 
+  const debouncedSetQueryParams = useRef(
+    debounce((query) => {
+    // Update the query URL param to the value of the new search
+    searchParams.set('query', query)
+    setSearchParams(searchParams)
+    }, 500)
+  ).current;
+
   const refineFunction = (query) => {
     // Empty array of rules on each Keystrokes
     rulesApplied([]);
+
+    debouncedSetQueryParams(query)
     // Refine query in all the app through recoil
     setQueryState(query);
   };
@@ -80,7 +97,13 @@ function CustomSearchBox(props) {
           event.preventDefault();
           setQueryState(query);
           useStoreQueryToLocalStorage(query);
-          navigate('/search');
+
+          navigate(
+            { 
+              pathname: "/search",
+              search: `?${searchParams}`,
+            }
+          )
         }}
       >
         <input
@@ -97,7 +120,7 @@ function CustomSearchBox(props) {
             refineFunction(event.currentTarget.value);
           }}
         />
-        {state && isSearchInCategory && <SearchInCategory state={state} />}
+        {navigationState && isSearchInCategory && <SearchInCategory state={state} />}
         <Glass />
       </form>
     </div>
