@@ -1,5 +1,6 @@
 // React router
 import { BrowserRouter as Router } from 'react-router-dom';
+
 // Recoil State Management
 import { RecoilRoot } from 'recoil';
 
@@ -11,13 +12,14 @@ import './scss/index.scss';
 
 // Import Components
 import { Main } from './Main';
+
+// Add function from config file to scroll on top every change of page
 import ScrollToTop from './config/scrollOnTop';
 
 const App = () => {
   return (
     <RecoilRoot>
       <Router>
-        {/* Add function from config file to scroll on top every change of page */}
         <ScrollToTop />
         <ScreenResizer />
         <Main />

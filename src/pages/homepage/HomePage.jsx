@@ -2,17 +2,17 @@
 // By default it contains some banners and carousels
 import { useState } from 'react';
 
-import { lazy, Suspense, useEffect, useRef } from 'react';
+import { lazy, Suspense, useRef } from 'react';
 
-// recoil import
+// Fetch values from state
 import { useRecoilValue } from 'recoil';
+
+//Use Translation
+import { useTranslation } from 'react-i18next';
 
 // Import screenShot/ images for the homepage
 import homepage_1 from '@/assets/homepage/homepage_1.webp';
 import homepage_2 from '@/assets/homepage/homepage_2.webp';
-
-import { mainIndex } from '@/config/algoliaEnvConfig';
-import { framerMotionPage } from '@/config/animationConfig';
 
 // should carousel be shown or not and config for carousel
 import { carouselConfig } from '@/config/carouselConfig';
@@ -26,14 +26,7 @@ import {
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
-// components import
-// const CustomHomeBanners = lazy(() =>
-//   import('@/components/banners/HomeBanners')
-// );
 import CustomHomeBanners from '@/components/banners/HomeBanners';
-
-//Use Translation
-import { useTranslation } from 'react-i18next';
 
 const FederatedSearch = lazy(() =>
   import('@/components/federatedSearch/FederatedSearch')
@@ -65,8 +58,7 @@ const HomePage = () => {
     shouldHaveTrendingProducts
   );
 
-  // Import const translation
-  // Use the translator
+  // Import and use translation
   const { t } = useTranslation('translation', {
     keyPrefix: 'homePage',
   });
@@ -79,10 +71,9 @@ const HomePage = () => {
           <FederatedSearch />
         </Suspense>
       )}
+      
       {/* Load custom banners */}
-      {/* <Suspense> */}
       <CustomHomeBanners />
-      {/* </Suspense> */}
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (

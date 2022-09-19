@@ -56,8 +56,7 @@ import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 //Import scope SCSS
 import './SCSS/productDetails.scss';
 
-// Import translation
-//Use Translation
+// Import and use translation
 import { useTranslation } from 'react-i18next';
 
 const ProductDetails = () => {
