@@ -14,7 +14,6 @@ export const categoryPageFilterAttribute = 'hierarchicalCategories.lvl0';
 // This const defines the navigation aspect of the header
 // The name is for display purposes for each navigation title
 // The filter is the value to filter on to show results for the linked category page
-// The url should be the lower case URL friendly version of the filter value
 // Please use rawFilter type and rawFilter attribute to pass your own filters directly to the API
 // https://www.algolia.com/doc/api-reference/api-parameters/filters/?client=javascript
 // ------------------------------------------
@@ -24,20 +23,17 @@ export const linksHeader = atom({
     {
       name: 'All',
       type: 'filter',
-      filter: '',
-      url: '/search',
+      filter: ''
     },
     {
       name: 'Mens',
       type: 'filter',
-      filter: 'Mens',
-      url: '/mens',
+      filter: 'Mens'
     },
     {
       name: 'Womens',
       type: 'filter',
-      filter: 'Womens',
-      url: '/womens',
+      filter: 'Womens'
     },
     // For an uilisation of your own made filter
     {
@@ -45,15 +41,13 @@ export const linksHeader = atom({
       type: 'rawFilter',
       filter: '',
       rawFilter:
-        "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
-      url: '/annafield',
+        "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'"
     },
     // This uses context from the Algolia dashboard, configured using Visual Editor
     {
       name: 'Accessories',
       type: 'context',
-      context: 'accessories',
-      url: '/accessories',
+      context: 'accessories'
     },
   ],
 });
@@ -66,4 +60,9 @@ export const selectorNavigationRef = atom({
 export const categorySelectionAtom = atom({
   key: 'categorySelectionAtom',
   default: null,
+});
+
+export const navigationStateAtom = atom({
+  key: 'navigationStateAtom',
+  default: {},
 });
