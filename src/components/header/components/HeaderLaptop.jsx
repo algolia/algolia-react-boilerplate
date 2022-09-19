@@ -20,9 +20,6 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 // Import voiceSearch config
 import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
-// Import Demo tour config
-import { shouldShowDemoTour } from '@/config/demoTourConfig';
-
 // Import applied rules config
 import { rulesAtom } from '@/config/appliedRulesConfig';
 
@@ -62,8 +59,6 @@ const HeaderLaptop = () => {
               setQueryState('');
               federated(false);
               rulesApplied([]);
-              // LEFT IN FOR REFACTO PURPOSES
-              // setUnderlineCategory(null);
             }}
           >
             {/* Add possibility to change the Logo */}

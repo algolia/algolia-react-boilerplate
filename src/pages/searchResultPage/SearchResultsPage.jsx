@@ -21,6 +21,8 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 
 const SearchResultPage = ({ props }) => {
+
+  // Initialize to one so by default we try to show SRP
   const [nbOfHits, setNbOfHits] = useState(1);
 
   // Do you want to show banner on SRP? This boolean tells us yes or no

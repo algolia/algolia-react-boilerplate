@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
-
+// Algolia Instantsearch components
 import { Configure, InstantSearch } from 'react-instantsearch-hooks-web';
 
-// application state from config file
+// Algolia API client
 import { searchClient } from './config/algoliaEnvConfig';
 
 // Framer-Motion
@@ -39,13 +38,18 @@ import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
+
+// Error handler for network errors
 import SearchErrorToast from './utils/ErrorHandler';
 
 export const Main = () => {
+  // Index to make the main search queries to
   const index = useRecoilValue(mainIndex);
 
+  // Current location from react Router
   const location = useLocation();
 
+  // Current query from config atom
   const queryState = useRecoilValue(queryAtom);
 
   // Check if Carousels are ready & loaded on the homepage
@@ -54,26 +58,27 @@ export const Main = () => {
   // Should the alert badges for the demo guide be shown
   const shouldShowAlertAtom = useRecoilValue(shouldShowAlert);
 
-  // Show rules applied panel when switch on in the demo guide panel
-  const isRulesSwitchToggleChecked = useRecoilValue(isRulesSwitchToggle);
+  // Should the currently applied Algolia rules be shown
+  const shouldShowAppliedRules = useRecoilValue(isRulesSwitchToggle);
 
-  // Show guided panel for SE
+  // Should the demo guide panel be shown
   const shouldHaveDemoGuideAtom = useRecoilValue(shouldHaveDemoGuide);
 
-  // Show/hide the panel if click on the guide btn
+  // State to control the Showing/hiding of the demo guide panel
   const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
 
   // Value that shows Network Errors to Guide you to the correct Configuration
-  const isNetworkErorrs = useRecoilValue(showNetworkErorrs);
+  const shouldShowNetworkErrors = useRecoilValue(showNetworkErorrs);
 
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
 
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
-      {isNetworkErorrs && <SearchErrorToast />}
+      {shouldShowNetworkErrors && <SearchErrorToast />}
 
       <div className="visible">
+        {/* TODO: Check if this configure is used for anything */}
         <Configure query={queryState} />
         <Header />
         {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
@@ -91,10 +96,11 @@ export const Main = () => {
               element={<ProductDetails />}
             />
           </Routes>
+          {/* To avoid CLS, load in the footer after the carousels render */}
           {carouselLoaded && <Footer />}
         </AnimatePresence>
         {shouldShowAlertAtom && <AlertNavigation />}
-        {isRulesSwitchToggleChecked && <CustomAppliedRules />}
+        {shouldShowAppliedRules && <CustomAppliedRules />}
       </div>
     </InstantSearch>
   );

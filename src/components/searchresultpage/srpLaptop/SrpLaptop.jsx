@@ -53,7 +53,6 @@ import InjectedHits from '@/components/hits/components/injected-hits/InjectedHit
 //Import scope SCSS
 import '../SCSS/searchResultsPage.scss';
 import { FilterPicto } from '@/assets/svg/SvgIndex';
-import { use } from 'i18next';
 
 import { navigationStateAtom } from '@/config/navigationConfig';
 
@@ -204,7 +203,6 @@ const SrpLaptop = () => {
           />
 
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
-
           {shouldInjectContent ? (
             <Suspense fallback={<SkeletonLoader type={'hit'} />}>
               <Index indexName={injectedContentIndex}>

@@ -1,10 +1,9 @@
 // Component for displaying hits in teh
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // Import framer-motion for animation on hits
 import { motion, AnimatePresence } from 'framer-motion';
-import { framerMotionTransition } from '@/config/animationConfig';
 
 import { Highlight } from 'react-instantsearch-hooks-web';
 

@@ -35,7 +35,6 @@ const HomeCarousel = ({ context, title }) => {
   const index = useRecoilValue(mainIndex);
   const userToken = useRecoilValue(personaSelectedAtom);
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
-  const carouselLoaded = useRecoilValue(isCarouselLoaded);
 
   const { mobile } = useRecoilValue(windowSize);
 
@@ -58,7 +57,6 @@ const HomeCarousel = ({ context, title }) => {
 // This carousel is used inside of HomeCarousel
 
 function Carousel(props) {
-  const LanguageSelected = useRecoilValue(LanguageSelectedAtom);
   const { hits } = useHits(props);
   const { title } = props;
   const [width, setWidth] = useState(0);

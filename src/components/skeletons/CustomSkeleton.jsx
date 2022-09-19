@@ -21,16 +21,12 @@ const CustomSkeleton = ({ type }) => {
       );
     case 'banner':
       return <div className="skeleton__banner"></div>;
-      break;
     case 'carousel':
       return <div className="skeleton__carousel"></div>;
-      break;
     case 'homepage':
       return <div className="skeleton__homepage"></div>;
-      break;
     case 'logo':
       return <div className="skeleton__logo"></div>;
-      break;
   }
 };
 

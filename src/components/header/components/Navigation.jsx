@@ -29,7 +29,7 @@ import { languagesConfig } from '@/config/languagesConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
-  const [queryState, setQueryState] = useRecoilState(queryAtom);
+  const setQueryState = useSetRecoilState(queryAtom);
 
   // navigate is used by React Router
   const navigate = useNavigate();
@@ -63,7 +63,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   const shouldShowLanguageSelected = useRecoilValue(shouldHaveLanguages);
 
   // Import the navigation links, as defined in the config
-  const [links] = useRecoilState(linksHeader);
+  const links = useRecoilValue(linksHeader);
 
   let [searchParams, setSearchParams] = useSearchParams();
 
