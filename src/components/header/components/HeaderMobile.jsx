@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Recoil Header State
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 // eslint-disable-next-line import/order
 import { queryAtom } from '@/config/searchboxConfig';
@@ -22,11 +22,13 @@ import { AnimatePresence } from 'framer-motion';
 // Import SearchBox
 // eslint-disable-next-line import/order
 import CustomSearchBox from '@/components/searchbox/SearchBox';
+import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 
 import Navigation from './Navigation';
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from '@/hooks/usePreventScrolling';
+import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
@@ -34,6 +36,8 @@ const HeaderMobile = ({ mobile, tablet }) => {
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
 
   // Prevent body from scrolling when panel is open
   usePreventScrolling(isMenuOpen);
@@ -43,8 +47,9 @@ const HeaderMobile = ({ mobile, tablet }) => {
       <div className="container__header-top">
         {/* Hamburger button to open or close the menu dropdown */}
         <div
-          className={`${isMenuOpen ? 'hamburger-active' : 'hamburger-inactive'
-            } hamburger`}
+          className={`${
+            isMenuOpen ? 'hamburger-active' : 'hamburger-inactive'
+          } hamburger`}
           onClick={() => {
             setIsMenuOpen(!isMenuOpen);
           }}
