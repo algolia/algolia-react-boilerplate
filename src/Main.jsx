@@ -1,3 +1,5 @@
+import { lazy, Suspense } from 'react';
+
 // Algolia Instantsearch components
 import { Configure, InstantSearch } from 'react-instantsearch-hooks-web';
 
@@ -27,6 +29,7 @@ import { isCarouselLoaded } from './config/carouselConfig';
 
 // Import Pages and static components
 import AlertNavigation from '@/components/demoGuide/AlertNavigation';
+
 import DemoGuide from '@/components/demoGuide/DemoGuide';
 import Header from '@/components/header/Header';
 import CustomAppliedRules from './components/appliedRules/AppliedRules';
@@ -34,7 +37,10 @@ import Footer from './components/footer/Footer';
 import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
 import HomePage from './pages/homepage/HomePage';
 import ProductDetails from './pages/productDetailsPage/ProductDetails';
-import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
+const SearchResultsPage = lazy(() =>
+  import('./pages/searchResultPage/SearchResultsPage')
+);
+// import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
@@ -88,7 +94,14 @@ export const Main = () => {
         <AnimatePresence initial={true}>
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/search" element={<SearchResultsPage />} />
+            <Route
+              path="/search"
+              element={
+                <Suspense fallback={'loading'}>
+                  <SearchResultsPage />
+                </Suspense>
+              }
+            />
             <Route path="/search/:categories" element={<SearchResultsPage />} />
             {/* objectID is the unique identifier for an algolia record */}
             <Route
