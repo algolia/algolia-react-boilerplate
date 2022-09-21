@@ -74,6 +74,7 @@ const HomeBannerComponent = ({
           fetchpriority="high"
           width={mobile ? '400' : '1121'}
           height={mobile ? '202' : '466'}
+          sizes="100vw"
           onLoad={() => setIsBannerLoaded(true)}
         />
         <div className="overlay"></div>
