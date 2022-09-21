@@ -22,12 +22,16 @@ import './SCSS/homeBanner.scss';
 function CustomHomeBanners(props) {
   const { items } = useQueryRules(props);
   return items.map(
-    ({ type, title, subtitle, button1, LinkButton1, imgUrl1 }, index) => {
+    (
+      { type, title, subtitle, button1, LinkButton1, imgUrl1, imgUrl1Mobile },
+      index
+    ) => {
       if (type === 'HomeBannerTwo') {
         return (
           <div className="homeBanner" key={title}>
             <HomeBannerComponent
               imgUrl1={imgUrl1}
+              imgUrl1Mobile={imgUrl1Mobile}
               title={title}
               subtitle={subtitle}
               LinkButton1={LinkButton1}
@@ -42,6 +46,7 @@ function CustomHomeBanners(props) {
 
 const HomeBannerComponent = ({
   imgUrl1,
+  imgUrl1Mobile,
   title,
   subtitle,
   LinkButton1,
@@ -54,9 +59,9 @@ const HomeBannerComponent = ({
   useEffect(() => {
     //Preload image
     const img = new Image();
-    img.src = imgUrl1;
+    mobile ? (img.src = imgUrl1Mobile) : (img.src = imgUrl1);
     setBanner(img.src);
-  }, []);
+  }, [mobile]);
 
   return (
     <div className="home-banner3-container">
