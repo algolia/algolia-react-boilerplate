@@ -1,3 +1,5 @@
+import { lazy, Suspense } from 'react';
+
 // Algolia Instantsearch components
 import { Configure, InstantSearch } from 'react-instantsearch-hooks-web';
 
@@ -27,20 +29,29 @@ import { isCarouselLoaded } from './config/carouselConfig';
 
 // Import Pages and static components
 import AlertNavigation from '@/components/demoGuide/AlertNavigation';
+
 import DemoGuide from '@/components/demoGuide/DemoGuide';
 import Header from '@/components/header/Header';
 import CustomAppliedRules from './components/appliedRules/AppliedRules';
 import Footer from './components/footer/Footer';
 import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
-import HomePage from './pages/homepage/HomePage';
-import ProductDetails from './pages/productDetailsPage/ProductDetails';
-import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
+const HomePage = lazy(() => import('./pages/homepage/HomePage'));
+// import HomePage from './pages/homepage/HomePage';
+// import ProductDetails from './pages/productDetailsPage/ProductDetails';
+const ProductDetails = lazy(() =>
+  import('./pages/productDetailsPage/ProductDetails')
+);
+const SearchResultsPage = lazy(() =>
+  import('./pages/searchResultPage/SearchResultsPage')
+);
+// import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
 
 // Error handler for network errors
 import SearchErrorToast from './utils/ErrorHandler';
+import Loader from './components/loader/Loader';
 
 export const Main = () => {
   // Index to make the main search queries to
@@ -87,13 +98,38 @@ export const Main = () => {
         </AnimatePresence>
         <AnimatePresence initial={true}>
           <Routes key={location.pathname} location={location}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/search" element={<SearchResultsPage />} />
-            <Route path="/search/:categories" element={<SearchResultsPage />} />
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <HomePage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/search"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <SearchResultsPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/search/:categories"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <SearchResultsPage />
+                </Suspense>
+              }
+            />
             {/* objectID is the unique identifier for an algolia record */}
             <Route
               path="/search/product/:objectID"
-              element={<ProductDetails />}
+              element={
+                <Suspense fallback={<Loader />}>
+                  <ProductDetails />
+                </Suspense>
+              }
             />
           </Routes>
           {/* To avoid CLS, load in the footer after the carousels render */}

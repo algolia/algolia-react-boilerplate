@@ -62,12 +62,13 @@ const HeaderMobile = ({ mobile, tablet }) => {
         <div className="container__header-top__logo">
           <Link
             to="/"
+            aria-label="Back to homepage"
             onClick={() => {
               setQueryState('');
               federated(false);
             }}
           >
-            <img src={logo} alt="" />
+            <img src={logo} alt="" width="200" />
           </Link>
         </div>
         {/* For a search box Simple center */}

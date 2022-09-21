@@ -7,6 +7,11 @@
     @include salesCard($white-color);
   }
   .image-wrapper-sales {
+    &__img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .infos_influencer {
       @include infosSalesCard($white-color);
     }

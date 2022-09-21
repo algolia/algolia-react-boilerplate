@@ -15,11 +15,17 @@ const SalesCard = ({ hit }) => {
       animate={framerMotionHits.animate}
       transition={framerMotionHits.transition}
       className="image-wrapper-sales"
-      style={{
-        backgroundImage: `url(${hit.image.desktop_url})`,
-        backgroundSize: 'cover',
-      }}
+      // style={{
+      //   backgroundImage: `url(${hit.image.desktop_url})`,
+      //   backgroundSize: 'cover',
+      // }}
     >
+      <img
+        className="image-wrapper-sales__img"
+        src={hit.image.desktop_url}
+        alt="sales ad"
+        loading="lazy"
+      />
       <div className="image-wrapper-sales__infos">
         <p>{hit.coupon}</p>
         <h3>{hit.title}</h3>
