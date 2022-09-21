@@ -33,6 +33,7 @@ import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import DemoGuide from '@/components/demoGuide/DemoGuide';
 import Header from '@/components/header/Header';
 import CustomAppliedRules from './components/appliedRules/AppliedRules';
+
 import Footer from './components/footer/Footer';
 import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
 const HomePage = lazy(() => import('./pages/homepage/HomePage'));
@@ -135,8 +136,16 @@ export const Main = () => {
           {/* To avoid CLS, load in the footer after the carousels render */}
           {carouselLoaded && <Footer />}
         </AnimatePresence>
-        {shouldShowAlertAtom && <AlertNavigation />}
-        {shouldShowAppliedRules && <CustomAppliedRules />}
+        {shouldShowAlertAtom && (
+          <Suspense fallback={''}>
+            <AlertNavigation />
+          </Suspense>
+        )}
+        {shouldShowAppliedRules && (
+          <Suspense fallback={''}>
+            <CustomAppliedRules />
+          </Suspense>
+        )}
       </div>
     </InstantSearch>
   );

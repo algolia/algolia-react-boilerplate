@@ -17,6 +17,9 @@ import homepage_2 from '@/assets/homepage/homepage_2.webp';
 // should carousel be shown or not and config for carousel
 import { carouselConfig } from '@/config/carouselConfig';
 
+import CustomHomeBanners from '@/components/banners/HomeBanners';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
+
 //  should federated search be shown or not
 import {
   shouldHaveCarousels,
@@ -24,9 +27,7 @@ import {
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
-import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
-
-import CustomHomeBanners from '@/components/banners/HomeBanners';
+import { windowSize } from '@/hooks/useScreenSize';
 
 const FederatedSearch = lazy(() =>
   import('@/components/federatedSearch/FederatedSearch')
@@ -58,6 +59,8 @@ const HomePage = () => {
     shouldHaveTrendingProducts
   );
 
+  const { isDesktop, mobile } = useRecoilValue(windowSize);
+
   // Import and use translation
   const { t } = useTranslation('translation', {
     keyPrefix: 'homePage',
@@ -71,7 +74,7 @@ const HomePage = () => {
           <FederatedSearch />
         </Suspense>
       )}
-      
+
       {/* Load custom banners */}
       <CustomHomeBanners />
 
@@ -105,8 +108,8 @@ const HomePage = () => {
           <img
             src={homepage_1}
             alt="homepage1"
-            width="3014"
-            height="1324"
+            width={mobile ? '400' : '3014'}
+            height={mobile ? '202' : '1324'}
             onLoad={() => setHomepage1Loaded(true)}
           />
         </div>

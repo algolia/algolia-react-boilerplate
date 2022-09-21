@@ -66,8 +66,8 @@ const HomeBannerComponent = ({
           src={banner}
           alt="homeBanner"
           fetchpriority="high"
-          width="1121"
-          height="466"
+          width={mobile ? '400' : '1121'}
+          height={mobile ? '202' : '466'}
           onLoad={() => setIsBannerLoaded(true)}
         />
         <div className="overlay"></div>
