@@ -1,6 +1,6 @@
 // Component for displaying hits in teh
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Import framer-motion for animation on hits
 import { motion, AnimatePresence } from 'framer-motion';
@@ -19,9 +19,8 @@ import get from 'lodash/get';
 import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
-import { hitAtom } from '@/config/hitsConfig';
-import { useSetRecoilState } from 'recoil';
-import { hitsConfig } from '@/config/hitsConfig';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { hitsConfig, cartHits, hitAtom } from '@/config/hitsConfig';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
@@ -39,6 +38,8 @@ import './SCSS/hits.scss';
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
+  const cartState = useSetRecoilState(cartHits);
+  const cartValue = useRecoilValue(cartHits);
   const [isHovered, setIsHovered] = useState(false);
   const [cartQty, setCartQty] = useState(0);
 
@@ -73,6 +74,10 @@ const Hit = ({ hit }) => {
   };
 
   const promoted = hit?._rankingInfo?.promoted;
+
+  useEffect(() => {
+    console.log(cartValue);
+  }, [cartValue]);
 
   return (
     <motion.div
@@ -161,6 +166,9 @@ const Hit = ({ hit }) => {
                   if (cartQty > 0) {
                     setCartQty(cartQty - 1);
                   }
+                  if ((cartQty = 0)) {
+                    cartState([]);
+                  }
                 }}
               >
                 <MinusPicto />
@@ -170,6 +178,7 @@ const Hit = ({ hit }) => {
                 onClick={() => {
                   if (cartQty >= 0) {
                     setCartQty(cartQty + 1);
+                    cartState([hit.name]);
                   }
                 }}
               >
