@@ -248,3 +248,33 @@ export const CartPicto = memo(() => (
     />
   </svg>
 ));
+
+export const MinusPicto = memo(() => (
+  <svg
+    width="50"
+    height="50"
+    viewBox="0 0 50 50"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M25 2C15.08 2 7 10.08 7 20C7 29.92 15.08 38 25 38C34.92 38 43 29.92 43 20C43 10.08 34.92 2 25 2ZM35.8 21.8H14.2V18.2001H35.8V21.8Z"
+      fill="#5568F9"
+    />
+  </svg>
+));
+
+export const PlusPicto = memo(() => (
+  <svg
+    width="50"
+    height="50"
+    viewBox="0 0 50 50"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M25 2C15.08 2 7 10.08 7 20C7 29.92 15.08 38 25 38C34.92 38 43 29.92 43 20C43 10.08 34.92 2 25 2ZM35.8 21.8H26.8V30.8H23.2001V21.8H14.2001V18.2001H23.2001V9.20014H26.8V18.2001H35.8V21.8Z"
+      fill="#5568F9"
+    />
+  </svg>
+));

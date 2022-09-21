@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { Highlight } from 'react-instantsearch-hooks-web';
 
-import { Heart } from '@/assets/svg/SvgIndex';
+import { Heart, MinusPicto, PlusPicto } from '@/assets/svg/SvgIndex';
 
 import { badgeCriteria } from '@/config/badgeConfig';
 
@@ -40,6 +40,7 @@ const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
+  const [cartQty, setCartQty] = useState(0);
 
   // Get hit attribute from config file
   const { objectID, image, imageAlt, category, productName, brand } =
@@ -150,9 +151,32 @@ const Hit = ({ hit }) => {
               <Highlight hit={hit} attribute={productName} />
             </h3>
           </div>
-          <p className="price">
-            <Price hit={hit} />
-          </p>
+          <div className="srpItem__infosDown">
+            <p className="price">
+              <Price hit={hit} />
+            </p>
+            <div className="srpItem__infosDown__cart">
+              <div
+                onClick={() => {
+                  if (cartQty > 0) {
+                    setCartQty(cartQty - 1);
+                  }
+                }}
+              >
+                <MinusPicto />
+              </div>
+              <p>{cartQty}</p>
+              <div
+                onClick={() => {
+                  if (cartQty >= 0) {
+                    setCartQty(cartQty + 1);
+                  }
+                }}
+              >
+                <PlusPicto />
+              </div>
+            </div>
+          </div>
         </div>
       </>
     </motion.div>
