@@ -12,7 +12,6 @@ import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
 // Import logo URL for header
-import logo from '@/assets/logo/logo.webp';
 import logoMobile from '@/assets/logo/logoMobile.webp';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
