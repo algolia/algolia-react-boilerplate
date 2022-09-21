@@ -21,7 +21,7 @@ const SalesCard = ({ hit }) => {
       // }}
     >
       <img
-        class="image-wrapper-sales__img"
+        className="image-wrapper-sales__img"
         src={hit.image.desktop_url}
         alt="sales ad"
         loading="lazy"

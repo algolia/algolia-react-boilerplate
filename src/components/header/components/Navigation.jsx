@@ -11,7 +11,7 @@ import {
   categoryPageFilterAttribute,
   linksHeader,
   selectorNavigationRef,
-  navigationStateAtom
+  navigationStateAtom,
 } from '@/config/navigationConfig';
 
 // Import Recoil config
@@ -67,7 +67,8 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const [navigationState, setNavigationState] = useRecoilState(navigationStateAtom);
+  const [navigationState, setNavigationState] =
+    useRecoilState(navigationStateAtom);
 
   return (
     <ul
@@ -82,7 +83,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           <li
             id={link.name}
             tabIndex="0"
-            key={link.url}
+            key={link.name}
             onClick={() => {
               // Set query to nothing when clicking on a category
               // setQueryState('');
@@ -100,14 +101,16 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
                 action = `${link.rawFilter}`;
               }
 
-              setNavigationState({ type: link.type, name: link.name, action: action })
-              searchParams.set('category', link.name)
-              navigate(
-                { 
-                  pathname: "/search",
-                  search: `?${searchParams}`,
-                }
-              )
+              setNavigationState({
+                type: link.type,
+                name: link.name,
+                action: action,
+              });
+              searchParams.set('category', link.name);
+              navigate({
+                pathname: '/search',
+                search: `?${searchParams}`,
+              });
 
               // Only used for Mobile view
               if (tablet || mobile) {

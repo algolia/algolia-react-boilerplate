@@ -87,7 +87,10 @@ const Hit = ({ hit }) => {
         className="button-ranking-container"
         onClick={() => setShouldShowRankingInfo(!shouldShowRankingInfo)}
       >
-        <button className="ranking-formula-button"></button>
+        <button
+          className="ranking-formula-button"
+          aria-label="show ranking"
+        ></button>
         <p>Click to see Ranking</p>
       </div>
       <AnimatePresence>

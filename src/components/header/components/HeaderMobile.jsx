@@ -62,6 +62,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
         <div className="container__header-top__logo">
           <Link
             to="/"
+            aria-label="Back to homepage"
             onClick={() => {
               setQueryState('');
               federated(false);
