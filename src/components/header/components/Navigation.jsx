@@ -26,6 +26,7 @@ import { Selectors } from '../../selector/Selectors';
 import { segmentConfig } from '@/config/segmentConfig';
 import { personaConfig } from '@/config/personaConfig';
 import { languagesConfig } from '@/config/languagesConfig';
+import { CartPicto } from '@/assets/svg/SvgIndex';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
@@ -148,6 +149,12 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
             <Selectors props={languagesConfig} />
           </div>
         )}
+      </li>
+      <li className="picto-cart">
+        <CartPicto />
+        <div className="notification-cart">
+          <p>1</p>
+        </div>
       </li>
     </ul>
   );
