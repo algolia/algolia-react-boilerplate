@@ -41,7 +41,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
 
   // Prevent body from scrolling when panel is open
   usePreventScrolling(isMenuOpen);
-
+  console.log(logoMobile);
   return (
     <div className="container container-mobile">
       <div className="container__header-top">
