@@ -62,7 +62,12 @@ const HeaderLaptop = () => {
             }}
           >
             {/* Add possibility to change the Logo */}
-            <img src={logo} alt="" onLoad={() => setIsLogoLoaded(true)} />
+            <img
+              src={logo}
+              alt=""
+              onLoad={() => setIsLogoLoaded(true)}
+              width="200"
+            />
             {isLogoLoaded === false && <CustomSkeleton type="logo" />}
           </Link>
         </div>

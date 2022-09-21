@@ -68,7 +68,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
               federated(false);
             }}
           >
-            <img src={logo} alt="" />
+            <img src={logo} alt="" width="200" />
           </Link>
         </div>
         {/* For a search box Simple center */}
