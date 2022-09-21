@@ -68,8 +68,7 @@ const HomeBannerComponent = ({
       <div className="home-banner3-container__image">
         {isBannerLoaded === false && <CustomSkeleton type="banner" />}
         <img
-          src="https://res.cloudinary.com/hugo-valla/image/upload/q_20/v1657721542/BoilerPlate/Group-1-_2__exxrnm_1_mjriib.webp"
-          srcSet="https://res.cloudinary.com/hugo-valla/image/upload/q_20/v1657721542/BoilerPlate/Group-1-_2__exxrnm_1_mjriib.webp 480w"
+          src={mobile ? imgUrl1Mobile : imgUrl1}
           alt="homeBanner"
           fetchpriority="high"
           width={mobile ? '400' : '1121'}
