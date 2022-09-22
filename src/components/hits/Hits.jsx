@@ -27,6 +27,7 @@ import { hitsConfig } from '@/config/hitsConfig';
 import { useNavigate } from 'react-router-dom';
 import Badge from './components/Badge';
 
+
 //Import hook for store ID into local storage
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 
@@ -37,7 +38,7 @@ import Price from '@/components/hits/components/Price.jsx';
 import './SCSS/hits.scss';
 import RankingIcon from './components/RankingIcon';
 import { shouldHavePersona } from '@/config/featuresConfig';
-import { shouldDisplayRankingIcons } from '@/config/personaConfig';
+import { shouldDisplayRankingIcons, personaSelectedFiltersAtom } from '@/config/personaConfig';
 
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ const Hit = ({ hit }) => {
   const [isHovered, setIsHovered] = useState(false);
   const showPersona = useRecoilValue(shouldHavePersona);
   const showRankingIcons =  useRecoilValue(shouldDisplayRankingIcons);
+  const personaFilters = useRecoilValue(personaSelectedFiltersAtom)
 
   // Get hit attribute from config file
   const { objectID, image, imageAlt, category, productName, brand } =
@@ -146,7 +148,7 @@ const Hit = ({ hit }) => {
             <Badge title={badgeCriteria(hit)} />
           )}
           <div className="srpItem__imgWrapper__heart">
-            <Heart />
+            {((personaFilters.length < 1) || !showPersona || !showRankingIcons) && <Heart />}
           </div>
         </div>
         <div className="srpItem__infos">
