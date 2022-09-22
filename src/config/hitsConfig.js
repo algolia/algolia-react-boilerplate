@@ -82,11 +82,3 @@ export const hitsNumber = atom({
   key: 'hitsNumber', // unique ID (with respect to other atoms/selectors)
   default: 1, // default value (aka initial value)
 });
-
-// Please ignore this atom
-export const cartHits = atom({
-  key: 'cartHits', // unique ID (with respect to other
-  default: [], // default value
-});
-
-

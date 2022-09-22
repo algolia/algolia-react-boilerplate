@@ -1,6 +1,6 @@
 // Component for displaying hits in teh
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Import framer-motion for animation on hits
 import { AnimatePresence, motion } from 'framer-motion';
@@ -20,7 +20,7 @@ import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
@@ -32,6 +32,9 @@ import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 // import Price component
 import Price from '@/components/hits/components/Price.jsx';
 
+// Import cart from recoil
+import { cartState } from '@/config/cartFunctions';
+
 //Import scope SCSS
 import './SCSS/hits.scss';
 
@@ -39,6 +42,7 @@ const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
+  const [cart, setCart] = useRecoilState(cartState);
 
   // Get hit attribute from config file
   const { objectID, image, imageAlt, category, productName, brand } =
@@ -70,7 +74,48 @@ const Hit = ({ hit }) => {
     );
   };
 
+  const [productQty, setProductQty] = useState(0);
+
   const promoted = hit?._rankingInfo?.promoted;
+
+  const addToCart = (product, productQty) => {
+    setProductQty(productQty + 1);
+    if (cart.length < 1) {
+      setCart([{ ...product, qty: 1 }]);
+    } else {
+      let cartItemIndex = null;
+      const cartItem = cart.map((item, index) => {
+        if (item.objectID === product.objectID) {
+          cartItemIndex = index;
+        }
+      });
+      // item.objectID === product.objectID);
+      // console.log(cartItem);
+      console.log('cartItemIndex', cartItemIndex);
+      if (cartItemIndex !== null) {
+        console.log('IF', cartItemIndex);
+        let items = [...cart];
+        console.log('items', items[cartItemIndex]);
+        items[cartItemIndex] = { ...items[cartItemIndex], qty: productQty + 1 };
+        console.log('ITEMS', items);
+        setCart(items);
+      } else {
+        console.log('ELSE');
+        setCart([...cart, { ...product, qty: 1 }]);
+      }
+    }
+  };
+
+  const removeFromCart = (product, productQty) => {
+    setProductQty(productqty - 1);
+    setCart((cart) =>
+      cart.filter((item) => item.objectID !== product.objectID)
+    );
+  };
+
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
 
   return (
     <motion.div
@@ -154,11 +199,19 @@ const Hit = ({ hit }) => {
               <Price hit={hit} />
             </p>
             <div className="srpItem__infosDown__cart">
-              <div onClick={() => {}}>
+              <div
+                onClick={() => {
+                  removeFromCart(hit, productQty);
+                }}
+              >
                 <MinusPicto />
               </div>
-              <p>1</p>
-              <div onClick={() => {}}>
+              <p>{productQty}</p>
+              <div
+                onClick={() => {
+                  addToCart(hit, productQty);
+                }}
+              >
                 <PlusPicto />
               </div>
             </div>
