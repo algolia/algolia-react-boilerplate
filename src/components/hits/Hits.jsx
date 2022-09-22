@@ -1,9 +1,9 @@
 // Component for displaying hits in teh
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // Import framer-motion for animation on hits
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { Highlight } from 'react-instantsearch-hooks-web';
 
@@ -19,8 +19,8 @@ import get from 'lodash/get';
 import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { hitsConfig, cartHits, hitAtom } from '@/config/hitsConfig';
+import { hitAtom, hitsConfig } from '@/config/hitsConfig';
+import { useSetRecoilState } from 'recoil';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
@@ -38,10 +38,7 @@ import './SCSS/hits.scss';
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
-  const cartState = useSetRecoilState(cartHits);
-  const cartValue = useRecoilValue(cartHits);
   const [isHovered, setIsHovered] = useState(false);
-  const [cartQty, setCartQty] = useState(0);
 
   // Get hit attribute from config file
   const { objectID, image, imageAlt, category, productName, brand } =
@@ -74,55 +71,6 @@ const Hit = ({ hit }) => {
   };
 
   const promoted = hit?._rankingInfo?.promoted;
-
-  // On click cart function
-  const onClickFunction = (hit) => {
-    console.log('Je clique');
-    if (cartQty >= 0) {
-      console.log('IF');
-      setCartQty(cartQty + 1);
-      if (cartValue.length) {
-        cartValue.map((item) => {
-          if (!item.hasOwnProperty(hit.objectID)) {
-            console.log('firstif');
-            return cartState([
-              {
-                [hit.objectID]: {
-                  hit,
-                },
-                qty: cartQty,
-              },
-            ]);
-          }
-          if (item.hasOwnProperty(hit.objectID)) {
-            console.log('secondif', cartQty + 1);
-            return cartState([
-              {
-                [hit.objectID]: {
-                  hit,
-                },
-                qty: cartQty + 1,
-              },
-            ]);
-          }
-        });
-      } else {
-        console.log('ELSE');
-        cartState([
-          {
-            [hit.objectID]: {
-              hit,
-            },
-            qty: 1,
-          },
-        ]);
-      }
-    }
-  };
-
-  useEffect(() => {
-    console.log(cartValue);
-  }, [cartValue]);
 
   return (
     <motion.div
@@ -206,21 +154,11 @@ const Hit = ({ hit }) => {
               <Price hit={hit} />
             </p>
             <div className="srpItem__infosDown__cart">
-              <div
-                onClick={() => {
-                  if (cartQty > 0) {
-                    setCartQty(cartQty - 1);
-                  }
-                }}
-              >
+              <div onClick={() => {}}>
                 <MinusPicto />
               </div>
-              <p>{cartQty}</p>
-              <div
-                onClick={() => {
-                  onClickFunction(hit);
-                }}
-              >
+              <p>1</p>
+              <div onClick={() => {}}>
                 <PlusPicto />
               </div>
             </div>
