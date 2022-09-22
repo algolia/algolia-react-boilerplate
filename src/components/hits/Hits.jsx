@@ -89,18 +89,11 @@ const Hit = ({ hit }) => {
           cartItemIndex = index;
         }
       });
-      // item.objectID === product.objectID);
-      // console.log(cartItem);
-      console.log('cartItemIndex', cartItemIndex);
       if (cartItemIndex !== null) {
-        console.log('IF', cartItemIndex);
         let items = [...cart];
-        console.log('items', items[cartItemIndex]);
         items[cartItemIndex] = { ...items[cartItemIndex], qty: productQty + 1 };
-        console.log('ITEMS', items);
         setCart(items);
       } else {
-        console.log('ELSE');
         setCart([...cart, { ...product, qty: 1 }]);
       }
     }
