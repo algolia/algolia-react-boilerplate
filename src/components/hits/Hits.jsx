@@ -45,8 +45,15 @@ const Hit = ({ hit }) => {
   const [cart, setCart] = useRecoilState(cartState);
 
   // Get hit attribute from config file
-  const { objectID, image, imageAlt, category, productName, brand } =
-    hitsConfig;
+  const {
+    objectID,
+    image,
+    imageAlt,
+    category,
+    productName,
+    brand,
+    price: priceForTotal,
+  } = hitsConfig;
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
 
@@ -79,9 +86,10 @@ const Hit = ({ hit }) => {
   const promoted = hit?._rankingInfo?.promoted;
 
   const addToCart = (product, productQty) => {
+    console.log(priceForTotal);
     setProductQty(productQty + 1);
     if (cart.length < 1) {
-      setCart([{ ...product, qty: 1, totalPrice: product.unformated_price }]);
+      setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
     } else {
       let cartItemIndex = null;
       const cartItem = cart.map((item, index) => {
@@ -94,13 +102,13 @@ const Hit = ({ hit }) => {
         items[cartItemIndex] = {
           ...items[cartItemIndex],
           qty: productQty + 1,
-          totalPrice: (productQty + 1) * items[cartItemIndex].unformated_price,
+          totalPrice: (productQty + 1) * items[cartItemIndex][priceForTotal],
         };
         setCart(items);
       } else {
         setCart([
           ...cart,
-          { ...product, qty: 1, totalPrice: product.unformated_price },
+          { ...product, qty: 1, totalPrice: product[priceForTotal] },
         ]);
       }
     }
