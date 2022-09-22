@@ -27,7 +27,6 @@ import { hitsConfig } from '@/config/hitsConfig';
 import { useNavigate } from 'react-router-dom';
 import Badge from './components/Badge';
 
-
 //Import hook for store ID into local storage
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 
@@ -38,15 +37,18 @@ import Price from '@/components/hits/components/Price.jsx';
 import './SCSS/hits.scss';
 import RankingIcon from './components/RankingIcon';
 import { shouldHavePersona } from '@/config/featuresConfig';
-import { shouldDisplayRankingIcons, personaSelectedFiltersAtom } from '@/config/personaConfig';
+import {
+  shouldDisplayRankingIcons,
+  personaSelectedFiltersAtom,
+} from '@/config/personaConfig';
 
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
   const showPersona = useRecoilValue(shouldHavePersona);
-  const showRankingIcons =  useRecoilValue(shouldDisplayRankingIcons);
-  const personaFilters = useRecoilValue(personaSelectedFiltersAtom)
+  const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);
+  const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
 
   // Get hit attribute from config file
   const { objectID, image, imageAlt, category, productName, brand } =
@@ -119,36 +121,28 @@ const Hit = ({ hit }) => {
             useStoreIdToLocalStorage(hit[objectID]);
           }}
         >
-          {isHovered && get(hit, imageAlt) !== undefined ? (
-            <img
-              key={1}
-              className={
-                shouldShowRankingInfo ? 'secondImage-opacity' : 'secondImage'
-              }
-              loading="lazy"
-              src={get(hit, imageAlt)}
-              alt={get(hit, category)}
-              onError={(e) => (e.currentTarget.src = placeHolderError)}
-            />
-          ) : (
-            <img
-              className={
-                shouldShowRankingInfo
-                  ? 'mainImage-opacity'
-                  : 'mainImage-visible'
-              }
-              loading="lazy"
-              src={get(hit, image)}
-              key={2}
-              alt={get(hit, category)}
-              onError={(e) => (e.currentTarget.src = placeHolderError)}
-            />
-          )}
+          <img
+            className={
+              shouldShowRankingInfo ? 'mainImage-opacity' : 'mainImage-visible'
+            }
+            loading="lazy"
+            src={
+              isHovered && get(hit, imageAlt) !== undefined
+                ? get(hit, imageAlt)
+                : get(hit, image)
+            }
+            key={2}
+            alt={get(hit, category)}
+            onError={(e) => (e.currentTarget.src = placeHolderError)}
+          />
+          {/* )} */}
           {badgeCriteria(hit) !== null && !shouldShowRankingInfo && (
             <Badge title={badgeCriteria(hit)} />
           )}
           <div className="srpItem__imgWrapper__heart">
-            {((personaFilters.length < 1) || !showPersona || !showRankingIcons) && <Heart />}
+            {(personaFilters.length < 1 ||
+              !showPersona ||
+              !showRankingIcons) && <Heart />}
           </div>
         </div>
         <div className="srpItem__infos">

@@ -284,11 +284,14 @@
   padding: 1rem;
   border-radius: 0.5rem;
 
+
   &__imgWrapper, .image-wrapper {
     overflow: hidden;
     margin: 1rem;
+    cursor: pointer;
     img {
-      @include productImage()
+      @include productImage();
+      cursor: pointer;
     }
     &__heart {
       @include heartIcon($second-color)
@@ -324,7 +327,7 @@
 }
 
 @mixin productImage {
-  width: clamp(8rem, 10rem, 12rem);
+  // width: clamp(8rem, 10rem, 12rem);
   height: 100%;
   margin: 0 auto;
   position: relative;
