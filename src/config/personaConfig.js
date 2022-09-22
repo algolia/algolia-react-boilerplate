@@ -45,6 +45,12 @@ export const personaConfig = [
   },
 ];
 
+// This atom will display ranking icons on SRP based on Persona Impact
+export const shouldDisplayRankingIcons = atom({
+  key: 'shouldDisplayRankingIcons', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+});
+
 // Please ignore this atom
 export const personaSelectedAtom = atom({
   key: 'personaSelected', // unique ID (with respect to other atoms/selectors)

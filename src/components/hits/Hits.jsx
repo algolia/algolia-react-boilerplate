@@ -20,7 +20,7 @@ import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
 import { hitAtom } from '@/config/hitsConfig';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
 
 // React-router import
@@ -35,11 +35,16 @@ import Price from '@/components/hits/components/Price.jsx';
 
 //Import scope SCSS
 import './SCSS/hits.scss';
+import RankingIcon from './components/RankingIcon';
+import { shouldHavePersona } from '@/config/featuresConfig';
+import { shouldDisplayRankingIcons } from '@/config/personaConfig';
 
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
+  const showPersona = useRecoilValue(shouldHavePersona);
+  const showRankingIcons =  useRecoilValue(shouldDisplayRankingIcons);
 
   // Get hit attribute from config file
   const { objectID, image, imageAlt, category, productName, brand } =
@@ -83,6 +88,7 @@ const Hit = ({ hit }) => {
       transition={framerMotionHits.transition}
       className={`${promoted ? 'promotedItems' : ''} srpItem`}
     >
+      {showPersona && showRankingIcons && <RankingIcon {...{ hit }} />}
       <div
         className="button-ranking-container"
         onClick={() => setShouldShowRankingInfo(!shouldShowRankingInfo)}
