@@ -17,6 +17,7 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { isCarouselLoaded } from '@/config/carouselConfig';
 import { framerMotionTransition } from '@/config/animationConfig';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
 // In case of img loading error
 import * as placeHolderError from '@/assets/logo/logo.webp';
@@ -60,7 +61,7 @@ function Carousel(props) {
   const { hits } = useHits(props);
   const { title } = props;
   const [width, setWidth] = useState(0);
-
+  const [isLoading, setIsLoading] = useState(true);
   // Navigate is used by React Router
   const navigate = useNavigate();
 
@@ -70,7 +71,11 @@ function Carousel(props) {
   const carousel = useRef();
 
   useEffect(() => {
-    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+    !isLoading && setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+  }, [hits, isLoading]);
+
+  useEffect(() => {
+    if (hits.length > 0) setIsLoading(false)
   }, [hits]);
 
   return (
@@ -103,6 +108,8 @@ function Carousel(props) {
         >
           {/* Display the hits in the carousel */}
           {hits.map((hit, i) => {
+            if (isLoading) return (<div key={i} className={`item ${isLoading && 'carousel-loader'}`}><CustomSkeleton type="hit" /></div>)
+          
             return (
               <div key={i} className="item">
                 <div className="carousel__imageWrapper">
