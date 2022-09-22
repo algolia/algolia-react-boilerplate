@@ -75,6 +75,51 @@ const Hit = ({ hit }) => {
 
   const promoted = hit?._rankingInfo?.promoted;
 
+  // On click cart function
+  const onClickFunction = (hit) => {
+    console.log('Je clique');
+    if (cartQty >= 0) {
+      console.log('IF');
+      setCartQty(cartQty + 1);
+      if (cartValue.length) {
+        cartValue.map((item) => {
+          if (!item.hasOwnProperty(hit.objectID)) {
+            console.log('firstif');
+            return cartState([
+              {
+                [hit.objectID]: {
+                  hit,
+                },
+                qty: cartQty,
+              },
+            ]);
+          }
+          if (item.hasOwnProperty(hit.objectID)) {
+            console.log('secondif', cartQty + 1);
+            return cartState([
+              {
+                [hit.objectID]: {
+                  hit,
+                },
+                qty: cartQty + 1,
+              },
+            ]);
+          }
+        });
+      } else {
+        console.log('ELSE');
+        cartState([
+          {
+            [hit.objectID]: {
+              hit,
+            },
+            qty: 1,
+          },
+        ]);
+      }
+    }
+  };
+
   useEffect(() => {
     console.log(cartValue);
   }, [cartValue]);
@@ -166,9 +211,6 @@ const Hit = ({ hit }) => {
                   if (cartQty > 0) {
                     setCartQty(cartQty - 1);
                   }
-                  if ((cartQty = 0)) {
-                    cartState([]);
-                  }
                 }}
               >
                 <MinusPicto />
@@ -176,10 +218,7 @@ const Hit = ({ hit }) => {
               <p>{cartQty}</p>
               <div
                 onClick={() => {
-                  if (cartQty >= 0) {
-                    setCartQty(cartQty + 1);
-                    cartState([hit.name]);
-                  }
+                  onClickFunction(hit);
                 }}
               >
                 <PlusPicto />
