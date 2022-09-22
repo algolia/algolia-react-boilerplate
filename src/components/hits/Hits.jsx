@@ -81,7 +81,7 @@ const Hit = ({ hit }) => {
   const addToCart = (product, productQty) => {
     setProductQty(productQty + 1);
     if (cart.length < 1) {
-      setCart([{ ...product, qty: 1 }]);
+      setCart([{ ...product, qty: 1, totalPrice: product.unformated_price }]);
     } else {
       let cartItemIndex = null;
       const cartItem = cart.map((item, index) => {
@@ -91,10 +91,17 @@ const Hit = ({ hit }) => {
       });
       if (cartItemIndex !== null) {
         let items = [...cart];
-        items[cartItemIndex] = { ...items[cartItemIndex], qty: productQty + 1 };
+        items[cartItemIndex] = {
+          ...items[cartItemIndex],
+          qty: productQty + 1,
+          totalPrice: (productQty + 1) * items[cartItemIndex].unformated_price,
+        };
         setCart(items);
       } else {
-        setCart([...cart, { ...product, qty: 1 }]);
+        setCart([
+          ...cart,
+          { ...product, qty: 1, totalPrice: product.unformated_price },
+        ]);
       }
     }
   };
