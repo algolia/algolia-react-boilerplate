@@ -4,14 +4,14 @@
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 // Recoil Header State
 import { queryAtom } from '@/config/searchboxConfig';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import Config for the header
 import {
   categoryPageFilterAttribute,
   linksHeader,
-  selectorNavigationRef,
   navigationStateAtom,
+  selectorNavigationRef,
 } from '@/config/navigationConfig';
 
 // Import Recoil config
@@ -20,17 +20,21 @@ import {
   shouldHavePersona,
   shouldHaveSegments,
 } from '@/config/featuresConfig';
+
+import { cartOpen, cartState } from '@/config/cartFunctions';
 import { Selectors } from '../../selector/Selectors';
 
 // Import segment configuration
-import { segmentConfig } from '@/config/segmentConfig';
-import { personaConfig } from '@/config/personaConfig';
-import { languagesConfig } from '@/config/languagesConfig';
 import { CartPicto } from '@/assets/svg/SvgIndex';
+import { languagesConfig } from '@/config/languagesConfig';
+import { personaConfig } from '@/config/personaConfig';
+import { segmentConfig } from '@/config/segmentConfig';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
   const setQueryState = useSetRecoilState(queryAtom);
+  const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen);
+  const showCart = useRecoilValue(cartState);
 
   // navigate is used by React Router
   const navigate = useNavigate();
@@ -150,11 +154,18 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           </div>
         )}
       </li>
-      <li className="picto-cart">
+      <li
+        className="picto-cart"
+        onClick={() => {
+          setCartOpenValue(!cartOpenValue);
+        }}
+      >
         <CartPicto />
-        <div className="notification-cart">
-          <p>1</p>
-        </div>
+        {showCart?.length > 1 && (
+          <div className="notification-cart">
+            <p>{showCart?.length}</p>
+          </div>
+        )}
       </li>
     </ul>
   );

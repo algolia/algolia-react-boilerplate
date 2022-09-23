@@ -9,3 +9,8 @@ export const cartState = atom({
   key: 'cartState',
   default: [],
 });
+
+export const cartOpen = atom({
+  key: 'cartOpen',
+  default: false,
+});

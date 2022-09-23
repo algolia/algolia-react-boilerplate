@@ -27,6 +27,7 @@ import {
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
+import { cartOpen } from '@/config/cartFunctions';
 import {
   personalizationImpact,
   personaSelectedAtom,
@@ -63,6 +64,7 @@ const SrpLaptop = () => {
   const queryState = useRecoilValue(queryAtom);
   const { isDesktop, mobile } = useRecoilValue(windowSize);
   const navigationState = useRecoilValue(navigationStateAtom);
+  const showCart = useRecoilValue(cartOpen);
 
   // Should show injected content or not
   // Defined in config file
@@ -115,7 +117,7 @@ const SrpLaptop = () => {
   }
   return (
     <>
-      <Modal />
+      {showCart && <Modal />}
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
