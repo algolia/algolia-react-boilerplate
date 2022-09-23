@@ -64,6 +64,11 @@
       }
       }
 
+      .carousel-loader {
+        box-shadow: none;
+        border: none;
+      }
+
     }
   }
 }
@@ -109,26 +114,31 @@
       
 
         &__infos{   
-        display: flex;
-        position: relative;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        cursor: pointer;
-        height: 7rem;
-        .name {
-          color: $main-color;
-          font-size: 0.8rem;
-          text-align: center;
-          margin-top: 1rem;
-          text-transform: capitalize;
-        }
-        .price {
-          color: $second-color;
-          font-size: 1.2rem;
-          font-weight: 600;   
+          display: flex;
+          position: relative;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+          height: 7rem;
+          .name {
+            color: $main-color;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 1rem;
+            text-transform: capitalize;
+          }
+          .price {
+            color: $second-color;
+            font-size: 1.2rem;
+            font-weight: 600;   
+          }
         }
       }
+
+      .carousel-loader {
+        box-shadow: none;
+        border: none;
       }
 
     }
