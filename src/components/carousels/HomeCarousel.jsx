@@ -30,6 +30,7 @@ import { windowSize } from '@/hooks/useScreenSize';
 
 //Import scope SCSS
 import './SCSS/carousels.scss';
+import SkeletonLoader from '../hits/components/HitsSkeletonLoader';
 
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ context, title }) => {
@@ -82,61 +83,63 @@ function Carousel(props) {
     <>
       <h3 className="title">{title}</h3>
       {/* This div declares the outer reference for the framer motion */}
-      <motion.div
-        ref={carousel}
-        className="carousel"
-        whileTap={{ cursor: 'grabbing' }}
-      >
-        {/* This div declares the parameters for the carousel dragging effect */}
+      {isLoading ? (
+        <SkeletonLoader type="carousel" />
+      ) : (
         <motion.div
-          // ADD THAT TO NEW FILE ABOUT ANIMATION IN CONFIG
-          draggable
-          drag="x"
-          dragConstraints={{ right: 0, left: -width }}
-          dragTransition={
-            ({
-              min: 0,
-              max: 100,
-              velocity: 0,
-              power: 1,
-              bounceStiffness: 10,
-              bounceDamping: 1,
-            },
-            framerMotionTransition)
-          }
-          className="inner-carousel"
+          ref={carousel}
+          className="carousel"
+          whileTap={{ cursor: 'grabbing' }}
         >
-          {/* Display the hits in the carousel */}
-          {hits.map((hit, i) => {
-            if (isLoading) return (<div key={i} className={`item ${isLoading && 'carousel-loader'}`}><CustomSkeleton type="hit" /></div>)
-          
-            return (
-              <div key={i} className="item">
-                <div className="carousel__imageWrapper">
-                  <img
-                    src={get(hit, image)}
-                    alt={get(hit, productName)}
-                    onError={(e) => (e.currentTarget.src = placeHolderError)}
-                  />
+          {/* This div declares the parameters for the carousel dragging effect */}
+          <motion.div
+            // ADD THAT TO NEW FILE ABOUT ANIMATION IN CONFIG
+            draggable
+            drag="x"
+            dragConstraints={{ right: 0, left: -width }}
+            dragTransition={
+              ({
+                min: 0,
+                max: 100,
+                velocity: 0,
+                power: 1,
+                bounceStiffness: 10,
+                bounceDamping: 1,
+              },
+              framerMotionTransition)
+            }
+            className="inner-carousel"
+          >
+            {/* Display the hits in the carousel */}
+            {hits.map((hit, i) => {          
+              return (
+                <div key={i} className="item">
+                  <div className="carousel__imageWrapper">
+                    <img
+                      src={get(hit, image)}
+                      alt={get(hit, productName)}
+                      onError={(e) => (e.currentTarget.src = placeHolderError)}
+                    />
+                  </div>
+                  <div
+                    className="item__infos"
+                    onClick={() => {
+                      hitState(hit);
+                      // navigate to the product show page
+                      navigate(`/search/product/${hit[objectID]}`);
+                    }}
+                  >
+                    <p className="name">{get(hit, productName)}</p>
+                    <p className="price">
+                      <Price hit={hit} />
+                    </p>
+                  </div>
                 </div>
-                <div
-                  className="item__infos"
-                  onClick={() => {
-                    hitState(hit);
-                    // navigate to the product show page
-                    navigate(`/search/product/${hit[objectID]}`);
-                  }}
-                >
-                  <p className="name">{get(hit, productName)}</p>
-                  <p className="price">
-                    <Price hit={hit} />
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </motion.div>
         </motion.div>
-      </motion.div>
+      )}
     </>
   );
 }

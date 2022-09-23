@@ -31,6 +31,12 @@ const SkeletonLoader = ({type}) => {
         <div>
           {[...Array(4)].map((e, i) => <div key={i + "facet"}><CustomSkeleton {...{type}} /></div>)}
         </div>
+      );
+    case "carousel":
+      return (
+        <div className='carousel-skel'>
+          {[...Array(4)].map((e, i) => <li key={i + "carousel"}><CustomSkeleton type="hit" /></li>)}
+        </div>
       )
   }
 };

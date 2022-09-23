@@ -80,14 +80,12 @@ const HomePage = () => {
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
-          <Suspense key={i} fallback={<CustomSkeleton type="banner" />}>
+
             <HomeCarousel
               context={carousel.context}
               title={t('titleCarousels')[i]}
-              setCarouselLoaded={setCarouselLoaded}
-              carouselLoaded={carouselLoaded}
             />
-          </Suspense>
+
         ))}
 
       {/* Render Recommend component - Trending Products Slider */}
