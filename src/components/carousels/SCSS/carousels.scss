@@ -5,6 +5,7 @@
 
 .home-carousel {
   margin: 2rem 4rem;
+
   h3 {
     color: $second-color;
     font-size: 2rem;
@@ -27,6 +28,7 @@
         object-fit: cover;
       }
     }
+
     .inner-carousel {
       display: flex;
       gap: 1rem;
@@ -68,10 +70,10 @@
         box-shadow: none;
         border: none;
       }
-
     }
   }
 }
+
 .carousel::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
