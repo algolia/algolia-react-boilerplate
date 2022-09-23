@@ -86,7 +86,6 @@ const Hit = ({ hit }) => {
   const promoted = hit?._rankingInfo?.promoted;
 
   const addToCart = (product, productQty) => {
-    console.log(priceForTotal);
     setProductQty(productQty + 1);
     if (cart.length < 1) {
       setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
