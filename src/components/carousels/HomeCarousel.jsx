@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 // Recoil
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { LanguageSelectedAtom } from '@/config/languagesConfig';
 
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig';
@@ -15,9 +14,7 @@ import { hitsPerCarousel } from '@/config/carouselConfig';
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
-import { isCarouselLoaded } from '@/config/carouselConfig';
 import { framerMotionTransition } from '@/config/animationConfig';
-import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
 // In case of img loading error
 import * as placeHolderError from '@/assets/logo/logo.webp';

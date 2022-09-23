@@ -3,7 +3,7 @@ import { windowSize } from '@/hooks/useScreenSize';
 import { useRecoilValue } from 'recoil';
 
 const SkeletonLoader = ({type}) => {
-  const { tablet, mobile } = useRecoilValue(windowSize);
+  const { tablet, mobile, isDesktop } = useRecoilValue(windowSize);
 
   // Change this number to render more placeholders on the SRP loader
   const resultsNumber = 20;
@@ -35,7 +35,7 @@ const SkeletonLoader = ({type}) => {
     case "carousel":
       return (
         <div className='carousel-skel'>
-          {[...Array(4)].map((e, i) => <li key={i + "carousel"}><CustomSkeleton type="hit" /></li>)}
+          {[...Array(isDesktop ? 4 : 2)].map((e, i) => <li key={i + "carousel"}><CustomSkeleton type="hit" /></li>)}
         </div>
       )
   }
