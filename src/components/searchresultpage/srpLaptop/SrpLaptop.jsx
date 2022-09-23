@@ -55,6 +55,7 @@ import '../SCSS/searchResultsPage.scss';
 import { FilterPicto } from '@/assets/svg/SvgIndex';
 
 import { navigationStateAtom } from '@/config/navigationConfig';
+import Modal from '@/components/cart/Modal';
 
 const SrpLaptop = () => {
   // Recoil & React states
@@ -114,6 +115,7 @@ const SrpLaptop = () => {
   }
   return (
     <>
+      <Modal />
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
@@ -191,13 +193,16 @@ const SrpLaptop = () => {
             personalizationImpact={personalizationImpact}
             personalizationFilters={personalizationFilters}
             filters={
-              (navigationState?.type === 'filter' || navigationState?.type === 'rawFilter') &&
+              (navigationState?.type === 'filter' ||
+                navigationState?.type === 'rawFilter') &&
               navigationState?.action !== null
                 ? navigationState.action
                 : ''
             }
             optionalFilters={segmentOptionalFilters}
-            ruleContexts={navigationState?.type === 'context' ? navigationState.action : ''}
+            ruleContexts={
+              navigationState?.type === 'context' ? navigationState.action : ''
+            }
             query={queryState}
             getRankingInfo={true}
           />

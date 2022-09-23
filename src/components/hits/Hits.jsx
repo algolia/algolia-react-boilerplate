@@ -121,10 +121,6 @@ const Hit = ({ hit }) => {
     );
   };
 
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
-
   return (
     <motion.div
       layout
