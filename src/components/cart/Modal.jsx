@@ -1,16 +1,41 @@
 import ArticlesCard from './ArticlesCard';
 
-import { cartState } from '@/config/cartFunctions';
+import { cartOpen, cartState } from '@/config/cartFunctions';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 //Import scope SCSS
+import { useRef } from 'react';
 import './SCSS/cartModal.scss';
 
-const Modal = () => {
+//Import config from helped navigation
+import { cartClick, clickHamburger } from '@/config/cartFunctions';
+import useOutsideClickTwoConditionals from '@/hooks/useOutsideClickTwoConditions';
+
+const Modal = ({ mobile, isDesktop }) => {
+  const [showCart, setShowCart] = useRecoilState(cartOpen);
   const [cartValue, setCartValue] = useRecoilState(cartState);
-  const showCart = useRecoilValue(cartState);
+  const cartModal = useRef();
+  const cartIcon = useRecoilValue(cartClick);
+  const hamburgerIcon = useRecoilValue(clickHamburger);
+  //Listen for click outside the Demo Guide panel
+  useOutsideClickTwoConditionals(cartModal, cartIcon, hamburgerIcon, () =>
+    setShowCart(!showCart)
+  );
   return (
-    <div className="modal-container">
+    <div
+      className={`${mobile ? 'modal-container-mobile' : 'modal-container'}`}
+      ref={cartModal}
+    >
+      {mobile && (
+        <a
+          className="modal-container-mobile__close"
+          onClick={() => {
+            setShowCart(!showCart);
+          }}
+        >
+          x
+        </a>
+      )}
       <h3 className="modal-container__title">
         My Cart{' '}
         {showCart?.length > 0 && (

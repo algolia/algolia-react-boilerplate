@@ -170,6 +170,16 @@
         }
       }
     }
+    .picto-cart {
+      display: flex;
+      .notification-cart {
+        margin-left: 1rem;
+        p {
+          color: $second-color;
+          font-weight: 600;
+        }
+      }
+    }
   }
   .hamburger {
     @include hamburger-menu;

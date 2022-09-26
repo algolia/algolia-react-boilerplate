@@ -117,7 +117,7 @@ const SrpLaptop = () => {
   }
   return (
     <>
-      {showCart && <Modal />}
+      {showCart && <Modal isDesktop={isDesktop} mobile={mobile} />}
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">

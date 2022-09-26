@@ -31,6 +31,10 @@ import { personaConfig } from '@/config/personaConfig';
 import { segmentConfig } from '@/config/segmentConfig';
 import useStoreCartToLocalStorage from '@/hooks/useStoreCartToLocalStorage';
 import { useEffect } from 'react';
+import { useRef } from 'react';
+
+//Import config from helped navigation
+import { cartClick } from '@/config/cartFunctions';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
@@ -76,6 +80,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   const [navigationState, setNavigationState] =
     useRecoilState(navigationStateAtom);
+
+  const cartIcon = useSetRecoilState(cartClick);
+  // const cartIcon = useRef();
 
   // UseEffect to store into the local storage our Cart
   useEffect(() => {
@@ -184,8 +191,10 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         onClick={() => {
           setCartOpenValue(!cartOpenValue);
         }}
+        ref={cartIcon}
       >
-        <CartPicto />
+        {!mobile && <CartPicto />}
+        {mobile && <p>Cart</p>}
         {/* Picto notification up the cart icon */}
         {showCart?.length > 0 && (
           <div className="notification-cart">

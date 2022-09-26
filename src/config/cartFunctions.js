@@ -19,3 +19,13 @@ export const removedItem = atom({
   key: 'removedItem',
   default: null,
 });
+
+export const cartClick = atom({
+  key: 'cartClick',
+  default: null,
+});
+
+export const clickHamburger = atom({
+  key: 'clickHamburger',
+  default: null,
+});

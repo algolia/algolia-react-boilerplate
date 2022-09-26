@@ -107,3 +107,17 @@
     right: 2rem;
   }
 }
+
+// ------------------------------Mobile
+.modal-container-mobile {
+  padding: 25px 15px;
+  position: relative;
+  &__close {
+    position: absolute;
+    right: 1rem;
+    font-size: 1.5rem;
+    top: 1.2rem;
+    font-weight: bold;
+    color: $second-color;
+  }
+}

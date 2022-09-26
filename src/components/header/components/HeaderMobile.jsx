@@ -29,6 +29,9 @@ import Navigation from './Navigation';
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from '@/hooks/usePreventScrolling';
 import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
+import { clickHamburger } from '@/config/cartFunctions';
+
+import { useRef } from 'react';
 
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
@@ -38,6 +41,8 @@ const HeaderMobile = ({ mobile, tablet }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
+
+  const hamburger = useSetRecoilState(clickHamburger);
 
   // Prevent body from scrolling when panel is open
   usePreventScrolling(isMenuOpen);
@@ -54,7 +59,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
             setIsMenuOpen(!isMenuOpen);
           }}
         >
-          <span className="hamburger__line"></span>
+          <span ref={hamburger} className="hamburger__line"></span>
           <span className="hamburger__line"></span>
           <span className="hamburger__line"></span>
         </div>
