@@ -114,10 +114,34 @@ const Hit = ({ hit }) => {
   };
 
   const removeFromCart = (product, productQty) => {
-    setProductQty(productqty - 1);
-    setCart((cart) =>
-      cart.filter((item) => item.objectID !== product.objectID)
-    );
+    setProductQty(productQty - 1);
+    if (cart.length < 1) {
+      setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
+    } else {
+      let cartItemIndex = null;
+      const cartItem = cart.map((item, index) => {
+        if (item.objectID === product.objectID) {
+          cartItemIndex = index;
+        }
+      });
+      if (cartItemIndex !== null) {
+        let items = [...cart];
+        if (items[cartItemIndex].qty !== 0) {
+          items[cartItemIndex] = {
+            ...items[cartItemIndex],
+            qty: productQty - 1,
+            totalPrice: (productQty - 1) * items[cartItemIndex][priceForTotal],
+          };
+          setCart(items);
+        }
+        if (items[cartItemIndex].qty === 0) {
+          setCart((cart) =>
+            cart.filter((item) => item.objectID !== product.objectID)
+          );
+        }
+      } else {
+      }
+    }
   };
 
   return (
@@ -204,7 +228,9 @@ const Hit = ({ hit }) => {
             <div className="srpItem__infosDown__cart">
               <div
                 onClick={() => {
-                  removeFromCart(hit, productQty);
+                  if (productQty !== 0) {
+                    removeFromCart(hit, productQty);
+                  }
                 }}
               >
                 <MinusPicto />
