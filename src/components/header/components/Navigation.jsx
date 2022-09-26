@@ -190,7 +190,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         className="picto-cart"
         onClick={() => {
           setCartOpenValue(!cartOpenValue);
-          setIsMenuOpen(false);
+          {
+            mobile && setIsMenuOpen(false);
+          }
         }}
         ref={cartIcon}
       >
