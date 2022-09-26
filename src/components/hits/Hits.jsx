@@ -290,12 +290,12 @@ const Hit = ({ hit }) => {
               <div
                 onClick={() => {
                   addToCart(hit, productQty);
-                  useSendAlgoliaEvent(
-                    'clickedObjectIDs',
-                    index,
-                    hit,
-                    'add-to-cart'
-                  );
+                  // useSendAlgoliaEvent(
+                  //   'clickedObjectIDs',
+                  //   index,
+                  //   hit,
+                  //   'add-to-cart'
+                  // );
                 }}
               >
                 <PlusPicto />
