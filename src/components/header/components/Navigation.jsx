@@ -29,12 +29,14 @@ import { CartPicto } from '@/assets/svg/SvgIndex';
 import { languagesConfig } from '@/config/languagesConfig';
 import { personaConfig } from '@/config/personaConfig';
 import { segmentConfig } from '@/config/segmentConfig';
+import { useEffect } from 'react';
+import useStoreCartToLocalStorage from '@/hooks/useStoreCartToLocalStorage';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
   const setQueryState = useSetRecoilState(queryAtom);
   const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen);
-  const showCart = useRecoilValue(cartState);
+  const [showCart, setShowCart] = useRecoilState(cartState);
 
   // navigate is used by React Router
   const navigate = useNavigate();
@@ -74,6 +76,22 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   const [navigationState, setNavigationState] =
     useRecoilState(navigationStateAtom);
+
+  useEffect(() => {
+    if (showCart?.length > 0) {
+      console.log('Hello');
+      useStoreCartToLocalStorage(showCart);
+    }
+  }, [showCart]);
+
+  useEffect(() => {
+    const getCart = localStorage.getItem('myCart');
+    if (getCart) {
+      const cleanCart = JSON.parse(getCart);
+      const savedCart = cleanCart[cleanCart?.length - 1];
+      setShowCart(savedCart);
+    }
+  }, []);
 
   return (
     <ul
