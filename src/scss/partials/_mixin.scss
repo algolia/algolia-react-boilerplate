@@ -58,14 +58,15 @@
   }
   &::-webkit-search-cancel-button {
     // If you want display or not cross in searchbox
+    display: none;
     -webkit-appearance: none;
-    height: 1em;
-    width: 1em;
-    border-radius: 50em;
-    background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
-      no-repeat 50% 50%;
-    background-size: contain;
-    cursor: pointer;
+    // height: 1em;
+    // width: 1em;
+    // border-radius: 50em;
+    // background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+    //   no-repeat 50% 50%;
+    // background-size: contain;
+    // cursor: pointer;
   }
 }
 
@@ -278,12 +279,13 @@
   padding: 1rem;
   border-radius: 0.5rem;
 
-  &__imgWrapper,
-  .image-wrapper {
+  &__imgWrapper, .image-wrapper {
     overflow: hidden;
     margin: 1rem;
+    cursor: pointer;
     img {
       @include productImage();
+      cursor: pointer;
     }
     &__heart {
       @include heartIcon($second-color);
@@ -332,7 +334,7 @@
 }
 
 @mixin productImage {
-  width: clamp(8rem, 10rem, 12rem);
+  // width: clamp(8rem, 10rem, 12rem);
   height: 100%;
   margin: 0 auto;
   position: relative;

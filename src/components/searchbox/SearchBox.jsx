@@ -64,19 +64,20 @@ function CustomSearchBox(props) {
     keyPrefix: 'searchBox',
   });
 
-  const debouncedSetQueryParams = useRef(
-    debounce((query) => {
-    // Update the query URL param to the value of the new search
-    searchParams.set('query', query)
-    setSearchParams(searchParams)
-    }, 500)
-  ).current;
+  // const debouncedSetQueryParams = useRef(
+  //   debounce((query) => {
+  //     // Update the query URL param to the value of the new search
+  //     searchParams.set('query', query);
+  //     setSearchParams(searchParams);
+  //   }, 500)
+  // ).current;
 
   const refineFunction = (query) => {
     // Empty array of rules on each Keystrokes
     rulesApplied([]);
-
-    debouncedSetQueryParams(query)
+    searchParams.set('query', query);
+    setSearchParams(searchParams);
+    // debouncedSetQueryParams(query);
     // Refine query in all the app through recoil
     setQueryState(query);
   };
@@ -97,12 +98,10 @@ function CustomSearchBox(props) {
           setQueryState(query);
           useStoreQueryToLocalStorage(query);
 
-          navigate(
-            { 
-              pathname: "/search",
-              search: `?${searchParams}`,
-            }
-          )
+          navigate({
+            pathname: '/search',
+            search: `?${searchParams}`,
+          });
         }}
       >
         <input
@@ -119,7 +118,9 @@ function CustomSearchBox(props) {
             refineFunction(event.currentTarget.value);
           }}
         />
-        {navigationState && isSearchInCategory && <SearchInCategory state={state} />}
+        {navigationState && isSearchInCategory && (
+          <SearchInCategory state={state} />
+        )}
         <Glass />
       </form>
     </div>

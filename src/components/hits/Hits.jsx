@@ -20,7 +20,7 @@ import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
@@ -37,12 +37,21 @@ import { cartState } from '@/config/cartFunctions';
 
 //Import scope SCSS
 import './SCSS/hits.scss';
+import RankingIcon from './components/RankingIcon';
+import { shouldHavePersona } from '@/config/featuresConfig';
+import {
+  shouldDisplayRankingIcons,
+  personaSelectedFiltersAtom,
+} from '@/config/personaConfig';
 
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
   const [cart, setCart] = useRecoilState(cartState);
+  const showPersona = useRecoilValue(shouldHavePersona);
+  const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);
+  const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
 
   // Get hit attribute from config file
   const {
@@ -154,6 +163,7 @@ const Hit = ({ hit }) => {
       transition={framerMotionHits.transition}
       className={`${promoted ? 'promotedItems' : ''} srpItem`}
     >
+      {showPersona && showRankingIcons && <RankingIcon {...{ hit }} />}
       <div
         className="button-ranking-container"
         onClick={() => setShouldShowRankingInfo(!shouldShowRankingInfo)}
@@ -182,36 +192,28 @@ const Hit = ({ hit }) => {
             useStoreIdToLocalStorage(hit[objectID]);
           }}
         >
-          {isHovered && get(hit, imageAlt) !== undefined ? (
-            <img
-              key={1}
-              className={
-                shouldShowRankingInfo ? 'secondImage-opacity' : 'secondImage'
-              }
-              loading="lazy"
-              src={get(hit, imageAlt)}
-              alt={get(hit, category)}
-              onError={(e) => (e.currentTarget.src = placeHolderError)}
-            />
-          ) : (
-            <img
-              className={
-                shouldShowRankingInfo
-                  ? 'mainImage-opacity'
-                  : 'mainImage-visible'
-              }
-              loading="lazy"
-              src={get(hit, image)}
-              key={2}
-              alt={get(hit, category)}
-              onError={(e) => (e.currentTarget.src = placeHolderError)}
-            />
-          )}
+          <img
+            className={
+              shouldShowRankingInfo ? 'mainImage-opacity' : 'mainImage-visible'
+            }
+            loading="lazy"
+            src={
+              isHovered && get(hit, imageAlt) !== undefined
+                ? get(hit, imageAlt)
+                : get(hit, image)
+            }
+            key={2}
+            alt={get(hit, category)}
+            onError={(e) => (e.currentTarget.src = placeHolderError)}
+          />
+          {/* )} */}
           {badgeCriteria(hit) !== null && !shouldShowRankingInfo && (
             <Badge title={badgeCriteria(hit)} />
           )}
           <div className="srpItem__imgWrapper__heart">
-            <Heart />
+            {(personaFilters.length < 1 ||
+              !showPersona ||
+              !showRankingIcons) && <Heart />}
           </div>
         </div>
         <div className="srpItem__infos">

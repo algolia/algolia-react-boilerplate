@@ -12,7 +12,7 @@ import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
 
 // Import logo URL for header
-import logo from '@/assets/logo/logo.webp';
+import logoMobile from '@/assets/logo/LogoMobile.webp';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
@@ -68,7 +68,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
               federated(false);
             }}
           >
-            <img src={logo} alt="" width="200" />
+            <img src={logoMobile} alt="" width="200" />
           </Link>
         </div>
         {/* For a search box Simple center */}
