@@ -23,6 +23,9 @@
     width: 80%;
     margin: 30px auto;
   }
+  &__button {
+    @include btn($second-color, $white-color);
+  }
 }
 
 .modal-container::-webkit-scrollbar {

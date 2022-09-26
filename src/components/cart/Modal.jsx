@@ -1,13 +1,13 @@
 import ArticlesCard from './ArticlesCard';
 
-import { cartOpen, cartState } from '@/config/cartFunctions';
-import { useRecoilValue } from 'recoil';
+import { cartState } from '@/config/cartFunctions';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 //Import scope SCSS
 import './SCSS/cartModal.scss';
 
 const Modal = () => {
-  const cartValue = useRecoilValue(cartState);
+  const [cartValue, setCartValue] = useRecoilState(cartState);
   const showCart = useRecoilValue(cartState);
   return (
     <div className="modal-container">
@@ -22,6 +22,17 @@ const Modal = () => {
         return <ArticlesCard item={item} key={i} />;
       })}
       {cartValue.length === 0 && <p>Your cart is empty</p>}
+      {cartValue.length !== 0 && (
+        <a
+          className="modal-container__button"
+          onClick={() => {
+            setCartValue([]);
+            localStorage.removeItem('myCart');
+          }}
+        >
+          Empty my cart
+        </a>
+      )}
     </div>
   );
 };
