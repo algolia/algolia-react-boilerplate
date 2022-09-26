@@ -1,24 +1,25 @@
 import ArticlesCard from './ArticlesCard';
 
-import { cartState } from '@/config/cartFunctions';
+import { cartOpen, cartState } from '@/config/cartFunctions';
 import { useRecoilValue } from 'recoil';
-import { useEffect } from 'react';
 
 //Import scope SCSS
 import './SCSS/cartModal.scss';
 
 const Modal = () => {
   const cartValue = useRecoilValue(cartState);
-  useEffect(() => {
-    console.log(cartValue);
-  }, [cartValue]);
-
+  const showCart = useRecoilValue(cartState);
   return (
     <div className="modal-container">
-      <h3 className="modal-container__title">My Cart(3)</h3>
+      <h3 className="modal-container__title">
+        My Cart{' '}
+        {showCart?.length > 0 && (
+          <span className="modal-container__title">({showCart.length})</span>
+        )}
+      </h3>
       <div className="modal-container__line"></div>
-      {cartValue.map((item) => {
-        return <ArticlesCard item={item} />;
+      {cartValue.map((item, i) => {
+        return <ArticlesCard item={item} key={i} />;
       })}
     </div>
   );
