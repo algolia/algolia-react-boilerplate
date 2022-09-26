@@ -26,7 +26,7 @@ import { cartOpen } from '@/config/cartFunctions';
 import {
   shouldHaveCarousels,
   shouldHaveFederatedSearch,
-  shouldHaveTrendingProducts
+  shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { windowSize } from '@/hooks/useScreenSize';
@@ -89,6 +89,7 @@ const HomePage = () => {
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
           <HomeCarousel
+            key={i}
             context={carousel.context}
             title={t('titleCarousels')[i]}
           />
