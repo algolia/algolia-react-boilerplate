@@ -162,7 +162,6 @@ const Hit = ({ hit }) => {
     if (removed !== null) {
       if (removed[0] === hit.objectID) {
         if (removed[1] !== 0) {
-          console.log(removed[1]);
           setProductQty(removed[1]);
           setRemoved(null);
         } else {

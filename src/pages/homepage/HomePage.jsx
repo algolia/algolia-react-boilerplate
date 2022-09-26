@@ -26,7 +26,7 @@ import { cartOpen } from '@/config/cartFunctions';
 import {
   shouldHaveCarousels,
   shouldHaveFederatedSearch,
-  shouldHaveTrendingProducts,
+  shouldHaveTrendingProducts
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { windowSize } from '@/hooks/useScreenSize';
