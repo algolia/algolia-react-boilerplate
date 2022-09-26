@@ -201,3 +201,13 @@
         grid-row-gap: 1rem;
     }
   }
+
+.carousel-skel {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  
+  li {
+    width: 100%;
+  }
+}
