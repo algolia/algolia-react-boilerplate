@@ -29,8 +29,8 @@ import { CartPicto } from '@/assets/svg/SvgIndex';
 import { languagesConfig } from '@/config/languagesConfig';
 import { personaConfig } from '@/config/personaConfig';
 import { segmentConfig } from '@/config/segmentConfig';
-import { useEffect } from 'react';
 import useStoreCartToLocalStorage from '@/hooks/useStoreCartToLocalStorage';
+import { useEffect } from 'react';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
@@ -77,12 +77,15 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   const [navigationState, setNavigationState] =
     useRecoilState(navigationStateAtom);
 
+  // UseEffect to store into the local storage our Cart
   useEffect(() => {
     if (showCart?.length > 0) {
+      localStorage.removeItem('myCart');
       useStoreCartToLocalStorage(showCart);
     }
   }, [showCart]);
 
+  // If there is already a Cart in the local storage, then store it in recoile state
   useEffect(() => {
     const getCart = localStorage.getItem('myCart');
     if (getCart) {
@@ -107,9 +110,6 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
             tabIndex="0"
             key={link.name}
             onClick={() => {
-              // Set query to nothing when clicking on a category
-              // setQueryState('');
-
               //Build action based on link type, then navigate
               let action = null;
               if (link.type === 'filter' && link.filter?.length > 0) {
@@ -178,6 +178,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         }}
       >
         <CartPicto />
+        {/* Picto notification up the cart icon */}
         {showCart?.length > 0 && (
           <div className="notification-cart">
             <p>{showCart?.length}</p>

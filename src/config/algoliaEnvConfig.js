@@ -13,7 +13,7 @@ export const searchClientCreds = {
   appID: '853MYZ81KY',
   // Used to get the Persona Strat and score if you haven't got one you have to create one in you API Keys
   // https://www.algolia.com/doc/rest-api/personalization/#get-the-current-personalization-strategy
-  personaStrategyAPIKey: '4983f1e3449111609c1e7688209b787b'
+  personaStrategyAPIKey: '4983f1e3449111609c1e7688209b787b',
 };
 
 // ADJUST THE DEFAULT VALUE TO YOUR MAIN INDEX
@@ -51,7 +51,7 @@ export const recommendClient = algoliarecommend(
 // Initialise insights client
 aa('init', {
   appId: searchClientCreds.appID,
-  apiKey: searchClientCreds.APIKey,
+  apiKey: 'f2f030011dd333c96f87e91d404ebcf1',
 });
 
 // Export an active insights client

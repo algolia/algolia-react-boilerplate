@@ -20,7 +20,7 @@ import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
@@ -32,19 +32,24 @@ import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 // import Price component
 import Price from '@/components/hits/components/Price.jsx';
 
-// Import cart from recoil
+// Import cart from recoil(Cart state and the event if it's removed)
 import { cartState, removedItem } from '@/config/cartFunctions';
 
 //Import scope SCSS
-import './SCSS/hits.scss';
-import RankingIcon from './components/RankingIcon';
 import { shouldHavePersona } from '@/config/featuresConfig';
 import {
-  shouldDisplayRankingIcons,
   personaSelectedFiltersAtom,
+  shouldDisplayRankingIcons,
 } from '@/config/personaConfig';
+import RankingIcon from './components/RankingIcon';
+import './SCSS/hits.scss';
 
-const Hit = ({ hit, sendEvent }) => {
+// Used to send insights event on add to cart
+import { mainIndex } from '@/config/algoliaEnvConfig';
+import { personaSelectedAtom } from '@/config/personaConfig';
+import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+
+const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
@@ -54,6 +59,12 @@ const Hit = ({ hit, sendEvent }) => {
   const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
 
   const [removed, setRemoved] = useRecoilState(removedItem);
+
+  // personalisation user token
+  const userToken = useRecoilValue(personaSelectedAtom);
+
+  // Get the main index
+  const index = useRecoilValue(mainIndex);
 
   // Get hit attribute from config file
   const {
@@ -96,6 +107,7 @@ const Hit = ({ hit, sendEvent }) => {
 
   const promoted = hit?._rankingInfo?.promoted;
 
+  // Function on click on plus button to add hit in the cart
   const addToCart = (product, productQty) => {
     if (cart.length < 1) {
       setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
@@ -125,6 +137,7 @@ const Hit = ({ hit, sendEvent }) => {
     }
   };
 
+  // Function on click on plus button to add hit in the cart
   const removeFromCart = (product, productQty) => {
     if (cart.length < 1) {
       setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
@@ -158,6 +171,7 @@ const Hit = ({ hit, sendEvent }) => {
     }
   };
 
+  // Function to have a link between the fact I removed an item in my cart
   useEffect(() => {
     if (removed !== null) {
       if (removed[0] === hit.objectID) {
@@ -259,8 +273,13 @@ const Hit = ({ hit, sendEvent }) => {
               <p>{productQty}</p>
               <div
                 onClick={() => {
-                  addToCart(hit, productQty);
-                  sendEvent('click', hit, 'Product Added');
+                  useSendAlgoliaEvent(
+                    'clickedObjectIDs',
+                    userToken,
+                    index,
+                    hit,
+                    'add-to-cart'
+                  );
                 }}
               >
                 <PlusPicto />
