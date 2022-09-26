@@ -33,6 +33,8 @@ import {
   framerMotionTransition,
 } from '@/config/animationConfig';
 
+import { cartOpen } from '@/config/cartFunctions';
+
 // In case of img loading error
 import * as placeHolderError from '@/assets/logo/logo.webp';
 import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
@@ -58,6 +60,7 @@ import './SCSS/productDetails.scss';
 
 // Import and use translation
 import { useTranslation } from 'react-i18next';
+import Modal from '@/components/cart/Modal';
 
 const ProductDetails = () => {
   // For alert on sending add to cart event
@@ -125,7 +128,7 @@ const ProductDetails = () => {
   // navigate is used by react router
   const navigate = useNavigate();
 
-  const { isDesktop } = useRecoilValue(windowSize);
+  const { isDesktop, mobile } = useRecoilValue(windowSize);
 
   // Get hit attribute from config file
   const { image, productName, brand, sizeFilter, colour, colourHexa } =
@@ -138,6 +141,8 @@ const ProductDetails = () => {
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
   });
+
+  const showCart = useRecoilValue(cartOpen);
 
   let fbtRecommendationsProducts;
   let relatedRecommendationsProducts;
@@ -170,6 +175,7 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
+      {showCart && <Modal isDesktop={isDesktop} mobile={mobile} />}
       <div className={`${!isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'}`}>
         <div
           className={`${!isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'}`}
