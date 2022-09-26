@@ -104,6 +104,7 @@ const ArticlesCard = ({ item }) => {
           <div className="articles-card__infos__qtyprice">
             <div className="articles-card__infos__qtyprice__plus-minus">
               <div
+                className="articles-card__infos__qtyprice__plus-minus__icons"
                 onClick={() => {
                   removeFromCart(item);
                 }}
@@ -112,6 +113,7 @@ const ArticlesCard = ({ item }) => {
               </div>
               <p>{item.qty}</p>
               <div
+                className="articles-card__infos__qtyprice__plus-minus__icons"
                 onClick={() => {
                   addToCart(item);
                 }}
@@ -120,7 +122,7 @@ const ArticlesCard = ({ item }) => {
               </div>
             </div>
             <div className="articles-card__infos__qtyprice__price">
-              <p>${item.totalPrice}</p>
+              <p>${item.totalPrice.toFixed(2)}</p>
             </div>
           </div>
         </div>
