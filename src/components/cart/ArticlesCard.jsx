@@ -6,6 +6,7 @@ import get from 'lodash/get';
 // Import cart from recoil
 import { cartState, removedItem } from '@/config/cartFunctions';
 import { useRecoilState } from 'recoil';
+import { cartOpen } from '@/config/cartFunctions';
 
 const ArticlesCard = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);

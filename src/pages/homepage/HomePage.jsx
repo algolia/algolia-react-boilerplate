@@ -20,6 +20,8 @@ import { carouselConfig } from '@/config/carouselConfig';
 import CustomHomeBanners from '@/components/banners/HomeBanners';
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
+import { cartOpen } from '@/config/cartFunctions';
+
 //  should federated search be shown or not
 import {
   shouldHaveCarousels,
@@ -40,6 +42,7 @@ const Trending = lazy(() =>
 );
 
 // Import scoped SCSS
+import Modal from '@/components/cart/Modal';
 import './homepage.scss';
 
 const HomePage = () => {
@@ -60,6 +63,8 @@ const HomePage = () => {
   );
 
   const { isDesktop, mobile } = useRecoilValue(windowSize);
+  //Import modal opening value
+  const showCart = useRecoilValue(cartOpen);
 
   // Import and use translation
   const { t } = useTranslation('translation', {
@@ -69,6 +74,9 @@ const HomePage = () => {
   return (
     // Framer motion wrapper
     <div className="homepage" ref={HomePage}>
+      {/* Cart Modal */}
+      {showCart && <Modal />}
+
       {isFederated && isFederatedOpen && (
         <Suspense>
           <FederatedSearch />
@@ -80,12 +88,10 @@ const HomePage = () => {
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (
-
-            <HomeCarousel
-              context={carousel.context}
-              title={t('titleCarousels')[i]}
-            />
-
+          <HomeCarousel
+            context={carousel.context}
+            title={t('titleCarousels')[i]}
+          />
         ))}
 
       {/* Render Recommend component - Trending Products Slider */}
