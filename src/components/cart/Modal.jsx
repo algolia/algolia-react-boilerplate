@@ -21,6 +21,7 @@ const Modal = () => {
       {cartValue.map((item, i) => {
         return <ArticlesCard item={item} key={i} />;
       })}
+      {cartValue.length === 0 && <p>Your cart is empty</p>}
     </div>
   );
 };

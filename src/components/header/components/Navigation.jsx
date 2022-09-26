@@ -95,6 +95,14 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
     }
   }, []);
 
+  const sumAllArticles = (cart) => {
+    let x = 0;
+    cart.map((i, index) => {
+      x += i.qty;
+    });
+    return x;
+  };
+
   return (
     <ul
       className={`${
@@ -181,7 +189,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         {/* Picto notification up the cart icon */}
         {showCart?.length > 0 && (
           <div className="notification-cart">
-            <p>{showCart?.length}</p>
+            <p>{sumAllArticles(showCart)}</p>
           </div>
         )}
       </li>
