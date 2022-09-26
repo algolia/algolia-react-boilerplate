@@ -1,10 +1,15 @@
 // Recoil import
 import { Garbage, MinusEmptyIcon, PlusEmptyIcon } from '@/assets/svg/SvgIndex';
-import { hitAtom, hitsConfig } from '@/config/hitsConfig';
+import { hitsConfig } from '@/config/hitsConfig';
 import get from 'lodash/get';
 
+// Import cart from recoil
+import { cartState, removedItem } from '@/config/cartFunctions';
+import { useRecoilState } from 'recoil';
+
 const ArticlesCard = ({ item }) => {
-  console.log(item);
+  const [cart, setCart] = useRecoilState(cartState);
+  const [removed, setRemoved] = useRecoilState(removedItem);
   // Get hit attribute from config file
   const {
     objectID,
@@ -17,6 +22,7 @@ const ArticlesCard = ({ item }) => {
     sizeFilter,
     colour,
   } = hitsConfig;
+
   return (
     <div>
       <div className="articles-card">
@@ -55,7 +61,15 @@ const ArticlesCard = ({ item }) => {
             </div>
           </div>
         </div>
-        <div className="articles-card__remove">
+        <div
+          className="articles-card__remove"
+          onClick={() => {
+            setCart((cart) =>
+              cart.filter((it) => it.objectID !== item.objectID)
+            );
+            setRemoved(item.objectID);
+          }}
+        >
           <Garbage />
         </div>
       </div>

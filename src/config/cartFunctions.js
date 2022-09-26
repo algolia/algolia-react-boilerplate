@@ -14,3 +14,8 @@ export const cartOpen = atom({
   key: 'cartOpen',
   default: false,
 });
+
+export const removedItem = atom({
+  key: 'removedItem',
+  default: null,
+});

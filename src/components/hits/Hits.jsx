@@ -33,7 +33,7 @@ import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 import Price from '@/components/hits/components/Price.jsx';
 
 // Import cart from recoil
-import { cartState } from '@/config/cartFunctions';
+import { cartState, removedItem } from '@/config/cartFunctions';
 
 //Import scope SCSS
 import './SCSS/hits.scss';
@@ -52,6 +52,8 @@ const Hit = ({ hit }) => {
   const showPersona = useRecoilValue(shouldHavePersona);
   const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);
   const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
+
+  const [removed, setRemoved] = useRecoilState(removedItem);
 
   // Get hit attribute from config file
   const {
@@ -95,7 +97,6 @@ const Hit = ({ hit }) => {
   const promoted = hit?._rankingInfo?.promoted;
 
   const addToCart = (product, productQty) => {
-    setProductQty(productQty + 1);
     if (cart.length < 1) {
       setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
     } else {
@@ -112,20 +113,22 @@ const Hit = ({ hit }) => {
           qty: productQty + 1,
           totalPrice: (productQty + 1) * items[cartItemIndex][priceForTotal],
         };
+        setProductQty(items[cartItemIndex].qty);
         setCart(items);
       } else {
         setCart([
           ...cart,
           { ...product, qty: 1, totalPrice: product[priceForTotal] },
         ]);
+        setProductQty(1);
       }
     }
   };
 
   const removeFromCart = (product, productQty) => {
-    setProductQty(productQty - 1);
     if (cart.length < 1) {
       setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
+      setProductQty(1);
     } else {
       let cartItemIndex = null;
       const cartItem = cart.map((item, index) => {
@@ -142,16 +145,26 @@ const Hit = ({ hit }) => {
             totalPrice: (productQty - 1) * items[cartItemIndex][priceForTotal],
           };
           setCart(items);
+          setProductQty(items[cartItemIndex].qty);
         }
         if (items[cartItemIndex].qty === 0) {
           setCart((cart) =>
             cart.filter((item) => item.objectID !== product.objectID)
           );
+          setProductQty(0);
         }
       } else {
       }
     }
   };
+
+  useEffect(() => {
+    if (removed === hit.objectID) {
+      console.log('object');
+      setProductQty(0);
+      setRemoved(null);
+    }
+  }, [removed]);
 
   return (
     <motion.div
