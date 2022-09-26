@@ -9,15 +9,23 @@ const useOutsideClickTwoConditionals = (
   callback
 ) => {
   optionalParameter1 ||= null;
-  console.log(ref, optionalParameter1);
+  console.log(optionalParameter1, optionalParameter2);
   const handleClick = (e) => {
+    console.log(
+      ref.current &&
+        !ref.current.contains(e.target) &&
+        !optionalParameter1.contains(e.target) &&
+        !optionalParameter2.contains(e.target) &&
+        !e.target.classList.contains('react-select__option')
+    );
     if (
-      ref &&
-      !ref.contains(e.target) &&
+      ref.current &&
+      !ref.current.contains(e.target) &&
       !optionalParameter1.contains(e.target) &&
       !optionalParameter2.contains(e.target) &&
       !e.target.classList.contains('react-select__option')
     ) {
+      console.log('if');
       callback();
     }
   };

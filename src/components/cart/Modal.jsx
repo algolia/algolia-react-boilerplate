@@ -9,7 +9,7 @@ import './SCSS/cartModal.scss';
 
 //Import config from helped navigation
 import { cartClick, clickHamburger } from '@/config/cartFunctions';
-import useOutsideClickTwoConditionals from '@/hooks/useOutsideClickTwoConditions';
+import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 
 const Modal = ({ mobile, isDesktop }) => {
   const [showCart, setShowCart] = useRecoilState(cartOpen);
@@ -18,9 +18,8 @@ const Modal = ({ mobile, isDesktop }) => {
   const cartIcon = useRecoilValue(cartClick);
   const hamburgerIcon = useRecoilValue(clickHamburger);
   //Listen for click outside the Demo Guide panel
-  useOutsideClickTwoConditionals(cartModal, cartIcon, hamburgerIcon, () =>
-    setShowCart(!showCart)
-  );
+  useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(!showCart));
+
   return (
     <div
       className={`${mobile ? 'modal-container-mobile' : 'modal-container'}`}
