@@ -23,6 +23,60 @@ const ArticlesCard = ({ item }) => {
     colour,
   } = hitsConfig;
 
+  const removeFromCart = (it) => {
+    let cartItemIndex = null;
+    const cartItem = cart.map((item, index) => {
+      if (item.objectID === it.objectID) {
+        cartItemIndex = index;
+      }
+    });
+    if (cartItemIndex !== null) {
+      let items = [...cart];
+      if (items[cartItemIndex].qty !== 0) {
+        items[cartItemIndex] = {
+          ...items[cartItemIndex],
+          qty: items[cartItemIndex].qty - 1,
+          totalPrice:
+            (items[cartItemIndex].qty - 1) *
+            items[cartItemIndex][priceForTotal],
+        };
+        setCart(items);
+        setRemoved([item.objectID, item.qty - 1]);
+      }
+      if (items[cartItemIndex].qty === 0) {
+        setCart((cart) => cart.filter((item) => item.objectID !== it.objectID));
+        setProductQty(0);
+      }
+    }
+  };
+
+  const addToCart = (it) => {
+    let cartItemIndex = null;
+    const cartItem = cart.map((item, index) => {
+      if (item.objectID === it.objectID) {
+        cartItemIndex = index;
+      }
+    });
+    if (cartItemIndex !== null) {
+      let items = [...cart];
+      if (items[cartItemIndex].qty !== 0) {
+        items[cartItemIndex] = {
+          ...items[cartItemIndex],
+          qty: items[cartItemIndex].qty + 1,
+          totalPrice:
+            (items[cartItemIndex].qty + 1) *
+            items[cartItemIndex][priceForTotal],
+        };
+        setCart(items);
+        setRemoved([item.objectID, item.qty + 1]);
+      }
+      if (items[cartItemIndex].qty === 0) {
+        setCart((cart) => cart.filter((item) => item.objectID !== it.objectID));
+        setProductQty(0);
+      }
+    }
+  };
+
   return (
     <div>
       <div className="articles-card">
@@ -48,11 +102,19 @@ const ArticlesCard = ({ item }) => {
           </div>
           <div className="articles-card__infos__qtyprice">
             <div className="articles-card__infos__qtyprice__plus-minus">
-              <div>
+              <div
+                onClick={() => {
+                  removeFromCart(item);
+                }}
+              >
                 <MinusEmptyIcon />
               </div>
               <p>{item.qty}</p>
-              <div>
+              <div
+                onClick={() => {
+                  addToCart(item);
+                }}
+              >
                 <PlusEmptyIcon />
               </div>
             </div>
@@ -67,7 +129,7 @@ const ArticlesCard = ({ item }) => {
             setCart((cart) =>
               cart.filter((it) => it.objectID !== item.objectID)
             );
-            setRemoved(item.objectID);
+            setRemoved([item.objectID, 0]);
           }}
         >
           <Garbage />

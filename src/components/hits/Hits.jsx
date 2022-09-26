@@ -159,12 +159,19 @@ const Hit = ({ hit }) => {
   };
 
   useEffect(() => {
-    if (removed === hit.objectID) {
-      console.log('object');
-      setProductQty(0);
-      setRemoved(null);
+    if (removed !== null) {
+      if (removed[0] === hit.objectID) {
+        if (removed[1] !== 0) {
+          console.log(removed[1]);
+          setProductQty(removed[1]);
+          setRemoved(null);
+        } else {
+          setProductQty(0);
+          setRemoved(null);
+        }
+      }
     }
-  }, [removed]);
+  }, [removed, productQty]);
 
   return (
     <motion.div
