@@ -44,7 +44,7 @@ import {
   personaSelectedFiltersAtom,
 } from '@/config/personaConfig';
 
-const Hit = ({ hit }) => {
+const Hit = ({ hit, sendEvent }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
@@ -260,6 +260,7 @@ const Hit = ({ hit }) => {
               <div
                 onClick={() => {
                   addToCart(hit, productQty);
+                  sendEvent('click', hit, 'Product Added');
                 }}
               >
                 <PlusPicto />

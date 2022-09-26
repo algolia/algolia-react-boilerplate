@@ -79,7 +79,6 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
 
   useEffect(() => {
     if (showCart?.length > 0) {
-      console.log('Hello');
       useStoreCartToLocalStorage(showCart);
     }
   }, [showCart]);
