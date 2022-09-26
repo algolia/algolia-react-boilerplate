@@ -107,10 +107,25 @@ const Hit = ({ hit }) => {
 
   const promoted = hit?._rankingInfo?.promoted;
 
+  useEffect(() => {
+    let cartItemIndex = null;
+    const cartItem = cart.map((item, index) => {
+      if (item.objectID === hit.objectID) {
+        cartItemIndex = index;
+      }
+    });
+    if (cartItemIndex !== null) {
+      let items = [...cart];
+      setProductQty(items[cartItemIndex].qty);
+    }
+  }, [cart]);
+
   // Function on click on plus button to add hit in the cart
   const addToCart = (product, productQty) => {
     if (cart.length < 1) {
+      console.log('IF');
       setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
+      setProductQty(1);
     } else {
       let cartItemIndex = null;
       const cartItem = cart.map((item, index) => {
