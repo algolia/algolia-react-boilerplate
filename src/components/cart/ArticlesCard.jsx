@@ -46,8 +46,9 @@ const ArticlesCard = ({ item }) => {
       }
       if (items[cartItemIndex].qty === 0) {
         setCart((cart) => cart.filter((item) => item.objectID !== it.objectID));
-        setProductQty(0);
-        localStorage.removeItem('myCart');
+        if (cart?.length === 1) {
+          localStorage.removeItem('myCart');
+        }
       }
     }
   };

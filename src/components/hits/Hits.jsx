@@ -165,6 +165,7 @@ const Hit = ({ hit }) => {
             cart.filter((item) => item.objectID !== product.objectID)
           );
           setProductQty(0);
+          localStorage.removeItem('myCart');
         }
       } else {
       }
@@ -273,9 +274,9 @@ const Hit = ({ hit }) => {
               <p>{productQty}</p>
               <div
                 onClick={() => {
+                  addToCart(hit, productQty);
                   useSendAlgoliaEvent(
                     'clickedObjectIDs',
-                    userToken,
                     index,
                     hit,
                     'add-to-cart'
