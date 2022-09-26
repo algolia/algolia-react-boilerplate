@@ -161,7 +161,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         }}
       >
         <CartPicto />
-        {showCart?.length > 1 && (
+        {showCart?.length > 0 && (
           <div className="notification-cart">
             <p>{showCart?.length}</p>
           </div>
