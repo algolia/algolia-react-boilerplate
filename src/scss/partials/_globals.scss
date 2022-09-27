@@ -58,3 +58,9 @@
   .visible{
     @include visible
   }
+
+  .mainWrapper{
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
+  }

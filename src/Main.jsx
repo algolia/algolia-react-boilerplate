@@ -89,7 +89,7 @@ export const Main = () => {
     <InstantSearch searchClient={searchClient} indexName={index}>
       {shouldShowNetworkErrors && <SearchErrorToast />}
 
-      <div className="visible">
+      <div className="mainWrapper">
         {/* TODO: Check if this configure is used for anything */}
         <Configure query={queryState} />
         <Header />

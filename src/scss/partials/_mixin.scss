@@ -596,9 +596,6 @@
 // Utility classes
 // ------------------------------------------
 @mixin visible {
-  position: relative;
-  width: 100%;
-  overflow-x: hidden;
   opacity: 1;
   transition: opacity 1s ease-in-out;
 }
