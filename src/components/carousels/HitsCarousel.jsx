@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import get from 'lodash/get';
+import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
 import Price from '../hits/components/Price';
 import { CartPicto } from '@/assets/svg/SvgIndex';
 import { cartState, removedItem } from '@/config/cartFunctions';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 
-const HitsCarousel = ({ hit }) => {
+// Used to send insights event on add to cart
+import { personaSelectedAtom } from '@/config/personaConfig';
+
+const HitsCarousel = ({ hit, index }) => {
   const {
     objectID,
     image,
@@ -29,6 +34,9 @@ const HitsCarousel = ({ hit }) => {
 
   // Hits are imported by Recoil
   const hitState = useSetRecoilState(hitAtom);
+
+  // personalisation user token
+  const userToken = useRecoilValue(personaSelectedAtom);
 
   const addToCart = (it) => {
     let cartItemIndex = null;
@@ -96,6 +104,13 @@ const HitsCarousel = ({ hit }) => {
             className="cart"
             onClick={() => {
               addToCart(hit);
+              useSendAlgoliaEvent({
+                type: 'conversion',
+                userToken: userToken,
+                index: index,
+                hit: hit,
+                name: 'add-to-cart',
+              });
             }}
           >
             <CartPicto />
