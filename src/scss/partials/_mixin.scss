@@ -84,7 +84,7 @@
 @mixin titleH2($text-color: $main-color) {
   color: $text-color;
   font-weight: 600;
-  font-size: clamp(1rem, -0.71rem + 0.94vw, 1.2rem);
+  font-size: clamp(1rem, -0.32rem + 2.58vw, 2rem)
 }
 
 @mixin titleH3($text-color: $second-color) {

@@ -7,9 +7,7 @@
   margin: 2rem 4rem;
 
   h3 {
-    color: $second-color;
-    font-size: 2rem;
-    font-weight: 800;
+    @include titleH2($second-color);
   }
   .carousel {
     cursor: grab;
