@@ -95,13 +95,29 @@ const ProductDetails = () => {
   const [removed, setRemoved] = useRecoilState(removedItem);
 
   const addToCart = (it) => {
-    let items = [it];
-    items[0] = {
-      ...items[0],
-      qty: 1,
-      totalPrice: 1 * items[0].unformated_price,
-    };
-    setCart(items);
+    let cartItemIndex = null;
+    const cartItem = cart.map((item, index) => {
+      if (item.objectID === it.objectID) {
+        cartItemIndex = index;
+      }
+    });
+    if (cartItemIndex !== null) {
+      let items = [...cart];
+      if (items[cartItemIndex].qty !== 0) {
+        items[cartItemIndex] = {
+          ...items[cartItemIndex],
+          qty: items[cartItemIndex].qty + 1,
+          totalPrice:
+            (items[cartItemIndex].qty + 1) *
+            items[cartItemIndex][priceForTotal],
+        };
+        console.log('if', items);
+        setCart(items);
+        setRemoved([it.objectID, it.qty + 1]);
+      }
+    } else {
+      setCart([...cart, { ...it, qty: 1, totalPrice: it[priceForTotal] }]);
+    }
   };
 
   // if there is no stored hit
@@ -147,8 +163,16 @@ const ProductDetails = () => {
   const { isDesktop, mobile } = useRecoilValue(windowSize);
 
   // Get hit attribute from config file
-  const { image, productName, brand, sizeFilter, colour, colourHexa } =
-    hitsConfig;
+  const {
+    objectID,
+    image,
+    productName,
+    brand,
+    sizeFilter,
+    colour,
+    colourHexa,
+    price: priceForTotal,
+  } = hitsConfig;
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1];
 

@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 // Recoil
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig';
@@ -28,6 +28,10 @@ import { windowSize } from '@/hooks/useScreenSize';
 //Import scope SCSS
 import './SCSS/carousels.scss';
 import SkeletonLoader from '../hits/components/HitsSkeletonLoader';
+import { CartPicto } from '@/assets/svg/SvgIndex';
+
+// Import cart from recoil
+import { cartState, removedItem } from '@/config/cartFunctions';
 
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ context, title }) => {
@@ -60,20 +64,57 @@ function Carousel(props) {
   const { title } = props;
   const [width, setWidth] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [cart, setCart] = useRecoilState(cartState);
+  const [removed, setRemoved] = useRecoilState(removedItem);
   // Navigate is used by React Router
   const navigate = useNavigate();
 
   // Hits are imported by Recoil
   const hitState = useSetRecoilState(hitAtom);
-  const { objectID, image, productName } = hitsConfig;
+  const {
+    objectID,
+    image,
+    productName,
+    brand,
+    sizeFilter,
+    colour,
+    colourHexa,
+    price: priceForTotal,
+  } = hitsConfig;
   const carousel = useRef();
 
+  const addToCart = (it) => {
+    let cartItemIndex = null;
+    const cartItem = cart.map((item, index) => {
+      if (item.objectID === it.objectID) {
+        cartItemIndex = index;
+      }
+    });
+    if (cartItemIndex !== null) {
+      let items = [...cart];
+      if (items[cartItemIndex].qty !== 0) {
+        items[cartItemIndex] = {
+          ...items[cartItemIndex],
+          qty: items[cartItemIndex].qty + 1,
+          totalPrice:
+            (items[cartItemIndex].qty + 1) *
+            items[cartItemIndex][priceForTotal],
+        };
+        setCart(items);
+        setRemoved([it.objectID, it.qty + 1]);
+      }
+    } else {
+      setCart([...cart, { ...it, qty: 1, totalPrice: it[priceForTotal] }]);
+    }
+  };
+
   useEffect(() => {
-    !isLoading && setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+    !isLoading &&
+      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
   }, [hits, isLoading]);
 
   useEffect(() => {
-    if (hits.length > 0) setIsLoading(false)
+    if (hits.length > 0) setIsLoading(false);
   }, [hits]);
 
   return (
@@ -108,9 +149,17 @@ function Carousel(props) {
             className="inner-carousel"
           >
             {/* Display the hits in the carousel */}
-            {hits.map((hit, i) => {          
+            {hits.map((hit, i) => {
               return (
                 <div key={i} className="item">
+                  <div
+                    className="item__picto"
+                    onClick={() => {
+                      addToCart(hit);
+                    }}
+                  >
+                    <CartPicto />
+                  </div>
                   <div className="carousel__imageWrapper">
                     <img
                       src={get(hit, image)}
