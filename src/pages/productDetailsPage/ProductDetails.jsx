@@ -62,6 +62,9 @@ import './SCSS/productDetails.scss';
 import { useTranslation } from 'react-i18next';
 import Modal from '@/components/cart/Modal';
 
+// Import cart from recoil
+import { cartState, removedItem } from '@/config/cartFunctions';
+
 const ProductDetails = () => {
   // For alert on sending add to cart event
   const setAlert = useSetRecoilState(alertContent);
@@ -87,6 +90,39 @@ const ProductDetails = () => {
 
   // current Object ID from URL
   const currentObjectID = location.pathname.split('/')[3];
+
+  const [cart, setCart] = useRecoilState(cartState);
+  const [removed, setRemoved] = useRecoilState(removedItem);
+
+  const addToCart = (it) => {
+    console.log('first');
+    let cartItemIndex = null;
+    const cartItem = cart.map((item, index) => {
+      if (item.objectID === it.objectID) {
+        console.log('object');
+        cartItemIndex = index;
+      }
+    });
+    if (cartItemIndex !== null) {
+      console.log('NULL');
+      let items = [...cart];
+      if (items[cartItemIndex].qty !== 0) {
+        items[cartItemIndex] = {
+          ...items[cartItemIndex],
+          qty: items[cartItemIndex].qty + 1,
+          totalPrice:
+            (items[cartItemIndex].qty + 1) *
+            items[cartItemIndex][priceForTotal],
+        };
+        setCart(items);
+        setRemoved([item.objectID, item.qty + 1]);
+      }
+      if (items[cartItemIndex].qty === 0) {
+        setCart((cart) => cart.filter((item) => item.objectID !== it.objectID));
+        setProductQty(0);
+      }
+    }
+  };
 
   // if there is no stored hit
   useEffect(() => {
@@ -286,6 +322,7 @@ const ProductDetails = () => {
               <motion.button
                 className="add-to-cart"
                 onClick={() => {
+                  addToCart(hit);
                   triggerAlert('Sending add to cart event to Algolia'),
                     useSendAlgoliaEvent(
                       'clickedObjectIDs',
