@@ -4,8 +4,12 @@ import get from 'lodash/get';
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
 import Price from '../hits/components/Price';
 import { cartState, removedItem } from '@/config/cartFunctions';
-import { useRecoilState } from 'recoil';
-const HitsCarousel = ({ hit }) => {
+import { useRecoilState, useRecoilValue } from 'recoil';
+import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+
+// Used to send insights event on add to cart
+import { personaSelectedAtom } from '@/config/personaConfig';
+const HitsCarousel = ({ hit, index }) => {
   const {
     objectID,
     image,
@@ -20,6 +24,9 @@ const HitsCarousel = ({ hit }) => {
 
   const [cart, setCart] = useRecoilState(cartState);
   const [removed, setRemoved] = useRecoilState(removedItem);
+
+  // personalisation user token
+  const userToken = useRecoilValue(personaSelectedAtom);
 
   const addToCart = (it) => {
     let cartItemIndex = null;
@@ -61,6 +68,13 @@ const HitsCarousel = ({ hit }) => {
           className="item__button"
           onClick={() => {
             addToCart(hit);
+            useSendAlgoliaEvent({
+              type: 'conversion',
+              userToken: userToken,
+              index: index,
+              hit: hit,
+              name: 'add-to-cart',
+            });
           }}
         >
           <p>Add to cart</p>

@@ -59,6 +59,8 @@ function Carousel(props) {
   const { title } = props;
   const [width, setWidth] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  // Get the main index
+  const index = useRecoilValue(mainIndex);
 
   // Navigate is used by React Router
   const navigate = useNavigate();
@@ -110,7 +112,7 @@ function Carousel(props) {
           >
             {/* Display the hits in the carousel */}
             {hits.map((hit, i) => {
-              return <HitsCarousel hit={hit} key={i} />;
+              return <HitsCarousel hit={hit} key={i} index={index} />;
             })}
           </motion.div>
         </motion.div>

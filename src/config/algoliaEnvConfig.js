@@ -10,6 +10,7 @@ import aa from 'search-insights';
 // ADJUST THE APIKEY AND APPID TO YOUR OWN
 export const searchClientCreds = {
   APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
+  writeOrAdminApiKey: 'f2f030011dd333c96f87e91d404ebcf1',
   appID: '853MYZ81KY',
   // Used to get the Persona Strat and score if you haven't got one you have to create one in you API Keys
   // https://www.algolia.com/doc/rest-api/personalization/#get-the-current-personalization-strategy
@@ -51,7 +52,7 @@ export const recommendClient = algoliarecommend(
 // Initialise insights client
 aa('init', {
   appId: searchClientCreds.appID,
-  apiKey: 'f2f030011dd333c96f87e91d404ebcf1',
+  apiKey: searchClientCreds.writeOrAdminApiKey,
 });
 
 // Export an active insights client

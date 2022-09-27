@@ -9,7 +9,6 @@ const useOutsideClickTwoConditionals = (
   callback
 ) => {
   optionalParameter1 ||= null;
-  console.log(optionalParameter1, optionalParameter2);
   const handleClick = (e) => {
     if (
       ref &&
