@@ -37,7 +37,7 @@ const HomeCarousel = ({ context, title }) => {
   const { mobile } = useRecoilValue(windowSize);
 
   return (
-    <div className={`${mobile ? 'home-carousel-mobile' : 'home-carousel'}`}>
+    <div className="home-carousel">
       <Index indexId={title} indexName={index}>
         <Configure
           hitsPerPage={hitsPerCarousel}
