@@ -1,13 +1,7 @@
 import { insightsClient } from '@/config/algoliaEnvConfig';
 
-const useSendAlgoliaEvent = (
-  eventType,
-  userToken,
-  indexName,
-  hit,
-  eventName
-) => {
-  console.log('Hello', eventType, indexName, userToken);
+const useSendAlgoliaEvent = (eventType, indexName, hit, eventName) => {
+  console.log('Hello', hit.objectID);
   try {
     // insightsClient(eventType, {
     //   userToken: userToken,
