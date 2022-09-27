@@ -6,6 +6,7 @@ const useSendAlgoliaEvent = (eventType, indexName, hit, eventName) => {
     // insightsClient(eventType, {
     //   userToken: userToken,
     //   index: indexName,
+    // 
     //   timestamp: '1664199799',
     //   eventName: eventName,
     //   objectIDs: [hit.objectID],
