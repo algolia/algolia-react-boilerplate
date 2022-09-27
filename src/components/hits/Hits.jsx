@@ -121,7 +121,7 @@ const Hit = ({ hit }) => {
   }, [cart]);
 
   useEffect(() => {
-    if (removed.length === 0) {
+    if (removed?.length === 0) {
       setProductQty(0);
     }
   }, [removed]);
