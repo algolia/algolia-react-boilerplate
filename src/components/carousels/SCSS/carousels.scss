@@ -15,7 +15,7 @@
     cursor: grab;
     overflow: scroll;
 
-    &__imageWrapper{
+    &__imageWrapper {
       max-width: 60%;
       display: flex;
       justify-content: center;
@@ -28,6 +28,9 @@
         object-fit: cover;
       }
     }
+    .hovered {
+      filter: blur(8px);
+    }
 
     .inner-carousel {
       display: flex;
@@ -37,33 +40,72 @@
         min-width: 25%;
         padding: 1rem;
         position: relative;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+          rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
         transition: box-shadow 0.3s ease-in-out;
         padding: 1rem;
         border-radius: 0.5rem;
-      
 
-        &__infos{   
-        display: flex;
-        position: relative;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        cursor: pointer;
-        height: 6rem;
-        .name {
-          color: $main-color;
-          font-size: 0.8rem;
-          text-align: center;
-          margin-top: 1rem;
-          text-transform: capitalize;
+        &__infos {
+          display: flex;
+          position: relative;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+          height: 6rem;
+          .name {
+            color: $main-color;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 1rem;
+            text-transform: capitalize;
+          }
+          .price {
+            color: $second-color;
+            font-size: 1.2rem;
+            font-weight: 600;
+          }
         }
-        .price {
-          color: $second-color;
-          font-size: 1.2rem;
-          font-weight: 600;   
+        &__picto {
+          background-color: $second-color;
+          position: absolute;
+          border-radius: 50%;
+          padding: 3px;
+          right: 0.5rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          svg {
+            width: 2rem;
+          }
         }
-      }
+        &__button {
+          z-index: 1000;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%) translateX(-50%);
+          left: 50%;
+          cursor: pointer;
+          p {
+            border: 1px solid $second-color;
+            padding: 0.7rem;
+            border-radius: 8px;
+            text-align: center;
+            background-color: $white-color;
+            font-weight: 600;
+            font-size: 0.8rem;
+          }
+          &:hover {
+            p {
+              background-color: $second-color;
+              color: $white-color;
+            }
+          }
+        }
       }
 
       .carousel-loader {
@@ -78,10 +120,9 @@
   display: none; /* Safari and Chrome */
 }
 
-
 // MOBILE & TABLET
 
-.home-carousel-mobile{
+.home-carousel-mobile {
   margin: 2rem 1rem;
   h3 {
     color: $second-color;
@@ -92,7 +133,7 @@
     cursor: grab;
     overflow: scroll;
 
-    &__imageWrapper{
+    &__imageWrapper {
       max-width: 100%;
       img {
         width: 100%;
@@ -109,13 +150,13 @@
         min-width: 50%;
         padding: 1rem;
         position: relative;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+          rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
         transition: box-shadow 0.3s ease-in-out;
         padding: 1rem;
         border-radius: 0.5rem;
-      
 
-        &__infos{   
+        &__infos {
           display: flex;
           position: relative;
           flex-direction: column;
@@ -133,7 +174,7 @@
           .price {
             color: $second-color;
             font-size: 1.2rem;
-            font-weight: 600;   
+            font-weight: 600;
           }
         }
       }
@@ -142,7 +183,6 @@
         box-shadow: none;
         border: none;
       }
-
     }
   }
 }

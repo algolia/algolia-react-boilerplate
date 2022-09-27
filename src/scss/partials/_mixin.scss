@@ -28,6 +28,7 @@
   font-family: $main-font;
   border-radius: 2px;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 @mixin btn-hover($background, $text-color) {
@@ -279,7 +280,8 @@
   padding: 1rem;
   border-radius: 0.5rem;
 
-  &__imgWrapper, .image-wrapper {
+  &__imgWrapper,
+  .image-wrapper {
     overflow: hidden;
     margin: 1rem;
     cursor: pointer;

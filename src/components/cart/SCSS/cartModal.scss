@@ -27,7 +27,12 @@
     margin: 30px auto;
   }
   &__button {
-    @include btn($second-color, $white-color);
+    @include btn($white-color, $second-color);
+    border: 1px solid $second-color;
+    border-radius: 2px;
+    &:hover {
+      @include btn-hover($second-color, $white-color);
+    }
   }
 }
 .modal-container-active {
