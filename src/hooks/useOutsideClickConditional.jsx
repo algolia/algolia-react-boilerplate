@@ -6,11 +6,19 @@ const useOutsideClickConditional = (ref, optionalParameter1, callback) => {
   optionalParameter1 ||= null;
 
   const handleClick = (e) => {
+    console.log(
+      e,
+      ref.current,
+      !ref.current.contains(e.target),
+      optionalParameter1,
+      !optionalParameter1?.contains(e.target)
+    );
     if (
       ref.current &&
       !ref.current.contains(e.target) &&
-      !optionalParameter1.contains(e.target)
+      !optionalParameter1?.contains(e.target)
     ) {
+      console.log('if');
       callback();
     }
   };
