@@ -19,10 +19,13 @@ const Modal = ({ mobile, isDesktop }) => {
   const hamburgerIcon = useRecoilValue(clickHamburger);
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(!showCart));
+  console.log(showCart);
 
   return (
     <div
-      className={`${mobile ? 'modal-container-mobile' : 'modal-container'}`}
+      className={`${mobile ? 'modal-container-mobile' : 'modal-container'} ${
+        showCart ? 'modal-container-active' : ''
+      }`}
       ref={cartModal}
     >
       {mobile && (

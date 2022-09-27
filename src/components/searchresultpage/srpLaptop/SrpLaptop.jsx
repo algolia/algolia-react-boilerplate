@@ -18,7 +18,7 @@ import CustomSortBy from '@/components/sortBy/SortBy';
 import { CustomStats } from '@/components/stats/Stats';
 
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
-import { isFacetPanelOpen } from '@/config/refinementsConfig';
+import { cartOpen } from '@/config/cartFunctions';
 import {
   shouldHaveInjectedHits,
   shouldHaveSorts,
@@ -27,12 +27,12 @@ import {
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
-import { cartOpen } from '@/config/cartFunctions';
 import {
   personalizationImpact,
   personaSelectedAtom,
   personaSelectedFiltersAtom,
 } from '@/config/personaConfig';
+import { isFacetPanelOpen } from '@/config/refinementsConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
@@ -52,11 +52,11 @@ const CustomHitsComponent = lazy(() =>
 import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
 
 //Import scope SCSS
-import '../SCSS/searchResultsPage.scss';
 import { FilterPicto } from '@/assets/svg/SvgIndex';
+import '../SCSS/searchResultsPage.scss';
 
-import { navigationStateAtom } from '@/config/navigationConfig';
 import Modal from '@/components/cart/Modal';
+import { navigationStateAtom } from '@/config/navigationConfig';
 
 const SrpLaptop = () => {
   // Recoil & React states
@@ -117,7 +117,7 @@ const SrpLaptop = () => {
   }
   return (
     <>
-      {showCart && <Modal isDesktop={isDesktop} mobile={mobile} />}
+      <Modal isDesktop={isDesktop} mobile={mobile} />
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">
