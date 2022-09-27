@@ -28,6 +28,9 @@
         object-fit: cover;
       }
     }
+    .hovered {
+      filter: blur(8px);
+    }
 
     .inner-carousel {
       display: flex;
@@ -76,6 +79,31 @@
           cursor: pointer;
           svg {
             width: 2rem;
+          }
+        }
+        &__button {
+          z-index: 1000;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%) translateX(-50%);
+          left: 50%;
+          cursor: pointer;
+          p {
+            border: 1px solid $second-color;
+            padding: 0.7rem;
+            border-radius: 8px;
+            text-align: center;
+            background-color: $white-color;
+            font-weight: 600;
+            font-size: 0.8rem;
+          }
+          &:hover {
+            p {
+              background-color: $second-color;
+              color: $white-color;
+            }
           }
         }
       }
