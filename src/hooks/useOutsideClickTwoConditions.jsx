@@ -17,7 +17,6 @@ const useOutsideClickTwoConditionals = (
       !optionalParameter2.contains(e.target) &&
       !e.target.classList.contains('react-select__option')
     ) {
-      console.log('if');
       callback();
     }
   };

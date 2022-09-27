@@ -20,7 +20,8 @@
     font-size: 16px;
   }
   body {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     background-color: $background-color;
     font-family: $main-font;
   }

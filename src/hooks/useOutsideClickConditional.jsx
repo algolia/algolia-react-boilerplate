@@ -11,7 +11,6 @@ const useOutsideClickConditional = (ref, optionalParameter1, callback) => {
       !ref.current.contains(e.target) &&
       !optionalParameter1?.contains(e.target)
     ) {
-      console.log('if');
       callback();
     }
   };

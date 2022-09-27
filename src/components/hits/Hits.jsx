@@ -123,7 +123,6 @@ const Hit = ({ hit }) => {
   // Function on click on plus button to add hit in the cart
   const addToCart = (product, productQty) => {
     if (cart.length < 1) {
-      console.log('IF');
       setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
       setProductQty(1);
     } else {

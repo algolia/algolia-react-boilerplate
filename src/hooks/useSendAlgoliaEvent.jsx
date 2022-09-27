@@ -7,7 +7,6 @@ const useSendAlgoliaEvent = (
   hit,
   eventName
 ) => {
-  console.log('Hello', eventType, indexName, userToken);
   try {
     // insightsClient(eventType, {
     //   userToken: userToken,
