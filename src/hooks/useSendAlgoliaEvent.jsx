@@ -1,26 +1,13 @@
 import { insightsClient } from '@/config/algoliaEnvConfig';
 
-const useSendAlgoliaEvent = (
-  eventType,
-  userToken,
-  indexName,
-  hit,
-  eventName
-) => {
+const useSendAlgoliaEvent = ({ type, userToken, index, hit, name }) => {
   try {
-    // insightsClient(eventType, {
-    //   userToken: userToken,
-    //   index: indexName,
-    //   timestamp: '1664199799',
-    //   eventName: eventName,
-    //   objectIDs: [hit.objectID],
-    // });
     insightsClient('clickedObjectIDs', {
-      eventName: 'Add to basket',
-      eventType: 'click',
-      userToken: 'anonymous',
-      index: indexName,
-      timestamp: 1664200526673,
+      eventName: name,
+      eventType: type,
+      userToken: userToken,
+      index: index,
+      timestamp: Date.now(),
       objectIDs: [`${hit.objectID}`],
     });
   } catch (e) {

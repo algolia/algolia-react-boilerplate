@@ -1,6 +1,6 @@
 import ArticlesCard from './ArticlesCard';
 
-import { cartOpen, cartState } from '@/config/cartFunctions';
+import { cartOpen, cartState, removedItem } from '@/config/cartFunctions';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 //Import scope SCSS
@@ -14,6 +14,7 @@ import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 const Modal = ({ mobile, isDesktop }) => {
   const [showCart, setShowCart] = useRecoilState(cartOpen);
   const [cartValue, setCartValue] = useRecoilState(cartState);
+  const [removed, setRemoved] = useRecoilState(removedItem);
   const cartModal = useRef();
   const cartIcon = useRecoilValue(cartClick);
   const hamburgerIcon = useRecoilValue(clickHamburger);
@@ -55,6 +56,7 @@ const Modal = ({ mobile, isDesktop }) => {
           onClick={() => {
             setCartValue([]);
             localStorage.removeItem('myCart');
+            setRemoved([]);
           }}
         >
           Empty my cart

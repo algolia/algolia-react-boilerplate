@@ -327,13 +327,13 @@ const ProductDetails = () => {
                 onClick={() => {
                   addToCart(hit);
                   triggerAlert('Sending add to cart event to Algolia'),
-                    useSendAlgoliaEvent(
-                      'clickedObjectIDs',
-                      userToken,
-                      index,
-                      hit,
-                      'add-to-cart'
-                    );
+                    useSendAlgoliaEvent({
+                      type: 'conversion',
+                      userToken: userToken,
+                      index: index,
+                      hit: hit,
+                      name: 'add-to-cart'
+                });
                 }}
               >
                 <i className="fa-solid fa-shopping-cart"></i>

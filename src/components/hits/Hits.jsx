@@ -120,6 +120,12 @@ const Hit = ({ hit }) => {
     }
   }, [cart]);
 
+  useEffect(() => {
+    if (removed?.length === 0) {
+      setProductQty(0);
+    }
+  }, [removed]);
+
   // Function on click on plus button to add hit in the cart
   const addToCart = (product, productQty) => {
     if (cart.length < 1) {
@@ -289,12 +295,12 @@ const Hit = ({ hit }) => {
               <div
                 onClick={() => {
                   addToCart(hit, productQty);
-                  // useSendAlgoliaEvent(
-                  //   'clickedObjectIDs',
-                  //   index,
-                  //   hit,
-                  //   'add-to-cart'
-                  // );
+                  useSendAlgoliaEvent(
+                    'clickedObjectIDs',
+                    index,
+                    hit,
+                    'add-to-cart'
+                  );
                 }}
               >
                 <PlusPicto />
