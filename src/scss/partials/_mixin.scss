@@ -368,7 +368,8 @@
   color: $price-color;
   font-weight: 700;
   font-size: 1rem;
-  strike {
+  margin-top: 1px;
+  s {
     color: $grey-dark-color;
     text-decoration: line-through;
   }

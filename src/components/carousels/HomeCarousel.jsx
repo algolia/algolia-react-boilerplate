@@ -60,12 +60,6 @@ function Carousel(props) {
   const [width, setWidth] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Navigate is used by React Router
-  const navigate = useNavigate();
-
-  // Hits are imported by Recoil
-  const hitState = useSetRecoilState(hitAtom);
-
   const carousel = useRef();
 
   useEffect(() => {

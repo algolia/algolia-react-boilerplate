@@ -3,8 +3,11 @@ import get from 'lodash/get';
 
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
 import Price from '../hits/components/Price';
+import { CartPicto } from '@/assets/svg/SvgIndex';
 import { cartState, removedItem } from '@/config/cartFunctions';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+
 const HitsCarousel = ({ hit }) => {
   const {
     objectID,
@@ -20,6 +23,12 @@ const HitsCarousel = ({ hit }) => {
 
   const [cart, setCart] = useRecoilState(cartState);
   const [removed, setRemoved] = useRecoilState(removedItem);
+
+  // Navigate is used by React Router
+  const navigate = useNavigate();
+
+  // Hits are imported by Recoil
+  const hitState = useSetRecoilState(hitAtom);
 
   const addToCart = (it) => {
     let cartItemIndex = null;
@@ -56,16 +65,6 @@ const HitsCarousel = ({ hit }) => {
         setHovered(false);
       }}
     >
-      {hovered && (
-        <div
-          className="item__button"
-          onClick={() => {
-            addToCart(hit);
-          }}
-        >
-          <p>Add to cart</p>
-        </div>
-      )}
       <div
         className={`${
           hovered ? 'carousel__imageWrapper hovered' : 'carousel__imageWrapper'
@@ -77,18 +76,31 @@ const HitsCarousel = ({ hit }) => {
           onError={(e) => (e.currentTarget.src = placeHolderError)}
         />
       </div>
-      <div
-        className="item__infos"
-        onClick={() => {
-          hitState(hit);
-          // navigate to the product show page
-          navigate(`/search/product/${hit[objectID]}`);
-        }}
-      >
-        <p className="name">{get(hit, productName)}</p>
-        <p className="price">
-          <Price hit={hit} />
-        </p>
+      <div className="item__infos">
+        <div
+          className="item__infos-up"
+          onClick={() => {
+            hitState(hit);
+            // navigate to the product show page
+            navigate(`/search/product/${hit[objectID]}`);
+          }}
+        >
+          <p className="brand">{get(hit, brand)}</p>
+          <p className="name">{get(hit, productName)}</p>
+        </div>
+        <div className="item__infos-down">
+          <p className="price">
+            <Price hit={hit} />
+          </p>
+          <div
+            className="cart"
+            onClick={() => {
+              addToCart(hit);
+            }}
+          >
+            <CartPicto />
+          </div>
+        </div>
       </div>
     </div>
   );
