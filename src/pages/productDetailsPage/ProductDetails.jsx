@@ -101,7 +101,6 @@ const ProductDetails = () => {
       qty: 1,
       totalPrice: 1 * items[0].unformated_price,
     };
-    console.log(items[0]);
     setCart(items);
   };
 

@@ -75,7 +75,7 @@ const HomePage = () => {
     // Framer motion wrapper
     <div className="homepage" ref={HomePage}>
       {/* Cart Modal */}
-      {showCart && <Modal isDesktop={isDesktop} mobile={mobile} />}
+      <Modal isDesktop={isDesktop} mobile={mobile} />
 
       {isFederated && isFederatedOpen && (
         <Suspense>
