@@ -95,33 +95,14 @@ const ProductDetails = () => {
   const [removed, setRemoved] = useRecoilState(removedItem);
 
   const addToCart = (it) => {
-    console.log('first');
-    let cartItemIndex = null;
-    const cartItem = cart.map((item, index) => {
-      if (item.objectID === it.objectID) {
-        console.log('object');
-        cartItemIndex = index;
-      }
-    });
-    if (cartItemIndex !== null) {
-      console.log('NULL');
-      let items = [...cart];
-      if (items[cartItemIndex].qty !== 0) {
-        items[cartItemIndex] = {
-          ...items[cartItemIndex],
-          qty: items[cartItemIndex].qty + 1,
-          totalPrice:
-            (items[cartItemIndex].qty + 1) *
-            items[cartItemIndex][priceForTotal],
-        };
-        setCart(items);
-        setRemoved([item.objectID, item.qty + 1]);
-      }
-      if (items[cartItemIndex].qty === 0) {
-        setCart((cart) => cart.filter((item) => item.objectID !== it.objectID));
-        setProductQty(0);
-      }
-    }
+    let items = [it];
+    items[0] = {
+      ...items[0],
+      qty: 1,
+      totalPrice: 1 * items[0].unformated_price,
+    };
+    console.log(items[0]);
+    setCart(items);
   };
 
   // if there is no stored hit
