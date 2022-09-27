@@ -111,7 +111,6 @@ const ProductDetails = () => {
             (items[cartItemIndex].qty + 1) *
             items[cartItemIndex][priceForTotal],
         };
-        console.log('if', items);
         setCart(items);
         setRemoved([it.objectID, it.qty + 1]);
       }
