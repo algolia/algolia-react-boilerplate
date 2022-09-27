@@ -43,7 +43,7 @@
         min-height: 5rem;
         min-width: 40%;
         h1 {
-          @include titleH2($second-color);
+          @include titleH3($second-color);
           // font-size: 0.9rem;
           text-transform: capitalize;
           margin: 0px;
