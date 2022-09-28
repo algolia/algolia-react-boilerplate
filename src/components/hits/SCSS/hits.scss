@@ -55,18 +55,31 @@
         rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     }
   }
-
-  .ais-InfiniteHits-list-mobile {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .ais-InfiniteHits-list-tablet {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
+
 
 .hit-list {
   img {
     height: 100%;
   }
+}
+
+@media only screen and (max-width: 1274px) {
+  .ais-InfiniteHits-list {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media only screen and (max-width: 975px) {
+  .ais-InfiniteHits-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+.ais-InfiniteHits-list-mobile {
+  grid-template-columns: repeat(1, 1fr) !important;
+}
+
+.ais-InfiniteHits-list-tablet {
+  grid-template-columns: repeat(2, 1fr) !important;
 }
