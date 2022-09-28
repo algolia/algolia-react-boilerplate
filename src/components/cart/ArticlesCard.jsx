@@ -97,8 +97,6 @@ const ArticlesCard = ({ item }) => {
     }
   };
 
-  console.log(get(item, sizeFilter));
-
   return (
     <div>
       <div className="articles-card">
