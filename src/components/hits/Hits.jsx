@@ -111,8 +111,9 @@ const Hit = ({ hit }) => {
   const promoted = hit?._rankingInfo?.promoted;
 
   useEffect(() => {
+    // This useEffect is for update the Cart
     let cartItemIndex = null;
-    const cartItem = cart.map((item, index) => {
+    cart.map((item, index) => {
       if (item.objectID === hit.objectID) {
         cartItemIndex = index;
       }
@@ -124,6 +125,8 @@ const Hit = ({ hit }) => {
   }, [cart]);
 
   useEffect(() => {
+    // This useEffect is here for update the qty in
+    // SRP between + and -
     if (removed?.length === 0) {
       setProductQty(0);
     }
