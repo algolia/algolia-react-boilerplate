@@ -6,16 +6,18 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { Highlight } from 'react-instantsearch-hooks-web';
-
+// Import SVGs
 import { Heart, MinusPicto, PlusPicto } from '@/assets/svg/SvgIndex';
-
+import RankingIcon from './components/RankingIcon';
+// Import Badge config
 import { badgeCriteria } from '@/config/badgeConfig';
 
 // In case of img loading error
 import * as placeHolderError from '@/assets/logo/logo.webp';
 
+// Lodash function to acces to precise attribute
 import get from 'lodash/get';
-
+// Animations
 import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
@@ -34,14 +36,14 @@ import Price from '@/components/hits/components/Price.jsx';
 
 // Import cart from recoil(Cart state and the event if it's removed)
 import { cartState, removedItem } from '@/config/cartFunctions';
-
-//Import scope SCSS
+// Import Persona if there is
 import { shouldHavePersona } from '@/config/featuresConfig';
 import {
   personaSelectedFiltersAtom,
   shouldDisplayRankingIcons,
 } from '@/config/personaConfig';
-import RankingIcon from './components/RankingIcon';
+
+//Import scope SCSS
 import './SCSS/hits.scss';
 
 // Used to send insights event on add to cart
@@ -53,6 +55,7 @@ const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
+  // Import Cart State
   const [cart, setCart] = useRecoilState(cartState);
   const showPersona = useRecoilValue(shouldHavePersona);
   const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);

@@ -12,9 +12,11 @@ import { cartClick, clickHamburger } from '@/config/cartFunctions';
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 
 const Modal = ({ mobile, isDesktop }) => {
+  // Import all recoil states to show modal + Cart stored and Removed articles
   const [showCart, setShowCart] = useRecoilState(cartOpen);
   const [cartValue, setCartValue] = useRecoilState(cartState);
   const [removed, setRemoved] = useRecoilState(removedItem);
+  // Use ref on click modal and on cart icon + hamburger
   const cartModal = useRef();
   const cartIcon = useRecoilValue(cartClick);
   const hamburgerIcon = useRecoilValue(clickHamburger);

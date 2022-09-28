@@ -6,7 +6,8 @@ import get from 'lodash/get';
 // Import cart from recoil
 import { cartState, removedItem } from '@/config/cartFunctions';
 import { useRecoilState } from 'recoil';
-import { cartOpen } from '@/config/cartFunctions';
+
+// ArticlesCard in Cart Modal
 
 const ArticlesCard = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
@@ -24,6 +25,7 @@ const ArticlesCard = ({ item }) => {
     colour,
   } = hitsConfig;
 
+  // Remove from cart function
   const removeFromCart = (it) => {
     let cartItemIndex = null;
     const cartItem = cart.map((item, index) => {
@@ -41,7 +43,9 @@ const ArticlesCard = ({ item }) => {
             (items[cartItemIndex].qty - 1) *
             items[cartItemIndex][priceForTotal],
         };
+        // Store the new cart
         setCart(items);
+        // Store the removed one to decrease all qty
         setRemoved([item.objectID, item.qty - 1]);
       }
       if (items[cartItemIndex].qty === 0) {
@@ -53,6 +57,7 @@ const ArticlesCard = ({ item }) => {
     }
   };
 
+  // Add to cart function
   const addToCart = (it) => {
     let cartItemIndex = null;
     const cartItem = cart.map((item, index) => {
@@ -70,7 +75,9 @@ const ArticlesCard = ({ item }) => {
             (items[cartItemIndex].qty + 1) *
             items[cartItemIndex][priceForTotal],
         };
+        // Store the new cart
         setCart(items);
+        // Store the removed one to decrease all qty
         setRemoved([item.objectID, item.qty + 1]);
       }
       if (items[cartItemIndex].qty === 0) {
