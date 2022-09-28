@@ -131,13 +131,20 @@ const Hit = ({ hit }) => {
 
   // Function on click on plus button to add hit in the cart
   const addToCart = (product, productQty) => {
+    // If we have not already a Cart
     if (cart.length < 1) {
+      // Store it
       setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
       setProductQty(1);
     } else {
+      // Define a null const
       let cartItemIndex = null;
-      const cartItem = cart.map((item, index) => {
+      // Iterate on our cart
+      cart.map((item, index) => {
         if (item.objectID === product.objectID) {
+          // And
+          // If we already have the same article have
+          // we store the index of this on cartItemIndex
           cartItemIndex = index;
         }
       });
@@ -148,9 +155,11 @@ const Hit = ({ hit }) => {
           qty: productQty + 1,
           totalPrice: (productQty + 1) * items[cartItemIndex][priceForTotal],
         };
+        // Store in the cart the new array Items
         setProductQty(items[cartItemIndex].qty);
         setCart(items);
       } else {
+        // If not already the same article
         setCart([
           ...cart,
           { ...product, qty: 1, totalPrice: product[priceForTotal] },

@@ -27,12 +27,18 @@ const ArticlesCard = ({ item }) => {
 
   // Remove from cart function
   const removeFromCart = (it) => {
+    // Define a null const
     let cartItemIndex = null;
-    const cartItem = cart.map((item, index) => {
+    // Iterate on our cart
+    cart.map((item, index) => {
       if (item.objectID === it.objectID) {
+        // And
+        // If we already have the same article have
+        // we store the index of this on cartItemIndex
         cartItemIndex = index;
       }
     });
+    // So if we already have the same article
     if (cartItemIndex !== null) {
       let items = [...cart];
       if (items[cartItemIndex].qty !== 0) {
@@ -43,7 +49,7 @@ const ArticlesCard = ({ item }) => {
             (items[cartItemIndex].qty - 1) *
             items[cartItemIndex][priceForTotal],
         };
-        // Store the new cart
+        // Store in the cart the new array Items
         setCart(items);
         // Store the removed one to decrease all qty
         setRemoved([item.objectID, item.qty - 1]);
@@ -59,12 +65,18 @@ const ArticlesCard = ({ item }) => {
 
   // Add to cart function
   const addToCart = (it) => {
+    // Define a null const
     let cartItemIndex = null;
-    const cartItem = cart.map((item, index) => {
+    // Iterate on our cart
+    cart.map((item, index) => {
       if (item.objectID === it.objectID) {
+        // And
+        // If we already have the same article have
+        // we store the index of this on cartItemIndex
         cartItemIndex = index;
       }
     });
+    // So if we already have the same article
     if (cartItemIndex !== null) {
       let items = [...cart];
       if (items[cartItemIndex].qty !== 0) {
@@ -75,15 +87,13 @@ const ArticlesCard = ({ item }) => {
             (items[cartItemIndex].qty + 1) *
             items[cartItemIndex][priceForTotal],
         };
-        // Store the new cart
+        // Store in the cart the new array Items
         setCart(items);
-        // Store the removed one to decrease all qty
-        setRemoved([item.objectID, item.qty + 1]);
+        setRemoved([it.objectID, it.qty + 1]);
       }
-      if (items[cartItemIndex].qty === 0) {
-        setCart((cart) => cart.filter((item) => item.objectID !== it.objectID));
-        setProductQty(0);
-      }
+    } else {
+      // If not already the same article
+      setCart([...cart, { ...it, qty: 1, totalPrice: it[priceForTotal] }]);
     }
   };
 

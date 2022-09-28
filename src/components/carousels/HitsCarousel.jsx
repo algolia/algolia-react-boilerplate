@@ -39,12 +39,18 @@ const HitsCarousel = ({ hit, index }) => {
   const userToken = useRecoilValue(personaSelectedAtom);
 
   const addToCart = (it) => {
+    // Define a null const
     let cartItemIndex = null;
-    const cartItem = cart.map((item, index) => {
+    // Iterate on our cart
+    cart.map((item, index) => {
       if (item.objectID === it.objectID) {
+        // And
+        // If we already have the same article have
+        // we store the index of this on cartItemIndex
         cartItemIndex = index;
       }
     });
+    // So if we already have the same article
     if (cartItemIndex !== null) {
       let items = [...cart];
       if (items[cartItemIndex].qty !== 0) {
@@ -55,10 +61,12 @@ const HitsCarousel = ({ hit, index }) => {
             (items[cartItemIndex].qty + 1) *
             items[cartItemIndex][priceForTotal],
         };
+        // Store in the cart the new array Items
         setCart(items);
         setRemoved([it.objectID, it.qty + 1]);
       }
     } else {
+      // If not already the same article
       setCart([...cart, { ...it, qty: 1, totalPrice: it[priceForTotal] }]);
     }
   };
