@@ -97,6 +97,8 @@ const ArticlesCard = ({ item }) => {
     }
   };
 
+  console.log(get(item, sizeFilter));
+
   return (
     <div>
       <div className="articles-card">
@@ -108,7 +110,14 @@ const ArticlesCard = ({ item }) => {
             {get(item, sizeFilter) && (
               <div className="articles-card__infos__details__size">
                 <p>
-                  Size <span>{get(item, sizeFilter)}</span>
+                  Size{' '}
+                  <span>
+                    {
+                      get(item, sizeFilter)[
+                        Math.floor(Math.random() * get(item, sizeFilter).length)
+                      ]
+                    }
+                  </span>
                 </p>
               </div>
             )}
