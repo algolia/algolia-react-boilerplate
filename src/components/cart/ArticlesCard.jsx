@@ -148,7 +148,7 @@ const ArticlesCard = ({ item }) => {
               </div>
             </div>
             <div className="articles-card__infos__qtyprice__price">
-              <p>${item.totalPrice.toFixed(2)}</p>
+              {/* <p>${item.totalPrice.toFixed(2)}</p> */}
             </div>
           </div>
         </div>

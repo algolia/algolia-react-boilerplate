@@ -62,7 +62,7 @@ const Hit = ({ hit }) => {
   const [isHovered, setIsHovered] = useState(false);
   // Import Cart State
   const [cart, setCart] = useRecoilState(cartState);
-  const [addToCartS, setAddToCartS] = useRecoilState(addToCartSelector);
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   const showPersona = useRecoilValue(shouldHavePersona);
   const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);
   const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
@@ -117,6 +117,7 @@ const Hit = ({ hit }) => {
   const promoted = hit?._rankingInfo?.promoted;
 
   useEffect(() => {
+    console.log('cart', cart);
     // This useEffect is for update the Cart
     let cartItemIndex = null;
     cart.map((item, index) => {
@@ -317,10 +318,10 @@ const Hit = ({ hit }) => {
                 <MinusPicto />
               </div>
               <p>{productQty}</p>
-              <p>{addToCartS}</p>
+              {/* <p>{addToCartAtom}</p> */}
               <div
                 onClick={() => {
-                  setAddToCartS(hit);
+                  setAddToCartAtom(hit);
                   // addToCart(hit, productQty);
                   // useSendAlgoliaEvent({
                   //   type: 'conversion',

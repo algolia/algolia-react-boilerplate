@@ -4,6 +4,8 @@
 // ------------------------------------------
 
 import { atom, selector } from 'recoil';
+import { hitsConfig } from '@/config/hitsConfig';
+
 
 export const cartState = atom({
   key: 'cartState',
@@ -37,9 +39,15 @@ export const order = atom({
 
 export const addToCartSelector = selector({
   key: 'addToCartSelector',
-  set: ({ get, set }, newArticle) => {
+  get: ({get}) => get(cartState),
+  set: ({ set, get }, newProduct) => {
     const cart = get(cartState);
-    set(cartState, [...cart, newArticle]);
+   if (cart.length < 1) {
+    console.log(hitsConfig)
+     set(cartState, [
+      { ...newProduct, qty: 1, totalPrice: newProduct[hitsConfig.price]},
+    ]);
+   }
   },
 });
 
