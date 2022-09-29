@@ -1,7 +1,7 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
 
-import { memo, useRef } from 'react';
+import { memo, useRef, useState, useEffect } from 'react';
 
 // Algolia Import
 import { useSearchBox } from 'react-instantsearch-hooks-web';
@@ -13,7 +13,7 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import SVG from file as a component
-import { Glass } from '@/assets/svg/SvgIndex';
+import { Glass, SimpleCloseButton } from '@/assets/svg/SvgIndex';
 import SearchInCategory from './components/SearchInCategory';
 
 import { rulesAtom } from '@/config/appliedRulesConfig';
@@ -43,10 +43,13 @@ function CustomSearchBox(props) {
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams();
 
+  const [hasKeystroke, setHasKeystroke] = useState(false);
+
   const { query } = useSearchBox(props);
 
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
+
   const [sbIsActive, setSbIsActive] = useRecoilState(searchBoxIsActive);
   // const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
@@ -81,6 +84,10 @@ function CustomSearchBox(props) {
     // Refine query in all the app through recoil
     setQueryState(query);
   };
+
+  useEffect(() => {
+    queryState === '' ? setHasKeystroke(false) : setHasKeystroke(true);
+  }, [queryState]);
 
   return (
     <div
@@ -118,6 +125,11 @@ function CustomSearchBox(props) {
             refineFunction(event.currentTarget.value);
           }}
         />
+        {!!hasKeystroke && (
+          <div className="closeBtn" onClick={() => setQueryState('')}>
+            <SimpleCloseButton />
+          </div>
+        )}
         {navigationState && isSearchInCategory && (
           <SearchInCategory state={state} />
         )}
