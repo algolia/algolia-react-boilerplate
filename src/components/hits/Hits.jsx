@@ -35,7 +35,12 @@ import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 import Price from '@/components/hits/components/Price.jsx';
 
 // Import cart from recoil(Cart state and the event if it's removed)
-import { cartState, removedItem } from '@/config/cartFunctions';
+import {
+  addToCartSelector,
+  cartState,
+  removedItem,
+  order,
+} from '@/config/cartFunctions';
 // Import Persona if there is
 import { shouldHavePersona } from '@/config/featuresConfig';
 import {
@@ -57,6 +62,7 @@ const Hit = ({ hit }) => {
   const [isHovered, setIsHovered] = useState(false);
   // Import Cart State
   const [cart, setCart] = useRecoilState(cartState);
+  const [addToCartS, setAddToCartS] = useRecoilState(addToCartSelector);
   const showPersona = useRecoilValue(shouldHavePersona);
   const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);
   const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
@@ -222,6 +228,10 @@ const Hit = ({ hit }) => {
     }
   }, [removed, productQty]);
 
+  // useEffect(() => {
+  //   addToCartS;
+  // }, []);
+
   return (
     <motion.div
       layout
@@ -307,16 +317,18 @@ const Hit = ({ hit }) => {
                 <MinusPicto />
               </div>
               <p>{productQty}</p>
+              <p>{addToCartS}</p>
               <div
                 onClick={() => {
-                  addToCart(hit, productQty);
-                  useSendAlgoliaEvent({
-                    type: 'conversion',
-                    userToken: userToken,
-                    index: index,
-                    hit: hit,
-                    name: 'add-to-cart',
-                  });
+                  setAddToCartS(hit);
+                  // addToCart(hit, productQty);
+                  // useSendAlgoliaEvent({
+                  //   type: 'conversion',
+                  //   userToken: userToken,
+                  //   index: index,
+                  //   hit: hit,
+                  //   name: 'add-to-cart',
+                  // });
                 }}
               >
                 <PlusPicto />

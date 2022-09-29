@@ -3,7 +3,7 @@
 // Please ignore this configuration
 // ------------------------------------------
 
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 
 export const cartState = atom({
   key: 'cartState',
@@ -29,3 +29,69 @@ export const clickHamburger = atom({
   key: 'clickHamburger',
   default: null,
 });
+
+export const order = atom({
+  key: 'order',
+  default: [],
+});
+
+export const addToCartSelector = selector({
+  key: 'addToCartSelector',
+  set: ({ get, set }, newArticle) => {
+    const cart = get(cartState);
+    set(cartState, [...cart, newArticle]);
+  },
+});
+
+// export const addToCartSelector = selector({
+//   key: 'addToCartSelector',
+// get: ({ get }) => get(order),
+// set: ({ set, get }, newArticle) => {
+//   set(order, [...get(order), newArticle]);
+//   if (cart.length < 1) {
+// Store it
+// set(cartState, [{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
+// setProductQty(1);
+//   }
+// },
+// set: ({set}, newValue) => set(myAtom, newValue instanceof DefaultValue ? newValue : newValue / 100),
+// });
+
+// const addToCart = (product, productQty) => {
+//   // If we have not already a Cart
+//   if (cart.length < 1) {
+//     // Store it
+//     setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
+//     setProductQty(1);
+//   } else {
+//     // Define a null const
+//     let cartItemIndex = null;
+//     // Iterate on our cart
+//     cart.map((item, index) => {
+//       if (item.objectID === product.objectID) {
+//         // And
+//         // If we already have the same article have
+//         // we store the index of this on cartItemIndex
+//         cartItemIndex = index;
+//       }
+//     });
+//     if (cartItemIndex !== null) {
+//       let items = [...cart];
+//       items[cartItemIndex] = {
+//         ...items[cartItemIndex],
+//         qty: productQty + 1,
+//         totalPrice: (productQty + 1) * items[cartItemIndex][priceForTotal],
+//       };
+//       // Store in the cart the new array Items
+//       setProductQty(items[cartItemIndex].qty);
+//       setCart(items);
+//     } else {
+//       // If not already the same article
+//       setCart([
+//         ...cart,
+//         { ...product, qty: 1, totalPrice: product[priceForTotal] },
+//       ]);
+//       setProductQty(1);
+//     }
+//   }
+// };
