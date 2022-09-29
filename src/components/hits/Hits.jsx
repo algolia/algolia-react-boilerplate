@@ -40,6 +40,7 @@ import {
   cartState,
   removedItem,
   order,
+  productQtyState,
 } from '@/config/cartFunctions';
 // Import Persona if there is
 import { shouldHavePersona } from '@/config/featuresConfig';
@@ -66,6 +67,7 @@ const Hit = ({ hit }) => {
   const showPersona = useRecoilValue(shouldHavePersona);
   const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);
   const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
+  const [productQty, setProductQty] = useRecoilState(productQtyState);
 
   const [removed, setRemoved] = useRecoilState(removedItem);
 
@@ -111,8 +113,6 @@ const Hit = ({ hit }) => {
       </div>
     );
   };
-
-  const [productQty, setProductQty] = useState(0);
 
   const promoted = hit?._rankingInfo?.promoted;
 
