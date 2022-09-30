@@ -37,6 +37,7 @@ import Price from '@/components/hits/components/Price.jsx';
 // Import cart from recoil(Cart state and the event if it's removed)
 import {
   addToCartSelector,
+  removeToCartSelector,
   cartState,
   removedItem,
   order,
@@ -64,6 +65,7 @@ const Hit = ({ hit }) => {
   // Import Cart State
   const [cart, setCart] = useRecoilState(cartState);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
+  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
   const showPersona = useRecoilValue(shouldHavePersona);
   const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);
   const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
@@ -117,7 +119,6 @@ const Hit = ({ hit }) => {
   const promoted = hit?._rankingInfo?.promoted;
 
   useEffect(() => {
-    console.log('cart', cart);
     // This useEffect is for update the Cart
     let cartItemIndex = null;
     cart.map((item, index) => {
@@ -138,46 +139,6 @@ const Hit = ({ hit }) => {
       setProductQty(0);
     }
   }, [removed]);
-
-  // Function on click on plus button to add hit in the cart
-  const addToCart = (product, productQty) => {
-    // If we have not already a Cart
-    if (cart.length < 1) {
-      // Store it
-      setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
-      setProductQty(1);
-    } else {
-      // Define a null const
-      let cartItemIndex = null;
-      // Iterate on our cart
-      cart.map((item, index) => {
-        if (item.objectID === product.objectID) {
-          // And
-          // If we already have the same article have
-          // we store the index of this on cartItemIndex
-          cartItemIndex = index;
-        }
-      });
-      if (cartItemIndex !== null) {
-        let items = [...cart];
-        items[cartItemIndex] = {
-          ...items[cartItemIndex],
-          qty: productQty + 1,
-          totalPrice: (productQty + 1) * items[cartItemIndex][priceForTotal],
-        };
-        // Store in the cart the new array Items
-        setProductQty(items[cartItemIndex].qty);
-        setCart(items);
-      } else {
-        // If not already the same article
-        setCart([
-          ...cart,
-          { ...product, qty: 1, totalPrice: product[priceForTotal] },
-        ]);
-        setProductQty(1);
-      }
-    }
-  };
 
   // Function on click on plus button to add hit in the cart
   const removeFromCart = (product, productQty) => {
@@ -310,9 +271,8 @@ const Hit = ({ hit }) => {
             <div className="srpItem__infosDown__cart">
               <div
                 onClick={() => {
-                  if (productQty !== 0) {
-                    removeFromCart(hit, productQty);
-                  }
+                  setRemoveToCartAtom(hit);
+                  // removeFromCart(hit, productQty);
                 }}
               >
                 <MinusPicto />

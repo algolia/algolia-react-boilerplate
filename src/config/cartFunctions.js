@@ -72,17 +72,42 @@ export const addToCartSelector = selector({
           qty: getProdQty + 1,
           totalPrice: (getProdQty + 1) * items[cartItemIndex][hitsConfig.price],
         };
-        console.log(items);
         // Store in the cart the new array Items
         // set(productQtyState[cartItemIndex].qty);
         set(cartState, items);
       } else {
         // If not already the same article
-        console.log('first');
         set(cartState, [
           ...cart,
           { ...newProduct, qty: 1, totalPrice: newProduct[hitsConfig.price] },
         ]);
+      }
+    }
+  },
+});
+
+export const removeToCartSelector = selector({
+  key: 'removeToCartSelector',
+  get: ({ get }) => get(cartState),
+  set: ({ set, get }, newProduct) => {
+    const cart = get(cartState);
+    const getProdQty = get(productQtyState);
+    // Define a null const
+    let cartItemIndex = null;
+    const cartItem = cart.map((item, index) => {
+      if (item.objectID === newProduct.objectID) {
+        cartItemIndex = index;
+      }
+    });
+    if (cartItemIndex !== null) {
+      let items = [...cart];
+      if (items[cartItemIndex].qty !== 0) {
+        items[cartItemIndex] = {
+          ...items[cartItemIndex],
+          qty: getProdQty - 1,
+          totalPrice: (getProdQty - 1) * items[cartItemIndex][hitsConfig.price],
+        };
+        set(cartState, items);
       }
     }
   },

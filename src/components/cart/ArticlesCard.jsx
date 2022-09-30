@@ -8,6 +8,7 @@ import {
   cartState,
   removedItem,
   addToCartSelector,
+  removeToCartSelector,
 } from '@/config/cartFunctions';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
@@ -17,6 +18,7 @@ const ArticlesCard = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
   const [removed, setRemoved] = useRecoilState(removedItem);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
+  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
   // Get hit attribute from config file
   const {
     objectID,
@@ -30,77 +32,6 @@ const ArticlesCard = ({ item }) => {
     colour,
   } = hitsConfig;
 
-  // Remove from cart function
-  const removeFromCart = (it) => {
-    // Define a null const
-    let cartItemIndex = null;
-    // Iterate on our cart
-    cart.map((item, index) => {
-      if (item.objectID === it.objectID) {
-        // And
-        // If we already have the same article have
-        // we store the index of this on cartItemIndex
-        cartItemIndex = index;
-      }
-    });
-    // So if we already have the same article
-    if (cartItemIndex !== null) {
-      let items = [...cart];
-      if (items[cartItemIndex].qty !== 0) {
-        items[cartItemIndex] = {
-          ...items[cartItemIndex],
-          qty: items[cartItemIndex].qty - 1,
-          totalPrice:
-            (items[cartItemIndex].qty - 1) *
-            items[cartItemIndex][priceForTotal],
-        };
-        // Store in the cart the new array Items
-        setCart(items);
-        // Store the removed one to decrease all qty
-        setRemoved([item.objectID, item.qty - 1]);
-      }
-      if (items[cartItemIndex].qty === 0) {
-        setCart((cart) => cart.filter((item) => item.objectID !== it.objectID));
-        if (cart?.length === 1) {
-          localStorage.removeItem('myCart');
-        }
-      }
-    }
-  };
-
-  // Add to cart function
-  const addToCart = (it) => {
-    // Define a null const
-    let cartItemIndex = null;
-    // Iterate on our cart
-    cart.map((item, index) => {
-      if (item.objectID === it.objectID) {
-        // And
-        // If we already have the same article have
-        // we store the index of this on cartItemIndex
-        cartItemIndex = index;
-      }
-    });
-    // So if we already have the same article
-    if (cartItemIndex !== null) {
-      let items = [...cart];
-      if (items[cartItemIndex].qty !== 0) {
-        items[cartItemIndex] = {
-          ...items[cartItemIndex],
-          qty: items[cartItemIndex].qty + 1,
-          totalPrice:
-            (items[cartItemIndex].qty + 1) *
-            items[cartItemIndex][priceForTotal],
-        };
-        // Store in the cart the new array Items
-        setCart(items);
-        setRemoved([it.objectID, it.qty + 1]);
-      }
-    } else {
-      // If not already the same article
-      setCart([...cart, { ...it, qty: 1, totalPrice: it[priceForTotal] }]);
-    }
-  };
 
   return (
     <div>
@@ -137,7 +68,7 @@ const ArticlesCard = ({ item }) => {
               <div
                 className="articles-card__infos__qtyprice__plus-minus__icons"
                 onClick={() => {
-                  removeFromCart(item);
+                  setRemoveToCartAtom(item);
                 }}
               >
                 <MinusEmptyIcon />
@@ -147,7 +78,6 @@ const ArticlesCard = ({ item }) => {
                 className="articles-card__infos__qtyprice__plus-minus__icons"
                 onClick={() => {
                   setAddToCartAtom(item);
-                  addToCart(item);
                 }}
               >
                 <PlusEmptyIcon />
