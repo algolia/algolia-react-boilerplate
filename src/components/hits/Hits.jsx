@@ -140,41 +140,6 @@ const Hit = ({ hit }) => {
     }
   }, [removed]);
 
-  // Function on click on plus button to add hit in the cart
-  const removeFromCart = (product, productQty) => {
-    if (cart.length < 1) {
-      setCart([{ ...product, qty: 1, totalPrice: product[priceForTotal] }]);
-      setProductQty(1);
-    } else {
-      let cartItemIndex = null;
-      const cartItem = cart.map((item, index) => {
-        if (item.objectID === product.objectID) {
-          cartItemIndex = index;
-        }
-      });
-      if (cartItemIndex !== null) {
-        let items = [...cart];
-        if (items[cartItemIndex].qty !== 0) {
-          items[cartItemIndex] = {
-            ...items[cartItemIndex],
-            qty: productQty - 1,
-            totalPrice: (productQty - 1) * items[cartItemIndex][priceForTotal],
-          };
-          setCart(items);
-          setProductQty(items[cartItemIndex].qty);
-        }
-        if (items[cartItemIndex].qty === 0) {
-          setCart((cart) =>
-            cart.filter((item) => item.objectID !== product.objectID)
-          );
-          setProductQty(0);
-          localStorage.removeItem('myCart');
-        }
-      } else {
-      }
-    }
-  };
-
   // Function to have a link between the fact I removed an item in my cart
   useEffect(() => {
     if (removed !== null) {
@@ -272,7 +237,6 @@ const Hit = ({ hit }) => {
               <div
                 onClick={() => {
                   setRemoveToCartAtom(hit);
-                  // removeFromCart(hit, productQty);
                 }}
               >
                 <MinusPicto />
