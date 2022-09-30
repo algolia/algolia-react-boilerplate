@@ -4,14 +4,19 @@ import { hitsConfig } from '@/config/hitsConfig';
 import get from 'lodash/get';
 
 // Import cart from recoil
-import { cartState, removedItem } from '@/config/cartFunctions';
-import { useRecoilState } from 'recoil';
+import {
+  cartState,
+  removedItem,
+  addToCartSelector,
+} from '@/config/cartFunctions';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 // ArticlesCard in Cart Modal
 
 const ArticlesCard = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
   const [removed, setRemoved] = useRecoilState(removedItem);
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   // Get hit attribute from config file
   const {
     objectID,
@@ -141,6 +146,7 @@ const ArticlesCard = ({ item }) => {
               <div
                 className="articles-card__infos__qtyprice__plus-minus__icons"
                 onClick={() => {
+                  setAddToCartAtom(item);
                   addToCart(item);
                 }}
               >
