@@ -121,8 +121,7 @@ const Hit = ({ hit }) => {
       setItemQty(0);
     } else {
       cart.map((item) => {
-        if (item.objectID === article.objectID && item.qty > 0)
-          setItemQty(item.qty);
+        if (item.objectID === article.objectID) setItemQty(item.qty);
       });
     }
   };
