@@ -66,6 +66,9 @@ const ArticlesCard = ({ item }) => {
                 className="articles-card__infos__qtyprice__plus-minus__icons"
                 onClick={() => {
                   if (item.qty === 1) {
+                    if (cart.length === 1) {
+                      localStorage.removeItem('myCart');
+                    }
                     setCart((cart) =>
                       cart.filter((it) => it.objectID !== item.objectID)
                     );
