@@ -118,47 +118,7 @@ const Hit = ({ hit }) => {
 
   const promoted = hit?._rankingInfo?.promoted;
 
-  // useEffect(() => {
-  //   // This useEffect is for update the Cart
-  //   let cartItemIndex = null;
-  //   cart.map((item, index) => {
-  //     if (item.objectID === hit.objectID) {
-  //       cartItemIndex = index;
-  //     }
-  //   });
-  //   if (cartItemIndex !== null) {
-  //     let items = [...cart];
-  //     setProductQty(items[cartItemIndex].qty);
-  //   }
-  // }, [cart]);
-
-  // useEffect(() => {
-  //   // This useEffect is here for update the qty in
-  //   // SRP between + and -
-  //   if (removed?.length === 0) {
-  //     setProductQty(0);
-  //   }
-  // }, [removed]);
-
-  // Function to have a link between the fact I removed an item in my cart
-  // useEffect(() => {
-  //   if (removed !== null) {
-  //     if (removed[0] === hit.objectID) {
-  //       if (removed[1] !== 0) {
-  //         setProductQty(removed[1]);
-  //         setRemoved(null);
-  //       } else {
-  //         setProductQty(0);
-  //         setRemoved(null);
-  //       }
-  //     }
-  //   }
-  // }, [removed, productQty]);
-
-  // useEffect(() => {
-  //   addToCartS;
-  // }, []);
-
+  // To update qty in SRP on each card
   const updateQty = (article) => {
     if (cart.length === 0) {
       setItemQty(0);
@@ -170,9 +130,6 @@ const Hit = ({ hit }) => {
     }
   };
 
-  useEffect(() => {
-    updateQty(hit);
-  }, [cart]);
 
   return (
     <motion.div

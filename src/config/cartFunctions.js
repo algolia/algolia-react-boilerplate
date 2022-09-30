@@ -84,16 +84,20 @@ export const removeToCartSelector = selector({
   key: 'removeToCartSelector',
   get: ({ get }) => get(cartState),
   set: ({ set, get }, newProduct) => {
+    // Get the Cart from state
     const cart = get(cartState);
     // Define a null const
     let cartItemIndex = null;
+    // check if the cart already have the same item
     const cartItem = cart.map((item, index) => {
       if (item.objectID === newProduct.objectID) {
         cartItemIndex = index;
       }
     });
     if (cartItemIndex !== null) {
+      // If the product has already been added
       let items = [...cart];
+      // Store the old qty to increment the quantity
       const oldQty = items[cartItemIndex];
       if (items[cartItemIndex].qty !== 0) {
         items[cartItemIndex] = {
