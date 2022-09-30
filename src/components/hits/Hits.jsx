@@ -130,6 +130,10 @@ const Hit = ({ hit }) => {
     }
   };
 
+  // Update the qty on SRP each time Cart is modified
+  useEffect(() => {
+    updateQty(hit);
+  }, [cart]);
 
   return (
     <motion.div
