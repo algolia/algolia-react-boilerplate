@@ -36,17 +36,11 @@ export const order = atom({
   default: [],
 });
 
-export const productQtyState = atom({
-  key: 'productQty',
-  default: 0,
-});
-
 export const addToCartSelector = selector({
   key: 'addToCartSelector',
   get: ({ get }) => get(cartState),
   set: ({ set, get }, newProduct) => {
     const cart = get(cartState);
-    const getProdQty = get(productQtyState);
     // If we have not already a Cart
     if (cart.length < 1) {
       // Store it
@@ -67,13 +61,13 @@ export const addToCartSelector = selector({
       });
       if (cartItemIndex !== null) {
         let items = [...cart];
+        const oldQty = items[cartItemIndex];
         items[cartItemIndex] = {
           ...items[cartItemIndex],
-          qty: getProdQty + 1,
-          totalPrice: (getProdQty + 1) * items[cartItemIndex][hitsConfig.price],
+          qty: oldQty.qty + 1,
+          totalPrice: (oldQty.qty + 1) * items[cartItemIndex][hitsConfig.price],
         };
         // Store in the cart the new array Items
-        // set(productQtyState[cartItemIndex].qty);
         set(cartState, items);
       } else {
         // If not already the same article
@@ -91,7 +85,6 @@ export const removeToCartSelector = selector({
   get: ({ get }) => get(cartState),
   set: ({ set, get }, newProduct) => {
     const cart = get(cartState);
-    const getProdQty = get(productQtyState);
     // Define a null const
     let cartItemIndex = null;
     const cartItem = cart.map((item, index) => {
@@ -101,11 +94,12 @@ export const removeToCartSelector = selector({
     });
     if (cartItemIndex !== null) {
       let items = [...cart];
+      const oldQty = items[cartItemIndex];
       if (items[cartItemIndex].qty !== 0) {
         items[cartItemIndex] = {
           ...items[cartItemIndex],
-          qty: getProdQty - 1,
-          totalPrice: (getProdQty - 1) * items[cartItemIndex][hitsConfig.price],
+          qty: oldQty.qty - 1,
+          totalPrice: (oldQty.qty - 1) * items[cartItemIndex][hitsConfig.price],
         };
         set(cartState, items);
       }

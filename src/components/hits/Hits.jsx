@@ -41,7 +41,6 @@ import {
   cartState,
   removedItem,
   order,
-  productQtyState,
 } from '@/config/cartFunctions';
 // Import Persona if there is
 import { shouldHavePersona } from '@/config/featuresConfig';
@@ -62,6 +61,8 @@ const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
+  // Qty state
+  const [itemQty, setItemQty] = useState(0);
   // Import Cart State
   const [cart, setCart] = useRecoilState(cartState);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
@@ -69,7 +70,6 @@ const Hit = ({ hit }) => {
   const showPersona = useRecoilValue(shouldHavePersona);
   const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);
   const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
-  const [productQty, setProductQty] = useRecoilState(productQtyState);
 
   const [removed, setRemoved] = useRecoilState(removedItem);
 
@@ -118,46 +118,68 @@ const Hit = ({ hit }) => {
 
   const promoted = hit?._rankingInfo?.promoted;
 
-  useEffect(() => {
-    // This useEffect is for update the Cart
-    let cartItemIndex = null;
-    cart.map((item, index) => {
-      if (item.objectID === hit.objectID) {
-        cartItemIndex = index;
-      }
-    });
-    if (cartItemIndex !== null) {
-      let items = [...cart];
-      setProductQty(items[cartItemIndex].qty);
-    }
-  }, [cart]);
+  // useEffect(() => {
+  //   // This useEffect is for update the Cart
+  //   let cartItemIndex = null;
+  //   cart.map((item, index) => {
+  //     if (item.objectID === hit.objectID) {
+  //       cartItemIndex = index;
+  //     }
+  //   });
+  //   if (cartItemIndex !== null) {
+  //     let items = [...cart];
+  //     setProductQty(items[cartItemIndex].qty);
+  //   }
+  // }, [cart]);
 
-  useEffect(() => {
-    // This useEffect is here for update the qty in
-    // SRP between + and -
-    if (removed?.length === 0) {
-      setProductQty(0);
-    }
-  }, [removed]);
+  // useEffect(() => {
+  //   // This useEffect is here for update the qty in
+  //   // SRP between + and -
+  //   if (removed?.length === 0) {
+  //     setProductQty(0);
+  //   }
+  // }, [removed]);
 
   // Function to have a link between the fact I removed an item in my cart
-  useEffect(() => {
-    if (removed !== null) {
-      if (removed[0] === hit.objectID) {
-        if (removed[1] !== 0) {
-          setProductQty(removed[1]);
-          setRemoved(null);
-        } else {
-          setProductQty(0);
-          setRemoved(null);
-        }
-      }
-    }
-  }, [removed, productQty]);
+  // useEffect(() => {
+  //   if (removed !== null) {
+  //     if (removed[0] === hit.objectID) {
+  //       if (removed[1] !== 0) {
+  //         setProductQty(removed[1]);
+  //         setRemoved(null);
+  //       } else {
+  //         setProductQty(0);
+  //         setRemoved(null);
+  //       }
+  //     }
+  //   }
+  // }, [removed, productQty]);
 
   // useEffect(() => {
   //   addToCartS;
   // }, []);
+
+  const updateQty = (art) => {
+    console.log(art);
+    return cart.map((c) => {
+      if (c.objectID === art.objectID && c.qty > 0) {
+        console.log('if', c.objectID, art.objectID, c.qty);
+        setItemQty(c.qty);
+      } else {
+        console.log('else', art);
+        setItemQty(0);
+      }
+    });
+  };
+
+  useEffect(() => {
+    console.log('Je suis la');
+    updateQty(hit);
+  }, [cart]);
+
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
 
   return (
     <motion.div
@@ -241,7 +263,7 @@ const Hit = ({ hit }) => {
               >
                 <MinusPicto />
               </div>
-              <p>{productQty}</p>
+              <p>{itemQty}</p>
               {/* <p>{addToCartAtom}</p> */}
               <div
                 onClick={() => {

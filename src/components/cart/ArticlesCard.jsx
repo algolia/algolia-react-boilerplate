@@ -6,7 +6,6 @@ import get from 'lodash/get';
 // Import cart from recoil
 import {
   cartState,
-  removedItem,
   addToCartSelector,
   removeToCartSelector,
 } from '@/config/cartFunctions';
@@ -16,7 +15,6 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 
 const ArticlesCard = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
-  const [removed, setRemoved] = useRecoilState(removedItem);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
   // Get hit attribute from config file
@@ -31,7 +29,6 @@ const ArticlesCard = ({ item }) => {
     sizeFilter,
     colour,
   } = hitsConfig;
-
 
   return (
     <div>
@@ -94,7 +91,6 @@ const ArticlesCard = ({ item }) => {
             setCart((cart) =>
               cart.filter((it) => it.objectID !== item.objectID)
             );
-            setRemoved([item.objectID, 0]);
             localStorage.removeItem('myCart');
           }}
         >
