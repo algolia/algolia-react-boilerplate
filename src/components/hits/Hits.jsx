@@ -115,7 +115,7 @@ const Hit = ({ hit }) => {
 
   const promoted = hit?._rankingInfo?.promoted;
 
-  // To update qty in SRP on each card
+  // Update the qty for a product on SRP each time Cart is modified
   const updateQty = (article) => {
     if (cart.length === 0) {
       setItemQty(0);
@@ -127,7 +127,7 @@ const Hit = ({ hit }) => {
     }
   };
 
-  // Update the qty on SRP each time Cart is modified
+  // Update the qty for a product on SRP each time Cart is modified
   useEffect(() => {
     updateQty(hit);
   }, [cart]);

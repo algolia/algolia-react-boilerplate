@@ -41,36 +41,36 @@ export const addToCartSelector = selector({
   get: ({ get }) => get(cartState),
   set: ({ set, get }, newProduct) => {
     const cart = get(cartState);
-    // If we have not already a Cart
+    // Check if a there's product in the cart
     if (cart.length < 1) {
-      // Store it
+      // If not we're storing a new product to the cart
       set(cartState, [
         { ...newProduct, qty: 1, totalPrice: newProduct[hitsConfig.price] },
       ]);
     } else {
-      // Define a null const
+      // Check if when adding a product the product is already in the cart... or not.
       let cartItemIndex = null;
-      // Iterate on our cart
       cart.map((item, index) => {
         if (item.objectID === newProduct.objectID) {
-          // And
-          // If we already have the same article have
-          // we store the index of this on cartItemIndex
+          // If the product is already in the cart we're storing the index of the product in a variable
           cartItemIndex = index;
         }
       });
+      // If we've an index matching that means that there is a product 
+      // that is matching and that we need to update the quantity of this product in the cart
       if (cartItemIndex !== null) {
         let items = [...cart];
         const oldQty = items[cartItemIndex];
+      // Updating quantity of product + the total price   
         items[cartItemIndex] = {
           ...items[cartItemIndex],
           qty: oldQty.qty + 1,
           totalPrice: (oldQty.qty + 1) * items[cartItemIndex][hitsConfig.price],
         };
-        // Store in the cart the new array Items
+        // Store in the cart the new array of Items
         set(cartState, items);
       } else {
-        // If not already the same article
+        // If we have a new product that is not already in the cart we're storing this new product in the cart
         set(cartState, [
           ...cart,
           { ...newProduct, qty: 1, totalPrice: newProduct[hitsConfig.price] },
@@ -86,18 +86,17 @@ export const removeToCartSelector = selector({
   set: ({ set, get }, newProduct) => {
     // Get the Cart from state
     const cart = get(cartState);
-    // Define a null const
+     // If we've an index matching that means that there is a product 
+      // that is matching and that we need to update the quantity of this product in the cart
     let cartItemIndex = null;
-    // check if the cart already have the same item
-    const cartItem = cart.map((item, index) => {
+    cart.map((item, index) => {
       if (item.objectID === newProduct.objectID) {
         cartItemIndex = index;
       }
     });
     if (cartItemIndex !== null) {
-      // If the product has already been added
+      // Check if the product is in the cart and decrease the quantity
       let items = [...cart];
-      // Store the old qty to increment the quantity
       const oldQty = items[cartItemIndex];
       if (items[cartItemIndex].qty !== 0) {
         items[cartItemIndex] = {
