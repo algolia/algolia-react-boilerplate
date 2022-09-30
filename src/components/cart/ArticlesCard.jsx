@@ -65,6 +65,11 @@ const ArticlesCard = ({ item }) => {
               <div
                 className="articles-card__infos__qtyprice__plus-minus__icons"
                 onClick={() => {
+                  if (item.qty === 1) {
+                    setCart((cart) =>
+                      cart.filter((it) => it.objectID !== item.objectID)
+                    );
+                  }
                   setRemoveToCartAtom(item);
                 }}
               >
@@ -81,7 +86,7 @@ const ArticlesCard = ({ item }) => {
               </div>
             </div>
             <div className="articles-card__infos__qtyprice__price">
-              {/* <p>${item.totalPrice.toFixed(2)}</p> */}
+              <p>${item.totalPrice.toFixed(2)}</p>
             </div>
           </div>
         </div>

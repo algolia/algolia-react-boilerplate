@@ -39,7 +39,6 @@ import {
   addToCartSelector,
   removeToCartSelector,
   cartState,
-  removedItem,
   order,
 } from '@/config/cartFunctions';
 // Import Persona if there is
@@ -70,8 +69,6 @@ const Hit = ({ hit }) => {
   const showPersona = useRecoilValue(shouldHavePersona);
   const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);
   const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
-
-  const [removed, setRemoved] = useRecoilState(removedItem);
 
   // personalisation user token
   const userToken = useRecoilValue(personaSelectedAtom);
@@ -218,18 +215,17 @@ const Hit = ({ hit }) => {
                 <MinusPicto />
               </div>
               <p>{itemQty}</p>
-              {/* <p>{addToCartAtom}</p> */}
               <div
                 onClick={() => {
                   setAddToCartAtom(hit);
-                  // addToCart(hit, productQty);
-                  // useSendAlgoliaEvent({
-                  //   type: 'conversion',
-                  //   userToken: userToken,
-                  //   index: index,
-                  //   hit: hit,
-                  //   name: 'add-to-cart',
-                  // });
+                  addToCart(hit, productQty);
+                  useSendAlgoliaEvent({
+                    type: 'conversion',
+                    userToken: userToken,
+                    index: index,
+                    hit: hit,
+                    name: 'add-to-cart',
+                  });
                 }}
               >
                 <PlusPicto />
