@@ -159,26 +159,19 @@ const Hit = ({ hit }) => {
   //   addToCartS;
   // }, []);
 
-  const updateQty = (art) => {
-    console.log(art);
-    return cart.map((c) => {
-      if (c.objectID === art.objectID && c.qty > 0) {
-        console.log('if', c.objectID, art.objectID, c.qty);
-        setItemQty(c.qty);
-      } else {
-        console.log('else', art);
-        setItemQty(0);
-      }
-    });
+  const updateQty = (article) => {
+    if (cart.length === 0) {
+      setItemQty(0);
+    } else {
+      cart.map((item) => {
+        if (item.objectID === article.objectID && item.qty > 0)
+          setItemQty(item.qty);
+      });
+    }
   };
 
   useEffect(() => {
-    console.log('Je suis la');
     updateQty(hit);
-  }, [cart]);
-
-  useEffect(() => {
-    console.log(cart);
   }, [cart]);
 
   return (
