@@ -218,7 +218,6 @@ const Hit = ({ hit }) => {
               <div
                 onClick={() => {
                   setAddToCartAtom(hit);
-                  addToCart(hit, productQty);
                   useSendAlgoliaEvent({
                     type: 'conversion',
                     userToken: userToken,
