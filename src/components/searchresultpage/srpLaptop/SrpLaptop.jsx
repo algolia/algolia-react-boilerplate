@@ -27,7 +27,7 @@ const CustomCurrentRefinements = lazy(() =>
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
 
 const CartModal = lazy(() => import('@/components/cart/CartModal'));
-import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
+
 // Configuration
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import { cartOpen } from '@/config/cartFunctions';
