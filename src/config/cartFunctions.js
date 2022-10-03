@@ -31,12 +31,6 @@ export const clickHamburger = atom({
   default: null,
 });
 
-export const order = atom({
-  key: 'order',
-  default: [],
-});
-
-
 export const addToCartSelector = selector({
   key: 'addToCartSelector',
   get: ({ get }) => get(cartState),
