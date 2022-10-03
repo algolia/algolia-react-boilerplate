@@ -40,6 +40,7 @@ import {
 } from '@/config/cartFunctions';
 // Import Persona if there is
 import { shouldHavePersona } from '@/config/featuresConfig';
+import { shouldHaveCartFunctionality } from '@/config/featuresConfig';
 import {
   personaSelectedFiltersAtom,
   shouldDisplayRankingIcons,
@@ -66,6 +67,8 @@ const Hit = ({ hit }) => {
   const showPersona = useRecoilValue(shouldHavePersona);
   const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);
   const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
+
+  const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality);
 
   // personalisation user token
   const userToken = useRecoilValue(personaSelectedAtom);
@@ -200,31 +203,33 @@ const Hit = ({ hit }) => {
             <p className="price">
               <Price hit={hit} />
             </p>
-            <div className="srpItem__infosDown__cart">
-              <div
-                onClick={() => {
-                  setRemoveToCartAtom(hit);
-                }}
-              >
-                <MinusPicto />
+            {shouldShowCartIcons && (
+              <div className="srpItem__infosDown__cart">
+                <div
+                  onClick={() => {
+                    setRemoveToCartAtom(hit);
+                  }}
+                >
+                  <MinusPicto />
+                </div>
+                <p>{itemQty}</p>
+                <div
+                  onClick={() => {
+                    setAddToCartAtom(hit);
+                    // Send event conversion to Algolia API
+                    useSendAlgoliaEvent({
+                      type: 'conversion',
+                      userToken: userToken,
+                      index: index,
+                      hit: hit,
+                      name: 'add-to-cart',
+                    });
+                  }}
+                >
+                  <PlusPicto />
+                </div>
               </div>
-              <p>{itemQty}</p>
-              <div
-                onClick={() => {
-                  setAddToCartAtom(hit);
-                  // Send event conversion to Algolia API
-                  useSendAlgoliaEvent({
-                    type: 'conversion',
-                    userToken: userToken,
-                    index: index,
-                    hit: hit,
-                    name: 'add-to-cart',
-                  });
-                }}
-              >
-                <PlusPicto />
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </>
