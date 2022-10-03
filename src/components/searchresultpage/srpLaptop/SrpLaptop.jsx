@@ -3,9 +3,11 @@ import { lazy, Suspense } from 'react';
 
 // eslint-disable-next-line import/order
 import { Configure, Index } from 'react-instantsearch-hooks-web';
-
+// Custom Hooks
 import { windowSize } from '@/hooks/useScreenSize';
+// router
 import { useLocation } from 'react-router-dom';
+// State Manager Recoil
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Import Components
@@ -16,27 +18,6 @@ import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
 import Redirect from '@/components/redirects/Redirect';
 import CustomSortBy from '@/components/sortBy/SortBy';
 import { CustomStats } from '@/components/stats/Stats';
-
-import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
-import { cartOpen } from '@/config/cartFunctions';
-import {
-  shouldHaveInjectedHits,
-  shouldHaveSorts,
-  shouldHaveStats,
-  shouldHaveTrendingFacets,
-  shouldHaveTrendingProducts
-} from '@/config/featuresConfig';
-import { hitsPerPage } from '@/config/hitsConfig';
-import {
-  personalizationImpact,
-  personaSelectedAtom,
-  personaSelectedFiltersAtom
-} from '@/config/personaConfig';
-import { isFacetPanelOpen } from '@/config/refinementsConfig';
-import { queryAtom } from '@/config/searchboxConfig';
-import { segmentSelectedAtom } from '@/config/segmentConfig';
-import { sortBy } from '@/config/sortByConfig';
-
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/components/ClearRefinement')
 );
@@ -48,15 +29,33 @@ const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
 const CustomHitsComponent = lazy(() =>
   import('@/components/hits/components/CustomHits')
 );
-
+const CartModal = lazy(() => import('@/components/cart/CartModal'));
 import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
-
-//Import scope SCSS
-import { FilterPicto } from '@/assets/svg/SvgIndex';
-import '../SCSS/searchResultsPage.scss';
-
-import CartModal from '@/components/cart/CartModal';
+// Configuration
+import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
+import { cartOpen } from '@/config/cartFunctions';
+import {
+  shouldHaveInjectedHits,
+  shouldHaveSorts,
+  shouldHaveStats,
+  shouldHaveTrendingFacets,
+  shouldHaveTrendingProducts,
+} from '@/config/featuresConfig';
+import { hitsPerPage } from '@/config/hitsConfig';
+import {
+  personalizationImpact,
+  personaSelectedAtom,
+  personaSelectedFiltersAtom,
+} from '@/config/personaConfig';
+import { isFacetPanelOpen } from '@/config/refinementsConfig';
+import { queryAtom } from '@/config/searchboxConfig';
+import { segmentSelectedAtom } from '@/config/segmentConfig';
+import { sortBy } from '@/config/sortByConfig';
 import { navigationStateAtom } from '@/config/navigationConfig';
+// SVG
+import { FilterPicto } from '@/assets/svg/SvgIndex';
+//Import scope SCSS
+import '../SCSS/searchResultsPage.scss';
 
 const SrpLaptop = () => {
   // Recoil & React states

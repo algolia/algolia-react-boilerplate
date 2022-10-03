@@ -1,6 +1,6 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
-import { useEffect, useState } from 'react';
+import { lazy, useEffect, useState } from 'react';
 
 // Recommend
 import {
@@ -16,13 +16,20 @@ import '@algolia/ui-components-horizontal-slider-theme';
 
 // framer-motion
 import { motion } from 'framer-motion';
+// Import Lodash functions
 import get from 'lodash/get';
+// React Router
 import { useLocation, useNavigate } from 'react-router-dom';
+// State Manage Recoil
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
+// SVG & components
 import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import Price from '@/components/hits/components/Price.jsx';
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
+// In case of img loading error
+import * as placeHolderError from '@/assets/logo/logo.webp';
+// Configuration
 import {
   mainIndex,
   recommendClient,
@@ -32,18 +39,13 @@ import {
   framerMotionPage,
   framerMotionTransition,
 } from '@/config/animationConfig';
-
 import { addToCartSelector, cartOpen } from '@/config/cartFunctions';
-
-// In case of img loading error
-import * as placeHolderError from '@/assets/logo/logo.webp';
 import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 import {
   shouldHaveFbtProducts,
   shouldHaveRelatedProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
-
 import { hitAtom, hitsConfig, PDPHitSections } from '@/config/hitsConfig';
 
 // Used to send insights event on add to cart
@@ -59,11 +61,11 @@ import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 import './SCSS/productDetails.scss';
 
 // Import and use translation
+import { cartState, removedItem } from '@/config/cartFunctions';
 import { useTranslation } from 'react-i18next';
 
 // Import cart from recoil
-import CartModal from '@/components/cart/CartModal';
-import { cartState, removedItem } from '@/config/cartFunctions';
+const CartModal = lazy(() => import('@/components/cart/CartModal'));
 
 const ProductDetails = () => {
   // For alert on sending add to cart event

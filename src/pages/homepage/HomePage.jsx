@@ -1,8 +1,6 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
-import { useState } from 'react';
-
-import { lazy, Suspense, useRef } from 'react';
+import { lazy, Suspense, useRef, useState } from 'react';
 
 // Fetch values from state
 import { useRecoilValue } from 'recoil';
@@ -40,9 +38,8 @@ const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
 const Trending = lazy(() =>
   import('@/components/recommend/trending/TrendingProducts')
 );
-
+const CartModal = lazy(() => import('@/components/cart/CartModal'));
 // Import scoped SCSS
-import CartModal from '@/components/cart/CartModal';
 import './homepage.scss';
 
 const HomePage = () => {
