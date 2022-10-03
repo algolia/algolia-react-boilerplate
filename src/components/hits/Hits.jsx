@@ -37,7 +37,6 @@ import {
   addToCartSelector,
   removeToCartSelector,
   cartState,
-  hitsInCart,
 } from '@/config/cartFunctions';
 // Import Persona if there is
 import { shouldHavePersona } from '@/config/featuresConfig';
@@ -62,7 +61,6 @@ const Hit = ({ hit }) => {
   const [itemQty, setItemQty] = useState(0);
   // Import Cart State
   const cart = useRecoilValue(cartState);
-  const productIncart = useRecoilValue(hitsInCart);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
   const showPersona = useRecoilValue(shouldHavePersona);
@@ -116,7 +114,7 @@ const Hit = ({ hit }) => {
 
   // Update the qty for a product on SRP each time Cart is modified or set qty to 0
   const updateQty = (article) => {
-    if (!productIncart.length) setItemQty(0);
+    if (!cart.length) setItemQty(0);
     const productAddedInCart = cart.find(
       (element) => element.objectID === article.objectID
     );
