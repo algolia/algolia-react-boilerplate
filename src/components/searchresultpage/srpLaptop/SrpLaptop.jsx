@@ -24,11 +24,8 @@ const CustomClearRefinements = lazy(() =>
 const CustomCurrentRefinements = lazy(() =>
   import('@/components/facets/components/CurrentRefinement')
 );
-
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
-const CustomHitsComponent = lazy(() =>
-  import('@/components/hits/components/CustomHits')
-);
+
 const CartModal = lazy(() => import('@/components/cart/CartModal'));
 import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
 // Configuration
@@ -52,9 +49,14 @@ import { isFacetPanelOpen } from '@/config/refinementsConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
+
 import { navigationStateAtom } from '@/config/navigationConfig';
 // SVG
 import { FilterPicto } from '@/assets/svg/SvgIndex';
+
+import CustomHits from '@/components/hits/components/CustomHits';
+import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
+
 //Import scope SCSS
 import '../SCSS/searchResultsPage.scss';
 
@@ -223,7 +225,7 @@ const SrpLaptop = () => {
             </Suspense>
           ) : (
             <Suspense fallback={<SkeletonLoader type={'hit'} />}>
-              <CustomHitsComponent />
+              <CustomHits />
             </Suspense>
           )}
           <Redirect />
