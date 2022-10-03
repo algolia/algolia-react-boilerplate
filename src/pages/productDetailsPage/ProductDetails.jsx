@@ -42,6 +42,7 @@ import {
 import { addToCartSelector, cartOpen } from '@/config/cartFunctions';
 import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 import {
+  shouldHaveCartFunctionality,
   shouldHaveFbtProducts,
   shouldHaveRelatedProducts,
 } from '@/config/featuresConfig';
@@ -71,6 +72,8 @@ const ProductDetails = () => {
   // For alert on sending add to cart event
   const setAlert = useSetRecoilState(alertContent);
   const setAlertOpen = useSetRecoilState(isAlertOpen);
+
+  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
 
   // Function to manage the alert
   const triggerAlert = (content) => {
@@ -193,7 +196,9 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-      {showCart && <CartModal isDesktop={isDesktop} mobile={mobile} />}
+      {shouldShowCartIcon && showCart && (
+        <CartModal isDesktop={isDesktop} mobile={mobile} />
+      )}
       <div className={`${!isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'}`}>
         <div
           className={`${!isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'}`}

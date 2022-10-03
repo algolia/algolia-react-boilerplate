@@ -16,6 +16,7 @@ import {
 
 // Import Recoil config
 import {
+  shouldHaveCartFunctionality,
   shouldHaveLanguages,
   shouldHavePersona,
   shouldHaveSegments,
@@ -72,6 +73,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
   const shouldShowSegmentsAtom = useRecoilValue(shouldHaveSegments);
   const shouldShowLanguageSelected = useRecoilValue(shouldHaveLanguages);
+  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
 
   // Import the navigation links, as defined in the config
   const links = useRecoilValue(linksHeader);
@@ -186,25 +188,27 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           </div>
         )}
       </li>
-      <li
-        className="picto-cart"
-        onClick={() => {
-          setCartOpenValue(!cartOpenValue);
-          {
-            mobile && setIsMenuOpen(false);
-          }
-        }}
-        ref={cartIcon}
-      >
-        {!mobile && <CartPicto />}
-        {mobile && <p>Cart</p>}
-        {/* Picto notification up the cart icon */}
-        {showCart?.length > 0 && (
-          <div className="notification-cart">
-            <p>{sumAllArticles(showCart)}</p>
-          </div>
-        )}
-      </li>
+      {shouldShowCartIcon && (
+        <li
+          className="picto-cart"
+          onClick={() => {
+            setCartOpenValue(!cartOpenValue);
+            {
+              mobile && setIsMenuOpen(false);
+            }
+          }}
+          ref={cartIcon}
+        >
+          {!mobile && <CartPicto />}
+          {mobile && <p>Cart</p>}
+          {/* Picto notification up the cart icon */}
+          {showCart?.length > 0 && (
+            <div className="notification-cart">
+              <p>{sumAllArticles(showCart)}</p>
+            </div>
+          )}
+        </li>
+      )}
     </ul>
   );
 };

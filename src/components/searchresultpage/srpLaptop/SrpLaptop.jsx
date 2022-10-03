@@ -35,6 +35,7 @@ import InjectedHits from '@/components/hits/components/injected-hits/InjectedHit
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
 import { cartOpen } from '@/config/cartFunctions';
 import {
+  shouldHaveCartFunctionality,
   shouldHaveInjectedHits,
   shouldHaveSorts,
   shouldHaveStats,
@@ -68,6 +69,7 @@ const SrpLaptop = () => {
   // Should show injected content or not
   // Defined in config file
   const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
+  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
 
   // Get indexes Value
   const index = useRecoilValue(mainIndex);
@@ -116,7 +118,9 @@ const SrpLaptop = () => {
   }
   return (
     <>
-      <CartModal isDesktop={isDesktop} mobile={mobile} />
+      {shouldShowCartIcon && (
+        <CartModal isDesktop={isDesktop} mobile={mobile} />
+      )}
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">

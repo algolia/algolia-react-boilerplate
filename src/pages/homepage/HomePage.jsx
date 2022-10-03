@@ -24,7 +24,8 @@ import { cartOpen } from '@/config/cartFunctions';
 import {
   shouldHaveCarousels,
   shouldHaveFederatedSearch,
-  shouldHaveTrendingProducts
+  shouldHaveTrendingProducts,
+  shouldHaveCartFunctionality,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { windowSize } from '@/hooks/useScreenSize';
@@ -52,6 +53,7 @@ const HomePage = () => {
   const isFederated = useRecoilValue(shouldHaveFederatedSearch);
   const isCarousel = useRecoilValue(shouldHaveCarousels);
   const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch);
+  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
   const HomePage = useRef(false);
 
   // Boolean value which determines if federated search is shown or not, default is false
@@ -72,7 +74,9 @@ const HomePage = () => {
     // Framer motion wrapper
     <div className="homepage" ref={HomePage}>
       {/* Cart Modal */}
-      <CartModal isDesktop={isDesktop} mobile={mobile} />
+      {shouldShowCartIcon && (
+        <CartModal isDesktop={isDesktop} mobile={mobile} />
+      )}
 
       {isFederated && isFederatedOpen && (
         <Suspense>
