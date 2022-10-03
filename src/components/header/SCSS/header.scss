@@ -85,6 +85,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            transform: scale(1);
             span {
               color: $white-color;
             }
@@ -93,6 +94,36 @@
             width: 1.9rem;
             height: 1.9rem;
           }
+
+          body {
+            font: 1em sans-serif;
+            text-align: center;
+        }
+        .stage {
+            border-bottom: 3px solid #444;
+            display: flex;
+            height: 330px;
+            width: 100%;
+        }
+        .box {
+            align-self: flex-end;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            background-color: #F44336;
+            height: 200px;
+            margin: 0 auto 0 auto;
+            transform-origin: bottom;
+            width: 200px;
+            transition: transform 0.3s ease-in-out;
+            
+        }
+        &__active {
+          // transform: scale(0.96);
+          // transition: transform 0.1s ease-in-out;
+            animation: bounce 0.3s ease-in-out forwards;
+        }
+ 
+    
         }
       }
       .container__header-nav-selectors {
@@ -190,4 +221,17 @@
   .hamburger-inactive {
     @include hamburger-menu-inactive;
   }
+}
+
+
+@keyframes bounce {
+0%{
+  transform: scale(0.90);
+}
+50%{
+  transform: scale(1.02);
+}
+100%{
+  transform: scale(1);
+}
 }

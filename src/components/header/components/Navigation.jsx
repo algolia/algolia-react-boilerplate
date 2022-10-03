@@ -1,5 +1,7 @@
 // Render the navigation menu in the header
 
+import { useState } from 'react';
+
 // React Router
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 // Recoil Header State
@@ -39,7 +41,6 @@ import { cartClick } from '@/config/cartFunctions';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   // Recoil State
-  const setQueryState = useSetRecoilState(queryAtom);
   const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen);
   const [showCart, setShowCart] = useRecoilState(cartState);
 
@@ -189,7 +190,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
       </li>
       {shouldShowCartIcon && (
         <li
-          className="picto-cart"
+          className={
+            cartOpenValue ? 'picto-cart picto-cart__active' : 'picto-cart'
+          }
           onClick={() => {
             setCartOpenValue(!cartOpenValue);
             {
