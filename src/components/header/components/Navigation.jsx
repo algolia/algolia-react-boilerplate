@@ -84,7 +84,6 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
     useRecoilState(navigationStateAtom);
 
   const cartIcon = useSetRecoilState(cartClick);
-  // const cartIcon = useRef();
 
   // UseEffect to store into the local storage our Cart
   useEffect(() => {
