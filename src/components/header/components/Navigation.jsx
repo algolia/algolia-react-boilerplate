@@ -203,7 +203,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           {/* Picto notification up the cart icon */}
           {showCart?.length > 0 && (
             <div className="notification-cart">
-              <p>{sumAllArticles(showCart)}</p>
+              <span>{sumAllArticles(showCart)}</span>
             </div>
           )}
         </li>
