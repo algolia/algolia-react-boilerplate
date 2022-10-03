@@ -7,6 +7,9 @@ import Price from '../hits/components/Price';
 import { CartPicto } from '@/assets/svg/SvgIndex';
 import { cartState, removedItem } from '@/config/cartFunctions';
 
+// Display or not cart icons
+import { shouldHaveCartFunctionality } from '@/config/featuresConfig';
+
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,6 +40,9 @@ const HitsCarousel = ({ hit, index }) => {
 
   // Hits are imported by Recoil
   const hitState = useSetRecoilState(hitAtom);
+
+  // display or not the cart icons
+  const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality);
 
   // personalisation user token
   const userToken = useRecoilValue(personaSelectedAtom);
@@ -77,22 +83,24 @@ const HitsCarousel = ({ hit, index }) => {
           <p className="price">
             <Price hit={hit} />
           </p>
-          <div
-            className="cart"
-            onClick={() => {
-              setAddToCartAtom(hit);
-              // Send event conversion to Algolia API
-              useSendAlgoliaEvent({
-                type: 'conversion',
-                userToken: userToken,
-                index: index,
-                hit: hit,
-                name: 'add-to-cart',
-              });
-            }}
-          >
-            <CartPicto />
-          </div>
+          {shouldShowCartIcons && (
+            <div
+              className="cart"
+              onClick={() => {
+                setAddToCartAtom(hit);
+                // Send event conversion to Algolia API
+                useSendAlgoliaEvent({
+                  type: 'conversion',
+                  userToken: userToken,
+                  index: index,
+                  hit: hit,
+                  name: 'add-to-cart',
+                });
+              }}
+            >
+              <CartPicto />
+            </div>
+          )}
         </div>
       </div>
     </div>
