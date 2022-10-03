@@ -319,12 +319,17 @@
       display: flex;
       justify-content: space-between;
       width: 40%;
+      &-inactive{
+        font-weight: 300 !important;
+        color: $grey-dark-color-60 !important;
+      }
       p {
-        @include p-text();
+        @include p-text($main-color, 500);
       }
       svg {
         width: 2rem;
       }
+    
     }
   }
 }

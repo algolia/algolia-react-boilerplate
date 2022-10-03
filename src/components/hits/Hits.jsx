@@ -212,7 +212,13 @@ const Hit = ({ hit }) => {
                 >
                   <MinusPicto />
                 </div>
-                <p>{itemQty}</p>
+                <p
+                  className={
+                    itemQty === 0 && 'srpItem__infosDown__cart-inactive'
+                  }
+                >
+                  {itemQty}
+                </p>
                 <div
                   onClick={() => {
                     setAddToCartAtom(hit);
