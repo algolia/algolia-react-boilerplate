@@ -11,8 +11,10 @@
   min-width: 30%;
   padding: 3rem 2rem;
   background-color: $white-color;
+  transform: translateY(-100%);
   z-index: 998;
   overflow: scroll;
+  
 
   h2 {
     @include titleH2($second-color)

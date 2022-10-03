@@ -16,6 +16,7 @@ import { windowSize } from '@/hooks/useScreenSize';
 
 //Import custom transition for panel animations
 import { framerMotionTransition } from '@/config/animationConfig';
+import { motion } from 'framer-motion';
 
 // Import Reference for the Button that trigger the panel
 import {
@@ -61,7 +62,7 @@ const DemoGuide = ({ setshowDemoGuide }) => {
   );
 
   return (
-    <div
+    <motion.div
       ref={demoGuide}
       className={`${
         tablet || mobile ? 'helpNavigation-mobile' : ''
@@ -116,7 +117,7 @@ const DemoGuide = ({ setshowDemoGuide }) => {
           </li>
         )}
       </ul>
-    </div>
+    </motion.div>
   );
 };
 
