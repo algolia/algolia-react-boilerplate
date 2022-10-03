@@ -24,13 +24,13 @@ import {
   shouldHaveSorts,
   shouldHaveStats,
   shouldHaveTrendingFacets,
-  shouldHaveTrendingProducts,
+  shouldHaveTrendingProducts
 } from '@/config/featuresConfig';
 import { hitsPerPage } from '@/config/hitsConfig';
 import {
   personalizationImpact,
   personaSelectedAtom,
-  personaSelectedFiltersAtom,
+  personaSelectedFiltersAtom
 } from '@/config/personaConfig';
 import { isFacetPanelOpen } from '@/config/refinementsConfig';
 import { queryAtom } from '@/config/searchboxConfig';
@@ -55,7 +55,7 @@ import InjectedHits from '@/components/hits/components/injected-hits/InjectedHit
 import { FilterPicto } from '@/assets/svg/SvgIndex';
 import '../SCSS/searchResultsPage.scss';
 
-import Modal from '@/components/cart/Modal';
+import CartModal from '@/components/cart/CartModal';
 import { navigationStateAtom } from '@/config/navigationConfig';
 
 const SrpLaptop = () => {
@@ -117,7 +117,7 @@ const SrpLaptop = () => {
   }
   return (
     <>
-      <Modal isDesktop={isDesktop} mobile={mobile} />
+      <CartModal isDesktop={isDesktop} mobile={mobile} />
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 // Recommend
 import {
   useFrequentlyBoughtTogether,
-  useRelatedProducts,
+  useRelatedProducts
 } from '@algolia/recommend-react';
 
 // Slider for recommend
@@ -26,11 +26,11 @@ import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
 import {
   mainIndex,
   recommendClient,
-  searchClient,
+  searchClient
 } from '@/config/algoliaEnvConfig';
 import {
   framerMotionPage,
-  framerMotionTransition,
+  framerMotionTransition
 } from '@/config/animationConfig';
 
 import { addToCartSelector, cartOpen } from '@/config/cartFunctions';
@@ -40,7 +40,7 @@ import * as placeHolderError from '@/assets/logo/logo.webp';
 import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 import {
   shouldHaveFbtProducts,
-  shouldHaveRelatedProducts,
+  shouldHaveRelatedProducts
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
@@ -59,10 +59,10 @@ import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 import './SCSS/productDetails.scss';
 
 // Import and use translation
-import Modal from '@/components/cart/Modal';
 import { useTranslation } from 'react-i18next';
 
 // Import cart from recoil
+import CartModal from '@/components/cart/CartModal';
 import { cartState, removedItem } from '@/config/cartFunctions';
 
 const ProductDetails = () => {
@@ -191,7 +191,7 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-      {showCart && <Modal isDesktop={isDesktop} mobile={mobile} />}
+      {showCart && <CartModal isDesktop={isDesktop} mobile={mobile} />}
       <div className={`${!isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'}`}>
         <div
           className={`${!isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'}`}

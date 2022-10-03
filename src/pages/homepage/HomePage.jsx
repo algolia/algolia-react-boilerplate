@@ -26,7 +26,7 @@ import { cartOpen } from '@/config/cartFunctions';
 import {
   shouldHaveCarousels,
   shouldHaveFederatedSearch,
-  shouldHaveTrendingProducts,
+  shouldHaveTrendingProducts
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { windowSize } from '@/hooks/useScreenSize';
@@ -42,7 +42,7 @@ const Trending = lazy(() =>
 );
 
 // Import scoped SCSS
-import Modal from '@/components/cart/Modal';
+import CartModal from '@/components/cart/CartModal';
 import './homepage.scss';
 
 const HomePage = () => {
@@ -75,7 +75,7 @@ const HomePage = () => {
     // Framer motion wrapper
     <div className="homepage" ref={HomePage}>
       {/* Cart Modal */}
-      <Modal isDesktop={isDesktop} mobile={mobile} />
+      <CartModal isDesktop={isDesktop} mobile={mobile} />
 
       {isFederated && isFederatedOpen && (
         <Suspense>
