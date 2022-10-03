@@ -71,16 +71,16 @@ const PriceBuilder = ({ hit }) => {
 
   return (
     <>
-      {!isCurrencyRight && currencySymbol && displayCurrency}
+      {!isCurrencyRight && displayCurrency && currencySymbol}
       {userPaysPrice}
-      {isCurrencyRight && currencySymbol && displayCurrency}
+      {isCurrencyRight && displayCurrency && currencySymbol}
       {isOnSale && (
-        <strike>
+        <s>
           {' '}
           {!isCurrencyRight && currencySymbol && displayCurrency}
           {hitPrice}
           {isCurrencyRight && currencySymbol && displayCurrency}
-        </strike>
+        </s>
       )}
     </>
   );
