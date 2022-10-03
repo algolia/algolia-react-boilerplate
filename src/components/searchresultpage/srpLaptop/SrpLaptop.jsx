@@ -44,10 +44,10 @@ const CustomCurrentRefinements = lazy(() =>
 );
 
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
-const CustomHitsComponent = lazy(() =>
-  import('@/components/hits/components/CustomHits')
-);
-
+// const CustomHitsComponent = lazy(() =>
+//   import('@/components/hits/components/CustomHits')
+// );
+import CustomHits from '@/components/hits/components/CustomHits';
 import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
 
 //Import scope SCSS
@@ -191,13 +191,16 @@ const SrpLaptop = () => {
             personalizationImpact={personalizationImpact}
             personalizationFilters={personalizationFilters}
             filters={
-              (navigationState?.type === 'filter' || navigationState?.type === 'rawFilter') &&
+              (navigationState?.type === 'filter' ||
+                navigationState?.type === 'rawFilter') &&
               navigationState?.action !== null
                 ? navigationState.action
                 : ''
             }
             optionalFilters={segmentOptionalFilters}
-            ruleContexts={navigationState?.type === 'context' ? navigationState.action : ''}
+            ruleContexts={
+              navigationState?.type === 'context' ? navigationState.action : ''
+            }
             query={queryState}
             getRankingInfo={true}
           />
@@ -213,7 +216,7 @@ const SrpLaptop = () => {
             </Suspense>
           ) : (
             <Suspense fallback={<SkeletonLoader type={'hit'} />}>
-              <CustomHitsComponent />
+              <CustomHits />
             </Suspense>
           )}
           <Redirect />
