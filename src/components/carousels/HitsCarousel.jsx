@@ -13,6 +13,9 @@ import { useNavigate } from 'react-router-dom';
 // Used to send insights event on add to cart
 import { personaSelectedAtom } from '@/config/personaConfig';
 
+// Import cart from recoil(Cart state and the event if it's removed)
+import { addToCartSelector } from '@/config/cartFunctions';
+
 const HitsCarousel = ({ hit, index }) => {
   const {
     objectID,
@@ -25,7 +28,7 @@ const HitsCarousel = ({ hit, index }) => {
     price: priceForTotal,
   } = hitsConfig;
   const [hovered, setHovered] = useState(false);
-
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   const [cart, setCart] = useRecoilState(cartState);
   const [removed, setRemoved] = useRecoilState(removedItem);
 
@@ -37,40 +40,6 @@ const HitsCarousel = ({ hit, index }) => {
 
   // personalisation user token
   const userToken = useRecoilValue(personaSelectedAtom);
-
-  const addToCart = (it) => {
-    // Define a null const
-    let cartItemIndex = null;
-    // Iterate on our cart
-    cart.map((item, index) => {
-      if (item.objectID === it.objectID) {
-        // And
-        // If we already have the same article have
-        // we store the index of this on cartItemIndex
-        cartItemIndex = index;
-      }
-    });
-    // So if we already have the same article
-    if (cartItemIndex !== null) {
-      let items = [...cart];
-      if (items[cartItemIndex].qty !== 0) {
-        items[cartItemIndex] = {
-          ...items[cartItemIndex],
-          qty: items[cartItemIndex].qty + 1,
-          totalPrice:
-            (items[cartItemIndex].qty + 1) *
-            items[cartItemIndex][priceForTotal],
-        };
-        // Store in the cart the new array Items
-        setCart(items);
-        setRemoved([it.objectID, it.qty + 1]);
-      }
-    } else {
-      // If not already the same article
-      setCart([...cart, { ...it, qty: 1, totalPrice: it[priceForTotal] }]);
-    }
-  };
-
   return (
     <div
       className="item"
@@ -111,7 +80,8 @@ const HitsCarousel = ({ hit, index }) => {
           <div
             className="cart"
             onClick={() => {
-              addToCart(hit);
+              setAddToCartAtom(hit);
+              // Send event conversion to Algolia API
               useSendAlgoliaEvent({
                 type: 'conversion',
                 userToken: userToken,

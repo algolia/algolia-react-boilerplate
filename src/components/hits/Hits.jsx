@@ -1,5 +1,3 @@
-// Component for displaying hits in teh
-
 import { useEffect, useState } from 'react';
 
 // Import framer-motion for animation on hits
@@ -116,7 +114,7 @@ const Hit = ({ hit }) => {
 
   const promoted = hit?._rankingInfo?.promoted;
 
-  // Update the qty for a product on SRP each time Cart is modified
+  // Update the qty for a product on SRP each time Cart is modified or set qty to 0
   const updateQty = (article) => {
     if (!productIncart.length) setItemQty(0);
     const productAddedInCart = cart.find(
@@ -216,6 +214,7 @@ const Hit = ({ hit }) => {
               <div
                 onClick={() => {
                   setAddToCartAtom(hit);
+                  // Send event conversion to Algolia API
                   useSendAlgoliaEvent({
                     type: 'conversion',
                     userToken: userToken,

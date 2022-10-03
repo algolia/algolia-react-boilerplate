@@ -11,7 +11,7 @@ import './SCSS/cartModal.scss';
 import { cartClick } from '@/config/cartFunctions';
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 
-const Modal = ({ mobile }) => {
+const CartModal = ({ mobile }) => {
   // Import all recoil states to show modal + Cart stored and Removed articles
   const [showCart, setShowCart] = useRecoilState(cartOpen);
   const [cartValue, setCartValue] = useRecoilState(cartState);
@@ -69,4 +69,4 @@ const Modal = ({ mobile }) => {
   );
 };
 
-export default Modal;
+export default CartModal;

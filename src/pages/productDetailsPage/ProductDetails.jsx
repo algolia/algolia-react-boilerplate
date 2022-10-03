@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 
 // Recommend
 import {
-  useRelatedProducts,
   useFrequentlyBoughtTogether,
+  useRelatedProducts,
 } from '@algolia/recommend-react';
 
 // Slider for recommend
@@ -17,23 +17,23 @@ import '@algolia/ui-components-horizontal-slider-theme';
 // framer-motion
 import { motion } from 'framer-motion';
 import get from 'lodash/get';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import Price from '@/components/hits/components/Price.jsx';
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
 import {
   mainIndex,
-  searchClient,
   recommendClient,
+  searchClient,
 } from '@/config/algoliaEnvConfig';
 import {
   framerMotionPage,
   framerMotionTransition,
 } from '@/config/animationConfig';
 
-import { cartOpen } from '@/config/cartFunctions';
+import { addToCartSelector, cartOpen } from '@/config/cartFunctions';
 
 // In case of img loading error
 import * as placeHolderError from '@/assets/logo/logo.webp';
@@ -60,9 +60,9 @@ import './SCSS/productDetails.scss';
 
 // Import and use translation
 import { useTranslation } from 'react-i18next';
-import Modal from '@/components/cart/Modal';
 
 // Import cart from recoil
+import CartModal from '@/components/cart/CartModal';
 import { cartState, removedItem } from '@/config/cartFunctions';
 
 const ProductDetails = () => {
@@ -93,31 +93,6 @@ const ProductDetails = () => {
 
   const [cart, setCart] = useRecoilState(cartState);
   const [removed, setRemoved] = useRecoilState(removedItem);
-
-  const addToCart = (it) => {
-    let cartItemIndex = null;
-    const cartItem = cart.map((item, index) => {
-      if (item.objectID === it.objectID) {
-        cartItemIndex = index;
-      }
-    });
-    if (cartItemIndex !== null) {
-      let items = [...cart];
-      if (items[cartItemIndex].qty !== 0) {
-        items[cartItemIndex] = {
-          ...items[cartItemIndex],
-          qty: items[cartItemIndex].qty + 1,
-          totalPrice:
-            (items[cartItemIndex].qty + 1) *
-            items[cartItemIndex][priceForTotal],
-        };
-        setCart(items);
-        setRemoved([it.objectID, it.qty + 1]);
-      }
-    } else {
-      setCart([...cart, { ...it, qty: 1, totalPrice: it[priceForTotal] }]);
-    }
-  };
 
   // if there is no stored hit
   useEffect(() => {
@@ -160,6 +135,8 @@ const ProductDetails = () => {
   const navigate = useNavigate();
 
   const { isDesktop, mobile } = useRecoilValue(windowSize);
+
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
 
   // Get hit attribute from config file
   const {
@@ -214,7 +191,7 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-      {showCart && <Modal isDesktop={isDesktop} mobile={mobile} />}
+      {showCart && <CartModal isDesktop={isDesktop} mobile={mobile} />}
       <div className={`${!isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'}`}>
         <div
           className={`${!isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'}`}
@@ -325,15 +302,16 @@ const ProductDetails = () => {
               <motion.button
                 className="add-to-cart"
                 onClick={() => {
-                  addToCart(hit);
+                  setAddToCartAtom(hit);
                   triggerAlert('Sending add to cart event to Algolia'),
+                    // Send event conversion to Algolia API
                     useSendAlgoliaEvent({
                       type: 'conversion',
                       userToken: userToken,
                       index: index,
                       hit: hit,
-                      name: 'add-to-cart'
-                });
+                      name: 'add-to-cart',
+                    });
                 }}
               >
                 <i className="fa-solid fa-shopping-cart"></i>

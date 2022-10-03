@@ -67,7 +67,12 @@ const ArticlesCard = ({ item }) => {
                 className="articles-card__infos__qtyprice__plus-minus__icons"
                 onClick={() => {
                   if (item.qty === 1) {
+                    if (cart.length === 1) {
+                      // Remove all in local storage
+                      localStorage.removeItem('myCart');
+                    }
                     setCart((cart) =>
+                      // Remove article in cart
                       cart.filter((it) => it.objectID !== item.objectID)
                     );
                   }
@@ -95,8 +100,10 @@ const ArticlesCard = ({ item }) => {
           className="articles-card__remove"
           onClick={() => {
             setCart((cart) =>
+              // Remove all in cart
               cart.filter((it) => it.objectID !== item.objectID)
             );
+            // Remove all in local storage
             localStorage.removeItem('myCart');
           }}
         >
