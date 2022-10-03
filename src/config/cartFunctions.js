@@ -41,14 +41,15 @@ export const addToCartSelector = selector({
   get: ({ get }) => get(cartState),
   set: ({ set, get }, newProduct) => {
     const cart = get(cartState);
-    // Check if a there's product in the cart
+    // Check if a there are product in the cart
     if (cart.length < 1) {
-      // If not we're storing a new product to the cart
+      // If no product we're storing a new one into the cart
       set(cartState, [
         { ...newProduct, qty: 1, totalPrice: newProduct[hitsConfig.price] },
       ]);
     } else {
-      // Check if when adding a product the product is already in the cart... or not.
+      // If already products in cart
+      // Check there's the same product as the product we want add... or not.
       let cartItemIndex = null;
       cart.map((item, index) => {
         if (item.objectID === newProduct.objectID) {
@@ -56,7 +57,7 @@ export const addToCartSelector = selector({
           cartItemIndex = index;
         }
       });
-      // If we've an index matching that means that there is a product 
+      // If we've an index matching that means that there is a same product 
       // that is matching and that we need to update the quantity of this product in the cart
       if (cartItemIndex !== null) {
         let items = [...cart];
@@ -86,8 +87,8 @@ export const removeToCartSelector = selector({
   set: ({ set, get }, newProduct) => {
     // Get the Cart from state
     const cart = get(cartState);
-     // If we've an index matching that means that there is a product 
-      // that is matching and that we need to update the quantity of this product in the cart
+     // If we've an index matching that means that there is already have same product 
+      //  and we need to update the quantity of this product in the cart
     let cartItemIndex = null;
     cart.map((item, index) => {
       if (item.objectID === newProduct.objectID) {
