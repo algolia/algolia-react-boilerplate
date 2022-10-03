@@ -101,3 +101,8 @@ export const shouldHaveRedirect = atom({
   key: 'shouldHaveRedirect', // unique ID (with respect to other atoms/selectors)
   default: true, // default value (aka initial value)
 });
+
+export const shouldHaveCartFunctionality = atom({
+  key: 'shouldHaveCartFunctionality', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+});

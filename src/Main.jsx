@@ -54,6 +54,8 @@ import usePreventScrolling from './hooks/usePreventScrolling';
 import SearchErrorToast from './utils/ErrorHandler';
 import Loader from './components/loader/Loader';
 
+import clamp from './utils/clampCalcFunction';
+
 export const Main = () => {
   // Index to make the main search queries to
   const index = useRecoilValue(mainIndex);
@@ -85,11 +87,13 @@ export const Main = () => {
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
 
+  clamp(1, 2, 820, 1440);
+
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
       {shouldShowNetworkErrors && <SearchErrorToast />}
 
-      <div className="visible">
+      <div className="mainWrapper">
         {/* TODO: Check if this configure is used for anything */}
         <Configure query={queryState} />
         <Header />

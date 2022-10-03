@@ -1,16 +1,18 @@
-import { insightsClient } from '@/config/algoliaEnvConfig'
+import { insightsClient } from '@/config/algoliaEnvConfig';
 
-const useSendAlgoliaEvent = (eventType, userToken, indexName, hit, eventName) => {
+const useSendAlgoliaEvent = ({ type, userToken, index, hit, name }) => {
   try {
-    insightsClient(eventType, {
+    insightsClient('clickedObjectIDs', {
+      eventName: name,
+      eventType: type,
       userToken: userToken,
-      index: indexName,
-      eventName: eventName,
-      objectIDs: [hit.objectID]
+      index: index,
+      timestamp: Date.now(),
+      objectIDs: [`${hit.objectID}`],
     });
-  } catch(e) {
+  } catch (e) {
     console.log(e);
   }
-}
+};
 
-export default useSendAlgoliaEvent
+export default useSendAlgoliaEvent;

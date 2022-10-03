@@ -1,11 +1,11 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
-import { useEffect, useState } from 'react';
+import { lazy, useEffect, useState } from 'react';
 
 // Recommend
 import {
-  useRelatedProducts,
   useFrequentlyBoughtTogether,
+  useRelatedProducts,
 } from '@algolia/recommend-react';
 
 // Slider for recommend
@@ -16,32 +16,37 @@ import '@algolia/ui-components-horizontal-slider-theme';
 
 // framer-motion
 import { motion } from 'framer-motion';
+// Import Lodash functions
 import get from 'lodash/get';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+// React Router
+import { useLocation, useNavigate } from 'react-router-dom';
+// State Manage Recoil
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
+// SVG & components
 import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import Price from '@/components/hits/components/Price.jsx';
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
+// In case of img loading error
+import * as placeHolderError from '@/assets/logo/logo.webp';
+// Configuration
 import {
   mainIndex,
-  searchClient,
   recommendClient,
+  searchClient,
 } from '@/config/algoliaEnvConfig';
 import {
   framerMotionPage,
   framerMotionTransition,
 } from '@/config/animationConfig';
-
-// In case of img loading error
-import * as placeHolderError from '@/assets/logo/logo.webp';
+import { addToCartSelector, cartOpen } from '@/config/cartFunctions';
 import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 import {
+  shouldHaveCartFunctionality,
   shouldHaveFbtProducts,
   shouldHaveRelatedProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
-
 import { hitAtom, hitsConfig, PDPHitSections } from '@/config/hitsConfig';
 
 // Used to send insights event on add to cart
@@ -57,12 +62,18 @@ import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 import './SCSS/productDetails.scss';
 
 // Import and use translation
+import { cartState, removedItem } from '@/config/cartFunctions';
 import { useTranslation } from 'react-i18next';
+
+// Import cart from recoil
+const CartModal = lazy(() => import('@/components/cart/CartModal'));
 
 const ProductDetails = () => {
   // For alert on sending add to cart event
   const setAlert = useSetRecoilState(alertContent);
   const setAlertOpen = useSetRecoilState(isAlertOpen);
+
+  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
 
   // Function to manage the alert
   const triggerAlert = (content) => {
@@ -84,6 +95,9 @@ const ProductDetails = () => {
 
   // current Object ID from URL
   const currentObjectID = location.pathname.split('/')[3];
+
+  const [cart, setCart] = useRecoilState(cartState);
+  const [removed, setRemoved] = useRecoilState(removedItem);
 
   // if there is no stored hit
   useEffect(() => {
@@ -125,11 +139,21 @@ const ProductDetails = () => {
   // navigate is used by react router
   const navigate = useNavigate();
 
-  const { isDesktop } = useRecoilValue(windowSize);
+  const { isDesktop, mobile } = useRecoilValue(windowSize);
+
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
 
   // Get hit attribute from config file
-  const { image, productName, brand, sizeFilter, colour, colourHexa } =
-    hitsConfig;
+  const {
+    objectID,
+    image,
+    productName,
+    brand,
+    sizeFilter,
+    colour,
+    colourHexa,
+    price: priceForTotal,
+  } = hitsConfig;
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1];
 
@@ -138,6 +162,8 @@ const ProductDetails = () => {
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
   });
+
+  const showCart = useRecoilValue(cartOpen);
 
   let fbtRecommendationsProducts;
   let relatedRecommendationsProducts;
@@ -170,6 +196,9 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
+      {shouldShowCartIcon && showCart && (
+        <CartModal isDesktop={isDesktop} mobile={mobile} />
+      )}
       <div className={`${!isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'}`}>
         <div
           className={`${!isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'}`}
@@ -280,14 +309,16 @@ const ProductDetails = () => {
               <motion.button
                 className="add-to-cart"
                 onClick={() => {
+                  setAddToCartAtom(hit);
                   triggerAlert('Sending add to cart event to Algolia'),
-                    useSendAlgoliaEvent(
-                      'clickedObjectIDs',
-                      userToken,
-                      index,
-                      hit,
-                      'add-to-cart'
-                    );
+                    // Send event conversion to Algolia API
+                    useSendAlgoliaEvent({
+                      type: 'conversion',
+                      userToken: userToken,
+                      index: index,
+                      hit: hit,
+                      name: 'add-to-cart',
+                    });
                 }}
               >
                 <i className="fa-solid fa-shopping-cart"></i>

@@ -1,27 +1,26 @@
-// Component for displaying hits in teh
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Import framer-motion for animation on hits
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { Highlight } from 'react-instantsearch-hooks-web';
-
-import { Heart } from '@/assets/svg/SvgIndex';
-
+// Import SVGs
+import { Heart, MinusPicto, PlusPicto } from '@/assets/svg/SvgIndex';
+import RankingIcon from './components/RankingIcon';
+// Import Badge config
 import { badgeCriteria } from '@/config/badgeConfig';
 
 // In case of img loading error
 import * as placeHolderError from '@/assets/logo/logo.webp';
 
+// Lodash function to acces to precise attribute
 import get from 'lodash/get';
-
+// Animations
 import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
-import { hitAtom } from '@/config/hitsConfig';
+import { hitAtom, hitsConfig } from '@/config/hitsConfig';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { hitsConfig } from '@/config/hitsConfig';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
@@ -33,26 +32,60 @@ import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 // import Price component
 import Price from '@/components/hits/components/Price.jsx';
 
+// Import cart from recoil(Cart state and the event if it's removed)
+import {
+  addToCartSelector,
+  removeToCartSelector,
+  cartState,
+} from '@/config/cartFunctions';
+// Import Persona if there is
+import { shouldHavePersona } from '@/config/featuresConfig';
+import { shouldHaveCartFunctionality } from '@/config/featuresConfig';
+import {
+  personaSelectedFiltersAtom,
+  shouldDisplayRankingIcons,
+} from '@/config/personaConfig';
+
 //Import scope SCSS
 import './SCSS/hits.scss';
-import RankingIcon from './components/RankingIcon';
-import { shouldHavePersona } from '@/config/featuresConfig';
-import {
-  shouldDisplayRankingIcons,
-  personaSelectedFiltersAtom,
-} from '@/config/personaConfig';
+
+// Used to send insights event on add to cart
+import { mainIndex } from '@/config/algoliaEnvConfig';
+import { personaSelectedAtom } from '@/config/personaConfig';
+import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
 const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
+  // Qty state
+  const [itemQty, setItemQty] = useState(0);
+  // Import Cart State
+  const cart = useRecoilValue(cartState);
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
+  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
   const showPersona = useRecoilValue(shouldHavePersona);
   const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);
   const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
 
+  const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality);
+
+  // personalisation user token
+  const userToken = useRecoilValue(personaSelectedAtom);
+
+  // Get the main index
+  const index = useRecoilValue(mainIndex);
+
   // Get hit attribute from config file
-  const { objectID, image, imageAlt, category, productName, brand } =
-    hitsConfig;
+  const {
+    objectID,
+    image,
+    imageAlt,
+    category,
+    productName,
+    brand,
+    price: priceForTotal,
+  } = hitsConfig;
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
 
@@ -81,6 +114,20 @@ const Hit = ({ hit }) => {
   };
 
   const promoted = hit?._rankingInfo?.promoted;
+
+  // Update the qty for a product on SRP each time Cart is modified or set qty to 0
+  const updateQty = (article) => {
+    if (!cart.length) setItemQty(0);
+    const productAddedInCart = cart.find(
+      (element) => element.objectID === article.objectID
+    );
+    productAddedInCart ? setItemQty(productAddedInCart.qty) : setItemQty(0);
+  };
+
+  // Update the qty for a product on SRP each time Cart is modified
+  useEffect(() => {
+    updateQty(hit);
+  }, [cart]);
 
   return (
     <motion.div
@@ -152,9 +199,38 @@ const Hit = ({ hit }) => {
               <Highlight hit={hit} attribute={productName} />
             </h3>
           </div>
-          <p className="price">
-            <Price hit={hit} />
-          </p>
+          <div className="srpItem__infosDown">
+            <p className="price">
+              <Price hit={hit} />
+            </p>
+            {shouldShowCartIcons && (
+              <div className="srpItem__infosDown__cart">
+                <div
+                  onClick={() => {
+                    setRemoveToCartAtom(hit);
+                  }}
+                >
+                  <MinusPicto />
+                </div>
+                <p>{itemQty}</p>
+                <div
+                  onClick={() => {
+                    setAddToCartAtom(hit);
+                    // Send event conversion to Algolia API
+                    useSendAlgoliaEvent({
+                      type: 'conversion',
+                      userToken: userToken,
+                      index: index,
+                      hit: hit,
+                      name: 'add-to-cart',
+                    });
+                  }}
+                >
+                  <PlusPicto />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </>
     </motion.div>

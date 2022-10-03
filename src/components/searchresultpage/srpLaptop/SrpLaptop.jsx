@@ -3,9 +3,11 @@ import { lazy, Suspense } from 'react';
 
 // eslint-disable-next-line import/order
 import { Configure, Index } from 'react-instantsearch-hooks-web';
-
+// Custom Hooks
 import { windowSize } from '@/hooks/useScreenSize';
+// router
 import { useLocation } from 'react-router-dom';
+// State Manager Recoil
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Import Components
@@ -16,10 +18,21 @@ import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
 import Redirect from '@/components/redirects/Redirect';
 import CustomSortBy from '@/components/sortBy/SortBy';
 import { CustomStats } from '@/components/stats/Stats';
+const CustomClearRefinements = lazy(() =>
+  import('@/components/facets/components/ClearRefinement')
+);
+const CustomCurrentRefinements = lazy(() =>
+  import('@/components/facets/components/CurrentRefinement')
+);
+const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
 
+const CartModal = lazy(() => import('@/components/cart/CartModal'));
+
+// Configuration
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
-import { isFacetPanelOpen } from '@/config/refinementsConfig';
+import { cartOpen } from '@/config/cartFunctions';
 import {
+  shouldHaveCartFunctionality,
   shouldHaveInjectedHits,
   shouldHaveSorts,
   shouldHaveStats,
@@ -32,27 +45,20 @@ import {
   personaSelectedAtom,
   personaSelectedFiltersAtom,
 } from '@/config/personaConfig';
+import { isFacetPanelOpen } from '@/config/refinementsConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 import { sortBy } from '@/config/sortByConfig';
 
-const CustomClearRefinements = lazy(() =>
-  import('@/components/facets/components/ClearRefinement')
-);
-const CustomCurrentRefinements = lazy(() =>
-  import('@/components/facets/components/CurrentRefinement')
-);
-
-const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
+import { navigationStateAtom } from '@/config/navigationConfig';
+// SVG
+import { FilterPicto } from '@/assets/svg/SvgIndex';
 
 import CustomHits from '@/components/hits/components/CustomHits';
 import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
 
 //Import scope SCSS
 import '../SCSS/searchResultsPage.scss';
-import { FilterPicto } from '@/assets/svg/SvgIndex';
-
-import { navigationStateAtom } from '@/config/navigationConfig';
 
 const SrpLaptop = () => {
   // Recoil & React states
@@ -60,10 +66,12 @@ const SrpLaptop = () => {
   const queryState = useRecoilValue(queryAtom);
   const { isDesktop, mobile } = useRecoilValue(windowSize);
   const navigationState = useRecoilValue(navigationStateAtom);
+  const showCart = useRecoilValue(cartOpen);
 
   // Should show injected content or not
   // Defined in config file
   const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
+  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
 
   // Get indexes Value
   const index = useRecoilValue(mainIndex);
@@ -112,6 +120,9 @@ const SrpLaptop = () => {
   }
   return (
     <>
+      {shouldShowCartIcon && (
+        <CartModal isDesktop={isDesktop} mobile={mobile} />
+      )}
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <div className="recommend">

@@ -26,6 +26,7 @@
     - [From Main Index](#from-main-index)
     - [From Seperate Index](#from-seperate-index)
   - [ Icons](#-icons)
+  - [ Cart](#-cart)
 - [Dependencies](#️-dependencies)
   - [State Manager](#-state-manager)
   - [Router](#-router)
@@ -43,8 +44,6 @@ Before proceeding, please make sure you have the following:
 
 - Node v16.0.0+ installed
 - Yarn installed
-
-
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
 
@@ -370,6 +369,10 @@ This project comes with fontawesome added by default so you can adjust or add ic
 
 It is then as simple as adding in your HTML the correct fontawesome tags i.e. `<i className="fa-solid fa-shopping-cart"></i>`
 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🛒 Cart</h3>
+
+This project comes with Cart feature based on what you'll put into it and it stores in Local Storage to have always your cart. It's linked to event sending [Insights](https://www.algolia.com/doc/rest-api/insights/)
+
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🚌 Tour</h3>
@@ -437,7 +440,8 @@ brew install git-flow-avh
 git flow init
 ```
 
-The repository is working around 3 branches : 
+The repository is working around 3 branches :
+
 - `main` branch, this branch is created for you to be able to fork the project with features turned off
 - `develop` branch, this branch is our feature branch where we're adding new feature before pushing it into production
 - `production`branch, this branch is our stable production branch

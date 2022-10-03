@@ -9,7 +9,7 @@ const useOutsideClickConditional = (ref, optionalParameter1, callback) => {
     if (
       ref.current &&
       !ref.current.contains(e.target) &&
-      !optionalParameter1.contains(e.target)
+      !optionalParameter1?.contains(e.target)
     ) {
       callback();
     }
