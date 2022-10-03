@@ -44,9 +44,7 @@ const CustomCurrentRefinements = lazy(() =>
 );
 
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
-// const CustomHitsComponent = lazy(() =>
-//   import('@/components/hits/components/CustomHits')
-// );
+
 import CustomHits from '@/components/hits/components/CustomHits';
 import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
 
