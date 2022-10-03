@@ -81,6 +81,7 @@ const HitsCarousel = ({ hit, index }) => {
             className="cart"
             onClick={() => {
               setAddToCartAtom(hit);
+              // Send event conversion to Algolia API
               useSendAlgoliaEvent({
                 type: 'conversion',
                 userToken: userToken,

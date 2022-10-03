@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 // Recommend
 import {
   useFrequentlyBoughtTogether,
-  useRelatedProducts
+  useRelatedProducts,
 } from '@algolia/recommend-react';
 
 // Slider for recommend
@@ -26,11 +26,11 @@ import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
 import {
   mainIndex,
   recommendClient,
-  searchClient
+  searchClient,
 } from '@/config/algoliaEnvConfig';
 import {
   framerMotionPage,
-  framerMotionTransition
+  framerMotionTransition,
 } from '@/config/animationConfig';
 
 import { addToCartSelector, cartOpen } from '@/config/cartFunctions';
@@ -40,7 +40,7 @@ import * as placeHolderError from '@/assets/logo/logo.webp';
 import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 import {
   shouldHaveFbtProducts,
-  shouldHaveRelatedProducts
+  shouldHaveRelatedProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
@@ -304,6 +304,7 @@ const ProductDetails = () => {
                 onClick={() => {
                   setAddToCartAtom(hit);
                   triggerAlert('Sending add to cart event to Algolia'),
+                    // Send event conversion to Algolia API
                     useSendAlgoliaEvent({
                       type: 'conversion',
                       userToken: userToken,

@@ -115,7 +115,7 @@ const Hit = ({ hit }) => {
 
   const promoted = hit?._rankingInfo?.promoted;
 
-  // Update the qty for a product on SRP each time Cart is modified
+  // Update the qty for a product on SRP each time Cart is modified or set qty to 0
   const updateQty = (article) => {
     if (cart.length === 0) {
       setItemQty(0);
@@ -217,6 +217,7 @@ const Hit = ({ hit }) => {
               <div
                 onClick={() => {
                   setAddToCartAtom(hit);
+                  // Send event conversion to Algolia API
                   useSendAlgoliaEvent({
                     type: 'conversion',
                     userToken: userToken,
