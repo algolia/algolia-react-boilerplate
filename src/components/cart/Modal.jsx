@@ -1,25 +1,24 @@
 import ArticlesCard from './ArticlesCard';
 
 import { cartOpen, cartState, removedItem } from '@/config/cartFunctions';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 //Import scope SCSS
 import { useRef } from 'react';
 import './SCSS/cartModal.scss';
 
 //Import config from helped navigation
-import { cartClick, clickHamburger } from '@/config/cartFunctions';
+import { cartClick } from '@/config/cartFunctions';
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 
-const Modal = ({ mobile, isDesktop }) => {
+const Modal = ({ mobile }) => {
   // Import all recoil states to show modal + Cart stored and Removed articles
   const [showCart, setShowCart] = useRecoilState(cartOpen);
   const [cartValue, setCartValue] = useRecoilState(cartState);
-  const [removed, setRemoved] = useRecoilState(removedItem);
+  const setRemoveItems = useSetRecoilState(removedItem);
   // Use ref on click modal and on cart icon + hamburger
   const cartModal = useRef();
   const cartIcon = useRecoilValue(cartClick);
-  const hamburgerIcon = useRecoilValue(clickHamburger);
 
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false));
@@ -49,7 +48,9 @@ const Modal = ({ mobile, isDesktop }) => {
       </h3>
       <div className="modal-container__line"></div>
       {cartValue.map((item, i) => {
-        return <ArticlesCard item={item} key={i} />;
+        if (item.qty !== 0) {
+          return <ArticlesCard item={item} key={i} />;
+        }
       })}
       {cartValue.length === 0 && <p>Your cart is empty</p>}
       {cartValue.length !== 0 && (
@@ -58,7 +59,7 @@ const Modal = ({ mobile, isDesktop }) => {
           onClick={() => {
             setCartValue([]);
             localStorage.removeItem('myCart');
-            setRemoved([]);
+            setRemoveItems([]);
           }}
         >
           Empty my cart

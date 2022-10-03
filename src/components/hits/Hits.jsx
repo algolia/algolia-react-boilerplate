@@ -22,7 +22,7 @@ import { framerMotionHits } from '@/config/animationConfig';
 
 // Recoil import
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';
@@ -39,7 +39,7 @@ import {
   addToCartSelector,
   removeToCartSelector,
   cartState,
-  order,
+  hitsInCart,
 } from '@/config/cartFunctions';
 // Import Persona if there is
 import { shouldHavePersona } from '@/config/featuresConfig';
@@ -63,7 +63,8 @@ const Hit = ({ hit }) => {
   // Qty state
   const [itemQty, setItemQty] = useState(0);
   // Import Cart State
-  const [cart, setCart] = useRecoilState(cartState);
+  const cart = useRecoilValue(cartState);
+  const productIncart = useRecoilValue(hitsInCart);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
   const showPersona = useRecoilValue(shouldHavePersona);
@@ -117,13 +118,11 @@ const Hit = ({ hit }) => {
 
   // Update the qty for a product on SRP each time Cart is modified
   const updateQty = (article) => {
-    if (cart.length === 0) {
-      setItemQty(0);
-    } else {
-      cart.map((item) => {
-        if (item.objectID === article.objectID) setItemQty(item.qty);
-      });
-    }
+    if (!productIncart.length) setItemQty(0);
+    const productAddedInCart = cart.find(
+      (element) => element.objectID === article.objectID
+    );
+    productAddedInCart ? setItemQty(productAddedInCart.qty) : setItemQty(0);
   };
 
   // Update the qty for a product on SRP each time Cart is modified

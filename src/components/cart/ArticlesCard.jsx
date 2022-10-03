@@ -17,6 +17,7 @@ const ArticlesCard = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
+
   // Get hit attribute from config file
   const {
     objectID,

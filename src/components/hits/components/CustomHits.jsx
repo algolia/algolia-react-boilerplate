@@ -4,19 +4,19 @@
 import { useEffect, useState, useRef } from 'react';
 import { useInfiniteHits } from 'react-instantsearch-hooks-web';
 
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { windowSize } from '@/hooks/useScreenSize';
 
 import { hitsAtom } from '@/config/hitsConfig';
 
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 import { Hit } from '../Hits';
+import { cartState } from '@/config/cartFunctions';
 
 function CustomHits(props) {
   // If hits were not provided via props, we will use the ones from the IS hook (see footnote)
   const { hits: hookHits, isLastPage, showMore } = useInfiniteHits(props);
   const { mobile, tablet } = useRecoilValue(windowSize);
-
   const [hits, setHits] = useState([]);
   const hitsState = useRecoilValue(hitsAtom);
   const [hitsLoaded, setHitsLoaded] = useState(false);

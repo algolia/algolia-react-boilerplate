@@ -36,6 +36,7 @@ export const order = atom({
   default: [],
 });
 
+
 export const addToCartSelector = selector({
   key: 'addToCartSelector',
   get: ({ get }) => get(cartState),
@@ -98,6 +99,7 @@ export const removeToCartSelector = selector({
       // Check if the product is in the cart and decrease the quantity
       let items = [...cart];
       const oldQty = items[cartItemIndex];
+      
       if (items[cartItemIndex].qty !== 0) {
         items[cartItemIndex] = {
           ...items[cartItemIndex],
@@ -105,7 +107,7 @@ export const removeToCartSelector = selector({
           totalPrice: (oldQty.qty - 1) * items[cartItemIndex][hitsConfig.price],
         };
         set(cartState, items);
-      }
+      } 
     }
   },
 });
