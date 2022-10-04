@@ -58,7 +58,7 @@ function CustomHits(props) {
         observer.disconnect();
       };
     }
-  }, [isLastPage, showMore, hits]);
+  }, [isLastPage, hits]);
 
   return (
     <div className="ais-InfiniteHits">
