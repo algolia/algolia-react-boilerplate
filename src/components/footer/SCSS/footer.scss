@@ -1,16 +1,121 @@
 @use '../../../scss/partials' as *;
 
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  // max-height: 15rem;
-
-
-  img {
-    object-fit: cover;
+.footer-area {
+  .custom-container {
+    max-width: 1266px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
     width: 100%;
+  }
+
+  .footer-widget .footer-info ul li {
+    font-size: 12px;
+    color: #333;
+    line-height: 1;
+    margin: 0 0 9px;
+  }
+
+  .widget-title {
+    margin: 0 0 30px;
+  }
+
+  .footer-widget .widget-title h3 {
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0;
+    // font-family: Montserrat, sans-serif;
+    color: #4a4141;
+
+  }
+
+  .footer-widget .footer-map a {
+    font-size: 12px;
+    color: #333;
+    text-decoration: underline;
+  }
+
+  .footer-widget .footer-list ul li {
+    margin: 0 0 17px;
+  }
+
+  .footer-widget .footer-list ul li a {
+    color: #333;
+    font-size: 12px;
+    display: block;
+    line-height: 1;
+    font-weight: 400;
+    // font-family: Montserrat, sans-serif;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-img {
+    width: 150px;
+    object-fit: cover;
     height: 100%;
+  }
+
+  .footer-bottom {
+    padding-top: 25px;
+    padding-bottom: 15px;
+
+  }
+
+  .footer-widget.copyright-2 p {
+    color: #333;
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .payments {
+    width: 170px;
+    margin-top: -3px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  .subscribe-form-2 .mc-form-2 {
+    position: relative;
+  }
+
+  .subscribe-form-2 .mc-form-2>input {
+    background-color: transparent;
+    width: 16rem;
+    border: none;
+    border-bottom: 1px solid #e7e7e7;
+    color: #333;
+    padding: 5px 60px 5px 10px;
+    height: 43px;
+    font-size: 12px;
+  }
+
+  .subscribe-form-2 .mc-form-2 .clear-2 {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    padding: 0;
+  }
+
+  .subscribe-form-2 .mc-form-2 .clear-2 input {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    color: #262626;
+    font-weight: 700;
+    font-size: 12px;
+    height: 43px;
   }
 }
 

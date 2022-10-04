@@ -139,6 +139,7 @@ export const Main = () => {
           </Routes>
           {/* To avoid CLS, load in the footer after the carousels render */}
           {carouselLoaded && <Footer />}
+          <Footer />
         </AnimatePresence>
         {shouldShowAlertAtom && (
           <Suspense fallback={''}>
