@@ -62,7 +62,6 @@ import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 import './SCSS/productDetails.scss';
 
 // Import and use translation
-import { cartState, removedItem } from '@/config/cartFunctions';
 import { useTranslation } from 'react-i18next';
 
 // Import cart from recoil
@@ -96,7 +95,6 @@ const ProductDetails = () => {
   // current Object ID from URL
   const currentObjectID = location.pathname.split('/')[3];
 
-  const [cart, setCart] = useRecoilState(cartState);
   const [removed, setRemoved] = useRecoilState(removedItem);
 
   // if there is no stored hit

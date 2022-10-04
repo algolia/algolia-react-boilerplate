@@ -1,6 +1,6 @@
 import ArticlesCard from './ArticlesCard';
 
-import { cartOpen, cartState, removedItem } from '@/config/cartFunctions';
+import { cartOpen, cartState } from '@/config/cartFunctions';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 //Import scope SCSS
@@ -15,7 +15,6 @@ const CartModal = ({ mobile }) => {
   // Import all recoil states to show modal + Cart stored and Removed articles
   const [showCart, setShowCart] = useRecoilState(cartOpen);
   const [cartValue, setCartValue] = useRecoilState(cartState);
-  const setRemoveItems = useSetRecoilState(removedItem);
   // Use ref on click modal and on cart icon + hamburger
   const cartModal = useRef();
   const cartIcon = useRecoilValue(cartClick);
@@ -59,7 +58,6 @@ const CartModal = ({ mobile }) => {
           onClick={() => {
             setCartValue([]);
             localStorage.removeItem('myCart');
-            setRemoveItems([]);
           }}
         >
           Empty my cart
