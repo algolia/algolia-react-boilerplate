@@ -4,14 +4,13 @@
 import { useEffect, useState, useRef } from 'react';
 import { useInfiniteHits } from 'react-instantsearch-hooks-web';
 
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { windowSize } from '@/hooks/useScreenSize';
 
 import { hitsAtom } from '@/config/hitsConfig';
 
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 import { Hit } from '../Hits';
-import { cartState } from '@/config/cartFunctions';
 
 function CustomHits(props) {
   // If hits were not provided via props, we will use the ones from the IS hook (see footnote)
@@ -58,7 +57,7 @@ function CustomHits(props) {
         observer.disconnect();
       };
     }
-  }, [isLastPage, showMore, hits]);
+  }, [isLastPage, hits]);
 
   return (
     <div className="ais-InfiniteHits">

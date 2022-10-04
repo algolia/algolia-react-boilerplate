@@ -159,7 +159,7 @@ function CustomColorRefinement(props) {
 
 const Facets = () => {
   const { results } = useInstantSearch();
-  const facets = results.renderingContent.facetOrdering.facets.order;
+  const facets = results?.renderingContent?.facetOrdering?.facets?.order;
 
   return (
     <div>
