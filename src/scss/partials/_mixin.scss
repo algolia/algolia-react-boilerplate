@@ -273,6 +273,7 @@
 // ------------------------------------------
 @mixin hit($title-color, $price-color, $highlight-color, $shadow) {
   width: 100%;
+  height: 100%;
   display: block;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
@@ -315,16 +316,31 @@
   &__infosDown {
     display: flex;
     justify-content: space-between;
+    margin: 2rem 0 0 0;
     &__cart {
       display: flex;
       justify-content: space-between;
       width: 40%;
+      &-inactive{
+        font-weight: 300 !important;
+        color: $grey-light-color !important;
+      }
       p {
-        @include p-text();
+        @include p-text($main-color, 500);
       }
       svg {
         width: 2rem;
       }
+    
+    }
+    &__minusPicto-inactive{
+      pointer-events: none;
+      cursor: not-allowed;
+      path{
+        fill: $grey-light-color;
+
+      }
+
     }
   }
 }
@@ -536,7 +552,7 @@
   display: flex;
   height: fit-content;
   flex-direction: column;
-  z-index: 997;
+  z-index: 999;
   transition: 0.2s ease-in-out;
   cursor: pointer;
   :nth-child(1) {

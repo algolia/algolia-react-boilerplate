@@ -87,8 +87,6 @@ export const Main = () => {
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
 
-  clamp(1, 2, 820, 1440);
-
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
       {shouldShowNetworkErrors && <SearchErrorToast />}

@@ -3,7 +3,6 @@
 // React Router
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 // Recoil Header State
-import { queryAtom } from '@/config/searchboxConfig';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import Config for the header
@@ -32,16 +31,17 @@ import { personaConfig } from '@/config/personaConfig';
 import { segmentConfig } from '@/config/segmentConfig';
 import useStoreCartToLocalStorage from '@/hooks/useStoreCartToLocalStorage';
 import { useEffect } from 'react';
-import { useRef } from 'react';
 
 //Import config from helped navigation
 import { cartClick } from '@/config/cartFunctions';
+import { windowSize } from '@/hooks/useScreenSize';
 
-const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
+const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
   // Recoil State
-  const setQueryState = useSetRecoilState(queryAtom);
   const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen);
   const [showCart, setShowCart] = useRecoilState(cartState);
+
+  const { mobile, isDesktop } = useRecoilValue(windowSize);
 
   // navigate is used by React Router
   const navigate = useNavigate();
@@ -151,7 +151,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
               });
 
               // Only used for Mobile view
-              if (tablet || mobile) {
+              if (!isDesktop) {
                 setIsMenuOpen(false);
               }
             }}
@@ -189,7 +189,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
       </li>
       {shouldShowCartIcon && (
         <li
-          className="picto-cart"
+          className={
+            cartOpenValue ? 'picto-cart picto-cart__active' : 'picto-cart'
+          }
           onClick={() => {
             setCartOpenValue(!cartOpenValue);
             {
@@ -198,12 +200,11 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           }}
           ref={cartIcon}
         >
-          {!mobile && <CartPicto />}
-          {mobile && <p>Cart</p>}
+          {!isDesktop ? <p>Cart</p> : <CartPicto />}
           {/* Picto notification up the cart icon */}
-          {showCart?.length > 0 && (
+          {showCart?.length !== 0 && (
             <div className="notification-cart">
-              <p>{sumAllArticles(showCart)}</p>
+              <span>{sumAllArticles(showCart)}</span>
             </div>
           )}
         </li>

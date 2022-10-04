@@ -85,7 +85,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            p {
+            transform: scale(1);
+            span {
               color: $white-color;
             }
           }
@@ -93,6 +94,34 @@
             width: 1.9rem;
             height: 1.9rem;
           }
+
+          body {
+            font: 1em sans-serif;
+            text-align: center;
+        }
+        .stage {
+            border-bottom: 3px solid #444;
+            display: flex;
+            height: 330px;
+            width: 100%;
+        }
+        .box {
+            align-self: flex-end;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            background-color: #F44336;
+            height: 200px;
+            margin: 0 auto 0 auto;
+            transform-origin: bottom;
+            width: 200px;
+            transition: transform 0.3s ease-in-out;
+            
+        }
+        &__active {
+            animation: bounce 0.3s ease-in-out forwards;
+        }
+ 
+    
         }
       }
       .container__header-nav-selectors {
@@ -138,7 +167,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 50vw;
+      width: 60vw;
       height: 100vh;
       z-index: 998;
       background-color: $background-color;
@@ -147,16 +176,26 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
+        justify-content: flex-start;
+        gap: 1.5rem;
         margin-top: 8rem;
-        padding: 1rem;
+        padding: 1rem 2.5rem;
 
         li {
           cursor: pointer;
+          text-align: left;
           p {
             position: relative;
           }
         }
+        .container__header-nav-selectors{
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: 1.5rem;
+        }
+       
         .selected {
           &::before {
             content: '';
@@ -174,8 +213,16 @@
       display: flex;
       .notification-cart {
         margin-left: 1rem;
-        p {
-          color: $second-color;
+        background-color: $second-color;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          color: $background-color;
           font-weight: 600;
         }
       }
@@ -190,4 +237,17 @@
   .hamburger-inactive {
     @include hamburger-menu-inactive;
   }
+}
+
+
+@keyframes bounce {
+0%{
+  transform: scale(0.90);
+}
+50%{
+  transform: scale(1.02);
+}
+100%{
+  transform: scale(1);
+}
 }

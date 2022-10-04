@@ -31,9 +31,8 @@ const HitsCarousel = ({ hit, index }) => {
     price: priceForTotal,
   } = hitsConfig;
   const [hovered, setHovered] = useState(false);
+  const [cartLogoClicked, setCartLogoClicked] = useState(false);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
-  const [cart, setCart] = useRecoilState(cartState);
-  const [removed, setRemoved] = useRecoilState(removedItem);
 
   // Navigate is used by React Router
   const navigate = useNavigate();
@@ -85,8 +84,10 @@ const HitsCarousel = ({ hit, index }) => {
           </p>
           {shouldShowCartIcons && (
             <div
-              className="cart"
+              className={cartLogoClicked ? 'cart cart-active' : 'cart'}
               onClick={() => {
+                setCartLogoClicked(true);
+                setTimeout(() => setCartLogoClicked(false), 300);
                 setAddToCartAtom(hit);
                 // Send event conversion to Algolia API
                 useSendAlgoliaEvent({

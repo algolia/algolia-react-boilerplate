@@ -47,7 +47,11 @@
           margin-top: 0.2rem;
         }
       }
+      .picto-active{
+        animation: bounce 0.3s ease-in-out forwards;
+      }
     }
+
 
     .promotedItems {
       border: 1px solid rgb(170, 183, 251);
@@ -83,3 +87,15 @@
 .ais-InfiniteHits-list-tablet {
   grid-template-columns: repeat(2, 1fr) !important;
 }
+
+@keyframes bounce {
+  0%{
+    transform: scale(0.90);
+  }
+  50%{
+    transform: scale(1.02);
+  }
+  100%{
+    transform: scale(1);
+  }
+  }
