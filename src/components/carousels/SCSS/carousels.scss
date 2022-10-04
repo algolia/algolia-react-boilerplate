@@ -87,7 +87,11 @@
               }
               
             }
+            &-active{
+              animation: bounce 0.3s ease-in-out forwards;
+            }
           }
+          
         }
         &__infos-up{
          width: 100%;
@@ -139,5 +143,17 @@
 .carousel::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
+
+@keyframes bounce {
+  0%{
+    transform: scale(0.90);
+  }
+  50%{
+    transform: scale(1.02);
+  }
+  100%{
+    transform: scale(1);
+  }
+  }
 
 
