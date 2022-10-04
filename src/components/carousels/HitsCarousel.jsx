@@ -33,8 +33,6 @@ const HitsCarousel = ({ hit, index }) => {
   const [hovered, setHovered] = useState(false);
   const [cartLogoClicked, setCartLogoClicked] = useState(false);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
-  const [cart, setCart] = useRecoilState(cartState);
-  const [removed, setRemoved] = useRecoilState(removedItem);
 
   // Navigate is used by React Router
   const navigate = useNavigate();
@@ -50,12 +48,12 @@ const HitsCarousel = ({ hit, index }) => {
   return (
     <div
       className="item"
-      // onMouseEnter={() => {
-      //   setHovered(true);
-      // }}
-      // onMouseLeave={() => {
-      //   setHovered(false);
-      // }}
+      onMouseEnter={() => {
+        setHovered(true);
+      }}
+      onMouseLeave={() => {
+        setHovered(false);
+      }}
     >
       <div
         className={`${

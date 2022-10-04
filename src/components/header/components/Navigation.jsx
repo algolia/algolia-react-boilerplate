@@ -1,7 +1,5 @@
 // Render the navigation menu in the header
 
-import { useState } from 'react';
-
 // React Router
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 // Recoil Header State
