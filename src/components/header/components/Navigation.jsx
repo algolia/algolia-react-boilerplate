@@ -103,7 +103,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
       setShowCart(savedCart);
     }
   }, []);
-
+  console.log(showCart);
   const sumAllArticles = (cart) => {
     let x = 0;
     cart.map((i, index) => {
@@ -204,7 +204,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           {!mobile && <CartPicto />}
           {mobile && <p>Cart</p>}
           {/* Picto notification up the cart icon */}
-          {showCart?.length > 0 && (
+          {showCart?.length !== 0 && (
             <div className="notification-cart">
               <span>{sumAllArticles(showCart)}</span>
             </div>

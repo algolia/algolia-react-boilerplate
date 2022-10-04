@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 // Recoil Header State
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
+import { motion } from 'framer-motion';
+
 // eslint-disable-next-line import/order
 import { queryAtom } from '@/config/searchboxConfig';
 
@@ -103,7 +105,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
 
 const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
   return (
-    <div
+    <motion.div
       className="container-mobile__navList"
       initial={{ opacity: 0, x: -100 }}
       animate={{ opacity: 1, x: 0 }}
@@ -115,7 +117,7 @@ const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         mobile={mobile}
         tablet={tablet}
       />
-    </div>
+    </motion.div>
   );
 };
 
