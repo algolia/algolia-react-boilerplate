@@ -24,6 +24,12 @@
     justify-content: center;
   }
 
+  .uic-HorizontalSlider-list{
+    padding: 1rem 1rem;
+    grid-auto-columns: 20%;
+    
+  }
+
   .auc-Recommend-title {
     display: none;
     font-weight: bold;
@@ -39,6 +45,7 @@
       $second-color,
       $second-color,
       $second-color );
+      position: relative;
 
       &__infos{
         @include productName($grey-dark-color);
@@ -54,7 +61,18 @@
 }
 
 // ------------------------------------------
-// TRENDING
+// MOBILE
 // ------------------------------------------
 
+.recommend-mobile{
+  .uic-HorizontalSlider-list{
+    grid-auto-columns: 40%;  
+  }
+}
+
+@media (max-width: 460px) {
+  .uic-HorizontalSlider-list{
+    grid-auto-columns: 60% !important;  
+  }
+}
 

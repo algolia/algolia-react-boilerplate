@@ -103,7 +103,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
       setShowCart(savedCart);
     }
   }, []);
-  console.log(showCart);
+
   const sumAllArticles = (cart) => {
     let x = 0;
     cart.map((i, index) => {

@@ -237,14 +237,16 @@
     transition: transform 0.3s ease-in-out;
     transform: translateX(0%);
   }
+
+
 }
 
-@media only screen and (max-width: 480px) {
-  .uic-HorizontalSlider-list {
-    gap: 6.5rem !important;
+// @media only screen and (max-width: 480px) {
+//   .uic-HorizontalSlider-list {
 
-    li {
-      width: fit-content;
-    }
-  }
-}
+//     li {
+//       width: fit-content;
+//       height: auto;
+//     }
+//   }
+// }
