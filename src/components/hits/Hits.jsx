@@ -58,6 +58,8 @@ const Hit = ({ hit }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
+  const [cartPictoMinusClicked, setCartPictoMinusClicked] = useState(false);
+  const [cartPictoPlusClicked, setCartPictoPlusClicked] = useState(false);
   // Qty state
   const [itemQty, setItemQty] = useState(0);
   // Import Cart State
@@ -206,7 +208,12 @@ const Hit = ({ hit }) => {
             {shouldShowCartIcons && (
               <div className="srpItem__infosDown__cart">
                 <div
+                  className={`${
+                    itemQty === 0 && 'srpItem__infosDown__minusPicto-inactive '
+                  }${cartPictoMinusClicked && 'picto-active'}`}
                   onClick={() => {
+                    setCartPictoMinusClicked(true);
+                    setTimeout(() => setCartPictoMinusClicked(false), 300);
                     setRemoveToCartAtom(hit);
                   }}
                 >
@@ -220,7 +227,10 @@ const Hit = ({ hit }) => {
                   {itemQty}
                 </p>
                 <div
+                  className={cartPictoPlusClicked && 'picto-active'}
                   onClick={() => {
+                    setCartPictoPlusClicked(true);
+                    setTimeout(() => setCartPictoPlusClicked(false), 300);
                     setAddToCartAtom(hit);
                     // Send event conversion to Algolia API
                     useSendAlgoliaEvent({

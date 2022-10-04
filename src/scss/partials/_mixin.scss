@@ -321,7 +321,7 @@
       width: 40%;
       &-inactive{
         font-weight: 300 !important;
-        color: $grey-dark-color-60 !important;
+        color: $grey-light-color !important;
       }
       p {
         @include p-text($main-color, 500);
@@ -330,6 +330,15 @@
         width: 2rem;
       }
     
+    }
+    &__minusPicto-inactive{
+      pointer-events: none;
+      cursor: not-allowed;
+      path{
+        fill: $grey-light-color;
+
+      }
+
     }
   }
 }
