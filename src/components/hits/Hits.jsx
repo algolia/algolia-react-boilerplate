@@ -92,26 +92,27 @@ const Hit = ({ hit }) => {
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
 
   const RankingFormulaOverlay = ({ hit }) => {
+    console.log(hit._rankingInfo);
     return (
-      <div
-        layout
+      <motion.div
         variants={framerMotionHits}
         initial={framerMotionHits.initial}
         exit={framerMotionHits.exit}
         animate={framerMotionHits.animate}
         transition={{
-          duration: 0.8,
-          delay: 0.3,
+          duration: 0.3,
+          delay: 0,
           ease: [0.43, 0.13, 0.23, 0.96],
         }}
         className="ranking-formula"
       >
-        {Object.entries(hit._rankingInfo).map((entry) => (
-          <p>
-            {entry[0]} {JSON.stringify(entry[1])}
-          </p>
-        ))}
-      </div>
+        {hit._rankingInfo &&
+          Object.entries(hit._rankingInfo).map((entry, i) => (
+            <p key={i}>
+              {entry[0]} {JSON.stringify(entry[1])}
+            </p>
+          ))}
+      </motion.div>
     );
   };
 
@@ -221,13 +222,13 @@ const Hit = ({ hit }) => {
                 </div>
                 <p
                   className={
-                    itemQty === 0 && 'srpItem__infosDown__cart-inactive'
+                    itemQty === 0 ? 'srpItem__infosDown__cart-inactive' : ''
                   }
                 >
                   {itemQty}
                 </p>
                 <div
-                  className={cartPictoPlusClicked && 'picto-active'}
+                  className={cartPictoPlusClicked ? 'picto-active' : ''}
                   onClick={() => {
                     setCartPictoPlusClicked(true);
                     setTimeout(() => setCartPictoPlusClicked(false), 300);
