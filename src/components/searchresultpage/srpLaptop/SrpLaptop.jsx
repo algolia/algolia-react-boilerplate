@@ -192,6 +192,7 @@ const SrpLaptop = () => {
           <Configure
             hitsPerPage={hitsPerPageNotInjected}
             analytics={false}
+            clickAnalytics={true}
             enablePersonalization={true}
             userToken={userToken}
             personalizationImpact={personalizationImpact}

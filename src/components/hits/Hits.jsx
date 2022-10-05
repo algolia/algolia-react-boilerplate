@@ -91,8 +91,9 @@ const Hit = ({ hit }) => {
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
 
+  const queryID = hit.__queryID;
+
   const RankingFormulaOverlay = ({ hit }) => {
-    console.log(hit._rankingInfo);
     return (
       <motion.div
         variants={framerMotionHits}
@@ -239,7 +240,8 @@ const Hit = ({ hit }) => {
                       userToken: userToken,
                       index: index,
                       hit: hit,
-                      name: 'add-to-cart',
+                      name: 'SRP: Add to cart',
+                      queryID: queryID,
                     });
                   }}
                 >

@@ -91,7 +91,7 @@ const CartModal = () => {
                 type: 'conversion',
                 userToken: userToken,
                 index: index,
-                name: 'add-to-cart',
+                name: 'PDP: Add to cart',
               })
             }
           >

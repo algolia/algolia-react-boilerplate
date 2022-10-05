@@ -95,7 +95,7 @@ const HitsCarousel = ({ hit, index }) => {
                   userToken: userToken,
                   index: index,
                   hit: hit,
-                  name: 'add-to-cart',
+                  name: 'Homepage: Add to cart',
                 });
               }}
             >
