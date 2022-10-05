@@ -7,12 +7,45 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    width: 100%;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    &__mobile {
+      max-width: 1266px;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        width: 90%;
+        justify-content: center;
+      }
+  }
+
+  .columns-wrapper {
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: space-between;
+    &__mobile {
+      display: none;
+    }
+  }
+
+  .footer-column__company-details {
+    flex-direction: column;
+    &__mobile {
+      .footer-widget {
+        margin: 0 auto;
+          display: flex;
+          flex-wrap: wrap;
+        }
+  }
+    
   }
 
   .footer-widget .footer-info ul li {
     font-size: 12px;
-    color: #333;
+    color: $grey-dark-color;
     line-height: 1;
     margin: 0 0 9px;
   }
@@ -25,14 +58,13 @@
     font-size: 12px;
     font-weight: 700;
     margin: 0;
-    // font-family: Montserrat, sans-serif;
-    color: #4a4141;
+    color: $main-color;
 
   }
 
   .footer-widget .footer-map a {
     font-size: 12px;
-    color: #333;
+    color: $grey-dark-color;
     text-decoration: underline;
   }
 
@@ -41,12 +73,11 @@
   }
 
   .footer-widget .footer-list ul li a {
-    color: #333;
+    color: $grey-dark-color;
     font-size: 12px;
     display: block;
     line-height: 1;
     font-weight: 400;
-    // font-family: Montserrat, sans-serif;
   }
 
   .footer {
@@ -59,6 +90,7 @@
     width: 150px;
     object-fit: cover;
     height: 100%;
+    transform: translate(-25px);
   }
 
   .footer-bottom {
@@ -67,8 +99,11 @@
 
   }
 
+  .footer-widget.copyright-2 {
+    align-items: center;
+  }
   .footer-widget.copyright-2 p {
-    color: #333;
+    color: $grey-dark-color;
     font-size: 12px;
     margin: 0;
   }
@@ -80,10 +115,10 @@
 
   .row {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
+    justify-content: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    
   }
 
   .subscribe-form-2 .mc-form-2 {
@@ -95,7 +130,7 @@
     width: 16rem;
     border: none;
     border-bottom: 1px solid #e7e7e7;
-    color: #333;
+    color: $grey-dark-color;
     padding: 5px 60px 5px 10px;
     height: 43px;
     font-size: 12px;
@@ -112,7 +147,7 @@
     padding: 0;
     background-color: transparent;
     border: none;
-    color: #262626;
+    color: $main-color;
     font-weight: 700;
     font-size: 12px;
     height: 43px;
