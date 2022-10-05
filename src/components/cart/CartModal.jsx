@@ -15,6 +15,9 @@ import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 import { windowSize } from '@/hooks/useScreenSize';
 import { framerMotionTransition } from '@/config/animationConfig';
 import { ChevronRight } from '@/assets/svg/SvgIndex';
+import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+import { personaSelectedAtom } from '@/config/personaConfig';
+import { mainIndex } from '@/config/algoliaEnvConfig';
 
 const CartModal = () => {
   // Import all recoil states to show modal + Cart stored and Removed articles
@@ -25,6 +28,11 @@ const CartModal = () => {
   const cartIcon = useRecoilValue(cartClick);
 
   const { isDesktop } = useRecoilValue(windowSize);
+
+  // personalisation user token
+  const userToken = useRecoilValue(personaSelectedAtom);
+  // Get the main index
+  const index = useRecoilValue(mainIndex);
 
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false));
@@ -78,10 +86,14 @@ const CartModal = () => {
           </a>
           <a
             className="modal-container__checkout"
-            onClick={() => {
-              setCartValue([]);
-              localStorage.removeItem('myCart');
-            }}
+            onClick={() =>
+              useSendAlgoliaEvent({
+                type: 'conversion',
+                userToken: userToken,
+                index: index,
+                name: 'add-to-cart',
+              })
+            }
           >
             <p>Checkout</p>
             <ChevronRight />
