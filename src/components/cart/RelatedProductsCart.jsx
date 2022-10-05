@@ -27,7 +27,7 @@ const RelatedProductsCart = ({ objectIds }) => {
   const { recommendations } = useRelatedProducts({
     recommendClient,
     indexName,
-    maxRecommendations: 4,
+    maxRecommendations: 3,
     objectIDs: objectIds,
   });
 
