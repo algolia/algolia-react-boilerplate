@@ -35,7 +35,7 @@ const RelatedProductsCart = ({ objectId }) => {
 
   return (
     <>
-      {relatedRecommendationsProducts.length && (
+      {relatedRecommendationsProducts.length ? (
         <div className="recommend-cart">
           <h3 className="title">{t('relatedTitle')}</h3>
           <HorizontalSlider
@@ -43,6 +43,8 @@ const RelatedProductsCart = ({ objectId }) => {
             items={relatedRecommendationsProducts}
           />
         </div>
+      ) : (
+        ''
       )}
     </>
   );

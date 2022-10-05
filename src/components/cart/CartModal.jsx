@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ArticlesCard from './ArticlesCard';
 
 import { cartOpen, cartState } from '@/config/cartFunctions';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { useEffect, useRef } from 'react';
 import './SCSS/cartModal.scss';
@@ -23,7 +23,7 @@ import './SCSS/cartModal.scss';
 const CartModal = ({ mobile }) => {
   // Import all recoil states to show modal + Cart stored and Removed articles
   const [showCart, setShowCart] = useRecoilState(cartOpen);
-  const cartValue = useRecoilValue(cartState);
+  const [cartValue, setCartValue] = useRecoilState(cartState);
   const [objectId, setObjectId] = useState('');
   // Use ref on click modal and on cart icon + hamburger
   const cartModal = useRef();
@@ -38,8 +38,10 @@ const CartModal = ({ mobile }) => {
 
   // Store the last object id added in the cart to use for recommend
   useEffect(() => {
-    const lastObjectId = cartValue[cartValue.length - 1].objectID.toString();
-    setObjectId(lastObjectId);
+    if (cartValue.length) {
+      const lastObjectId = cartValue[cartValue.length - 1].objectID.toString();
+      setObjectId(lastObjectId);
+    }
   }, [cartValue]);
 
   return (
