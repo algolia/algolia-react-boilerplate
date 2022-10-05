@@ -21,14 +21,14 @@ const RelatedProductsCart = ({ objectIds }) => {
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
   });
-  
+
   let relatedRecommendationsProducts;
 
   const { recommendations } = useRelatedProducts({
     recommendClient,
     indexName,
     maxRecommendations: 4,
-    objectIDs: objectId,
+    objectIDs: objectIds,
   });
 
   return (
