@@ -22,7 +22,7 @@ const RelatedProductsCart = ({ objectIds }) => {
     keyPrefix: 'pdp',
   });
 
-  let relatedRecommendationsProducts;
+  // let relatedRecommendationsProducts;
 
   const { recommendations } = useRelatedProducts({
     recommendClient,
