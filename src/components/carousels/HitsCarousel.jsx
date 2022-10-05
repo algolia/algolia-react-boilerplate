@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import get from 'lodash/get';
-import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+// import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
 import Price from '../hits/components/Price';
@@ -90,13 +90,13 @@ const HitsCarousel = ({ hit, index }) => {
                 setTimeout(() => setCartLogoClicked(false), 300);
                 setAddToCartAtom(hit);
                 // Send event conversion to Algolia API
-                useSendAlgoliaEvent({
-                  type: 'conversion',
-                  userToken: userToken,
-                  index: index,
-                  hit: hit,
-                  name: 'Homepage: Add to cart',
-                });
+                // useSendAlgoliaEvent({
+                //   type: 'conversion',
+                //   userToken: userToken,
+                //   index: index,
+                //   hit: hit,
+                //   name: 'Homepage: Add to cart',
+                // });
               }}
             >
               <CartPicto />

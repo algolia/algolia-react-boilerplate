@@ -55,7 +55,7 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 import { windowSize } from '@/hooks/useScreenSize';
 
 // Send an insights event to algolia
-import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+// import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
 //Import scope SCSS
 import './SCSS/productDetails.scss';
@@ -305,15 +305,15 @@ const ProductDetails = () => {
                   setAddToCartAtom(hit);
                   setAddToCartIsClicked(true);
                   setTimeout(() => setAddToCartIsClicked(false), 300);
-                  triggerAlert('Sending add to cart event to Algolia'),
-                    // Send event conversion to Algolia API
-                    useSendAlgoliaEvent({
-                      type: 'conversion',
-                      userToken: userToken,
-                      index: index,
-                      hit: hit,
-                      name: 'add-to-cart',
-                    });
+                  triggerAlert('Sending add to cart event to Algolia');
+                  // Send event conversion to Algolia API
+                  // useSendAlgoliaEvent({
+                  //   type: 'conversion',
+                  //   userToken: userToken,
+                  //   index: index,
+                  //   hit: hit,
+                  //   name: 'add-to-cart',
+                  // });
                 }}
               >
                 <CartPicto />

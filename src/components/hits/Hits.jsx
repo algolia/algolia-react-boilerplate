@@ -52,9 +52,10 @@ import './SCSS/hits.scss';
 // Used to send insights event on add to cart
 import { mainIndex } from '@/config/algoliaEnvConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
-import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
-const Hit = ({ hit }) => {
+// import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+
+const Hit = ({ hit, sendEvent }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
@@ -91,8 +92,6 @@ const Hit = ({ hit }) => {
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
 
-  const queryID = hit.__queryID;
-
   const RankingFormulaOverlay = ({ hit }) => {
     return (
       <motion.div
@@ -118,6 +117,8 @@ const Hit = ({ hit }) => {
   };
 
   const promoted = hit?._rankingInfo?.promoted;
+
+  // aa('setUserToken', userToken);
 
   // Update the qty for a product on SRP each time Cart is modified or set qty to 0
   const updateQty = (article) => {
@@ -235,14 +236,15 @@ const Hit = ({ hit }) => {
                     setTimeout(() => setCartPictoPlusClicked(false), 300);
                     setAddToCartAtom(hit);
                     // Send event conversion to Algolia API
-                    useSendAlgoliaEvent({
-                      type: 'conversion',
-                      userToken: userToken,
-                      index: index,
-                      hit: hit,
-                      name: 'SRP: Add to cart',
-                      queryID: queryID,
-                    });
+                    sendEvent('conversion', hit, 'SRP: Add to cart', userToken);
+                    // useSendAlgoliaEvent({
+                    //   type: 'conversion',
+                    //   userToken: userToken,
+                    //   index: index,
+                    //   hit: hit,
+                    //   name: 'SRP: Add to cart',
+                    //   queryID: queryID,
+                    // });
                   }}
                 >
                   <PlusPicto />

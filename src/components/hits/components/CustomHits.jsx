@@ -14,7 +14,12 @@ import { Hit } from '../Hits';
 
 function CustomHits(props) {
   // If hits were not provided via props, we will use the ones from the IS hook (see footnote)
-  const { hits: hookHits, isLastPage, showMore } = useInfiniteHits(props);
+  const {
+    hits: hookHits,
+    isLastPage,
+    showMore,
+    sendEvent,
+  } = useInfiniteHits(props);
   const { mobile, tablet } = useRecoilValue(windowSize);
   const [hits, setHits] = useState([]);
   const hitsState = useRecoilValue(hitsAtom);
@@ -86,7 +91,11 @@ function CustomHits(props) {
           }
           return (
             <li key={hit.objectID}>
-              {hitsLoaded ? <Hit hit={hit} /> : <CustomSkeleton type="hit" />}
+              {hitsLoaded ? (
+                <Hit hit={hit} sendEvent={sendEvent} />
+              ) : (
+                <CustomSkeleton type="hit" />
+              )}
             </li>
           );
           // Note: it's not good practice to use the item index as key, because that may cause the renderer

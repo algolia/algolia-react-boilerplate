@@ -5,6 +5,7 @@ import { Configure, InstantSearch } from 'react-instantsearch-hooks-web';
 
 // Algolia API client
 import { searchClient } from './config/algoliaEnvConfig';
+import { InsightsMiddleware } from './config/algoliaInsightEvents';
 
 // Framer-Motion
 import { AnimatePresence } from 'framer-motion';
@@ -94,6 +95,7 @@ export const Main = () => {
 
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
+      <InsightsMiddleware />
       {shouldShowNetworkErrors && <SearchErrorToast />}
 
       <div className="mainWrapper">

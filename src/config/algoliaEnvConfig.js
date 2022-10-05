@@ -5,7 +5,16 @@
 import algoliarecommend from '@algolia/recommend';
 import algoliasearch from 'algoliasearch';
 import { atom, selector } from 'recoil';
-import aa from 'search-insights';
+// import aa from 'search-insights';
+import { createInsightsMiddleware } from 'instantsearch.js/es/middlewares';
+import { useInstantSearch } from 'react-instantsearch-hooks-web';
+import { useLayoutEffect } from 'react';
+
+
+
+
+
+
 
 // ADJUST THE APIKEY AND APPID TO YOUR OWN
 export const searchClientCreds = {
@@ -50,10 +59,11 @@ export const recommendClient = algoliarecommend(
 );
 
 // Initialise insights client
-aa('init', {
-  appId: searchClientCreds.appID,
-  apiKey: searchClientCreds.writeOrAdminApiKey,
-});
+// aa('init', {
+//   appId: searchClientCreds.appID,
+//   apiKey: searchClientCreds.writeOrAdminApiKey,
+// });
 
 // Export an active insights client
-export const insightsClient = aa;
+// export const insightsClient = aa;
+

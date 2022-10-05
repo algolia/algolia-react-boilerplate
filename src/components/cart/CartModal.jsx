@@ -15,7 +15,7 @@ import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 import { windowSize } from '@/hooks/useScreenSize';
 import { framerMotionTransition } from '@/config/animationConfig';
 import { ChevronRight } from '@/assets/svg/SvgIndex';
-import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+// import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 import { personaSelectedAtom } from '@/config/personaConfig';
 import { mainIndex } from '@/config/algoliaEnvConfig';
 
