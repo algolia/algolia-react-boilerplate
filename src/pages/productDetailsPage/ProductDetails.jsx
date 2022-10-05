@@ -95,8 +95,6 @@ const ProductDetails = () => {
   // current Object ID from URL
   const currentObjectID = location.pathname.split('/')[3];
 
-  const [removed, setRemoved] = useRecoilState(removedItem);
-
   // if there is no stored hit
   useEffect(() => {
     if (Object.keys(hit).length === 0) {

@@ -99,45 +99,45 @@ export const Main = () => {
         <AnimatePresence>
           {showDemoGuide && <DemoGuide setshowDemoGuide={setshowDemoGuide} />}
         </AnimatePresence>
-        <AnimatePresence initial={true}>
-          <Routes key={location.pathname} location={location}>
-            <Route
-              path="/"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <HomePage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/search"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <SearchResultsPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/search/:categories"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <SearchResultsPage />
-                </Suspense>
-              }
-            />
-            {/* objectID is the unique identifier for an algolia record */}
-            <Route
-              path="/search/product/:objectID"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <ProductDetails />
-                </Suspense>
-              }
-            />
-          </Routes>
-          {/* To avoid CLS, load in the footer after the carousels render */}
-          {carouselLoaded && <Footer />}
-        </AnimatePresence>
+        {/* <AnimatePresence initial={true}> */}
+        <Routes key={location.pathname} location={location}>
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<Loader />}>
+                <HomePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SearchResultsPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/search/:categories"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SearchResultsPage />
+              </Suspense>
+            }
+          />
+          {/* objectID is the unique identifier for an algolia record */}
+          <Route
+            path="/search/product/:objectID"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ProductDetails />
+              </Suspense>
+            }
+          />
+        </Routes>
+        {/* To avoid CLS, load in the footer after the carousels render */}
+        {carouselLoaded && <Footer />}
+        {/* </AnimatePresence> */}
         {shouldShowAlertAtom && (
           <Suspense fallback={''}>
             <AlertNavigation />
