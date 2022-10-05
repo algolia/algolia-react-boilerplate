@@ -11,7 +11,7 @@ import { useRecoilValue } from 'recoil';
 // Import and use translation
 import { useTranslation } from 'react-i18next';
 
-const RelatedProductsCart = ({ objectId }) => {
+const RelatedProductsCart = ({ objectIds }) => {
   // access the main index from recoil state
   const indexName = useRecoilValue(mainIndex);
 
@@ -21,23 +21,20 @@ const RelatedProductsCart = ({ objectId }) => {
     keyPrefix: 'pdp',
   });
 
-  let relatedRecommendationsProducts;
-
   const { recommendations } = useFrequentlyBoughtTogether({
     recommendClient,
     indexName,
-    objectIDs: objectId,
+    objectIDs: objectIds,
   });
-  relatedRecommendationsProducts = recommendations;
 
   return (
     <>
-      {relatedRecommendationsProducts.length ? (
+      {recommendations.length ? (
         <div className="recommend-cart">
           <h3 className="title">{t('relatedTitle')}</h3>
           <HorizontalSlider
             itemComponent={RelatedItem}
-            items={relatedRecommendationsProducts}
+            items={recommendations}
           />
         </div>
       ) : (
