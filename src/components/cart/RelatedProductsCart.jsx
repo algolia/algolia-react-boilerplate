@@ -3,7 +3,8 @@ import { mainIndex, recommendClient } from '@/config/algoliaEnvConfig';
 // Recommend components
 import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
 import RelatedItem from '../recommend/relatedItems/RelatedProducts';
-import { useFrequentlyBoughtTogether } from '@algolia/recommend-react';
+// Recommend
+import { useRelatedProducts } from '@algolia/recommend-react';
 
 // Recoil
 import { useRecoilValue } from 'recoil';
@@ -23,9 +24,10 @@ const RelatedProductsCart = ({ objectId }) => {
 
   let relatedRecommendationsProducts;
 
-  const { recommendations } = useFrequentlyBoughtTogether({
+  const { recommendations } = useRelatedProducts({
     recommendClient,
     indexName,
+    maxRecommendations: 4,
     objectIDs: objectId,
   });
   relatedRecommendationsProducts = recommendations;
