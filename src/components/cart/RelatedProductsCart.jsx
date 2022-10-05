@@ -29,7 +29,7 @@ const RelatedProductsCart = ({ objectId }) => {
   const { recommendations } = useFrequentlyBoughtTogether({
     recommendClient,
     indexName,
-    objectIDs: [objectId],
+    objectIDs: objectId,
   });
   relatedRecommendationsProducts = recommendations;
 

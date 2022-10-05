@@ -24,7 +24,7 @@ const CartModal = ({ mobile }) => {
   // Import all recoil states to show modal + Cart stored and Removed articles
   const [showCart, setShowCart] = useRecoilState(cartOpen);
   const [cartValue, setCartValue] = useRecoilState(cartState);
-  const [objectId, setObjectId] = useState('');
+  const [objectId, setObjectId] = useState([]);
   // Use ref on click modal and on cart icon + hamburger
   const cartModal = useRef();
   const cartIcon = useRecoilValue(cartClick);
@@ -38,9 +38,13 @@ const CartModal = ({ mobile }) => {
 
   // Store the last object id added in the cart to use for recommend
   useEffect(() => {
+    let objectIdsArray = [];
     if (cartValue.length) {
-      const lastObjectId = cartValue[cartValue.length - 1].objectID.toString();
-      setObjectId(lastObjectId);
+      cartValue.map((object) => {
+        objectIdsArray.push(object.objectID);
+      });
+      console.log(objectIdsArray);
+      setObjectId(objectIdsArray);
     }
   }, [cartValue]);
 

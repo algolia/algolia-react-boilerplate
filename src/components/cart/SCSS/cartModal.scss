@@ -123,8 +123,10 @@
 
 .recommend-cart {
   margin-top: 1rem;
+  .uic-HorizontalSlider-container {
+    display: flex;
+  }
   .uic-HorizontalSlider-list {
-    padding: 1rem 1rem;
     gap: 1rem;
     grid-auto-columns: 19%;
     display: flex;
@@ -135,6 +137,9 @@
     padding: 0;
     &__imgWrapper {
       margin: 0;
+      &__heart {
+        display: none;
+      }
     }
 
     &__infos {
@@ -152,6 +157,9 @@
       .relatedItem__infosUp {
         .productName {
           text-align: center;
+          span {
+            font-size: 0.7rem;
+          }
         }
       }
     }
