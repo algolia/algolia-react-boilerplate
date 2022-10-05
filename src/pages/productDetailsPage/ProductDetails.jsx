@@ -24,7 +24,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // SVG & components
-import { ChevronLeft } from '@/assets/svg/SvgIndex';
+import { ChevronLeft, CartPicto } from '@/assets/svg/SvgIndex';
 import Price from '@/components/hits/components/Price.jsx';
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
 // In case of img loading error
@@ -71,6 +71,8 @@ const ProductDetails = () => {
   // For alert on sending add to cart event
   const setAlert = useSetRecoilState(alertContent);
   const setAlertOpen = useSetRecoilState(isAlertOpen);
+
+  const [addToCartIsClicked, setAddToCartIsClicked] = useState(false);
 
   const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
 
@@ -192,9 +194,9 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-      {shouldShowCartIcon && showCart && (
+      {/* {shouldShowCartIcon && showCart && (
         <CartModal isDesktop={isDesktop} mobile={mobile} />
-      )}
+      )} */}
       <div className={`${!isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'}`}>
         <div
           className={`${!isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'}`}
@@ -303,9 +305,15 @@ const ProductDetails = () => {
             )}
             {!PDPHitSections.sizeFilter && (
               <motion.button
-                className="add-to-cart"
+                className={
+                  addToCartIsClicked
+                    ? 'add-to-cart add-to-cart-active'
+                    : 'add-to-cart'
+                }
                 onClick={() => {
                   setAddToCartAtom(hit);
+                  setAddToCartIsClicked(true);
+                  setTimeout(() => setAddToCartIsClicked(false), 300);
                   triggerAlert('Sending add to cart event to Algolia'),
                     // Send event conversion to Algolia API
                     useSendAlgoliaEvent({
@@ -317,7 +325,7 @@ const ProductDetails = () => {
                     });
                 }}
               >
-                <i className="fa-solid fa-shopping-cart"></i>
+                <CartPicto />
                 <p>{t('addToCartButton')}</p>
               </motion.button>
             )}

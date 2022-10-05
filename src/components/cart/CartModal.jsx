@@ -1,7 +1,9 @@
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { motion } from 'framer-motion';
+
 import ArticlesCard from './ArticlesCard';
 
 import { cartOpen, cartState } from '@/config/cartFunctions';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 //Import scope SCSS
 import { useRef } from 'react';
@@ -10,8 +12,10 @@ import './SCSS/cartModal.scss';
 //Import config from helped navigation
 import { cartClick } from '@/config/cartFunctions';
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
+import { windowSize } from '@/hooks/useScreenSize';
+import { framerMotionTransition } from '@/config/animationConfig';
 
-const CartModal = ({ mobile }) => {
+const CartModal = () => {
   // Import all recoil states to show modal + Cart stored and Removed articles
   const [showCart, setShowCart] = useRecoilState(cartOpen);
   const [cartValue, setCartValue] = useRecoilState(cartState);
@@ -19,17 +23,25 @@ const CartModal = ({ mobile }) => {
   const cartModal = useRef();
   const cartIcon = useRecoilValue(cartClick);
 
+  const { mobile, isDesktop } = useRecoilValue(windowSize);
+
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false));
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, x: '120%' }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: '100%' }}
+      transition={framerMotionTransition}
       className={`${
-        mobile ? 'modal-container-mobile modal-container' : 'modal-container'
-      } ${showCart ? 'modal-container-active' : ''}`}
+        !isDesktop
+          ? 'modal-container-mobile modal-container'
+          : 'modal-container'
+      }`}
       ref={cartModal}
     >
-      {mobile && (
+      {!isDesktop && (
         <a
           className="modal-container-mobile__close"
           onClick={() => {
@@ -63,7 +75,7 @@ const CartModal = ({ mobile }) => {
           Empty my cart
         </a>
       )}
-    </div>
+    </motion.div>
   );
 };
 

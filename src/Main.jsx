@@ -24,7 +24,10 @@ import {
   shouldShowAlert,
   showNetworkErorrs,
 } from '@/config/demoGuideConfig';
-import { shouldHaveDemoGuide } from '@/config/featuresConfig';
+import {
+  shouldHaveCartFunctionality,
+  shouldHaveDemoGuide,
+} from '@/config/featuresConfig';
 import { isCarouselLoaded } from './config/carouselConfig';
 
 // Import Pages and static components
@@ -55,6 +58,9 @@ import SearchErrorToast from './utils/ErrorHandler';
 import Loader from './components/loader/Loader';
 
 import clamp from './utils/clampCalcFunction';
+import { cartOpen } from './config/cartFunctions';
+// import CartModal from './components/cart/CartModal';
+const CartModal = lazy(() => import('./components/cart/CartModal'));
 
 export const Main = () => {
   // Index to make the main search queries to
@@ -84,6 +90,9 @@ export const Main = () => {
   // Value that shows Network Errors to Guide you to the correct Configuration
   const shouldShowNetworkErrors = useRecoilValue(showNetworkErorrs);
 
+  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
+  const showCart = useRecoilValue(cartOpen);
+
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
 
@@ -98,6 +107,11 @@ export const Main = () => {
         {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
         <AnimatePresence>
           {showDemoGuide && <DemoGuide setshowDemoGuide={setshowDemoGuide} />}
+          {shouldShowCartIcon && showCart && (
+            <Suspense fallback={''}>
+              <CartModal />
+            </Suspense>
+          )}
         </AnimatePresence>
         {/* <AnimatePresence initial={true}> */}
         <Routes key={location.pathname} location={location}>
