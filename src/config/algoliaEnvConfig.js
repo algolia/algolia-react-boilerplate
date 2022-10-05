@@ -58,11 +58,7 @@ export const recommendClient = algoliarecommend(
   searchClientCreds.APIKey
 );
 
-// Initialise insights client
-// aa('init', {
-//   appId: searchClientCreds.appID,
-//   apiKey: searchClientCreds.writeOrAdminApiKey,
-// });
+
 
 // Export an active insights client
 // export const insightsClient = aa;

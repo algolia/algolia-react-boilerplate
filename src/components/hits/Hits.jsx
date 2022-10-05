@@ -236,7 +236,7 @@ const Hit = ({ hit, sendEvent }) => {
                     setTimeout(() => setCartPictoPlusClicked(false), 300);
                     setAddToCartAtom(hit);
                     // Send event conversion to Algolia API
-                    sendEvent('conversion', hit, 'SRP: Add to cart', userToken);
+                    sendEvent('conversion', hit, 'SRP: Add to cart');
                     // useSendAlgoliaEvent({
                     //   type: 'conversion',
                     //   userToken: userToken,
