@@ -14,6 +14,7 @@ import { cartClick } from '@/config/cartFunctions';
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 import { windowSize } from '@/hooks/useScreenSize';
 import { framerMotionTransition } from '@/config/animationConfig';
+import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 const CartModal = () => {
   // Import all recoil states to show modal + Cart stored and Removed articles
@@ -65,15 +66,27 @@ const CartModal = () => {
       })}
       {cartValue.length === 0 && <p>Your cart is empty</p>}
       {cartValue.length !== 0 && (
-        <a
-          className="modal-container__button"
-          onClick={() => {
-            setCartValue([]);
-            localStorage.removeItem('myCart');
-          }}
-        >
-          Empty my cart
-        </a>
+        <div className="modal-container__buttons">
+          <a
+            className="modal-container__emptyCart"
+            onClick={() => {
+              setCartValue([]);
+              localStorage.removeItem('myCart');
+            }}
+          >
+            <p>Empty my cart</p>
+          </a>
+          <a
+            className="modal-container__checkout"
+            onClick={() => {
+              setCartValue([]);
+              localStorage.removeItem('myCart');
+            }}
+          >
+            <p>Checkout</p>
+            <ChevronRight />
+          </a>
+        </div>
       )}
     </motion.div>
   );
