@@ -8,9 +8,6 @@ import { useFrequentlyBoughtTogether } from '@algolia/recommend-react';
 // Recoil
 import { useRecoilValue } from 'recoil';
 
-// State of cart
-import { cartState } from '@/config/cartFunctions';
-
 // Import and use translation
 import { useTranslation } from 'react-i18next';
 

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ArticlesCard from './ArticlesCard';
 
 import { cartOpen, cartState } from '@/config/cartFunctions';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { useEffect, useRef } from 'react';
 import './SCSS/cartModal.scss';
@@ -38,13 +38,8 @@ const CartModal = ({ mobile }) => {
 
   // Store the last object id added in the cart to use for recommend
   useEffect(() => {
-    let objectIdsArray = [];
     if (cartValue.length) {
-      cartValue.map((object) => {
-        objectIdsArray.push(object.objectID);
-      });
-      console.log(objectIdsArray);
-      setObjectId(objectIdsArray);
+      setObjectId(cartValue.reduce((accum, obj) => [...accum, obj.objectID], []));
     }
   }, [cartValue]);
 
@@ -89,7 +84,7 @@ const CartModal = ({ mobile }) => {
           Empty my cart
         </a>
       )}
-      {shouldHaveRelatedProductsValue && objectId && (
+      {shouldHaveRelatedProductsValue && objectId && cartValue.length !== 0 && (
         <RelatedProductsCart objectId={objectId} />
       )}
     </div>
