@@ -40,15 +40,14 @@ import CustomAppliedRules from './components/appliedRules/AppliedRules';
 import Footer from './components/footer/Footer';
 import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
 const HomePage = lazy(() => import('./pages/homepage/HomePage'));
-// import HomePage from './pages/homepage/HomePage';
-// import ProductDetails from './pages/productDetailsPage/ProductDetails';
 const ProductDetails = lazy(() =>
   import('./pages/productDetailsPage/ProductDetails')
 );
 const SearchResultsPage = lazy(() =>
   import('./pages/searchResultPage/SearchResultsPage')
 );
-// import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
+
+const CartModal = lazy(() => import('./components/cart/CartModal'));
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
@@ -57,10 +56,7 @@ import usePreventScrolling from './hooks/usePreventScrolling';
 import SearchErrorToast from './utils/ErrorHandler';
 import Loader from './components/loader/Loader';
 
-import clamp from './utils/clampCalcFunction';
 import { cartOpen } from './config/cartFunctions';
-// import CartModal from './components/cart/CartModal';
-const CartModal = lazy(() => import('./components/cart/CartModal'));
 
 export const Main = () => {
   // Index to make the main search queries to

@@ -23,7 +23,7 @@ const CartModal = () => {
   const cartModal = useRef();
   const cartIcon = useRecoilValue(cartClick);
 
-  const { mobile, isDesktop } = useRecoilValue(windowSize);
+  const { isDesktop } = useRecoilValue(windowSize);
 
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false));

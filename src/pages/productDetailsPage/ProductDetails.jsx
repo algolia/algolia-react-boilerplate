@@ -42,7 +42,6 @@ import {
 import { addToCartSelector, cartOpen } from '@/config/cartFunctions';
 import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 import {
-  shouldHaveCartFunctionality,
   shouldHaveFbtProducts,
   shouldHaveRelatedProducts,
 } from '@/config/featuresConfig';
@@ -64,17 +63,12 @@ import './SCSS/productDetails.scss';
 // Import and use translation
 import { useTranslation } from 'react-i18next';
 
-// Import cart from recoil
-const CartModal = lazy(() => import('@/components/cart/CartModal'));
-
 const ProductDetails = () => {
   // For alert on sending add to cart event
   const setAlert = useSetRecoilState(alertContent);
   const setAlertOpen = useSetRecoilState(isAlertOpen);
 
   const [addToCartIsClicked, setAddToCartIsClicked] = useState(false);
-
-  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
 
   // Function to manage the alert
   const triggerAlert = (content) => {
@@ -137,7 +131,7 @@ const ProductDetails = () => {
   // navigate is used by react router
   const navigate = useNavigate();
 
-  const { isDesktop, mobile } = useRecoilValue(windowSize);
+  const { isDesktop } = useRecoilValue(windowSize);
 
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
 
@@ -194,9 +188,6 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-      {/* {shouldShowCartIcon && showCart && (
-        <CartModal isDesktop={isDesktop} mobile={mobile} />
-      )} */}
       <div className={`${!isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'}`}>
         <div
           className={`${!isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'}`}

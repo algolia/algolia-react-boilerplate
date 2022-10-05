@@ -18,14 +18,11 @@ import { carouselConfig } from '@/config/carouselConfig';
 import CustomHomeBanners from '@/components/banners/HomeBanners';
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
-import { cartOpen } from '@/config/cartFunctions';
-
 //  should federated search be shown or not
 import {
   shouldHaveCarousels,
   shouldHaveFederatedSearch,
   shouldHaveTrendingProducts,
-  shouldHaveCartFunctionality,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { windowSize } from '@/hooks/useScreenSize';
@@ -39,7 +36,6 @@ const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
 const Trending = lazy(() =>
   import('@/components/recommend/trending/TrendingProducts')
 );
-const CartModal = lazy(() => import('@/components/cart/CartModal'));
 // Import scoped SCSS
 import './homepage.scss';
 
@@ -53,7 +49,6 @@ const HomePage = () => {
   const isFederated = useRecoilValue(shouldHaveFederatedSearch);
   const isCarousel = useRecoilValue(shouldHaveCarousels);
   const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch);
-  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
   const HomePage = useRef(false);
 
   // Boolean value which determines if federated search is shown or not, default is false
@@ -61,9 +56,7 @@ const HomePage = () => {
     shouldHaveTrendingProducts
   );
 
-  const { isDesktop, mobile } = useRecoilValue(windowSize);
-  //Import modal opening value
-  const showCart = useRecoilValue(cartOpen);
+  const { mobile } = useRecoilValue(windowSize);
 
   // Import and use translation
   const { t } = useTranslation('translation', {
@@ -73,11 +66,6 @@ const HomePage = () => {
   return (
     // Framer motion wrapper
     <div className="homepage" ref={HomePage}>
-      {/* Cart Modal */}
-      {/* {shouldShowCartIcon && (
-        <CartModal isDesktop={isDesktop} mobile={mobile} />
-      )} */}
-
       {isFederated && isFederatedOpen && (
         <Suspense>
           <FederatedSearch />

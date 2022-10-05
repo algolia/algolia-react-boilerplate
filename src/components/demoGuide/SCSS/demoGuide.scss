@@ -14,7 +14,6 @@
   transform: translateY(-100%);
   z-index: 998;
   overflow: scroll;
-  
 
   h2 {
     @include titleH2($second-color)
