@@ -121,6 +121,46 @@
   }
 }
 
+.recommend-cart {
+  margin-top: 1rem;
+  .uic-HorizontalSlider-list {
+    padding: 1rem 1rem;
+    gap: 1rem;
+    grid-auto-columns: 19%;
+    display: flex;
+  }
+  .relatedItem {
+    @include hit($main-color, $second-color, $second-color, $second-color);
+    position: relative;
+    padding: 0;
+    &__imgWrapper {
+      margin: 0;
+    }
+
+    &__infos {
+      @include productName($grey-dark-color);
+
+      .brand {
+        @include brand($main-color);
+        text-align: center;
+      }
+      .price {
+        @include price($second-color);
+        text-align: center;
+        font-size: 0.9rem;
+      }
+      .relatedItem__infosUp {
+        .productName {
+          text-align: center;
+        }
+      }
+    }
+  }
+  .title {
+    @include titleH3();
+  }
+}
+
 // ------------------------------------------
 // MOBILE
 // ------------------------------------------

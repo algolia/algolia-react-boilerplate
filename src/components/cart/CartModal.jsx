@@ -10,6 +10,7 @@ import './SCSS/cartModal.scss';
 //Import config from helped navigation
 import { cartClick } from '@/config/cartFunctions';
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
+import RelatedProductsCart from './RelatedProductsCart';
 
 const CartModal = ({ mobile }) => {
   // Import all recoil states to show modal + Cart stored and Removed articles
@@ -63,6 +64,7 @@ const CartModal = ({ mobile }) => {
           Empty my cart
         </a>
       )}
+      <RelatedProductsCart />
     </div>
   );
 };
