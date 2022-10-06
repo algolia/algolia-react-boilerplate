@@ -121,9 +121,13 @@ const CartModal = () => {
           </a>
         </div>
       )}
-      {shouldHaveRelatedProductsValue &&
-        objectIds &&
-        cartValue.length !== 0 && <RelatedProductsCart objectIds={objectIds} />}
+      <div className="modal-container__recommend">
+        {shouldHaveRelatedProductsValue &&
+          objectIds &&
+          cartValue.length !== 0 && (
+            <RelatedProductsCart objectIds={objectIds} />
+          )}
+      </div>
     </motion.div>
   );
 };

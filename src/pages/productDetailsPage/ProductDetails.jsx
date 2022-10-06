@@ -114,12 +114,6 @@ const ProductDetails = () => {
     }
   }, []);
 
-  // personalisation user token
-  const userToken = useRecoilValue(personaSelectedAtom);
-
-  // Get the main index
-  const index = useRecoilValue(mainIndex);
-
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
   );
@@ -307,7 +301,6 @@ const ProductDetails = () => {
                   setAddToCartAtom(hit);
                   setAddToCartIsClicked(true);
                   setTimeout(() => setAddToCartIsClicked(false), 300);
-                  triggerAlert('Sending add to cart event to Algolia');
                   // Send event conversion to Algolia API
                   sendEvent('conversion', hit, 'PDP: Add to cart');
                 }}
