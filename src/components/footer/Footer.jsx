@@ -124,7 +124,7 @@ const Footer = (props) => {
                       </div>
                     </div>
                   </div>
-                  <div className="footer-column">
+                  {/* <div className="footer-column">
                     <div className="footer-widget">
                       <div className="widget-title">
                         <h3>PROFILE</h3>
@@ -146,7 +146,7 @@ const Footer = (props) => {
                         </ul>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="footer-column">
                     <div className="footer-widget">
                       <div className="widget-title">
@@ -193,7 +193,7 @@ const Footer = (props) => {
             </div>
           </div>
           <div className="footer-bottom">
-            <div className="custom-container">
+            <div className="custom-container__copyright">
               <div className="footer-widget copyright-2">
                 <p>© 2022 ALGOLIA</p>
               </div>
