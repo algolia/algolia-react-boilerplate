@@ -38,6 +38,13 @@ const resources = {
       searchBox: {
         placeHolder: 'Search...',
       },
+      cartModal: {
+        title: 'My Cart',
+        emptyCart: 'Empty my cart',
+        sizeTitle: 'Size',
+        colorTitle: 'Color',
+        yourCartIsEmpty: 'Your cart is empty',
+      },
     },
   },
   fr: {
@@ -71,6 +78,13 @@ const resources = {
       },
       searchBox: {
         placeHolder: 'Rechercher...',
+      },
+      cartModal: {
+        title: 'Mon panier',
+        emptyCart: 'Vider mon panier',
+        sizeTitle: 'Taille',
+        colorTitle: 'Couleur',
+        yourCartIsEmpty: 'Votre panier est vide',
       },
     },
   },
@@ -108,6 +122,13 @@ const resources = {
       },
       searchBox: {
         placeHolder: 'Forschen...',
+      },
+      cartModal: {
+        title: 'Mein Korb',
+        emptyCart: 'Meinen Einkaufswagen leeren',
+        sizeTitle: 'Schneiden',
+        colorTitle: 'Farbe',
+        yourCartIsEmpty: 'Dein Korb ist leer',
       },
     },
   },

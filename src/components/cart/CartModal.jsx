@@ -12,6 +12,10 @@ import './SCSS/cartModal.scss';
 import { cartClick } from '@/config/cartFunctions';
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 
+
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 // components
 import RelatedProductsCart from './RelatedProductsCart';
 
@@ -19,6 +23,7 @@ import { shouldHaveRelatedProducts } from '@/config/featuresConfig';
 
 //Import scope SCSS
 import './SCSS/cartModal.scss';
+
 
 const CartModal = ({ mobile }) => {
   // Import all recoil states to show modal + Cart stored and Removed articles
@@ -36,12 +41,20 @@ const CartModal = ({ mobile }) => {
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false));
 
+
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'cartModal',
+  });
+
   // Store the last object id added in the cart to use for recommend
   useEffect(() => {
     if (cartValue.length) {
       setObjectIds(cartValue.reduce((accum, obj) => [...accum, obj.objectID], []));
     }
   }, [cartValue]);
+
 
   return (
     <div
@@ -61,7 +74,7 @@ const CartModal = ({ mobile }) => {
         </a>
       )}
       <h3 className="modal-container__title">
-        My Cart{' '}
+        {t('title')}{' '}
         {showCart?.length > 0 && (
           <span className="modal-container__title">({showCart.length})</span>
         )}
@@ -72,7 +85,7 @@ const CartModal = ({ mobile }) => {
           return <ArticlesCard item={item} key={i} />;
         }
       })}
-      {cartValue.length === 0 && <p>Your cart is empty</p>}
+      {cartValue.length === 0 && <p>{t('yourCartIsEmpty')}</p>}
       {cartValue.length !== 0 && (
         <a
           className="modal-container__button"
@@ -81,7 +94,7 @@ const CartModal = ({ mobile }) => {
             localStorage.removeItem('myCart');
           }}
         >
-          Empty my cart
+          {t('emptyCart')}
         </a>
       )}
       {shouldHaveRelatedProductsValue && objectIds && cartValue.length !== 0 && (
