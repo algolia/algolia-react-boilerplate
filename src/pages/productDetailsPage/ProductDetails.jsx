@@ -66,18 +66,8 @@ import { useHits } from 'react-instantsearch-hooks-web';
 
 const ProductDetails = () => {
   const { sendEvent } = useHits();
-  // For alert on sending add to cart event
-  const setAlert = useSetRecoilState(alertContent);
-  const setAlertOpen = useSetRecoilState(isAlertOpen);
 
   const [addToCartIsClicked, setAddToCartIsClicked] = useState(false);
-
-  // Function to manage the alert
-  const triggerAlert = (content) => {
-    setAlertOpen(true);
-    setAlert(content);
-    setTimeout(() => setAlertOpen(false), 5000);
-  };
 
   // location in order to access current objectID
   const location = useLocation();
@@ -150,8 +140,6 @@ const ProductDetails = () => {
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
   });
-
-  const showCart = useRecoilValue(cartOpen);
 
   let fbtRecommendationsProducts;
   let relatedRecommendationsProducts;
