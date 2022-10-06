@@ -12,7 +12,7 @@ function CustomClearRefinements(props) {
       onClick={() => refine('')}
       // disabled={!items}
     >
-      Clear all refinements
+      <p>Clear all refinements</p>
     </button>
   ) : null;
 }
