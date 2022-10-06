@@ -2,18 +2,22 @@
 
 .redirectModal{
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
     background: $white-color;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,;
-    width: 50%;
-    height: 50%;
+    width: 35rem;
+    height: 20rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 999;
+    padding: 1.5rem 2rem;
+    border-radius: 0.5rem;
 
     &__infos{
+        margin-bottom: 2rem;
         p{
             @include p-text($main-color, 500);
             text-align: left;
@@ -47,4 +51,13 @@
         }
     }
 
+}
+
+//__________________________________________________
+// MOBILE
+//__________________________________________________
+
+.redirectModal-mobile{
+    width: 100vw;
+    height: 100vh;
 }
