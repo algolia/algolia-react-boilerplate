@@ -60,7 +60,7 @@ const CartModal = ({ mobile }) => {
           return <ArticlesCard item={item} key={i} />;
         }
       })}
-      {cartValue.length === 0 && <p>{t('emptyCart')}</p>}
+      {cartValue.length === 0 && <p>{t('yourCartIsEmpty')}</p>}
       {cartValue.length !== 0 && (
         <a
           className="modal-container__button"
