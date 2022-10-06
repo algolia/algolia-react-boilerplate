@@ -37,6 +37,7 @@ import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import DemoGuide from '@/components/demoGuide/DemoGuide';
 import Header from '@/components/header/Header';
 import CustomAppliedRules from './components/appliedRules/AppliedRules';
+import Redirect from '@/components/redirects/Redirect';
 
 import Footer from './components/footer/Footer';
 import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
@@ -102,6 +103,7 @@ export const Main = () => {
         {/* TODO: Check if this configure is used for anything */}
         <Configure query={queryState} />
         <Header />
+        <Redirect />
         {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
         <AnimatePresence>
           {showDemoGuide && <DemoGuide setshowDemoGuide={setshowDemoGuide} />}

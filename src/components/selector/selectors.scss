@@ -49,6 +49,7 @@
 
     &:hover {
       @include btn-hover($second-color, $white-color);
+      color: $white-color;
     }
   }
 }

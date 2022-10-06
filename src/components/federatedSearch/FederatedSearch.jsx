@@ -191,7 +191,7 @@ const FederatedSearch = () => {
           </div>
         )}
       </div>
-      <Redirect />
+      {/* <Redirect /> */}
     </div>
   );
 };

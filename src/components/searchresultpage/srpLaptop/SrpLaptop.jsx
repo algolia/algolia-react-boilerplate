@@ -226,7 +226,7 @@ const SrpLaptop = () => {
               <CustomHits />
             </Suspense>
           )}
-          <Redirect />
+          {/* <Redirect /> */}
         </div>
       </div>
     </>
