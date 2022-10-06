@@ -123,7 +123,7 @@ export const languageSwitchConfig = {
         url: '/home',
       },
       {
-        name: 'Summer 22 Collection',
+        name: 'Sommerkollektion 22',
         type: 'context',
         context: 'Summer 22 Collection',
         url: '/summer-22-collection',

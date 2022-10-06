@@ -11,6 +11,9 @@ import './SCSS/cartModal.scss';
 import { cartClick } from '@/config/cartFunctions';
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 const CartModal = ({ mobile }) => {
   // Import all recoil states to show modal + Cart stored and Removed articles
   const [showCart, setShowCart] = useRecoilState(cartOpen);
@@ -21,6 +24,12 @@ const CartModal = ({ mobile }) => {
 
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false));
+
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'cartModal',
+  });
 
   return (
     <div
@@ -40,7 +49,7 @@ const CartModal = ({ mobile }) => {
         </a>
       )}
       <h3 className="modal-container__title">
-        My Cart{' '}
+        {t('title')}{' '}
         {showCart?.length > 0 && (
           <span className="modal-container__title">({showCart.length})</span>
         )}
@@ -60,7 +69,7 @@ const CartModal = ({ mobile }) => {
             localStorage.removeItem('myCart');
           }}
         >
-          Empty my cart
+          {t('emptyCart')}
         </a>
       )}
     </div>

@@ -11,12 +11,21 @@ import {
 } from '@/config/cartFunctions';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 // ArticlesCard in Cart Modal
 
 const ArticlesCard = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
+
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'cartModal',
+  });
 
   // Get hit attribute from config file
   const {
@@ -42,7 +51,7 @@ const ArticlesCard = ({ item }) => {
             {get(item, sizeFilter) && (
               <div className="articles-card__infos__details__size">
                 <p>
-                  Size{' '}
+                  {t('sizeTitle')}{' '}
                   <span>
                     {
                       get(item, sizeFilter)[
@@ -56,7 +65,7 @@ const ArticlesCard = ({ item }) => {
             {get(item, colour) && (
               <div className="articles-card__infos__details__size">
                 <p>
-                  Colour <span>{get(item, colour)}</span>
+                {t('colorTitle')} <span>{get(item, colour)}</span>
                 </p>
               </div>
             )}
