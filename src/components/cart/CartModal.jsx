@@ -1,26 +1,47 @@
+import { useState } from 'react';
+
 import ArticlesCard from './ArticlesCard';
 
 import { cartOpen, cartState } from '@/config/cartFunctions';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
-//Import scope SCSS
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import './SCSS/cartModal.scss';
 
 //Import config from helped navigation
 import { cartClick } from '@/config/cartFunctions';
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 
+// components
+import RelatedProductsCart from './RelatedProductsCart';
+
+import { shouldHaveRelatedProducts } from '@/config/featuresConfig';
+
+//Import scope SCSS
+import './SCSS/cartModal.scss';
+
 const CartModal = ({ mobile }) => {
   // Import all recoil states to show modal + Cart stored and Removed articles
   const [showCart, setShowCart] = useRecoilState(cartOpen);
   const [cartValue, setCartValue] = useRecoilState(cartState);
+  const [objectIds, setObjectIds] = useState([]);
   // Use ref on click modal and on cart icon + hamburger
   const cartModal = useRef();
   const cartIcon = useRecoilValue(cartClick);
 
+  const shouldHaveRelatedProductsValue = useRecoilValue(
+    shouldHaveRelatedProducts
+  );
+
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false));
+
+  // Store the last object id added in the cart to use for recommend
+  useEffect(() => {
+    if (cartValue.length) {
+      setObjectIds(cartValue.reduce((accum, obj) => [...accum, obj.objectID], []));
+    }
+  }, [cartValue]);
 
   return (
     <div
@@ -62,6 +83,9 @@ const CartModal = ({ mobile }) => {
         >
           Empty my cart
         </a>
+      )}
+      {shouldHaveRelatedProductsValue && objectIds && cartValue.length !== 0 && (
+        <RelatedProductsCart objectIds={objectIds} />
       )}
     </div>
   );
