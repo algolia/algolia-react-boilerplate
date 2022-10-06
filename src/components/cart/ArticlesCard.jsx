@@ -13,7 +13,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 
 // ArticlesCard in Cart Modal
 
-const ArticlesCard = ({ item }) => {
+const ArticlesCard = ({ item, sendEvent }) => {
   const [cart, setCart] = useRecoilState(cartState);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
@@ -85,6 +85,7 @@ const ArticlesCard = ({ item }) => {
               <div
                 className="articles-card__infos__qtyprice__plus-minus__icons"
                 onClick={() => {
+                  sendEvent('conversion', item, 'Cart: Add to cart');
                   setAddToCartAtom(item);
                 }}
               >

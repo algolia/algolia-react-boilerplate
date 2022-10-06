@@ -73,12 +73,6 @@ const Hit = ({ hit, sendEvent }) => {
 
   const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality);
 
-  // personalisation user token
-  const userToken = useRecoilValue(personaSelectedAtom);
-
-  // Get the main index
-  const index = useRecoilValue(mainIndex);
-
   // Get hit attribute from config file
   const {
     objectID,
@@ -117,8 +111,6 @@ const Hit = ({ hit, sendEvent }) => {
   };
 
   const promoted = hit?._rankingInfo?.promoted;
-
-  // aa('setUserToken', userToken);
 
   // Update the qty for a product on SRP each time Cart is modified or set qty to 0
   const updateQty = (article) => {
@@ -171,6 +163,7 @@ const Hit = ({ hit, sendEvent }) => {
             hitState(hit);
             navigate(`/search/product/${hit[objectID]}`);
             useStoreIdToLocalStorage(hit[objectID]);
+            sendEvent('click', hit, 'SRP: Product clicked');
           }}
         >
           <img
@@ -237,14 +230,6 @@ const Hit = ({ hit, sendEvent }) => {
                     setAddToCartAtom(hit);
                     // Send event conversion to Algolia API
                     sendEvent('conversion', hit, 'SRP: Add to cart');
-                    // useSendAlgoliaEvent({
-                    //   type: 'conversion',
-                    //   userToken: userToken,
-                    //   index: index,
-                    //   hit: hit,
-                    //   name: 'SRP: Add to cart',
-                    //   queryID: queryID,
-                    // });
                   }}
                 >
                   <PlusPicto />

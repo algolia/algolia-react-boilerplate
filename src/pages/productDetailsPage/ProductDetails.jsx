@@ -62,8 +62,10 @@ import './SCSS/productDetails.scss';
 
 // Import and use translation
 import { useTranslation } from 'react-i18next';
+import { useHits } from 'react-instantsearch-hooks-web';
 
 const ProductDetails = () => {
+  const { sendEvent } = useHits();
   // For alert on sending add to cart event
   const setAlert = useSetRecoilState(alertContent);
   const setAlertOpen = useSetRecoilState(isAlertOpen);
@@ -307,13 +309,7 @@ const ProductDetails = () => {
                   setTimeout(() => setAddToCartIsClicked(false), 300);
                   triggerAlert('Sending add to cart event to Algolia');
                   // Send event conversion to Algolia API
-                  // useSendAlgoliaEvent({
-                  //   type: 'conversion',
-                  //   userToken: userToken,
-                  //   index: index,
-                  //   hit: hit,
-                  //   name: 'add-to-cart',
-                  // });
+                  sendEvent('conversion', hit, 'PDP: Add to cart');
                 }}
               >
                 <CartPicto />

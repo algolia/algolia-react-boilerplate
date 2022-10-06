@@ -19,7 +19,7 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 // Import cart from recoil(Cart state and the event if it's removed)
 import { addToCartSelector } from '@/config/cartFunctions';
 
-const HitsCarousel = ({ hit, index }) => {
+const HitsCarousel = ({ hit, sendEvent }) => {
   const {
     objectID,
     image,
@@ -73,6 +73,7 @@ const HitsCarousel = ({ hit, index }) => {
             hitState(hit);
             // navigate to the product show page
             navigate(`/search/product/${hit[objectID]}`);
+            sendEvent('click', hit, 'Homepage: Product clicked');
           }}
         >
           <p className="brand">{get(hit, brand)}</p>
@@ -89,14 +90,7 @@ const HitsCarousel = ({ hit, index }) => {
                 setCartLogoClicked(true);
                 setTimeout(() => setCartLogoClicked(false), 300);
                 setAddToCartAtom(hit);
-                // Send event conversion to Algolia API
-                // useSendAlgoliaEvent({
-                //   type: 'conversion',
-                //   userToken: userToken,
-                //   index: index,
-                //   hit: hit,
-                //   name: 'Homepage: Add to cart',
-                // });
+                sendEvent('conversion', hit, 'Homepage: Add to cart');
               }}
             >
               <CartPicto />

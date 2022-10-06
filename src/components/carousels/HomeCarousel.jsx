@@ -55,7 +55,7 @@ const HomeCarousel = ({ context, title }) => {
 // This carousel is used inside of HomeCarousel
 
 function Carousel(props) {
-  const { hits } = useHits(props);
+  const { hits, sendEvent } = useHits(props);
   const { title } = props;
   const [width, setWidth] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -106,7 +106,14 @@ function Carousel(props) {
           >
             {/* Display the hits in the carousel */}
             {hits.map((hit, i) => {
-              return <HitsCarousel hit={hit} key={i} index={index} />;
+              return (
+                <HitsCarousel
+                  hit={hit}
+                  key={i}
+                  index={index}
+                  sendEvent={sendEvent}
+                />
+              );
             })}
           </motion.div>
         </motion.div>

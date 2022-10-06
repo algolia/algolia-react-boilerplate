@@ -15,9 +15,7 @@ import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 import { windowSize } from '@/hooks/useScreenSize';
 import { framerMotionTransition } from '@/config/animationConfig';
 import { ChevronRight } from '@/assets/svg/SvgIndex';
-// import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
-import { personaSelectedAtom } from '@/config/personaConfig';
-import { mainIndex } from '@/config/algoliaEnvConfig';
+import { useHits } from 'react-instantsearch-hooks-web';
 
 const CartModal = () => {
   // Import all recoil states to show modal + Cart stored and Removed articles
@@ -29,10 +27,7 @@ const CartModal = () => {
 
   const { isDesktop } = useRecoilValue(windowSize);
 
-  // personalisation user token
-  const userToken = useRecoilValue(personaSelectedAtom);
-  // Get the main index
-  const index = useRecoilValue(mainIndex);
+  const { sendEvent } = useHits();
 
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false));
@@ -69,7 +64,7 @@ const CartModal = () => {
       <div className="modal-container__line"></div>
       {cartValue.map((item, i) => {
         if (item.qty !== 0) {
-          return <ArticlesCard item={item} key={i} />;
+          return <ArticlesCard item={item} key={i} sendEvent={sendEvent} />;
         }
       })}
       {cartValue.length === 0 && <p>Your cart is empty</p>}
@@ -86,14 +81,7 @@ const CartModal = () => {
           </a>
           <a
             className="modal-container__checkout"
-            onClick={() =>
-              useSendAlgoliaEvent({
-                type: 'conversion',
-                userToken: userToken,
-                index: index,
-                name: 'PDP: Add to cart',
-              })
-            }
+            onClick={() => sendEvent('conversion', cartValue, 'Cart: Checkout')}
           >
             <p>Checkout</p>
             <ChevronRight />
