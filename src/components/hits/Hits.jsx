@@ -7,6 +7,7 @@ import { Highlight } from 'react-instantsearch-hooks-web';
 // Import SVGs
 import { Heart, MinusPicto, PlusPicto } from '@/assets/svg/SvgIndex';
 import RankingIcon from './components/RankingIcon';
+
 // Import Badge config
 import { badgeCriteria } from '@/config/badgeConfig';
 
@@ -35,12 +36,14 @@ import Price from '@/components/hits/components/Price.jsx';
 // Import cart from recoil(Cart state and the event if it's removed)
 import {
   addToCartSelector,
-  removeToCartSelector,
   cartState,
+  removeToCartSelector,
 } from '@/config/cartFunctions';
 // Import Persona if there is
-import { shouldHavePersona } from '@/config/featuresConfig';
-import { shouldHaveCartFunctionality } from '@/config/featuresConfig';
+import {
+  shouldHaveCartFunctionality,
+  shouldHavePersona,
+} from '@/config/featuresConfig';
 import {
   personaSelectedFiltersAtom,
   shouldDisplayRankingIcons,
@@ -50,8 +53,6 @@ import {
 import './SCSS/hits.scss';
 
 // Used to send insights event on add to cart
-import { mainIndex } from '@/config/algoliaEnvConfig';
-import { personaSelectedAtom } from '@/config/personaConfig';
 
 // import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 

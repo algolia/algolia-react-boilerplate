@@ -1,12 +1,12 @@
 // import IS hook
-import { Index, Configure } from 'react-instantsearch-hooks-web';
+import { Configure, Index } from 'react-instantsearch-hooks-web';
 
 // Import recoil function
 import { useRecoilValue } from 'recoil';
 
 // Recommend
-import algoliarecommend from '@algolia/recommend';
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
+import algoliarecommend from '@algolia/recommend';
 import { RelatedProducts } from '@algolia/recommend-react';
 
 // Algolia search client

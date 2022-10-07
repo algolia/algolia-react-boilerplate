@@ -1,12 +1,10 @@
-// Render the Header component in Main.jsx, for small screen sizes
-
 import { useState } from 'react';
 
 // React Router
 import { Link } from 'react-router-dom';
 
 // Recoil Header State
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { motion } from 'framer-motion';
 
@@ -29,11 +27,9 @@ import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 
 // Custom hook to prevent body from scrolling
-import usePreventScrolling from '@/hooks/usePreventScrolling';
-import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 import { clickHamburger } from '@/config/cartFunctions';
-
-import { useRef } from 'react';
+import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
+import usePreventScrolling from '@/hooks/usePreventScrolling';
 
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil

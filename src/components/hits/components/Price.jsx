@@ -11,8 +11,6 @@ import get from 'lodash/get';
 import {
   currencySymbolAtom,
   shouldDisplayCurrency,
-  // TODO: Add fallback for varying types of currency number separators
-  // shouldInvertPriceSeparators,
 } from '@/config/currencyConfig';
 
 // Add this function with hitPrice to convert the decimal separators ie. 1,999.99 => 1.999,99 and vice versa

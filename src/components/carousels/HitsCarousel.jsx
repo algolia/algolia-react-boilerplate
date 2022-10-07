@@ -1,17 +1,16 @@
-import { useState } from 'react';
 import get from 'lodash/get';
+import { useState } from 'react';
 // import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
+import { CartPicto } from '@/assets/svg/SvgIndex';
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
 import Price from '../hits/components/Price';
-import { CartPicto } from '@/assets/svg/SvgIndex';
-import { cartState, removedItem } from '@/config/cartFunctions';
 
 // Display or not cart icons
 import { shouldHaveCartFunctionality } from '@/config/featuresConfig';
 
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Used to send insights event on add to cart
 import { personaSelectedAtom } from '@/config/personaConfig';

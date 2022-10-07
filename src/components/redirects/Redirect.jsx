@@ -2,7 +2,7 @@
 import { useQueryRules } from 'react-instantsearch-hooks-web';
 
 // Import Recoil
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Import React router
 import { useSearchParams } from 'react-router-dom';

@@ -2,17 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 
 import { motion } from 'framer-motion';
 import { Configure, Index, useHits } from 'react-instantsearch-hooks-web';
-// React Router
-import { useNavigate } from 'react-router-dom';
 
 // Recoil
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig';
 import { framerMotionTransition } from '@/config/animationConfig';
 import { hitsPerCarousel } from '@/config/carouselConfig';
-import { hitAtom } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 

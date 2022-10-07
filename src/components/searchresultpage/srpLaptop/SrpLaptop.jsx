@@ -15,7 +15,6 @@ import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
 import { Hit } from '@/components/hits/Hits';
 import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
 import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
-import Redirect from '@/components/redirects/Redirect';
 import CustomSortBy from '@/components/sortBy/SortBy';
 import { CustomStats } from '@/components/stats/Stats';
 const CustomClearRefinements = lazy(() =>
@@ -25,8 +24,6 @@ const CustomCurrentRefinements = lazy(() =>
   import('@/components/facets/components/CurrentRefinement')
 );
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
-
-const CartModal = lazy(() => import('@/components/cart/CartModal'));
 
 // Configuration
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
@@ -226,7 +223,6 @@ const SrpLaptop = () => {
               <CustomHits />
             </Suspense>
           )}
-          {/* <Redirect /> */}
         </div>
       </div>
     </>

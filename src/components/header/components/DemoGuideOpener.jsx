@@ -1,4 +1,4 @@
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 //Import the option pictogram component
 import { OptionDots } from '@/assets/svg/SvgIndex';

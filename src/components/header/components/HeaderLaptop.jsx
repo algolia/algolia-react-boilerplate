@@ -30,9 +30,9 @@ import logo from '@/assets/logo/logo.webp';
 
 // Import Components
 import CustomSearchBox from '@/components/searchbox/SearchBox';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
-import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
 const HeaderLaptop = () => {
   const [isLogoLoaded, setIsLogoLoaded] = useState(false);

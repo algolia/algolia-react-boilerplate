@@ -1,11 +1,11 @@
 // This is in the Search Results Page for both laptop and mobile windows
 
 // Import InstantSearch Functionality
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useInfiniteHits } from 'react-instantsearch-hooks-web';
 
-import { useRecoilValue } from 'recoil';
 import { windowSize } from '@/hooks/useScreenSize';
+import { useRecoilValue } from 'recoil';
 
 import { hitsAtom } from '@/config/hitsConfig';
 

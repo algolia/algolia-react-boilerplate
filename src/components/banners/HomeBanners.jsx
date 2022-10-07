@@ -1,5 +1,5 @@
 // NB: we need React declared for the Fragments used here
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 //recoil
 import { useRecoilValue } from 'recoil';

@@ -47,7 +47,6 @@ import { windowSize } from '@/hooks/useScreenSize';
 import { useTranslation } from 'react-i18next';
 
 // Components imports
-import Redirect from '@/components/redirects/Redirect';
 import Articles from './components/BlogPost';
 import Category from './components/Category';
 import Products from './components/Products';
@@ -191,7 +190,6 @@ const FederatedSearch = () => {
           </div>
         )}
       </div>
-      {/* <Redirect /> */}
     </div>
   );
 };

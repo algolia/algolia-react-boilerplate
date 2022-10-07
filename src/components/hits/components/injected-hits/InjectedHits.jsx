@@ -1,14 +1,13 @@
 // Import the custom hits to display in the SRP
 import CustomHits from '../CustomHits';
 // Import the config files we'll need to import
-import { useRecoilValue } from 'recoil';
 import { indexNames } from '@/config/algoliaEnvConfig';
 import { queryAtom } from '@/config/searchboxConfig';
+import { useRecoilValue } from 'recoil';
 
 import { lazy, useEffect, useState } from 'react';
 // Algolia
 import {
-  useHits,
   useInfiniteHits,
   useInstantSearch,
   useQueryRules,

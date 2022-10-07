@@ -18,7 +18,6 @@ import { carouselConfig } from '@/config/carouselConfig';
 import CustomHomeBanners from '@/components/banners/HomeBanners';
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 
-import clamp from '@/utils/clampCalcFunction';
 //  should federated search be shown or not
 import {
   shouldHaveCarousels,
@@ -56,8 +55,6 @@ const HomePage = () => {
   const shouldHaveTrendingProductsValue = useRecoilValue(
     shouldHaveTrendingProducts
   );
-
-  console.log(clamp(30, 35, 820, 1440));
 
   const { mobile } = useRecoilValue(windowSize);
 
