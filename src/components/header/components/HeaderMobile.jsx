@@ -91,12 +91,17 @@ const HeaderMobile = ({ mobile, tablet }) => {
       </div>
       <AnimatePresence>
         {isMenuOpen && (
-          <CategoriesMobile
-            isMenuOpen={isMenuOpen}
-            setIsMenuOpen={setIsMenuOpen}
-            mobile={mobile}
-            tablet={tablet}
-          />
+          <div
+            className="container-mobile__navigation-wp"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <CategoriesMobile
+              isMenuOpen={isMenuOpen}
+              setIsMenuOpen={setIsMenuOpen}
+              mobile={mobile}
+              tablet={tablet}
+            />
+          </div>
         )}
       </AnimatePresence>
     </div>

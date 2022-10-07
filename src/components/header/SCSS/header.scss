@@ -163,13 +163,22 @@
       }
     }
 
+    &__navigation-wp{
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur( 2px );
+      -webkit-backdrop-filter: blur( 2px );
+      z-index: 994;
+    }
+
     &__navList {
       position: absolute;
       top: 0;
       left: 0;
       width: 60vw;
       height: 100vh;
-      z-index: 998;
+      z-index: 994;
       background-color: $background-color;
 
       ul {
