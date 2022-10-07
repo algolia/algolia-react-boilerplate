@@ -11,6 +11,8 @@ export const refinements = [
   {
     type: 'hierarchical',
     label: 'Category',
+    labelFrench: 'Catégorie',
+    labelGerman: 'Kategorie',
     options: {
       attribute: [
         hitsConfig.hierarchicalCategoriesLvl0,
@@ -24,6 +26,8 @@ export const refinements = [
   {
     type: 'price',
     label: 'Price',
+    labelFrench: 'Prix',
+    labelGerman: 'Preis',
     options: {
       attribute: hitsConfig.price,
     },
@@ -31,6 +35,8 @@ export const refinements = [
   {
     type: 'list',
     label: 'Brand',
+    labelFrench: 'Marque',
+    labelGerman: 'Markieren',
     options: {
       attribute: hitsConfig.brand,
       // when searchable is enabled, you can search for a specific value of that facet. Ex: Here you can search for a specific brand
@@ -43,6 +49,8 @@ export const refinements = [
   {
     type: 'colour',
     label: 'Colour',
+    labelFrench: 'Couleur',
+    labelGerman: 'Farbe',
     options: {
       attribute: hitsConfig.colourHexa,
     },
@@ -50,6 +58,8 @@ export const refinements = [
   {
     type: 'list',
     label: 'Gender',
+    labelFrench: 'Genre',
+    labelFrench: 'Geschlecht',
     options: {
       attribute: hitsConfig.genderFilter,
     },
@@ -57,6 +67,7 @@ export const refinements = [
   {
     type: 'size',
     label: 'Size',
+    labelFrench: 'Taille',
     options: {
       attribute: hitsConfig.sizeFilter,
       limit: 8,

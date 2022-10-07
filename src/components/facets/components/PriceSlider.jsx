@@ -13,6 +13,9 @@ import { useRecoilValue } from 'recoil';
 import { currencySymbolAtom } from '@/config/currencyConfig';
 import { showNetworkErorrs } from '@/config/demoGuideConfig';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 function PriceSlider(props) {
   // Import const from hooks
   const { range: rangeHook, refine, start } = useRange(props);
@@ -22,7 +25,7 @@ function PriceSlider(props) {
   const minValue = min;
   const maxValue = max;
   // Props
-  const { title } = props;
+  const { title, titleFr, titleGer } = props;
   // Set the state of the slider
   const [minSlider, setMinSlider] = useState(min);
   const [maxSlider, setMaxSlider] = useState(max);
@@ -30,6 +33,12 @@ function PriceSlider(props) {
   // Call the currency configuration
   const currency = useRecoilValue(currencySymbolAtom);
   const isCurrencyRight = '€' === currency;
+
+  // Import const translation
+  // Use the translator
+  const { i18n } = useTranslation();
+
+  const language = i18n.language;
 
   const [networkErrors, setNetworkErrors] = useRecoilState(showNetworkErorrs);
 
@@ -87,7 +96,9 @@ function PriceSlider(props) {
   return (
     <div className="filters-container">
       <div className="filters-container__title">
-        <h3>{title}</h3>
+        {language === 'en' && <h3>{title}</h3>}
+        {language === 'fr' && <h3>{titleFr}</h3>}
+        {language === 'ger' && <h3>{titleGer}</h3>}
       </div>
       <div className="filters-container__pricecontainer">
         <form>

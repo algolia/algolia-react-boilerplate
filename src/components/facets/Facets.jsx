@@ -20,26 +20,32 @@ import { refinements } from '@/config/refinementsConfig';
 //Import scope SCSS
 import './SCSS/facets.scss';
 
+//Use Translation
+import { useTranslation } from 'react-i18next';
+
 // expects an attribute which is an array of items
 function GenericRefinementList(props) {
-  const {
-    items,
-    refine,
-    searchForItems,
-    isShowingMore,
-    toggleShowMore,
-  } = useRefinementList(props);
+  const { items, refine, searchForItems, isShowingMore, toggleShowMore } =
+    useRefinementList(props);
 
-  const { title, options } = props;
+  const { title, options, titleFr, titleGer } = props;
   const { showMoreFunction } = options;
 
   // With this state you can search for items in facets
   const [searchInput, setSearchInput] = useState(false);
 
+  // Import const translation
+  // Use the translator
+  const { i18n } = useTranslation();
+
+  const language = i18n.language;
+
   return (
     <div className="filters-container">
       <div className="filters-container__title">
-        <h3>{title}</h3>
+        {language === 'en' && <h3>{title}</h3>}
+        {language === 'fr' && <h3>{titleFr}</h3>}
+        {language === 'ger' && <h3>{titleGer}</h3>}
         {/* If the facet is searchable, show the magnifying glass which will open or close the search input */}
         {options.searchable && (
           <div
@@ -111,12 +117,20 @@ function GenericRefinementList(props) {
 // ColorRefinementList custom for Hooks
 function CustomColorRefinement(props) {
   const { items, refine } = useRefinementList(props);
-  const { title } = props;
+  const { title, titleGer, titleFr } = props;
+
+  // Import const translation
+  // Use the translator
+  const { i18n } = useTranslation();
+
+  const language = i18n.language;
 
   return (
     <div className="filters-container">
       <div className="filters-container__title">
-        <h3>{title}</h3>
+        {language === 'en' && <h3>{title}</h3>}
+        {language === 'fr' && <h3>{titleFr}</h3>}
+        {language === 'ger' && <h3>{titleGer}</h3>}
       </div>
       <ul className="filters-container__content-color">
         {items.map((item) => {
@@ -145,8 +159,7 @@ function CustomColorRefinement(props) {
                     event.preventDefault();
                     refine(item.value);
                   }}
-                >
-                </input>
+                ></input>
                 <p>{item.label.split(';')[0]}</p>
               </div>
             </li>
@@ -176,13 +189,15 @@ const Facets = () => {
       {facets?.length > 0 && (
         <DynamicWidgets maxValuesPerFacet={500}>
           {refinements.map((e, i) => {
-            const { type, label, options } = e;
+            const { type, label, labelFrench, labelGerman, options } = e;
             switch (type) {
               case 'price':
                 return (
                   <PriceSlider
                     attribute={options.attribute}
                     title={label}
+                    titleFr={labelFrench}
+                    titleGer={labelGerman}
                     key={i}
                   />
                 );
@@ -192,6 +207,8 @@ const Facets = () => {
                     attribute={options.attribute}
                     key={i}
                     title={label}
+                    titleFr={labelFrench}
+                    titleGer={labelGerman}
                   />
                 );
               case 'hierarchical':
@@ -199,6 +216,8 @@ const Facets = () => {
                   <HierarchicalMenu
                     attributes={options.attribute}
                     title={label}
+                    titleFr={labelFrench}
+                    titleGer={labelGerman}
                     key={i}
                   />
                 );
@@ -210,6 +229,8 @@ const Facets = () => {
                     limit={options?.limit}
                     attribute={options.attribute}
                     title={label}
+                    titleFr={labelFrench}
+                    titleGer={labelGerman}
                     options={options}
                     showMore={options?.showMoreFunction}
                   />

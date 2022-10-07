@@ -35,26 +35,28 @@ export const languageSwitchConfig = {
       {
         name: 'Mens',
         type: 'filter',
-        filter: 'Men',
+        filter: 'Mens',
         url: '/mens',
       },
       {
         name: 'Womens',
         type: 'filter',
-        filter: 'Women',
+        filter: 'Womens',
         url: '/womens',
       },
+      // For an uilisation of your own made filter
       {
-        name: 'Home',
-        type: 'filter',
-        filter: 'Home',
-        url: '/home',
+        name: 'Womens accessories by Even & Odd',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+          "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
       },
+      // This uses context from the Algolia dashboard, configured using Visual Editor
       {
-        name: 'Summer 22 Collection',
+        name: 'Accessories',
         type: 'context',
-        context: 'Summer 22 Collection',
-        url: '/summer-22-collection',
+        context: 'accessories',
       },
     ],
   },
@@ -71,26 +73,28 @@ export const languageSwitchConfig = {
       {
         name: 'Hommes',
         type: 'filter',
-        filter: 'Hommes',
+        filter: 'Mens',
         url: '/hommes',
       },
       {
         name: 'Femmes',
         type: 'filter',
-        filter: 'Femmes',
+        filter: 'Womens',
         url: '/femmes',
       },
+      // For an uilisation of your own made filter
       {
-        name: 'La Maison',
-        type: 'filter',
-        filter: 'La Maison',
-        url: '/la-maison',
+        name: 'Femmes et Accessoires by Even & Odd',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+          "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
       },
+      // This uses context from the Algolia dashboard, configured using Visual Editor
       {
-        name: 'Collection été 2022',
+        name: 'Accessoires',
         type: 'context',
-        context: 'Collection été 2022',
-        url: '/collection-ete-2022',
+        context: 'accessories',
       },
     ],
   },
@@ -107,26 +111,28 @@ export const languageSwitchConfig = {
       {
         name: 'Herren',
         type: 'filter',
-        filter: 'Herren',
+        filter: 'Mens',
         url: '/herren',
       },
       {
         name: 'Damen',
         type: 'filter',
-        filter: 'Damen',
+        filter: 'Womens',
         url: '/damen',
       },
+      // For an uilisation of your own made filter
       {
-        name: 'Home',
-        type: 'filter',
-        filter: 'Home',
-        url: '/home',
+        name: 'Damen Zubehör Even & Odd',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+          "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
       },
+      // This uses context from the Algolia dashboard, configured using Visual Editor
       {
-        name: 'Sommerkollektion 22',
+        name: 'Zubehör',
         type: 'context',
-        context: 'Summer 22 Collection',
-        url: '/summer-22-collection',
+        context: 'accessories',
       },
     ],
   },
