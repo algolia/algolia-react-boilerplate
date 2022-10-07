@@ -1,0 +1,16 @@
+@use '../../../scss/partials' as *;
+
+.footer__wrapper {
+width: 90%;
+}
+
+.footer__container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer__column{
+  &--company-details{
+    
+  }
+}

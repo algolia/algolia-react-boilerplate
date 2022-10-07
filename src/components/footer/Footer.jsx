@@ -34,7 +34,7 @@ const Footer = (props) => {
                     <div className="footer-info">
                       <ul>
                         <li>
-                          <a href="#">+49 (899) 9829960</a>
+                          <a href="#">+49 (899) 415-390-6031</a>
                         </li>
                         <li>
                           <a href="#">support@algolia.com</a>
