@@ -167,7 +167,7 @@ const FederatedSearch = () => {
           <div className="federatedSearch__middle">
             <Configure
               filters=""
-              hitsPerPage={6}
+              hitsPerPage={isDesktop ? 6 : 3}
               enablePersonalization={true}
               userToken={personaSelect}
               personalizationImpact={personalizationImpact}
