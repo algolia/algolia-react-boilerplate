@@ -13,39 +13,6 @@ import {
   shouldDisplayCurrency,
 } from '@/config/currencyConfig';
 
-// Add this function with hitPrice to convert the decimal separators ie. 1,999.99 => 1.999,99 and vice versa
-// like this => {convertSeparators(hitPrice)}
-const convertSeparators = (price) => {
-  return price.replace(/[,.]/g, (m) => (m === ',' ? '.' : ','));
-};
-
-// TODO: Add fallback for varying types of currency number separators
-// EG:
-// different inputs = '10,000.56' '10.000,56' '10' '10,00'
-// first detect which currency
-// translated to a javascript number
-// then we need to round it to 2 dp
-// revert back the number to its OG currency for display
-
-// if EUROS:
-// check for , => if not add ,00
-// if .** them change to ,** (ie run convertSeparators)
-
-// if GBP or USD
-// check for . => if not add .00
-// if ,** them change to .** (ie run convertSeparators)
-
-// const detectPriceFormat = (price) => {
-//   const isEuropean = (price) => {
-//     // check for non number at index[length-3]
-//     // '10,000.56' '10.000,56' '10000' '10000000.67' '10000,67'
-
-//     return price[price.length - 3] === ',' || price[price.length - 4] === '.';
-//   };
-
-// be in EUR => if is european
-// };
-
 const PriceBuilder = ({ hit }) => {
   const { price, onSale, onSalePrice } = hitsConfig;
   const currencySymbol = useRecoilValue(currencySymbolAtom);
