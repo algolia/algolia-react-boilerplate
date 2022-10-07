@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 // Import Recoil functions
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // Algolia imports
 import { useHits } from 'react-instantsearch-hooks-web';
@@ -29,6 +29,9 @@ import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 // Import CSS
 import './SCSS/cartModal.scss';
+import { isAlertOpen } from '@/config/demoGuideConfig';
+import { alertContent } from '@/config/demoGuideConfig';
+import usePreventScrolling from '@/hooks/usePreventScrolling';
 
 const CartModal = () => {
   // Import all recoil states to show modal + Cart stored and Removed articles
@@ -46,6 +49,17 @@ const CartModal = () => {
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
   );
+
+  usePreventScrolling(showCart);
+
+  // Recoil state for alert
+  const setAlert = useSetRecoilState(alertContent);
+  const setAlertOpen = useSetRecoilState(isAlertOpen);
+  const triggerAlert = (content) => {
+    setAlertOpen(true);
+    setAlert(content);
+    setTimeout(() => setAlertOpen(false), 5000);
+  };
 
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false));
@@ -114,7 +128,10 @@ const CartModal = () => {
           </a>
           <a
             className="modal-container__checkout"
-            onClick={() => sendEvent('conversion', cartValue, 'Cart: Checkout')}
+            onClick={() => {
+              sendEvent('conversion', cartValue, 'Cart: Checkout');
+              triggerAlert('Thanks using Algolia 💙');
+            }}
           >
             <p>{t('checkout')}</p>
             <ChevronRight />

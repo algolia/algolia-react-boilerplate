@@ -113,7 +113,9 @@ export const Main = () => {
           )}
           {shouldShowCartIcon && showCart && (
             <Suspense fallback={''}>
-              <CartModal />
+              <div className="cartModal-wp">
+                <CartModal />
+              </div>
             </Suspense>
           )}
         </AnimatePresence>
