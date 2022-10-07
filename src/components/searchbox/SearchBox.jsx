@@ -67,20 +67,11 @@ function CustomSearchBox(props) {
     keyPrefix: 'searchBox',
   });
 
-  // const debouncedSetQueryParams = useRef(
-  //   debounce((query) => {
-  //     // Update the query URL param to the value of the new search
-  //     searchParams.set('query', query);
-  //     setSearchParams(searchParams);
-  //   }, 500)
-  // ).current;
-
   const refineFunction = (query) => {
     // Empty array of rules on each Keystrokes
     rulesApplied([]);
     searchParams.set('query', query);
     setSearchParams(searchParams);
-    // debouncedSetQueryParams(query);
     // Refine query in all the app through recoil
     setQueryState(query);
   };

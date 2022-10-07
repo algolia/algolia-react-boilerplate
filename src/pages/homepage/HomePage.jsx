@@ -57,8 +57,6 @@ const HomePage = () => {
     shouldHaveTrendingProducts
   );
 
-  console.log(clamp(30, 35, 820, 1440));
-
   const { mobile } = useRecoilValue(windowSize);
 
   // Import and use translation
