@@ -52,6 +52,7 @@ import Category from './components/Category';
 import Products from './components/Products';
 import QuerySuggestions from './components/QuerySuggestions';
 import RecentSearches from './components/RecentSearches';
+import { ChevronLeft } from '@/assets/svg/SvgIndex';
 
 //Import scope SCSS
 import './SCSS/federatedSearch.scss';
@@ -77,7 +78,7 @@ const FederatedSearch = () => {
     useRecoilState(federatedRef);
 
   // Get screen size
-  const { mobile, tablet } = useRecoilValue(windowSize);
+  const { mobile, tablet, isDesktop } = useRecoilValue(windowSize);
 
   // Import const translation
   // Use the translator
@@ -122,9 +123,11 @@ const FederatedSearch = () => {
       exit={framerMotionFederatedContainer.exit}
       transition={framerMotionFederatedContainer.transition}
     >
-      <span className="closeFederated" onClick={() => setIsFederated(false)}>
-        &lsaquo; {t('buttonReturn')}
-      </span>
+      {!isDesktop && (
+        <div className="closeFederated" onClick={() => setIsFederated(false)}>
+          <ChevronLeft /> <p>{t('buttonReturn')}</p>
+        </div>
+      )}
       <div
         className={`${
           mobile || tablet

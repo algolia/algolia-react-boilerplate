@@ -31,13 +31,6 @@
     }
 }
 
-.closeFederated {
-    position: absolute;
-    top: -2rem;
-    right: 1rem;
-    cursor: pointer;
-}
-
 //Recent searches
 .recentSearches{
     &__title{
@@ -240,8 +233,37 @@
 }
 .closeFederated{
     position: absolute;
-    top: 1rem;
+    top: 0.5rem;
     right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     cursor: pointer;
+
+    &:hover{
+
+      p{
+        transform: translateX(0.1rem);
+        transition: transform 0.3s ease-in-out;
+      }
+      svg{
+        transform: translateX(-0.1rem);
+        transition: transform 0.3s ease-in-out;
+      }
+    }
+
+    p{ 
+      @include p-text($main-color, 300);
+      font-size: 0.8rem;
+      transition: transform 0.1s ease-in-out;
+    }
+    svg {
+      margin-top: 2px;
+      width: 8px;
+      transition: transform 0.1s ease-in-out;
+      path{
+        fill: $second-color;
+      }
+    }
 }
 }
