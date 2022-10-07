@@ -106,7 +106,11 @@ export const Main = () => {
         <Redirect />
         {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
         <AnimatePresence>
-          {showDemoGuide && <DemoGuide setshowDemoGuide={setshowDemoGuide} />}
+          {showDemoGuide && (
+            <div className="demoGuide-wp">
+              <DemoGuide setshowDemoGuide={setshowDemoGuide} />
+            </div>
+          )}
           {shouldShowCartIcon && showCart && (
             <Suspense fallback={''}>
               <CartModal />

@@ -3,6 +3,15 @@
 // ------------------------------------------
 @use '../../../scss/partials' as *;
 
+.demoGuide-wp{
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur( 2px );
+  -webkit-backdrop-filter: blur( 2px );
+  z-index: 999;
+}
+
 .helpNavigation {
   position: absolute;
   top: 0;
@@ -33,7 +42,7 @@
   width: 3rem;
   height: 3rem;
   cursor: pointer;
-  z-index: 999;
+  z-index: 998;
   transition: all 0.3s ease-in-out;
   display: flex;
   justify-content: center;
