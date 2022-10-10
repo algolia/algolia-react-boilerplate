@@ -16,6 +16,12 @@ import logoMobile from '@/assets/logo/LogoMobile.webp';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 
+//import Navigation config
+import { navigationStateAtom } from '@/config/navigationConfig';
+
+// Import Rules config
+import { rulesAtom } from '@/config/appliedRulesConfig';
+
 // Import framer motion
 import { AnimatePresence } from 'framer-motion';
 
@@ -41,6 +47,10 @@ const HeaderMobile = ({ mobile, tablet }) => {
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
 
   const hamburger = useSetRecoilState(clickHamburger);
+
+  const setNavigationState = useSetRecoilState(navigationStateAtom);
+
+  const rulesApplied = useSetRecoilState(rulesAtom);
 
   // Prevent body from scrolling when panel is open
   usePreventScrolling(isMenuOpen);
@@ -68,7 +78,9 @@ const HeaderMobile = ({ mobile, tablet }) => {
             aria-label="Back to homepage"
             onClick={() => {
               setQueryState('');
+              setNavigationState({});
               federated(false);
+              rulesApplied([]);
             }}
           >
             <img src={logoMobile} alt="" width="200" />
