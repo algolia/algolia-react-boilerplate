@@ -23,6 +23,9 @@ import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 // Import applied rules config
 import { rulesAtom } from '@/config/appliedRulesConfig';
 
+//import Navigation config
+import { navigationStateAtom } from '@/config/navigationConfig';
+
 // Custom Hooks
 import useOutsideClick from '@/hooks/useOutsideClick';
 
@@ -42,6 +45,7 @@ const HeaderLaptop = () => {
   const setSbIsActive = useSetRecoilState(searchBoxIsActive);
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
   const rulesApplied = useSetRecoilState(rulesAtom);
+  const setNavigationState = useSetRecoilState(navigationStateAtom);
 
   useOutsideClick(searchboxRef, () => setSbIsActive(false));
 
@@ -57,6 +61,7 @@ const HeaderLaptop = () => {
             aria-label="link to home"
             onClick={() => {
               setQueryState('');
+              setNavigationState({});
               federated(false);
               rulesApplied([]);
             }}
