@@ -1,7 +1,15 @@
 // This component renders a footer in Main.jsx, which can receive props if needed
 // This footer is not designed to be interactive, but instead to perform better by not being an image
 
-import { useRecoilValue } from 'recoil';
+import {
+  categoryPageFilterAttribute,
+  linksHeader,
+  navigationStateAtom,
+} from '@/config/navigationConfig';
+
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 //Import scope SCSS
 import './SCSS/newfooter.scss';
@@ -12,6 +20,17 @@ import { windowSize } from '@/hooks/useScreenSize';
 
 const Footer = (props) => {
   const { isDesktop } = useRecoilValue(windowSize);
+
+  // Import the navigation links, as defined in the config
+  const links = useRecoilValue(linksHeader);
+
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  const [navigationState, setNavigationState] =
+    useRecoilState(navigationStateAtom);
+
+  const navigate = useNavigate();
+
   return (
     <footer className="footer__wrapper">
       <div className="footer__container">
@@ -72,16 +91,42 @@ const Footer = (props) => {
           </div>
           <div className="footer__column">
             <h3>Categories</h3>
-            <ul>
-              <li>
-                <a href="#">Mens</a>
-              </li>
-              <li>
-                <a href="#">Womens</a>
-              </li>
-              <li>
-                <a href="#">Accessoires</a>
-              </li>
+            <ul className="footer__column--nav-links">
+              {links.map((link, i) => {
+                return (
+                  <li
+                    id={link.name}
+                    tabIndex="0"
+                    key={link.name}
+                    onClick={() => {
+                      //Build action based on link type, then navigate
+                      let action = null;
+                      if (link.type === 'filter' && link.filter?.length > 0) {
+                        action = `${categoryPageFilterAttribute}:'${link.filter}'`;
+                      } else if (link.type === 'context') {
+                        action = link.context;
+                      } else if (
+                        link.type === 'rawFilter' &&
+                        link.rawFilter?.length > 0
+                      ) {
+                        action = `${link.rawFilter}`;
+                      }
+                      setNavigationState({
+                        type: link.type,
+                        name: link.name,
+                        action: action,
+                      });
+                      searchParams.set('category', link.name);
+                      navigate({
+                        pathname: '/search',
+                        search: `?${searchParams}`,
+                      });
+                    }}
+                  >
+                    <p>{link.name}</p>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div className="footer__column">Join our Newsletter</div>

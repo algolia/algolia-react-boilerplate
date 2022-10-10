@@ -34,7 +34,7 @@ import DemoGuide from '@/components/demoGuide/DemoGuide';
 import Header from '@/components/header/Header';
 import CustomAppliedRules from './components/appliedRules/AppliedRules';
 
-import Footer from './components/footer/NewFooter';
+import Footer from './components/footer/Footer';
 import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
 const HomePage = lazy(() => import('./pages/homepage/HomePage'));
 // import HomePage from './pages/homepage/HomePage';
