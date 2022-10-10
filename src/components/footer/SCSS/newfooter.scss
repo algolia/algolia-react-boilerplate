@@ -27,3 +27,30 @@ width: 90%;
   height: 100%;
   transform: translate(-1.5rem, -1.5rem);
 }
+
+.mc-form-2>input {
+  background-color: transparent;
+  width: 16rem;
+  border: none;
+  border-bottom: 1px solid #e7e7e7;
+  border-right: 1px solid #e7e7e7;
+  color: $grey-dark-color;
+  padding: 0.5rem 5rem 0.5rem 0.5rem;
+  height: 43px;
+  font-size: 12px;
+}
+
+.mc-form-2 .clear-2 input {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  color: $main-color;
+  font-weight: 700;
+  font-size: 12px;
+  height: 43px;
+}
+
+.mc-form-2 .clear-2 .button {
+  @include btn($main-color, $white-color);
+  padding: 0 1rem;
+}
