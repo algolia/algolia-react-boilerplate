@@ -43,7 +43,7 @@ function Redirect(props) {
           }
         >
           <div className="redirectModal__infos">
-            <p>This query will take you to Alolia's Homepage</p>
+            <p>This query will take you to Algolia's Homepage</p>
             <p>Do you wish to be redirected ? </p>
           </div>
           <div className="redirectModal__buttons">
