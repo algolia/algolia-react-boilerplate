@@ -43,7 +43,7 @@ function CustomSearchBox(props) {
 
   const [hasKeystroke, setHasKeystroke] = useState(false);
 
-  const { query } = useSearchBox(props);
+  const { query, refine } = useSearchBox(props);
 
   // Recoil State
   const [queryState, setQueryState] = useRecoilState(queryAtom);
@@ -66,13 +66,12 @@ function CustomSearchBox(props) {
   });
 
   const refineFunction = (query) => {
+    // Refine query in all the app through recoil
+    setQueryState(query);
     // Empty array of rules on each Keystrokes
     rulesApplied([]);
     searchParams.set('query', query);
     setSearchParams(searchParams);
-
-    // Refine query in all the app through recoil
-    setQueryState(query);
   };
 
   useEffect(() => {
@@ -113,6 +112,7 @@ function CustomSearchBox(props) {
           }}
           onChange={(event) => {
             refineFunction(event.currentTarget.value);
+            refine(event.currentTarget.value);
           }}
         />
         {!!hasKeystroke && (

@@ -61,9 +61,8 @@ const SrpLaptop = () => {
   // Recoil & React states
   const stats = useRecoilValue(shouldHaveStats);
   const queryState = useRecoilValue(queryAtom);
-  const { isDesktop, mobile } = useRecoilValue(windowSize);
+  const { isDesktop } = useRecoilValue(windowSize);
   const navigationState = useRecoilValue(navigationStateAtom);
-  const showCart = useRecoilValue(cartOpen);
 
   // Should show injected content or not
   // Defined in config file
