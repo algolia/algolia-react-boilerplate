@@ -1,6 +1,5 @@
 import get from 'lodash/get';
 import { useState } from 'react';
-// import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
 import { CartPicto } from '@/assets/svg/SvgIndex';
 import { hitAtom, hitsConfig } from '@/config/hitsConfig';
@@ -11,9 +10,6 @@ import { shouldHaveCartFunctionality } from '@/config/featuresConfig';
 
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-
-// Used to send insights event on add to cart
-import { personaSelectedAtom } from '@/config/personaConfig';
 
 // Import cart from recoil(Cart state and the event if it's removed)
 import { addToCartSelector } from '@/config/cartFunctions';
@@ -42,8 +38,6 @@ const HitsCarousel = ({ hit, sendEvent }) => {
   // display or not the cart icons
   const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality);
 
-  // personalisation user token
-  const userToken = useRecoilValue(personaSelectedAtom);
   return (
     <div
       className="item"
