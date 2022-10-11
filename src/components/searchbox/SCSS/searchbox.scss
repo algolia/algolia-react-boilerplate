@@ -39,6 +39,7 @@
       }
       &__input {
         @include searchBoxInput($white-color, $grey-light-color-80);
+        
       }
     }
     &__category {
