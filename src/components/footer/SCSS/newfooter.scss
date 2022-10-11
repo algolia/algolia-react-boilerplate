@@ -1,7 +1,8 @@
 @use '../../../scss/partials' as *;
 
 .footer__wrapper {
-width: 90%;
+  margin-left: 5%;
+  width: 90%;
 }
 
 .footer__column__container {
@@ -10,9 +11,61 @@ width: 90%;
   justify-content: space-around;
 }
 
+.footer-columns__wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+
+  &__mobile {
+    display: none;
+  }
+}
+
 .footer__column{
-  &--company-details{
-    
+ 
+  h3 {
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+  li {
+    margin-bottom: 1rem;
+  }
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  &__infos {
+    a {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &__mobile {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      font-size: 0.8rem;
+    }
+    &--company-details{
+      img {
+        max-width: 10rem;
+          object-fit: cover;
+          height: auto;
+          transform: translate(-1.5rem, -1.5rem);
+      }
+    }
+  }
+  &__signup {
+    h3 {
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+  }
+  &__mobile {
+    display: none;
   }
 }
 
@@ -22,7 +75,7 @@ width: 90%;
 }
 
 .footer__img {
-  width: 150px;
+  max-width: 10rem;
   object-fit: cover;
   height: 100%;
   transform: translate(-1.5rem, -1.5rem);
@@ -32,12 +85,12 @@ width: 90%;
   background-color: transparent;
   width: 16rem;
   border: none;
-  border-bottom: 1px solid #e7e7e7;
-  border-right: 1px solid #e7e7e7;
+  border-bottom: 1px solid $grey-border-light-color;
+  border-right: 1px solid $grey-border-light-color;
   color: $grey-dark-color;
   padding: 0.5rem 5rem 0.5rem 0.5rem;
-  height: 43px;
-  font-size: 12px;
+  height: 3rem;
+  font-size: 0.8rem;
 }
 
 .mc-form-2 .clear-2 input {
@@ -46,8 +99,8 @@ width: 90%;
   border: none;
   color: $main-color;
   font-weight: 700;
-  font-size: 12px;
-  height: 43px;
+  font-size: 0.8rem;
+  height: 3rem;
 }
 
 .mc-form-2 .clear-2 .button {

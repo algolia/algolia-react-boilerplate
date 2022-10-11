@@ -35,8 +35,15 @@ const Footer = (props) => {
     <footer className="footer__wrapper">
       <div className="footer__container">
         <div className="footer__column__container">
-          <div className="footer__column--company-details">
-            <div className="footer__column__infos">
+          <div
+            className={`footer__column--company-details${
+              !isDesktop ? '__mobile' : ''
+            }`}
+          >
+            {' '}
+            <div
+              className={`footer__column__infos${!isDesktop ? '__mobile' : ''}`}
+            >
               <img className="footer__img" src={logo} alt="logo" />
               <ul>
                 <li>
@@ -55,41 +62,45 @@ const Footer = (props) => {
               </a>
             </div>
           </div>
-          <div className="footer__column">
-            <h3>Company</h3>
-            <ul>
-              <li>
-                <a href="#">About Us</a>
-              </li>
-              <li>
-                <a href="#">Jobs</a>
-              </li>
-              <li>
-                <a href="#">Press</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
-              </li>
-              <li>
-                <a href="#">Blog</a>
-              </li>
-            </ul>
-          </div>
-          <div className="footer__column">
-            <h3>Community</h3>
-            <ul>
-              <li>
-                <a href="#">Facebook group</a>
-              </li>
-              <li>
-                <a href="#">Forums</a>
-              </li>
-              <li>
-                <a href="#">Meetups</a>
-              </li>
-            </ul>
-          </div>
-          {/* <div className="footer__column">
+          <div
+            className={`footer-columns__wrapper${!isDesktop ? '__mobile' : ''}`}
+          >
+            <div className="footer__column">
+              <h3>Company</h3>
+              <ul>
+                <li>
+                  <a href="#">About Us</a>
+                </li>
+                <li>
+                  <a href="#">Jobs</a>
+                </li>
+                <li>
+                  <a href="#">Press</a>
+                </li>
+                <li>
+                  <a href="#">Contact</a>
+                </li>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+              </ul>
+            </div>
+            <div className="footer__column">
+              <h3>Community</h3>
+              <ul>
+                <li>
+                  <a href="#">Facebook group</a>
+                </li>
+                <li>
+                  <a href="#">Forums</a>
+                </li>
+                <li>
+                  <a href="#">Meetups</a>
+                </li>
+              </ul>
+            </div>
+            {/* column removed while bug being fixed, do not remove */}
+            {/* <div className="footer__column">
             <h3>Categories</h3>
             <ul className="footer__column--nav-links">
               {links.map((link, i) => {
@@ -129,30 +140,31 @@ const Footer = (props) => {
               })}
             </ul>
           </div> */}
-          <div className="footer__column__signup">
-            Join our Newsletter
-            <form className="validate subscribe-form-style" noValidate="">
-              <div className="mc-form-2">
-                <input
-                  className="email"
-                  type="email"
-                  required=""
-                  placeholder="Enter your email address..."
-                  name="EMAIL"
-                />
-                <div className="mc-news-2" aria-hidden="true">
-                  <input type="text" />
-                </div>
-                <div className="clear-2">
+            <div className="footer__column__signup">
+              <h3> Join our Newsletter</h3>{' '}
+              <form className="validate subscribe-form-style" noValidate="">
+                <div className="mc-form-2">
                   <input
-                    className="button"
-                    type="submit"
-                    name="subscribe"
-                    value="Submit"
+                    className="email"
+                    type="email"
+                    required=""
+                    placeholder="Enter your email address..."
+                    name="EMAIL"
                   />
+                  <div className="mc-news-2" aria-hidden="true">
+                    <input type="text" />
+                  </div>
+                  <div className="clear-2">
+                    <input
+                      className="button"
+                      type="submit"
+                      name="subscribe"
+                      value="Submit"
+                    />
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
