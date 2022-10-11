@@ -1,12 +1,10 @@
-// Render the Header component in Main.jsx, for small screen sizes
-
 import { useState } from 'react';
 
 // React Router
 import { Link } from 'react-router-dom';
 
 // Recoil Header State
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { motion } from 'framer-motion';
 
@@ -17,6 +15,12 @@ import { queryAtom } from '@/config/searchboxConfig';
 import logoMobile from '@/assets/logo/LogoMobile.webp';
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+
+//import Navigation config
+import { navigationStateAtom } from '@/config/navigationConfig';
+
+// Import Rules config
+import { rulesAtom } from '@/config/appliedRulesConfig';
 
 // Import framer motion
 import { AnimatePresence } from 'framer-motion';
@@ -29,11 +33,9 @@ import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
 import Navigation from './Navigation';
 
 // Custom hook to prevent body from scrolling
-import usePreventScrolling from '@/hooks/usePreventScrolling';
-import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 import { clickHamburger } from '@/config/cartFunctions';
-
-import { useRef } from 'react';
+import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
+import usePreventScrolling from '@/hooks/usePreventScrolling';
 
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
@@ -45,6 +47,10 @@ const HeaderMobile = ({ mobile, tablet }) => {
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
 
   const hamburger = useSetRecoilState(clickHamburger);
+
+  const setNavigationState = useSetRecoilState(navigationStateAtom);
+
+  const rulesApplied = useSetRecoilState(rulesAtom);
 
   // Prevent body from scrolling when panel is open
   usePreventScrolling(isMenuOpen);
@@ -72,7 +78,9 @@ const HeaderMobile = ({ mobile, tablet }) => {
             aria-label="Back to homepage"
             onClick={() => {
               setQueryState('');
+              setNavigationState({});
               federated(false);
+              rulesApplied([]);
             }}
           >
             <img src={logoMobile} alt="" width="200" />
@@ -91,12 +99,17 @@ const HeaderMobile = ({ mobile, tablet }) => {
       </div>
       <AnimatePresence>
         {isMenuOpen && (
-          <CategoriesMobile
-            isMenuOpen={isMenuOpen}
-            setIsMenuOpen={setIsMenuOpen}
-            mobile={mobile}
-            tablet={tablet}
-          />
+          <div
+            className="container-mobile__navigation-wp"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <CategoriesMobile
+              isMenuOpen={isMenuOpen}
+              setIsMenuOpen={setIsMenuOpen}
+              mobile={mobile}
+              tablet={tablet}
+            />
+          </div>
         )}
       </AnimatePresence>
     </div>

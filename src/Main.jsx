@@ -5,6 +5,7 @@ import { Configure, InstantSearch } from 'react-instantsearch-hooks-web';
 
 // Algolia API client
 import { searchClient } from './config/algoliaEnvConfig';
+import { InsightsMiddleware } from './config/algoliaInsightEvents';
 
 // Framer-Motion
 import { AnimatePresence } from 'framer-motion';
@@ -24,7 +25,10 @@ import {
   shouldShowAlert,
   showNetworkErorrs,
 } from '@/config/demoGuideConfig';
-import { shouldHaveDemoGuide } from '@/config/featuresConfig';
+import {
+  shouldHaveCartFunctionality,
+  shouldHaveDemoGuide,
+} from '@/config/featuresConfig';
 import { isCarouselLoaded } from './config/carouselConfig';
 
 // Import Pages and static components
@@ -33,19 +37,19 @@ import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 import DemoGuide from '@/components/demoGuide/DemoGuide';
 import Header from '@/components/header/Header';
 import CustomAppliedRules from './components/appliedRules/AppliedRules';
+import Redirect from '@/components/redirects/Redirect';
 
 import Footer from './components/footer/Footer';
 import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
 const HomePage = lazy(() => import('./pages/homepage/HomePage'));
-// import HomePage from './pages/homepage/HomePage';
-// import ProductDetails from './pages/productDetailsPage/ProductDetails';
 const ProductDetails = lazy(() =>
   import('./pages/productDetailsPage/ProductDetails')
 );
 const SearchResultsPage = lazy(() =>
   import('./pages/searchResultPage/SearchResultsPage')
 );
-// import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
+
+const CartModal = lazy(() => import('./components/cart/CartModal'));
 
 // Custom hook to prevent body from scrolling
 import usePreventScrolling from './hooks/usePreventScrolling';
@@ -54,7 +58,7 @@ import usePreventScrolling from './hooks/usePreventScrolling';
 import SearchErrorToast from './utils/ErrorHandler';
 import Loader from './components/loader/Loader';
 
-import clamp from './utils/clampCalcFunction';
+import { cartOpen } from './config/cartFunctions';
 
 export const Main = () => {
   // Index to make the main search queries to
@@ -84,60 +88,76 @@ export const Main = () => {
   // Value that shows Network Errors to Guide you to the correct Configuration
   const shouldShowNetworkErrors = useRecoilValue(showNetworkErorrs);
 
+  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
+  const showCart = useRecoilValue(cartOpen);
+
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
 
   return (
     <InstantSearch searchClient={searchClient} indexName={index}>
+      <InsightsMiddleware />
       {shouldShowNetworkErrors && <SearchErrorToast />}
 
       <div className="mainWrapper">
         {/* TODO: Check if this configure is used for anything */}
         <Configure query={queryState} />
         <Header />
+        <Redirect />
         {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
         <AnimatePresence>
-          {showDemoGuide && <DemoGuide setshowDemoGuide={setshowDemoGuide} />}
+          {showDemoGuide && (
+            <div className="demoGuide-wp">
+              <DemoGuide setshowDemoGuide={setshowDemoGuide} />
+            </div>
+          )}
+          {shouldShowCartIcon && showCart && (
+            <Suspense fallback={''}>
+              <div className="cartModal-wp">
+                <CartModal />
+              </div>
+            </Suspense>
+          )}
         </AnimatePresence>
-        <AnimatePresence initial={true}>
-          <Routes key={location.pathname} location={location}>
-            <Route
-              path="/"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <HomePage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/search"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <SearchResultsPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/search/:categories"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <SearchResultsPage />
-                </Suspense>
-              }
-            />
-            {/* objectID is the unique identifier for an algolia record */}
-            <Route
-              path="/search/product/:objectID"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <ProductDetails />
-                </Suspense>
-              }
-            />
-          </Routes>
-          {/* To avoid CLS, load in the footer after the carousels render */}
-          {carouselLoaded && <Footer />}
-        </AnimatePresence>
+        {/* <AnimatePresence initial={true}> */}
+        <Routes key={location.pathname} location={location}>
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<Loader />}>
+                <HomePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SearchResultsPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/search/:categories"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SearchResultsPage />
+              </Suspense>
+            }
+          />
+          {/* objectID is the unique identifier for an algolia record */}
+          <Route
+            path="/search/product/:objectID"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ProductDetails />
+              </Suspense>
+            }
+          />
+        </Routes>
+        {/* To avoid CLS, load in the footer after the carousels render */}
+        {carouselLoaded && <Footer />}
+        {/* </AnimatePresence> */}
         {shouldShowAlertAtom && (
           <Suspense fallback={''}>
             <AlertNavigation />

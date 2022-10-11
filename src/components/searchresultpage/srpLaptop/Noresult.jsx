@@ -1,12 +1,12 @@
 // import IS hook
-import { Index, Configure } from 'react-instantsearch-hooks-web';
+import { Configure, Index } from 'react-instantsearch-hooks-web';
 
 // Import recoil function
 import { useRecoilValue } from 'recoil';
 
 // Recommend
-import algoliarecommend from '@algolia/recommend';
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
+import algoliarecommend from '@algolia/recommend';
 import { RelatedProducts } from '@algolia/recommend-react';
 
 // Algolia search client
@@ -32,6 +32,8 @@ import { federatedSearchConfig } from '@/config/federatedConfig';
 
 import { shouldHaveRelatedProducts } from '@/config/featuresConfig';
 
+import { windowSize } from '@/hooks/useScreenSize';
+
 // This is rendered when there are no results to display
 const NoResults = () => {
   //Get the query
@@ -43,6 +45,8 @@ const NoResults = () => {
   const { suggestionsIndex } = useRecoilValue(indexNames);
   // Get the main index
   const index = useRecoilValue(mainIndex);
+
+  const { isDesktop } = useRecoilValue(windowSize);
 
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
@@ -94,7 +98,7 @@ const NoResults = () => {
                         indexName={index}
                         objectIDs={[lastId]}
                         itemComponent={RelatedItem}
-                        maxRecommendations={5}
+                        maxRecommendations={isDesktop ? 5 : 2}
                       />
                     </div>
                   )}

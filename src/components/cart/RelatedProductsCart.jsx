@@ -23,7 +23,6 @@ const RelatedProductsCart = ({ objectIds }) => {
   });
 
   // let relatedRecommendationsProducts;
-
   const { recommendations } = useRelatedProducts({
     recommendClient,
     indexName,

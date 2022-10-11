@@ -9,8 +9,7 @@ export default function ScrollToTop({ children }) {
     if (canControlScrollRestoration) {
       window.history.scrollRestoration = 'manual';
     }
-
-    window.scrollTo(0, 0);
+    setTimeout(() => {window.scrollTo(0, 0)}, 300) 
   }, [pathname]);
 
   return children;

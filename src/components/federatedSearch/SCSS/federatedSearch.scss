@@ -31,13 +31,6 @@
     }
 }
 
-.closeFederated {
-    position: absolute;
-    top: -2rem;
-    right: 1rem;
-    cursor: pointer;
-}
-
 //Recent searches
 .recentSearches{
     &__title{
@@ -116,7 +109,7 @@
         display: flex;
         align-items: flex-start;
         gap: 0.5rem;
-        width: 32%;
+        width: clamp(10rem, 32%, 32%);
         box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
         transition: box-shadow 0.3s ease-in-out;
         padding: 2rem 1rem;
@@ -130,14 +123,17 @@
         }
         .infos{
             .productName{
-               @include productName($grey-dark-color)
+               @include productName($grey-dark-color);
+               text-align: left;
             }
             
             .brand{
-               @include brand($main-color)
+               @include brand($main-color); 
+               text-align: left;
             }
             .price{
-               @include price($second-color)
+               @include price($second-color);
+               text-align: left;
             }
         }
         &:hover{
@@ -216,6 +212,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: stretch;
+            
 
             .image-wrapper{
                 max-width: 60%;
@@ -240,8 +237,37 @@
 }
 .closeFederated{
     position: absolute;
-    top: 1rem;
+    top: 0.5rem;
     right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     cursor: pointer;
+
+    &:hover{
+
+      p{
+        transform: translateX(0.1rem);
+        transition: transform 0.3s ease-in-out;
+      }
+      svg{
+        transform: translateX(-0.1rem);
+        transition: transform 0.3s ease-in-out;
+      }
+    }
+
+    p{ 
+      @include p-text($main-color, 300);
+      font-size: 0.8rem;
+      transition: transform 0.1s ease-in-out;
+    }
+    svg {
+      margin-top: 2px;
+      width: 8px;
+      transition: transform 0.1s ease-in-out;
+      path{
+        fill: $second-color;
+      }
+    }
 }
 }

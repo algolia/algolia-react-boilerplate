@@ -8,9 +8,9 @@ import { useRecoilValue } from 'recoil';
 import { mainIndex, recommendClient } from '@/config/algoliaEnvConfig';
 import '@algolia/ui-components-horizontal-slider-theme';
 
-import { trendingConfig } from '@/config/trendingConfig';
-import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 import TrendingFacetsItem from '@/components/recommend/trending/TrendingFacetsItem';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
+import { trendingConfig } from '@/config/trendingConfig';
 
 //Use Translation
 import { useTranslation } from 'react-i18next';

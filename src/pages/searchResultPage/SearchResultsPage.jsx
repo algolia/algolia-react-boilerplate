@@ -6,7 +6,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 // import IS hook
-import { useHits } from 'react-instantsearch-hooks-web';
+import { useHits, useSearchBox } from 'react-instantsearch-hooks-web';
 
 // Recoil state to directly access results
 import { useSetRecoilState, useRecoilValue } from 'recoil';
@@ -21,7 +21,6 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
 
 const SearchResultPage = ({ props }) => {
-
   // Initialize to one so by default we try to show SRP
   const [nbOfHits, setNbOfHits] = useState(1);
 

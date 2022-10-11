@@ -44,6 +44,7 @@ const resources = {
         sizeTitle: 'Size',
         colorTitle: 'Color',
         yourCartIsEmpty: 'Your cart is empty',
+        checkout: 'Checkout'
       },
     },
   },
@@ -71,7 +72,7 @@ const resources = {
       },
       pdp: {
         fbtTitle: 'Fréquemment acheté ensemble',
-        relatedTitle: 'Produits connexes',
+        relatedTitle: 'Dans la même catégorie',
         buttonBack: 'Revenir aux recherches',
         addToCartButton: 'Ajouter au panier',
         availableSize: 'Taille disponibles:',
@@ -85,6 +86,7 @@ const resources = {
         sizeTitle: 'Taille',
         colorTitle: 'Couleur',
         yourCartIsEmpty: 'Votre panier est vide',
+        checkout: 'Valider mon panier'
       },
     },
   },
@@ -129,6 +131,7 @@ const resources = {
         sizeTitle: 'Schneiden',
         colorTitle: 'Farbe',
         yourCartIsEmpty: 'Dein Korb ist leer',
+        checkout: 'Kasse'
       },
     },
   },

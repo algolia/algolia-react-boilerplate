@@ -24,7 +24,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // SVG & components
-import { ChevronLeft } from '@/assets/svg/SvgIndex';
+import { ChevronLeft, CartPicto } from '@/assets/svg/SvgIndex';
 import Price from '@/components/hits/components/Price.jsx';
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
 // In case of img loading error
@@ -42,7 +42,6 @@ import {
 import { addToCartSelector, cartOpen } from '@/config/cartFunctions';
 import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 import {
-  shouldHaveCartFunctionality,
   shouldHaveFbtProducts,
   shouldHaveRelatedProducts,
 } from '@/config/featuresConfig';
@@ -56,30 +55,19 @@ import { personaSelectedAtom } from '@/config/personaConfig';
 import { windowSize } from '@/hooks/useScreenSize';
 
 // Send an insights event to algolia
-import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+// import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
 //Import scope SCSS
 import './SCSS/productDetails.scss';
 
 // Import and use translation
 import { useTranslation } from 'react-i18next';
-
-// Import cart from recoil
-const CartModal = lazy(() => import('@/components/cart/CartModal'));
+import { useHits } from 'react-instantsearch-hooks-web';
 
 const ProductDetails = () => {
-  // For alert on sending add to cart event
-  const setAlert = useSetRecoilState(alertContent);
-  const setAlertOpen = useSetRecoilState(isAlertOpen);
+  const { sendEvent } = useHits();
 
-  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
-
-  // Function to manage the alert
-  const triggerAlert = (content) => {
-    setAlertOpen(true);
-    setAlert(content);
-    setTimeout(() => setAlertOpen(false), 5000);
-  };
+  const [addToCartIsClicked, setAddToCartIsClicked] = useState(false);
 
   // location in order to access current objectID
   const location = useLocation();
@@ -116,12 +104,6 @@ const ProductDetails = () => {
     }
   }, []);
 
-  // personalisation user token
-  const userToken = useRecoilValue(personaSelectedAtom);
-
-  // Get the main index
-  const index = useRecoilValue(mainIndex);
-
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
   );
@@ -135,7 +117,7 @@ const ProductDetails = () => {
   // navigate is used by react router
   const navigate = useNavigate();
 
-  const { isDesktop, mobile } = useRecoilValue(windowSize);
+  const { isDesktop } = useRecoilValue(windowSize);
 
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
 
@@ -158,8 +140,6 @@ const ProductDetails = () => {
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
   });
-
-  const showCart = useRecoilValue(cartOpen);
 
   let fbtRecommendationsProducts;
   let relatedRecommendationsProducts;
@@ -192,9 +172,6 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-      {shouldShowCartIcon && showCart && (
-        <CartModal isDesktop={isDesktop} mobile={mobile} />
-      )}
       <div className={`${!isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'}`}>
         <div
           className={`${!isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'}`}
@@ -303,21 +280,20 @@ const ProductDetails = () => {
             )}
             {!PDPHitSections.sizeFilter && (
               <motion.button
-                className="add-to-cart"
+                className={
+                  addToCartIsClicked
+                    ? 'add-to-cart add-to-cart-active'
+                    : 'add-to-cart'
+                }
                 onClick={() => {
                   setAddToCartAtom(hit);
-                  triggerAlert('Sending add to cart event to Algolia'),
-                    // Send event conversion to Algolia API
-                    useSendAlgoliaEvent({
-                      type: 'conversion',
-                      userToken: userToken,
-                      index: index,
-                      hit: hit,
-                      name: 'add-to-cart',
-                    });
+                  setAddToCartIsClicked(true);
+                  setTimeout(() => setAddToCartIsClicked(false), 300);
+                  // Send event conversion to Algolia API
+                  sendEvent('conversion', hit, 'PDP: Add to cart');
                 }}
               >
-                <i className="fa-solid fa-shopping-cart"></i>
+                <CartPicto />
                 <p>{t('addToCartButton')}</p>
               </motion.button>
             )}

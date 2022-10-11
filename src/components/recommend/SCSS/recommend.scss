@@ -24,6 +24,26 @@
     justify-content: center;
   }
 
+  .uic-HorizontalSlider-navigation{
+    align-items: center;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.44);
+    color: $second-color;
+    cursor: pointer;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    outline-color: transparent;
+    padding: 0;
+    position: absolute;
+    top: 35%;
+    transition: opacity .15s;
+    width: 32px;
+    z-index: 1;
+  }
+
   .uic-HorizontalSlider-list{
     padding: 1rem 1rem;
     gap: 1rem;

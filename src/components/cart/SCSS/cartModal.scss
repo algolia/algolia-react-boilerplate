@@ -3,21 +3,32 @@
 // ------------------------------------------
 @use '../../../scss/partials' as *;
 
+.cartModal-wp{
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur( 2px );
+  -webkit-backdrop-filter: blur( 2px );
+  z-index: 999;
+  animation: opacity 0.2s ease-in-out;
+}
+
+
+
 .modal-container {
   z-index: 1000;
   position: absolute;
   background-color: $white-color;
+  // top: calc(13rem);
   right: 0;
-  width: 462px;
-  height: 529px;
+  width: clamp(30rem, 23.38rem + 12.90vw, 35rem);
+  height: 100vh;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  padding: 45px 35px;
+  border-radius: 0.2rem 0 0 0.2rem ;
+  padding: 1.5rem 2rem;
   overflow: scroll;
   opacity: 0;
-  transform: translateX(100%);
-  transition: all 0.1s ease-in-out;
+
   &__title {
     @include titleH3();
   }
@@ -26,19 +37,51 @@
     width: 80%;
     margin: 30px auto;
   }
-  &__button {
-    @include btn($white-color, $second-color);
+  &__buttons{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center
+  }
+  &__emptyCart {
+    @include btn($white-color, $main-color);
     border: 1px solid $second-color;
-    border-radius: 2px;
+    width: 100%;
     &:hover {
       @include btn-hover($second-color, $white-color);
     }
   }
-}
-.modal-container-active {
-  opacity: 1;
-  transform: translateX(0%);
-  transition: all 0.3s ease-in-out;
+  &__checkout{
+    @include btn($second-color-custom-gradient, $white-color); 
+    border: 1px solid transparent;
+    width: 100%;
+    gap: 1rem;
+    p{
+      transition: all 0.3s ease-in-out;
+    }
+    svg{
+      margin-top: 2px;
+      width: 8px;
+      transition: all 0.3s ease-in-out;
+      path{
+        fill: $white-color;
+      }
+    }
+    &:hover {
+      @include btn-hover($second-color-custom-gradient, $white-color);
+      p{
+        transform: translateX(-0.5rem);
+        transition: all 0.3s ease-in-out;
+      }
+      svg{
+          transform: translateX(0.5rem);
+          transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+
+
+
 }
 
 .modal-container::-webkit-scrollbar {
@@ -62,6 +105,7 @@
     &__details {
       display: flex;
       justify-content: space-between;
+      gap: 1rem;
       margin-top: 0.5rem;
       &__size {
         p {
@@ -86,14 +130,22 @@
         justify-content: space-around;
         width: 50%;
         svg {
-          width: 20px;
+          width: 10px;
+          path{fill: $white-color;}
         }
         p {
           font-weight: 500;
           font-size: 1rem;
         }
         &__icons {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           cursor: pointer;
+          width: 20px;
+          height: 20px;
+          background-color: $second-color;
+          border-radius: 50%;
         }
       }
       &__price {
@@ -122,7 +174,11 @@
 }
 
 .recommend-cart {
-  margin-top: 1rem;
+  margin: 3rem 0;
+  .title {
+    @include titleH3($second-color);
+    margin-bottom: 1rem;
+  }
   .uic-HorizontalSlider-container {
     display: flex;
   }
@@ -131,6 +187,11 @@
     grid-auto-columns: 19%;
     display: flex;
   }
+
+  .uic-HorizontalSlider-navigation{
+    display: none
+  } 
+
   .relatedItem {
     @include hit($main-color, $second-color, $second-color, $second-color);
     position: relative;
@@ -141,6 +202,7 @@
         display: none;
       }
     }
+
 
     &__infos {
       @include productName($grey-dark-color);
@@ -164,16 +226,15 @@
       }
     }
   }
-  .title {
-    @include titleH3();
-  }
+
 }
 
 // ------------------------------------------
 // MOBILE
 // ------------------------------------------
 .modal-container-mobile {
-  padding: 25px 15px;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100vh;
   &__close {
@@ -183,5 +244,14 @@
     top: 1.2rem;
     font-weight: bold;
     color: $second-color;
+  }
+}
+
+@keyframes opacity {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
   }
 }

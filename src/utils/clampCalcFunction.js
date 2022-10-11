@@ -7,7 +7,7 @@ function clamp(minFontSizeRem, maxFontSizeRem, minScreenSize, maxScreenSize) {
   let slope = (maxFontSizeRem - minFontSizeRem) / (maxWidthRem - minWidthRem);
   let yAxis = -minWidthRem * slope + minFontSizeRem;
   let output = { yAxis: yAxis, slopeVw: slope * 100 };
-  return output;
+  return `clamp(${minFontSizeRem}rem, ${yAxis}rem + ${slope * 100}vw, ${maxFontSizeRem}rem);`;
 }
 
 export default clamp;

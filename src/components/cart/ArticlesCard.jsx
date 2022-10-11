@@ -14,9 +14,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 //Use Translation
 import { useTranslation } from 'react-i18next';
 
-// ArticlesCard in Cart Modal
-
-const ArticlesCard = ({ item }) => {
+const ArticlesCard = ({ item, sendEvent }) => {
   const [cart, setCart] = useRecoilState(cartState);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
@@ -65,7 +63,7 @@ const ArticlesCard = ({ item }) => {
             {get(item, colour) && (
               <div className="articles-card__infos__details__size">
                 <p>
-                {t('colorTitle')} <span>{get(item, colour)}</span>
+                  {t('colorTitle')} <span>{get(item, colour)}</span>
                 </p>
               </div>
             )}
@@ -94,6 +92,7 @@ const ArticlesCard = ({ item }) => {
               <div
                 className="articles-card__infos__qtyprice__plus-minus__icons"
                 onClick={() => {
+                  sendEvent('conversion', item, 'Cart: Add to cart');
                   setAddToCartAtom(item);
                 }}
               >

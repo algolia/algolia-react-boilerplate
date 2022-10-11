@@ -1,14 +1,13 @@
 // Import the custom hits to display in the SRP
 import CustomHits from '../CustomHits';
 // Import the config files we'll need to import
-import { useRecoilValue } from 'recoil';
 import { indexNames } from '@/config/algoliaEnvConfig';
 import { queryAtom } from '@/config/searchboxConfig';
+import { useRecoilValue } from 'recoil';
 
 import { lazy, useEffect, useState } from 'react';
 // Algolia
 import {
-  useHits,
   useInfiniteHits,
   useInstantSearch,
   useQueryRules,
@@ -35,7 +34,7 @@ const contentTypeComponentMap = {
 // This component renders the custom query hits, but also injects them with content from rule data or the injection Index
 const InjectedHits = (props) => {
   // Get the regular hits
-  const { hits } = useInfiniteHits(props);
+  const { hits, sendEvent } = useInfiniteHits(props);
 
   // Get custom data from rules
   const { items: ruleData } = useQueryRules(props);
@@ -92,7 +91,7 @@ const InjectedHits = (props) => {
     setInjectedHits(injectContent(hits, itemsToInject));
   }, [ruleData, hits, scopedResults, query]);
 
-  return <CustomHits hits={injectedHits} />;
+  return <CustomHits hits={injectedHits} sendEvent={sendEvent} />;
 };
 
 export default InjectedHits;

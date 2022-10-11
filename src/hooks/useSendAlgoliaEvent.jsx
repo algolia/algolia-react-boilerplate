@@ -1,4 +1,4 @@
-import { insightsClient } from '@/config/algoliaEnvConfig';
+// import { insightsClient } from '@/config/algoliaEnvConfig';
 
 const useSendAlgoliaEvent = ({ type, userToken, index, hit, name }) => {
   try {
@@ -15,4 +15,4 @@ const useSendAlgoliaEvent = ({ type, userToken, index, hit, name }) => {
   }
 };
 
-export default useSendAlgoliaEvent;
+// export default useSendAlgoliaEvent;

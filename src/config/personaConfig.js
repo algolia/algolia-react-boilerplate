@@ -17,6 +17,8 @@ export const personaConfig = [
   {
     value: 'anon',
     label: 'No Persona',
+    labelFr:'Pas de persona',
+    labelGer: 'Keine persönlichkeit',
     description: 'Anonymous user',
     type: 'persona',
     personalizationFilters: [],

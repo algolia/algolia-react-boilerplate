@@ -75,7 +75,7 @@ function CurrentRefinements(props) {
                     refine(item.value);
                   }}
                 >
-                  {displayColor(item)}
+                  <p>{displayColor(item)}</p>
                 </a>
               )}
             </li>
@@ -111,7 +111,7 @@ function CurrentRefinementGeneral(props) {
                 refine(nested);
               }}
             >
-              {colourHexa ? displayColor(nested.label) : nested.label}
+              <p>{colourHexa ? displayColor(nested.label) : nested.label}</p>
             </a>
           </li>
         );

@@ -19,7 +19,11 @@ const Header = () => {
   // Render the Header for Laptop or Mobile, depending on the size of the screen
   return (
     <header className="header">
-      {isDesktop ? <HeaderLaptop /> : <HeaderMobile tablet={tablet} mobile={mobile} />}
+      {isDesktop ? (
+        <HeaderLaptop />
+      ) : (
+        <HeaderMobile tablet={tablet} mobile={mobile} />
+      )}
     </header>
   );
 };

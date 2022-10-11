@@ -7,6 +7,7 @@ import { Highlight } from 'react-instantsearch-hooks-web';
 // Import SVGs
 import { Heart, MinusPicto, PlusPicto } from '@/assets/svg/SvgIndex';
 import RankingIcon from './components/RankingIcon';
+
 // Import Badge config
 import { badgeCriteria } from '@/config/badgeConfig';
 
@@ -35,12 +36,14 @@ import Price from '@/components/hits/components/Price.jsx';
 // Import cart from recoil(Cart state and the event if it's removed)
 import {
   addToCartSelector,
-  removeToCartSelector,
   cartState,
+  removeToCartSelector,
 } from '@/config/cartFunctions';
 // Import Persona if there is
-import { shouldHavePersona } from '@/config/featuresConfig';
-import { shouldHaveCartFunctionality } from '@/config/featuresConfig';
+import {
+  shouldHaveCartFunctionality,
+  shouldHavePersona,
+} from '@/config/featuresConfig';
 import {
   personaSelectedFiltersAtom,
   shouldDisplayRankingIcons,
@@ -50,11 +53,10 @@ import {
 import './SCSS/hits.scss';
 
 // Used to send insights event on add to cart
-import { mainIndex } from '@/config/algoliaEnvConfig';
-import { personaSelectedAtom } from '@/config/personaConfig';
-import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
-const Hit = ({ hit }) => {
+// import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+
+const Hit = ({ hit, sendEvent }) => {
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
   const [isHovered, setIsHovered] = useState(false);
@@ -72,12 +74,6 @@ const Hit = ({ hit }) => {
 
   const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality);
 
-  // personalisation user token
-  const userToken = useRecoilValue(personaSelectedAtom);
-
-  // Get the main index
-  const index = useRecoilValue(mainIndex);
-
   // Get hit attribute from config file
   const {
     objectID,
@@ -93,25 +89,25 @@ const Hit = ({ hit }) => {
 
   const RankingFormulaOverlay = ({ hit }) => {
     return (
-      <div
-        layout
+      <motion.div
         variants={framerMotionHits}
         initial={framerMotionHits.initial}
         exit={framerMotionHits.exit}
         animate={framerMotionHits.animate}
         transition={{
-          duration: 0.8,
-          delay: 0.3,
+          duration: 0.3,
+          delay: 0,
           ease: [0.43, 0.13, 0.23, 0.96],
         }}
         className="ranking-formula"
       >
-        {Object.entries(hit._rankingInfo).map((entry) => (
-          <p>
-            {entry[0]} {JSON.stringify(entry[1])}
-          </p>
-        ))}
-      </div>
+        {hit._rankingInfo &&
+          Object.entries(hit._rankingInfo).map((entry, i) => (
+            <p key={i}>
+              {entry[0]} {JSON.stringify(entry[1])}
+            </p>
+          ))}
+      </motion.div>
     );
   };
 
@@ -168,6 +164,7 @@ const Hit = ({ hit }) => {
             hitState(hit);
             navigate(`/search/product/${hit[objectID]}`);
             useStoreIdToLocalStorage(hit[objectID]);
+            sendEvent('click', hit, 'SRP: Product clicked');
           }}
         >
           <img
@@ -221,25 +218,19 @@ const Hit = ({ hit }) => {
                 </div>
                 <p
                   className={
-                    itemQty === 0 && 'srpItem__infosDown__cart-inactive'
+                    itemQty === 0 ? 'srpItem__infosDown__cart-inactive' : ''
                   }
                 >
                   {itemQty}
                 </p>
                 <div
-                  className={cartPictoPlusClicked && 'picto-active'}
+                  className={cartPictoPlusClicked ? 'picto-active' : ''}
                   onClick={() => {
                     setCartPictoPlusClicked(true);
                     setTimeout(() => setCartPictoPlusClicked(false), 300);
                     setAddToCartAtom(hit);
                     // Send event conversion to Algolia API
-                    useSendAlgoliaEvent({
-                      type: 'conversion',
-                      userToken: userToken,
-                      index: index,
-                      hit: hit,
-                      name: 'add-to-cart',
-                    });
+                    sendEvent('conversion', hit, 'SRP: Add to cart');
                   }}
                 >
                   <PlusPicto />

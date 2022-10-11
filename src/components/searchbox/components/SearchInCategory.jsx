@@ -9,7 +9,8 @@ import { navigationStateAtom } from '@/config/navigationConfig';
 import { useRecoilState } from 'recoil';
 
 const SearchInCategory = () => {
-  const [navigationState, setNavigationState] = useRecoilState(navigationStateAtom);
+  const [navigationState, setNavigationState] =
+    useRecoilState(navigationStateAtom);
 
   // navigate is used by React Router
   const navigate = useNavigate();
@@ -23,17 +24,11 @@ const SearchInCategory = () => {
     return (
       <div className="searchbox__category">
         <p>
-          {t('searchInCategory')}{' '}
-          {navigationState.action
-            .split(':')[1]
-            .split('>')
-            .pop()
-            .replace("'", '')
-            .slice(0, -1)}
+          {t('searchInCategory')} {navigationState.name}
         </p>
         <span
           onClick={() => {
-            setNavigationState({})
+            setNavigationState({});
             navigate('/search');
           }}
           className="searchbox__category__close-btn"
@@ -46,11 +41,11 @@ const SearchInCategory = () => {
     return (
       <div className="searchbox__category">
         <p>
-          {t('searchInCategory')} {navigationState.action}
+          {t('searchInCategory')} {navigationState.name}
         </p>
         <span
           onClick={() => {
-            setNavigationState({})
+            setNavigationState({});
             navigate('/search');
           }}
           className="searchbox__category__close-btn"
@@ -67,7 +62,7 @@ const SearchInCategory = () => {
         </p>
         <span
           onClick={() => {
-            setNavigationState({})
+            setNavigationState({});
             navigate('/search');
           }}
           className="searchbox__category__close-btn"

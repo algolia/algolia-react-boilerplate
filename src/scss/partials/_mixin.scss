@@ -21,20 +21,29 @@
   justify-content: center;
   align-items: center;
   background: $background;
-  color: $text-color;
-  font-weight: 400;
-  padding: 0.5rem;
-  font-size: 0.8rem;
-  font-family: $main-font;
   border-radius: 2px;
   transition: all 0.3s ease-in-out;
+  padding: 0.5rem;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  p{
+    color: $text-color;
+    font-weight: 400; 
+    font-family: $main-font;
+    font-size: 0.8rem;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+  }
 }
 
 @mixin btn-hover($background, $text-color) {
   background: $background;
-  color: $text-color;
   transition: all 0.3s ease-in-out;
+  p{
+    color: $text-color;
+    transition: all 0.3s ease-in-out;
+  }
+ 
 }
 
 // ------------------------------------------
@@ -552,7 +561,7 @@
   display: flex;
   height: fit-content;
   flex-direction: column;
-  z-index: 999;
+  z-index: 995;
   transition: 0.2s ease-in-out;
   cursor: pointer;
   :nth-child(1) {

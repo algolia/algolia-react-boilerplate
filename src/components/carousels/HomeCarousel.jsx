@@ -2,17 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 
 import { motion } from 'framer-motion';
 import { Configure, Index, useHits } from 'react-instantsearch-hooks-web';
-// React Router
-import { useNavigate } from 'react-router-dom';
 
 // Recoil
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig';
 import { framerMotionTransition } from '@/config/animationConfig';
 import { hitsPerCarousel } from '@/config/carouselConfig';
-import { hitAtom } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 import { segmentSelectedAtom } from '@/config/segmentConfig';
 
@@ -55,7 +52,7 @@ const HomeCarousel = ({ context, title }) => {
 // This carousel is used inside of HomeCarousel
 
 function Carousel(props) {
-  const { hits } = useHits(props);
+  const { hits, sendEvent } = useHits(props);
   const { title } = props;
   const [width, setWidth] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -106,7 +103,14 @@ function Carousel(props) {
           >
             {/* Display the hits in the carousel */}
             {hits.map((hit, i) => {
-              return <HitsCarousel hit={hit} key={i} index={index} />;
+              return (
+                <HitsCarousel
+                  hit={hit}
+                  key={i}
+                  index={index}
+                  sendEvent={sendEvent}
+                />
+              );
             })}
           </motion.div>
         </motion.div>
