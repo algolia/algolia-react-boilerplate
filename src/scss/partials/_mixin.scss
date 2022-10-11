@@ -57,14 +57,19 @@
   height: 100%;
   background-color: $background;
   border: 1px solid $border-color;
+  border-left: 1px solid $second-color;
+  border-right: 1px solid $second-color;
   font-size: 0.8rem;
+  transition: all 0.2s ease-in-out;
 
   &::placeholder {
     font-size: 0.8rem;
     color: $grey-dark-color;
   }
   &:focus {
-    outline: none;
+    border-top: 1px solid $second-color;
+    border-bottom: 1px solid $second-color;
+    transition: all 0.5s ease-in-out;
   }
   &::-webkit-search-cancel-button {
     // If you want display or not cross in searchbox
