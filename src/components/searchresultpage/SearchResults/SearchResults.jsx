@@ -57,7 +57,7 @@ import InjectedHits from '@/components/hits/components/injected-hits/InjectedHit
 //Import scope SCSS
 import '../SCSS/searchResultsPage.scss';
 
-const SrpLaptop = () => {
+const SearchResults = () => {
   // Recoil & React states
   const stats = useRecoilValue(shouldHaveStats);
   const queryState = useRecoilValue(queryAtom);
@@ -228,4 +228,4 @@ const SrpLaptop = () => {
   );
 };
 
-export default SrpLaptop;
+export default SearchResults;

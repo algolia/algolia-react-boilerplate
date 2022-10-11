@@ -1,4 +1,4 @@
-import { atom, selector, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { personaSelectedAtom } from './personaConfig';
 
 import aa from 'search-insights';

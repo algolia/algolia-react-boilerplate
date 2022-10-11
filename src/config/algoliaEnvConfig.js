@@ -5,10 +5,7 @@
 import algoliarecommend from '@algolia/recommend';
 import algoliasearch from 'algoliasearch';
 import { atom, selector } from 'recoil';
-// import aa from 'search-insights';
-import { createInsightsMiddleware } from 'instantsearch.js/es/middlewares';
-import { useInstantSearch } from 'react-instantsearch-hooks-web';
-import { useLayoutEffect } from 'react';
+
 
 
 

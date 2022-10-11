@@ -6,14 +6,14 @@
 import { useEffect, useRef, useState } from 'react';
 
 // import IS hook
-import { useHits, useSearchBox } from 'react-instantsearch-hooks-web';
+import { useHits } from 'react-instantsearch-hooks-web';
 
 // Recoil state to directly access results
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 // Import Components
-import SrpLaptop from '@/components/searchresultpage/srpLaptop/SrpLaptop';
-import { NoResults } from '@/components/searchresultpage/srpLaptop/Noresult';
+import SearchResults from '@/components/searchresultpage/SearchResults/SearchResults';
+import { NoResults } from '@/components/searchresultpage/SearchResults/Noresult';
 import Banner from '@/components/banners/Banner';
 
 // Federated congif from recoil
@@ -57,7 +57,7 @@ const SearchResultPage = ({ props }) => {
       ) : (
         <>
           {shouldDisplayBanners && <Banner />}
-          {<SrpLaptop />}
+          {<SearchResults />}
         </>
       )}
     </>
