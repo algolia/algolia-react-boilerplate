@@ -57,13 +57,12 @@ import InjectedHits from '@/components/hits/components/injected-hits/InjectedHit
 //Import scope SCSS
 import '../SCSS/searchResultsPage.scss';
 
-const SrpLaptop = () => {
+const SearchResults = () => {
   // Recoil & React states
   const stats = useRecoilValue(shouldHaveStats);
   const queryState = useRecoilValue(queryAtom);
-  const { isDesktop, mobile } = useRecoilValue(windowSize);
+  const { isDesktop } = useRecoilValue(windowSize);
   const navigationState = useRecoilValue(navigationStateAtom);
-  const showCart = useRecoilValue(cartOpen);
 
   // Should show injected content or not
   // Defined in config file
@@ -229,4 +228,4 @@ const SrpLaptop = () => {
   );
 };
 
-export default SrpLaptop;
+export default SearchResults;
