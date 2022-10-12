@@ -182,7 +182,7 @@
       z-index: 994;
       background-color: $background-color;
 
-      ul {
+      &-items {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -196,6 +196,8 @@
           text-align: left;
           p {
             position: relative;
+            @include p-text($main-color, 500);
+            font-size: 0.8rem;
           }
         }
         .container__header-nav-selectors{

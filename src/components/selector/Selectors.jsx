@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
 // import Recoil States
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 //import configuration
 import {
@@ -37,6 +37,8 @@ import useOutsideClick from '@/hooks/useOutsideClick';
 // import scoped CSS
 import './selectors.scss';
 
+import { windowSize } from '@/hooks/useScreenSize';
+
 //Use Translation
 import { useTranslation } from 'react-i18next';
 
@@ -45,10 +47,18 @@ export const Selectors = ({ props }) => {
   const [selectedValue, setSelectedValue] = useState(props[0].label);
   const selectorBtn = useRef();
 
+  const { isDesktop } = useRecoilValue(windowSize);
+
   useOutsideClick(selectorBtn.current, () => setMenuActive(false));
 
   return (
-    <div className="selectorsWrapper">
+    <div
+      className={
+        isDesktop
+          ? 'selectorsWrapper'
+          : 'selectorsWrapper selectorsWrapper-mobile'
+      }
+    >
       <button
         className="selectorsWrapper__btn"
         onClick={() => setMenuActive(!menuActive)}

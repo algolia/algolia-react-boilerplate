@@ -53,3 +53,21 @@
     }
   }
 }
+
+
+// MOBILE
+
+.selectorsWrapper-mobile{
+
+  .selectorsWrapper__btn{
+    p{
+      text-align: left;
+    }
+  }
+  .selectorsWrapper__list {
+    top: 2rem;
+    margin-top: 0rem;
+    padding: 0.3rem;
+    width: fit-content;
+  }
+}
