@@ -17,9 +17,6 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Import help navigation state & config
-import { mainIndex } from './config/algoliaEnvConfig';
-import { isRulesSwitchToggle } from './config/appliedRulesConfig';
-import { queryAtom } from './config/searchboxConfig';
 import {
   isDemoGuideOpen,
   shouldShowAlert,
@@ -29,15 +26,18 @@ import {
   shouldHaveCartFunctionality,
   shouldHaveDemoGuide,
 } from '@/config/featuresConfig';
+import { mainIndex } from './config/algoliaEnvConfig';
+import { isRulesSwitchToggle } from './config/appliedRulesConfig';
 import { isCarouselLoaded } from './config/carouselConfig';
+import { queryAtom } from './config/searchboxConfig';
 
 // Import Pages and static components
 import AlertNavigation from '@/components/demoGuide/AlertNavigation';
 
 import DemoGuide from '@/components/demoGuide/DemoGuide';
 import Header from '@/components/header/Header';
-import CustomAppliedRules from './components/appliedRules/AppliedRules';
 import Redirect from '@/components/redirects/Redirect';
+import CustomAppliedRules from './components/appliedRules/AppliedRules';
 
 import Footer from './components/footer/Footer';
 import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
@@ -55,8 +55,8 @@ const CartModal = lazy(() => import('./components/cart/CartModal'));
 import usePreventScrolling from './hooks/usePreventScrolling';
 
 // Error handler for network errors
-import SearchErrorToast from './utils/ErrorHandler';
 import Loader from './components/loader/Loader';
+import SearchErrorToast from './utils/ErrorHandler';
 
 import { cartOpen } from './config/cartFunctions';
 
@@ -119,7 +119,6 @@ export const Main = () => {
             </Suspense>
           )}
         </AnimatePresence>
-        {/* <AnimatePresence initial={true}> */}
         <Routes key={location.pathname} location={location}>
           <Route
             path="/"
@@ -157,7 +156,6 @@ export const Main = () => {
         </Routes>
         {/* To avoid CLS, load in the footer after the carousels render */}
         {carouselLoaded && <Footer />}
-        {/* </AnimatePresence> */}
         {shouldShowAlertAtom && (
           <Suspense fallback={''}>
             <AlertNavigation />

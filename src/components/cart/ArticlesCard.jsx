@@ -5,8 +5,8 @@ import get from 'lodash/get';
 
 // Import cart from recoil
 import {
-  cartState,
   addToCartSelector,
+  cartState,
   removeToCartSelector,
 } from '@/config/cartFunctions';
 import { useRecoilState, useSetRecoilState } from 'recoil';

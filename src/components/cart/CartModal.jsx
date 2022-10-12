@@ -13,25 +13,23 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
 //Import config
-import { cartOpen, cartState } from '@/config/cartFunctions';
-import { cartClick } from '@/config/cartFunctions';
-import { shouldHaveRelatedProducts } from '@/config/featuresConfig';
 import { framerMotionTransition } from '@/config/animationConfig';
+import { cartClick, cartOpen, cartState } from '@/config/cartFunctions';
+import { shouldHaveRelatedProducts } from '@/config/featuresConfig';
 
 // Import hooks
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
 import { windowSize } from '@/hooks/useScreenSize';
 
 // Components
+import { ChevronRight } from '@/assets/svg/SvgIndex';
 import ArticlesCard from './ArticlesCard';
 import RelatedProductsCart from './RelatedProductsCart';
-import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 // Import CSS
-import './SCSS/cartModal.scss';
-import { isAlertOpen } from '@/config/demoGuideConfig';
-import { alertContent } from '@/config/demoGuideConfig';
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
 import usePreventScrolling from '@/hooks/usePreventScrolling';
+import './SCSS/cartModal.scss';
 
 const CartModal = () => {
   // Import all recoil states to show modal + Cart stored and Removed articles

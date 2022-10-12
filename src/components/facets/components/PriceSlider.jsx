@@ -9,9 +9,9 @@ import 'rc-slider/assets/index.css';
 // Import the range function from IS hook
 import { useRange } from 'react-instantsearch-hooks-web';
 // import Currency from recoil
-import { useRecoilValue } from 'recoil';
 import { currencySymbolAtom } from '@/config/currencyConfig';
 import { showNetworkErorrs } from '@/config/demoGuideConfig';
+import { useRecoilValue } from 'recoil';
 
 //Use Translation
 import { useTranslation } from 'react-i18next';
@@ -24,22 +24,14 @@ function PriceSlider(props) {
   // Rename the value for our usage
   const minValue = min;
   const maxValue = max;
-  // Props
-  const { title, titleFr, titleGer } = props;
+
   // Set the state of the slider
   const [minSlider, setMinSlider] = useState(min);
   const [maxSlider, setMaxSlider] = useState(max);
-  const [showRefineBtn, setShowRefineBtn] = useState(false);
 
   // Call the currency configuration
   const currency = useRecoilValue(currencySymbolAtom);
   const isCurrencyRight = '€' === currency;
-
-  // Import const translation
-  // Use the translator
-  const { i18n } = useTranslation();
-
-  const language = i18n.language;
 
   // Import const translation
   // Use the translator
@@ -108,7 +100,6 @@ function PriceSlider(props) {
       <div className="filters-container__pricecontainer">
         <form className="filters-container__pricecontainer__form">
           <div className="filters-container__pricecontainer__inputs">
-            {/* <p>{t('minPrice')}</p> */}
             {!isCurrencyRight && <span>{currency}</span>}
             <input
               type="text"
@@ -122,7 +113,6 @@ function PriceSlider(props) {
             {isCurrencyRight && <span>{currency}</span>}
           </div>
           <div className="filters-container__pricecontainer__inputs">
-            {/* <p>{t('maxPrice')}</p> */}
             {!isCurrencyRight && <span>{currency}</span>}
             <input
               type="text"
@@ -136,18 +126,6 @@ function PriceSlider(props) {
             {isCurrencyRight && <span>{currency}</span>}
           </div>
         </form>
-        {/* <div className="filters-container__pricecontainer__prices">
-          <p>
-            {!isCurrencyRight && currency}
-            {minSlider || 0}
-            {isCurrencyRight && currency}
-          </p>
-          <p>
-            {!isCurrencyRight && currency}
-            {maxSlider || 100}
-            {isCurrencyRight && currency}
-          </p>
-        </div> */}
         <Slider
           range
           min={min}

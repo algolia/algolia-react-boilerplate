@@ -8,11 +8,10 @@ import { ChevronRight } from '@/assets/svg/SvgIndex';
 import Price from '@/components/hits/components/Price.jsx';
 
 // Recoil import
-import { hitAtom } from '@/config/hitsConfig';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { hitsConfig } from '@/config/hitsConfig';
+import { hitAtom, hitsConfig } from '@/config/hitsConfig';
 import { personaSelectedAtom } from '@/config/personaConfig';
 import { queryAtom } from '@/config/searchboxConfig';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // React-router import
 import { useNavigate } from 'react-router-dom';

@@ -1,5 +1,4 @@
 // To close the modal simply click on the grey background
-
 const CustomModal = (props) => {
   const {
     position = 'static',
@@ -13,7 +12,6 @@ const CustomModal = (props) => {
   // This function closes the modal when the
   // background is clicked - stopPropagation
   // needed to alow clicks on the modal body
-
   const closeModal = (event) => {
     event.cancelBubble = true;
     if (event.stopPropagation) event.stopPropagation();

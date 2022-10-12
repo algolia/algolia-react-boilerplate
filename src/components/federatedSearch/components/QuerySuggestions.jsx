@@ -1,17 +1,17 @@
 import { memo } from 'react';
 
 // Algolia's imports
-import { useHits, Highlight } from 'react-instantsearch-hooks-web';
+import { Highlight, useHits } from 'react-instantsearch-hooks-web';
 
 // components import
 import { ChevronRight } from '@/assets/svg/SvgIndex';
 
 // Router import
-import { useNavigate, createSearchParams } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 
 // Recoil import
-import { useSetRecoilState } from 'recoil';
 import { queryAtom } from '@/config/searchboxConfig';
+import { useSetRecoilState } from 'recoil';
 
 function QuerySuggestions(props) {
   //Get title
