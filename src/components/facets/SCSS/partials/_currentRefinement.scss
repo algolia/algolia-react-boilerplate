@@ -4,6 +4,8 @@
   display: flex;
   margin: 1rem 0;
   height: fit-content;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   &:empty {
     display: none;
   }
@@ -12,12 +14,14 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    flex-wrap: wrap;
   }
 
   .refinement-container__refinements {
     margin-right: 0.5rem;
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
     &:empty {
       display: none;
     }
