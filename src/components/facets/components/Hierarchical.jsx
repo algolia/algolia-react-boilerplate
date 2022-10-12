@@ -58,18 +58,20 @@ function HierarchicalMenu(props) {
   // Define the props from hook function
   const { items, onNavigate, createURL, refine } = useHierarchicalMenu(props);
   return (
-    <div className="filters-container-hierarchical">
-      <div className="filters-container-hierarchical__title">
-        {language === 'en' && <h3>{title}</h3>}
-        {language === 'fr' && <h3>{titleFr}</h3>}
-        {language === 'ger' && <h3>{titleGer}</h3>}
+    <div className="filters-container">
+      <div className="filters-container-hierarchical">
+        <div className="filters-container-hierarchical__title">
+          {language === 'en' && <h3>{title}</h3>}
+          {language === 'fr' && <h3>{titleFr}</h3>}
+          {language === 'ger' && <h3>{titleGer}</h3>}
+        </div>
+        <HierarchicalList
+          items={items}
+          onNavigate={onNavigate}
+          createURL={createURL}
+          refine={refine}
+        />
       </div>
-      <HierarchicalList
-        items={items}
-        onNavigate={onNavigate}
-        createURL={createURL}
-        refine={refine}
-      />
     </div>
   );
 }

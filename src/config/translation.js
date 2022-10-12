@@ -47,6 +47,11 @@ const resources = {
         yourCartIsEmpty: 'Your cart is empty',
         checkout: 'Checkout'
       },
+      priceFacet: {
+        title:'Price',
+        maxPrice: 'Max Price',
+        minPrice: 'Min Price'
+      }
     },
   },
   fr: {
@@ -90,6 +95,11 @@ const resources = {
         yourCartIsEmpty: 'Votre panier est vide',
         checkout: 'Valider mon panier'
       },
+      priceFacet: {
+        title:'Prix',
+        maxPrice: 'Prix Maximum',
+        minPrice: 'Prix Minimum'
+      }
     },
   },
   ger: {
@@ -136,6 +146,11 @@ const resources = {
         yourCartIsEmpty: 'Dein Korb ist leer',
         checkout: 'Kasse'
       },
+      priceFacet: {
+        title:'Preis',
+        maxPrice: 'Max Preis',
+        minPrice: 'Min Preis'
+      }
     },
   },
 };

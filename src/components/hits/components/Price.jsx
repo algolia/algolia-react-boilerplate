@@ -41,7 +41,6 @@ const PriceBuilder = ({ hit }) => {
       {isCurrencyRight && displayCurrency && currencySymbol}
       {isOnSale && (
         <s>
-          {' '}
           {!isCurrencyRight && currencySymbol && displayCurrency}
           {hitPrice}
           {isCurrencyRight && currencySymbol && displayCurrency}

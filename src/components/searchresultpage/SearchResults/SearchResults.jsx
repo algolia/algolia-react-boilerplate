@@ -5,8 +5,7 @@ import { lazy, Suspense } from 'react';
 import { Configure, Index } from 'react-instantsearch-hooks-web';
 // Custom Hooks
 import { windowSize } from '@/hooks/useScreenSize';
-// router
-import { useLocation } from 'react-router-dom';
+
 // State Manager Recoil
 import { useRecoilState, useRecoilValue } from 'recoil';
 
@@ -27,9 +26,7 @@ const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
 
 // Configuration
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
-import { cartOpen } from '@/config/cartFunctions';
 import {
-  shouldHaveCartFunctionality,
   shouldHaveInjectedHits,
   shouldHaveSorts,
   shouldHaveStats,
@@ -67,7 +64,6 @@ const SearchResults = () => {
   // Should show injected content or not
   // Defined in config file
   const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
-  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
 
   // Get indexes Value
   const index = useRecoilValue(mainIndex);
@@ -80,9 +76,6 @@ const SearchResults = () => {
   const { labelIndex } = useRecoilValue(sortBy);
 
   const shouldHaveSortsAtom = useRecoilValue(shouldHaveSorts);
-
-  // Get states of React Router
-  const { state } = useLocation();
 
   // Persona
   const userToken = useRecoilValue(personaSelectedAtom);
