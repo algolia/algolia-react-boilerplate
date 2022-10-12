@@ -9,6 +9,15 @@ import { hitsConfig } from './hitsConfig';
 // Generally you should use type list if you are adding a new facet here
 export const refinements = [
   {
+    type: 'price',
+    label: 'Price',
+    labelFrench: 'Prix',
+    labelGerman: 'Preis',
+    options: {
+      attribute: hitsConfig.price,
+    },
+  },
+  {
     type: 'hierarchical',
     label: 'Category',
     labelFrench: 'Catégorie',
@@ -21,15 +30,6 @@ export const refinements = [
         hitsConfig.hierarchicalCategoriesLvl3,
       ],
       searchable: true,
-    },
-  },
-  {
-    type: 'price',
-    label: 'Price',
-    labelFrench: 'Prix',
-    labelGerman: 'Preis',
-    options: {
-      attribute: hitsConfig.price,
     },
   },
   {

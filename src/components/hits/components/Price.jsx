@@ -18,9 +18,6 @@ const PriceBuilder = ({ hit }) => {
   const currencySymbol = useRecoilValue(currencySymbolAtom);
   const displayCurrency = useRecoilValue(shouldDisplayCurrency);
 
-  // TODO: Add fallback for varying types of currency number separators
-  // const invertedPriceSeparators = useRecoilValue(shouldInvertPriceSeparators);
-
   // get the values from the data in hitsConfig
   const hitPrice = get(hit, price);
   const isOnSale = get(hit, onSale);
@@ -41,7 +38,6 @@ const PriceBuilder = ({ hit }) => {
       {isCurrencyRight && displayCurrency && currencySymbol}
       {isOnSale && (
         <s>
-          {' '}
           {!isCurrencyRight && currencySymbol && displayCurrency}
           {hitPrice}
           {isCurrencyRight && currencySymbol && displayCurrency}

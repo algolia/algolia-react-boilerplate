@@ -27,7 +27,6 @@ function Redirect(props) {
 
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams);
 
   const match = items.find((data) => Boolean(data.redirect));
   match && match.redirect

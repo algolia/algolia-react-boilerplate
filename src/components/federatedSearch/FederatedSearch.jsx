@@ -47,12 +47,12 @@ import { windowSize } from '@/hooks/useScreenSize';
 import { useTranslation } from 'react-i18next';
 
 // Components imports
+import { ChevronLeft } from '@/assets/svg/SvgIndex';
 import Articles from './components/BlogPost';
 import Category from './components/Category';
 import Products from './components/Products';
 import QuerySuggestions from './components/QuerySuggestions';
 import RecentSearches from './components/RecentSearches';
-import { ChevronLeft } from '@/assets/svg/SvgIndex';
 
 //Import scope SCSS
 import './SCSS/federatedSearch.scss';

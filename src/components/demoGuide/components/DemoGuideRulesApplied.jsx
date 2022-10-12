@@ -1,6 +1,7 @@
-import { appliedRulesInformations } from '@/config/demoGuideConfig';
 import { isRulesSwitchToggle } from '@/config/appliedRulesConfig';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { appliedRulesInformations } from '@/config/demoGuideConfig';
+import { useRecoilState } from 'recoil';
+
 const DemoGuideRulesApplied = () => {
   const [isSwitchToggle, setIsSwitchToggle] =
     useRecoilState(isRulesSwitchToggle);

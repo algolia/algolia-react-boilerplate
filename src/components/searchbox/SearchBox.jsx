@@ -49,6 +49,8 @@ function CustomSearchBox(props) {
   const [queryState, setQueryState] = useRecoilState(queryAtom);
 
   const [sbIsActive, setSbIsActive] = useRecoilState(searchBoxIsActive);
+
+  const [tooltip, setTooltip] = useState(false);
   // const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
 
@@ -93,11 +95,13 @@ function CustomSearchBox(props) {
           event.preventDefault();
           setQueryState(query);
           useStoreQueryToLocalStorage(query);
-
-          navigate({
-            pathname: '/search',
-            search: `?${searchParams}`,
-          });
+          if (query === '') setTooltip(true);
+          if (query !== '') {
+            navigate({
+              pathname: '/search',
+              search: `?${searchParams}`,
+            });
+          }
         }}
       >
         <input
@@ -113,8 +117,14 @@ function CustomSearchBox(props) {
           onChange={(event) => {
             refineFunction(event.currentTarget.value);
             refine(event.currentTarget.value);
+            setTooltip(false);
           }}
         />
+        {!!tooltip && (
+          <div className="searchbox__tooltip">
+            <p>{t('tooltip')}</p>
+          </div>
+        )}
         {!!hasKeystroke && (
           <div className="closeBtn" onClick={() => setQueryState('')}>
             <SimpleCloseButton />

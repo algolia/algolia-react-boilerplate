@@ -9,9 +9,9 @@ import 'rc-slider/assets/index.css';
 // Import the range function from IS hook
 import { useRange } from 'react-instantsearch-hooks-web';
 // import Currency from recoil
-import { useRecoilValue } from 'recoil';
 import { currencySymbolAtom } from '@/config/currencyConfig';
 import { showNetworkErorrs } from '@/config/demoGuideConfig';
+import { useRecoilValue } from 'recoil';
 
 //Use Translation
 import { useTranslation } from 'react-i18next';
@@ -24,8 +24,7 @@ function PriceSlider(props) {
   // Rename the value for our usage
   const minValue = min;
   const maxValue = max;
-  // Props
-  const { title, titleFr, titleGer } = props;
+
   // Set the state of the slider
   const [minSlider, setMinSlider] = useState(min);
   const [maxSlider, setMaxSlider] = useState(max);
@@ -36,9 +35,9 @@ function PriceSlider(props) {
 
   // Import const translation
   // Use the translator
-  const { i18n } = useTranslation();
-
-  const language = i18n.language;
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'priceFacet',
+  });
 
   const [networkErrors, setNetworkErrors] = useRecoilState(showNetworkErorrs);
 
@@ -96,52 +95,37 @@ function PriceSlider(props) {
   return (
     <div className="filters-container">
       <div className="filters-container__title">
-        {language === 'en' && <h3>{title}</h3>}
-        {language === 'fr' && <h3>{titleFr}</h3>}
-        {language === 'ger' && <h3>{titleGer}</h3>}
+        <h3>{t('title')}</h3>
       </div>
       <div className="filters-container__pricecontainer">
-        <form>
+        <form className="filters-container__pricecontainer__form">
           <div className="filters-container__pricecontainer__inputs">
-            <p>Min:</p>
+            {!isCurrencyRight && <span>{currency}</span>}
             <input
-              type="number"
+              type="text"
               placeholder={0}
-              value={minSlider}
+              value={isNaN(minSlider) ? 2 : minSlider}
               onChange={(e) => {
+                if (isNaN(maxSlider)) setMaxSlider(2);
                 setMinSlider(parseInt(e.target.value));
               }}
             />
+            {isCurrencyRight && <span>{currency}</span>}
           </div>
           <div className="filters-container__pricecontainer__inputs">
-            <p>Max:</p>
+            {!isCurrencyRight && <span>{currency}</span>}
             <input
-              type="number"
+              type="text"
               placeholder={100}
-              value={maxSlider}
+              value={isNaN(maxSlider) ? minSlider + 2 : maxSlider}
               onChange={(e) => {
+                if (isNaN(maxSlider)) setMaxSlider(minSlider + 2);
                 setMaxSlider(parseInt(e.target.value));
               }}
             />
-          </div>
-          <div className="filters-container__pricecontainer__button-container">
-            <button className="filters-container__pricecontainer__button-container__button">
-              Refine
-            </button>
+            {isCurrencyRight && <span>{currency}</span>}
           </div>
         </form>
-        <div className="filters-container__pricecontainer__prices">
-          <p>
-            {!isCurrencyRight && currency}
-            {minSlider || 0}
-            {isCurrencyRight && currency}
-          </p>
-          <p>
-            {!isCurrencyRight && currency}
-            {maxSlider || 100}
-            {isCurrencyRight && currency}
-          </p>
-        </div>
         <Slider
           range
           min={min}

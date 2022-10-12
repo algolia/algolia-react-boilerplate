@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Selectors } from '@/components/selector/Selectors';
 
 // Import configuration

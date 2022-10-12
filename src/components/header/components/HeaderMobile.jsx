@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 // React Router
 import { Link } from 'react-router-dom';
@@ -36,6 +36,7 @@ import Navigation from './Navigation';
 import { clickHamburger } from '@/config/cartFunctions';
 import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
 import usePreventScrolling from '@/hooks/usePreventScrolling';
+import useOutsideClick from '@/hooks/useOutsideClick';
 
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
@@ -99,10 +100,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
       </div>
       <AnimatePresence>
         {isMenuOpen && (
-          <div
-            className="container-mobile__navigation-wp"
-            onClick={() => setIsMenuOpen(false)}
-          >
+          <div className="container-mobile__navigation-wp">
             <CategoriesMobile
               isMenuOpen={isMenuOpen}
               setIsMenuOpen={setIsMenuOpen}
@@ -117,8 +115,17 @@ const HeaderMobile = ({ mobile, tablet }) => {
 };
 
 const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
+  const navigationMobile = useRef(null);
+  const [navigationComponentRef, setNavigationComponentRef] = useState(null);
+
+  useEffect(() => {
+    setNavigationComponentRef(navigationMobile.current);
+  }, []);
+  useOutsideClick(navigationComponentRef, () => setIsMenuOpen(false));
+
   return (
     <motion.div
+      ref={navigationMobile}
       className="container-mobile__navList"
       initial={{ opacity: 0, x: -100 }}
       animate={{ opacity: 1, x: 0 }}

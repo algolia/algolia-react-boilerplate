@@ -147,6 +147,31 @@
         gap: 0.5rem;
         margin-top: 2rem;
         cursor: pointer;
+        p{ 
+            @include p-text($main-color, 300);
+            font-size: 0.8rem;
+            transition: transform 0.3s ease-in-out;
+          }
+        svg{
+            margin-top: 2px;
+            width: 8px;
+            transition: transform 0.3s ease-in-out;
+            path{
+            fill: $second-color;
+            }
+        }
+        &:hover{
+            p{
+              transform: translateX(0.1rem);
+              transition: transform 0.3s ease-in-out;
+            }
+            svg{
+              transform: translateX(-0.1rem);
+              transition: transform 0.3s ease-in-out;
+            }
+          }
+      
+       
     }
 }
 

@@ -37,6 +37,7 @@ const resources = {
       },
       searchBox: {
         placeHolder: 'Search...',
+        tooltip: '💡 Type a query before submitting your request'
       },
       cartModal: {
         title: 'My Cart',
@@ -46,6 +47,11 @@ const resources = {
         yourCartIsEmpty: 'Your cart is empty',
         checkout: 'Checkout'
       },
+      priceFacet: {
+        title:'Price',
+        maxPrice: 'Max Price',
+        minPrice: 'Min Price'
+      }
     },
   },
   fr: {
@@ -79,6 +85,7 @@ const resources = {
       },
       searchBox: {
         placeHolder: 'Rechercher...',
+        tooltip: '💡 Taper une requête avant de soumettre votre recherche'
       },
       cartModal: {
         title: 'Mon panier',
@@ -88,6 +95,11 @@ const resources = {
         yourCartIsEmpty: 'Votre panier est vide',
         checkout: 'Valider mon panier'
       },
+      priceFacet: {
+        title:'Prix',
+        maxPrice: 'Prix Maximum',
+        minPrice: 'Prix Minimum'
+      }
     },
   },
   ger: {
@@ -124,6 +136,7 @@ const resources = {
       },
       searchBox: {
         placeHolder: 'Forschen...',
+        tooltip: '💡 Geben Sie eine Abfrage ein, bevor Sie Ihre Anfrage senden'
       },
       cartModal: {
         title: 'Mein Korb',
@@ -133,6 +146,11 @@ const resources = {
         yourCartIsEmpty: 'Dein Korb ist leer',
         checkout: 'Kasse'
       },
+      priceFacet: {
+        title:'Preis',
+        maxPrice: 'Max Preis',
+        minPrice: 'Min Preis'
+      }
     },
   },
 };
