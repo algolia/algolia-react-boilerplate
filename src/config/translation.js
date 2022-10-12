@@ -37,6 +37,7 @@ const resources = {
       },
       searchBox: {
         placeHolder: 'Search...',
+        tooltip: '💡 Type a query before submitting your request'
       },
       cartModal: {
         title: 'My Cart',
@@ -79,6 +80,7 @@ const resources = {
       },
       searchBox: {
         placeHolder: 'Rechercher...',
+        tooltip: '💡 Taper une requête avant de soumettre votre recherche'
       },
       cartModal: {
         title: 'Mon panier',
@@ -124,6 +126,7 @@ const resources = {
       },
       searchBox: {
         placeHolder: 'Forschen...',
+        tooltip: '💡 Geben Sie eine Abfrage ein, bevor Sie Ihre Anfrage senden'
       },
       cartModal: {
         title: 'Mein Korb',
