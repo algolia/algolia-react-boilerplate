@@ -224,7 +224,7 @@ const SearchResults = () => {
               navigationState?.type === 'context' ? navigationState.action : ''
             }
             query={
-              searchParams.get('query')
+              queryState
             }
             getRankingInfo={true}
           />
