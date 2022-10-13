@@ -43,7 +43,7 @@
         min-height: 5rem;
         min-width: 40%;
         h1 {
-          @include titleH3($second-color);
+          @include titleH3($secondary-color);
           // font-size: 0.9rem;
           text-transform: capitalize;
           margin: 0px;
@@ -66,17 +66,17 @@
             transition: 0.2 ease-in-out;
             @include p-text($main-color, 800);
             font-size: clamp(0.6rem, 0.07rem + 1.03vw, 1rem);
-            @include underliningAnimation($second-color);
+            @include underliningAnimation($secondary-color);
           }
           .selected {
-            @include selectedNavItem($second-color);
+            @include selectedNavItem($secondary-color);
           }
         }
         .picto-cart {
           position: relative;
           .notification-cart {
             position: absolute;
-            background-color: $second-color;
+            background-color: $secondary-color;
             top: -1rem;
             right: -0.6rem;
             border-radius: 50%;
@@ -225,7 +225,7 @@
       display: flex;
       .notification-cart {
         margin-left: 1rem;
-        background-color: $second-color;
+        background-color: $secondary-color;
         border-radius: 50%;
         width: 25px;
         height: 25px;

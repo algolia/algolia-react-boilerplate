@@ -58,10 +58,17 @@ export const alertContent = atom({
 export const searchTermsConfig = [
   { value: '', label: 'Choose', type: 'search terms' },
   {
-    value: 'bag',
-    label: 'Bag',
-    alertContent: 'The category Bags is boosted.',
-    details: 'The category Bags will be boosted.',
+    value: 'winter',
+    label: 'winter',
+    alertContent: 'The categories winter jacket and hike shoes is boosted.',
+    details: 'The categories winter jacket and hike shoes will be boosted.',
+    type: 'search terms',
+  },
+  {
+    value: 'warm',
+    label: 'warm',
+    alertContent: 'The categories winter jacket and hike shoes is boosted.',
+    details: 'The categories winter jacket and hike shoes will be boosted.',
     type: 'search terms',
   },
   {

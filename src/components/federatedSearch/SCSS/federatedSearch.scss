@@ -34,7 +34,7 @@
 //Recent searches
 .recentSearches{
     &__title{
-        @include titleH3($second-color)
+        @include titleH3($secondary-color)
     }
     &__items{
         li{
@@ -53,12 +53,12 @@
 // Suggestion
 .suggestions{
     &__title{
-        @include titleH3($second-color)
+        @include titleH3($secondary-color)
     }
     &__items{
         li{
             .ais-Highlight-highlighted{
-                @include highlight($second-color)
+                @include highlight($secondary-color)
             }
             display: flex;
             align-items: center;
@@ -75,7 +75,7 @@
 // Categories
 .categories{
     &__title{
-        @include titleH3($second-color)
+        @include titleH3($secondary-color)
     }
     &__items{
         li{
@@ -95,7 +95,7 @@
 // Products
 .products{
     &__title{
-        @include titleH3($second-color);
+        @include titleH3($secondary-color);
         margin-left: 1rem;
     }
     &__items{
@@ -132,7 +132,7 @@
                text-align: left;
             }
             .price{
-               @include price($second-color);
+               @include price($secondary-color);
                text-align: left;
             }
         }
@@ -157,7 +157,7 @@
             width: 8px;
             transition: transform 0.3s ease-in-out;
             path{
-            fill: $second-color;
+            fill: $secondary-color;
             }
         }
         &:hover{
@@ -178,7 +178,7 @@
 // Articles
 .articles{
     &__title{
-        @include titleH3($second-color)
+        @include titleH3($secondary-color)
     }
     &__item{
         .image-wrapper{
@@ -291,7 +291,7 @@
       width: 8px;
       transition: transform 0.1s ease-in-out;
       path{
-        fill: $second-color;
+        fill: $secondary-color;
       }
     }
 }

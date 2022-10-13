@@ -53,7 +53,7 @@
     cursor: pointer;
 
     &:hover {
-      @include btn-hover($second-color, $white-color);
+      @include btn-hover($secondary-color, $white-color);
       color: $white-color;
     }
   }
