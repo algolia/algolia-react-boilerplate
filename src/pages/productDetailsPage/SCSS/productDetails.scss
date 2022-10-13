@@ -237,6 +237,16 @@
   }
 }
 
+.fbt-container-mobile {
+  display: flex;
+  flex-direction: column;
+  .fbt-infos {
+    margin-top: 1rem;
+    width: 100%;
+    align-items: center;
+  }
+}
+
 .fbt-infos {
   width: 40%;
   margin: auto;
@@ -261,7 +271,7 @@
     width: 13rem;
     @include btn($second-color-custom-gradient, $white-color);
     border: 1px solid $second-color;
-    p{
+    p {
       font-size: 1rem;
     }
     &:hover {

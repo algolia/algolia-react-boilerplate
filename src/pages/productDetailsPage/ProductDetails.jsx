@@ -326,7 +326,11 @@ const ProductDetails = () => {
           {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 0 && (
             <>
               <h3 className="title">{t('fbtTitle')}</h3>
-              <div className="fbt-container">
+              <div
+                className={`${
+                  !isDesktop ? 'fbt-container-mobile' : 'fbt-container'
+                }`}
+              >
                 <HorizontalSlider
                   itemComponent={RelatedItem}
                   items={fbtRecommendationsProducts}
