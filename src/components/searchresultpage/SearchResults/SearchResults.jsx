@@ -104,7 +104,6 @@ const SearchResults = () => {
 
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams.get('query'), queryState);
 
   // Related to next conditional
   let facetName;

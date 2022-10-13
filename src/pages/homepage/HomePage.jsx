@@ -55,6 +55,7 @@ const HomePage = () => {
   const shouldHaveTrendingProductsValue = useRecoilValue(
     shouldHaveTrendingProducts
   );
+  console.log(isFederatedOpen);
 
   const { mobile } = useRecoilValue(windowSize);
 

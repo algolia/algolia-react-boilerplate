@@ -35,7 +35,6 @@ const contentTypeComponentMap = {
 const InjectedHits = (props) => {
   // Get the regular hits
   const { hits, sendEvent } = useInfiniteHits(props);
-  console.log(hits);
 
   // Get custom data from rules
   const { items: ruleData } = useQueryRules(props);
