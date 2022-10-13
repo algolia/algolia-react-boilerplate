@@ -106,7 +106,7 @@ const SearchResults = () => {
 
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams.get('query'), queryState);
+  // console.log(searchParams.get('query'), queryState);
 
   // Related to next conditional
   let facetName;
@@ -123,6 +123,10 @@ const SearchResults = () => {
     ? searchParams.get('query')
     : queryState);
   }, [queryState]);
+
+  useEffect(() => {
+    console.log(finalQuery);
+  }, [finalQuery]);
 
   // Trending needs to know if you are on category page
   if (navigationState?.type === 'filter' && navigationState?.action !== null) {
