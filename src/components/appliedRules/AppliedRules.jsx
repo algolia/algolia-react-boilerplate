@@ -25,7 +25,7 @@ import PersonaScore from './PersonaScore';
 
 function CustomAppliedRules(props) {
   const { results } = useInstantSearch(props);
-  console.log(results.query);
+
   const [rules, setRules] = useRecoilState(rulesAtom);
 
   //Get score from Persona
