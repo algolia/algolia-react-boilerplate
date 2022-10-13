@@ -1,5 +1,5 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
 // eslint-disable-next-line import/order
 import { Configure, Index } from 'react-instantsearch-hooks-web';
@@ -65,6 +65,8 @@ const SearchResults = () => {
   const { isDesktop } = useRecoilValue(windowSize);
   const navigationState = useRecoilValue(navigationStateAtom);
 
+  const [finalQuery, setFinalQuery] = useState('')
+
   // Should show injected content or not
   // Defined in config file
   const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
@@ -109,6 +111,18 @@ const SearchResults = () => {
   // Related to next conditional
   let facetName;
   let facetValue;
+
+  useEffect(() => {
+    setFinalQuery(searchParams.get('query') !== ''
+    ? searchParams.get('query')
+    : queryState)
+  }, []);
+
+  useEffect(() => {
+    setFinalQuery(searchParams.get('query') !== ''
+    ? searchParams.get('query')
+    : queryState);
+  }, [queryState]);
 
   // Trending needs to know if you are on category page
   if (navigationState?.type === 'filter' && navigationState?.action !== null) {
@@ -206,9 +220,7 @@ const SearchResults = () => {
               navigationState?.type === 'context' ? navigationState.action : ''
             }
             query={
-              searchParams.get('query') !== ''
-                ? searchParams.get('query')
-                : queryState
+              finalQuery
             }
             getRankingInfo={true}
           />
