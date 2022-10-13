@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useHits } from 'react-instantsearch-hooks-web';
 
 // Recoil state to directly access results
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 
 // Import Components
 import SearchResults from '@/components/searchresultpage/SearchResults/SearchResults';
@@ -28,8 +28,10 @@ const SearchResultPage = ({ props }) => {
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners);
 
   // Close federated and set value false for return without it
-  const setFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
-
+  const [test, setFederatedOpen] = useRecoilState(
+    shouldHaveOpenFederatedSearch
+  );
+  console.log(test);
   // import IS hook
   const { hits } = useHits(props);
 

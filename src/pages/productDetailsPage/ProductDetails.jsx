@@ -112,7 +112,10 @@ const ProductDetails = () => {
 
   // Close federated and set value false for return without it
   const setFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
-  setFederatedOpen(false);
+
+  useEffect(() => {
+    setFederatedOpen(false);
+  }, []);
 
   // navigate is used by react router
   const navigate = useNavigate();

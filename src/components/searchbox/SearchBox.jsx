@@ -7,7 +7,12 @@ import { memo, useEffect, useState } from 'react';
 import { useSearchBox } from 'react-instantsearch-hooks-web';
 
 // Import navigate function to route to results page on search submit
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  useLocation,
+  useNavigate,
+  useSearchParams,
+  useMatch,
+} from 'react-router-dom';
 
 // Import Recoil
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -57,7 +62,9 @@ function CustomSearchBox(props) {
   // router hook to navigate using a function
   const navigate = useNavigate();
   // Get states of React Router
-  const { state } = useLocation();
+  const { state, pathname } = useLocation();
+  const isHomepageRoute = useMatch('/search');
+  console.log(pathname);
 
   // Get array of rules from Recoil
   const rulesApplied = useSetRecoilState(rulesAtom);
@@ -111,7 +118,7 @@ function CustomSearchBox(props) {
           value={queryState ? queryState : ''}
           placeholder={t('placeHolder')}
           onClick={() => {
-            setIsFederatedOpen(true);
+            if (pathname === '/') setIsFederatedOpen(true);
             setSbIsActive(true);
           }}
           onChange={(event) => {
