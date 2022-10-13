@@ -63,6 +63,7 @@ import './SCSS/productDetails.scss';
 // Import and use translation
 import { useTranslation } from 'react-i18next';
 import { useHits } from 'react-instantsearch-hooks-web';
+import FbtAddAll from './FbtAddAll';
 
 const ProductDetails = () => {
   const { sendEvent } = useHits();
@@ -323,13 +324,16 @@ const ProductDetails = () => {
               </div>
             )}
           {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 0 && (
-            <div>
+            <>
               <h3 className="title">{t('fbtTitle')}</h3>
-              <HorizontalSlider
-                itemComponent={RelatedItem}
-                items={fbtRecommendationsProducts}
-              />
-            </div>
+              <div className="fbt-container">
+                <HorizontalSlider
+                  itemComponent={RelatedItem}
+                  items={fbtRecommendationsProducts}
+                />
+                <FbtAddAll items={fbtRecommendationsProducts} />
+              </div>
+            </>
           )}
         </div>
       )}
