@@ -26,7 +26,7 @@
   overflow: scroll;
 
   h2 {
-    @include titleH2($second-color)
+    @include titleH2($secondary-color)
   }
 }
 
@@ -68,7 +68,7 @@
   svg {
     width: 6px;
     path {
-      fill: $second-color;
+      fill: $secondary-color;
     }
   }
 }
@@ -90,7 +90,7 @@
       gap: 0.3rem;
       span {
         font-size: 0.7rem;
-        color: $second-color;
+        color: $secondary-color;
       }
       p {
         @include p-text($main-color);

@@ -9,7 +9,7 @@
   text-align: center;
 
   a {
-    color: $second-color;
+    color: $secondary-color;
   }
 }
 
@@ -63,7 +63,7 @@
     &__list {
       &__button-filter {
         display: flex;
-        @include facetsFilter('transparent', $main-color, $second-color);
+        @include facetsFilter('transparent', $main-color, $secondary-color);
 
         > p {
           @include p-text($main-color);
@@ -78,7 +78,7 @@
           right: 0;
           bottom: 0;
           left: 0;
-          background: $second-color;
+          background: $secondary-color;
           z-index: -1;
           transition: opacity 0.3s ease-in-out;
           opacity: 0;
@@ -121,7 +121,7 @@
   }
 
   .refined-filter {
-    @include refinedFacet($second-color-custom-gradient, $white-color);
+    @include refinedFacet($secondary-color-custom-gradient, $white-color);
 
     p,
     span {

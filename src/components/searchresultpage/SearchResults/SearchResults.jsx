@@ -3,6 +3,10 @@ import { lazy, Suspense } from 'react';
 
 // eslint-disable-next-line import/order
 import { Configure, Index } from 'react-instantsearch-hooks-web';
+
+//import react router
+import { useSearchParams } from 'react-router-dom';
+
 // Custom Hooks
 import { windowSize } from '@/hooks/useScreenSize';
 
@@ -97,6 +101,9 @@ const SearchResults = () => {
   // Handle the facet panel on mobile
   const [isFacetsPanelOpen, setIsFacetsPanelOpen] =
     useRecoilState(isFacetPanelOpen);
+
+  // Handle URL search parameters through React Router
+  let [searchParams, setSearchParams] = useSearchParams();
 
   // Related to next conditional
   let facetName;
@@ -197,7 +204,11 @@ const SearchResults = () => {
             ruleContexts={
               navigationState?.type === 'context' ? navigationState.action : ''
             }
-            query={queryState}
+            query={
+              searchParams.get('query') !== ''
+                ? searchParams.get('query')
+                : queryState
+            }
             getRankingInfo={true}
           />
 

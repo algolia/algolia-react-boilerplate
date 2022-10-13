@@ -21,16 +21,16 @@
       cursor: pointer;
       @include hit(
         $main-color,
-        $second-color,
-        $second-color,
-        $second-color
+        $secondary-color,
+        $secondary-color,
+        $secondary-color
       );
 
       .productName {
         @include productName();
       }
       .price {
-        @include price($second-color);
+        @include price($secondary-color);
       }
       .brand {
         @include brand($main-color);
@@ -42,7 +42,7 @@
         width: 100%;
         margin-left: 0.5rem;
         p {
-          @include p-text($second-color);
+          @include p-text($secondary-color);
           font-size: 0.6rem;
           margin-top: 0.2rem;
         }

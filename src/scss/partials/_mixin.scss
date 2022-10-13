@@ -57,8 +57,8 @@
   height: 100%;
   background-color: $background;
   border: 1px solid $border-color;
-  border-left: 1px solid $second-color;
-  border-right: 1px solid $second-color;
+  border-left: 1px solid $secondary-color;
+  border-right: 1px solid $secondary-color;
   font-size: 0.8rem;
   transition: all 0.2s ease-in-out;
 
@@ -67,8 +67,8 @@
     color: $grey-dark-color;
   }
   &:focus {
-    border-top: 1px solid $second-color;
-    border-bottom: 1px solid $second-color;
+    border-top: 1px solid $secondary-color;
+    border-bottom: 1px solid $secondary-color;
     transition: all 0.5s ease-in-out;
   }
   &::-webkit-search-cancel-button {
@@ -101,7 +101,7 @@
   font-size: clamp(1rem, -0.32rem + 2.58vw, 2rem)
 }
 
-@mixin titleH3($text-color: $second-color) {
+@mixin titleH3($text-color: $secondary-color) {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -194,7 +194,7 @@
     height: 30px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: $second-color;
+    background-color: $secondary-color;
     box-shadow: inset 0px 28px 0px $background-color;
   }
 }
@@ -252,7 +252,7 @@
 
       a,
       span {
-        color: $second-color;
+        color: $secondary-color;
       }
     }
   }
@@ -305,7 +305,7 @@
       cursor: pointer;
     }
     &__heart {
-      @include heartIcon($second-color);
+      @include heartIcon($secondary-color);
     }
     .mainImage-opacity {
       animation: fadeOutImage 0.7s forwards ease-in-out;
@@ -383,7 +383,7 @@
     color: $productName-color;
   }
   .ais-Highlight-highlighted {
-    @include highlight($second-color);
+    @include highlight($secondary-color);
   }
 }
 
@@ -394,7 +394,7 @@
   text-transform: capitalize;
 }
 
-@mixin price($price-color: $second-color) {
+@mixin price($price-color: $secondary-color) {
   color: $price-color;
   font-weight: 700;
   font-size: 1rem;
@@ -411,7 +411,7 @@
   text-transform: capitalize;
 }
 
-@mixin highlight($highlight-color: $second-color) {
+@mixin highlight($highlight-color: $secondary-color) {
   color: $highlight-color;
   font-style: normal;
   font-weight: 600;
@@ -577,7 +577,7 @@
   }
 
   &__line {
-    background-color: $second-color;
+    background-color: $secondary-color;
     height: 2px;
     width: 1rem;
   }
