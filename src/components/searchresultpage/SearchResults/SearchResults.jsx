@@ -205,11 +205,7 @@ const SearchResults = () => {
             ruleContexts={
               navigationState?.type === 'context' ? navigationState.action : ''
             }
-            query={
-              searchParams.get('query') !== ''
-                ? searchParams.get('query')
-                : queryState
-            }
+            query={searchParams.get('query')}
             getRankingInfo={true}
           />
 
