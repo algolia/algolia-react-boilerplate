@@ -1,7 +1,8 @@
 import get from 'lodash/get';
 import { hitsConfig } from '@/config/hitsConfig';
 import { currencySymbolAtom } from '@/config/currencyConfig';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { addToCartSelector } from '@/config/cartFunctions';
 
 const priceTotal = (items) => {
   const { price } = hitsConfig;
@@ -33,6 +34,7 @@ const numberOfHits = (items) => {
 };
 
 const FbtAddAll = ({ items }) => {
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   const currencySymbol = useRecoilValue(currencySymbolAtom);
   return (
     <div className="fbt-infos">
@@ -43,7 +45,14 @@ const FbtAddAll = ({ items }) => {
           {priceTotal(items)}
         </p>
       </div>
-      <a className="fbt-infos__buttons">
+      <a
+        className="fbt-infos__buttons"
+        onClick={() => {
+          items.map((item) => {
+            return setAddToCartAtom(item);
+          });
+        }}
+      >
         <p>{numberOfHits(items)}</p>
       </a>
     </div>
