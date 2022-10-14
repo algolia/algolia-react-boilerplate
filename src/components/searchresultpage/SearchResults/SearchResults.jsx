@@ -215,7 +215,7 @@ const SearchResults = () => {
               <Configure hitsPerPage={1} page={0} />
             </Index>
             {/* Injected content*/}
-            <InjectedHits hitComponent={Hit} />
+            <InjectedHits />
           </Suspense>
 
           <Suspense fallback={<SkeletonLoader type={'hit'} />}>

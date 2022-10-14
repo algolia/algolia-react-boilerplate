@@ -90,6 +90,7 @@ const InjectedHits = (props) => {
     // Inject items
     setInjectedHits(injectContent(hits, itemsToInject));
   }, [ruleData, hits, scopedResults, query]);
+  console.log('INJECTED 93', injectedHits);
 
   return <CustomHits hits={injectedHits} sendEvent={sendEvent} />;
 };
