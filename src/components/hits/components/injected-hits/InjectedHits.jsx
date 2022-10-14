@@ -120,9 +120,28 @@ const InjectedHits = (props) => {
         _component: contentTypeComponentMap[item.type],
       }));
 
+    // Copy original hit array so that we avoid modifying it
+    const originalHits = [...hits];
+
+    // For each content to be injected
+    for (const item of itemsToInject) {
+      // Default position to inject to, if "position" not specified
+      if (item.type === 'salesCard') {
+        item.position ??= 3;
+      }
+      item.position ??= 7;
+
+      // Also make sure it has some ID to be used as a React map key
+      item.objectID ??= `injected-content-${JSON.stringify(item)}`;
+
+      // Add it to the array
+      originalHits.splice(item.position, 0, item);
+    }
+
     // Inject items
-    setInjectedHits(injectContent(hits, itemsToInject));
-  }, [ruleData, hits, scopedResults, query, setInjectedHits]);
+    setInjectedHits(originalHits);
+    // console.log(injectContent(hits, itemsToInject));
+  }, [ruleData, hits, scopedResults, query]);
 
   return (
     <div className="ais-InfiniteHits">
