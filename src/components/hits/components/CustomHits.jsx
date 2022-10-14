@@ -20,6 +20,7 @@ function CustomHits(props) {
     showMore,
     sendEvent,
   } = useInfiniteHits(props);
+  console.log(hits);
   const { mobile, tablet } = useRecoilValue(windowSize);
   const [hits, setHits] = useState([]);
   const hitsState = useRecoilValue(hitsAtom);

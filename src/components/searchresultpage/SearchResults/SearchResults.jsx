@@ -209,19 +209,18 @@ const SearchResults = () => {
           />
 
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
-          {shouldInjectContent ? (
-            <Suspense fallback={<SkeletonLoader type={'hit'} />}>
-              <Index indexName={injectedContentIndex}>
-                <Configure hitsPerPage={1} page={0} />
-              </Index>
-              {/* Injected content*/}
-              <InjectedHits hitComponent={Hit} />
-            </Suspense>
-          ) : (
-            <Suspense fallback={<SkeletonLoader type={'hit'} />}>
-              <CustomHits />
-            </Suspense>
-          )}
+
+          <Suspense fallback={<SkeletonLoader type={'hit'} />}>
+            <Index indexName={injectedContentIndex}>
+              <Configure hitsPerPage={1} page={0} />
+            </Index>
+            {/* Injected content*/}
+            <InjectedHits hitComponent={Hit} />
+          </Suspense>
+
+          <Suspense fallback={<SkeletonLoader type={'hit'} />}>
+            <CustomHits />
+          </Suspense>
         </div>
       </div>
     </>
