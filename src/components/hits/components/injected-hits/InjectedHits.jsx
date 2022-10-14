@@ -85,6 +85,7 @@ const InjectedHits = (props) => {
   }, [hits]);
 
   useEffect(() => {
+    console.log('hits', hits);
     // Will hold the hits from injection index
     let injectionIndexResults;
 
