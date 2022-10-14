@@ -217,10 +217,10 @@ const SearchResults = () => {
             {/* Injected content*/}
             <InjectedHits />
           </Suspense>
-
+          {/* 
           <Suspense fallback={<SkeletonLoader type={'hit'} />}>
             <CustomHits />
-          </Suspense>
+          </Suspense> */}
         </div>
       </div>
     </>

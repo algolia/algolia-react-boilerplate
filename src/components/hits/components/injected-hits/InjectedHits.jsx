@@ -1,11 +1,12 @@
 // Import the custom hits to display in the SRP
-import CustomHits from '../CustomHits';
+// import CustomHits from '../CustomHits';
+import { Hit } from '../../Hits';
 // Import the config files we'll need to import
 import { indexNames } from '@/config/algoliaEnvConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { useRecoilValue } from 'recoil';
 
-import { lazy, useEffect, useState } from 'react';
+import { lazy, useEffect, useState, useRef } from 'react';
 // Algolia
 import {
   useInfiniteHits,
@@ -15,6 +16,9 @@ import {
 
 // Components
 import injectContent from './injectContent';
+import { windowSize } from '@/hooks/useScreenSize';
+import { hitsAtom } from '@/config/hitsConfig';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 // Components lazy loaded
 
 const NoCtaCard = lazy(() => import('../NoCtaCard'));
@@ -34,7 +38,7 @@ const contentTypeComponentMap = {
 // This component renders the custom query hits, but also injects them with content from rule data or the injection Index
 const InjectedHits = (props) => {
   // Get the regular hits
-  const { hits, sendEvent } = useInfiniteHits(props);
+  const { hits, isLastPage, showMore, sendEvent } = useInfiniteHits(props);
   console.log('Injected', hits);
   // Get custom data from rules
   const { items: ruleData } = useQueryRules(props);
@@ -50,6 +54,35 @@ const InjectedHits = (props) => {
 
   // Will hold the hits with injected content
   const [injectedHits, setInjectedHits] = useState(hits);
+
+  const { mobile, tablet } = useRecoilValue(windowSize);
+  const hitsState = useRecoilValue(hitsAtom);
+  const [hitsLoaded, setHitsLoaded] = useState(false);
+  const productCard = useRef(null);
+
+  useEffect(() => {
+    if (productCard.current !== null) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isLastPage) {
+            showMore();
+          }
+        });
+      });
+
+      observer.observe(productCard.current);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, [isLastPage, hits]);
+
+  useEffect(() => {
+    if (hits.length > 0) {
+      setHitsLoaded(true);
+    }
+  }, [hits]);
 
   useEffect(() => {
     // Will hold the hits from injection index
@@ -89,10 +122,49 @@ const InjectedHits = (props) => {
 
     // Inject items
     setInjectedHits(injectContent(hits, itemsToInject));
+    console.log(hits);
   }, [ruleData, hits, scopedResults, query]);
   console.log('INJECTED 93', injectedHits);
 
-  return <CustomHits hits={injectedHits} sendEvent={sendEvent} />;
+  return (
+    <div className="ais-InfiniteHits">
+      <ul
+        className={`ais-InfiniteHits-list ${
+          mobile
+            ? 'ais-InfiniteHits-list-mobile'
+            : tablet
+            ? 'ais-InfiniteHits-list-tablet'
+            : ''
+        }`}
+      >
+        {hits.map((hit) => {
+          // Wrap the hit info in an animation, and click functionality to view the product
+          if (hit._component != undefined) {
+            // If the hit has a component property, use it instead of the default component
+            return (
+              <li key={hit.objectID}>
+                {hitsLoaded ? (
+                  <hit._component hit={hit} />
+                ) : (
+                  <CustomSkeleton type="hit" />
+                )}
+              </li>
+            );
+          }
+          return (
+            <li key={hit.objectID}>
+              {hitsLoaded ? (
+                <Hit hit={hit} sendEvent={sendEvent} />
+              ) : (
+                <CustomSkeleton type="hit" />
+              )}
+            </li>
+          );
+        })}
+        <li ref={productCard} aria-hidden="true" />
+      </ul>
+    </div>
+  );
 };
 
 export default InjectedHits;
