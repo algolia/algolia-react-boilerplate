@@ -15,7 +15,6 @@ import {
 } from 'react-instantsearch-hooks-web';
 
 // Components
-import injectContent from './injectContent';
 import { windowSize } from '@/hooks/useScreenSize';
 import { hitsAtom } from '@/config/hitsConfig';
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
