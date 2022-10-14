@@ -140,8 +140,8 @@ const InjectedHits = (props) => {
 
     // Inject items
     setInjectedHits(originalHits);
-    // console.log(injectContent(hits, itemsToInject));
   }, [ruleData, hits, scopedResults, query]);
+  console.log(injectedHits);
 
   return (
     <div className="ais-InfiniteHits">
