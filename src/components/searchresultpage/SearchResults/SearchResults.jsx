@@ -15,7 +15,6 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Import Components
 import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
-import { Hit } from '@/components/hits/Hits';
 import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
 import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
 import CustomSortBy from '@/components/sortBy/SortBy';
@@ -215,7 +214,7 @@ const SearchResults = () => {
                 <Configure hitsPerPage={1} page={0} />
               </Index>
               {/* Injected content*/}
-              <InjectedHits hitComponent={Hit} />
+              <InjectedHits />
             </Suspense>
           ) : (
             <Suspense fallback={<SkeletonLoader type={'hit'} />}>

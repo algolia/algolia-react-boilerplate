@@ -31,7 +31,6 @@ const SearchResultPage = ({ props }) => {
   const [test, setFederatedOpen] = useRecoilState(
     shouldHaveOpenFederatedSearch
   );
-  console.log(test);
   // import IS hook
   const { hits } = useHits(props);
 

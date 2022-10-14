@@ -62,7 +62,7 @@ export const shouldHavePersona = atom({
 // Please see https://github.com/algolia/algolia-react-boilerplate#--injected-content for more info on injected content
 export const shouldHaveInjectedHits = atom({
   key: 'shouldHaveInjectedHits',
-  default: true,
+  default: false,
 });
 
 export const shouldHaveFederatedSearch = atom({
