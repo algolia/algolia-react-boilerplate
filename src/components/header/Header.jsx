@@ -11,10 +11,15 @@ import HeaderMobile from '@/components/header/components/HeaderMobile';
 
 //Import scope SCSS
 import './SCSS/header.scss';
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+import usePreventScrolling from '@/hooks/usePreventScrolling';
 
 const Header = () => {
   // Handle screen sizing & responsiveness with this hook
   const { isDesktop, tablet, mobile } = useRecoilValue(windowSize);
+  const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch);
+
+  usePreventScrolling(isFederatedOpen);
 
   // Render the Header for Laptop or Mobile, depending on the size of the screen
   return (

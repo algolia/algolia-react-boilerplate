@@ -5,6 +5,9 @@ import { lazy, Suspense, useRef, useState } from 'react';
 // Fetch values from state
 import { useRecoilValue } from 'recoil';
 
+// Framer motion
+import { AnimatePresence } from 'framer-motion';
+
 //Use Translation
 import { useTranslation } from 'react-i18next';
 
@@ -25,7 +28,9 @@ import {
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+
 import { windowSize } from '@/hooks/useScreenSize';
+import usePreventScrolling from '@/hooks/usePreventScrolling';
 
 const FederatedSearch = lazy(() =>
   import('@/components/federatedSearch/FederatedSearch')
@@ -68,7 +73,9 @@ const HomePage = () => {
     <div className="homepage" ref={HomePage}>
       {isFederated && isFederatedOpen && (
         <Suspense>
-          <FederatedSearch />
+          <AnimatePresence>
+            <FederatedSearch />
+          </AnimatePresence>
         </Suspense>
       )}
 

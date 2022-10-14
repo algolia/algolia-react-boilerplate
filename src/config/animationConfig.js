@@ -35,7 +35,7 @@ export const framerMotionFederatedContainer = {
   initial: { y: '-100%', opacity: 0 },
   exit: { y: '-100%', opacity: 0 },
   animate: { y: 0, opacity: 1 },
-  transition: { duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] },
+  transition: { duration: 0.2, ease: [0.43, 0.13, 0.23, 0.96] },
 };
 export const framerMotionFacet = {
   initial: { opacity: 0 },

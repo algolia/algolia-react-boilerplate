@@ -4,10 +4,11 @@ import { memo, useEffect } from 'react';
 import { Configure, Index } from 'react-instantsearch-hooks-web';
 
 // framer motion
+import { motion } from 'framer-motion';
 import { framerMotionFederatedContainer } from '@/config/animationConfig';
 
 // import from Recoil
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Config
 import { indexNames, searchClient } from '@/config/algoliaEnvConfig';
@@ -63,7 +64,9 @@ const FederatedSearch = () => {
   const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom);
 
   const segmentSelect = useRecoilValue(segmentSelectedAtom);
-  const setIsFederated = useSetRecoilState(shouldHaveOpenFederatedSearch);
+  const [isFederated, setIsFederated] = useRecoilState(
+    shouldHaveOpenFederatedSearch
+  );
   const searchboxRef = useRecoilValue(searchBoxAtom);
   const query = useRecoilValue(queryAtom);
 
@@ -95,9 +98,7 @@ const FederatedSearch = () => {
   );
 
   useEffect(() => {
-    document.body.style.overflowY = 'hidden';
     return () => {
-      document.body.style.overflowY = 'auto';
       setIsFederated(false);
     };
   }, []);
@@ -112,7 +113,7 @@ const FederatedSearch = () => {
   } = federatedSearchConfig;
 
   return (
-    <div
+    <motion.div
       className={`${
         mobile || tablet ? 'federatedSearch-mobile' : 'federatedSearch'
       }`}
@@ -193,7 +194,7 @@ const FederatedSearch = () => {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
