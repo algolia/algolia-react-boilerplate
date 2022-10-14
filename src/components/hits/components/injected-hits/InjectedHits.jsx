@@ -79,16 +79,12 @@ const InjectedHits = (props) => {
   }, [isLastPage, hits]);
 
   useEffect(() => {
-    console.log('hits useEffect1', hits);
     if (hits.length > 0) {
       setHitsLoaded(true);
     }
   }, [hits]);
 
-  console.log('useEffect Out', hits);
-
   useEffect(() => {
-    console.log('hits useEffect2', hits);
     // Will hold the hits from injection index
     let injectionIndexResults;
 
@@ -145,7 +141,6 @@ const InjectedHits = (props) => {
     // Inject items
     setInjectedHits(originalHits);
   }, [ruleData, hits, scopedResults, query]);
-  console.log(injectedHits);
 
   return (
     <div className="ais-InfiniteHits">
