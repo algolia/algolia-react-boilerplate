@@ -39,7 +39,7 @@ const contentTypeComponentMap = {
 const InjectedHits = (props) => {
   // Get the regular hits
   const { hits, isLastPage, showMore, sendEvent } = useInfiniteHits(props);
-  console.log('Injected', hits);
+
   // Get custom data from rules
   const { items: ruleData } = useQueryRules(props);
 
@@ -122,9 +122,7 @@ const InjectedHits = (props) => {
 
     // Inject items
     setInjectedHits(injectContent(hits, itemsToInject));
-    console.log(hits);
   }, [ruleData, hits, scopedResults, query]);
-  console.log('INJECTED 93', injectedHits);
 
   return (
     <div className="ais-InfiniteHits">

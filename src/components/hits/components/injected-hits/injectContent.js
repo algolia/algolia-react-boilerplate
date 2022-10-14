@@ -17,7 +17,7 @@ export default function injectContent(originalHits, content) {
     // Add it to the array
     hits.splice(item.position, 0, item);
   }
-
+console.log(hits)
   // Return the array with the injections
   return hits;
 }
