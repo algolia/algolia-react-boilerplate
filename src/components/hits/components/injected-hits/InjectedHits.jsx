@@ -122,7 +122,7 @@ const InjectedHits = (props) => {
 
     // Inject items
     setInjectedHits(injectContent(hits, itemsToInject));
-  }, [ruleData, hits, scopedResults, query]);
+  }, [ruleData, hits, scopedResults, query, setInjectedHits]);
 
   return (
     <div className="ais-InfiniteHits">
@@ -135,7 +135,7 @@ const InjectedHits = (props) => {
             : ''
         }`}
       >
-        {hits.map((hit) => {
+        {injectContent.map((hit) => {
           // Wrap the hit info in an animation, and click functionality to view the product
           if (hit._component != undefined) {
             // If the hit has a component property, use it instead of the default component
