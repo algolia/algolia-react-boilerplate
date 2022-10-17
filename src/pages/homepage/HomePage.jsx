@@ -144,6 +144,8 @@ const HomePage = () => {
           />
         </div>
       )}
+
+      <img src="/static/images/footer.png" alt="" />
     </div>
   );
 };
