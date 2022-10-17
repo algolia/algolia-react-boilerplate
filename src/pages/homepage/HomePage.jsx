@@ -80,7 +80,23 @@ const HomePage = () => {
       )}
 
       {/* Load custom banners */}
-      <CustomHomeBanners />
+      <div className="landingImg">
+        <img src="/static/images/landingImg.webp" alt="" id='landingImg'/>
+        <img src="/static/images/imgDetail.png" alt="" />
+      </div>
+      <br /><br /><br /><br />
+      <div className="fall-section">
+        <p id='title-fall'>THE FALL WINTER 2022 COLLECTION</p>
+        <p id='braket'>[2]</p>
+        <div className="w-66">
+          <img src="/static/images/firstFall.jpg" alt="" />
+          <img src="/static/images/fall1D.jpg" alt="" />
+        </div>
+        <div className="w-33">
+          <img src="/static/images/secondFall.jpg" alt="" />
+          <img src="/static/images/fall2D.jpg" alt="" />
+        </div>
+      </div>
 
       {isCarousel &&
         carouselConfig.map((carousel, i) => (

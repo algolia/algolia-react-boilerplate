@@ -51,9 +51,17 @@ const HeaderLaptop = () => {
 
   return (
     <div className="container">
+      <div className="top-left">
+
+      </div>
+      <div className="top-right">
+
+      </div>
+      <div className="bottom-left">
+        
+      </div>
       <div className="container__header-top">
         <div className="container__header-top__title">
-          <h1>Demo BoilerPlate</h1>
         </div>
         <div className="container__header-top__logo">
           <Link
@@ -68,7 +76,7 @@ const HeaderLaptop = () => {
           >
             {/* Add possibility to change the Logo */}
             <img
-              src={logo}
+              src={'/static/images/logo.png'}
               alt=""
               onLoad={() => setIsLogoLoaded(true)}
               width="200"

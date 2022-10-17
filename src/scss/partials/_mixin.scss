@@ -135,16 +135,16 @@
 
 @mixin underliningAnimation($underline-color) {
   &::before {
-    content: '';
-    position: absolute;
-    background-color: $underline-color;
-    height: 2px;
+    // content: '';
+    // position: absolute;
+    background-color: black;
+    height: 1px;
     border-radius: 3rem;
-    width: 100%;
-    bottom: -0.5rem;
+    width: 90%;
+    // bottom: 1px;
     transform-origin: center center;
     transform: scaleX(0);
-    transition: transform 0.4s;
+    // transition: transform 0.4s;
   }
   &:hover::before {
     transition: 0.2 ease-in-out;

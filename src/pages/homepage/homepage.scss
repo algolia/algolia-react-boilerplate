@@ -3,8 +3,41 @@
 .homepage{
     width: 100%;
     height: 100%;
+    background-color: white;
     &__imageWrapper{
         position: relative;
         min-height: 50vh;
     }
+}
+
+.landingImg {
+    padding: 0 1rem;
+}
+
+.fall-section {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 1rem;
+
+    #title-fall {
+        position: absolute;
+        font-size: 11px;
+        top: -20px;
+    }
+
+    #braket {
+        position: absolute;
+        font-size: 11px;
+        top: -20px;
+        right: 1rem;
+    }
+}
+
+.w-66 {
+    width: 66%;
+}
+
+.w-33 {
+    width: 32%;
 }

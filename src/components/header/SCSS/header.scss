@@ -6,11 +6,14 @@
 .header {
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-  padding: 2rem 0;
-  background-color: $background-color;
+  padding: 0rem 0;
+  background-color: #FFFFFF;
+  height: 150px;
+
   .container {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
+
     .container__header-top {
       position: relative;
       align-items: center;
@@ -20,19 +23,21 @@
 
       a {
         position: relative;
-        width: 100%;
+        width: fit-content;
         height: 100%;
       }
       &__logo {
-        width: 100%;
+        width: fit-content;
         min-height: 7rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
+
         img {
           margin: 0 auto;
-          width: 90%;
+          width: 230px;
+          padding: 12px 10px 36px 10px;
+          background-color: white;
           height: 100%;
         }
       }
@@ -65,8 +70,16 @@
             position: relative;
             transition: 0.2 ease-in-out;
             @include p-text($main-color, 800);
+            font-weight: 500;
             font-size: clamp(0.6rem, 0.07rem + 1.03vw, 1rem);
-            @include underliningAnimation($secondary-color);
+            padding: 5px 11px;
+            border-radius: 5px;
+
+            &:hover {
+              background-color: #E2DCC9;
+              text-decoration: underline;
+            }
+            // @include underliningAnimation($secondary-color);
           }
           .selected {
             @include selectedNavItem($secondary-color);

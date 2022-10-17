@@ -68,12 +68,9 @@ const HomeBannerComponent = ({
       <div className="home-banner3-container__image">
         {isBannerLoaded === false && <CustomSkeleton type="banner" />}
         <img
-          src={mobile ? imgUrl1Mobile : imgUrl1}
+          src={'/static/images/landingImg.webp'}
           alt="homeBanner"
           fetchpriority="high"
-          width={mobile ? '400' : '1121'}
-          height={mobile ? '202' : '466'}
-          sizes="100vw"
           onLoad={() => setIsBannerLoaded(true)}
         />
         <div className="overlay"></div>
@@ -93,7 +90,7 @@ const HomeBannerComponent = ({
           <div className="home-banner3-container__buttons__circles">
             <div className="home-banner3-container__buttons__circles__circles2">
               <div className="home-banner3-container__buttons__circles__circles2__circles3">
-                <p>{button1}</p>
+                {/* <p>{button1}</p> */}
               </div>
             </div>
           </div>
