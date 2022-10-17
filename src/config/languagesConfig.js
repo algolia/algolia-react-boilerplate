@@ -7,23 +7,28 @@ import { atom } from 'recoil';
 // Define what values are going to be displayed in the language selector
 export const languagesConfig = [
   { value: 'English', label: 'English', type: 'language' },
+  // {
+  //   value: 'German',
+  //   label: 'German',
+  //   type: 'language',
+  // },
   {
-    value: 'German',
-    label: 'German',
+    value: 'Italian',
+    label: 'Italian',
     type: 'language',
   },
-  {
-    value: 'French',
-    label: 'French',
-    type: 'language',
-  },
+  // {
+  //   value: 'French',
+  //   label: 'French',
+  //   type: 'language',
+  // },
 ];
 
 // Define index by languages & currency.
 // Change if necessary
 export const languageSwitchConfig = {
   EN: {
-    index: 'flagship_fashion',
+    index: 'off_white_custom_demo_english',
     currency: '£',
     linksHeader: [
       {
@@ -33,31 +38,63 @@ export const languageSwitchConfig = {
         url: '/search',
       },
       {
-        name: 'Mens',
+        name: 'Man',
         type: 'filter',
-        filter: 'Mens',
+        filter: 'Male',
         url: '/mens',
       },
       {
-        name: 'Womens',
+        name: 'Woman',
         type: 'filter',
-        filter: 'Womens',
+        filter: 'Female',
         url: '/womens',
       },
-      // For an uilisation of your own made filter
       {
-        name: 'Womens accessories by Even & Odd',
+        name: 'Kids',
         type: 'rawFilter',
         filter: '',
         rawFilter:
-          "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
+        "age_group: 'Kids'",
+        url: '/Kids',
       },
-      // This uses context from the Algolia dashboard, configured using Visual Editor
+      {
+        name: 'Shoes',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+        "hierarchical_categories.lvl0: 'Shoes'",
+        url: '/Shoes',
+      },
+      {
+        name: 'Eyewear',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter: "hierarchical_categories.lvl1: 'Accessories > Sunglasses'",
+        url: '/Eyewear',
+      },
       {
         name: 'Accessories',
-        type: 'context',
-        context: 'accessories',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+        "hierarchical_categories.lvl0: 'Accessories'",
+        url: '/Accessories',
       },
+    
+      // For an uilisation of your own made filter
+      // {
+      //   name: 'Womens accessories by Even & Odd',
+      //   type: 'rawFilter',
+      //   filter: '',
+      //   rawFilter:
+      //     "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
+      // },
+      // This uses context from the Algolia dashboard, configured using Visual Editor
+      // {
+      //   name: 'Accessories',
+      //   type: 'context',
+      //   context: 'accessories',
+      // },
     ],
   },
   FR: {
@@ -133,6 +170,61 @@ export const languageSwitchConfig = {
         name: 'Zubehör',
         type: 'context',
         context: 'accessories',
+      },
+    ],
+  },
+  IT: {
+    index: 'off_white_custom_demo_italian',
+    currency: '€',
+    linksHeader: [
+      {
+        name: 'Tutto',
+        type: 'filter',
+        filter: '',
+        url: '/search',
+      },
+      {
+        name: 'Uomo',
+        type: 'filter',
+        filter: 'Male',
+        url: '/Uomo',
+      },
+      {
+        name: 'Donna',
+        type: 'filter',
+        filter: 'Female',
+        url: '/Donna',
+      },
+      {
+        name: 'Bambino',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+        "age_group: 'Kids'",
+        url: '/Bambino',
+      },
+      {
+        name: 'Shoes',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+        "hierarchical_categories.lvl0: 'Shoes'",
+        url: '/scarpe',
+      },
+      {
+        name: 'Occhiali',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter: "hierarchical_categories.lvl1: 'Accessories > Sunglasses'",
+        url: '/Occhiali',
+      },
+      {
+        name: 'Accessories',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+        "hierarchical_categories.lvl0: 'Accessories'",
+        url: '/Accessori',
       },
     ],
   },

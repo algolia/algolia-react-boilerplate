@@ -28,7 +28,7 @@ function GenericRefinementList(props) {
   const { items, refine, searchForItems, isShowingMore, toggleShowMore } =
     useRefinementList(props);
 
-  const { title, options, titleFr, titleGer } = props;
+  const { title, options, titleFr, titleGer, titleIt } = props;
   const { showMoreFunction } = options;
 
   // With this state you can search for items in facets
@@ -46,6 +46,7 @@ function GenericRefinementList(props) {
         {language === 'en' && <h3>{title}</h3>}
         {language === 'fr' && <h3>{titleFr}</h3>}
         {language === 'ger' && <h3>{titleGer}</h3>}
+        {language === 'it' && <h3>{titleIt}</h3>}
         {/* If the facet is searchable, show the magnifying glass which will open or close the search input */}
         {options.searchable && (
           <div
@@ -117,7 +118,7 @@ function GenericRefinementList(props) {
 // ColorRefinementList custom for Hooks
 function CustomColorRefinement(props) {
   const { items, refine } = useRefinementList(props);
-  const { title, titleGer, titleFr } = props;
+  const { title, titleGer, titleFr, titleIt } = props;
 
   // Import const translation
   // Use the translator
@@ -131,6 +132,7 @@ function CustomColorRefinement(props) {
         {language === 'en' && <h3>{title}</h3>}
         {language === 'fr' && <h3>{titleFr}</h3>}
         {language === 'ger' && <h3>{titleGer}</h3>}
+        {language === 'it' && <h3>{titleIt}</h3>}
       </div>
       <ul className="filters-container__content-color">
         {items.map((item) => {
@@ -189,7 +191,14 @@ const Facets = () => {
       {facets?.length > 0 && (
         <DynamicWidgets maxValuesPerFacet={500}>
           {refinements.map((e, i) => {
-            const { type, label, labelFrench, labelGerman, options } = e;
+            const {
+              type,
+              label,
+              labelFrench,
+              labelGerman,
+              labelItalian,
+              options,
+            } = e;
             switch (type) {
               case 'price':
                 return (
@@ -198,6 +207,7 @@ const Facets = () => {
                     title={label}
                     titleFr={labelFrench}
                     titleGer={labelGerman}
+                    titleIt={labelItalian}
                     key={i}
                   />
                 );
@@ -209,6 +219,7 @@ const Facets = () => {
                     title={label}
                     titleFr={labelFrench}
                     titleGer={labelGerman}
+                    titleIt={labelItalian}
                   />
                 );
               case 'hierarchical':
@@ -218,6 +229,7 @@ const Facets = () => {
                     title={label}
                     titleFr={labelFrench}
                     titleGer={labelGerman}
+                    titleIt={labelItalian}
                     key={i}
                   />
                 );
@@ -231,6 +243,7 @@ const Facets = () => {
                     title={label}
                     titleFr={labelFrench}
                     titleGer={labelGerman}
+                    titleIt={labelItalian}
                     options={options}
                     showMore={options?.showMoreFunction}
                   />
