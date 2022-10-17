@@ -72,24 +72,24 @@ export const shouldHaveFederatedSearch = atom({
 
 export const shouldHaveRelatedProducts = atom({
   key: 'shouldHaveRelatedProductsAtom', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 });
 
 export const shouldHaveFbtProducts = atom({
   key: 'shouldHaveFbtProducts', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 });
 
 // this feature will be visible on home, results and category pages if activated -> (activated by default)
 export const shouldHaveTrendingProducts = atom({
   key: 'shouldHaveTrendingProductsAtom', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 });
 
 // this feature will be visible on home, results and category pages if activated -> (activated by default)
 export const shouldHaveTrendingFacets = atom({
   key: 'shouldHaveTrendingFacetsAtom', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 });
 
 export const shouldHaveDynamicFacet = atom({

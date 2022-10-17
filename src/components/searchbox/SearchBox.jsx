@@ -126,7 +126,15 @@ function CustomSearchBox(props) {
           </div>
         )}
         {!!hasKeystroke && (
-          <div className="closeBtn" onClick={() => setQueryState('')}>
+          <div
+            className="closeBtn"
+            onClick={(e) => {
+              console.log(e);
+              setQueryState('');
+              searchParams.set('query', '');
+              setSearchParams(searchParams);
+            }}
+          >
             <SimpleCloseButton />
           </div>
         )}

@@ -15,18 +15,18 @@ import { atom, selector } from 'recoil';
 
 // ADJUST THE APIKEY AND APPID TO YOUR OWN
 export const searchClientCreds = {
-  APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
-  writeOrAdminApiKey: 'f2f030011dd333c96f87e91d404ebcf1',
-  appID: '853MYZ81KY',
+  APIKey: '05fcc691f3a833263d63a9b425e14176',
+  writeOrAdminApiKey: '3ffb6e732af799b311c7b9226ef786ea',
+  appID: 'RSBCBF0EG8',
   // Used to get the Persona Strat and score if you haven't got one you have to create one in you API Keys
   // https://www.algolia.com/doc/rest-api/personalization/#get-the-current-personalization-strategy
-  personaStrategyAPIKey: '4983f1e3449111609c1e7688209b787b',
+  personaStrategyAPIKey: 'dfba185370c6b79ddf61674594144976',
 };
 
 // ADJUST THE DEFAULT VALUE TO YOUR MAIN INDEX
 export const mainIndex = atom({
   key: 'mainIndex', // unique ID (with respect to other atoms/selectors)
-  default: 'flagship_fashion', // default value (aka initial value)
+  default: 'off_white_custom_demo_english', // default value (aka initial value)
 });
 
 // ADJUST THE VALUES FOR EACH INDEX NAME IF YOU HAVE THEM
@@ -36,7 +36,7 @@ export const indexNames = selector({
   get: ({ get }) => {
     return {
       suggestionsIndex: `${get(mainIndex)}_query_suggestions`,
-      articlesIndex: 'canda_customDemo_articles',
+      articlesIndex: 'off_white_custom_demo_news',
       injectedContentIndex: `${get(mainIndex)}_influencers`,
     };
   },

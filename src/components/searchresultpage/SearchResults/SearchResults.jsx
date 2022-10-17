@@ -103,6 +103,7 @@ const SearchResults = () => {
 
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams();
+  console.log(searchParams.get('query'));
 
   // Related to next conditional
   let facetName;
@@ -203,7 +204,11 @@ const SearchResults = () => {
             ruleContexts={
               navigationState?.type === 'context' ? navigationState.action : ''
             }
-            query={searchParams.get('query')}
+            query={
+              searchParams.get('query') === ''
+                ? searchParams.get('query')
+                : queryState
+            }
             getRankingInfo={true}
           />
 

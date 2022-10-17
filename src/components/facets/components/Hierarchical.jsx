@@ -49,7 +49,7 @@ const HierarchicalList = (props) => {
 
 // General component which use the React IS Hooks
 function HierarchicalMenu(props) {
-  const { title, titleFr, titleGer } = props;
+  const { title, titleFr, titleGer, titleIt } = props;
   // Import const translation
   // Use the translator
   const { i18n } = useTranslation();
@@ -64,6 +64,7 @@ function HierarchicalMenu(props) {
           {language === 'en' && <h3>{title}</h3>}
           {language === 'fr' && <h3>{titleFr}</h3>}
           {language === 'ger' && <h3>{titleGer}</h3>}
+          {language === 'it' && <h3>{titleIt}</h3>}
         </div>
         <HierarchicalList
           items={items}

@@ -13,8 +13,9 @@ export const refinements = [
     label: 'Price',
     labelFrench: 'Prix',
     labelGerman: 'Preis',
+    labelItalian: 'Prezzo',
     options: {
-      attribute: hitsConfig.price,
+      attribute: hitsConfig.unformated_price,
     },
   },
   {
@@ -22,12 +23,12 @@ export const refinements = [
     label: 'Category',
     labelFrench: 'Catégorie',
     labelGerman: 'Kategorie',
+    labelItalian: 'Categoria',
     options: {
       attribute: [
         hitsConfig.hierarchicalCategoriesLvl0,
         hitsConfig.hierarchicalCategoriesLvl1,
         hitsConfig.hierarchicalCategoriesLvl2,
-        hitsConfig.hierarchicalCategoriesLvl3,
       ],
       searchable: true,
     },
@@ -37,6 +38,7 @@ export const refinements = [
     label: 'Brand',
     labelFrench: 'Marque',
     labelGerman: 'Markieren',
+    labelItalian: 'Marca',
     options: {
       attribute: hitsConfig.brand,
       // when searchable is enabled, you can search for a specific value of that facet. Ex: Here you can search for a specific brand
@@ -51,8 +53,9 @@ export const refinements = [
     label: 'Colour',
     labelFrench: 'Couleur',
     labelGerman: 'Farbe',
+    labelItalian: 'Colore',
     options: {
-      attribute: hitsConfig.colourHexa,
+      attribute: hitsConfig.colour,
     },
   },
   {
@@ -60,6 +63,7 @@ export const refinements = [
     label: 'Gender',
     labelFrench: 'Genre',
     labelFrench: 'Geschlecht',
+    labelItalian: 'Genere',
     options: {
       attribute: hitsConfig.genderFilter,
     },
@@ -68,6 +72,7 @@ export const refinements = [
     type: 'size',
     label: 'Size',
     labelFrench: 'Taille',
+    labelItalian: 'Taglia',
     options: {
       attribute: hitsConfig.sizeFilter,
       limit: 8,
