@@ -99,25 +99,56 @@
   align-items: center;
   width: 100%;
   margin-top: 1rem;
-}
-
-.cart {
-  background-color: $second-color;
-  border-radius: 50%;
-  width: 1.7rem;
-  height: 1.7rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  svg {
-    margin-top: 0.3rem;
-    width: 1.2rem;
-    height: 100%;
-    path {
-      fill: $background-color;
+  .cart {
+    background-color: $second-color;
+    border-radius: 50%;
+    width: 1.7rem;
+    height: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      margin-top: 0.3rem;
+      width: 1.2rem;
+      height: 100%;
+      path {
+        fill: $background-color;
+      }
+    }
+    &-active {
+      animation: bounce 0.3s ease-in-out forwards;
     }
   }
-  &-active {
-    animation: bounce 0.3s ease-in-out forwards;
+}
+
+.fbt-component {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &__plus-icon {
+    svg {
+      width: 3rem;
+      margin: 0 1rem;
+    }
+  }
+  .cart {
+    background-color: $second-color;
+    border-radius: 50%;
+    width: 1.7rem;
+    height: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      margin-top: 0.3rem;
+      width: 1.2rem;
+      height: 100%;
+      path {
+        fill: $background-color;
+      }
+    }
+    &-active {
+      animation: bounce 0.3s ease-in-out forwards;
+    }
   }
 }

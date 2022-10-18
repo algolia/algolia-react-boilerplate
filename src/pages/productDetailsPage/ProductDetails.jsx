@@ -64,6 +64,7 @@ import './SCSS/productDetails.scss';
 import { useTranslation } from 'react-i18next';
 import { useHits } from 'react-instantsearch-hooks-web';
 import FbtAddAll from '@/components/fbtPdp/FbtAddAll';
+import FbtItems from '@/components/recommend/fbtItems/FbtProducts';
 
 const ProductDetails = () => {
   const { sendEvent } = useHits();
@@ -337,7 +338,7 @@ const ProductDetails = () => {
                 }`}
               >
                 <HorizontalSlider
-                  itemComponent={RelatedItem}
+                  itemComponent={FbtItems}
                   items={fbtRecommendationsProducts}
                 />
                 <FbtAddAll items={fbtRecommendationsProducts} />

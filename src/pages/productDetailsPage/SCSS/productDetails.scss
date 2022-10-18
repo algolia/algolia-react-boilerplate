@@ -248,18 +248,20 @@
 }
 
 .fbt-infos {
-  width: 40%;
+  width: 30%;
   margin: auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   h1 {
-    @include titleH1();
-    font-size: 1.3rem;
+    @include p-text();
+    font-size: 16px;
   }
   p {
     @include p-text($second-color);
     margin-left: 1rem;
-    font-size: 1.3rem;
+    font-size: 16px;
     font-weight: 600;
   }
   &__price {
