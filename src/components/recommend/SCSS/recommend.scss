@@ -10,8 +10,8 @@
 .recommend {
   margin: 2rem 2rem;
 
-  .title{
-    @include titleH3($second-color)
+  .title {
+    @include titleH3($second-color);
   }
 
   .auc-Recommend-list {
@@ -24,7 +24,7 @@
     justify-content: center;
   }
 
-  .uic-HorizontalSlider-navigation{
+  .uic-HorizontalSlider-navigation {
     align-items: center;
     background: transparent;
     border: 1px solid transparent;
@@ -39,16 +39,15 @@
     padding: 0;
     position: absolute;
     top: 35%;
-    transition: opacity .15s;
+    transition: opacity 0.15s;
     width: 32px;
     z-index: 1;
   }
 
-  .uic-HorizontalSlider-list{
+  .uic-HorizontalSlider-list {
     padding: 1rem 1rem;
     gap: 1rem;
     grid-auto-columns: 19%;
-    
   }
 
   .auc-Recommend-title {
@@ -62,22 +61,19 @@
   }
 
   .relatedItem {
-    @include hit($main-color,
-      $second-color,
-      $second-color,
-      $second-color );
-      position: relative;
+    @include hit($main-color, $second-color, $second-color, $second-color);
+    position: relative;
 
-      &__infos{
-        @include productName($grey-dark-color);
+    &__infos {
+      @include productName($grey-dark-color);
 
-        .brand{
-          @include brand($main-color);
-        }
-        .price {
-          @include price($second-color)
-        }
+      .brand {
+        @include brand($main-color);
       }
+      .price {
+        @include price($second-color);
+      }
+    }
   }
 }
 
@@ -85,15 +81,43 @@
 // MOBILE
 // ------------------------------------------
 
-.recommend-mobile{
-  .uic-HorizontalSlider-list{
-    grid-auto-columns: 40%;  
+.recommend-mobile {
+  .uic-HorizontalSlider-list {
+    grid-auto-columns: 40%;
   }
 }
 
 @media (max-width: 460px) {
-  .uic-HorizontalSlider-list{
-    grid-auto-columns: 60% !important;  
+  .uic-HorizontalSlider-list {
+    grid-auto-columns: 60% !important;
   }
 }
 
+.item__infos-down {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.cart {
+  background-color: $second-color;
+  border-radius: 50%;
+  width: 1.7rem;
+  height: 1.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    margin-top: 0.3rem;
+    width: 1.2rem;
+    height: 100%;
+    path {
+      fill: $background-color;
+    }
+  }
+  &-active {
+    animation: bounce 0.3s ease-in-out forwards;
+  }
+}
