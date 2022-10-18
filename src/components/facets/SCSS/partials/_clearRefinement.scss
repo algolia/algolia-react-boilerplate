@@ -1,6 +1,6 @@
 @use '../../../../scss/partials/' as *;
 
 .button-clear-refinement {
-    @include btn($second-color-custom-gradient, $white-color);
+    @include btn($secondary-color-custom-gradient, $white-color);
   }
   

@@ -1,11 +1,12 @@
 // Import the custom hits to display in the SRP
-import CustomHits from '../CustomHits';
+// import CustomHits from '../CustomHits';
+import { Hit } from '../../Hits';
 // Import the config files we'll need to import
 import { indexNames } from '@/config/algoliaEnvConfig';
 import { queryAtom } from '@/config/searchboxConfig';
 import { useRecoilValue } from 'recoil';
 
-import { lazy, useEffect, useState } from 'react';
+import { lazy, useEffect, useState, useRef } from 'react';
 // Algolia
 import {
   useInfiniteHits,
@@ -14,7 +15,9 @@ import {
 } from 'react-instantsearch-hooks-web';
 
 // Components
-import injectContent from './injectContent';
+import { windowSize } from '@/hooks/useScreenSize';
+import { hitsAtom } from '@/config/hitsConfig';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
 // Components lazy loaded
 
 const NoCtaCard = lazy(() => import('../NoCtaCard'));
@@ -34,7 +37,7 @@ const contentTypeComponentMap = {
 // This component renders the custom query hits, but also injects them with content from rule data or the injection Index
 const InjectedHits = (props) => {
   // Get the regular hits
-  const { hits, sendEvent } = useInfiniteHits(props);
+  const { hits, isLastPage, showMore, sendEvent } = useInfiniteHits(props);
 
   // Get custom data from rules
   const { items: ruleData } = useQueryRules(props);
@@ -50,6 +53,35 @@ const InjectedHits = (props) => {
 
   // Will hold the hits with injected content
   const [injectedHits, setInjectedHits] = useState(hits);
+
+  const { mobile, tablet } = useRecoilValue(windowSize);
+  const hitsState = useRecoilValue(hitsAtom);
+  const [hitsLoaded, setHitsLoaded] = useState(false);
+  const productCard = useRef(null);
+
+  useEffect(() => {
+    if (productCard.current !== null) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isLastPage) {
+            showMore();
+          }
+        });
+      });
+
+      observer.observe(productCard.current);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, [isLastPage, hits]);
+
+  useEffect(() => {
+    if (hits.length > 0) {
+      setHitsLoaded(true);
+    }
+  }, [hits]);
 
   useEffect(() => {
     // Will hold the hits from injection index
@@ -87,11 +119,67 @@ const InjectedHits = (props) => {
         _component: contentTypeComponentMap[item.type],
       }));
 
+    // Copy original hit array so that we avoid modifying it
+    const originalHits = [...hits];
+
+    // For each content to be injected
+    for (const item of itemsToInject) {
+      // Default position to inject to, if "position" not specified
+      if (item.type === 'salesCard') {
+        item.position ??= 3;
+      }
+      item.position ??= 7;
+
+      // Also make sure it has some ID to be used as a React map key
+      item.objectID ??= `injected-content-${JSON.stringify(item)}`;
+
+      // Add it to the array
+      originalHits.splice(item.position, 0, item);
+    }
+
     // Inject items
-    setInjectedHits(injectContent(hits, itemsToInject));
+    setInjectedHits(originalHits);
   }, [ruleData, hits, scopedResults, query]);
 
-  return <CustomHits hits={injectedHits} sendEvent={sendEvent} />;
+  return (
+    <div className="ais-InfiniteHits">
+      <ul
+        className={`ais-InfiniteHits-list ${
+          mobile
+            ? 'ais-InfiniteHits-list-mobile'
+            : tablet
+            ? 'ais-InfiniteHits-list-tablet'
+            : ''
+        }`}
+      >
+        {injectedHits.map((hit) => {
+          // Wrap the hit info in an animation, and click functionality to view the product
+          if (hit._component != undefined) {
+            // If the hit has a component property, use it instead of the default component
+            return (
+              <li key={hit.objectID}>
+                {hitsLoaded ? (
+                  <hit._component hit={hit} />
+                ) : (
+                  <CustomSkeleton type="hit" />
+                )}
+              </li>
+            );
+          }
+          return (
+            <li key={hit.objectID}>
+              {hitsLoaded ? (
+                <Hit hit={hit} sendEvent={sendEvent} />
+              ) : (
+                <CustomSkeleton type="hit" />
+              )}
+            </li>
+          );
+        })}
+        <li ref={productCard} aria-hidden="true" />
+      </ul>
+    </div>
+  );
 };
 
 export default InjectedHits;

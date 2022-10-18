@@ -3,6 +3,10 @@ import { lazy, Suspense } from 'react';
 
 // eslint-disable-next-line import/order
 import { Configure, Index } from 'react-instantsearch-hooks-web';
+
+//import react router
+import { useSearchParams } from 'react-router-dom';
+
 // Custom Hooks
 import { windowSize } from '@/hooks/useScreenSize';
 
@@ -11,7 +15,6 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 
 // Import Components
 import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
-import { Hit } from '@/components/hits/Hits';
 import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
 import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
 import CustomSortBy from '@/components/sortBy/SortBy';
@@ -97,6 +100,9 @@ const SearchResults = () => {
   // Handle the facet panel on mobile
   const [isFacetsPanelOpen, setIsFacetsPanelOpen] =
     useRecoilState(isFacetPanelOpen);
+
+  // Handle URL search parameters through React Router
+  let [searchParams, setSearchParams] = useSearchParams();
 
   // Related to next conditional
   let facetName;
@@ -197,7 +203,7 @@ const SearchResults = () => {
             ruleContexts={
               navigationState?.type === 'context' ? navigationState.action : ''
             }
-            query={queryState}
+            query={searchParams.get('query') === null ? '' : searchParams.get('query')}
             getRankingInfo={true}
           />
 
@@ -208,7 +214,7 @@ const SearchResults = () => {
                 <Configure hitsPerPage={1} page={0} />
               </Index>
               {/* Injected content*/}
-              <InjectedHits hitComponent={Hit} />
+              <InjectedHits />
             </Suspense>
           ) : (
             <Suspense fallback={<SkeletonLoader type={'hit'} />}>

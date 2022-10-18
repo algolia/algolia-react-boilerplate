@@ -57,7 +57,7 @@ function CustomSearchBox(props) {
   // router hook to navigate using a function
   const navigate = useNavigate();
   // Get states of React Router
-  const { state } = useLocation();
+  const { state, pathname } = useLocation();
 
   // Get array of rules from Recoil
   const rulesApplied = useSetRecoilState(rulesAtom);
@@ -111,7 +111,7 @@ function CustomSearchBox(props) {
           value={queryState ? queryState : ''}
           placeholder={t('placeHolder')}
           onClick={() => {
-            setIsFederatedOpen(true);
+            if (pathname === '/') setIsFederatedOpen(true);
             setSbIsActive(true);
           }}
           onChange={(event) => {

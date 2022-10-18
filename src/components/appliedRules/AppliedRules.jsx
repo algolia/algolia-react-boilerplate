@@ -25,6 +25,7 @@ import PersonaScore from './PersonaScore';
 
 function CustomAppliedRules(props) {
   const { results } = useInstantSearch(props);
+
   const [rules, setRules] = useRecoilState(rulesAtom);
 
   //Get score from Persona
@@ -52,7 +53,7 @@ function CustomAppliedRules(props) {
         });
       }
     }
-  }, [results.appliedRules]);
+  }, [results, results.appliedRules]);
 
   // Create an array without duplicates
   const uniqRules = uniq(rules);

@@ -65,7 +65,7 @@
       width: 8px;
       transition: transform 0.1s ease-in-out;
       path {
-        fill: $second-color;
+        fill: $secondary-color;
       }
     }
   }
@@ -97,7 +97,7 @@
         }
       }
       .add-to-cart {
-        @include btn($second-color-custom-gradient, $white-color);
+        @include btn($secondary-color-custom-gradient, $white-color);
         margin-top: 2rem;
         gap: 1rem;
         width: 10rem;
@@ -105,7 +105,7 @@
           animation: bounce 0.4s ease-in-out forwards;
         }
         &:hover {
-          @include btn-hover($second-color-custom-gradient, $white-color);
+          @include btn-hover($secondary-color-custom-gradient, $white-color);
           gap: 1.5rem;
         }
         svg {
@@ -121,7 +121,7 @@
         }
       }
       .price {
-        @include price($second-color);
+        @include price($secondary-color);
         font-size: 2rem;
         strike {
           margin-right: 0.5rem;
@@ -183,8 +183,9 @@
       margin-top: 2px;
       width: 8px;
       transition: transform 0.3s ease-in-out;
+
       path {
-        fill: $second-color;
+        fill: $secondary-color;
       }
     }
   }
@@ -245,14 +246,14 @@
     width: 100%;
     align-items: center;
   }
-  .fbt-container__component{
+  .fbt-container__component {
     display: flex;
     flex-direction: column;
-    .fbt-component{
+    .fbt-component {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      .fbt-component__plus-icon{
+      .fbt-component__plus-icon {
         margin-top: 1rem;
       }
     }

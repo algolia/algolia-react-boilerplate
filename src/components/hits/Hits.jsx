@@ -64,6 +64,7 @@ const Hit = ({ hit, sendEvent }) => {
   const [cartPictoPlusClicked, setCartPictoPlusClicked] = useState(false);
   // Qty state
   const [itemQty, setItemQty] = useState(0);
+
   // Import Cart State
   const cart = useRecoilValue(cartState);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);

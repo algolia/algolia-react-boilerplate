@@ -45,9 +45,8 @@ const HomePage = lazy(() => import('./pages/homepage/HomePage'));
 const ProductDetails = lazy(() =>
   import('./pages/productDetailsPage/ProductDetails')
 );
-const SearchResultsPage = lazy(() =>
-  import('./pages/searchResultPage/SearchResultsPage')
-);
+
+import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
 
 const CartModal = lazy(() => import('./components/cart/CartModal'));
 
