@@ -63,7 +63,7 @@ import './SCSS/productDetails.scss';
 // Import and use translation
 import { useTranslation } from 'react-i18next';
 import { useHits } from 'react-instantsearch-hooks-web';
-import FbtAddAll from './FbtAddAll';
+import FbtAddAll from '@/components/fbtPdp/FbtAddAll';
 
 const ProductDetails = () => {
   const { sendEvent } = useHits();
@@ -104,6 +104,8 @@ const ProductDetails = () => {
       setReadyToLoad(true);
     }
   }, []);
+
+  useEffect(() => {}, [hit]);
 
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
@@ -152,6 +154,9 @@ const ProductDetails = () => {
       objectIDs: [currentObjectID],
     });
     fbtRecommendationsProducts = recommendations;
+    if (recommendations.length > 0) {
+      fbtRecommendationsProducts = [hit, ...recommendations];
+    }
   }
 
   if (shouldHaveRelatedProductsValue) {
