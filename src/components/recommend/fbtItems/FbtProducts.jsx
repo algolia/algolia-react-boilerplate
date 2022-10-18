@@ -28,8 +28,7 @@ import { useState } from 'react';
 // Algolia imports
 import { useHits } from 'react-instantsearch-hooks-web';
 
-const FbtItems = ({ item, size }) => {
-  console.log(size);
+const FbtItems = ({ item, index }) => {
   const { sendEvent } = useHits();
   const navigate = useNavigate();
   const hitState = useSetRecoilState(hitAtom);
@@ -84,9 +83,11 @@ const FbtItems = ({ item, size }) => {
           </div>
         </div>
       </div>
-      <div className="fbt-component__plus-icon">
-        <PlusPicto />
-      </div>
+      {index !== 2 && (
+        <div className="fbt-component__plus-icon">
+          <PlusPicto />
+        </div>
+      )}
     </div>
   );
 };

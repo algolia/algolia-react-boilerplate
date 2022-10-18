@@ -337,10 +337,11 @@ const ProductDetails = () => {
                   !isDesktop ? 'fbt-container-mobile' : 'fbt-container'
                 }`}
               >
-                <HorizontalSlider
-                  itemComponent={FbtItems}
-                  items={fbtRecommendationsProducts}
-                />
+                <div className="fbt-container__component">
+                  {fbtRecommendationsProducts.slice(0, 3).map((item, i) => {
+                    return <FbtItems item={item} index={i} />;
+                  })}
+                </div>
                 <FbtAddAll items={fbtRecommendationsProducts} />
               </div>
             </>

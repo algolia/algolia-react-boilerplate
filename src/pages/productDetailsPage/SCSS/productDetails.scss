@@ -245,6 +245,18 @@
     width: 100%;
     align-items: center;
   }
+  .fbt-container__component{
+    display: flex;
+    flex-direction: column;
+    .fbt-component{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .fbt-component__plus-icon{
+        margin-top: 1rem;
+      }
+    }
+  }
 }
 
 .fbt-infos {
