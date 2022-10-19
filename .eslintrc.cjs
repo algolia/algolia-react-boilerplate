@@ -1,12 +1,8 @@
 // eslint-disable-next-line import/no-commonjs
 module.exports = {
-
-  // extends: [
-  //   'algolia',
-  //   'algolia/react',
-  //   'plugin:react/recommended',
-  //   'plugin:react/jsx-runtime',
-  // ],
+  extends: [
+    "plugin:prettier/recommended"
+  ],
 
   parser: '@babel/eslint-parser',
   rules: {
@@ -32,4 +28,4 @@ module.exports = {
       version: 'detect', // you have to tell eslint which version React are using, "detect" will say can you just figure out yourself (from package.json)
     },
   },
-};
+}
