@@ -5,6 +5,7 @@
 - [Get started](#️-get-started)
 - [Structure](#️-structure)
 - [Features Config](#-features-config)
+  - [ Predict](#--predict)
   - [ Redirects](#--redirects)
   - [ Federated Search](#--federated-search)
   - [ Voice Search](#--voice-search)
@@ -130,6 +131,16 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
   - Frequently Bought Together
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 🔮 Predict</h3>
+
+The app has access to predict through the PredictUserProfileProvider component, found in `./src/components/predict`.
+
+In order for predict to function, it must have a predict App ID, API key and region set in algoliaEnvConfig, found in `./src/config`. Please contact Algolia if you are not sure what values they should have.
+
+You must also adjust the values found in `src/config/predictConfig`. We store a default value for `predictUserIdAtom` to ensure the app works with the default demo flow, but you should replace it with your own predict user ID for your own demo purposes.
+
+You can feel free to keep the default values for all of these atoms and configurations, and follow the default demo flow outlined below (TBD).
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Demo Tour</h3>
 
