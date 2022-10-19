@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, useEffect, Suspense } from 'react';
 
 // Algolia Instantsearch components
 import { Configure, InstantSearch } from 'react-instantsearch-hooks-web';
@@ -26,10 +26,11 @@ import {
   shouldHaveCartFunctionality,
   shouldHaveDemoGuide,
 } from '@/config/featuresConfig';
-import { mainIndex } from './config/algoliaEnvConfig';
-import { isRulesSwitchToggle } from './config/appliedRulesConfig';
-import { isCarouselLoaded } from './config/carouselConfig';
-import { queryAtom } from './config/searchboxConfig';
+import { predictUserIdAtom } from '@/config/predictConfig'
+import { mainIndex } from '@/config/algoliaEnvConfig';
+import { isRulesSwitchToggle } from '@/config/appliedRulesConfig';
+import { isCarouselLoaded } from '@/config/carouselConfig';
+import { queryAtom } from '@/config/searchboxConfig';
 
 // Import Pages and static components
 import AlertNavigation from '@/components/demoGuide/AlertNavigation';
@@ -47,6 +48,8 @@ const ProductDetails = lazy(() =>
 );
 
 import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
+
+import PredictUserProfileProvider from './components/predict/PredictUserProfileProvider';
 
 const CartModal = lazy(() => import('./components/cart/CartModal'));
 
@@ -92,8 +95,10 @@ export const Main = () => {
 
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide);
+  const userId = useRecoilValue(predictUserIdAtom)
 
   return (
+    <PredictUserProfileProvider userID={userId}>
     <InstantSearch searchClient={searchClient} indexName={index}>
       <InsightsMiddleware />
       {shouldShowNetworkErrors && <SearchErrorToast />}
@@ -166,6 +171,7 @@ export const Main = () => {
           </Suspense>
         )}
       </div>
-    </InstantSearch>
+      </InstantSearch>
+    // </PredictUserProfileProvider>
   );
 };
