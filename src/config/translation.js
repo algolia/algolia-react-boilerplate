@@ -34,10 +34,17 @@ const resources = {
         addToCartButton: 'Add to Cart',
         buttonBack: 'Back to search',
         availableSize: 'Available Size:',
+        addFbtTotal: 'Total price',
+        fbtButtonAdd: [
+          'Add to cart',
+          'Add both to cart',
+          'Add all three to cart',
+          'Add all four to cart',
+        ],
       },
       searchBox: {
         placeHolder: 'Search...',
-        tooltip: '💡 Type a query before submitting your request'
+        tooltip: '💡 Type a query before submitting your request',
       },
       cartModal: {
         title: 'My Cart',
@@ -45,13 +52,13 @@ const resources = {
         sizeTitle: 'Size',
         colorTitle: 'Color',
         yourCartIsEmpty: 'Your cart is empty',
-        checkout: 'Checkout'
+        checkout: 'Checkout',
       },
       priceFacet: {
-        title:'Price',
+        title: 'Price',
         maxPrice: 'Max Price',
-        minPrice: 'Min Price'
-      }
+        minPrice: 'Min Price',
+      },
     },
   },
   fr: {
@@ -82,10 +89,17 @@ const resources = {
         buttonBack: 'Revenir aux recherches',
         addToCartButton: 'Ajouter au panier',
         availableSize: 'Taille disponibles:',
+        addFbtTotal: 'Prix total',
+        fbtButtonAdd: [
+          'Ajouter cet article à mon panier',
+          'Ajouter les deux à mon panier',
+          'Ajouter les trois à mon panier',
+          'Ajouter les quatre à mon panier',
+        ],
       },
       searchBox: {
         placeHolder: 'Rechercher...',
-        tooltip: '💡 Taper une requête avant de soumettre votre recherche'
+        tooltip: '💡 Taper une requête avant de soumettre votre recherche',
       },
       cartModal: {
         title: 'Mon panier',
@@ -93,13 +107,13 @@ const resources = {
         sizeTitle: 'Taille',
         colorTitle: 'Couleur',
         yourCartIsEmpty: 'Votre panier est vide',
-        checkout: 'Valider mon panier'
+        checkout: 'Valider mon panier',
       },
       priceFacet: {
-        title:'Prix',
+        title: 'Prix',
         maxPrice: 'Prix Maximum',
-        minPrice: 'Prix Minimum'
-      }
+        minPrice: 'Prix Minimum',
+      },
     },
   },
   ger: {
@@ -133,10 +147,17 @@ const resources = {
         buttonBack: 'Zurück zur Forschung',
         addToCartButton: 'In den Warenkorb legen',
         availableSize: 'Verfügbare Größe:',
+        addFbtTotal: 'Festgelegte Preis',
+        fbtButtonAdd: [
+          'Fügen Sie diesen Artikel meinem Warenkorb hinzu',
+          'Beides in meinen Warenkorb legen',
+          'Fügen Sie alle drei zu meinem Warenkorb hinzu',
+          'Fügen Sie alle vier zu meinem Warenkorb hinzu',
+        ],
       },
       searchBox: {
         placeHolder: 'Forschen...',
-        tooltip: '💡 Geben Sie eine Abfrage ein, bevor Sie Ihre Anfrage senden'
+        tooltip: '💡 Geben Sie eine Abfrage ein, bevor Sie Ihre Anfrage senden',
       },
       cartModal: {
         title: 'Mein Korb',
@@ -144,13 +165,13 @@ const resources = {
         sizeTitle: 'Schneiden',
         colorTitle: 'Farbe',
         yourCartIsEmpty: 'Dein Korb ist leer',
-        checkout: 'Kasse'
+        checkout: 'Kasse',
       },
       priceFacet: {
-        title:'Preis',
+        title: 'Preis',
         maxPrice: 'Max Preis',
-        minPrice: 'Min Preis'
-      }
+        minPrice: 'Min Preis',
+      },
     },
   },
 };
