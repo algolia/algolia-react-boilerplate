@@ -1,46 +1,46 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 
-import { createSearchParams, useLocation, useNavigate } from 'react-router-dom';
+import { createSearchParams, useLocation, useNavigate } from 'react-router-dom'
 
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil'
 
-import connectVoiceSearch from 'instantsearch.js/es/connectors/voice-search/connectVoiceSearch';
-import { useConnector } from 'react-instantsearch-hooks-web';
+import connectVoiceSearch from 'instantsearch.js/es/connectors/voice-search/connectVoiceSearch'
+import { useConnector } from 'react-instantsearch-hooks-web'
 
 // Import searchbox Config
-import { queryAtom, searchBoxIsActive } from '@/config/searchboxConfig';
+import { queryAtom, searchBoxIsActive } from '@/config/searchboxConfig'
 
 //Import scope SCSS
-import './SCSS/voicesearch.scss';
+import './SCSS/voicesearch.scss'
 
 export function useVoiceSearch(props) {
-  return useConnector(connectVoiceSearch, props);
+  return useConnector(connectVoiceSearch, props)
 }
 
 function CustomVoiceSearchComponent(props) {
   const { isListening, toggleListening, voiceListeningState } =
-    useVoiceSearch(props);
+    useVoiceSearch(props)
 
-  const { status, transcript } = voiceListeningState;
+  const { status, transcript } = voiceListeningState
 
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
 
-  const setQueryState = useSetRecoilState(queryAtom);
-  const setSbIsActive = useSetRecoilState(searchBoxIsActive);
+  const setQueryState = useSetRecoilState(queryAtom)
+  const setSbIsActive = useSetRecoilState(searchBoxIsActive)
 
   useEffect(() => {
     if (status === 'finished') {
-      setQueryState(transcript);
+      setQueryState(transcript)
 
       if (pathname !== '/search') {
         navigate({
           pathname: '/search',
           search: `?${createSearchParams({ query: transcript })}`,
-        });
+        })
       }
     }
-  }, [status]);
+  }, [status])
 
   return (
     <div className="voiceSearch">
@@ -63,7 +63,7 @@ function CustomVoiceSearchComponent(props) {
         </svg>
       </button>
     </div>
-  );
+  )
 }
 
-export default CustomVoiceSearchComponent;
+export default CustomVoiceSearchComponent

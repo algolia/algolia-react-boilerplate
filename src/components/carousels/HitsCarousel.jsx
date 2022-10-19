@@ -1,18 +1,18 @@
-import get from 'lodash/get';
-import { useState } from 'react';
+import get from 'lodash/get'
+import { useState } from 'react'
 
-import { CartPicto } from '@/assets/svg/SvgIndex';
-import { hitAtom, hitsConfig } from '@/config/hitsConfig';
-import Price from '../hits/components/Price';
+import { CartPicto } from '@/assets/svg/SvgIndex'
+import { hitAtom, hitsConfig } from '@/config/hitsConfig'
+import Price from '../hits/components/Price'
 
 // Display or not cart icons
-import { shouldHaveCartFunctionality } from '@/config/featuresConfig';
+import { shouldHaveCartFunctionality } from '@/config/featuresConfig'
 
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Import cart from recoil(Cart state and the event if it's removed)
-import { addToCartSelector } from '@/config/cartFunctions';
+import { addToCartSelector } from '@/config/cartFunctions'
 
 const HitsCarousel = ({ hit, sendEvent }) => {
   const {
@@ -24,28 +24,28 @@ const HitsCarousel = ({ hit, sendEvent }) => {
     colour,
     colourHexa,
     price: priceForTotal,
-  } = hitsConfig;
-  const [hovered, setHovered] = useState(false);
-  const [cartLogoClicked, setCartLogoClicked] = useState(false);
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
+  } = hitsConfig
+  const [hovered, setHovered] = useState(false)
+  const [cartLogoClicked, setCartLogoClicked] = useState(false)
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
 
   // Navigate is used by React Router
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // Hits are imported by Recoil
-  const hitState = useSetRecoilState(hitAtom);
+  const hitState = useSetRecoilState(hitAtom)
 
   // display or not the cart icons
-  const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality);
+  const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
 
   return (
     <div
       className="item"
       onMouseEnter={() => {
-        setHovered(true);
+        setHovered(true)
       }}
       onMouseLeave={() => {
-        setHovered(false);
+        setHovered(false)
       }}
     >
       <div
@@ -63,10 +63,10 @@ const HitsCarousel = ({ hit, sendEvent }) => {
         <div
           className="item__infos-up"
           onClick={() => {
-            hitState(hit);
+            hitState(hit)
             // navigate to the product show page
-            navigate(`/search/product/${hit[objectID]}`);
-            sendEvent('click', hit, 'Homepage: Product clicked');
+            navigate(`/search/product/${hit[objectID]}`)
+            sendEvent('click', hit, 'Homepage: Product clicked')
           }}
         >
           <p className="brand">{get(hit, brand)}</p>
@@ -80,10 +80,10 @@ const HitsCarousel = ({ hit, sendEvent }) => {
             <div
               className={cartLogoClicked ? 'cart cart-active' : 'cart'}
               onClick={() => {
-                setCartLogoClicked(true);
-                setTimeout(() => setCartLogoClicked(false), 300);
-                setAddToCartAtom(hit);
-                sendEvent('conversion', hit, 'Homepage: Add to cart');
+                setCartLogoClicked(true)
+                setTimeout(() => setCartLogoClicked(false), 300)
+                setAddToCartAtom(hit)
+                sendEvent('conversion', hit, 'Homepage: Add to cart')
               }}
             >
               <CartPicto />
@@ -92,7 +92,7 @@ const HitsCarousel = ({ hit, sendEvent }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HitsCarousel;
+export default HitsCarousel

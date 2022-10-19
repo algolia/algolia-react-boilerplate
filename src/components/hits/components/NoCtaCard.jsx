@@ -1,8 +1,8 @@
 // Component to render injected content from the Algolia dashboard, eg 'Free return Policy'
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 // Import framer Motion config
-import { framerMotionHits } from '@/config/animationConfig';
+import { framerMotionHits } from '@/config/animationConfig'
 
 // Display an image, within a framer-motion wrapper
 const NoCtaCard = ({ hit }) => {
@@ -15,7 +15,7 @@ const NoCtaCard = ({ hit }) => {
     >
       <img src={hit.image.desktop_url} loading="lazy" alt="" />
     </motion.div>
-  );
-};
+  )
+}
 
-export default NoCtaCard;
+export default NoCtaCard

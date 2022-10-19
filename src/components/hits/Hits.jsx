@@ -1,79 +1,79 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 // Import framer-motion for animation on hits
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion'
 
-import { Highlight } from 'react-instantsearch-hooks-web';
+import { Highlight } from 'react-instantsearch-hooks-web'
 // Import SVGs
-import { Heart, MinusPicto, PlusPicto } from '@/assets/svg/SvgIndex';
-import RankingIcon from './components/RankingIcon';
+import { Heart, MinusPicto, PlusPicto } from '@/assets/svg/SvgIndex'
+import RankingIcon from './components/RankingIcon'
 
 // Import Badge config
-import { badgeCriteria } from '@/config/badgeConfig';
+import { badgeCriteria } from '@/config/badgeConfig'
 
 // In case of img loading error
-import * as placeHolderError from '@/assets/logo/logo.webp';
+import * as placeHolderError from '@/assets/logo/logo.webp'
 
 // Lodash function to acces to precise attribute
-import get from 'lodash/get';
+import get from 'lodash/get'
 // Animations
-import { framerMotionHits } from '@/config/animationConfig';
+import { framerMotionHits } from '@/config/animationConfig'
 
 // Recoil import
-import { hitAtom, hitsConfig } from '@/config/hitsConfig';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { hitAtom, hitsConfig } from '@/config/hitsConfig'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 // React-router import
-import { useNavigate } from 'react-router-dom';
-import Badge from './components/Badge';
+import { useNavigate } from 'react-router-dom'
+import Badge from './components/Badge'
 
 //Import hook for store ID into local storage
-import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
+import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage'
 
 // import Price component
-import Price from '@/components/hits/components/Price.jsx';
+import Price from '@/components/hits/components/Price.jsx'
 
 // Import cart from recoil(Cart state and the event if it's removed)
 import {
   addToCartSelector,
   cartState,
   removeToCartSelector,
-} from '@/config/cartFunctions';
+} from '@/config/cartFunctions'
 // Import Persona if there is
 import {
   shouldHaveCartFunctionality,
   shouldHavePersona,
-} from '@/config/featuresConfig';
+} from '@/config/featuresConfig'
 import {
   personaSelectedFiltersAtom,
   shouldDisplayRankingIcons,
-} from '@/config/personaConfig';
+} from '@/config/personaConfig'
 
 //Import scope SCSS
-import './SCSS/hits.scss';
+import './SCSS/hits.scss'
 
 // Used to send insights event on add to cart
 
 // import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
 const Hit = ({ hit, sendEvent }) => {
-  const navigate = useNavigate();
-  const hitState = useSetRecoilState(hitAtom);
-  const [isHovered, setIsHovered] = useState(false);
-  const [cartPictoMinusClicked, setCartPictoMinusClicked] = useState(false);
-  const [cartPictoPlusClicked, setCartPictoPlusClicked] = useState(false);
+  const navigate = useNavigate()
+  const hitState = useSetRecoilState(hitAtom)
+  const [isHovered, setIsHovered] = useState(false)
+  const [cartPictoMinusClicked, setCartPictoMinusClicked] = useState(false)
+  const [cartPictoPlusClicked, setCartPictoPlusClicked] = useState(false)
   // Qty state
-  const [itemQty, setItemQty] = useState(0);
+  const [itemQty, setItemQty] = useState(0)
 
   // Import Cart State
-  const cart = useRecoilValue(cartState);
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
-  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
-  const showPersona = useRecoilValue(shouldHavePersona);
-  const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons);
-  const personaFilters = useRecoilValue(personaSelectedFiltersAtom);
+  const cart = useRecoilValue(cartState)
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
+  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector)
+  const showPersona = useRecoilValue(shouldHavePersona)
+  const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons)
+  const personaFilters = useRecoilValue(personaSelectedFiltersAtom)
 
-  const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality);
+  const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
 
   // Get hit attribute from config file
   const {
@@ -84,9 +84,9 @@ const Hit = ({ hit, sendEvent }) => {
     productName,
     brand,
     price: priceForTotal,
-  } = hitsConfig;
+  } = hitsConfig
 
-  const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
+  const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false)
 
   const RankingFormulaOverlay = ({ hit }) => {
     return (
@@ -109,24 +109,24 @@ const Hit = ({ hit, sendEvent }) => {
             </p>
           ))}
       </motion.div>
-    );
-  };
+    )
+  }
 
-  const promoted = hit?._rankingInfo?.promoted;
+  const promoted = hit?._rankingInfo?.promoted
 
   // Update the qty for a product on SRP each time Cart is modified or set qty to 0
   const updateQty = (article) => {
-    if (!cart.length) setItemQty(0);
+    if (!cart.length) setItemQty(0)
     const productAddedInCart = cart.find(
       (element) => element.objectID === article.objectID
-    );
-    productAddedInCart ? setItemQty(productAddedInCart.qty) : setItemQty(0);
-  };
+    )
+    productAddedInCart ? setItemQty(productAddedInCart.qty) : setItemQty(0)
+  }
 
   // Update the qty for a product on SRP each time Cart is modified
   useEffect(() => {
-    updateQty(hit);
-  }, [cart]);
+    updateQty(hit)
+  }, [cart])
 
   return (
     <motion.div
@@ -156,16 +156,16 @@ const Hit = ({ hit, sendEvent }) => {
         <div
           className="srpItem__imgWrapper"
           onMouseLeave={(e) => {
-            setIsHovered(false);
+            setIsHovered(false)
           }}
           onMouseOver={(e) => {
-            !shouldShowRankingInfo && setIsHovered(true);
+            !shouldShowRankingInfo && setIsHovered(true)
           }}
           onClick={() => {
-            hitState(hit);
-            navigate(`/search/product/${hit[objectID]}`);
-            useStoreIdToLocalStorage(hit[objectID]);
-            sendEvent('click', hit, 'SRP: Product clicked');
+            hitState(hit)
+            navigate(`/search/product/${hit[objectID]}`)
+            useStoreIdToLocalStorage(hit[objectID])
+            sendEvent('click', hit, 'SRP: Product clicked')
           }}
         >
           <img
@@ -210,9 +210,9 @@ const Hit = ({ hit, sendEvent }) => {
                     itemQty === 0 && 'srpItem__infosDown__minusPicto-inactive '
                   }${cartPictoMinusClicked && 'picto-active'}`}
                   onClick={() => {
-                    setCartPictoMinusClicked(true);
-                    setTimeout(() => setCartPictoMinusClicked(false), 300);
-                    setRemoveToCartAtom(hit);
+                    setCartPictoMinusClicked(true)
+                    setTimeout(() => setCartPictoMinusClicked(false), 300)
+                    setRemoveToCartAtom(hit)
                   }}
                 >
                   <MinusPicto />
@@ -227,11 +227,11 @@ const Hit = ({ hit, sendEvent }) => {
                 <div
                   className={cartPictoPlusClicked ? 'picto-active' : ''}
                   onClick={() => {
-                    setCartPictoPlusClicked(true);
-                    setTimeout(() => setCartPictoPlusClicked(false), 300);
-                    setAddToCartAtom(hit);
+                    setCartPictoPlusClicked(true)
+                    setTimeout(() => setCartPictoPlusClicked(false), 300)
+                    setAddToCartAtom(hit)
                     // Send event conversion to Algolia API
-                    sendEvent('conversion', hit, 'SRP: Add to cart');
+                    sendEvent('conversion', hit, 'SRP: Add to cart')
                   }}
                 >
                   <PlusPicto />
@@ -242,7 +242,7 @@ const Hit = ({ hit, sendEvent }) => {
         </div>
       </>
     </motion.div>
-  );
-};
+  )
+}
 
-export { Hit };
+export { Hit }

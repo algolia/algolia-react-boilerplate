@@ -7,15 +7,15 @@ const CustomModal = (props) => {
     children,
     isActive,
     setActive,
-  } = props;
+  } = props
 
   // This function closes the modal when the
   // background is clicked - stopPropagation
   // needed to alow clicks on the modal body
   const closeModal = (event) => {
-    event.cancelBubble = true;
-    if (event.stopPropagation) event.stopPropagation();
-  };
+    event.cancelBubble = true
+    if (event.stopPropagation) event.stopPropagation()
+  }
 
   return (
     <div>
@@ -24,7 +24,7 @@ const CustomModal = (props) => {
           <div
             className="Modal"
             onClick={(e) => {
-              closeModal(e);
+              closeModal(e)
             }}
           >
             <div
@@ -41,7 +41,7 @@ const CustomModal = (props) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CustomModal;
+export default CustomModal

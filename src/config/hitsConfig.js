@@ -3,7 +3,7 @@
 // Holds both content results and product results
 // ------------------------------------------
 
-import { atom } from 'recoil';
+import { atom } from 'recoil'
 
 // ------------------------------------------
 // This const defines a map of attributes used in the app to the names of the attributes in your own index
@@ -32,7 +32,7 @@ export const hitsConfig = {
   hierarchicalCategoriesLvl2: 'hierarchicalCategories.lvl2',
   hierarchicalCategoriesLvl3: 'hierarchicalCategories.lvl3',
   colourHexa: 'colour_hexa_v6',
-};
+}
 
 // ------------------------------------------
 // This const defines what parts of a hit you want to show on the PDP or not
@@ -43,7 +43,7 @@ export const PDPHitSections = {
   brand: true,
   sizeFilter: false,
   colour: true,
-};
+}
 
 // Similar structure to previous const, please do not remove if you don't use articles
 export const contentArticlesConfig = atom({
@@ -57,28 +57,28 @@ export const contentArticlesConfig = atom({
     description: 'description',
     image: 'Image Link',
   },
-});
+})
 
 // Choose number of records the app should display per results page
 export const hitsPerPage = {
   numberNotInjected: 15,
   numberInjected: 14,
-};
+}
 
 // Please ignore this atom
 export const hitsAtom = atom({
   key: 'hitsAtom', // unique ID (with respect to other atoms/selectors)
   default: [], // default value (aka initial value)
-});
+})
 
 // Please ignore this atom
 export const hitAtom = atom({
   key: 'hitAtom', // unique ID (with respect to other atoms/selectors)
   default: {}, // default value (aka initial value)
-});
+})
 
 // Please ignore this atom
 export const hitsNumber = atom({
   key: 'hitsNumber', // unique ID (with respect to other atoms/selectors)
   default: 1, // default value (aka initial value)
-});
+})

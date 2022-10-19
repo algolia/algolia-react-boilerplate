@@ -3,12 +3,12 @@
 // ------------------------------------------
 @use '../../../scss/partials' as *;
 
-.demoGuide-wp{
+.demoGuide-wp {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur( 2px );
-  -webkit-backdrop-filter: blur( 2px );
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   z-index: 995;
   animation: opacity 0.2s ease-in-out;
 }
@@ -26,11 +26,11 @@
   overflow: scroll;
 
   h2 {
-    @include titleH2($secondary-color)
+    @include titleH2($secondary-color);
   }
 }
 
-.helpNavigation-mobile{
+.helpNavigation-mobile {
   min-width: 100%;
 }
 
@@ -53,13 +53,13 @@
     transform: rotate3d(0, 0, 1, -90deg);
     transition: all 0.3s ease-in-out;
 
-    p{
+    p {
       opacity: 0;
       transition: all 0.3s ease-in-out;
     }
   }
 
-  p{
+  p {
     font-size: 0.6rem;
     writing-mode: vertical-rl;
     text-orientation: mixed;
@@ -72,7 +72,6 @@
     }
   }
 }
-
 
 .demoGuideHelpers {
   margin-bottom: 1rem;
@@ -112,12 +111,11 @@
   }
 }
 
-
 @keyframes opacity {
-  0%{
+  0% {
     opacity: 0;
   }
-  100%{
+  100% {
     opacity: 1;
   }
 }

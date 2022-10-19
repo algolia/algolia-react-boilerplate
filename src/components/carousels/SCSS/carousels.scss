@@ -29,7 +29,7 @@
       }
     }
     .hovered {
-      img{
+      img {
         transition: transform 0.5s ease-in-out;
         transform: scale(1.1);
       }
@@ -61,16 +61,16 @@
           padding: 1rem;
           // height: 6rem;
           .name {
-            @include productName($grey-dark-color)
+            @include productName($grey-dark-color);
           }
           .price {
             @include price($secondary-color);
           }
-          .brand{
+          .brand {
             @include brand($main-color);
             margin-top: 1rem;
           }
-          .cart{
+          .cart {
             background-color: $secondary-color;
             border-radius: 50%;
             width: 20px;
@@ -82,28 +82,24 @@
               margin-top: 0.3rem;
               width: 1.2rem;
               height: 100%;
-              path{
+              path {
                 fill: $background-color;
               }
-              
             }
-            &-active{
+            &-active {
               animation: bounce 0.3s ease-in-out forwards;
             }
           }
-          
         }
-        &__infos-up{
-         width: 100%;
-        
+        &__infos-up {
+          width: 100%;
         }
-        &__infos-down{
+        &__infos-down {
           display: flex;
           justify-content: space-between;
           align-items: center;
           width: 100%;
           margin-top: 1rem;
-        
         }
         &__button {
           z-index: 1000;
@@ -145,15 +141,13 @@
 }
 
 @keyframes bounce {
-  0%{
-    transform: scale(0.90);
+  0% {
+    transform: scale(0.9);
   }
-  50%{
+  50% {
     transform: scale(1.02);
   }
-  100%{
+  100% {
     transform: scale(1);
   }
-  }
-
-
+}

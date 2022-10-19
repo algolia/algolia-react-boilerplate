@@ -1,8 +1,8 @@
 // ------------------------------------------
 // Configuration for refinements/facets
 // ------------------------------------------
-import { atom } from 'recoil';
-import { hitsConfig } from './hitsConfig';
+import { atom } from 'recoil'
+import { hitsConfig } from './hitsConfig'
 
 // This const defines the refinements to be shown
 // There are five possible types: hierarchical, price, colour, size, list
@@ -75,21 +75,21 @@ export const refinements = [
       showMoreFunction: false,
     },
   },
-];
+]
 
 // This const defines the labels used in price refinements
 export const refinementPriceLabels = {
   moreThan: 'More than',
   lessThan: 'Less than',
-};
+}
 
 export const refinementsAtom = atom({
   key: 'refinementsAtom', // unique ID (with respect to other atoms/selectors)
   default: [], // default value (aka initial value)
-});
+})
 
 // State to open facet panel on mobile
 export const isFacetPanelOpen = atom({
   key: 'isFacetPanelOpen', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
-});
+})
