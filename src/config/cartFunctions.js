@@ -6,6 +6,11 @@
 import { atom, selector } from 'recoil';
 import { hitsConfig } from '@/config/hitsConfig';
 
+export const currentTotal = atom({
+  key: 'currentTotal',
+  default: 0,
+});
+
 export const cartState = atom({
   key: 'cartState',
   default: [],

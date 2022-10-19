@@ -14,7 +14,7 @@ import { motion } from 'framer-motion';
 
 //Import config
 import { framerMotionTransition } from '@/config/animationConfig';
-import { cartClick, cartOpen, cartState } from '@/config/cartFunctions';
+import { cartClick, cartOpen, cartState, currentTotal } from '@/config/cartFunctions';
 import { shouldHaveRelatedProducts } from '@/config/featuresConfig';
 
 // Import hooks
@@ -35,6 +35,7 @@ const CartModal = () => {
   // Import all recoil states to show modal + Cart stored and Removed articles
   const [showCart, setShowCart] = useRecoilState(cartOpen);
   const [cartValue, setCartValue] = useRecoilState(cartState);
+  const [currentTotalAtom, setCurrentTotalAtom] = useRecoilState(currentTotal)
   const [objectIds, setObjectIds] = useState([]);
   // Use ref on click modal and on cart icon + hamburger
   const cartModal = useRef();
@@ -73,7 +74,7 @@ const CartModal = () => {
     if (cartValue.length) {
       setObjectIds(
         cartValue.reduce((accum, obj) => [...accum, obj.objectID], [])
-      );
+      )
     }
   }, [cartValue]);
 

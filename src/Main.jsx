@@ -97,6 +97,7 @@ export const Main = () => {
   usePreventScrolling(showDemoGuide);
   const userId = useRecoilValue(predictUserIdAtom)
 
+
   return (
     <PredictUserProfileProvider userID={userId}>
       <InstantSearch searchClient={searchClient} indexName={index}>

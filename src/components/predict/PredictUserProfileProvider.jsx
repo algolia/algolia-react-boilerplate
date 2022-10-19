@@ -23,10 +23,6 @@ function PredictUserProfileProvider({ userID, children }) {
       });
   }, [userID])
 
-  if (!userProfile) {
-    return children;
-  }
-
   return (
     <Predict userProfile={userProfile} suppressExperimentalWarning>
       {children}

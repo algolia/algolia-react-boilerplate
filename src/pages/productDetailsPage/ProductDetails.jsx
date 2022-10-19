@@ -1,12 +1,19 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
-import { lazy, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Recommend
 import {
   useFrequentlyBoughtTogether,
   useRelatedProducts,
 } from '@algolia/recommend-react';
+
+
+// https://www.algolia.com/doc/ui-libraries/predict/api-reference/predict-react/PredictZone/
+import { PredictZone } from '@algolia/predict-react'
+
+// Banner to be used in predict
+import PromotionCodeBanner from '@/components/predict/PromotionCodeBanner'
 
 // Slider for recommend
 import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
@@ -123,6 +130,16 @@ const ProductDetails = () => {
   const { isDesktop } = useRecoilValue(windowSize);
 
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
+  const cartState = useRecoilValue(addToCartSelector)
+
+  // Fetch and compute the current total value of the users cart
+  const [currentCartTotal, setCurrentCartTotal] = useState(cartState.reduce((acc, val) => acc += val.unformated_price, 0))
+
+  // Adjust the current total when the state of the cart changes
+  useEffect(() => {
+    setCurrentCartTotal(cartState.reduce((acc, val) => acc += val.unformated_price, 0))
+  }, [cartState])
+
 
   // Get hit attribute from config file
   const {
@@ -144,8 +161,10 @@ const ProductDetails = () => {
     keyPrefix: 'pdp',
   });
 
-  let fbtRecommendationsProducts;
-  let relatedRecommendationsProducts;
+  let fbtRecommendationsProducts
+  let relatedRecommendationsProducts
+  let totalFbtProductsAmount
+
 
   if (shouldHaveFbtProductsValue) {
     const { recommendations } = useFrequentlyBoughtTogether({
@@ -153,7 +172,8 @@ const ProductDetails = () => {
       indexName,
       objectIDs: [currentObjectID],
     });
-    fbtRecommendationsProducts = recommendations;
+    fbtRecommendationsProducts = recommendations
+    totalFbtProductsAmount = fbtRecommendationsProducts.reduce((acc, val) => acc += val.unformated_price, 0)
   }
 
   if (shouldHaveRelatedProductsValue) {
@@ -164,6 +184,7 @@ const ProductDetails = () => {
     });
     relatedRecommendationsProducts = recommendations;
   }
+
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -334,6 +355,21 @@ const ProductDetails = () => {
               />
             </div>
           )}
+
+          {totalFbtProductsAmount !== undefined &&
+            <PredictZone
+              name="Free shipping banner"
+              when={({ cartAbandonment, orderValue = 0 }) => {
+                const isUnderOrderValue = orderValue > 0 && currentCartTotal <= orderValue
+                // Show banner if already over buying power, or if buying all recommendations would bring user over buying power
+                const shouldShowPromoBanner = isUnderOrderValue || (currentCartTotal + totalFbtProductsAmount > orderValue)
+
+                return shouldShowPromoBanner
+              }}
+            >
+              <PromotionCodeBanner cartValue={currentCartTotal} valueToAdd={totalFbtProductsAmount} />
+            </PredictZone>
+          }
         </div>
       )}
     </div>
