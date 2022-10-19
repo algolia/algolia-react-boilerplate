@@ -9,6 +9,7 @@ export const predictUserProfileAtom = atom({
     default: null, // default value
 })
 
+// This atom stores the current User ID related to Predict
 export const predictUserIdAtom = atom({
     key: 'predictUserIdAtom', // unique ID
     default: "100023285.994839327", // default value

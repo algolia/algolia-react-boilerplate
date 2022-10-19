@@ -56,6 +56,7 @@ export const recommendClient = algoliarecommend(
   searchClientCreds.APIKey
 );
 
+// This export is a single instanc of the Algolia Predict API client
 export const predictClient = algoliapredict(
   predictClientCreds.appID,
   predictClientCreds.APIKey,

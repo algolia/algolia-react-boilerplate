@@ -4,6 +4,8 @@ import { predictUserProfileAtom } from '@/config/predictConfig'
 import { predictClient } from '@/config/algoliaEnvConfig'
 import { useRecoilState } from 'recoil'
 
+// PredictUserProfileProvider returns the Predict wrapper with the children encapsulated, or just the children
+// It depends on whether there is a valid user profile for the current user ID which is passed to the component
 function PredictUserProfileProvider({ userID, children }) {
   const [userProfile, setUserProfile] = useRecoilState(predictUserProfileAtom)
 
