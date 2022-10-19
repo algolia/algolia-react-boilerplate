@@ -10,12 +10,9 @@
 .recommend {
   margin: 2rem 2rem;
 
-  <<<<<<< HEAD .title {
-    @include titleH3($second-color);
-    ======= .title {
-      @include titleH3($secondary-color) >>>>>>>
-        ad2cf47de6dec12ba4dd5e7d45e21758a23f3e30;
-    }
+  .title {
+    @include titleH3($secondary-color);
+  }
 
     .auc-Recommend-list {
       display: flex;
@@ -83,11 +80,11 @@
         }
       }
       .price {
-        @include price($second-color);
+        @include price($secondary-color);
       }
     }
   }
-}
+
 
 // ------------------------------------------
 // MOBILE
@@ -112,7 +109,7 @@
   width: 100%;
   margin-top: 1rem;
   .cart {
-    background-color: $second-color;
+    background-color: $secondary-color;
     border-radius: 50%;
     width: 1.7rem;
     height: 1.7rem;
@@ -146,7 +143,7 @@
     }
   }
   .cart {
-    background-color: $second-color;
+    background-color: $secondary-color;
     border-radius: 50%;
     width: 1.7rem;
     height: 1.7rem;

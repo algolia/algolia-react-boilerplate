@@ -16,27 +16,11 @@ const priceTotal = (items) => {
 };
 
 const numberOfHits = (items) => {
-  // Import const translation
-  // Use the translator
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
   });
-  switch (items.length) {
-    case 1:
-      return t('fbtButtonAdd')[0];
-      break;
-    case 2:
-      return t('fbtButtonAdd')[1];
-      break;
-    case 3:
-      return t('fbtButtonAdd')[2];
-      break;
-    case 4:
-      return t('fbtButtonAdd')[3];
-      break;
-    default:
-      break;
-  }
+
+  return t('fbtButtonAdd')[items.length - 1]
 };
 
 const FbtAddAll = ({ items }) => {

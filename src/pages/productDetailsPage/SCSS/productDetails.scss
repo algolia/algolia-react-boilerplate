@@ -272,7 +272,7 @@
     font-size: 16px;
   }
   p {
-    @include p-text($second-color);
+    @include p-text($secondary-color);
     margin-left: 1rem;
     font-size: 16px;
     font-weight: 600;
@@ -284,13 +284,13 @@
   &__buttons {
     margin-top: 1rem;
     width: 13rem;
-    @include btn($second-color-custom-gradient, $white-color);
-    border: 1px solid $second-color;
+    @include btn($secondary-color-custom-gradient, $white-color);
+    border: 1px solid $secondary-color;
     p {
       font-size: 1rem;
     }
     &:hover {
-      @include btn-hover($second-color-custom-gradient, $white-color);
+      @include btn-hover($secondary-color-custom-gradient, $white-color);
       gap: 1.5rem;
     }
   }

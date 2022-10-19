@@ -36,8 +36,8 @@ const resources = {
         availableSize: 'Available Size:',
         addFbtTotal: 'Total price',
         fbtButtonAdd: [
-          'Add this article to cart',
-          'Add all two to cart',
+          'Add to cart',
+          'Add both to cart',
           'Add all three to cart',
           'Add all four to cart',
         ],
