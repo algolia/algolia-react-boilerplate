@@ -99,7 +99,7 @@ export const Main = () => {
 
   return (
     <PredictUserProfileProvider userID={userId}>
-    <InstantSearch searchClient={searchClient} indexName={index}>
+      <InstantSearch searchClient={searchClient} indexName={index}>
       <InsightsMiddleware />
       {shouldShowNetworkErrors && <SearchErrorToast />}
 
@@ -172,6 +172,6 @@ export const Main = () => {
         )}
       </div>
       </InstantSearch>
-    // </PredictUserProfileProvider>
+    </PredictUserProfileProvider>
   );
 };
