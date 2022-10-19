@@ -167,12 +167,11 @@ const ProductDetails = () => {
       recommendClient,
       indexName,
       objectIDs: [currentObjectID],
-    });
+    })
   
-    totalFbtProductsAmount = fbtRecommendationsProducts.reduce((acc, val) => acc += val.unformated_price, 0)
-    
     fbtRecommendationsProducts = recommendations.length > 0 ? [hit, ...recommendations] : recommendations
-
+    totalFbtProductsAmount = fbtRecommendationsProducts.reduce((acc, val) => acc += val.unformated_price, 0)
+  }
 
   if (shouldHaveRelatedProductsValue) {
     const { recommendations } = useRelatedProducts({
@@ -343,7 +342,8 @@ const ProductDetails = () => {
                   items={relatedRecommendationsProducts}
                 />
               </div>
-            )}
+          )}
+          
           {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 1 && (
             <>
               <h3 className="title">{t('fbtTitle')}</h3>
