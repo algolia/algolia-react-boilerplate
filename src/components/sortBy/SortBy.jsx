@@ -1,15 +1,15 @@
 // This is for displaying the SortBy widget, eg Price asc/desc
-import { useSortBy } from 'react-instantsearch-hooks-web';
+import { useSortBy } from 'react-instantsearch-hooks-web'
 
 function CustomSortBy(props) {
-  const { refine } = useSortBy(props);
-  const { items } = props;
+  const { refine } = useSortBy(props)
+  const { items } = props
   return (
     <div>
       <select
         onChange={(event) => {
-          event.preventDefault();
-          refine(event.target.value);
+          event.preventDefault()
+          refine(event.target.value)
         }}
       >
         {items.map((item) => (
@@ -19,7 +19,7 @@ function CustomSortBy(props) {
         ))}
       </select>
     </div>
-  );
+  )
 }
 
-export default CustomSortBy;
+export default CustomSortBy

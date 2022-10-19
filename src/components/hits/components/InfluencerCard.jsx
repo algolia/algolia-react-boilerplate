@@ -1,9 +1,9 @@
 // For displaying injected content in the Search Results
 
 // Import framer motion
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 // Import framer Motion config
-import { framerMotionHits } from '@/config/animationConfig';
+import { framerMotionHits } from '@/config/animationConfig'
 
 // Display the name, the category and the background image, wrapped in a framer motion div
 const InfluencerCard = ({ hit }) => {
@@ -27,7 +27,7 @@ const InfluencerCard = ({ hit }) => {
         <h4>{hit.category}</h4>
       </div>
     </motion.div>
-  );
-};
+  )
+}
 
-export default InfluencerCard;
+export default InfluencerCard

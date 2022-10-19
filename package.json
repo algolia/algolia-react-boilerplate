@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "A boilerplate for Algolia Demos",
   "main": "index.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint:fix && npm run format"
+    }
+  },
   "scripts": {
     "start": "vite",
     "build": "vite build",
@@ -49,6 +54,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
+    "@babel/eslint-parser": "^7.19.1",
     "@babel/plugin-proposal-optional-chaining": "^7.16.7",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
@@ -59,10 +65,12 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.5.1",
     "react-hot-loader": "^4.13.0",
     "vite": "^3.0.0",

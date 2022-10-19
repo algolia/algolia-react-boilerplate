@@ -9,10 +9,10 @@ const useSendAlgoliaEvent = ({ type, userToken, index, hit, name }) => {
       index: index,
       timestamp: Date.now(),
       objectIDs: [`${hit.objectID}`],
-    });
+    })
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
-};
+}
 
 // export default useSendAlgoliaEvent;

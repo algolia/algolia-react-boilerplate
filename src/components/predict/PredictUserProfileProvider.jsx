@@ -18,9 +18,9 @@ function PredictUserProfileProvider({ userID, children }) {
           typesToRetrieve: ['properties', 'segments'],
         },
       })
-        .then((nextUserProfile) => {
-          setUserProfile(nextUserProfile)
-      });
+      .then((nextUserProfile) => {
+        setUserProfile(nextUserProfile)
+      })
   }, [userID])
 
   if (!userProfile) {

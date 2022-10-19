@@ -1,7 +1,7 @@
-import { Selectors } from '@/components/selector/Selectors';
+import { Selectors } from '@/components/selector/Selectors'
 
 // Import configuration
-import { searchBannersConfig } from '@/config/demoGuideConfig';
+import { searchBannersConfig } from '@/config/demoGuideConfig'
 
 const SearchBanners = () => {
   return (
@@ -14,12 +14,12 @@ const SearchBanners = () => {
               <span>{item.label}:</span>
               <p>{item.details}</p>
             </div>
-          );
+          )
         })}
       </div>
       <Selectors props={searchBannersConfig} />
     </div>
-  );
-};
+  )
+}
 
-export default SearchBanners;
+export default SearchBanners

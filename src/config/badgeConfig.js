@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import get from 'lodash/get'
 
 // Please add your badge criteria in this array using the format outlined below.
 // Please note that for now, only one badge can be shown, and the higher priority badges come at the end of the array.
@@ -22,19 +22,19 @@ const criteriaConditionals = [
       badgeTitle: 'New Season',
     },
   },
-];
+]
 
 // Please ignore this function
 export const badgeCriteria = (hit) => {
-  let title = null;
+  let title = null
 
   criteriaConditionals.map((obj) => {
-    const { attribute, condition, badgeTitle } = obj.conditional;
+    const { attribute, condition, badgeTitle } = obj.conditional
 
     if (get(hit, attribute) === condition) {
-      title = badgeTitle;
+      title = badgeTitle
     }
-  });
+  })
 
-  return title;
-};
+  return title
+}

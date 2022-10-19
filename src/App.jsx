@@ -1,17 +1,17 @@
 // React router
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom'
 
 // Recoil State Management
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot } from 'recoil'
 
 // Resize component listens for screen size change to display UI accordingly
-import ScreenResizer from './utils/ScreenResizer';
+import ScreenResizer from './utils/ScreenResizer'
 
 // Import Components
-import { Main } from './Main';
+import { Main } from './Main'
 
 // Add function from config file to scroll on top every change of page
-import ScrollToTop from './config/scrollOnTop';
+import ScrollToTop from './config/scrollOnTop'
 
 const App = () => {
   return (
@@ -22,7 +22,7 @@ const App = () => {
         <Main />
       </Router>
     </RecoilRoot>
-  );
-};
+  )
+}
 
-export default App;
+export default App

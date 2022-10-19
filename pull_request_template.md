@@ -1,7 +1,8 @@
 ## Objective
+
 What:
 Why:
-How: 
+How:
 Usage:
 
 ## Type
@@ -13,7 +14,6 @@ Usage:
 - [ ] Code Refactoring
 - [ ] Documentation
 - [ ] Tests
-
 
 ## Tested
 

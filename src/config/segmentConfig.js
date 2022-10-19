@@ -1,7 +1,7 @@
 // ------------------------------------------
 // Configuration for segments accross the application
 // ------------------------------------------
-import { atom } from 'recoil';
+import { atom } from 'recoil'
 
 // ------------------------------------------
 // This const defines the options available for segmentation
@@ -27,16 +27,16 @@ export const segmentConfig = [
     label: 'Male Segment',
     type: 'segment',
   },
-];
+]
 
 // Please ignore this atom
 export const segmentSelectedAtom = atom({
   key: 'segmentSelected', // unique ID (with respect to other atoms/selectors)
   default: '', // default value (aka initial value)
-});
+})
 
 // Please ignore this atom
 export const isSegmentMenuOpen = atom({
   key: 'isSegmentMenuOpen', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
-});
+})

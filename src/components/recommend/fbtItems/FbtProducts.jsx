@@ -1,44 +1,44 @@
 // Component for rendering the Related Products through Recommend
 
 // Import Hit configuration for use with Recoil
-import { hitsConfig } from '@/config/hitsConfig';
+import { hitsConfig } from '@/config/hitsConfig'
 
 //  Import highlight widget from InstantSearch library
-import { Highlight } from 'react-instantsearch-hooks-web';
+import { Highlight } from 'react-instantsearch-hooks-web'
 
 // Import heart svg
-import { CartPicto, Heart, PlusPicto } from '@/assets/svg/SvgIndex';
+import { CartPicto, Heart, PlusPicto } from '@/assets/svg/SvgIndex'
 
 // import Price component
-import Price from '@/components/hits/components/Price.jsx';
+import Price from '@/components/hits/components/Price.jsx'
 
-import { hitAtom } from '@/config/hitsConfig';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { hitAtom } from '@/config/hitsConfig'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 // React-router import
-import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
-import { useNavigate } from 'react-router-dom';
+import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage'
+import { useNavigate } from 'react-router-dom'
 
 //Import scope SCSS
-import '../SCSS/recommend.scss';
-import { shouldHaveCartFunctionality } from '@/config/featuresConfig';
-import { addToCartSelector } from '@/config/cartFunctions';
-import { useState } from 'react';
+import '../SCSS/recommend.scss'
+import { shouldHaveCartFunctionality } from '@/config/featuresConfig'
+import { addToCartSelector } from '@/config/cartFunctions'
+import { useState } from 'react'
 
 // Algolia imports
-import { useHits } from 'react-instantsearch-hooks-web';
+import { useHits } from 'react-instantsearch-hooks-web'
 
 const FbtItems = ({ item, index }) => {
-  const { sendEvent } = useHits();
-  const navigate = useNavigate();
-  const hitState = useSetRecoilState(hitAtom);
+  const { sendEvent } = useHits()
+  const navigate = useNavigate()
+  const hitState = useSetRecoilState(hitAtom)
   // Get hit attribute from config file
-  const { image, category, productName, objectID, brand } = hitsConfig;
+  const { image, category, productName, objectID, brand } = hitsConfig
 
   // display or not the cart icons
-  const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality);
-  const [cartLogoClicked, setCartLogoClicked] = useState(false);
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
+  const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
+  const [cartLogoClicked, setCartLogoClicked] = useState(false)
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
 
   return (
     <div className="fbt-component">
@@ -46,9 +46,9 @@ const FbtItems = ({ item, index }) => {
         <div
           className="relatedItem__imgWrapper"
           onClick={() => {
-            hitState(item);
-            navigate(`/search/product/${item[objectID]}`);
-            useStoreIdToLocalStorage(item[objectID]);
+            hitState(item)
+            navigate(`/search/product/${item[objectID]}`)
+            useStoreIdToLocalStorage(item[objectID])
           }}
         >
           <img src={item[image]} loading="lazy" alt={item[category]} />
@@ -71,10 +71,10 @@ const FbtItems = ({ item, index }) => {
               <div
                 className={cartLogoClicked ? 'cart cart-active' : 'cart'}
                 onClick={() => {
-                  setCartLogoClicked(true);
-                  setTimeout(() => setCartLogoClicked(false), 300);
-                  setAddToCartAtom(item);
-                  sendEvent('conversion', item, 'FbtRelated: Add to cart');
+                  setCartLogoClicked(true)
+                  setTimeout(() => setCartLogoClicked(false), 300)
+                  setAddToCartAtom(item)
+                  sendEvent('conversion', item, 'FbtRelated: Add to cart')
                 }}
               >
                 <CartPicto />
@@ -89,7 +89,7 @@ const FbtItems = ({ item, index }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default FbtItems;
+export default FbtItems

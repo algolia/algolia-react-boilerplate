@@ -3,7 +3,7 @@ const Badge = ({ title }) => {
     <div className="badge">
       <p>{title}</p>
     </div>
-  );
-};
+  )
+}
 
-export default Badge;
+export default Badge

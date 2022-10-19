@@ -1,37 +1,37 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react'
 
-import { motion } from 'framer-motion';
-import { Configure, Index, useHits } from 'react-instantsearch-hooks-web';
+import { motion } from 'framer-motion'
+import { Configure, Index, useHits } from 'react-instantsearch-hooks-web'
 
 // Recoil
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil'
 
 // Import configuration
-import { mainIndex } from '@/config/algoliaEnvConfig';
-import { framerMotionTransition } from '@/config/animationConfig';
-import { hitsPerCarousel } from '@/config/carouselConfig';
-import { personaSelectedAtom } from '@/config/personaConfig';
-import { segmentSelectedAtom } from '@/config/segmentConfig';
+import { mainIndex } from '@/config/algoliaEnvConfig'
+import { framerMotionTransition } from '@/config/animationConfig'
+import { hitsPerCarousel } from '@/config/carouselConfig'
+import { personaSelectedAtom } from '@/config/personaConfig'
+import { segmentSelectedAtom } from '@/config/segmentConfig'
 
 // In case of img loading error
 
 // import Price component
-import { windowSize } from '@/hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize'
 
 //Import scope SCSS
-import SkeletonLoader from '../hits/components/HitsSkeletonLoader';
-import './SCSS/carousels.scss';
+import SkeletonLoader from '../hits/components/HitsSkeletonLoader'
+import './SCSS/carousels.scss'
 
 // Import cart from recoil
-import HitsCarousel from './HitsCarousel';
+import HitsCarousel from './HitsCarousel'
 
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ context, title }) => {
-  const index = useRecoilValue(mainIndex);
-  const userToken = useRecoilValue(personaSelectedAtom);
-  const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
+  const index = useRecoilValue(mainIndex)
+  const userToken = useRecoilValue(personaSelectedAtom)
+  const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom)
 
-  const { mobile } = useRecoilValue(windowSize);
+  const { mobile } = useRecoilValue(windowSize)
 
   return (
     <div className="home-carousel">
@@ -46,29 +46,29 @@ const HomeCarousel = ({ context, title }) => {
         <Carousel title={title} />
       </Index>
     </div>
-  );
-};
+  )
+}
 
 // This carousel is used inside of HomeCarousel
 
 function Carousel(props) {
-  const { hits, sendEvent } = useHits(props);
-  const { title } = props;
-  const [width, setWidth] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const { hits, sendEvent } = useHits(props)
+  const { title } = props
+  const [width, setWidth] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
   // Get the main index
-  const index = useRecoilValue(mainIndex);
+  const index = useRecoilValue(mainIndex)
 
-  const carousel = useRef();
+  const carousel = useRef()
 
   useEffect(() => {
     !isLoading &&
-      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
-  }, [hits, isLoading]);
+      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
+  }, [hits, isLoading])
 
   useEffect(() => {
-    if (hits.length > 0) setIsLoading(false);
-  }, [hits]);
+    if (hits.length > 0) setIsLoading(false)
+  }, [hits])
 
   return (
     <>
@@ -110,13 +110,13 @@ function Carousel(props) {
                   index={index}
                   sendEvent={sendEvent}
                 />
-              );
+              )
             })}
           </motion.div>
         </motion.div>
       )}
     </>
-  );
+  )
 }
 
-export default HomeCarousel;
+export default HomeCarousel

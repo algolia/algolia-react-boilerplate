@@ -1,37 +1,35 @@
 //Algolia's import
-import { useQueryRules } from 'react-instantsearch-hooks-web';
+import { useQueryRules } from 'react-instantsearch-hooks-web'
 
 // Import Recoil
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Import React router
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom'
 
 // Import Config
-import { showRedirectModal } from '@/config/redirectConfig';
-import { queryAtom } from '@/config/searchboxConfig';
+import { showRedirectModal } from '@/config/redirectConfig'
+import { queryAtom } from '@/config/searchboxConfig'
 
-import { windowSize } from '@/hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize'
 
 //importing CSS
-import './SCSS/redirect.scss';
+import './SCSS/redirect.scss'
 
 function Redirect(props) {
-  const { items } = useQueryRules(props);
+  const { items } = useQueryRules(props)
   const [isRedirectModal, setIsRedirectModal] =
-    useRecoilState(showRedirectModal);
+    useRecoilState(showRedirectModal)
 
-  const setQuery = useSetRecoilState(queryAtom);
+  const setQuery = useSetRecoilState(queryAtom)
 
-  const { isDesktop } = useRecoilValue(windowSize);
+  const { isDesktop } = useRecoilValue(windowSize)
 
   // Handle URL search parameters through React Router
-  let [searchParams, setSearchParams] = useSearchParams();
+  let [searchParams, setSearchParams] = useSearchParams()
 
-  const match = items.find((data) => Boolean(data.redirect));
-  match && match.redirect
-    ? setIsRedirectModal(true)
-    : setIsRedirectModal(false);
+  const match = items.find((data) => Boolean(data.redirect))
+  match && match.redirect ? setIsRedirectModal(true) : setIsRedirectModal(false)
 
   if (match && match.redirect && isRedirectModal) {
     return (
@@ -50,8 +48,8 @@ function Redirect(props) {
               href="#"
               className="redirectModal__buttons-ok"
               onClick={() => {
-                window.location.href = match.redirect;
-                setIsRedirectModal(false);
+                window.location.href = match.redirect
+                setIsRedirectModal(false)
               }}
             >
               <p>Yes I want to be redirected</p>
@@ -60,10 +58,10 @@ function Redirect(props) {
               href="#"
               className="redirectModal__buttons-no"
               onClick={() => {
-                setQuery('');
-                searchParams.set('query', '');
-                setSearchParams(searchParams);
-                setIsRedirectModal(false);
+                setQuery('')
+                searchParams.set('query', '')
+                setSearchParams(searchParams)
+                setIsRedirectModal(false)
               }}
             >
               <p>No I want to stay on this demo</p>
@@ -71,8 +69,8 @@ function Redirect(props) {
           </div>
         </div>
       </div>
-    );
-  } else return null;
+    )
+  } else return null
 }
 
-export default Redirect;
+export default Redirect

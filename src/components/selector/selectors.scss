@@ -48,7 +48,7 @@
     text-align: left;
     width: 100%;
     padding: 0.5rem;
-    font-size: clamp(0.6rem, 0.07rem + 1.03vw, 1rem);;
+    font-size: clamp(0.6rem, 0.07rem + 1.03vw, 1rem);
     border-radius: 0.2rem;
     cursor: pointer;
 
@@ -59,13 +59,11 @@
   }
 }
 
-
 // MOBILE
 
-.selectorsWrapper-mobile{
-
-  .selectorsWrapper__btn{
-    p{
+.selectorsWrapper-mobile {
+  .selectorsWrapper__btn {
+    p {
       text-align: left;
     }
   }

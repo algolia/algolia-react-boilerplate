@@ -1,72 +1,90 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react'
 
 // Import Recoil functions
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Algolia imports
-import { useHits } from 'react-instantsearch-hooks-web';
+import { useHits } from 'react-instantsearch-hooks-web'
 
 //Use Translation
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 // Framer Motion
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 //Import config
+<<<<<<< Updated upstream
 import { framerMotionTransition } from '@/config/animationConfig';
 import { cartClick, cartOpen, cartState } from '@/config/cartFunctions';
 import { shouldHaveRelatedProducts } from '@/config/featuresConfig';
+=======
+import { framerMotionTransition } from '@/config/animationConfig'
+import {
+  cartClick,
+  cartOpen,
+  cartState,
+  currentTotal,
+} from '@/config/cartFunctions'
+import { shouldHaveRelatedProducts } from '@/config/featuresConfig'
+>>>>>>> Stashed changes
 
 // Import hooks
-import useOutsideClickConditional from '@/hooks/useOutsideClickConditional';
-import { windowSize } from '@/hooks/useScreenSize';
+import useOutsideClickConditional from '@/hooks/useOutsideClickConditional'
+import { windowSize } from '@/hooks/useScreenSize'
 
 // Components
-import { ChevronRight } from '@/assets/svg/SvgIndex';
-import ArticlesCard from './ArticlesCard';
-import RelatedProductsCart from './RelatedProductsCart';
+import { ChevronRight } from '@/assets/svg/SvgIndex'
+import ArticlesCard from './ArticlesCard'
+import RelatedProductsCart from './RelatedProductsCart'
 
 // Import CSS
-import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
-import usePreventScrolling from '@/hooks/usePreventScrolling';
-import './SCSS/cartModal.scss';
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig'
+import usePreventScrolling from '@/hooks/usePreventScrolling'
+import './SCSS/cartModal.scss'
 
 const CartModal = () => {
   // Import all recoil states to show modal + Cart stored and Removed articles
+<<<<<<< Updated upstream
   const [showCart, setShowCart] = useRecoilState(cartOpen);
   const [cartValue, setCartValue] = useRecoilState(cartState);
   const [objectIds, setObjectIds] = useState([]);
+=======
+  const [showCart, setShowCart] = useRecoilState(cartOpen)
+  const [cartValue, setCartValue] = useRecoilState(cartState)
+  const [currentTotalAtom, setCurrentTotalAtom] = useRecoilState(currentTotal)
+  const [objectIds, setObjectIds] = useState([])
+>>>>>>> Stashed changes
   // Use ref on click modal and on cart icon + hamburger
-  const cartModal = useRef();
-  const cartIcon = useRecoilValue(cartClick);
+  const cartModal = useRef()
+  const cartIcon = useRecoilValue(cartClick)
 
-  const { isDesktop } = useRecoilValue(windowSize);
+  const { isDesktop } = useRecoilValue(windowSize)
 
-  const { sendEvent } = useHits();
+  const { sendEvent } = useHits()
 
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
-  );
+  )
 
-  usePreventScrolling(showCart);
+  usePreventScrolling(showCart)
 
   // Recoil state for alert
-  const setAlert = useSetRecoilState(alertContent);
-  const setAlertOpen = useSetRecoilState(isAlertOpen);
+  const setAlert = useSetRecoilState(alertContent)
+  const setAlertOpen = useSetRecoilState(isAlertOpen)
   const triggerAlert = (content) => {
-    setAlertOpen(true);
-    setAlert(content);
-    setTimeout(() => setAlertOpen(false), 5000);
-  };
+    setAlertOpen(true)
+    setAlert(content)
+    setTimeout(() => setAlertOpen(false), 5000)
+  }
 
   //Listen for click outside the Demo Guide panel
-  useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false));
+  useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false))
 
   // Import const translation
   // Use the translator
   const { t } = useTranslation('translation', {
     keyPrefix: 'cartModal',
-  });
+  })
 
   // Store the last object id added in the cart to use for recommend
   useEffect(() => {
@@ -75,7 +93,7 @@ const CartModal = () => {
         cartValue.reduce((accum, obj) => [...accum, obj.objectID], [])
       );
     }
-  }, [cartValue]);
+  }, [cartValue])
 
   return (
     <motion.div
@@ -94,7 +112,7 @@ const CartModal = () => {
         <a
           className="modal-container-mobile__close"
           onClick={() => {
-            setShowCart(!showCart);
+            setShowCart(!showCart)
           }}
         >
           x
@@ -109,7 +127,7 @@ const CartModal = () => {
       <div className="modal-container__line"></div>
       {cartValue.map((item, i) => {
         if (item.qty !== 0) {
-          return <ArticlesCard item={item} key={i} sendEvent={sendEvent} />;
+          return <ArticlesCard item={item} key={i} sendEvent={sendEvent} />
         }
       })}
       {cartValue.length === 0 && <p>{t('yourCartIsEmpty')}</p>}
@@ -127,8 +145,15 @@ const CartModal = () => {
           <a
             className="modal-container__checkout"
             onClick={() => {
+<<<<<<< Updated upstream
               sendEvent('conversion', cartValue, 'Cart: Checkout');
               triggerAlert('Thanks using Algolia 💙');
+=======
+              sendEvent('conversion', cartValue, 'Cart: Checkout')
+              triggerAlert('Thanks using Algolia 💙')
+              setCartValue([])
+              localStorage.removeItem('myCart')
+>>>>>>> Stashed changes
             }}
           >
             <p>{t('checkout')}</p>
@@ -144,7 +169,7 @@ const CartModal = () => {
           )}
       </div>
     </motion.div>
-  );
-};
+  )
+}
 
-export default CartModal;
+export default CartModal

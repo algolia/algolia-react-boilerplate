@@ -1,8 +1,8 @@
 //  Import framer motion
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 // Import config framer Motion
-import { framerMotionHits } from '@/config/animationConfig';
+import { framerMotionHits } from '@/config/animationConfig'
 
 // SALES CARD
 const SalesCard = ({ hit }) => {
@@ -27,7 +27,7 @@ const SalesCard = ({ hit }) => {
         <h3>{hit.title}</h3>
       </div>
     </motion.div>
-  );
-};
+  )
+}
 
-export default SalesCard;
+export default SalesCard

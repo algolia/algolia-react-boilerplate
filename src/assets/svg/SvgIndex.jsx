@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo } from 'react'
 
 export const Glass = memo(() => (
   <svg
@@ -16,7 +16,7 @@ export const Glass = memo(() => (
       fill="#030A2B"
     />
   </svg>
-));
+))
 
 export const Heart = memo(() => (
   <svg
@@ -38,7 +38,7 @@ export const Heart = memo(() => (
       </clipPath>
     </defs>
   </svg>
-));
+))
 
 export const ChevronRight = memo(() => (
   <svg
@@ -54,7 +54,7 @@ export const ChevronRight = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 export const ChevronLeft = memo(() => (
   <svg
     width="16"
@@ -68,7 +68,7 @@ export const ChevronLeft = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 export const OptionDots = memo(() => (
   <svg
     width="7"
@@ -85,7 +85,7 @@ export const OptionDots = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const CloseButton = memo(() => (
   <svg
@@ -108,7 +108,7 @@ export const CloseButton = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const SimpleCloseButton = memo(() => (
   <svg
@@ -125,7 +125,7 @@ export const SimpleCloseButton = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 export const ChevronDown = memo(() => (
   <svg
     width="30"
@@ -139,7 +139,7 @@ export const ChevronDown = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const ChevronUp = memo(() => (
   <svg
@@ -154,7 +154,7 @@ export const ChevronUp = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const FilterPicto = memo(() => (
   <svg
@@ -248,7 +248,7 @@ export const FilterPicto = memo(() => (
       </g>
     </g>
   </svg>
-));
+))
 
 export const CartPicto = memo(() => (
   <svg
@@ -271,7 +271,7 @@ export const CartPicto = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const MinusPicto = memo(() => (
   <svg
@@ -286,7 +286,7 @@ export const MinusPicto = memo(() => (
       fill="#5568F9"
     />
   </svg>
-));
+))
 
 export const PlusPicto = memo(() => (
   <svg
@@ -301,7 +301,7 @@ export const PlusPicto = memo(() => (
       fill="#5568F9"
     />
   </svg>
-));
+))
 
 export const MinusEmptyIcon = memo(() => (
   <svg
@@ -316,7 +316,7 @@ export const MinusEmptyIcon = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const PlusEmptyIcon = memo(() => (
   <svg
@@ -331,7 +331,7 @@ export const PlusEmptyIcon = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const Garbage = memo(() => (
   <svg
@@ -354,4 +354,4 @@ export const Garbage = memo(() => (
       fill="#231F20"
     />
   </svg>
-));
+))

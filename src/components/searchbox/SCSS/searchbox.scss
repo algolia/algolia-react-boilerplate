@@ -19,7 +19,7 @@
       width: 100%;
       display: flex;
       position: relative;
-      .glass  {
+      .glass {
         width: 30px;
         left: 1rem;
         top: 0rem;
@@ -29,7 +29,7 @@
           fill: $main-color;
         }
       }
-      .closeBtn{
+      .closeBtn {
         width: 10px;
         right: 1rem;
         top: 50%;
@@ -39,7 +39,6 @@
       }
       &__input {
         @include searchBoxInput($white-color, $grey-light-color-80);
-        
       }
     }
     &__category {
@@ -66,11 +65,10 @@
       }
       svg {
         // border: 1px solid #000000;
-        background: $background-color ;
+        background: $background-color;
         width: 20px;
         height: 20px;
         border-radius: 10px;
-       
       }
 
       &__close-btn {
@@ -79,11 +77,11 @@
         right: -5px;
       }
     }
-    &__category-raw{
+    &__category-raw {
       width: 60%;
     }
 
-    &__tooltip{
+    &__tooltip {
       position: absolute;
       top: -2rem;
       left: 0;
@@ -93,11 +91,10 @@
       border-radius: 0.2rem;
       transition: opacity 0.3s ease-in-out;
 
-      p{
+      p {
         @include p-text($white-color, 300);
         font-size: 0.5rem;
       }
-
     }
   }
   .searchboxCategory {

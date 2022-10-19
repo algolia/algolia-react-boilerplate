@@ -1,6 +1,6 @@
 // This is for closing federated search window when clicking outside of the modal
 
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 
 const useOutsideClickTwoConditionals = (
   ref,
@@ -8,7 +8,7 @@ const useOutsideClickTwoConditionals = (
   optionalParameter2,
   callback
 ) => {
-  optionalParameter1 ||= null;
+  optionalParameter1 ||= null
   const handleClick = (e) => {
     if (
       ref &&
@@ -17,17 +17,17 @@ const useOutsideClickTwoConditionals = (
       !optionalParameter2.contains(e.target) &&
       !e.target.classList.contains('react-select__option')
     ) {
-      callback();
+      callback()
     }
-  };
+  }
 
   useEffect(() => {
-    document.addEventListener('click', handleClick);
+    document.addEventListener('click', handleClick)
 
     return () => {
-      document.removeEventListener('click', handleClick);
-    };
-  });
-};
+      document.removeEventListener('click', handleClick)
+    }
+  })
+}
 
-export default useOutsideClickTwoConditionals;
+export default useOutsideClickTwoConditionals
