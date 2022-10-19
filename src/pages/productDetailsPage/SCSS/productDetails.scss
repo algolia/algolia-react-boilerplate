@@ -44,19 +44,18 @@
     gap: 0.5rem;
     cursor: pointer;
 
-    &:hover{
-
-      p{
+    &:hover {
+      p {
         transform: translateX(0.1rem);
         transition: transform 0.3s ease-in-out;
       }
-      svg{
+      svg {
         transform: translateX(-0.1rem);
         transition: transform 0.3s ease-in-out;
       }
     }
 
-    p{ 
+    p {
       @include p-text($main-color, 300);
       font-size: 0.8rem;
       transition: transform 0.1s ease-in-out;
@@ -65,7 +64,7 @@
       margin-top: 2px;
       width: 8px;
       transition: transform 0.1s ease-in-out;
-      path{
+      path {
         fill: $secondary-color;
       }
     }
@@ -102,7 +101,7 @@
         margin-top: 2rem;
         gap: 1rem;
         width: 10rem;
-        &-active{
+        &-active {
           animation: bounce 0.4s ease-in-out forwards;
         }
         &:hover {
@@ -112,7 +111,7 @@
         svg {
           margin-top: 1px;
           width: 20px;
-          path{
+          path {
             fill: $background-color;
           }
         }
@@ -125,10 +124,10 @@
         @include price($secondary-color);
         font-size: 2rem;
         strike {
-            margin-right: 0.5rem;
-            color: $grey-dark-color;
-            text-decoration: line-through
-          }
+          margin-right: 0.5rem;
+          color: $grey-dark-color;
+          text-decoration: line-through;
+        }
       }
       .sizes {
         font-weight: bold;
@@ -162,7 +161,7 @@
     display: flex;
     flex-direction: column;
 
-    .imageWrapper{
+    .imageWrapper {
       width: 60%;
       margin: 1rem auto 0 auto;
     }
@@ -175,8 +174,8 @@
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
-  
-    p{ 
+
+    p {
       @include p-text($main-color, 300);
       font-size: 0.8rem;
     }
@@ -184,12 +183,11 @@
       margin-top: 2px;
       width: 8px;
       transition: transform 0.3s ease-in-out;
-      path{
+
+      path {
         fill: $secondary-color;
       }
     }
-
- 
   }
   &__left {
     width: 100%;
@@ -219,13 +217,81 @@
 }
 
 @keyframes bounce {
-  0%{
+  0% {
     transform: scale(0.96);
   }
-  50%{
+  50% {
     transform: scale(1.02);
   }
-  100%{
+  100% {
     transform: scale(1);
   }
+}
+
+.fbt-container {
+  display: flex;
+  .uic-HorizontalSlider-container {
+    width: 70%;
+    .uic-HorizontalSlider-list {
+      grid-auto-columns: 28%;
+    }
   }
+}
+
+.fbt-container-mobile {
+  display: flex;
+  flex-direction: column;
+  .fbt-infos {
+    margin-top: 1rem;
+    width: 100%;
+    align-items: center;
+  }
+  .fbt-container__component {
+    display: flex;
+    flex-direction: column;
+    .fbt-component {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .fbt-component__plus-icon {
+        margin-top: 1rem;
+      }
+    }
+  }
+}
+
+.fbt-infos {
+  width: 30%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    @include p-text();
+    font-size: 16px;
+  }
+  p {
+    @include p-text($secondary-color);
+    margin-left: 1rem;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  &__price {
+    display: flex;
+    align-items: center;
+  }
+  &__buttons {
+    margin-top: 1rem;
+    width: 13rem;
+    @include btn($secondary-color-custom-gradient, $white-color);
+    border: 1px solid $secondary-color;
+    p {
+      font-size: 1rem;
+    }
+    &:hover {
+      @include btn-hover($secondary-color-custom-gradient, $white-color);
+      gap: 1.5rem;
+    }
+  }
+}

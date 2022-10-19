@@ -46,17 +46,13 @@ import {
   framerMotionPage,
   framerMotionTransition,
 } from '@/config/animationConfig';
-import { addToCartSelector, cartOpen } from '@/config/cartFunctions';
-import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
+import { addToCartSelector } from '@/config/cartFunctions';
 import {
   shouldHaveFbtProducts,
   shouldHaveRelatedProducts,
 } from '@/config/featuresConfig';
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
 import { hitAtom, hitsConfig, PDPHitSections } from '@/config/hitsConfig';
-
-// Used to send insights event on add to cart
-import { personaSelectedAtom } from '@/config/personaConfig';
 
 // Custom hooks
 import { windowSize } from '@/hooks/useScreenSize';
@@ -70,6 +66,8 @@ import './SCSS/productDetails.scss';
 // Import and use translation
 import { useTranslation } from 'react-i18next';
 import { useHits } from 'react-instantsearch-hooks-web';
+import FbtAddAll from '@/components/fbtPdp/FbtAddAll';
+import FbtItems from '@/components/recommend/fbtItems/FbtProducts';
 
 const ProductDetails = () => {
   const { sendEvent } = useHits();
@@ -143,14 +141,12 @@ const ProductDetails = () => {
 
   // Get hit attribute from config file
   const {
-    objectID,
     image,
     productName,
     brand,
     sizeFilter,
     colour,
-    colourHexa,
-    price: priceForTotal,
+    colourHexa
   } = hitsConfig;
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1];
@@ -172,9 +168,11 @@ const ProductDetails = () => {
       indexName,
       objectIDs: [currentObjectID],
     });
-    fbtRecommendationsProducts = recommendations
+  
     totalFbtProductsAmount = fbtRecommendationsProducts.reduce((acc, val) => acc += val.unformated_price, 0)
-  }
+    
+    fbtRecommendationsProducts = recommendations.length > 0 ? [hit, ...recommendations] : recommendations
+
 
   if (shouldHaveRelatedProductsValue) {
     const { recommendations } = useRelatedProducts({
@@ -346,14 +344,22 @@ const ProductDetails = () => {
                 />
               </div>
             )}
-          {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 0 && (
-            <div>
+          {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 1 && (
+            <>
               <h3 className="title">{t('fbtTitle')}</h3>
-              <HorizontalSlider
-                itemComponent={RelatedItem}
-                items={fbtRecommendationsProducts}
-              />
-            </div>
+              <div
+                className={`${
+                  !isDesktop ? 'fbt-container-mobile' : 'fbt-container'
+                }`}
+              >
+                <div className="fbt-container__component">
+                  {fbtRecommendationsProducts.slice(0, 3).map((item, i) => {
+                    return <FbtItems item={item} index={i} key={i} />;
+                  })}
+                </div>
+                <FbtAddAll items={fbtRecommendationsProducts.slice(0, 3)} />
+              </div>
+            </>
           )}
 
           {totalFbtProductsAmount !== undefined &&
@@ -376,4 +382,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default ProductDetails

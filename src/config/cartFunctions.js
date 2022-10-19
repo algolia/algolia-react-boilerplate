@@ -57,12 +57,12 @@ export const addToCartSelector = selector({
           cartItemIndex = index;
         }
       });
-      // If we've an index matching that means that there is a same product 
+      // If we've an index matching that means that there is a same product
       // that is matching and that we need to update the quantity of this product in the cart
       if (cartItemIndex !== null) {
         let items = [...cart];
         const oldQty = items[cartItemIndex];
-      // Updating quantity of product + the total price   
+        // Updating quantity of product + the total price
         items[cartItemIndex] = {
           ...items[cartItemIndex],
           qty: oldQty.qty + 1,
@@ -87,8 +87,8 @@ export const removeToCartSelector = selector({
   set: ({ set, get }, newProduct) => {
     // Get the Cart from state
     const cart = get(cartState);
-     // If we've an index matching that means that there is already have same product 
-      //  and we need to update the quantity of this product in the cart
+    // If we've an index matching that means that there is already have same product
+    //  and we need to update the quantity of this product in the cart
     let cartItemIndex = null;
     cart.map((item, index) => {
       if (item.objectID === newProduct.objectID) {
@@ -99,7 +99,7 @@ export const removeToCartSelector = selector({
       // Check if the product is in the cart and decrease the quantity
       let items = [...cart];
       const oldQty = items[cartItemIndex];
-      
+
       if (items[cartItemIndex].qty !== 0) {
         items[cartItemIndex] = {
           ...items[cartItemIndex],
@@ -107,7 +107,7 @@ export const removeToCartSelector = selector({
           totalPrice: (oldQty.qty - 1) * items[cartItemIndex][hitsConfig.price],
         };
         set(cartState, items);
-      } 
+      }
     }
   },
 });
