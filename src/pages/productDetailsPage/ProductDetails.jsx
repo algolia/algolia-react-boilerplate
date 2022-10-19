@@ -106,8 +106,6 @@ const ProductDetails = () => {
     }
   }, []);
 
-  useEffect(() => {}, [hit]);
-
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
   );
