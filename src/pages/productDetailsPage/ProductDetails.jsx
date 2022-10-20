@@ -64,8 +64,6 @@ import FbtAddAll from '@/components/fbtPdp/FbtAddAll'
 import FbtItems from '@/components/recommend/fbtItems/FbtProducts'
 
 const ProductDetails = () => {
-  // const { sendEvent } = useHits()
-
   const [addToCartIsClicked, setAddToCartIsClicked] = useState(false)
 
   // location in order to access current objectID
@@ -297,7 +295,7 @@ const ProductDetails = () => {
               </motion.p>
             )}
             {!PDPHitSections.sizeFilter && (
-              <motion.button
+              <button
                 className={
                   addToCartIsClicked
                     ? 'add-to-cart add-to-cart-active'
@@ -313,7 +311,7 @@ const ProductDetails = () => {
               >
                 <CartPicto />
                 <p>{t('addToCartButton')}</p>
-              </motion.button>
+              </button>
             )}
           </div>
         </div>

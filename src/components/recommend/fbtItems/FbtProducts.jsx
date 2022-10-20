@@ -83,11 +83,9 @@ const FbtItems = ({ item, index }) => {
           </div>
         </div>
       </div>
-      {index !== 2 && (
-        <div className="fbt-component__plus-icon">
-          <PlusPicto />
-        </div>
-      )}
+      <div className="fbt-component__plus-icon">
+        <PlusPicto />
+      </div>
     </div>
   )
 }
