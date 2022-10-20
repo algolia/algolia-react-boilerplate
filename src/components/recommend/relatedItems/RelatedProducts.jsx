@@ -29,7 +29,6 @@ import { useState } from 'react'
 import { useHits } from 'react-instantsearch-hooks-web'
 
 const RelatedItem = ({ item }) => {
-  const { sendEvent } = useHits()
   const navigate = useNavigate()
   const hitState = useSetRecoilState(hitAtom)
   // Get hit attribute from config file
@@ -73,7 +72,6 @@ const RelatedItem = ({ item }) => {
                 setCartLogoClicked(true)
                 setTimeout(() => setCartLogoClicked(false), 300)
                 setAddToCartAtom(item)
-                sendEvent('conversion', item, 'FbtRelated: Add to cart')
               }}
             >
               <CartPicto />
