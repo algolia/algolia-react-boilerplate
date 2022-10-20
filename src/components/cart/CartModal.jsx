@@ -13,9 +13,9 @@ import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 
 //Import config
-import { framerMotionTransition } from '@/config/animationConfig';
-import { cartClick, cartOpen, cartState } from '@/config/cartFunctions';
-import { shouldHaveRelatedProducts } from '@/config/featuresConfig';
+import { framerMotionTransition } from '@/config/animationConfig'
+import { cartClick, cartOpen, cartState } from '@/config/cartFunctions'
+import { shouldHaveRelatedProducts } from '@/config/featuresConfig'
 
 // Import hooks
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional'
@@ -33,9 +33,9 @@ import './SCSS/cartModal.scss'
 
 const CartModal = () => {
   // Import all recoil states to show modal + Cart stored and Removed articles
-  const [showCart, setShowCart] = useRecoilState(cartOpen);
-  const [cartValue, setCartValue] = useRecoilState(cartState);
-  const [objectIds, setObjectIds] = useState([]);
+  const [showCart, setShowCart] = useRecoilState(cartOpen)
+  const [cartValue, setCartValue] = useRecoilState(cartState)
+  const [objectIds, setObjectIds] = useState([])
   // Use ref on click modal and on cart icon + hamburger
   const cartModal = useRef()
   const cartIcon = useRecoilValue(cartClick)
@@ -73,7 +73,7 @@ const CartModal = () => {
     if (cartValue.length) {
       setObjectIds(
         cartValue.reduce((accum, obj) => [...accum, obj.objectID], [])
-      );
+      )
     }
   }, [cartValue])
 
@@ -118,8 +118,8 @@ const CartModal = () => {
           <a
             className="modal-container__emptyCart"
             onClick={() => {
-              setCartValue([]);
-              localStorage.removeItem('myCart');
+              setCartValue([])
+              localStorage.removeItem('myCart')
             }}
           >
             <p>{t('emptyCart')}</p>
@@ -127,8 +127,10 @@ const CartModal = () => {
           <a
             className="modal-container__checkout"
             onClick={() => {
-              sendEvent('conversion', cartValue, 'Cart: Checkout');
-              triggerAlert('Thanks using Algolia 💙');
+              sendEvent('conversion', cartValue, 'Cart: Checkout')
+              triggerAlert('Thanks using Algolia 💙')
+              setCartValue([])
+              localStorage.removeItem('myCart')
             }}
           >
             <p>{t('checkout')}</p>

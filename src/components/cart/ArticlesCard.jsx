@@ -1,23 +1,25 @@
 // Recoil import
-import { Garbage, MinusEmptyIcon, PlusEmptyIcon } from '@/assets/svg/SvgIndex';
-import { hitsConfig } from '@/config/hitsConfig';
-import get from 'lodash/get';
+import { currencySymbolAtom } from '@/config/currencyConfig'
+import { Garbage, MinusEmptyIcon, PlusEmptyIcon } from '@/assets/svg/SvgIndex'
+import { hitsConfig } from '@/config/hitsConfig'
+import get from 'lodash/get'
 
 // Import cart from recoil
 import {
   addToCartSelector,
   cartState,
   removeToCartSelector,
-} from '@/config/cartFunctions';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+} from '@/config/cartFunctions'
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil'
 
 //Use Translation
 import { useTranslation } from 'react-i18next'
 
 const ArticlesCard = ({ item, sendEvent }) => {
-  const [cart, setCart] = useRecoilState(cartState);
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
-  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
+  const currencySymbol = useRecoilValue(currencySymbolAtom)
+  const [cart, setCart] = useRecoilState(cartState)
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
+  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector)
 
   // Import const translation
   // Use the translator
@@ -100,7 +102,7 @@ const ArticlesCard = ({ item, sendEvent }) => {
               </div>
             </div>
             <div className="articles-card__infos__qtyprice__price">
-              <p>${item.totalPrice.toFixed(2)}</p>
+              <p>{currencySymbol + item.totalPrice.toFixed(2)}</p>
             </div>
           </div>
         </div>

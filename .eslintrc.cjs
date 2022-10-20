@@ -1,8 +1,6 @@
 // eslint-disable-next-line import/no-commonjs
 module.exports = {
-  extends: [
-    "plugin:prettier/recommended"
-  ],
+  extends: ['plugin:prettier/recommended'],
 
   parser: '@babel/eslint-parser',
   rules: {
