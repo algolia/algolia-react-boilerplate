@@ -1,7 +1,7 @@
-import { Selectors } from '@/components/selector/Selectors';
+import { Selectors } from '@/components/selector/Selectors'
 
 // Import configuration
-import { DemoGuideRedirectConfig } from '@/config/demoGuideConfig';
+import { DemoGuideRedirectConfig } from '@/config/demoGuideConfig'
 
 const DemoGuideRedirect = () => {
   return (
@@ -14,12 +14,12 @@ const DemoGuideRedirect = () => {
               <span>{item.label}:</span>
               <p>{item.details}</p>
             </div>
-          );
+          )
         })}
       </div>
       <Selectors props={DemoGuideRedirectConfig} />
     </div>
-  );
-};
+  )
+}
 
-export default DemoGuideRedirect;
+export default DemoGuideRedirect

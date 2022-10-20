@@ -1,60 +1,60 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react'
 
 // React Router
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 // Recoil Header State
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 // eslint-disable-next-line import/order
-import { queryAtom } from '@/config/searchboxConfig';
+import { queryAtom } from '@/config/searchboxConfig'
 
 // Import logo URL for header
-import logoMobile from '@/assets/logo/LogoMobile.webp';
+import logoMobile from '@/assets/logo/LogoMobile.webp'
 
-import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
 
 //import Navigation config
-import { navigationStateAtom } from '@/config/navigationConfig';
+import { navigationStateAtom } from '@/config/navigationConfig'
 
 // Import Rules config
-import { rulesAtom } from '@/config/appliedRulesConfig';
+import { rulesAtom } from '@/config/appliedRulesConfig'
 
 // Import framer motion
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion'
 
 // Import SearchBox
 // eslint-disable-next-line import/order
-import CustomSearchBox from '@/components/searchbox/SearchBox';
-import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
+import CustomSearchBox from '@/components/searchbox/SearchBox'
+import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch'
 
-import Navigation from './Navigation';
+import Navigation from './Navigation'
 
 // Custom hook to prevent body from scrolling
-import { clickHamburger } from '@/config/cartFunctions';
-import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
-import usePreventScrolling from '@/hooks/usePreventScrolling';
-import useOutsideClick from '@/hooks/useOutsideClick';
+import { clickHamburger } from '@/config/cartFunctions'
+import { shouldHaveVoiceSearch } from '@/config/featuresConfig'
+import usePreventScrolling from '@/hooks/usePreventScrolling'
+import useOutsideClick from '@/hooks/useOutsideClick'
 
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
-  const setQueryState = useSetRecoilState(queryAtom);
-  const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
+  const setQueryState = useSetRecoilState(queryAtom)
+  const federated = useSetRecoilState(shouldHaveOpenFederatedSearch)
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
+  const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch)
 
-  const hamburger = useSetRecoilState(clickHamburger);
+  const hamburger = useSetRecoilState(clickHamburger)
 
-  const setNavigationState = useSetRecoilState(navigationStateAtom);
+  const setNavigationState = useSetRecoilState(navigationStateAtom)
 
-  const rulesApplied = useSetRecoilState(rulesAtom);
+  const rulesApplied = useSetRecoilState(rulesAtom)
 
   // Prevent body from scrolling when panel is open
-  usePreventScrolling(isMenuOpen);
+  usePreventScrolling(isMenuOpen)
 
   return (
     <div className="container container-mobile">
@@ -65,7 +65,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
             isMenuOpen ? 'hamburger-active' : 'hamburger-inactive'
           } hamburger`}
           onClick={() => {
-            setIsMenuOpen(!isMenuOpen);
+            setIsMenuOpen(!isMenuOpen)
           }}
         >
           <span ref={hamburger} className="hamburger__line"></span>
@@ -78,10 +78,10 @@ const HeaderMobile = ({ mobile, tablet }) => {
             to="/"
             aria-label="Back to homepage"
             onClick={() => {
-              setQueryState('');
-              setNavigationState({});
-              federated(false);
-              rulesApplied([]);
+              setQueryState('')
+              setNavigationState({})
+              federated(false)
+              rulesApplied([])
             }}
           >
             <img src={logoMobile} alt="" width="200" />
@@ -111,17 +111,17 @@ const HeaderMobile = ({ mobile, tablet }) => {
         )}
       </AnimatePresence>
     </div>
-  );
-};
+  )
+}
 
 const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
-  const navigationMobile = useRef(null);
-  const [navigationComponentRef, setNavigationComponentRef] = useState(null);
+  const navigationMobile = useRef(null)
+  const [navigationComponentRef, setNavigationComponentRef] = useState(null)
 
   useEffect(() => {
-    setNavigationComponentRef(navigationMobile.current);
-  }, []);
-  useOutsideClick(navigationComponentRef, () => setIsMenuOpen(false));
+    setNavigationComponentRef(navigationMobile.current)
+  }, [])
+  useOutsideClick(navigationComponentRef, () => setIsMenuOpen(false))
 
   return (
     <motion.div
@@ -138,7 +138,7 @@ const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         tablet={tablet}
       />
     </motion.div>
-  );
-};
+  )
+}
 
-export default HeaderMobile;
+export default HeaderMobile

@@ -1,22 +1,20 @@
 // Render the blog post in federated search
-import { memo } from 'react';
+import { memo } from 'react'
 
 // Algolia
-import { useHits } from 'react-instantsearch-hooks-web';
+import { useHits } from 'react-instantsearch-hooks-web'
 
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil'
 
-import { contentArticlesConfig } from '@/config/hitsConfig';
+import { contentArticlesConfig } from '@/config/hitsConfig'
 
-import get from 'lodash/get';
+import get from 'lodash/get'
 
 function Articles(props) {
-  const { hits } = useHits(props);
-  const { image, date, title, headings } = useRecoilValue(
-    contentArticlesConfig
-  );
+  const { hits } = useHits(props)
+  const { image, date, title, headings } = useRecoilValue(contentArticlesConfig)
   //get title
-  const { titleArticles } = props;
+  const { titleArticles } = props
 
   return (
     <div className="articles__wrapper">
@@ -35,10 +33,10 @@ function Articles(props) {
               <p className="subtitle">{get(hit, headings)}</p>
             </div>
           </div>
-        );
+        )
       })}
     </div>
-  );
+  )
 }
 
-export default memo(Articles);
+export default memo(Articles)

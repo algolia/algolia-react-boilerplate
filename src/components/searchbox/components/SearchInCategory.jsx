@@ -1,24 +1,24 @@
 // Component for the searchbox being used when a category is selected eg. 'Mens'xz
-import { useNavigate } from 'react-router-dom';
-import { CloseButton } from '@/assets/svg/SvgIndex';
+import { useNavigate } from 'react-router-dom'
+import { CloseButton } from '@/assets/svg/SvgIndex'
 
 //Use Translation
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
-import { navigationStateAtom } from '@/config/navigationConfig';
-import { useRecoilState } from 'recoil';
+import { navigationStateAtom } from '@/config/navigationConfig'
+import { useRecoilState } from 'recoil'
 
 const SearchInCategory = () => {
   const [navigationState, setNavigationState] =
-    useRecoilState(navigationStateAtom);
+    useRecoilState(navigationStateAtom)
 
   // navigate is used by React Router
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // Import and use translation
   const { t } = useTranslation('translation', {
     keyPrefix: 'srp',
-  });
+  })
 
   if (navigationState?.type === 'filter' && navigationState?.action !== null) {
     return (
@@ -28,15 +28,15 @@ const SearchInCategory = () => {
         </p>
         <span
           onClick={() => {
-            setNavigationState({});
-            navigate('/search');
+            setNavigationState({})
+            navigate('/search')
           }}
           className="searchbox__category__close-btn"
         >
           <CloseButton />
         </span>
       </div>
-    );
+    )
   } else if (navigationState?.type === 'context') {
     return (
       <div className="searchbox__category">
@@ -45,15 +45,15 @@ const SearchInCategory = () => {
         </p>
         <span
           onClick={() => {
-            setNavigationState({});
-            navigate('/search');
+            setNavigationState({})
+            navigate('/search')
           }}
           className="searchbox__category__close-btn"
         >
           <CloseButton />
         </span>
       </div>
-    );
+    )
   } else if (navigationState?.type === 'rawFilter') {
     return (
       <div className="searchbox__category searchbox__category-raw">
@@ -62,18 +62,18 @@ const SearchInCategory = () => {
         </p>
         <span
           onClick={() => {
-            setNavigationState({});
-            navigate('/search');
+            setNavigationState({})
+            navigate('/search')
           }}
           className="searchbox__category__close-btn"
         >
           <CloseButton />
         </span>
       </div>
-    );
+    )
   } else {
-    return null;
+    return null
   }
-};
+}
 
-export default SearchInCategory;
+export default SearchInCategory

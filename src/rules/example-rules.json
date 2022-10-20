@@ -1,9 +1,7 @@
 [
   {
     "enabled": true,
-    "tags": [
-      "visual-editor"
-    ],
+    "tags": ["visual-editor"],
     "description": "Shows accessories first",
     "conditions": [
       {
@@ -156,9 +154,7 @@
       "lastUpdate": 1651675329
     },
     "enabled": true,
-    "tags": [
-      "visual-editor"
-    ],
+    "tags": ["visual-editor"],
     "description": "Facets are Re-ordering with size first",
     "conditions": [
       {
@@ -172,12 +168,7 @@
         "renderingContent": {
           "facetOrdering": {
             "facets": {
-              "order": [
-                "sizeFilter",
-                "colour",
-                "category",
-                "genderFilter"
-              ]
+              "order": ["sizeFilter", "colour", "category", "genderFilter"]
             },
             "values": {
               "sizeFilter": {
@@ -234,9 +225,7 @@
       "lastUpdate": 1651675011
     },
     "enabled": true,
-    "tags": [
-      "visual-editor"
-    ],
+    "tags": ["visual-editor"],
     "description": "Category Bags is boosted in HomePage Carousel",
     "conditions": [
       {
@@ -248,9 +237,7 @@
     ],
     "consequence": {
       "params": {
-        "optionalFilters": [
-          "categories:Bags<score=1>"
-        ]
+        "optionalFilters": ["categories:Bags<score=1>"]
       },
       "filterPromotes": true
     },
@@ -261,9 +248,7 @@
       "lastUpdate": 1651674970
     },
     "enabled": true,
-    "tags": [
-      "visual-editor"
-    ],
+    "tags": ["visual-editor"],
     "description": "Category Hoodies is boosted in HomePage Carousel",
     "conditions": [
       {
@@ -275,9 +260,7 @@
     ],
     "consequence": {
       "params": {
-        "optionalFilters": [
-          "categories:Hoodies<score=1>"
-        ]
+        "optionalFilters": ["categories:Hoodies<score=1>"]
       },
       "filterPromotes": true
     },
@@ -288,9 +271,7 @@
       "lastUpdate": 1635267975
     },
     "enabled": true,
-    "tags": [
-      "visual-editor"
-    ],
+    "tags": ["visual-editor"],
     "description": "facet ordering for categories",
     "conditions": [
       {

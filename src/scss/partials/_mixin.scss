@@ -26,9 +26,9 @@
   padding: 0.5rem;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  p{
+  p {
     color: $text-color;
-    font-weight: 400; 
+    font-weight: 400;
     font-family: $main-font;
     font-size: 0.8rem;
     text-align: center;
@@ -39,11 +39,10 @@
 @mixin btn-hover($background, $text-color) {
   background: $background;
   transition: all 0.3s ease-in-out;
-  p{
+  p {
     color: $text-color;
     transition: all 0.3s ease-in-out;
   }
- 
 }
 
 // ------------------------------------------
@@ -98,7 +97,7 @@
 @mixin titleH2($text-color: $main-color) {
   color: $text-color;
   font-weight: 600;
-  font-size: clamp(1rem, -0.32rem + 2.58vw, 2rem)
+  font-size: clamp(1rem, -0.32rem + 2.58vw, 2rem);
 }
 
 @mixin titleH3($text-color: $secondary-color) {
@@ -335,7 +334,7 @@
       display: flex;
       justify-content: space-between;
       width: 40%;
-      &-inactive{
+      &-inactive {
         font-weight: 300 !important;
         color: $grey-light-color !important;
       }
@@ -345,16 +344,13 @@
       svg {
         width: 2rem;
       }
-    
     }
-    &__minusPicto-inactive{
+    &__minusPicto-inactive {
       pointer-events: none;
       cursor: not-allowed;
-      path{
+      path {
         fill: $grey-light-color;
-
       }
-
     }
   }
 }

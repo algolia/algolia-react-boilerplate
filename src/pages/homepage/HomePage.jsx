@@ -1,72 +1,72 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
-import { lazy, Suspense, useRef, useState } from 'react';
+import { lazy, Suspense, useRef, useState } from 'react'
 
 // Fetch values from state
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil'
 
 // Framer motion
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion'
 
 //Use Translation
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 // Import screenShot/ images for the homepage
-import homepage_1 from '@/assets/homepage/homepage_1.webp';
-import homepage_2 from '@/assets/homepage/homepage_2.webp';
+import homepage_1 from '@/assets/homepage/homepage_1.webp'
+import homepage_2 from '@/assets/homepage/homepage_2.webp'
 
 // should carousel be shown or not and config for carousel
-import { carouselConfig } from '@/config/carouselConfig';
+import { carouselConfig } from '@/config/carouselConfig'
 
-import CustomHomeBanners from '@/components/banners/HomeBanners';
-import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
+import CustomHomeBanners from '@/components/banners/HomeBanners'
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
 
 //  should federated search be shown or not
 import {
   shouldHaveCarousels,
   shouldHaveFederatedSearch,
   shouldHaveTrendingProducts,
-} from '@/config/featuresConfig';
-import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+} from '@/config/featuresConfig'
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
 
-import { windowSize } from '@/hooks/useScreenSize';
-import usePreventScrolling from '@/hooks/usePreventScrolling';
+import { windowSize } from '@/hooks/useScreenSize'
+import usePreventScrolling from '@/hooks/usePreventScrolling'
 
 const FederatedSearch = lazy(() =>
   import('@/components/federatedSearch/FederatedSearch')
-);
+)
 
-const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'));
+const HomeCarousel = lazy(() => import('@/components/carousels/HomeCarousel'))
 
 const Trending = lazy(() =>
   import('@/components/recommend/trending/TrendingProducts')
-);
+)
 // Import scoped SCSS
-import './homepage.scss';
+import './homepage.scss'
 
 const HomePage = () => {
-  const [carouselLoaded, setCarouselLoaded] = useState(false);
+  const [carouselLoaded, setCarouselLoaded] = useState(false)
 
-  const [isHomepage1Loaded, setHomepage1Loaded] = useState(false);
-  const [isHomepage2Loaded, setHomepage2Loaded] = useState(false);
+  const [isHomepage1Loaded, setHomepage1Loaded] = useState(false)
+  const [isHomepage2Loaded, setHomepage2Loaded] = useState(false)
 
   // Boolean value which determines if federated search is shown or not, default is false
-  const isFederated = useRecoilValue(shouldHaveFederatedSearch);
-  const isCarousel = useRecoilValue(shouldHaveCarousels);
-  const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch);
-  const HomePage = useRef(false);
+  const isFederated = useRecoilValue(shouldHaveFederatedSearch)
+  const isCarousel = useRecoilValue(shouldHaveCarousels)
+  const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch)
+  const HomePage = useRef(false)
 
   // Boolean value which determines if federated search is shown or not, default is false
   const shouldHaveTrendingProductsValue = useRecoilValue(
     shouldHaveTrendingProducts
-  );
+  )
 
-  const { mobile } = useRecoilValue(windowSize);
+  const { mobile } = useRecoilValue(windowSize)
 
   // Import and use translation
   const { t } = useTranslation('translation', {
     keyPrefix: 'homePage',
-  });
+  })
 
   return (
     // Framer motion wrapper
@@ -129,7 +129,7 @@ const HomePage = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

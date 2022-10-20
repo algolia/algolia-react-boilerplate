@@ -1,10 +1,10 @@
-import { isRulesSwitchToggle } from '@/config/appliedRulesConfig';
-import { appliedRulesInformations } from '@/config/demoGuideConfig';
-import { useRecoilState } from 'recoil';
+import { isRulesSwitchToggle } from '@/config/appliedRulesConfig'
+import { appliedRulesInformations } from '@/config/demoGuideConfig'
+import { useRecoilState } from 'recoil'
 
 const DemoGuideRulesApplied = () => {
   const [isSwitchToggle, setIsSwitchToggle] =
-    useRecoilState(isRulesSwitchToggle);
+    useRecoilState(isRulesSwitchToggle)
   return (
     <div className="demoGuideHelpers">
       <h3>Applied rules</h3>
@@ -15,7 +15,7 @@ const DemoGuideRulesApplied = () => {
               <span>{item.span}:</span>
               <p>{item.details}</p>
             </div>
-          );
+          )
         })}
         <div className="appliedRules__toggle">
           <label className="switch">
@@ -23,7 +23,7 @@ const DemoGuideRulesApplied = () => {
               type="checkbox"
               checked={isSwitchToggle}
               onChange={(e) => {
-                setIsSwitchToggle(!isSwitchToggle);
+                setIsSwitchToggle(!isSwitchToggle)
               }}
             />
             <span className="slider round"></span>
@@ -31,7 +31,7 @@ const DemoGuideRulesApplied = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DemoGuideRulesApplied;
+export default DemoGuideRulesApplied

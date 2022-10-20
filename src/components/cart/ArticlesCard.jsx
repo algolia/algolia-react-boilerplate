@@ -1,29 +1,48 @@
 // Recoil import
+<<<<<<< Updated upstream
 import { Garbage, MinusEmptyIcon, PlusEmptyIcon } from '@/assets/svg/SvgIndex';
 import { hitsConfig } from '@/config/hitsConfig';
 import get from 'lodash/get';
+=======
+import { currencySymbolAtom } from '@/config/currencyConfig'
+import { Garbage, MinusEmptyIcon, PlusEmptyIcon } from '@/assets/svg/SvgIndex'
+import { hitsConfig } from '@/config/hitsConfig'
+import get from 'lodash/get'
+>>>>>>> Stashed changes
 
 // Import cart from recoil
 import {
   addToCartSelector,
   cartState,
   removeToCartSelector,
+<<<<<<< Updated upstream
 } from '@/config/cartFunctions';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+=======
+} from '@/config/cartFunctions'
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil'
+>>>>>>> Stashed changes
 
 //Use Translation
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 const ArticlesCard = ({ item, sendEvent }) => {
+<<<<<<< Updated upstream
   const [cart, setCart] = useRecoilState(cartState);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
+=======
+  const currencySymbol = useRecoilValue(currencySymbolAtom)
+  const [cart, setCart] = useRecoilState(cartState)
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
+  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector)
+>>>>>>> Stashed changes
 
   // Import const translation
   // Use the translator
   const { t } = useTranslation('translation', {
     keyPrefix: 'cartModal',
-  });
+  })
 
   // Get hit attribute from config file
   const {
@@ -36,7 +55,7 @@ const ArticlesCard = ({ item, sendEvent }) => {
     price: priceForTotal,
     sizeFilter,
     colour,
-  } = hitsConfig;
+  } = hitsConfig
 
   return (
     <div>
@@ -76,14 +95,14 @@ const ArticlesCard = ({ item, sendEvent }) => {
                   if (item.qty === 1) {
                     if (cart.length === 1) {
                       // Remove all in local storage
-                      localStorage.removeItem('myCart');
+                      localStorage.removeItem('myCart')
                     }
                     setCart((cart) =>
                       // Remove article in cart
                       cart.filter((it) => it.objectID !== item.objectID)
-                    );
+                    )
                   }
-                  setRemoveToCartAtom(item);
+                  setRemoveToCartAtom(item)
                 }}
               >
                 <MinusEmptyIcon />
@@ -92,8 +111,8 @@ const ArticlesCard = ({ item, sendEvent }) => {
               <div
                 className="articles-card__infos__qtyprice__plus-minus__icons"
                 onClick={() => {
-                  sendEvent('conversion', item, 'Cart: Add to cart');
-                  setAddToCartAtom(item);
+                  sendEvent('conversion', item, 'Cart: Add to cart')
+                  setAddToCartAtom(item)
                 }}
               >
                 <PlusEmptyIcon />
@@ -110,9 +129,9 @@ const ArticlesCard = ({ item, sendEvent }) => {
             setCart((cart) =>
               // Remove all in cart
               cart.filter((it) => it.objectID !== item.objectID)
-            );
+            )
             // Remove all in local storage
-            localStorage.removeItem('myCart');
+            localStorage.removeItem('myCart')
           }}
         >
           <Garbage />
@@ -120,7 +139,7 @@ const ArticlesCard = ({ item, sendEvent }) => {
       </div>
       <div className="articles-card__line"></div>
     </div>
-  );
-};
+  )
+}
 
-export default ArticlesCard;
+export default ArticlesCard

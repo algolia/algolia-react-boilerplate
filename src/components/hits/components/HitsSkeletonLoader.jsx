@@ -1,12 +1,12 @@
-import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
-import { windowSize } from '@/hooks/useScreenSize';
-import { useRecoilValue } from 'recoil';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
+import { windowSize } from '@/hooks/useScreenSize'
+import { useRecoilValue } from 'recoil'
 
 const SkeletonLoader = ({ type }) => {
-  const { tablet, mobile, isDesktop } = useRecoilValue(windowSize);
+  const { tablet, mobile, isDesktop } = useRecoilValue(windowSize)
 
   // Change this number to render more placeholders on the SRP loader
-  const resultsNumber = 20;
+  const resultsNumber = 20
 
   switch (type) {
     case 'hit':
@@ -30,7 +30,7 @@ const SkeletonLoader = ({ type }) => {
             </div>
           </div>
         </div>
-      );
+      )
     case 'facet':
       return (
         <div>
@@ -40,7 +40,7 @@ const SkeletonLoader = ({ type }) => {
             </div>
           ))}
         </div>
-      );
+      )
     case 'carousel':
       return (
         <div className="carousel-skel">
@@ -50,8 +50,8 @@ const SkeletonLoader = ({ type }) => {
             </li>
           ))}
         </div>
-      );
+      )
   }
-};
+}
 
-export default SkeletonLoader;
+export default SkeletonLoader

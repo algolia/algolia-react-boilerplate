@@ -1,7 +1,7 @@
-import { Selectors } from '@/components/selector/Selectors';
+import { Selectors } from '@/components/selector/Selectors'
 
 // Import configuration
-import { DemoGuideInjectedContentConfig } from '@/config/demoGuideConfig';
+import { DemoGuideInjectedContentConfig } from '@/config/demoGuideConfig'
 
 const DemoGuideInjectedContent = () => {
   return (
@@ -14,12 +14,12 @@ const DemoGuideInjectedContent = () => {
               <span>{item.label}:</span>
               <p>{item.details}</p>
             </div>
-          );
+          )
         })}
       </div>
       <Selectors props={DemoGuideInjectedContentConfig} />
     </div>
-  );
-};
+  )
+}
 
-export default DemoGuideInjectedContent;
+export default DemoGuideInjectedContent

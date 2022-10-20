@@ -2,7 +2,7 @@
 // Configuration for languages switch across the application
 // NB this isn't functional on the flagship index as we only have one language
 // ------------------------------------------
-import { atom } from 'recoil';
+import { atom } from 'recoil'
 
 // Define what values are going to be displayed in the language selector
 export const languagesConfig = [
@@ -17,7 +17,7 @@ export const languagesConfig = [
     label: 'French',
     type: 'language',
   },
-];
+]
 
 // Define index by languages & currency.
 // Change if necessary
@@ -136,10 +136,10 @@ export const languageSwitchConfig = {
       },
     ],
   },
-};
+}
 
 // Please ignore this atom - DO NOT TOUCH
 export const LanguageSelectedAtom = atom({
   key: 'LanguageSelected', // unique ID (with respect to other atoms/selectors)
   default: 'English', // default value (aka initial value)
-});
+})

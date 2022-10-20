@@ -1,7 +1,7 @@
-import { Selectors } from '@/components/selector/Selectors';
+import { Selectors } from '@/components/selector/Selectors'
 
 // Import configuration
-import { searchTermsConfig } from '@/config/demoGuideConfig';
+import { searchTermsConfig } from '@/config/demoGuideConfig'
 
 const SearchTerms = () => {
   return (
@@ -20,7 +20,7 @@ const SearchTerms = () => {
       </div>
       <Selectors props={searchTermsConfig} />
     </div>
-  );
-};
+  )
+}
 
-export default SearchTerms;
+export default SearchTerms

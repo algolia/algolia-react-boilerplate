@@ -13,7 +13,7 @@
     z-index: 1;
 
     .overlay {
-      @include overlay($secondary-color-custom-gradient-overlay)
+      @include overlay($secondary-color-custom-gradient-overlay);
     }
 
     img {
@@ -35,11 +35,10 @@
     align-content: flex-start;
 
     h1 {
-     @include titleH1($white-color)
+      @include titleH1($white-color);
     }
 
     h2 {
-     
       @include titleH2($white-color);
       margin-top: -0.5rem;
     }
@@ -88,10 +87,9 @@
           transition: all 0.2s ease-in-out;
 
           p {
-           @include p-text($white-color);
+            @include p-text($white-color);
             transition: all 0.2s ease-in-out;
           }
-
         }
       }
     }
@@ -110,9 +108,9 @@
   }
 }
 
-// MOBILE 
+// MOBILE
 .home-banner3-container {
-  &__infos-mobile{
+  &__infos-mobile {
     position: absolute;
     z-index: 20;
     left: 1rem;
@@ -123,14 +121,13 @@
     h1 {
       @include titleH1($white-color);
       // font-size: 1rem;
-     }
- 
-     h2 {
-      
-       @include titleH2($white-color);
-       margin-top: -0.5rem;
+    }
+
+    h2 {
+      @include titleH2($white-color);
+      margin-top: -0.5rem;
       //  font-size: 1rem;
       //  margin-top: 0rem;
-     }
+    }
   }
 }

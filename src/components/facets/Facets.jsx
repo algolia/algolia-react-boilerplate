@@ -1,44 +1,44 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 // Import Algolia
 import {
   DynamicWidgets,
   useRefinementList,
   useInstantSearch,
-} from 'react-instantsearch-hooks-web';
+} from 'react-instantsearch-hooks-web'
 
 // Import magnifying glass svg, and price slider component
-import { ChevronDown, ChevronUp, Glass } from '@/assets/svg/SvgIndex';
+import { ChevronDown, ChevronUp, Glass } from '@/assets/svg/SvgIndex'
 
 // Import components
-import HierarchicalMenu from './components/Hierarchical';
-import PriceSlider from './components/PriceSlider';
+import HierarchicalMenu from './components/Hierarchical'
+import PriceSlider from './components/PriceSlider'
 
 // Import list of Attributes/Facets
-import { refinements } from '@/config/refinementsConfig';
+import { refinements } from '@/config/refinementsConfig'
 
 //Import scope SCSS
-import './SCSS/facets.scss';
+import './SCSS/facets.scss'
 
 //Use Translation
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 // expects an attribute which is an array of items
 function GenericRefinementList(props) {
   const { items, refine, searchForItems, isShowingMore, toggleShowMore } =
-    useRefinementList(props);
+    useRefinementList(props)
 
-  const { title, options, titleFr, titleGer } = props;
-  const { showMoreFunction } = options;
+  const { title, options, titleFr, titleGer } = props
+  const { showMoreFunction } = options
 
   // With this state you can search for items in facets
-  const [searchInput, setSearchInput] = useState(false);
+  const [searchInput, setSearchInput] = useState(false)
 
   // Import const translation
   // Use the translator
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation()
 
-  const language = i18n.language;
+  const language = i18n.language
 
   return (
     <div className="filters-container">
@@ -50,7 +50,7 @@ function GenericRefinementList(props) {
         {options.searchable && (
           <div
             onClick={() => {
-              setSearchInput(!searchInput);
+              setSearchInput(!searchInput)
             }}
           >
             <Glass />
@@ -63,7 +63,7 @@ function GenericRefinementList(props) {
             type="search"
             placeholder="Search"
             onChange={(event) => {
-              searchForItems(event.currentTarget.value);
+              searchForItems(event.currentTarget.value)
             }}
           />
         )}
@@ -78,8 +78,8 @@ function GenericRefinementList(props) {
               type="button"
               href="#"
               onClick={(event) => {
-                event.preventDefault();
-                refine(item.value);
+                event.preventDefault()
+                refine(item.value)
               }}
             >
               <p>{item.label}</p>
@@ -95,7 +95,7 @@ function GenericRefinementList(props) {
           <button
             className="filters-container__button-container__button"
             onClick={() => {
-              toggleShowMore();
+              toggleShowMore()
             }}
           >
             {isShowingMore ? (
@@ -111,19 +111,19 @@ function GenericRefinementList(props) {
         </div>
       )}
     </div>
-  );
+  )
 }
 
 // ColorRefinementList custom for Hooks
 function CustomColorRefinement(props) {
-  const { items, refine } = useRefinementList(props);
-  const { title, titleGer, titleFr } = props;
+  const { items, refine } = useRefinementList(props)
+  const { title, titleGer, titleFr } = props
 
   // Import const translation
   // Use the translator
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation()
 
-  const language = i18n.language;
+  const language = i18n.language
 
   return (
     <div className="filters-container">
@@ -134,7 +134,7 @@ function CustomColorRefinement(props) {
       </div>
       <ul className="filters-container__content-color">
         {items.map((item) => {
-          const color = item.value.split(';')[1];
+          const color = item.value.split(';')[1]
           return (
             <li
               className="filters-container__content-color__list"
@@ -156,23 +156,23 @@ function CustomColorRefinement(props) {
                   href="#"
                   value={`${item.isRefined ? '✓' : ''}`}
                   onClick={(event) => {
-                    event.preventDefault();
-                    refine(item.value);
+                    event.preventDefault()
+                    refine(item.value)
                   }}
                 ></input>
                 <p>{item.label.split(';')[0]}</p>
               </div>
             </li>
-          );
+          )
         })}
       </ul>
     </div>
-  );
+  )
 }
 
 const Facets = () => {
-  const { results } = useInstantSearch();
-  const facets = results?.renderingContent?.facetOrdering?.facets?.order;
+  const { results } = useInstantSearch()
+  const facets = results?.renderingContent?.facetOrdering?.facets?.order
 
   return (
     <div>
@@ -189,7 +189,7 @@ const Facets = () => {
       {facets?.length > 0 && (
         <DynamicWidgets maxValuesPerFacet={500}>
           {refinements.map((e, i) => {
-            const { type, label, labelFrench, labelGerman, options } = e;
+            const { type, label, labelFrench, labelGerman, options } = e
             switch (type) {
               case 'price':
                 return (
@@ -200,7 +200,7 @@ const Facets = () => {
                     titleGer={labelGerman}
                     key={i}
                   />
-                );
+                )
               case 'colour':
                 return (
                   <CustomColorRefinement
@@ -210,7 +210,7 @@ const Facets = () => {
                     titleFr={labelFrench}
                     titleGer={labelGerman}
                   />
-                );
+                )
               case 'hierarchical':
                 return (
                   <HierarchicalMenu
@@ -220,7 +220,7 @@ const Facets = () => {
                     titleGer={labelGerman}
                     key={i}
                   />
-                );
+                )
               default:
                 return (
                   <GenericRefinementList
@@ -234,13 +234,13 @@ const Facets = () => {
                     options={options}
                     showMore={options?.showMoreFunction}
                   />
-                );
+                )
             }
           })}
         </DynamicWidgets>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Facets;
+export default Facets

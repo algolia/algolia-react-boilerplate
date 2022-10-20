@@ -1,51 +1,51 @@
-import { Selectors } from '@/components/selector/Selectors';
+import { Selectors } from '@/components/selector/Selectors'
 //Import UseEffect
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 // Import configuration
 import {
   scorePersonadAtom,
   searchPersonaInformations,
-} from '@/config/demoGuideConfig';
+} from '@/config/demoGuideConfig'
 
-import { personaConfig, personaSelectedAtom } from '@/config/personaConfig';
+import { personaConfig, personaSelectedAtom } from '@/config/personaConfig'
 //import API Keys, ...
-import { searchClientCreds } from '@/config/algoliaEnvConfig';
+import { searchClientCreds } from '@/config/algoliaEnvConfig'
 //Recoil to display ot not persona
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 // Import Recoil config
-import { shouldHavePersona } from '@/config/featuresConfig';
+import { shouldHavePersona } from '@/config/featuresConfig'
 
-import { isPersonnaEventToggle } from '@/config/demoGuideConfig';
+import { isPersonnaEventToggle } from '@/config/demoGuideConfig'
 
 //Recoil states & values
-import { useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil'
 
 const SearchPersona = () => {
   //Recoil to display ot not persona
-  const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
+  const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona)
   //Get userToken of persona
-  const selectedUserToken = useRecoilValue(personaSelectedAtom);
+  const selectedUserToken = useRecoilValue(personaSelectedAtom)
   //Call recoil state to set it with fetching results
-  const setScorePersona = useSetRecoilState(scorePersonadAtom);
+  const setScorePersona = useSetRecoilState(scorePersonadAtom)
   const [isSwitchToggle, setIsSwitchToggle] = useRecoilState(
     isPersonnaEventToggle
-  );
+  )
   useEffect(() => {
     if (shouldShowPersonasAtom && selectedUserToken !== 'anon') {
       //Fetch Algolia results API for Persona
-      const url = `https://personalization.eu.algolia.com/1/profiles/personalization/${selectedUserToken}?X-Algolia-API-Key=${searchClientCreds.personaStrategyAPIKey}&X-Algolia-Application-Id=${searchClientCreds.appID}`;
+      const url = `https://personalization.eu.algolia.com/1/profiles/personalization/${selectedUserToken}?X-Algolia-API-Key=${searchClientCreds.personaStrategyAPIKey}&X-Algolia-Application-Id=${searchClientCreds.appID}`
       const fetchData = async () => {
         try {
-          const response = await fetch(url);
-          const json = await response.json();
-          setScorePersona(json.scores);
+          const response = await fetch(url)
+          const json = await response.json()
+          setScorePersona(json.scores)
         } catch (error) {
-          console.log('error', error);
+          console.log('error', error)
         }
-      };
-      fetchData();
+      }
+      fetchData()
     }
-  }, [selectedUserToken]);
+  }, [selectedUserToken])
   return (
     <div className="demoGuideHelpers">
       <h3>Search Persona</h3>
@@ -60,7 +60,7 @@ const SearchPersona = () => {
             type="checkbox"
             checked={isSwitchToggle}
             onChange={(e) => {
-              setIsSwitchToggle(!isSwitchToggle);
+              setIsSwitchToggle(!isSwitchToggle)
             }}
           />
           <span className="slider round"></span>
@@ -73,12 +73,12 @@ const SearchPersona = () => {
               <span>{item.span}:</span>
               <p>{item.details}</p>
             </div>
-          );
+          )
         })}
       </div>
       <Selectors props={personaConfig} />
     </div>
-  );
-};
+  )
+}
 
-export default SearchPersona;
+export default SearchPersona

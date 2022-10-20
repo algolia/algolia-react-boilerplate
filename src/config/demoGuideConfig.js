@@ -70,7 +70,7 @@ export const searchTermsConfig = [
     alertContent: 'The categories winter jacket and hike shoes are boosted.',
     details: 'The categories winter jacket and hike shoes will be boosted.',
     type: 'search terms',
-  }
+  },
 ]
 
 // ------------------------------------------
@@ -210,7 +210,6 @@ export const searchBannersConfig = [
     type: 'banner',
   },
 ]
-
 
 // ------------------------------------------
 // Personalisation Guide Config

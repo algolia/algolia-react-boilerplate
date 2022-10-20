@@ -1,14 +1,14 @@
 // ------------------------------------------
 // Configuration for the header
 // ------------------------------------------
-import { atom } from 'recoil';
+import { atom } from 'recoil'
 
 // ------------------------------------------
 // This exported attribute name is used to generate results for Category pages
 // It will create a filter which will be used when a category page link is clicked on
 // Please refer to linksHeader to define the category page values which will be filtered
 // ------------------------------------------
-export const categoryPageFilterAttribute = 'hierarchicalCategories.lvl0';
+export const categoryPageFilterAttribute = 'hierarchicalCategories.lvl0'
 
 // ------------------------------------------
 // This const defines the navigation aspect of the header
@@ -23,17 +23,17 @@ export const linksHeader = atom({
     {
       name: 'All',
       type: 'filter',
-      filter: ''
+      filter: '',
     },
     {
       name: 'Mens',
       type: 'filter',
-      filter: 'Mens'
+      filter: 'Mens',
     },
     {
       name: 'Womens',
       type: 'filter',
-      filter: 'Womens'
+      filter: 'Womens',
     },
     // For an uilisation of your own made filter
     {
@@ -41,28 +41,28 @@ export const linksHeader = atom({
       type: 'rawFilter',
       filter: '',
       rawFilter:
-        "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'"
+        "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
     },
     // This uses context from the Algolia dashboard, configured using Visual Editor
     {
       name: 'Accessories',
       type: 'context',
-      context: 'accessories'
+      context: 'accessories',
     },
   ],
-});
+})
 
 export const selectorNavigationRef = atom({
   key: 'selectorNavigationRef', // unique ID (with respect to other atoms/selectors)
   default: '',
-});
+})
 
 export const categorySelectionAtom = atom({
   key: 'categorySelectionAtom',
   default: null,
-});
+})
 
 export const navigationStateAtom = atom({
   key: 'navigationStateAtom',
   default: {},
-});
+})

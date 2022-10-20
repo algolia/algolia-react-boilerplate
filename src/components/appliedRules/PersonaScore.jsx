@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
-import { hitsConfig } from '@/config/hitsConfig';
+import { hitsConfig } from '@/config/hitsConfig'
 
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil'
 
-import { isPersonnaEventToggle } from '@/config/demoGuideConfig';
+import { isPersonnaEventToggle } from '@/config/demoGuideConfig'
 
-import { personaSelectedFiltersAtom } from '@/config/personaConfig';
+import { personaSelectedFiltersAtom } from '@/config/personaConfig'
 
-import { windowSize } from '@/hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize'
 
 const PersonaScore = (props) => {
-  const { resultsScore, personaName } = props;
-  const { mobile } = useRecoilValue(windowSize);
-  const isSwitchToggle = useRecoilValue(isPersonnaEventToggle);
+  const { resultsScore, personaName } = props
+  const { mobile } = useRecoilValue(windowSize)
+  const isSwitchToggle = useRecoilValue(isPersonnaEventToggle)
 
-  const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom);
+  const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom)
 
   const {
     colour,
@@ -24,7 +24,7 @@ const PersonaScore = (props) => {
     hierarchicalCategoriesLvl2,
     genderFilter,
     brand,
-  } = hitsConfig;
+  } = hitsConfig
 
   const [scorePersona, setScorePersona] = useState({
     color: [],
@@ -35,11 +35,11 @@ const PersonaScore = (props) => {
     hierarchical2: [],
     category: [],
     categories: [],
-  });
+  })
 
   const handleNewPersona = (newParams, newPersona) => {
-    return { ...newPersona, ...newParams };
-  };
+    return { ...newPersona, ...newParams }
+  }
 
   useEffect(() => {
     const newPersona = {
@@ -51,10 +51,10 @@ const PersonaScore = (props) => {
       hierarchical2: [],
       category: [],
       categories: [],
-    };
+    }
 
-    treatResults(newPersona);
-  }, [resultsScore, isSwitchToggle]);
+    treatResults(newPersona)
+  }, [resultsScore, isSwitchToggle])
 
   useEffect(() => {
     const newPersona = {
@@ -66,98 +66,98 @@ const PersonaScore = (props) => {
       hierarchical2: [],
       category: [],
       categories: [],
-    };
+    }
     if (!isSwitchToggle) {
-      let newState = newPersona;
+      let newState = newPersona
       personalizationFilters.map((filter) => {
         if (filter.split('<')[0].includes(genderFilter)) {
-          const newFilterKey = filter.split('<')[0].split(':')[1];
+          const newFilterKey = filter.split('<')[0].split(':')[1]
           const newFilterValue = filter
             .split('<')[1]
             .split('=')[1]
-            .replace('>', '');
+            .replace('>', '')
           const newObject = {
             [newFilterKey]: newFilterValue,
-          };
-          newState = handleNewPersona({ gender: [newObject] }, newState);
+          }
+          newState = handleNewPersona({ gender: [newObject] }, newState)
         }
-      });
+      })
       personalizationFilters.map((filter) => {
         if (filter.split('<')[0].includes(brand)) {
-          const newFilterKey = filter.split('<')[0].split(':')[1];
+          const newFilterKey = filter.split('<')[0].split(':')[1]
           const newFilterValue = filter
             .split('<')[1]
             .split('=')[1]
-            .replace('>', '');
+            .replace('>', '')
           const newObject = {
             [newFilterKey]: newFilterValue,
-          };
-          newState = handleNewPersona({ brand: [newObject] }, newState);
+          }
+          newState = handleNewPersona({ brand: [newObject] }, newState)
         }
-      });
+      })
       personalizationFilters.map((filter) => {
         if (filter.split('<')[0].includes(colour)) {
-          const newFilterKey = filter.split('<')[0].split(':')[1];
+          const newFilterKey = filter.split('<')[0].split(':')[1]
           const newFilterValue = filter
             .split('<')[1]
             .split('=')[1]
-            .replace('>', '');
+            .replace('>', '')
           const newObject = {
             [newFilterKey]: newFilterValue,
-          };
-          newState = handleNewPersona({ color: [newObject] }, newState);
+          }
+          newState = handleNewPersona({ color: [newObject] }, newState)
         }
-      });
+      })
       personalizationFilters.map((filter) => {
         if (filter.split('<')[0].includes(hierarchicalCategoriesLvl0)) {
-          const newFilterKey = filter.split('<')[0].split(':')[1];
+          const newFilterKey = filter.split('<')[0].split(':')[1]
           const newFilterValue = filter
             .split('<')[1]
             .split('=')[1]
-            .replace('>', '');
+            .replace('>', '')
           const newObject = {
             [newFilterKey]: newFilterValue,
-          };
-          newState = handleNewPersona({ hierarchical0: [newObject] }, newState);
+          }
+          newState = handleNewPersona({ hierarchical0: [newObject] }, newState)
         }
-      });
+      })
       personalizationFilters.map((filter) => {
         if (filter.split('<')[0].includes(hierarchicalCategoriesLvl1)) {
-          const newFilterKey = filter.split('<')[0].split(':')[1];
+          const newFilterKey = filter.split('<')[0].split(':')[1]
           const newFilterValue = filter
             .split('<')[1]
             .split('=')[1]
-            .replace('>', '');
+            .replace('>', '')
           const newObject = {
             [newFilterKey]: newFilterValue,
-          };
-          newState = handleNewPersona({ hierarchical1: [newObject] }, newState);
+          }
+          newState = handleNewPersona({ hierarchical1: [newObject] }, newState)
         }
-      });
+      })
       personalizationFilters.map((filter) => {
         if (filter.split('<')[0].includes(hierarchicalCategoriesLvl2)) {
-          const newFilterKey = filter.split('<')[0].split(':')[1];
+          const newFilterKey = filter.split('<')[0].split(':')[1]
           const newFilterValue = filter
             .split('<')[1]
             .split('=')[1]
-            .replace('>', '');
+            .replace('>', '')
           const newObject = {
             [newFilterKey]: newFilterValue,
-          };
-          newState = handleNewPersona({ hierarchical2: [newObject] }, newState);
+          }
+          newState = handleNewPersona({ hierarchical2: [newObject] }, newState)
         }
-      });
-      setScorePersona(newState);
+      })
+      setScorePersona(newState)
     }
-  }, [isSwitchToggle, resultsScore]);
+  }, [isSwitchToggle, resultsScore])
 
   //Process the results for each attribute
   const treatResults = (newPersona) => {
-    let newState = newPersona;
+    let newState = newPersona
 
     // For Attribute Color
     if (resultsScore.hasOwnProperty(colour)) {
-      newState = handleNewPersona({ color: [resultsScore.colour] }, newState);
+      newState = handleNewPersona({ color: [resultsScore.colour] }, newState)
     }
 
     // For Attribute Gender
@@ -165,7 +165,7 @@ const PersonaScore = (props) => {
       newState = handleNewPersona(
         { gender: [resultsScore.genderFilter] },
         newState
-      );
+      )
     }
     // For Attribute Hierarchical level 0
     if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl0)) {
@@ -174,7 +174,7 @@ const PersonaScore = (props) => {
           hierarchical0: [resultsScore[hierarchicalCategoriesLvl0.toString()]],
         },
         newState
-      );
+      )
     }
     // For Attribute Hierarchical level 1
     if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl1)) {
@@ -183,7 +183,7 @@ const PersonaScore = (props) => {
           hierarchical1: [resultsScore[hierarchicalCategoriesLvl1.toString()]],
         },
         newState
-      );
+      )
     }
     // For Attribute Hierarchical level 2\
     if (resultsScore.hasOwnProperty(hierarchicalCategoriesLvl2)) {
@@ -192,15 +192,15 @@ const PersonaScore = (props) => {
           hierarchical2: [resultsScore[hierarchicalCategoriesLvl2.toString()]],
         },
         newState
-      );
+      )
     }
     // For Attribute Brand
     if (resultsScore.hasOwnProperty(brand)) {
-      newState = handleNewPersona({ brand: [resultsScore.brand] }, newState);
+      newState = handleNewPersona({ brand: [resultsScore.brand] }, newState)
     }
 
-    setScorePersona(newState);
-  };
+    setScorePersona(newState)
+  }
 
   return (
     <>
@@ -222,7 +222,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.hierarchical0.length > 0 &&
               Object.entries(scorePersona.hierarchical0[0]).map((cat) => {
@@ -238,7 +238,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.hierarchical1.length > 0 &&
               Object.entries(scorePersona.hierarchical1[0]).map((cat) => {
@@ -254,7 +254,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.hierarchical2.length > 0 &&
               Object.entries(scorePersona.hierarchical2[0]).map((cat) => {
@@ -270,7 +270,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.color.length > 0 &&
               Object.entries(scorePersona.color[0]).map((color) => {
@@ -296,7 +296,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.category.length > 0 &&
               Object.entries(scorePersona.category[0]).map((cat) => {
@@ -312,7 +312,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.brand.length > 0 &&
               Object.entries(scorePersona.brand[0]).map((cat) => {
@@ -328,7 +328,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.categories.length > 0 &&
               Object.entries(scorePersona.categories[0]).map((cat) => {
@@ -344,7 +344,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
           </ul>
         </div>
@@ -366,7 +366,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.hierarchical0.length > 0 &&
               Object.entries(scorePersona.hierarchical0[0]).map((cat) => {
@@ -382,7 +382,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.hierarchical1.length > 0 &&
               Object.entries(scorePersona.hierarchical1[0]).map((cat) => {
@@ -398,7 +398,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.hierarchical2.length > 0 &&
               Object.entries(scorePersona.hierarchical2[0]).map((cat) => {
@@ -414,7 +414,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.color.length > 0 &&
               Object.entries(scorePersona.color[0]).map((color) => {
@@ -440,7 +440,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.category.length > 0 &&
               Object.entries(scorePersona.category[0]).map((cat) => {
@@ -456,7 +456,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.brand.length > 0 &&
               Object.entries(scorePersona.brand[0]).map((cat) => {
@@ -472,7 +472,7 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
             {scorePersona.categories.length > 0 &&
               Object.entries(scorePersona.categories[0]).map((cat) => {
@@ -488,13 +488,13 @@ const PersonaScore = (props) => {
                       </div>
                     </div>
                   </li>
-                );
+                )
               })}
           </ul>
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default PersonaScore;
+export default PersonaScore
