@@ -367,27 +367,6 @@ const ProductDetails = () => {
               </div>
             </div>
           )}
-
-          {totalFbtProductsAmount !== undefined && (
-            <PredictZone
-              name="Free shipping banner"
-              when={({ cartAbandonment, orderValue = 0 }) => {
-                const isUnderOrderValue =
-                  orderValue > 0 && currentCartTotal <= orderValue
-                // Show banner if already over buying power, or if buying all recommendations would bring user over buying power
-                const shouldShowPromoBanner =
-                  isUnderOrderValue ||
-                  currentCartTotal + totalFbtProductsAmount > orderValue
-
-                return shouldShowPromoBanner
-              }}
-            >
-              <PromotionCodeBanner
-                cartValue={currentCartTotal}
-                valueToAdd={totalFbtProductsAmount}
-              />
-            </PredictZone>
-          )}
         </div>
       )}
     </div>

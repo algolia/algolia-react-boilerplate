@@ -32,7 +32,6 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
   const currencySymbol = useRecoilValue(currencySymbolAtom)
   const [isUserEligible, setIsUserEligible] = useState(false)
 
-
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
   })
