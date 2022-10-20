@@ -1,20 +1,12 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
-<<<<<<< Updated upstream
 import { lazy, useEffect, useState } from 'react';
-=======
-import { useEffect, useState } from 'react'
->>>>>>> Stashed changes
 
 // Recommend
 import {
   useFrequentlyBoughtTogether,
   useRelatedProducts,
-<<<<<<< Updated upstream
 } from '@algolia/recommend-react';
-=======
-} from '@algolia/recommend-react'
->>>>>>> Stashed changes
 
 // Slider for recommend
 import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react'
@@ -46,14 +38,9 @@ import {
 import {
   framerMotionPage,
   framerMotionTransition,
-<<<<<<< Updated upstream
 } from '@/config/animationConfig';
 import { addToCartSelector, cartOpen } from '@/config/cartFunctions';
 import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
-=======
-} from '@/config/animationConfig'
-import { addToCartSelector } from '@/config/cartFunctions'
->>>>>>> Stashed changes
 import {
   shouldHaveFbtProducts,
   shouldHaveRelatedProducts,
@@ -74,18 +61,10 @@ import { windowSize } from '@/hooks/useScreenSize'
 import './SCSS/productDetails.scss'
 
 // Import and use translation
-<<<<<<< Updated upstream
 import { useTranslation } from 'react-i18next';
 import { useHits } from 'react-instantsearch-hooks-web';
 import FbtAddAll from '@/components/fbtPdp/FbtAddAll';
 import FbtItems from '@/components/recommend/fbtItems/FbtProducts';
-=======
-import { useTranslation } from 'react-i18next'
-import { useHits } from 'react-instantsearch-hooks-web'
-import FbtAddAll from '@/components/fbtPdp/FbtAddAll'
-import FbtItems from '@/components/recommend/fbtItems/FbtProducts'
-import { usePredict } from '@algolia/predict-react'
->>>>>>> Stashed changes
 
 const ProductDetails = () => {
   const { sendEvent } = useHits()
@@ -145,7 +124,6 @@ const ProductDetails = () => {
 
   const { isDesktop } = useRecoilValue(windowSize)
 
-<<<<<<< Updated upstream
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
 
   // Get hit attribute from config file
@@ -159,26 +137,6 @@ const ProductDetails = () => {
     colourHexa,
     price: priceForTotal,
   } = hitsConfig;
-=======
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
-  const cartState = useRecoilValue(addToCartSelector)
-
-  // Fetch and compute the current total value of the users cart
-  const [currentCartTotal, setCurrentCartTotal] = useState(
-    cartState.reduce((acc, val) => (acc += val.unformated_price), 0)
-  )
-
-  // Adjust the current total when the state of the cart changes
-  useEffect(() => {
-    setCurrentCartTotal(
-      cartState.reduce((acc, val) => (acc += val.unformated_price), 0)
-    )
-  }, [cartState])
-
-  // Get hit attribute from config file
-  const { image, productName, brand, sizeFilter, colour, colourHexa } =
-    hitsConfig
->>>>>>> Stashed changes
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1]
 
@@ -188,40 +146,19 @@ const ProductDetails = () => {
     keyPrefix: 'pdp',
   })
 
-<<<<<<< Updated upstream
   let fbtRecommendationsProducts;
   let relatedRecommendationsProducts;
-=======
-  let fbtRecommendationsProducts
-  let relatedRecommendationsProducts
-  let totalFbtProductsAmount
->>>>>>> Stashed changes
 
   if (shouldHaveFbtProductsValue) {
     const { recommendations } = useFrequentlyBoughtTogether({
       recommendClient,
       indexName,
       objectIDs: [currentObjectID],
-<<<<<<< Updated upstream
     });
     fbtRecommendationsProducts = recommendations;
     if (recommendations.length > 0) {
       fbtRecommendationsProducts = [hit, ...recommendations];
     }
-=======
-      maxRecommendations: 2,
-    })
-
-    // Add the original product from the PDP at the start of the recommendations
-    fbtRecommendationsProducts =
-      recommendations.length > 0 ? [hit, ...recommendations] : recommendations
-
-    // Compute the total if all recommendations purchased, used for predict in addAllFbt component
-    totalFbtProductsAmount = fbtRecommendationsProducts.reduce(
-      (acc, val) => (acc += val.unformated_price),
-      0
-    )
->>>>>>> Stashed changes
   }
 
   if (shouldHaveRelatedProductsValue) {
@@ -229,13 +166,8 @@ const ProductDetails = () => {
       recommendClient,
       indexName,
       objectIDs: [currentObjectID],
-<<<<<<< Updated upstream
     });
     relatedRecommendationsProducts = recommendations;
-=======
-    })
-    relatedRecommendationsProducts = recommendations
->>>>>>> Stashed changes
   }
 
   return (
@@ -398,14 +330,8 @@ const ProductDetails = () => {
                 />
               </div>
             )}
-<<<<<<< Updated upstream
           {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 1 && (
             <>
-=======
-
-          {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 1 && (
-            <div className="fbt-outer-container">
->>>>>>> Stashed changes
               <h3 className="title">{t('fbtTitle')}</h3>
               <div
                 className={`${
@@ -413,23 +339,11 @@ const ProductDetails = () => {
                 }`}
               >
                 <div className="fbt-container__component">
-<<<<<<< Updated upstream
                   {fbtRecommendationsProducts.slice(0, 3).map((item, i) => {
                     return <FbtItems item={item} index={i} key={i} />;
                   })}
                 </div>
                 <FbtAddAll items={fbtRecommendationsProducts.slice(0, 3)} />
-=======
-                  {fbtRecommendationsProducts.map((item, i) => {
-                    return <FbtItems item={item} index={i} key={i} />
-                  })}
-                </div>
-                <FbtAddAll
-                  totalFbtProductsAmount={totalFbtProductsAmount}
-                  currentCartTotal={currentCartTotal}
-                  items={fbtRecommendationsProducts.slice(0, 3)}
-                />
->>>>>>> Stashed changes
               </div>
             </>
           )}
