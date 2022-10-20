@@ -9,7 +9,6 @@ import {
   useRelatedProducts,
 } from '@algolia/recommend-react'
 
-
 // https://www.algolia.com/doc/ui-libraries/predict/api-reference/predict-react/PredictZone/
 import { PredictZone } from '@algolia/predict-react'
 
@@ -69,7 +68,6 @@ import { useTranslation } from 'react-i18next'
 import { useHits } from 'react-instantsearch-hooks-web'
 import FbtAddAll from '@/components/fbtPdp/FbtAddAll'
 import FbtItems from '@/components/recommend/fbtItems/FbtProducts'
-import { usePredict } from '@algolia/predict-react'
 
 const ProductDetails = () => {
   const { sendEvent } = useHits()
@@ -156,7 +154,6 @@ const ProductDetails = () => {
     keyPrefix: 'pdp',
   })
 
-
   let fbtRecommendationsProducts
   let relatedRecommendationsProducts
   let totalFbtProductsAmount
@@ -184,11 +181,10 @@ const ProductDetails = () => {
     const { recommendations } = useRelatedProducts({
       recommendClient,
       indexName,
-      objectIDs: [currentObjectID]
+      objectIDs: [currentObjectID],
     })
     relatedRecommendationsProducts = recommendations
   }
-
 
   return (
     // Product Display Page parent container, including attributes for framer motion
@@ -369,23 +365,29 @@ const ProductDetails = () => {
                   items={fbtRecommendationsProducts.slice(0, 3)}
                 />
               </div>
-            </>
+            </div>
           )}
 
-          {totalFbtProductsAmount !== undefined &&
+          {totalFbtProductsAmount !== undefined && (
             <PredictZone
               name="Free shipping banner"
               when={({ cartAbandonment, orderValue = 0 }) => {
-                const isUnderOrderValue = orderValue > 0 && currentCartTotal <= orderValue
+                const isUnderOrderValue =
+                  orderValue > 0 && currentCartTotal <= orderValue
                 // Show banner if already over buying power, or if buying all recommendations would bring user over buying power
-                const shouldShowPromoBanner = isUnderOrderValue || (currentCartTotal + totalFbtProductsAmount > orderValue)
+                const shouldShowPromoBanner =
+                  isUnderOrderValue ||
+                  currentCartTotal + totalFbtProductsAmount > orderValue
 
                 return shouldShowPromoBanner
               }}
             >
-              <PromotionCodeBanner cartValue={currentCartTotal} valueToAdd={totalFbtProductsAmount} />
+              <PromotionCodeBanner
+                cartValue={currentCartTotal}
+                valueToAdd={totalFbtProductsAmount}
+              />
             </PredictZone>
-          }
+          )}
         </div>
       )}
     </div>

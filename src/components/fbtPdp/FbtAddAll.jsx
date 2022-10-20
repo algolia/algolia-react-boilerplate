@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import get from 'lodash/get'
 import { hitsConfig } from '@/config/hitsConfig'
 import { currencySymbolAtom } from '@/config/currencyConfig'
@@ -5,13 +6,9 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { addToCartSelector } from '@/config/cartFunctions'
 import { useTranslation } from 'react-i18next'
 
-<<<<<<< Updated upstream
-=======
 import { PredictZone, usePredict } from '@algolia/predict-react'
 import PromotionCodeBanner from '../predict/PromotionCodeBanner'
-import { useEffect, useState } from 'react'
 
->>>>>>> Stashed changes
 const priceTotal = (items) => {
   const { price } = hitsConfig
   let sum = 0
@@ -30,25 +27,14 @@ const numberOfHits = (items) => {
   return t('fbtButtonAdd')[items.length - 1]
 }
 
-<<<<<<< Updated upstream
-const FbtAddAll = ({ items }) => {
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
-  const currencySymbol = useRecoilValue(currencySymbolAtom);
-=======
 const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
   const setAddToCartAtom = useSetRecoilState(addToCartSelector)
   const currencySymbol = useRecoilValue(currencySymbolAtom)
->>>>>>> Stashed changes
+  const [isUserEligible, setIsUserEligible] = useState(false)
 
-  // Import const translation
-  // Use the translator
+
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
-<<<<<<< Updated upstream
-  });
-  return (
-    <div className="fbt-infos">
-=======
   })
 
   const { orderValue, userProfile } = usePredict()
@@ -110,34 +96,22 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
         />
       </PredictZone>
 
->>>>>>> Stashed changes
       <div className="fbt-infos__price">
         <h1>{t('addFbtTotal')}: </h1>
         <p>
           {currencySymbol}
-<<<<<<< Updated upstream
-          {priceTotal(items)}
-        </p>
-      </div>
-=======
           {!isUserEligible
             ? priceTotal(items)
             : (priceTotal(items) - priceTotal(items) * 0.1).toFixed(2)}
         </p>
       </div>
 
->>>>>>> Stashed changes
       <a
         className="fbt-infos__buttons"
         onClick={() => {
           items.map((item) => {
-<<<<<<< Updated upstream
-            return setAddToCartAtom(item);
-          });
-=======
             return setAddToCartAtom(item)
           })
->>>>>>> Stashed changes
         }}
       >
         <p>{numberOfHits(items)}</p>
@@ -146,8 +120,4 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
   )
 }
 
-<<<<<<< Updated upstream
-export default FbtAddAll;
-=======
 export default FbtAddAll
->>>>>>> Stashed changes
