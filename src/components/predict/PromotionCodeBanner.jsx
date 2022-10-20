@@ -1,7 +1,7 @@
 // https://www.algolia.com/doc/ui-libraries/predict/api-reference/predict-react/PredictZone/
 import { usePredictZone, usePredict } from '@algolia/predict-react'
 
-import './SCSS/promotionCodeBanner.scss'
+import './SCSS/predictPromotionCodeBanner.scss'
 
 function PromotionCodeBanner({ cartValue, valueToAdd }) {
   return (
