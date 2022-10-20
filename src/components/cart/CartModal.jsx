@@ -13,20 +13,9 @@ import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 
 //Import config
-<<<<<<< Updated upstream
-import { framerMotionTransition } from '@/config/animationConfig';
-import { cartClick, cartOpen, cartState, currentTotal } from '@/config/cartFunctions';
-import { shouldHaveRelatedProducts } from '@/config/featuresConfig';
-=======
 import { framerMotionTransition } from '@/config/animationConfig'
-import {
-  cartClick,
-  cartOpen,
-  cartState,
-  currentTotal,
-} from '@/config/cartFunctions'
+import { cartClick, cartOpen, cartState } from '@/config/cartFunctions'
 import { shouldHaveRelatedProducts } from '@/config/featuresConfig'
->>>>>>> Stashed changes
 
 // Import hooks
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional'
@@ -44,17 +33,9 @@ import './SCSS/cartModal.scss'
 
 const CartModal = () => {
   // Import all recoil states to show modal + Cart stored and Removed articles
-<<<<<<< Updated upstream
-  const [showCart, setShowCart] = useRecoilState(cartOpen);
-  const [cartValue, setCartValue] = useRecoilState(cartState);
-  const [currentTotalAtom, setCurrentTotalAtom] = useRecoilState(currentTotal)
-  const [objectIds, setObjectIds] = useState([]);
-=======
   const [showCart, setShowCart] = useRecoilState(cartOpen)
   const [cartValue, setCartValue] = useRecoilState(cartState)
-  const [currentTotalAtom, setCurrentTotalAtom] = useRecoilState(currentTotal)
   const [objectIds, setObjectIds] = useState([])
->>>>>>> Stashed changes
   // Use ref on click modal and on cart icon + hamburger
   const cartModal = useRef()
   const cartIcon = useRecoilValue(cartClick)
@@ -137,8 +118,8 @@ const CartModal = () => {
           <a
             className="modal-container__emptyCart"
             onClick={() => {
-              setCartValue([]);
-              localStorage.removeItem('myCart');
+              setCartValue([])
+              localStorage.removeItem('myCart')
             }}
           >
             <p>{t('emptyCart')}</p>
@@ -146,15 +127,10 @@ const CartModal = () => {
           <a
             className="modal-container__checkout"
             onClick={() => {
-<<<<<<< Updated upstream
-              sendEvent('conversion', cartValue, 'Cart: Checkout');
-              triggerAlert('Thanks using Algolia 💙');
-=======
               sendEvent('conversion', cartValue, 'Cart: Checkout')
               triggerAlert('Thanks using Algolia 💙')
               setCartValue([])
               localStorage.removeItem('myCart')
->>>>>>> Stashed changes
             }}
           >
             <p>{t('checkout')}</p>
