@@ -61,6 +61,66 @@ const resources = {
       },
     },
   },
+  it: {
+    translation: {
+      header: {
+        contact: 'Contattaci',
+        language: '€/IT'
+      },
+      homePage: {
+        titleCarousels: ['La nostra collezione di borse', 'Il nostro meglio Hoodies'],
+      },
+      federated: {
+        recentSearches: 'Ricerche Recenti',
+        suggestions: 'Suggerimento',
+        categories: 'Categoria',
+        products: 'Prodotti',
+        articles: 'Articolo',
+        productsBefore: 'Raccomandato per te',
+        showAllProducts: 'Mostra tutti i prodotti',
+        buttonReturn: 'Torna alla home page',
+        buttonShowAll: 'Mostra tutti i prodotti',
+        noResults: 'Nessun risultato trovato',
+      },
+      srp: {
+        titleTrendingProducts: 'Prodotti di tendenza',
+        titleTrendingFacets: 'Marchi di tendenza',
+        stats: 'Risultati trovati in',
+        searchInCategory: 'Cerca nel',
+      },
+      pdp: {
+        fbtTitle: 'Acquistati frequentemente insieme',
+        relatedTitle: 'Prodotti correlati',
+        addToCartButton: 'Aggiungi al carrello',
+        buttonBack: 'Torna alla ricerca',
+        availableSize: 'Taglie disponibili:',
+        addFbtTotal: 'Total price',
+        fbtButtonAdd: [
+          'Aggiungi al carrello',
+          'Aggiungi entrambi al carrello',
+          'Aggiungi tutti e tre al carrello',
+          'Aggiungi tutti e quattro al carrello',
+        ],
+      },
+      searchBox: {
+        placeHolder: 'Ricerca...',
+        tooltip: '💡 Digita una query prima di inviare la richiesta'
+      },
+      cartModal: {
+        title: 'La mia carta',
+        emptyCart: 'Svuota il mio carrello',
+        sizeTitle: 'Taglia',
+        colorTitle: 'Colore',
+        yourCartIsEmpty: 'Il tuo carrello è vuoto',
+        checkout: 'Pagina di pagamento'
+      },
+      priceFacet: {
+        title:'Prezzo',
+        maxPrice: 'Max Prezzo',
+        minPrice: 'Min Prezzo'
+      }
+    },
+  },
   fr: {
     translation: {
       homePage: {

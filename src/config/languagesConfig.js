@@ -17,6 +17,11 @@ export const languagesConfig = [
     label: 'French',
     type: 'language',
   },
+  {
+    value: 'Italian',
+    label: 'Italian',
+    type: 'language',
+  },
 ]
 
 // Define index by languages & currency.
@@ -55,6 +60,42 @@ export const languageSwitchConfig = {
       // This uses context from the Algolia dashboard, configured using Visual Editor
       {
         name: 'Accessories',
+        type: 'context',
+        context: 'accessories',
+      },
+    ],
+  },
+  IT: {
+    index: 'off_white_custom_demo_italian',
+    currency: '€',
+    linksHeader: [
+      {
+        name: 'Tutto',
+        type: 'filter',
+        filter: '',
+        url: '/search',
+      },
+      {
+        name: 'Uomo',
+        type: 'filter',
+        filter: 'Mens',
+        url: '/Uomo',
+      },
+      {
+        name: 'Donna',
+        type: 'filter',
+        filter: 'Womens',
+        url: '/Donna',
+      },
+      {
+        name: 'Accessori da donna di Even & Odd',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+          "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
+      },
+      {
+        name: 'Accessori',
         type: 'context',
         context: 'accessories',
       },
