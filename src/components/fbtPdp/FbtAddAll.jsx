@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next'
 import { PredictZone, usePredict } from '@algolia/predict-react'
 import PromotionCodeBanner from '../predict/PromotionCodeBanner'
 
-
 const numberOfHits = (items) => {
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
@@ -35,7 +34,6 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
   }
 
   useEffect(() => computePriceTotal(items), [items])
-
 
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
