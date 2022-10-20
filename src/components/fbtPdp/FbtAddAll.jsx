@@ -52,11 +52,8 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
   }, [currentCartTotal])
 
   const checkIfUserEligible = () => {
-    // IMPORTANT - HAD TO FAKE THE ORDER VALUE UNTIL THE PREDICT TEAM CAN CREATE A USER WITH HIGH ORDER VALUE
-    let fakeOrderValue = 400
-
     // Check if the total in the cart is more than the predicted order value
-    const isOverOrderValue = currentCartTotal > fakeOrderValue
+    const isOverOrderValue = currentCartTotal > orderValue
 
     // Logging for explainations
     console.log(
@@ -65,15 +62,15 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
       '\ntotal if all recommendations purchased',
       (currentCartTotal + totalFbtProductsAmount).toFixed(2),
       '\npredicted order value',
-      fakeOrderValue
+      orderValue
     )
-    if (currentCartTotal > fakeOrderValue) {
+    if (currentCartTotal > orderValue) {
       console.log(
         'The current cart total, plus the FBT recommendation would be within 5% of less of the predicted order value.\nIn this case, the user might need an incentive, so we give 10% off if they add all the FBT items to cart'
       )
     } else if (
       currentCartTotal + totalFbtProductsAmount >
-      fakeOrderValue - fakeOrderValue * 0.05
+      orderValue - orderValue * 0.05
     ) {
       console.log(
         'The current cart total is already over the predicted order value, this user definately needs an incentive, we offer the 10% off the combination of the FBT recommendations'
@@ -84,8 +81,7 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
     // We take 5% off the order total because it's ok to get the user close to it, no need for exactly
     return (
       isOverOrderValue ||
-      currentCartTotal + totalFbtProductsAmount >
-        fakeOrderValue - fakeOrderValue * 0.05
+      currentCartTotal + totalFbtProductsAmount > orderValue - orderValue * 0.05
     )
   }
 
