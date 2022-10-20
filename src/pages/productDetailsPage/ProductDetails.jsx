@@ -70,7 +70,7 @@ import FbtAddAll from '@/components/fbtPdp/FbtAddAll'
 import FbtItems from '@/components/recommend/fbtItems/FbtProducts'
 
 const ProductDetails = () => {
-  const { sendEvent } = useHits()
+  // const { sendEvent } = useHits()
 
   const [addToCartIsClicked, setAddToCartIsClicked] = useState(false)
 
@@ -314,7 +314,7 @@ const ProductDetails = () => {
                   setAddToCartIsClicked(true)
                   setTimeout(() => setAddToCartIsClicked(false), 300)
                   // Send event conversion to Algolia API
-                  sendEvent('conversion', hit, 'PDP: Add to cart')
+                  // sendEvent('conversion', hit, 'PDP: Add to cart')
                 }}
               >
                 <CartPicto />

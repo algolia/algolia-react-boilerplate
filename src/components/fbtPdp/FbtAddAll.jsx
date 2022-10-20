@@ -9,15 +9,6 @@ import { useTranslation } from 'react-i18next'
 import { PredictZone, usePredict } from '@algolia/predict-react'
 import PromotionCodeBanner from '../predict/PromotionCodeBanner'
 
-const priceTotal = (items) => {
-  const { price } = hitsConfig
-  let sum = 0
-  items.map((item) => {
-    sum += get(item, price)
-    return sum
-  })
-  return sum.toFixed(2)
-}
 
 const numberOfHits = (items) => {
   const { t } = useTranslation('translation', {
@@ -31,6 +22,20 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
   const setAddToCartAtom = useSetRecoilState(addToCartSelector)
   const currencySymbol = useRecoilValue(currencySymbolAtom)
   const [isUserEligible, setIsUserEligible] = useState(false)
+  const [priceTotal, setPriceTotal] = useState(0)
+
+  const computePriceTotal = (items) => {
+    const { price } = hitsConfig
+    let sum = 0
+    items.map((item) => {
+      sum += get(item, price)
+      return sum
+    })
+    setPriceTotal(sum.toFixed(2))
+  }
+
+  useEffect(() => computePriceTotal(items), [items])
+
 
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
@@ -100,8 +105,8 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
         <p>
           {currencySymbol}
           {!isUserEligible
-            ? priceTotal(items)
-            : (priceTotal(items) - priceTotal(items) * 0.1).toFixed(2)}
+            ? priceTotal
+            : (priceTotal - priceTotal * 0.1).toFixed(2)}
         </p>
       </div>
 
