@@ -6,14 +6,6 @@
 import { atom, selector } from 'recoil'
 import { hitsConfig } from '@/config/hitsConfig'
 
-<<<<<<< Updated upstream
-=======
-export const currentTotal = atom({
-  key: 'currentTotal',
-  default: 0,
-})
-
->>>>>>> Stashed changes
 export const cartState = atom({
   key: 'cartState',
   default: [],

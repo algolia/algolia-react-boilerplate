@@ -1,42 +1,23 @@
 // Recoil import
-<<<<<<< Updated upstream
 import { Garbage, MinusEmptyIcon, PlusEmptyIcon } from '@/assets/svg/SvgIndex';
 import { hitsConfig } from '@/config/hitsConfig';
 import get from 'lodash/get';
-=======
-import { currencySymbolAtom } from '@/config/currencyConfig'
-import { Garbage, MinusEmptyIcon, PlusEmptyIcon } from '@/assets/svg/SvgIndex'
-import { hitsConfig } from '@/config/hitsConfig'
-import get from 'lodash/get'
->>>>>>> Stashed changes
 
 // Import cart from recoil
 import {
   addToCartSelector,
   cartState,
   removeToCartSelector,
-<<<<<<< Updated upstream
 } from '@/config/cartFunctions';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-=======
-} from '@/config/cartFunctions'
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil'
->>>>>>> Stashed changes
 
 //Use Translation
 import { useTranslation } from 'react-i18next'
 
 const ArticlesCard = ({ item, sendEvent }) => {
-<<<<<<< Updated upstream
   const [cart, setCart] = useRecoilState(cartState);
   const setAddToCartAtom = useSetRecoilState(addToCartSelector);
   const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
-=======
-  const currencySymbol = useRecoilValue(currencySymbolAtom)
-  const [cart, setCart] = useRecoilState(cartState)
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
-  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector)
->>>>>>> Stashed changes
 
   // Import const translation
   // Use the translator
