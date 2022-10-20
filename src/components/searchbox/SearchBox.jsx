@@ -160,7 +160,7 @@ function CustomSearchBox(props) {
                     : 'submitBtn__text submitBtn__text-inactive'
                 }
               >
-                Submit
+                {t('submit')}
               </p>
               <div
                 className={
