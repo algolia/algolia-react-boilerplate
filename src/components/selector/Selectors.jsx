@@ -138,6 +138,12 @@ const SelectItem = ({
         navigationLinks(languageSwitchConfig.GER.linksHeader)
         i18n.changeLanguage('ger')
         break
+      case 'Italian':
+        index(languageSwitchConfig.IT.index)
+        setCurrency(languageSwitchConfig.IT.currency)
+        navigationLinks(languageSwitchConfig.IT.linksHeader)
+        i18n.changeLanguage('it')
+        break
     }
   }
 
