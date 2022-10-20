@@ -20,7 +20,6 @@ function PredictUserProfileProvider({ userID, children }) {
       })
       .then((nextUserProfile) => {
         setUserProfile(nextUserProfile)
-        console.log(nextUserProfile)
       })
   }, [userID])
 

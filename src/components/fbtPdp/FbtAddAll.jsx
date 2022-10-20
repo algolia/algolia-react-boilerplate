@@ -56,6 +56,7 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
     const isOverOrderValue = currentCartTotal > orderValue
 
     // Logging for explainations
+    // Here on purpose
     console.log(
       'current cart value',
       currentCartTotal.toFixed(2),

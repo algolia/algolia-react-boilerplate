@@ -29,16 +29,86 @@
           fill: $main-color;
         }
       }
-      .closeBtn {
-        width: 10px;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        position: absolute;
-        cursor: pointer;
-      }
+    
       &__input {
         @include searchBoxInput($white-color, $grey-light-color-80);
+      }
+    }
+    &__btn{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: absolute;
+      right: 0rem;
+      top: 50%;
+      height: 100%;
+      transform: translateY(-50%);
+      animation: fadeIn 0.3s forwards ease-in-out;
+
+      .closeBtn {
+        width: 10px;
+        cursor: pointer;
+      }
+
+      .submitBtn{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $secondary-color-custom-reverse-gradient;
+        border-radius: 0 3rem 3rem 0;
+        width: 4rem;
+        height: 100%;
+        cursor: pointer;
+
+        &__text{
+          position: absolute;
+          @include p-text($main-color, 500);
+          font-size: 0.6rem;
+          transition: all 0.2s ease-in-out;
+            &-active{
+              opacity: 1;
+              transform: translateX(0);
+              transition: all 0.2s ease-in-out;
+            }
+            &-inactive{
+              opacity: 0;
+              transform: translateX(-1.5rem);
+              transition: all 0.2s ease-in-out;
+            }
+        }
+        
+        &__picto{
+            transition: all 0.2s ease-in-out;
+            &-active{
+              opacity: 1;
+              transform: translateX(0);
+              transition: all 0.2s ease-in-out;
+            }
+            &-inactive{
+              opacity: 0;
+              transform: translateX(1.5rem);
+              transition: all 0.2s ease-in-out;
+            }
+          }
+        
+        
+
+        svg{
+          width: 8px;
+          font-size: 10px;
+        }
+
+        .active{
+          opacity: 1;
+          transform: translateX(0);
+          transition: all 0.2s ease-in-out;
+        }
+        .inactive{
+          opacity: 0;
+          transform: translateX(-30%);
+          transition: all 0.2s ease-in-out;
+        }
       }
     }
     &__category {
@@ -109,4 +179,16 @@
   .searchbox-category {
     width: 80%;
   }
+}
+
+
+// ANIMATIONS
+@keyframes fadeIn {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+
 }

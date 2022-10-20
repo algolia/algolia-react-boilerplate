@@ -13,7 +13,7 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Import SVG from file as a component
-import { Glass, SimpleCloseButton } from '@/assets/svg/SvgIndex'
+import { Glass, SimpleCloseButton, SubmitPicto } from '@/assets/svg/SvgIndex'
 import SearchInCategory from './components/SearchInCategory'
 
 import { rulesAtom } from '@/config/appliedRulesConfig'
@@ -51,6 +51,7 @@ function CustomSearchBox(props) {
   const [sbIsActive, setSbIsActive] = useRecoilState(searchBoxIsActive)
 
   const [tooltip, setTooltip] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
   // const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
   const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch)
 
@@ -126,8 +127,51 @@ function CustomSearchBox(props) {
           </div>
         )}
         {!!hasKeystroke && (
-          <div className="closeBtn" onClick={() => setQueryState('')}>
-            <SimpleCloseButton />
+          <div className="searchbox__btn">
+            <div
+              className="closeBtn"
+              onClick={() => {
+                setQueryState('')
+                searchParams.set('query', '')
+                setSearchParams(searchParams)
+              }}
+            >
+              <SimpleCloseButton />
+            </div>
+            <div
+              className="submitBtn"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              onClick={() => {
+                setQueryState(query)
+                useStoreQueryToLocalStorage(query)
+                if (query !== '') {
+                  navigate({
+                    pathname: '/search',
+                    search: `?${searchParams}`,
+                  })
+                }
+              }}
+            >
+              <p
+                className={
+                  isHovered
+                    ? 'submitBtn__text submitBtn__text-active'
+                    : 'submitBtn__text submitBtn__text-inactive'
+                }
+              >
+                Submit
+              </p>
+              <div
+                className={
+                  isHovered
+                    ? 'submitBtn__picto submitBtn__picto-inactive'
+                    : 'submitBtn__picto submitBtn__picto-active'
+                }
+              >
+                <SubmitPicto />
+              </div>
+            </div>
           </div>
         )}
         {navigationState && isSearchInCategory && (

@@ -34,11 +34,7 @@ $secondary-color-custom-gradient: linear-gradient(
   rgba(85, 104, 254, 1) 0%,
   rgba(131, 145, 255, 1) 100%
 );
-$secondary-color-custom-reverse-gradient: linear-gradient(
-  99deg,
-  rgba(84, 104, 255, 0.3) 31%,
-  rgba(255, 255, 255, 1) 100%
-);
+$secondary-color-custom-reverse-gradient: linear-gradient(99deg, rgba(249,249,249,0.1) 0%, rgba(85,104,254,0.4) 100%);
 $secondary-color-custom-reverse-gradient-30: linear-gradient(
   99deg,
   rgba(84, 104, 255, 0.3) 31%,
