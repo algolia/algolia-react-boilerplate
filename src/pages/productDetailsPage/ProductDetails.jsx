@@ -9,12 +9,6 @@ import {
   useRelatedProducts,
 } from '@algolia/recommend-react'
 
-// https://www.algolia.com/doc/ui-libraries/predict/api-reference/predict-react/PredictZone/
-import { PredictZone } from '@algolia/predict-react'
-
-// Banner to be used in predict
-import PromotionCodeBanner from '@/components/predict/PromotionCodeBanner'
-
 // Slider for recommend
 import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react'
 

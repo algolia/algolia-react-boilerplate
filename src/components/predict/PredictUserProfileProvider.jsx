@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil'
 // It depends on whether there is a valid user profile for the current user ID which is passed to the component
 function PredictUserProfileProvider({ userID, children }) {
   const [userProfile, setUserProfile] = useRecoilState(predictUserProfileAtom)
-
+  console.log(userProfile)
   useEffect(() => {
     predictClient
       .fetchUserProfile({
@@ -22,6 +22,10 @@ function PredictUserProfileProvider({ userID, children }) {
         setUserProfile(nextUserProfile)
       })
   }, [userID])
+
+  if (!userProfile) {
+    return children
+  }
 
   return (
     <Predict userProfile={userProfile} suppressExperimentalWarning>

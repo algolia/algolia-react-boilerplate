@@ -9,6 +9,16 @@ import { useTranslation } from 'react-i18next'
 import { PredictZone, usePredict } from '@algolia/predict-react'
 import PromotionCodeBanner from '../predict/PromotionCodeBanner'
 
+const computePriceTotal = (items) => {
+  const { price } = hitsConfig
+  let sum = 0
+  items.map((item) => {
+    sum += get(item, price)
+    return sum
+  })
+  return sum.toFixed(2)
+}
+
 const numberOfHits = (items) => {
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
@@ -20,20 +30,10 @@ const numberOfHits = (items) => {
 const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
   const setAddToCartAtom = useSetRecoilState(addToCartSelector)
   const currencySymbol = useRecoilValue(currencySymbolAtom)
-  const [isUserEligible, setIsUserEligible] = useState(false)
   const [priceTotal, setPriceTotal] = useState(0)
+  const [isUserEligible, setIsUserEligible] = useState(false)
 
-  const computePriceTotal = (items) => {
-    const { price } = hitsConfig
-    let sum = 0
-    items.map((item) => {
-      sum += get(item, price)
-      return sum
-    })
-    setPriceTotal(sum.toFixed(2))
-  }
-
-  useEffect(() => computePriceTotal(items), [items])
+  useEffect(() => setPriceTotal(computePriceTotal(items)), [items])
 
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
@@ -91,13 +91,6 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
 
   return (
     <div className="fbt-infos">
-      <PredictZone name="Free shipping banner" when={checkIfUserEligible}>
-        <PromotionCodeBanner
-          cartValue={currentCartTotal}
-          valueToAdd={totalFbtProductsAmount}
-        />
-      </PredictZone>
-
       <div className="fbt-infos__price">
         <h1>{t('addFbtTotal')}: </h1>
         <p>
@@ -107,6 +100,13 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
             : (priceTotal - priceTotal * 0.1).toFixed(2)}
         </p>
       </div>
+
+      <PredictZone name="Free shipping banner" when={checkIfUserEligible}>
+        <PromotionCodeBanner
+          cartValue={currentCartTotal}
+          valueToAdd={totalFbtProductsAmount}
+        />
+      </PredictZone>
 
       <a
         className="fbt-infos__buttons"

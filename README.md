@@ -236,6 +236,13 @@ Use it by making sure you have an index per language, and that the attribute nam
 
 Then, go to `config/languagesConfig` and adjust each export to what you need. Specifically, in `languageSwitchConfig` you must make sure each node has an `index` defined, and this index will be used when that language is selected.
 
+Currently in :
+
+- 🇬🇧 English
+- 🇫🇷 French
+- 🇩🇪 German
+- 🇮🇹 Italian
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Banners</h3>
 
 https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/add-banners/
