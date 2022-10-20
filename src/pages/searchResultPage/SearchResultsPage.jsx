@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useHits } from 'react-instantsearch-hooks-web'
 
 // Recoil state to directly access results
-import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil'
+import { useRecoilValue, useRecoilState } from 'recoil'
 
 // Import Components
 import SearchResults from '@/components/searchresultpage/SearchResults/SearchResults'

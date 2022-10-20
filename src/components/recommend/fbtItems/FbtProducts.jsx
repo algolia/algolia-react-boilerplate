@@ -25,9 +25,6 @@ import { shouldHaveCartFunctionality } from '@/config/featuresConfig'
 import { addToCartSelector } from '@/config/cartFunctions'
 import { useState } from 'react'
 
-// Algolia imports
-import { useHits } from 'react-instantsearch-hooks-web'
-
 const FbtItems = ({ item, index }) => {
   const navigate = useNavigate()
   const hitState = useSetRecoilState(hitAtom)

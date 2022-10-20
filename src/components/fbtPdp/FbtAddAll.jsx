@@ -24,14 +24,14 @@ const numberOfHits = (items) => {
 }
 
 const FbtAddAll = ({ items }) => {
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
-  const currencySymbol = useRecoilValue(currencySymbolAtom);
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
+  const currencySymbol = useRecoilValue(currencySymbolAtom)
 
   // Import const translation
   // Use the translator
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
-  });
+  })
   return (
     <div className="fbt-infos">
       <div className="fbt-infos__price">
@@ -45,8 +45,8 @@ const FbtAddAll = ({ items }) => {
         className="fbt-infos__buttons"
         onClick={() => {
           items.map((item) => {
-            return setAddToCartAtom(item);
-          });
+            return setAddToCartAtom(item)
+          })
         }}
       >
         <p>{numberOfHits(items)}</p>
@@ -55,4 +55,4 @@ const FbtAddAll = ({ items }) => {
   )
 }
 
-export default FbtAddAll;
+export default FbtAddAll

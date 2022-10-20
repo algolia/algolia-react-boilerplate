@@ -30,7 +30,6 @@ import {
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
 
 import { windowSize } from '@/hooks/useScreenSize'
-import usePreventScrolling from '@/hooks/usePreventScrolling'
 
 const FederatedSearch = lazy(() =>
   import('@/components/federatedSearch/FederatedSearch')

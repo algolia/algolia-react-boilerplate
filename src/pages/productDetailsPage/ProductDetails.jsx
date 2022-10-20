@@ -1,12 +1,12 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
-import { lazy, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 // Recommend
 import {
   useFrequentlyBoughtTogether,
   useRelatedProducts,
-} from '@algolia/recommend-react';
+} from '@algolia/recommend-react'
 
 // Slider for recommend
 import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react'
@@ -38,9 +38,9 @@ import {
 import {
   framerMotionPage,
   framerMotionTransition,
-} from '@/config/animationConfig';
-import { addToCartSelector, cartOpen } from '@/config/cartFunctions';
-import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
+} from '@/config/animationConfig'
+import { addToCartSelector } from '@/config/cartFunctions'
+
 import {
   shouldHaveFbtProducts,
   shouldHaveRelatedProducts,
@@ -48,23 +48,17 @@ import {
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
 import { hitAtom, hitsConfig, PDPHitSections } from '@/config/hitsConfig'
 
-// Used to send insights event on add to cart
-import { personaSelectedAtom } from '@/config/personaConfig';
-
 // Custom hooks
 import { windowSize } from '@/hooks/useScreenSize'
-
-// Send an insights event to algolia
-// import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
 
 //Import scope SCSS
 import './SCSS/productDetails.scss'
 
 // Import and use translation
-import { useTranslation } from 'react-i18next';
-import { useHits } from 'react-instantsearch-hooks-web';
-import FbtAddAll from '@/components/fbtPdp/FbtAddAll';
-import FbtItems from '@/components/recommend/fbtItems/FbtProducts';
+import { useTranslation } from 'react-i18next'
+import { useHits } from 'react-instantsearch-hooks-web'
+import FbtAddAll from '@/components/fbtPdp/FbtAddAll'
+import FbtItems from '@/components/recommend/fbtItems/FbtProducts'
 
 const ProductDetails = () => {
   const { sendEvent } = useHits()
@@ -124,19 +118,11 @@ const ProductDetails = () => {
 
   const { isDesktop } = useRecoilValue(windowSize)
 
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
 
   // Get hit attribute from config file
-  const {
-    objectID,
-    image,
-    productName,
-    brand,
-    sizeFilter,
-    colour,
-    colourHexa,
-    price: priceForTotal,
-  } = hitsConfig;
+  const { image, productName, brand, sizeFilter, colour, colourHexa } =
+    hitsConfig
 
   const hexaCode = get(hit, colourHexa)?.split(';')[1]
 
@@ -146,18 +132,18 @@ const ProductDetails = () => {
     keyPrefix: 'pdp',
   })
 
-  let fbtRecommendationsProducts;
-  let relatedRecommendationsProducts;
+  let fbtRecommendationsProducts
+  let relatedRecommendationsProducts
 
   if (shouldHaveFbtProductsValue) {
     const { recommendations } = useFrequentlyBoughtTogether({
       recommendClient,
       indexName,
       objectIDs: [currentObjectID],
-    });
-    fbtRecommendationsProducts = recommendations;
+    })
+    fbtRecommendationsProducts = recommendations
     if (recommendations.length > 0) {
-      fbtRecommendationsProducts = [hit, ...recommendations];
+      fbtRecommendationsProducts = [hit, ...recommendations]
     }
   }
 
@@ -166,8 +152,8 @@ const ProductDetails = () => {
       recommendClient,
       indexName,
       objectIDs: [currentObjectID],
-    });
-    relatedRecommendationsProducts = recommendations;
+    })
+    relatedRecommendationsProducts = recommendations
   }
 
   return (
@@ -340,7 +326,7 @@ const ProductDetails = () => {
               >
                 <div className="fbt-container__component">
                   {fbtRecommendationsProducts.slice(0, 3).map((item, i) => {
-                    return <FbtItems item={item} index={i} key={i} />;
+                    return <FbtItems item={item} index={i} key={i} />
                   })}
                 </div>
                 <FbtAddAll items={fbtRecommendationsProducts.slice(0, 3)} />
@@ -353,4 +339,4 @@ const ProductDetails = () => {
   )
 }
 
-export default ProductDetails;
+export default ProductDetails

@@ -1,23 +1,23 @@
 // Recoil import
-import { Garbage, MinusEmptyIcon, PlusEmptyIcon } from '@/assets/svg/SvgIndex';
-import { hitsConfig } from '@/config/hitsConfig';
-import get from 'lodash/get';
+import { Garbage, MinusEmptyIcon, PlusEmptyIcon } from '@/assets/svg/SvgIndex'
+import { hitsConfig } from '@/config/hitsConfig'
+import get from 'lodash/get'
 
 // Import cart from recoil
 import {
   addToCartSelector,
   cartState,
   removeToCartSelector,
-} from '@/config/cartFunctions';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+} from '@/config/cartFunctions'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 //Use Translation
 import { useTranslation } from 'react-i18next'
 
 const ArticlesCard = ({ item, sendEvent }) => {
-  const [cart, setCart] = useRecoilState(cartState);
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
-  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
+  const [cart, setCart] = useRecoilState(cartState)
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
+  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector)
 
   // Import const translation
   // Use the translator

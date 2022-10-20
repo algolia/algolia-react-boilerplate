@@ -31,8 +31,6 @@ const HomeCarousel = ({ context, title }) => {
   const userToken = useRecoilValue(personaSelectedAtom)
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom)
 
-  const { mobile } = useRecoilValue(windowSize)
-
   return (
     <div className="home-carousel">
       <Index indexId={title} indexName={index}>

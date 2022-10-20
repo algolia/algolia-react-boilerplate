@@ -1,11 +1,6 @@
 // ------------------------------------------
 // Currency Config
 // ------------------------------------------
-
-// ------------------------------------------
-// This const is used to define the symbol used to display prices
-// ------------------------------------------
-
 import { atom } from 'recoil'
 
 // Change the default currency symbol

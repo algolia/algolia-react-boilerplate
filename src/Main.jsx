@@ -1,4 +1,4 @@
-import { lazy, useEffect, Suspense } from 'react'
+import { lazy, Suspense } from 'react'
 
 // Algolia Instantsearch components
 import { Configure, InstantSearch } from 'react-instantsearch-hooks-web'
