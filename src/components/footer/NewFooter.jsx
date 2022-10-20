@@ -100,7 +100,7 @@ const Footer = (props) => {
               </ul>
             </div>
             {/* column removed while bug being fixed, do not remove */}
-            {/* <div className="footer__column">
+            <div className="footer__column">
             <h3>Categories</h3>
             <ul className="footer__column--nav-links">
               {links.map((link, i) => {
@@ -139,7 +139,7 @@ const Footer = (props) => {
                 );
               })}
             </ul>
-          </div> */}
+          </div>
             <div className="footer__column__signup">
               <h3> Join our Newsletter</h3>{' '}
               <form className="validate subscribe-form-style" noValidate="">

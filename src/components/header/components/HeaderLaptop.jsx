@@ -7,6 +7,10 @@ import { Link } from 'react-router-dom';
 // Recoil State
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
+
+
+import { navigationStateAtom } from '@/config/navigationConfig';
+
 // Import SearchBox config
 import {
   queryAtom,
@@ -42,7 +46,7 @@ const HeaderLaptop = () => {
   const setSbIsActive = useSetRecoilState(searchBoxIsActive);
   const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
   const rulesApplied = useSetRecoilState(rulesAtom);
-
+  const [navigationState, setNavigationState] = useRecoilState(navigationStateAtom);
   useOutsideClick(searchboxRef, () => setSbIsActive(false));
 
   return (
@@ -57,6 +61,7 @@ const HeaderLaptop = () => {
             aria-label="link to home"
             onClick={() => {
               setQueryState('');
+              setNavigationState({})
               federated(false);
               rulesApplied([]);
             }}

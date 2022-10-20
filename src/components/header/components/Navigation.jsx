@@ -32,7 +32,6 @@ import { personaConfig } from '@/config/personaConfig';
 import { segmentConfig } from '@/config/segmentConfig';
 import useStoreCartToLocalStorage from '@/hooks/useStoreCartToLocalStorage';
 import { useEffect } from 'react';
-import { useRef } from 'react';
 
 //Import config from helped navigation
 import { cartClick } from '@/config/cartFunctions';

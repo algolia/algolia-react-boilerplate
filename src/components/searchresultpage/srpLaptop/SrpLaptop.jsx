@@ -61,11 +61,13 @@ import InjectedHits from '@/components/hits/components/injected-hits/InjectedHit
 import '../SCSS/searchResultsPage.scss';
 
 const SrpLaptop = () => {
+
   // Recoil & React states
   const stats = useRecoilValue(shouldHaveStats);
   const queryState = useRecoilValue(queryAtom);
   const { isDesktop, mobile } = useRecoilValue(windowSize);
   const navigationState = useRecoilValue(navigationStateAtom);
+  
   const showCart = useRecoilValue(cartOpen);
 
   // Should show injected content or not
@@ -118,8 +120,32 @@ const SrpLaptop = () => {
     facetName = navigationState.action.split(':')[0];
     facetValue = navigationState.action.split(':')[1].replace(/['"]+/g, '');
   }
+
+  let configureProps = {
+    hitsPerPage: hitsPerPageNotInjected,
+    analytics: false,
+    enablePersonalization: true,
+    userToken: userToken,
+    personalizationImpact: personalizationImpact,
+    personalizationFilters: personalizationFilters,
+    filters: 
+      (navigationState?.type === 'filter' ||
+        navigationState?.type === 'rawFilter') &&
+      navigationState?.action !== null
+        ? navigationState.action
+        : ''
+    ,
+    optionalFilters: segmentOptionalFilters,
+    ruleContexts: navigationState?.type === 'context' ? navigationState.action : '',
+    query: queryState,
+    getRankingInfo: true
+  }
+  
   return (
     <>
+      <Configure
+        {...configureProps}
+      />
       {shouldShowCartIcon && (
         <CartModal isDesktop={isDesktop} mobile={mobile} />
       )}
@@ -192,27 +218,6 @@ const SrpLaptop = () => {
               <CustomClearRefinements />
             </Suspense>
           </div>
-          <Configure
-            hitsPerPage={hitsPerPageNotInjected}
-            analytics={false}
-            enablePersonalization={true}
-            userToken={userToken}
-            personalizationImpact={personalizationImpact}
-            personalizationFilters={personalizationFilters}
-            filters={
-              (navigationState?.type === 'filter' ||
-                navigationState?.type === 'rawFilter') &&
-              navigationState?.action !== null
-                ? navigationState.action
-                : ''
-            }
-            optionalFilters={segmentOptionalFilters}
-            ruleContexts={
-              navigationState?.type === 'context' ? navigationState.action : ''
-            }
-            query={queryState}
-            getRankingInfo={true}
-          />
 
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
           {shouldInjectContent ? (
@@ -221,7 +226,13 @@ const SrpLaptop = () => {
                 <Configure hitsPerPage={1} page={0} />
               </Index>
               {/* Injected content*/}
-              <InjectedHits hitComponent={Hit} />
+              
+              <Index indexName={index}>
+                <Configure
+                  {...configureProps}
+                />
+                  <InjectedHits hitComponent={Hit} />
+              </Index>
             </Suspense>
           ) : (
             <Suspense fallback={<SkeletonLoader type={'hit'} />}>

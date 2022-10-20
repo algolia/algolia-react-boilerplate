@@ -18,13 +18,13 @@ function CustomHits(props) {
   const { hits: hookHits, isLastPage, showMore } = useInfiniteHits(props);
   const { mobile, tablet } = useRecoilValue(windowSize);
   const [hits, setHits] = useState([]);
-  const hitsState = useRecoilValue(hitsAtom);
   const [hitsLoaded, setHitsLoaded] = useState(false);
   const productCard = useRef(null);
 
+
   // Decide whether to use hits from hook or props
   useEffect(() => {
-    // Check the props for the hits
+    // // Check the props for the hits
     if (props.hits != undefined) {
       setHits(props.hits);
       return;
@@ -33,8 +33,6 @@ function CustomHits(props) {
     // Use the hook
     else setHits(hookHits);
   }, [props]);
-
-  useEffect(() => {}, [hitsState]);
 
   useEffect(() => {
     if (hits.length > 0) {
