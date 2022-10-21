@@ -290,7 +290,7 @@ const ProductDetails = () => {
               </motion.p>
             )}
             {!PDPHitSections.sizeFilter && (
-              <motion.button
+              <button
                 className={
                   addToCartIsClicked
                     ? 'add-to-cart add-to-cart-active'
@@ -306,7 +306,7 @@ const ProductDetails = () => {
               >
                 <CartPicto />
                 <p>{t('addToCartButton')}</p>
-              </motion.button>
+              </button>
             )}
           </div>
         </div>

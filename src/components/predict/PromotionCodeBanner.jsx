@@ -1,7 +1,9 @@
+import './SCSS/predictPromotionCodeBanner.scss'
+
 function PromotionCodeBanner({ cartValue, valueToAdd }) {
   return (
-    <div>
-      <div>10% Discount applied!</div>
+    <div className="promotionCodeBanner">
+      <p>🎉 10% Discount applied!</p>
     </div>
   )
 }

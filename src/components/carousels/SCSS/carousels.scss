@@ -73,14 +73,14 @@
           .cart {
             background-color: $secondary-color;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 25px;
+            height: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
             svg {
               margin-top: 0.3rem;
-              width: 1.2rem;
+              width: 20px;
               height: 100%;
               path {
                 fill: $background-color;

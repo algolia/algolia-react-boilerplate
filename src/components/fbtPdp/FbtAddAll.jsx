@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 
 import { PredictZone, usePredict } from '@algolia/predict-react'
 import PromotionCodeBanner from '../predict/PromotionCodeBanner'
+import { CartPicto } from '@/assets/svg/SvgIndex'
 
 const computePriceTotal = (items) => {
   const { price } = hitsConfig
@@ -32,6 +33,7 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
   const currencySymbol = useRecoilValue(currencySymbolAtom)
   const [priceTotal, setPriceTotal] = useState(0)
   const [isUserEligible, setIsUserEligible] = useState(false)
+  const [addToCartIsClicked, setAddToCartIsClicked] = useState(false)
 
   useEffect(() => setPriceTotal(computePriceTotal(items)), [items])
 
@@ -88,8 +90,14 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
 
   return (
     <div className="fbt-infos">
+      <PredictZone name="Free shipping banner" when={checkIfUserEligible}>
+        <PromotionCodeBanner
+          cartValue={currentCartTotal}
+          valueToAdd={totalFbtProductsAmount}
+        />
+      </PredictZone>
       <div className="fbt-infos__price">
-        <h1>{t('addFbtTotal')}: </h1>
+        <p>{t('addFbtTotal')}: </p>
         <p>
           {currencySymbol}
           {!isUserEligible
@@ -98,21 +106,22 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
         </p>
       </div>
 
-      <PredictZone name="Free shipping banner" when={checkIfUserEligible}>
-        <PromotionCodeBanner
-          cartValue={currentCartTotal}
-          valueToAdd={totalFbtProductsAmount}
-        />
-      </PredictZone>
-
       <a
-        className="fbt-infos__buttons"
+        className={
+          addToCartIsClicked
+            ? 'fbt-infos__btn fbt-infos__btn-active'
+            : 'fbt-infos__btn'
+        }
+        // className="fbt-infos__btn"
         onClick={() => {
           items.map((item) => {
             return setAddToCartAtom(item)
           })
+          setAddToCartIsClicked(true)
+          setTimeout(() => setAddToCartIsClicked(false), 300)
         }}
       >
+        <CartPicto />
         <p>{numberOfHits(items)}</p>
       </a>
     </div>
