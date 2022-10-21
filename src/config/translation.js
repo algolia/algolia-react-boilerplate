@@ -45,6 +45,7 @@ const resources = {
       searchBox: {
         placeHolder: 'Search...',
         tooltip: '💡 Type a query before submitting your request',
+        submit: 'Submit'
       },
       cartModal: {
         title: 'My Cart',
@@ -63,10 +64,6 @@ const resources = {
   },
   it: {
     translation: {
-      header: {
-        contact: 'Contattaci',
-        language: '€/IT'
-      },
       homePage: {
         titleCarousels: ['La nostra collezione di borse', 'Il nostro meglio Hoodies'],
       },
@@ -104,7 +101,8 @@ const resources = {
       },
       searchBox: {
         placeHolder: 'Ricerca...',
-        tooltip: '💡 Digita una query prima di inviare la richiesta'
+        tooltip: '💡 Digita una query prima di inviare la richiesta',
+        submit: 'presentare'
       },
       cartModal: {
         title: 'La mia carta',
@@ -160,6 +158,7 @@ const resources = {
       searchBox: {
         placeHolder: 'Rechercher...',
         tooltip: '💡 Taper une requête avant de soumettre votre recherche',
+        submit: 'Envoyer'
       },
       cartModal: {
         title: 'Mon panier',
@@ -218,6 +217,7 @@ const resources = {
       searchBox: {
         placeHolder: 'Forschen...',
         tooltip: '💡 Geben Sie eine Abfrage ein, bevor Sie Ihre Anfrage senden',
+        submit: 'Senden'
       },
       cartModal: {
         title: 'Mein Korb',
