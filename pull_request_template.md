@@ -1,7 +1,8 @@
 ## Objective
+
 What:
 Why:
-How: 
+How:
 Usage:
 
 ## Type
@@ -14,11 +15,13 @@ Usage:
 - [ ] Documentation
 - [ ] Tests
 
-
 ## Tested
 
 Outline the approach you've taken to test the change
 
+## Translation
+
+- [ ] Have you translated all your Paragraphs, ButtonsTitle,... with i18n functionality?
 
 ## Documented
 

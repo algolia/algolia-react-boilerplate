@@ -6,9 +6,9 @@ import '../SCSS/ranking.scss'
 const RankingIcon = (props) => {
   const { hit } = props
   const personaFilters = useRecoilValue(personaSelectedFiltersAtom)
-  
+
   const [icon, setIcon] = useState(null)
-  
+
   useEffect(() => {
     const start = hit?._rankingInfo?.personalization?.initialPosition + 1
     const end = hit?.__position
@@ -19,28 +19,28 @@ const RankingIcon = (props) => {
       setIcon({
         url: '/static/images/arrowUp.svg',
         color: 'green',
-        val: diff
+        val: diff,
       })
     } else if (diff === 0) {
       setIcon({
         url: null,
         color: 'gray',
-        val: null
+        val: null,
       })
-    } else if (diff < 0){
+    } else if (diff < 0) {
       setIcon({
         url: '/static/images/arrowDown.svg',
         color: 'red',
-        val: diff * -1
+        val: diff * -1,
       })
     }
   }, [hit])
 
-  if (!icon || (personaFilters.length < 1)) return null
+  if (!icon || personaFilters.length < 1) return null
 
   return (
     <div className={`ranking-bg ${icon.color}`}>
-      {icon?.url && <img src={icon.url} alt='' />}
+      {icon?.url && <img src={icon.url} alt="" />}
       <p>{icon?.val ? icon?.val : '-'}</p>
     </div>
   )

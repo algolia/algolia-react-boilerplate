@@ -1,59 +1,42 @@
-import { useState } from 'react';
-import get from 'lodash/get';
-import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+import get from 'lodash/get'
+import { useState } from 'react'
 
-import { hitAtom, hitsConfig } from '@/config/hitsConfig';
-import Price from '../hits/components/Price';
-import { CartPicto } from '@/assets/svg/SvgIndex';
-import { cartState, removedItem } from '@/config/cartFunctions';
+import { CartPicto } from '@/assets/svg/SvgIndex'
+import { hitAtom, hitsConfig } from '@/config/hitsConfig'
+import Price from '../hits/components/Price'
 
 // Display or not cart icons
-import { shouldHaveCartFunctionality } from '@/config/featuresConfig';
+import { shouldHaveCartFunctionality } from '@/config/featuresConfig'
 
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
-import { useNavigate } from 'react-router-dom';
-
-// Used to send insights event on add to cart
-import { personaSelectedAtom } from '@/config/personaConfig';
+import { useNavigate } from 'react-router-dom'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Import cart from recoil(Cart state and the event if it's removed)
-import { addToCartSelector } from '@/config/cartFunctions';
+import { addToCartSelector } from '@/config/cartFunctions'
 
-const HitsCarousel = ({ hit, index }) => {
-  const {
-    objectID,
-    image,
-    productName,
-    brand,
-    sizeFilter,
-    colour,
-    colourHexa,
-    price: priceForTotal,
-  } = hitsConfig;
-  const [hovered, setHovered] = useState(false);
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
-  const [cart, setCart] = useRecoilState(cartState);
-  const [removed, setRemoved] = useRecoilState(removedItem);
+const HitsCarousel = ({ hit, sendEvent }) => {
+  const { objectID, image, productName, brand } = hitsConfig
+  const [hovered, setHovered] = useState(false)
+  const [cartLogoClicked, setCartLogoClicked] = useState(false)
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
 
   // Navigate is used by React Router
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // Hits are imported by Recoil
-  const hitState = useSetRecoilState(hitAtom);
+  const hitState = useSetRecoilState(hitAtom)
 
   // display or not the cart icons
-  const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality);
+  const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
 
-  // personalisation user token
-  const userToken = useRecoilValue(personaSelectedAtom);
   return (
     <div
       className="item"
       onMouseEnter={() => {
-        setHovered(true);
+        setHovered(true)
       }}
       onMouseLeave={() => {
-        setHovered(false);
+        setHovered(false)
       }}
     >
       <div
@@ -71,9 +54,10 @@ const HitsCarousel = ({ hit, index }) => {
         <div
           className="item__infos-up"
           onClick={() => {
-            hitState(hit);
+            hitState(hit)
             // navigate to the product show page
-            navigate(`/search/product/${hit[objectID]}`);
+            navigate(`/search/product/${hit[objectID]}`)
+            sendEvent('click', hit, 'Homepage: Product clicked')
           }}
         >
           <p className="brand">{get(hit, brand)}</p>
@@ -85,17 +69,12 @@ const HitsCarousel = ({ hit, index }) => {
           </p>
           {shouldShowCartIcons && (
             <div
-              className="cart"
+              className={cartLogoClicked ? 'cart cart-active' : 'cart'}
               onClick={() => {
-                setAddToCartAtom(hit);
-                // Send event conversion to Algolia API
-                useSendAlgoliaEvent({
-                  type: 'conversion',
-                  userToken: userToken,
-                  index: index,
-                  hit: hit,
-                  name: 'add-to-cart',
-                });
+                setCartLogoClicked(true)
+                setTimeout(() => setCartLogoClicked(false), 300)
+                setAddToCartAtom(hit)
+                sendEvent('conversion', hit, 'Homepage: Add to cart')
               }}
             >
               <CartPicto />
@@ -104,7 +83,7 @@ const HitsCarousel = ({ hit, index }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HitsCarousel;
+export default HitsCarousel

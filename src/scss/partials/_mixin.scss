@@ -21,20 +21,28 @@
   justify-content: center;
   align-items: center;
   background: $background;
-  color: $text-color;
-  font-weight: 400;
-  padding: 0.5rem;
-  font-size: 0.8rem;
-  font-family: $main-font;
   border-radius: 2px;
   transition: all 0.3s ease-in-out;
+  padding: 0.5rem 1rem;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  p {
+    color: $text-color;
+    font-weight: 400;
+    font-family: $main-font;
+    font-size: 0.8rem;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+  }
 }
 
 @mixin btn-hover($background, $text-color) {
   background: $background;
-  color: $text-color;
   transition: all 0.3s ease-in-out;
+  p {
+    color: $text-color;
+    transition: all 0.3s ease-in-out;
+  }
 }
 
 // ------------------------------------------
@@ -44,18 +52,23 @@
 @mixin searchBoxInput($background, $border-color) {
   width: 100%;
   border-radius: 3rem;
-  padding: 0.4rem 3rem;
+  padding: 0.4rem 0rem 0.4rem 3rem;
   height: 100%;
   background-color: $background;
   border: 1px solid $border-color;
+  border-left: 1px solid $secondary-color;
+  border-right: 1px solid $secondary-color;
   font-size: 0.8rem;
+  transition: all 0.2s ease-in-out;
 
   &::placeholder {
     font-size: 0.8rem;
     color: $grey-dark-color;
   }
   &:focus {
-    outline: none;
+    border-top: 1px solid $secondary-color;
+    border-bottom: 1px solid $secondary-color;
+    transition: all 0.5s ease-in-out;
   }
   &::-webkit-search-cancel-button {
     // If you want display or not cross in searchbox
@@ -84,10 +97,10 @@
 @mixin titleH2($text-color: $main-color) {
   color: $text-color;
   font-weight: 600;
-  font-size: clamp(1rem, -0.32rem + 2.58vw, 2rem)
+  font-size: clamp(1rem, -0.32rem + 2.58vw, 2rem);
 }
 
-@mixin titleH3($text-color: $second-color) {
+@mixin titleH3($text-color: $secondary-color) {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -180,7 +193,7 @@
     height: 30px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: $second-color;
+    background-color: $secondary-color;
     box-shadow: inset 0px 28px 0px $background-color;
   }
 }
@@ -238,7 +251,7 @@
 
       a,
       span {
-        color: $second-color;
+        color: $secondary-color;
       }
     }
   }
@@ -273,6 +286,7 @@
 // ------------------------------------------
 @mixin hit($title-color, $price-color, $highlight-color, $shadow) {
   width: 100%;
+  height: 100%;
   display: block;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
@@ -290,7 +304,7 @@
       cursor: pointer;
     }
     &__heart {
-      @include heartIcon($second-color);
+      @include heartIcon($secondary-color);
     }
     .mainImage-opacity {
       animation: fadeOutImage 0.7s forwards ease-in-out;
@@ -315,15 +329,27 @@
   &__infosDown {
     display: flex;
     justify-content: space-between;
+    margin: 2rem 0 0 0;
     &__cart {
       display: flex;
       justify-content: space-between;
       width: 40%;
+      &-inactive {
+        font-weight: 300 !important;
+        color: $grey-light-color !important;
+      }
       p {
-        @include p-text();
+        @include p-text($main-color, 500);
       }
       svg {
         width: 2rem;
+      }
+    }
+    &__minusPicto-inactive {
+      pointer-events: none;
+      cursor: not-allowed;
+      path {
+        fill: $grey-light-color;
       }
     }
   }
@@ -353,7 +379,7 @@
     color: $productName-color;
   }
   .ais-Highlight-highlighted {
-    @include highlight($second-color);
+    @include highlight($secondary-color);
   }
 }
 
@@ -364,7 +390,7 @@
   text-transform: capitalize;
 }
 
-@mixin price($price-color: $second-color) {
+@mixin price($price-color: $secondary-color) {
   color: $price-color;
   font-weight: 700;
   font-size: 1rem;
@@ -381,7 +407,7 @@
   text-transform: capitalize;
 }
 
-@mixin highlight($highlight-color: $second-color) {
+@mixin highlight($highlight-color: $secondary-color) {
   color: $highlight-color;
   font-style: normal;
   font-weight: 600;
@@ -536,7 +562,7 @@
   display: flex;
   height: fit-content;
   flex-direction: column;
-  z-index: 997;
+  z-index: 995;
   transition: 0.2s ease-in-out;
   cursor: pointer;
   :nth-child(1) {
@@ -547,7 +573,7 @@
   }
 
   &__line {
-    background-color: $second-color;
+    background-color: $secondary-color;
     height: 2px;
     width: 1rem;
   }

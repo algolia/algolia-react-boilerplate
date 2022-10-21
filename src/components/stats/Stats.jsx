@@ -1,23 +1,23 @@
 // This is for building the stats info that is displayed above the items in the search results page
-import connectStats from 'instantsearch.js/es/connectors/stats/connectStats';
-import { useConnector } from 'react-instantsearch-hooks-web';
+import connectStats from 'instantsearch.js/es/connectors/stats/connectStats'
+import { useConnector } from 'react-instantsearch-hooks-web'
 
 //Use Translation
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 export function useStats(props) {
-  return useConnector(connectStats, props);
+  return useConnector(connectStats, props)
 }
 
 export function CustomStats(props) {
   const { processingTimeMS, nbHits, nbSortedHits, areHitsSorted } =
-    useStats(props);
+    useStats(props)
 
   // Import const translation
   // Use the translator
   const { t } = useTranslation('translation', {
     keyPrefix: 'srp',
-  });
+  })
 
   return (
     <div className="stats-infos">
@@ -38,5 +38,5 @@ export function CustomStats(props) {
         </div>
       )}
     </div>
-  );
+  )
 }

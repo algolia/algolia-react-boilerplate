@@ -3,6 +3,16 @@
 // ------------------------------------------
 @use '../../../scss/partials' as *;
 
+.demoGuide-wp {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 995;
+  animation: opacity 0.2s ease-in-out;
+}
+
 .helpNavigation {
   position: absolute;
   top: 0;
@@ -11,15 +21,16 @@
   min-width: 30%;
   padding: 3rem 2rem;
   background-color: $white-color;
+  transform: translateY(-100%);
   z-index: 998;
   overflow: scroll;
 
   h2 {
-    @include titleH2($second-color)
+    @include titleH2($secondary-color);
   }
 }
 
-.helpNavigation-mobile{
+.helpNavigation-mobile {
   min-width: 100%;
 }
 
@@ -32,7 +43,7 @@
   width: 3rem;
   height: 3rem;
   cursor: pointer;
-  z-index: 999;
+  z-index: 998;
   transition: all 0.3s ease-in-out;
   display: flex;
   justify-content: center;
@@ -42,13 +53,13 @@
     transform: rotate3d(0, 0, 1, -90deg);
     transition: all 0.3s ease-in-out;
 
-    p{
+    p {
       opacity: 0;
       transition: all 0.3s ease-in-out;
     }
   }
 
-  p{
+  p {
     font-size: 0.6rem;
     writing-mode: vertical-rl;
     text-orientation: mixed;
@@ -57,11 +68,10 @@
   svg {
     width: 6px;
     path {
-      fill: $second-color;
+      fill: $secondary-color;
     }
   }
 }
-
 
 .demoGuideHelpers {
   margin-bottom: 1rem;
@@ -79,7 +89,7 @@
       gap: 0.3rem;
       span {
         font-size: 0.7rem;
-        color: $second-color;
+        color: $secondary-color;
       }
       p {
         @include p-text($main-color);
@@ -101,4 +111,11 @@
   }
 }
 
-
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

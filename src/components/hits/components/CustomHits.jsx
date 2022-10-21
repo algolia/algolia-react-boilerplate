@@ -1,62 +1,67 @@
 // This is in the Search Results Page for both laptop and mobile windows
 
 // Import InstantSearch Functionality
-import { useEffect, useState, useRef } from 'react';
-import { useInfiniteHits } from 'react-instantsearch-hooks-web';
+import { useEffect, useRef, useState } from 'react'
+import { useInfiniteHits } from 'react-instantsearch-hooks-web'
 
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { windowSize } from '@/hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize'
+import { useRecoilValue } from 'recoil'
 
-import { hitsAtom } from '@/config/hitsConfig';
+import { hitsAtom } from '@/config/hitsConfig'
 
-import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
-import { Hit } from '../Hits';
-import { cartState } from '@/config/cartFunctions';
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
+import { Hit } from '../Hits'
 
 function CustomHits(props) {
   // If hits were not provided via props, we will use the ones from the IS hook (see footnote)
-  const { hits: hookHits, isLastPage, showMore } = useInfiniteHits(props);
-  const { mobile, tablet } = useRecoilValue(windowSize);
-  const [hits, setHits] = useState([]);
-  const [hitsLoaded, setHitsLoaded] = useState(false);
-  const productCard = useRef(null);
+  const {
+    hits: hookHits,
+    isLastPage,
+    showMore,
+    sendEvent,
+  } = useInfiniteHits(props)
 
+  const { mobile, tablet } = useRecoilValue(windowSize)
+  const [hits, setHits] = useState([])
+  const hitsState = useRecoilValue(hitsAtom)
+  const [hitsLoaded, setHitsLoaded] = useState(false)
+  const productCard = useRef(null)
 
   // Decide whether to use hits from hook or props
   useEffect(() => {
     // // Check the props for the hits
     if (props.hits != undefined) {
-      setHits(props.hits);
-      return;
+      setHits(props.hits)
+      return
     }
 
     // Use the hook
-    else setHits(hookHits);
-  }, [props]);
+    else setHits(hookHits)
+  }, [props])
 
   useEffect(() => {
     if (hits.length > 0) {
-      setHitsLoaded(true);
+      setHitsLoaded(true)
     }
-  }, [hits]);
+  }, [hits])
 
   useEffect(() => {
     if (productCard.current !== null) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !isLastPage) {
-            showMore();
+            showMore()
           }
-        });
-      });
+        })
+      })
 
-      observer.observe(productCard.current);
+      observer.observe(productCard.current)
 
       return () => {
-        observer.disconnect();
-      };
+        observer.disconnect()
+      }
     }
-  }, [isLastPage, hits]);
+  }, [isLastPage, hits])
 
   return (
     <div className="ais-InfiniteHits">
@@ -81,22 +86,26 @@ function CustomHits(props) {
                   <CustomSkeleton type="hit" />
                 )}
               </li>
-            );
+            )
           }
           return (
             <li key={hit.objectID}>
-              {hitsLoaded ? <Hit hit={hit} /> : <CustomSkeleton type="hit" />}
+              {hitsLoaded ? (
+                <Hit hit={hit} sendEvent={sendEvent} />
+              ) : (
+                <CustomSkeleton type="hit" />
+              )}
             </li>
-          );
+          )
           // Note: it's not good practice to use the item index as key, because that may cause the renderer
           // to think 2 different products are one and the same in case they change positions
         })}
         <li ref={productCard} aria-hidden="true" />
       </ul>
     </div>
-  );
+  )
 }
 
-export default CustomHits;
+export default CustomHits
 
 // OBS: hits may be provided through props, for example, so that we can provided hits with injected content!

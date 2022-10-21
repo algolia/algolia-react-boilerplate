@@ -1,157 +1,121 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react'
 
 // eslint-disable-next-line import/order
-import { Configure, Index } from 'react-instantsearch-hooks-web';
+import { Configure, Index } from 'react-instantsearch-hooks-web'
+
+//import react router
+import { useSearchParams } from 'react-router-dom'
+
 // Custom Hooks
-import { windowSize } from '@/hooks/useScreenSize';
-// router
-import { useLocation } from 'react-router-dom';
+import { windowSize } from '@/hooks/useScreenSize'
+
 // State Manager Recoil
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 // Import Components
-import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader';
-import { Hit } from '@/components/hits/Hits';
-import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues';
-import TrendingProducts from '@/components/recommend/trending/TrendingProducts';
-import Redirect from '@/components/redirects/Redirect';
-import CustomSortBy from '@/components/sortBy/SortBy';
-import { CustomStats } from '@/components/stats/Stats';
+import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader'
+import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues'
+import TrendingProducts from '@/components/recommend/trending/TrendingProducts'
+import CustomSortBy from '@/components/sortBy/SortBy'
+import { CustomStats } from '@/components/stats/Stats'
 const CustomClearRefinements = lazy(() =>
   import('@/components/facets/components/ClearRefinement')
-);
+)
 const CustomCurrentRefinements = lazy(() =>
   import('@/components/facets/components/CurrentRefinement')
-);
-const GenericRefinementList = lazy(() => import('@/components/facets/Facets'));
-
-const CartModal = lazy(() => import('@/components/cart/CartModal'));
+)
+const GenericRefinementList = lazy(() => import('@/components/facets/Facets'))
 
 // Configuration
-import { indexNames, mainIndex } from '@/config/algoliaEnvConfig';
-import { cartOpen } from '@/config/cartFunctions';
+import { indexNames, mainIndex } from '@/config/algoliaEnvConfig'
 import {
-  shouldHaveCartFunctionality,
   shouldHaveInjectedHits,
   shouldHaveSorts,
   shouldHaveStats,
   shouldHaveTrendingFacets,
   shouldHaveTrendingProducts,
-} from '@/config/featuresConfig';
-import { hitsPerPage } from '@/config/hitsConfig';
+} from '@/config/featuresConfig'
+import { hitsPerPage } from '@/config/hitsConfig'
 import {
   personalizationImpact,
   personaSelectedAtom,
   personaSelectedFiltersAtom,
-} from '@/config/personaConfig';
-import { isFacetPanelOpen } from '@/config/refinementsConfig';
-import { queryAtom } from '@/config/searchboxConfig';
-import { segmentSelectedAtom } from '@/config/segmentConfig';
-import { sortBy } from '@/config/sortByConfig';
+} from '@/config/personaConfig'
+import { isFacetPanelOpen } from '@/config/refinementsConfig'
+import { queryAtom } from '@/config/searchboxConfig'
+import { segmentSelectedAtom } from '@/config/segmentConfig'
+import { sortBy } from '@/config/sortByConfig'
 
-import { navigationStateAtom } from '@/config/navigationConfig';
+import { navigationStateAtom } from '@/config/navigationConfig'
 // SVG
-import { FilterPicto } from '@/assets/svg/SvgIndex';
+import { FilterPicto } from '@/assets/svg/SvgIndex'
 
-import CustomHits from '@/components/hits/components/CustomHits';
-import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits';
+import CustomHits from '@/components/hits/components/CustomHits'
+import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits'
 
 //Import scope SCSS
-import '../SCSS/searchResultsPage.scss';
+import '../SCSS/searchResultsPage.scss'
 
-const SrpLaptop = () => {
-
+const SearchResults = () => {
   // Recoil & React states
-  const stats = useRecoilValue(shouldHaveStats);
-  const queryState = useRecoilValue(queryAtom);
-  const { isDesktop, mobile } = useRecoilValue(windowSize);
-  const navigationState = useRecoilValue(navigationStateAtom);
-  
-  const showCart = useRecoilValue(cartOpen);
+  const stats = useRecoilValue(shouldHaveStats)
+  const queryState = useRecoilValue(queryAtom)
+  const { isDesktop } = useRecoilValue(windowSize)
+  const navigationState = useRecoilValue(navigationStateAtom)
 
   // Should show injected content or not
   // Defined in config file
-  const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits);
-  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
+  const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits)
 
   // Get indexes Value
-  const index = useRecoilValue(mainIndex);
-  const { injectedContentIndex } = useRecoilValue(indexNames);
+  const index = useRecoilValue(mainIndex)
+  const { injectedContentIndex } = useRecoilValue(indexNames)
 
   // Define Stat Const
-  const { hitsPerPageNotInjected } = hitsPerPage;
+  const { hitsPerPageNotInjected } = hitsPerPage
 
   // Define Price Sort By Const
-  const { labelIndex } = useRecoilValue(sortBy);
+  const { labelIndex } = useRecoilValue(sortBy)
 
-  const shouldHaveSortsAtom = useRecoilValue(shouldHaveSorts);
-
-  // Get states of React Router
-  const { state } = useLocation();
+  const shouldHaveSortsAtom = useRecoilValue(shouldHaveSorts)
 
   // Persona
-  const userToken = useRecoilValue(personaSelectedAtom);
-  const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom);
+  const userToken = useRecoilValue(personaSelectedAtom)
+  const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom)
 
   // Segments
-  const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom);
+  const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom)
 
   // Trending
   const shouldHaveTrendingProductsValue = useRecoilValue(
     shouldHaveTrendingProducts
-  );
+  )
 
   // Trending
-  const shouldHaveTrendingFacetsValue = useRecoilValue(
-    shouldHaveTrendingFacets
-  );
+  const shouldHaveTrendingFacetsValue = useRecoilValue(shouldHaveTrendingFacets)
 
   // Handle the facet panel on mobile
   const [isFacetsPanelOpen, setIsFacetsPanelOpen] =
-    useRecoilState(isFacetPanelOpen);
+    useRecoilState(isFacetPanelOpen)
+
+  // Handle URL search parameters through React Router
+  let [searchParams, setSearchParams] = useSearchParams()
 
   // Related to next conditional
-  let facetName;
-  let facetValue;
+  let facetName
+  let facetValue
 
   // Trending needs to know if you are on category page
   if (navigationState?.type === 'filter' && navigationState?.action !== null) {
-    facetName = navigationState.action.split(':')[0];
-    facetValue = navigationState.action.split(':')[1].replace(/['"]+/g, '');
+    facetName = navigationState.action.split(':')[0]
+    facetValue = navigationState.action.split(':')[1].replace(/['"]+/g, '')
   }
-
-  let configureProps = {
-    hitsPerPage: hitsPerPageNotInjected,
-    analytics: false,
-    enablePersonalization: true,
-    userToken: userToken,
-    personalizationImpact: personalizationImpact,
-    personalizationFilters: personalizationFilters,
-    filters: 
-      (navigationState?.type === 'filter' ||
-        navigationState?.type === 'rawFilter') &&
-      navigationState?.action !== null
-        ? navigationState.action
-        : ''
-    ,
-    optionalFilters: segmentOptionalFilters,
-    ruleContexts: navigationState?.type === 'context' ? navigationState.action : '',
-    query: queryState,
-    getRankingInfo: true
-  }
-  
   return (
     <>
-      <Configure
-        {...configureProps}
-      />
-      {shouldShowCartIcon && (
-        <CartModal isDesktop={isDesktop} mobile={mobile} />
-      )}
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
-      <div className="recommend">
+      <div className={!isDesktop ? 'recommend recommend-mobile' : 'recommend'}>
         {shouldHaveTrendingProductsValue &&
           queryState === '' &&
           navigationState?.type !== 'context' && (
@@ -218,6 +182,32 @@ const SrpLaptop = () => {
               <CustomClearRefinements />
             </Suspense>
           </div>
+          <Configure
+            hitsPerPage={hitsPerPageNotInjected}
+            analytics={false}
+            clickAnalytics={true}
+            enablePersonalization={true}
+            userToken={userToken}
+            personalizationImpact={personalizationImpact}
+            personalizationFilters={personalizationFilters}
+            filters={
+              (navigationState?.type === 'filter' ||
+                navigationState?.type === 'rawFilter') &&
+              navigationState?.action !== null
+                ? navigationState.action
+                : ''
+            }
+            optionalFilters={segmentOptionalFilters}
+            ruleContexts={
+              navigationState?.type === 'context' ? navigationState.action : ''
+            }
+            query={
+              searchParams.get('query') === null
+                ? ''
+                : searchParams.get('query')
+            }
+            getRankingInfo={true}
+          />
 
           {/* This is a big ternary, where it injects a card (eg. Sale card) or renders an item */}
           {shouldInjectContent ? (
@@ -226,24 +216,17 @@ const SrpLaptop = () => {
                 <Configure hitsPerPage={1} page={0} />
               </Index>
               {/* Injected content*/}
-              
-              <Index indexName={index}>
-                <Configure
-                  {...configureProps}
-                />
-                  <InjectedHits hitComponent={Hit} />
-              </Index>
+              <InjectedHits />
             </Suspense>
           ) : (
             <Suspense fallback={<SkeletonLoader type={'hit'} />}>
               <CustomHits />
             </Suspense>
           )}
-          <Redirect />
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default SrpLaptop;
+export default SearchResults

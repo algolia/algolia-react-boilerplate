@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion'
 // import SCSS
-import './SCSS/loader.scss';
+import './SCSS/loader.scss'
 
 const Loader = () => {
   return (
@@ -14,7 +14,7 @@ const Loader = () => {
         <div className="loader__in"></div>
       </motion.div>
     </AnimatePresence>
-  );
-};
+  )
+}
 
-export default Loader;
+export default Loader

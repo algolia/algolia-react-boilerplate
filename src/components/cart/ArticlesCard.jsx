@@ -1,35 +1,34 @@
 // Recoil import
-import { Garbage, MinusEmptyIcon, PlusEmptyIcon } from '@/assets/svg/SvgIndex';
-import { hitsConfig } from '@/config/hitsConfig';
-import get from 'lodash/get';
+import { currencySymbolAtom } from '@/config/currencyConfig'
+import { Garbage, MinusEmptyIcon, PlusEmptyIcon } from '@/assets/svg/SvgIndex'
+import { hitsConfig } from '@/config/hitsConfig'
+import get from 'lodash/get'
 
 // Import cart from recoil
 import {
-  cartState,
   addToCartSelector,
+  cartState,
   removeToCartSelector,
-} from '@/config/cartFunctions';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+} from '@/config/cartFunctions'
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil'
 
-// ArticlesCard in Cart Modal
+//Use Translation
+import { useTranslation } from 'react-i18next'
 
-const ArticlesCard = ({ item }) => {
-  const [cart, setCart] = useRecoilState(cartState);
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
-  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector);
+const ArticlesCard = ({ item, sendEvent }) => {
+  const currencySymbol = useRecoilValue(currencySymbolAtom)
+  const [cart, setCart] = useRecoilState(cartState)
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
+  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector)
+
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'cartModal',
+  })
 
   // Get hit attribute from config file
-  const {
-    objectID,
-    image,
-    imageAlt,
-    category,
-    productName,
-    brand,
-    price: priceForTotal,
-    sizeFilter,
-    colour,
-  } = hitsConfig;
+  const { image, category, productName, brand, sizeFilter, colour } = hitsConfig
 
   return (
     <div>
@@ -42,7 +41,7 @@ const ArticlesCard = ({ item }) => {
             {get(item, sizeFilter) && (
               <div className="articles-card__infos__details__size">
                 <p>
-                  Size{' '}
+                  {t('sizeTitle')}{' '}
                   <span>
                     {
                       get(item, sizeFilter)[
@@ -56,7 +55,7 @@ const ArticlesCard = ({ item }) => {
             {get(item, colour) && (
               <div className="articles-card__infos__details__size">
                 <p>
-                  Colour <span>{get(item, colour)}</span>
+                  {t('colorTitle')} <span>{get(item, colour)}</span>
                 </p>
               </div>
             )}
@@ -69,14 +68,14 @@ const ArticlesCard = ({ item }) => {
                   if (item.qty === 1) {
                     if (cart.length === 1) {
                       // Remove all in local storage
-                      localStorage.removeItem('myCart');
+                      localStorage.removeItem('myCart')
                     }
                     setCart((cart) =>
                       // Remove article in cart
                       cart.filter((it) => it.objectID !== item.objectID)
-                    );
+                    )
                   }
-                  setRemoveToCartAtom(item);
+                  setRemoveToCartAtom(item)
                 }}
               >
                 <MinusEmptyIcon />
@@ -85,14 +84,15 @@ const ArticlesCard = ({ item }) => {
               <div
                 className="articles-card__infos__qtyprice__plus-minus__icons"
                 onClick={() => {
-                  setAddToCartAtom(item);
+                  sendEvent('conversion', item, 'Cart: Add to cart')
+                  setAddToCartAtom(item)
                 }}
               >
                 <PlusEmptyIcon />
               </div>
             </div>
             <div className="articles-card__infos__qtyprice__price">
-              <p>${item.totalPrice.toFixed(2)}</p>
+              <p>{currencySymbol + item.totalPrice.toFixed(2)}</p>
             </div>
           </div>
         </div>
@@ -102,9 +102,9 @@ const ArticlesCard = ({ item }) => {
             setCart((cart) =>
               // Remove all in cart
               cart.filter((it) => it.objectID !== item.objectID)
-            );
+            )
             // Remove all in local storage
-            localStorage.removeItem('myCart');
+            localStorage.removeItem('myCart')
           }}
         >
           <Garbage />
@@ -112,7 +112,7 @@ const ArticlesCard = ({ item }) => {
       </div>
       <div className="articles-card__line"></div>
     </div>
-  );
-};
+  )
+}
 
-export default ArticlesCard;
+export default ArticlesCard

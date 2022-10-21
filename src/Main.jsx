@@ -1,107 +1,128 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react'
 
 // Algolia Instantsearch components
-import { Configure, InstantSearch } from 'react-instantsearch-hooks-web';
+import { Configure, InstantSearch } from 'react-instantsearch-hooks-web'
 
 // Algolia API client
-import { searchClient } from './config/algoliaEnvConfig';
+import { searchClient } from './config/algoliaEnvConfig'
+import { InsightsMiddleware } from './config/algoliaInsightEvents'
 
 // Framer-Motion
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion'
 
 // React router
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom'
 
 //Recoil states & values
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 // Import help navigation state & config
-import { mainIndex } from './config/algoliaEnvConfig';
-import { isRulesSwitchToggle } from './config/appliedRulesConfig';
-import { queryAtom } from './config/searchboxConfig';
 import {
   isDemoGuideOpen,
   shouldShowAlert,
   showNetworkErorrs,
-} from '@/config/demoGuideConfig';
-import { shouldHaveDemoGuide } from '@/config/featuresConfig';
-import { isCarouselLoaded } from './config/carouselConfig';
+} from '@/config/demoGuideConfig'
+import {
+  shouldHaveCartFunctionality,
+  shouldHaveDemoGuide,
+} from '@/config/featuresConfig'
+import { predictUserIdAtom } from '@/config/predictConfig'
+import { mainIndex } from '@/config/algoliaEnvConfig'
+import { isRulesSwitchToggle } from '@/config/appliedRulesConfig'
+import { isCarouselLoaded } from '@/config/carouselConfig'
+import { queryAtom } from '@/config/searchboxConfig'
 
 // Import Pages and static components
-import AlertNavigation from '@/components/demoGuide/AlertNavigation';
+import AlertNavigation from '@/components/demoGuide/AlertNavigation'
 
-import DemoGuide from '@/components/demoGuide/DemoGuide';
-import Header from '@/components/header/Header';
-import CustomAppliedRules from './components/appliedRules/AppliedRules';
+import DemoGuide from '@/components/demoGuide/DemoGuide'
+import Header from '@/components/header/Header'
+import Redirect from '@/components/redirects/Redirect'
+import CustomAppliedRules from './components/appliedRules/AppliedRules'
 
-import Footer from './components/footer/NewFooter';
-import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
-const HomePage = lazy(() => import('./pages/homepage/HomePage'));
-// import HomePage from './pages/homepage/HomePage';
-// import ProductDetails from './pages/productDetailsPage/ProductDetails';
+import Footer from './components/footer/Footer'
+import { DemoGuideOpener } from './components/header/components/DemoGuideOpener'
+const HomePage = lazy(() => import('./pages/homepage/HomePage'))
 const ProductDetails = lazy(() =>
   import('./pages/productDetailsPage/ProductDetails')
-);
-const SearchResultsPage = lazy(() =>
-  import('./pages/searchResultPage/SearchResultsPage')
-);
-// import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
+)
+
+import SearchResultsPage from './pages/searchResultPage/SearchResultsPage'
+
+import PredictUserProfileProvider from './components/predict/PredictUserProfileProvider'
+
+const CartModal = lazy(() => import('./components/cart/CartModal'))
 
 // Custom hook to prevent body from scrolling
-import usePreventScrolling from './hooks/usePreventScrolling';
+import usePreventScrolling from './hooks/usePreventScrolling'
 
 // Error handler for network errors
-import SearchErrorToast from './utils/ErrorHandler';
-import Loader from './components/loader/Loader';
+import Loader from './components/loader/Loader'
+import SearchErrorToast from './utils/ErrorHandler'
 
-import clamp from './utils/clampCalcFunction';
+import { cartOpen } from './config/cartFunctions'
 
 export const Main = () => {
   // Index to make the main search queries to
-  const index = useRecoilValue(mainIndex);
+  const index = useRecoilValue(mainIndex)
 
   // Current location from react Router
-  const location = useLocation();
+  const location = useLocation()
 
   // Current query from config atom
-  const queryState = useRecoilValue(queryAtom);
+  const queryState = useRecoilValue(queryAtom)
 
   // Check if Carousels are ready & loaded on the homepage
-  const carouselLoaded = useRecoilValue(isCarouselLoaded);
+  const carouselLoaded = useRecoilValue(isCarouselLoaded)
 
   // Should the alert badges for the demo guide be shown
-  const shouldShowAlertAtom = useRecoilValue(shouldShowAlert);
+  const shouldShowAlertAtom = useRecoilValue(shouldShowAlert)
 
   // Should the currently applied Algolia rules be shown
-  const shouldShowAppliedRules = useRecoilValue(isRulesSwitchToggle);
+  const shouldShowAppliedRules = useRecoilValue(isRulesSwitchToggle)
 
   // Should the demo guide panel be shown
-  const shouldHaveDemoGuideAtom = useRecoilValue(shouldHaveDemoGuide);
+  const shouldHaveDemoGuideAtom = useRecoilValue(shouldHaveDemoGuide)
 
   // State to control the Showing/hiding of the demo guide panel
-  const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
+  const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen)
 
   // Value that shows Network Errors to Guide you to the correct Configuration
-  const shouldShowNetworkErrors = useRecoilValue(showNetworkErorrs);
+  const shouldShowNetworkErrors = useRecoilValue(showNetworkErorrs)
+
+  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality)
+  const showCart = useRecoilValue(cartOpen)
 
   // Prevent body from scrolling when panel is open
-  usePreventScrolling(showDemoGuide);
-
-  clamp(1, 2, 820, 1440);
+  usePreventScrolling(showDemoGuide)
+  const userId = useRecoilValue(predictUserIdAtom)
 
   return (
-    <InstantSearch searchClient={searchClient} indexName={index}>
-      {shouldShowNetworkErrors && <SearchErrorToast />}
+    <PredictUserProfileProvider userID={userId}>
+      <InstantSearch searchClient={searchClient} indexName={index}>
+        <InsightsMiddleware />
+        {shouldShowNetworkErrors && <SearchErrorToast />}
 
-      <div className="mainWrapper">
-        {/* TODO: Check if this configure is used for anything */}
-        <Configure query={queryState} />
-        <Header />
-        {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
-        <AnimatePresence>
-          {showDemoGuide && <DemoGuide setshowDemoGuide={setshowDemoGuide} />}
-        </AnimatePresence>
-        <AnimatePresence initial={true}>
+        <div className="mainWrapper">
+          {/* TODO: Check if this configure is used for anything */}
+          <Configure query={queryState} />
+          <Header />
+          <Redirect />
+          {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
+          <AnimatePresence>
+            {showDemoGuide && (
+              <div className="demoGuide-wp">
+                <DemoGuide setshowDemoGuide={setshowDemoGuide} />
+              </div>
+            )}
+            {shouldShowCartIcon && showCart && (
+              <Suspense fallback={''}>
+                <div className="cartModal-wp">
+                  <CartModal />
+                </div>
+              </Suspense>
+            )}
+          </AnimatePresence>
           <Routes key={location.pathname} location={location}>
             <Route
               path="/"
@@ -139,20 +160,19 @@ export const Main = () => {
           </Routes>
           {/* NB disabled logic to render footer */}
           {/* To avoid CLS, load in the footer after the carousels render */}
-          {/* {carouselLoaded && <Footer />} */}
-          <Footer />
-        </AnimatePresence>
-        {shouldShowAlertAtom && (
-          <Suspense fallback={''}>
-            <AlertNavigation />
-          </Suspense>
-        )}
-        {shouldShowAppliedRules && (
-          <Suspense fallback={''}>
-            <CustomAppliedRules />
-          </Suspense>
-        )}
-      </div>
-    </InstantSearch>
-  );
-};
+          {carouselLoaded && <Footer />}
+          {shouldShowAlertAtom && (
+            <Suspense fallback={''}>
+              <AlertNavigation />
+            </Suspense>
+          )}
+          {shouldShowAppliedRules && (
+            <Suspense fallback={''}>
+              <CustomAppliedRules />
+            </Suspense>
+          )}
+        </div>
+      </InstantSearch>
+    </PredictUserProfileProvider>
+  )
+}

@@ -1,109 +1,85 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
-import { lazy, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 // Recommend
 import {
   useFrequentlyBoughtTogether,
   useRelatedProducts,
-} from '@algolia/recommend-react';
+} from '@algolia/recommend-react'
 
 // Slider for recommend
-import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react';
+import { HorizontalSlider } from '@algolia/ui-components-horizontal-slider-react'
 
 // styles for Recommend HorizontalSlider
-import '@algolia/ui-components-horizontal-slider-theme';
+import '@algolia/ui-components-horizontal-slider-theme'
 
 // framer-motion
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 // Import Lodash functions
-import get from 'lodash/get';
+import get from 'lodash/get'
 // React Router
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom'
 // State Manage Recoil
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // SVG & components
-import { ChevronLeft } from '@/assets/svg/SvgIndex';
-import Price from '@/components/hits/components/Price.jsx';
-import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts';
+import { ChevronLeft, CartPicto } from '@/assets/svg/SvgIndex'
+import Price from '@/components/hits/components/Price.jsx'
+import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts'
 // In case of img loading error
-import * as placeHolderError from '@/assets/logo/logo.webp';
+import * as placeHolderError from '@/assets/logo/logo.webp'
 // Configuration
 import {
   mainIndex,
   recommendClient,
   searchClient,
-} from '@/config/algoliaEnvConfig';
+} from '@/config/algoliaEnvConfig'
 import {
   framerMotionPage,
   framerMotionTransition,
-} from '@/config/animationConfig';
-import { addToCartSelector, cartOpen } from '@/config/cartFunctions';
-import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
+} from '@/config/animationConfig'
+import { addToCartSelector } from '@/config/cartFunctions'
 import {
-  shouldHaveCartFunctionality,
   shouldHaveFbtProducts,
   shouldHaveRelatedProducts,
-} from '@/config/featuresConfig';
-import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
-import { hitAtom, hitsConfig, PDPHitSections } from '@/config/hitsConfig';
-
-// Used to send insights event on add to cart
-import { personaSelectedAtom } from '@/config/personaConfig';
+} from '@/config/featuresConfig'
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
+import { hitAtom, hitsConfig, PDPHitSections } from '@/config/hitsConfig'
 
 // Custom hooks
-import { windowSize } from '@/hooks/useScreenSize';
-
-// Send an insights event to algolia
-import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
+import { windowSize } from '@/hooks/useScreenSize'
 
 //Import scope SCSS
-import './SCSS/productDetails.scss';
+import './SCSS/productDetails.scss'
 
 // Import and use translation
-import { cartState, removedItem } from '@/config/cartFunctions';
-import { useTranslation } from 'react-i18next';
-
-// Import cart from recoil
-const CartModal = lazy(() => import('@/components/cart/CartModal'));
+import { useTranslation } from 'react-i18next'
+import FbtAddAll from '@/components/fbtPdp/FbtAddAll'
+import FbtItems from '@/components/recommend/fbtItems/FbtProducts'
 
 const ProductDetails = () => {
-  // For alert on sending add to cart event
-  const setAlert = useSetRecoilState(alertContent);
-  const setAlertOpen = useSetRecoilState(isAlertOpen);
-
-  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
-
-  // Function to manage the alert
-  const triggerAlert = (content) => {
-    setAlertOpen(true);
-    setAlert(content);
-    setTimeout(() => setAlertOpen(false), 5000);
-  };
+  const [addToCartIsClicked, setAddToCartIsClicked] = useState(false)
 
   // location in order to access current objectID
-  const location = useLocation();
+  const location = useLocation()
 
   // access the main index from recoil state
-  const indexName = useRecoilValue(mainIndex);
+  const indexName = useRecoilValue(mainIndex)
 
   // access the hit component from recoil state
-  const [hit, setHit] = useRecoilState(hitAtom);
+  const [hit, setHit] = useRecoilState(hitAtom)
 
-  const [readyToLoad, setReadyToLoad] = useState(false);
+  const [readyToLoad, setReadyToLoad] = useState(false)
 
   // current Object ID from URL
-  const currentObjectID = location.pathname.split('/')[3];
-
-  const [cart, setCart] = useRecoilState(cartState);
-  const [removed, setRemoved] = useRecoilState(removedItem);
+  const currentObjectID = location.pathname.split('/')[3]
 
   // if there is no stored hit
   useEffect(() => {
     if (Object.keys(hit).length === 0) {
       // initialise the API client
-      const index = searchClient.initIndex(indexName);
+      const index = searchClient.initIndex(indexName)
 
       // Find the hit by Object ID through Algolia
       index
@@ -111,70 +87,81 @@ const ProductDetails = () => {
         .then(({ hits }) => {
           if (hits.length && hits.length > 0) {
             // Set the hit atom
-            setHit(hits[0]);
-            setReadyToLoad(true);
+            setHit(hits[0])
+            setReadyToLoad(true)
           }
-        });
+        })
     } else {
-      setReadyToLoad(true);
+      setReadyToLoad(true)
     }
-  }, []);
-
-  // personalisation user token
-  const userToken = useRecoilValue(personaSelectedAtom);
-
-  // Get the main index
-  const index = useRecoilValue(mainIndex);
+  }, [])
 
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
-  );
+  )
 
-  const shouldHaveFbtProductsValue = useRecoilValue(shouldHaveFbtProducts);
+  const shouldHaveFbtProductsValue = useRecoilValue(shouldHaveFbtProducts)
 
   // Close federated and set value false for return without it
-  const setFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
-  setFederatedOpen(false);
+  const setFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch)
+
+  useEffect(() => {
+    setFederatedOpen(false)
+  }, [])
 
   // navigate is used by react router
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const { isDesktop, mobile } = useRecoilValue(windowSize);
+  const { isDesktop } = useRecoilValue(windowSize)
 
-  const setAddToCartAtom = useSetRecoilState(addToCartSelector);
+  const setAddToCartAtom = useSetRecoilState(addToCartSelector)
+  const cartState = useRecoilValue(addToCartSelector)
+
+  // Fetch and compute the current total value of the users cart
+  const [currentCartTotal, setCurrentCartTotal] = useState(
+    cartState.reduce((acc, val) => (acc += val.unformated_price), 0)
+  )
+
+  // Adjust the current total when the state of the cart changes
+  useEffect(() => {
+    setCurrentCartTotal(
+      cartState.reduce((acc, val) => (acc += val.unformated_price), 0)
+    )
+  }, [cartState])
 
   // Get hit attribute from config file
-  const {
-    objectID,
-    image,
-    productName,
-    brand,
-    sizeFilter,
-    colour,
-    colourHexa,
-    price: priceForTotal,
-  } = hitsConfig;
+  const { image, productName, brand, sizeFilter, colour, colourHexa } =
+    hitsConfig
 
-  const hexaCode = get(hit, colourHexa)?.split(';')[1];
+  const hexaCode = get(hit, colourHexa)?.split(';')[1]
 
   // Import const translation
   // Use the translator
   const { t } = useTranslation('translation', {
     keyPrefix: 'pdp',
-  });
+  })
 
-  const showCart = useRecoilValue(cartOpen);
-
-  let fbtRecommendationsProducts;
-  let relatedRecommendationsProducts;
+  let fbtRecommendationsProducts
+  let relatedRecommendationsProducts
+  let totalFbtProductsAmount
 
   if (shouldHaveFbtProductsValue) {
     const { recommendations } = useFrequentlyBoughtTogether({
       recommendClient,
       indexName,
       objectIDs: [currentObjectID],
-    });
-    fbtRecommendationsProducts = recommendations;
+      maxRecommendations: 2,
+    })
+
+    // Add the original product from the PDP at the start of the recommendations
+    fbtRecommendationsProducts =
+      recommendations.length > 0 ? [hit, ...recommendations] : recommendations
+
+    // Compute the total if all recommendations purchased, used for predict in addAllFbt component
+    totalFbtProductsAmount = fbtRecommendationsProducts.reduce(
+      (acc, val) => (acc += val.unformated_price),
+      0
+    )
   }
 
   if (shouldHaveRelatedProductsValue) {
@@ -182,8 +169,8 @@ const ProductDetails = () => {
       recommendClient,
       indexName,
       objectIDs: [currentObjectID],
-    });
-    relatedRecommendationsProducts = recommendations;
+    })
+    relatedRecommendationsProducts = recommendations
   }
 
   return (
@@ -196,14 +183,11 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-      {shouldShowCartIcon && showCart && (
-        <CartModal isDesktop={isDesktop} mobile={mobile} />
-      )}
       <div className={`${!isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'}`}>
         <div
           className={`${!isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'}`}
           onClick={() => {
-            navigate('/search');
+            navigate('/search')
           }}
         >
           <ChevronLeft />
@@ -306,24 +290,23 @@ const ProductDetails = () => {
               </motion.p>
             )}
             {!PDPHitSections.sizeFilter && (
-              <motion.button
-                className="add-to-cart"
+              <button
+                className={
+                  addToCartIsClicked
+                    ? 'add-to-cart add-to-cart-active'
+                    : 'add-to-cart'
+                }
                 onClick={() => {
-                  setAddToCartAtom(hit);
-                  triggerAlert('Sending add to cart event to Algolia'),
-                    // Send event conversion to Algolia API
-                    useSendAlgoliaEvent({
-                      type: 'conversion',
-                      userToken: userToken,
-                      index: index,
-                      hit: hit,
-                      name: 'add-to-cart',
-                    });
+                  setAddToCartAtom(hit)
+                  setAddToCartIsClicked(true)
+                  setTimeout(() => setAddToCartIsClicked(false), 300)
+                  // Send event conversion to Algolia API
+                  // sendEvent('conversion', hit, 'PDP: Add to cart')
                 }}
               >
-                <i className="fa-solid fa-shopping-cart"></i>
+                <CartPicto />
                 <p>{t('addToCartButton')}</p>
-              </motion.button>
+              </button>
             )}
           </div>
         </div>
@@ -350,19 +333,31 @@ const ProductDetails = () => {
                 />
               </div>
             )}
-          {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 0 && (
-            <div>
+          {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 1 && (
+            <div className="fbt-outer-container">
               <h3 className="title">{t('fbtTitle')}</h3>
-              <HorizontalSlider
-                itemComponent={RelatedItem}
-                items={fbtRecommendationsProducts}
-              />
+              <div
+                className={`${
+                  !isDesktop ? 'fbt-container-mobile' : 'fbt-container'
+                }`}
+              >
+                <div className="fbt-container__component">
+                  {fbtRecommendationsProducts.map((item, i) => {
+                    return <FbtItems item={item} index={i} key={i} />
+                  })}
+                </div>
+                <FbtAddAll
+                  totalFbtProductsAmount={totalFbtProductsAmount}
+                  currentCartTotal={currentCartTotal}
+                  items={fbtRecommendationsProducts.slice(0, 3)}
+                />
+              </div>
             </div>
           )}
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default ProductDetails;
+export default ProductDetails

@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom } from 'recoil'
 
 // This is for defining the size of the window, for responsive design
 export const windowSize = atom({
@@ -10,4 +10,4 @@ export const windowSize = atom({
     mobile: undefined,
     isDesktop: undefined,
   }, // default value (aka initial value)
-});
+})

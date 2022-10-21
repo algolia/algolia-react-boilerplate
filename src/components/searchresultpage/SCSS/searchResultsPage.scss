@@ -35,7 +35,7 @@
 }
 
 .refined-filter {
-  @include btn-hover($second-color, $white-color);
+  @include btn-hover($secondary-color, $white-color);
 
   p,
   span {
@@ -52,7 +52,7 @@
   justify-content: space-between;
 
   .stats-infos {
-    @include stats($second-color);
+    @include stats($secondary-color);
   }
 
   select {
@@ -67,7 +67,7 @@
 .ais-Pagination {
   display: flex;
   justify-content: center;
-  @include pagination($second-color-custom-gradient);
+  @include pagination($secondary-color-custom-gradient);
 }
 
 // ------------------------------------------
@@ -93,14 +93,14 @@
     margin-bottom: 2rem;
 
     &__span-query {
-      color: $second-color;
+      color: $secondary-color;
       font-weight: 900;
     }
   }
 
   &__infos {
     &__span {
-      color: $second-color;
+      color: $secondary-color;
     }
 
     .query-suggestion {
@@ -132,7 +132,13 @@
       margin-top: 1rem;
       span {
         font-weight: 700;
-        color: $second-color;
+        color: $secondary-color;
+      }
+    }
+    .recommend {
+      margin: 2rem 0;
+      .auc-Recommend-item {
+        width: 40%;
       }
     }
   }
@@ -199,7 +205,7 @@
         transform: translateX(10px);
         path {
           transition: all 0.3s ease-in-out;
-          fill: $second-color;
+          fill: $secondary-color;
         }
       }
       #ball2__wp {
@@ -207,7 +213,7 @@
         transform: translateX(-10px);
         path {
           transition: all 0.3s ease-in-out;
-          fill: $second-color;
+          fill: $secondary-color;
         }
       }
       #ball3__wp {
@@ -215,7 +221,7 @@
         transform: translateX(10px);
         path {
           transition: all 0.3s ease-in-out;
-          fill: $second-color;
+          fill: $secondary-color;
         }
       }
     }
@@ -236,15 +242,5 @@
   &__facets-mobile-active {
     transition: transform 0.3s ease-in-out;
     transform: translateX(0%);
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .uic-HorizontalSlider-list {
-    gap: 6.5rem !important;
-
-    li {
-      width: fit-content;
-    }
   }
 }

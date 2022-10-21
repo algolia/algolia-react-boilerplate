@@ -19,7 +19,7 @@
       width: 100%;
       display: flex;
       position: relative;
-      .glass  {
+      .glass {
         width: 30px;
         left: 1rem;
         top: 0rem;
@@ -29,16 +29,91 @@
           fill: $main-color;
         }
       }
-      .closeBtn{
-        width: 10px;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        position: absolute;
-        cursor: pointer;
-      }
+    
       &__input {
         @include searchBoxInput($white-color, $grey-light-color-80);
+      }
+    }
+    &__btn{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: absolute;
+      right: 0rem;
+      top: 50%;
+      height: 100%;
+      transform: translateY(-50%);
+      animation: fadeIn 0.3s forwards ease-in-out;
+
+      // translate the close btn only when we're on SRP 
+      &-srp{
+        right: 2rem;
+      }
+
+      .closeBtn {
+        width: 10px;
+        cursor: pointer;
+      }
+
+      .submitBtn{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $secondary-color-custom-reverse-gradient;
+        border-radius: 0 3rem 3rem 0;
+        width: 4rem;
+        height: 100%;
+        cursor: pointer;
+
+        &__text{
+          position: absolute;
+          @include p-text($main-color, 500);
+          font-size: 0.6rem;
+          transition: all 0.2s ease-in-out;
+            &-active{
+              opacity: 1;
+              transform: translateX(0);
+              transition: all 0.2s ease-in-out;
+            }
+            &-inactive{
+              opacity: 0;
+              transform: translateX(-1.5rem);
+              transition: all 0.2s ease-in-out;
+            }
+        }
+        
+        &__picto{
+            transition: all 0.2s ease-in-out;
+            &-active{
+              opacity: 1;
+              transform: translateX(0);
+              transition: all 0.2s ease-in-out;
+            }
+            &-inactive{
+              opacity: 0;
+              transform: translateX(1.5rem);
+              transition: all 0.2s ease-in-out;
+            }
+          }
+        
+        
+
+        svg{
+          width: 8px;
+          font-size: 10px;
+        }
+
+        .active{
+          opacity: 1;
+          transform: translateX(0);
+          transition: all 0.2s ease-in-out;
+        }
+        .inactive{
+          opacity: 0;
+          transform: translateX(-30%);
+          transition: all 0.2s ease-in-out;
+        }
       }
     }
     &__category {
@@ -49,7 +124,7 @@
       right: 0rem;
       border-radius: 2px 3rem 3rem 2px;
       padding: 0.4rem 1rem;
-      background: $second-color-custom-gradient;
+      background: $secondary-color-custom-gradient;
       display: flex;
       justify-content: center;
       gap: 0.5rem;
@@ -65,11 +140,10 @@
       }
       svg {
         // border: 1px solid #000000;
-        background: $background-color ;
+        background: $background-color;
         width: 20px;
         height: 20px;
         border-radius: 10px;
-       
       }
 
       &__close-btn {
@@ -78,8 +152,24 @@
         right: -5px;
       }
     }
-    &__category-raw{
+    &__category-raw {
       width: 60%;
+    }
+
+    &__tooltip {
+      position: absolute;
+      top: -2rem;
+      left: 0;
+      padding: 0.3rem 0.5rem;
+      background: $secondary-color-custom-gradient;
+      opacity: 1;
+      border-radius: 0.2rem;
+      transition: opacity 0.3s ease-in-out;
+
+      p {
+        @include p-text($white-color, 300);
+        font-size: 0.5rem;
+      }
     }
   }
   .searchboxCategory {
@@ -94,4 +184,16 @@
   .searchbox-category {
     width: 80%;
   }
+}
+
+
+// ANIMATIONS
+@keyframes fadeIn {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+
 }

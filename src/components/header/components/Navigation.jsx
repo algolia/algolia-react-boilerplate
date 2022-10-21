@@ -1,10 +1,9 @@
 // Render the navigation menu in the header
 
 // React Router
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 // Recoil Header State
-import { queryAtom } from '@/config/searchboxConfig';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Import Config for the header
 import {
@@ -12,7 +11,7 @@ import {
   linksHeader,
   navigationStateAtom,
   selectorNavigationRef,
-} from '@/config/navigationConfig';
+} from '@/config/navigationConfig'
 
 // Import Recoil config
 import {
@@ -20,31 +19,33 @@ import {
   shouldHaveLanguages,
   shouldHavePersona,
   shouldHaveSegments,
-} from '@/config/featuresConfig';
+} from '@/config/featuresConfig'
 
-import { cartOpen, cartState } from '@/config/cartFunctions';
-import { Selectors } from '../../selector/Selectors';
+import { cartOpen, cartState } from '@/config/cartFunctions'
+import { Selectors } from '../../selector/Selectors'
 
 // Import segment configuration
-import { CartPicto } from '@/assets/svg/SvgIndex';
-import { languagesConfig } from '@/config/languagesConfig';
-import { personaConfig } from '@/config/personaConfig';
-import { segmentConfig } from '@/config/segmentConfig';
-import useStoreCartToLocalStorage from '@/hooks/useStoreCartToLocalStorage';
-import { useEffect } from 'react';
+import { CartPicto } from '@/assets/svg/SvgIndex'
+import { languagesConfig } from '@/config/languagesConfig'
+import { personaConfig } from '@/config/personaConfig'
+import { segmentConfig } from '@/config/segmentConfig'
+import useStoreCartToLocalStorage from '@/hooks/useStoreCartToLocalStorage'
+import { useEffect } from 'react'
 
 //Import config from helped navigation
-import { cartClick } from '@/config/cartFunctions';
+import { cartClick } from '@/config/cartFunctions'
+import { windowSize } from '@/hooks/useScreenSize'
 
-const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
+const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
   // Recoil State
-  const setQueryState = useSetRecoilState(queryAtom);
-  const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen);
-  const [showCart, setShowCart] = useRecoilState(cartState);
+  const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen)
+  const [showCart, setShowCart] = useRecoilState(cartState)
+
+  const { mobile, isDesktop } = useRecoilValue(windowSize)
 
   // navigate is used by React Router
-  const navigate = useNavigate();
-  const { state } = useLocation();
+  const navigate = useNavigate()
+  const { state } = useLocation()
 
   const highlightingCat = () => {
     if (state?.action !== null) {
@@ -55,60 +56,60 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
           .pop()
           .replace("'", '')
           .slice(0, -1)
-          .toLowerCase();
+          .toLowerCase()
       } else if (state?.type === 'context') {
-        return state?.action.toLowerCase();
+        return state?.action.toLowerCase()
       } else {
-        null;
+        null
       }
     } else {
     }
-  };
+  }
 
   // Get references for dropdowns in Navigation
-  const selectorsNavigation = useSetRecoilState(selectorNavigationRef);
+  const selectorsNavigation = useSetRecoilState(selectorNavigationRef)
 
   // Should show or not the sections
-  const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
-  const shouldShowSegmentsAtom = useRecoilValue(shouldHaveSegments);
-  const shouldShowLanguageSelected = useRecoilValue(shouldHaveLanguages);
-  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality);
+  const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona)
+  const shouldShowSegmentsAtom = useRecoilValue(shouldHaveSegments)
+  const shouldShowLanguageSelected = useRecoilValue(shouldHaveLanguages)
+  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality)
 
   // Import the navigation links, as defined in the config
-  const links = useRecoilValue(linksHeader);
+  const links = useRecoilValue(linksHeader)
 
-  let [searchParams, setSearchParams] = useSearchParams();
+  let [searchParams, setSearchParams] = useSearchParams()
 
   const [navigationState, setNavigationState] =
-    useRecoilState(navigationStateAtom);
+    useRecoilState(navigationStateAtom)
 
-  const cartIcon = useSetRecoilState(cartClick);
+  const cartIcon = useSetRecoilState(cartClick)
 
   // UseEffect to store into the local storage our Cart
   useEffect(() => {
     if (showCart?.length > 0) {
-      localStorage.removeItem('myCart');
-      useStoreCartToLocalStorage(showCart);
+      localStorage.removeItem('myCart')
+      useStoreCartToLocalStorage(showCart)
     }
-  }, [showCart]);
+  }, [showCart])
 
   // If there is already a Cart in the local storage, then store it in recoile state
   useEffect(() => {
-    const getCart = localStorage.getItem('myCart');
+    const getCart = localStorage.getItem('myCart')
     if (getCart) {
-      const cleanCart = JSON.parse(getCart);
-      const savedCart = cleanCart[cleanCart?.length - 1];
-      setShowCart(savedCart);
+      const cleanCart = JSON.parse(getCart)
+      const savedCart = cleanCart[cleanCart?.length - 1]
+      setShowCart(savedCart)
     }
-  }, []);
+  }, [])
 
   const sumAllArticles = (cart) => {
-    let x = 0;
+    let x = 0
     cart.map((i, index) => {
-      x += i.qty;
-    });
-    return x;
-  };
+      x += i.qty
+    })
+    return x
+  }
 
   return (
     <ul
@@ -126,32 +127,32 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
             key={link.name}
             onClick={() => {
               //Build action based on link type, then navigate
-              let action = null;
+              let action = null
               if (link.type === 'filter' && link.filter?.length > 0) {
-                action = `${categoryPageFilterAttribute}:'${link.filter}'`;
+                action = `${categoryPageFilterAttribute}:'${link.filter}'`
               } else if (link.type === 'context') {
-                action = link.context;
+                action = link.context
               } else if (
                 link.type === 'rawFilter' &&
                 link.rawFilter?.length > 0
               ) {
-                action = `${link.rawFilter}`;
+                action = `${link.rawFilter}`
               }
 
               setNavigationState({
                 type: link.type,
                 name: link.name,
                 action: action,
-              });
-              searchParams.set('category', link.name);
+              })
+              searchParams.set('category', link.name)
               navigate({
                 pathname: '/search',
                 search: `?${searchParams}`,
-              });
+              })
 
               // Only used for Mobile view
-              if (tablet || mobile) {
-                setIsMenuOpen(false);
+              if (!isDesktop) {
+                setIsMenuOpen(false)
               }
             }}
           >
@@ -166,7 +167,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
               {link.name}
             </p>
           </li>
-        );
+        )
       })}
       <li className="container__header-nav-selectors" ref={selectorsNavigation}>
         {shouldShowPersonasAtom && (
@@ -188,27 +189,28 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
       </li>
       {shouldShowCartIcon && (
         <li
-          className="picto-cart"
+          className={
+            cartOpenValue ? 'picto-cart picto-cart__active' : 'picto-cart'
+          }
           onClick={() => {
-            setCartOpenValue(!cartOpenValue);
+            setCartOpenValue(!cartOpenValue)
             {
-              mobile && setIsMenuOpen(false);
+              mobile && setIsMenuOpen(false)
             }
           }}
           ref={cartIcon}
         >
-          {!mobile && <CartPicto />}
-          {mobile && <p>Cart</p>}
+          {!isDesktop ? <p>Cart</p> : <CartPicto />}
           {/* Picto notification up the cart icon */}
-          {showCart?.length > 0 && (
+          {showCart?.length !== 0 && (
             <div className="notification-cart">
-              <p>{sumAllArticles(showCart)}</p>
+              <span>{sumAllArticles(showCart)}</span>
             </div>
           )}
         </li>
       )}
     </ul>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation

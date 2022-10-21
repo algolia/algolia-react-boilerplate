@@ -34,9 +34,13 @@
   }
 
   .active {
+    display: flex;
+    padding: 0.5rem;
+    width: fit-content;
     pointer-events: all;
     opacity: 1;
     top: 3rem;
+
     transition: all 0.3s ease-in-out;
   }
 
@@ -44,11 +48,29 @@
     text-align: left;
     width: 100%;
     padding: 0.5rem;
+    font-size: clamp(0.6rem, 0.07rem + 1.03vw, 1rem);
     border-radius: 0.2rem;
     cursor: pointer;
 
     &:hover {
-      @include btn-hover($second-color, $white-color);
+      @include btn-hover($secondary-color, $white-color);
+      color: $white-color;
     }
+  }
+}
+
+// MOBILE
+
+.selectorsWrapper-mobile {
+  .selectorsWrapper__btn {
+    p {
+      text-align: left;
+    }
+  }
+  .selectorsWrapper__list {
+    top: 2rem;
+    margin-top: 0rem;
+    padding: 0.3rem;
+    width: fit-content;
   }
 }

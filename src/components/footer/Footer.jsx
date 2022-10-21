@@ -1,17 +1,16 @@
 // This component renders a footer in Main.jsx, which can receive props if needed
-// This footer is not designed to be interactive, but instead to perform better by not being an image
-
-import { useRecoilValue } from 'recoil';
+// NB it is normally (and currently) a screenshot image, stored in assets
+import { useRecoilValue } from 'recoil'
 
 //Import scope SCSS
-import './SCSS/footer.scss';
+import './SCSS/footer.scss'
 
-import logo from '@/assets/logo/logo.webp';
+import logo from '@/assets/logo/logo.webp'
 
-import { windowSize } from '@/hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize'
 
 const Footer = (props) => {
-  const { isDesktop } = useRecoilValue(windowSize);
+  const { isDesktop } = useRecoilValue(windowSize)
 
   return (
     <div className="footer">
@@ -202,7 +201,7 @@ const Footer = (props) => {
         </footer>
       </footer>
     </div>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

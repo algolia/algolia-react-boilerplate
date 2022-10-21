@@ -1,5 +1,5 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
 
 // the translations
 // (tip move them in a JSON file and import them,
@@ -34,10 +34,89 @@ const resources = {
         addToCartButton: 'Add to Cart',
         buttonBack: 'Back to search',
         availableSize: 'Available Size:',
+        addFbtTotal: 'Total price',
+        fbtButtonAdd: [
+          'Add to cart',
+          'Add both to cart',
+          'Add all three to cart',
+          'Add all four to cart',
+        ],
       },
       searchBox: {
         placeHolder: 'Search...',
+        tooltip: '💡 Type a query before submitting your request',
+        submit: 'Submit'
       },
+      cartModal: {
+        title: 'My Cart',
+        emptyCart: 'Empty my cart',
+        sizeTitle: 'Size',
+        colorTitle: 'Color',
+        yourCartIsEmpty: 'Your cart is empty',
+        checkout: 'Checkout',
+      },
+      priceFacet: {
+        title: 'Price',
+        maxPrice: 'Max Price',
+        minPrice: 'Min Price',
+      },
+    },
+  },
+  it: {
+    translation: {
+      homePage: {
+        titleCarousels: ['La nostra collezione di borse', 'Il nostro meglio Hoodies'],
+      },
+      federated: {
+        recentSearches: 'Ricerche Recenti',
+        suggestions: 'Suggerimento',
+        categories: 'Categoria',
+        products: 'Prodotti',
+        articles: 'Articolo',
+        productsBefore: 'Raccomandato per te',
+        showAllProducts: 'Mostra tutti i prodotti',
+        buttonReturn: 'Torna alla home page',
+        buttonShowAll: 'Mostra tutti i prodotti',
+        noResults: 'Nessun risultato trovato',
+      },
+      srp: {
+        titleTrendingProducts: 'Prodotti di tendenza',
+        titleTrendingFacets: 'Marchi di tendenza',
+        stats: 'Risultati trovati in',
+        searchInCategory: 'Cerca nel',
+      },
+      pdp: {
+        fbtTitle: 'Acquistati frequentemente insieme',
+        relatedTitle: 'Prodotti correlati',
+        addToCartButton: 'Aggiungi al carrello',
+        buttonBack: 'Torna alla ricerca',
+        availableSize: 'Taglie disponibili:',
+        addFbtTotal: 'Total price',
+        fbtButtonAdd: [
+          'Aggiungi al carrello',
+          'Aggiungi entrambi al carrello',
+          'Aggiungi tutti e tre al carrello',
+          'Aggiungi tutti e quattro al carrello',
+        ],
+      },
+      searchBox: {
+        placeHolder: 'Ricerca...',
+        tooltip: '💡 Digita una query prima di inviare la richiesta',
+        submit: 'presentare'
+      },
+      cartModal: {
+        title: 'La mia carta',
+        emptyCart: 'Svuota il mio carrello',
+        sizeTitle: 'Taglia',
+        colorTitle: 'Colore',
+        yourCartIsEmpty: 'Il tuo carrello è vuoto',
+        checkout: 'Pagina di pagamento'
+      },
+      priceFacet: {
+        title:'Prezzo',
+        maxPrice: 'Max Prezzo',
+        minPrice: 'Min Prezzo'
+      }
     },
   },
   fr: {
@@ -64,13 +143,35 @@ const resources = {
       },
       pdp: {
         fbtTitle: 'Fréquemment acheté ensemble',
-        relatedTitle: 'Produits connexes',
+        relatedTitle: 'Dans la même catégorie',
         buttonBack: 'Revenir aux recherches',
         addToCartButton: 'Ajouter au panier',
         availableSize: 'Taille disponibles:',
+        addFbtTotal: 'Prix total',
+        fbtButtonAdd: [
+          'Ajouter cet article à mon panier',
+          'Ajouter les deux à mon panier',
+          'Ajouter les trois à mon panier',
+          'Ajouter les quatre à mon panier',
+        ],
       },
       searchBox: {
         placeHolder: 'Rechercher...',
+        tooltip: '💡 Taper une requête avant de soumettre votre recherche',
+        submit: 'Envoyer'
+      },
+      cartModal: {
+        title: 'Mon panier',
+        emptyCart: 'Vider mon panier',
+        sizeTitle: 'Taille',
+        colorTitle: 'Couleur',
+        yourCartIsEmpty: 'Votre panier est vide',
+        checkout: 'Valider mon panier',
+      },
+      priceFacet: {
+        title: 'Prix',
+        maxPrice: 'Prix Maximum',
+        minPrice: 'Prix Minimum',
       },
     },
   },
@@ -105,13 +206,35 @@ const resources = {
         buttonBack: 'Zurück zur Forschung',
         addToCartButton: 'In den Warenkorb legen',
         availableSize: 'Verfügbare Größe:',
+        addFbtTotal: 'Festgelegte Preis',
+        fbtButtonAdd: [
+          'Fügen Sie diesen Artikel meinem Warenkorb hinzu',
+          'Beides in meinen Warenkorb legen',
+          'Fügen Sie alle drei zu meinem Warenkorb hinzu',
+          'Fügen Sie alle vier zu meinem Warenkorb hinzu',
+        ],
       },
       searchBox: {
         placeHolder: 'Forschen...',
+        tooltip: '💡 Geben Sie eine Abfrage ein, bevor Sie Ihre Anfrage senden',
+        submit: 'Senden'
+      },
+      cartModal: {
+        title: 'Mein Korb',
+        emptyCart: 'Meinen Einkaufswagen leeren',
+        sizeTitle: 'Schneiden',
+        colorTitle: 'Farbe',
+        yourCartIsEmpty: 'Dein Korb ist leer',
+        checkout: 'Kasse',
+      },
+      priceFacet: {
+        title: 'Preis',
+        maxPrice: 'Max Preis',
+        minPrice: 'Min Preis',
       },
     },
   },
-};
+}
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -125,6 +248,6 @@ i18n
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
-  });
+  })
 
-export default i18n;
+export default i18n

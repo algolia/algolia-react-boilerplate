@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo } from 'react'
 
 export const Glass = memo(() => (
   <svg
@@ -16,7 +16,7 @@ export const Glass = memo(() => (
       fill="#030A2B"
     />
   </svg>
-));
+))
 
 export const Heart = memo(() => (
   <svg
@@ -38,7 +38,7 @@ export const Heart = memo(() => (
       </clipPath>
     </defs>
   </svg>
-));
+))
 
 export const ChevronRight = memo(() => (
   <svg
@@ -54,7 +54,7 @@ export const ChevronRight = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 export const ChevronLeft = memo(() => (
   <svg
     width="16"
@@ -68,7 +68,7 @@ export const ChevronLeft = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 export const OptionDots = memo(() => (
   <svg
     width="7"
@@ -85,7 +85,7 @@ export const OptionDots = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const CloseButton = memo(() => (
   <svg
@@ -96,19 +96,19 @@ export const CloseButton = memo(() => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M12.5 0C5.60471 0 0 5.60217 0 12.5C0 19.3953 5.60471 25 12.5 25C19.3978 25 25 19.3953 25 12.5C25 5.60217 19.3978 0 12.5 0V0ZM12.5 1.13626C18.784 1.13626 23.8636 6.21591 23.8636 12.4999C23.8636 18.7808 18.784 23.8635 12.5 23.8635C6.21905 23.8635 1.13636 18.7808 1.13636 12.4999C1.13636 6.21591 6.21905 1.13626 12.5 1.13626Z"
       fill="black"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M8.17187 7.66773C7.95072 7.68933 7.76246 7.83775 7.68993 8.04781C7.61721 8.25786 7.67388 8.49091 7.8346 8.6443L11.6875 12.5062L7.8346 16.3591C7.61146 16.5822 7.61146 16.9439 7.8346 17.167C8.05773 17.3902 8.41937 17.3902 8.64253 17.167L12.5044 13.3052L16.3573 17.167C16.5805 17.3902 16.9421 17.3902 17.1651 17.167C17.3882 16.9439 17.3882 16.5823 17.1653 16.3591L13.3034 12.5062L17.1653 8.6443C17.3347 8.48061 17.3856 8.22914 17.2931 8.01235C17.2003 7.79556 16.9835 7.65842 16.7479 7.66774C16.6007 7.6713 16.4608 7.73174 16.3573 7.83657L12.5044 11.6895L8.64254 7.83657C8.53474 7.72738 8.38731 7.66654 8.23412 7.66774C8.21331 7.66674 8.19271 7.66674 8.1719 7.66774L8.17187 7.66773Z"
       fill="black"
     />
   </svg>
-));
+))
 
 export const SimpleCloseButton = memo(() => (
   <svg
@@ -119,13 +119,13 @@ export const SimpleCloseButton = memo(() => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M1.32537 0.0018933C0.754204 0.0576784 0.268007 0.441015 0.0806901 0.983511C-0.107138 1.52601 0.0392336 2.12788 0.454302 2.52403L10.405 12.4978L0.454302 22.4485C-0.12197 23.0248 -0.12197 23.9588 0.454302 24.5351C1.03057 25.1114 1.96456 25.1114 2.54091 24.5351L12.5147 14.5614L22.4654 24.5351C23.0417 25.1114 23.9757 25.1114 24.5515 24.5351C25.1278 23.9589 25.1278 23.0249 24.552 22.4485L14.5782 12.4978L24.552 2.52403C24.9896 2.10128 25.1211 1.45182 24.8821 0.891928C24.6426 0.332034 24.0827 -0.0221357 23.4742 0.00191929C23.0939 0.0111315 22.7326 0.167225 22.4654 0.437961L12.5147 10.3887L2.54093 0.437961C2.26252 0.15597 1.88175 -0.00115965 1.48613 0.00191929C1.43239 -0.000639764 1.37916 -0.000639764 1.32542 0.00191929L1.32537 0.0018933Z"
       fill="black"
     />
   </svg>
-));
+))
 export const ChevronDown = memo(() => (
   <svg
     width="30"
@@ -139,7 +139,7 @@ export const ChevronDown = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const ChevronUp = memo(() => (
   <svg
@@ -154,7 +154,7 @@ export const ChevronUp = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const FilterPicto = memo(() => (
   <svg
@@ -248,7 +248,7 @@ export const FilterPicto = memo(() => (
       </g>
     </g>
   </svg>
-));
+))
 
 export const CartPicto = memo(() => (
   <svg
@@ -271,7 +271,7 @@ export const CartPicto = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const MinusPicto = memo(() => (
   <svg
@@ -286,7 +286,7 @@ export const MinusPicto = memo(() => (
       fill="#5568F9"
     />
   </svg>
-));
+))
 
 export const PlusPicto = memo(() => (
   <svg
@@ -301,7 +301,7 @@ export const PlusPicto = memo(() => (
       fill="#5568F9"
     />
   </svg>
-));
+))
 
 export const MinusEmptyIcon = memo(() => (
   <svg
@@ -316,7 +316,7 @@ export const MinusEmptyIcon = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const PlusEmptyIcon = memo(() => (
   <svg
@@ -331,7 +331,7 @@ export const PlusEmptyIcon = memo(() => (
       fill="black"
     />
   </svg>
-));
+))
 
 export const Garbage = memo(() => (
   <svg
@@ -354,4 +354,19 @@ export const Garbage = memo(() => (
       fill="#231F20"
     />
   </svg>
-));
+))
+
+export const SubmitPicto = () => (
+  <svg
+    width="14"
+    height="25"
+    viewBox="0 0 14 25"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M0.177399 0.177005C0.295732 0.0589939 0.450812 0 0.605907 0C0.761001 0 0.916096 0.0590026 1.03442 0.177005L12.9499 12.0601C13.0716 12.1814 13.1278 12.3412 13.1249 12.5005C13.1278 12.6594 13.0716 12.8191 12.9499 12.9396L1.03442 24.8227C0.797341 25.0591 0.414463 25.0591 0.177808 24.8227C-0.0592689 24.5862 -0.0592689 24.2044 0.177808 23.9684L11.6768 12.4996L0.177808 1.03196C-0.0584251 0.795951 -0.0584251 0.413274 0.177808 0.177684L0.177399 0.177005Z"
+      fill="black"
+    />
+  </svg>
+)

@@ -1,53 +1,52 @@
 // Render the Header component in Main.jsx, for large screen sizes
-import { useState } from 'react';
+import { useState } from 'react'
 
 // React Router
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 // Recoil State
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-
-
-import { navigationStateAtom } from '@/config/navigationConfig';
+import { navigationStateAtom } from '@/config/navigationConfig'
 
 // Import SearchBox config
 import {
   queryAtom,
   searchBoxAtom,
   searchBoxIsActive,
-} from '@/config/searchboxConfig';
+} from '@/config/searchboxConfig'
 
 //Import config for federatedSearch
-import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
 
 // Import voiceSearch config
-import { shouldHaveVoiceSearch } from '@/config/featuresConfig';
+import { shouldHaveVoiceSearch } from '@/config/featuresConfig'
 
 // Import applied rules config
-import { rulesAtom } from '@/config/appliedRulesConfig';
+import { rulesAtom } from '@/config/appliedRulesConfig'
 
 // Custom Hooks
-import useOutsideClick from '@/hooks/useOutsideClick';
+import useOutsideClick from '@/hooks/useOutsideClick'
 
-import logo from '@/assets/logo/logo.webp';
+import logo from '@/assets/logo/logo.webp'
 
 // Import Components
-import CustomSearchBox from '@/components/searchbox/SearchBox';
-import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch';
-import Navigation from './Navigation';
-import CustomSkeleton from '@/components/skeletons/CustomSkeleton';
+import CustomSearchBox from '@/components/searchbox/SearchBox'
+import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
+import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch'
+import Navigation from './Navigation'
 
 const HeaderLaptop = () => {
-  const [isLogoLoaded, setIsLogoLoaded] = useState(false);
-  const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom);
-  const setQueryState = useSetRecoilState(queryAtom);
-  const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
-  const setSbIsActive = useSetRecoilState(searchBoxIsActive);
-  const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch);
-  const rulesApplied = useSetRecoilState(rulesAtom);
-  const [navigationState, setNavigationState] = useRecoilState(navigationStateAtom);
-  useOutsideClick(searchboxRef, () => setSbIsActive(false));
+  const [isLogoLoaded, setIsLogoLoaded] = useState(false)
+  const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom)
+  const setQueryState = useSetRecoilState(queryAtom)
+  const federated = useSetRecoilState(shouldHaveOpenFederatedSearch)
+  const setSbIsActive = useSetRecoilState(searchBoxIsActive)
+  const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch)
+  const rulesApplied = useSetRecoilState(rulesAtom)
+  const setNavigationState = useSetRecoilState(navigationStateAtom)
+
+  useOutsideClick(searchboxRef, () => setSbIsActive(false))
 
   return (
     <div className="container">
@@ -60,10 +59,10 @@ const HeaderLaptop = () => {
             to="/"
             aria-label="link to home"
             onClick={() => {
-              setQueryState('');
+              setQueryState('')
               setNavigationState({})
-              federated(false);
-              rulesApplied([]);
+              federated(false)
+              rulesApplied([])
             }}
           >
             {/* Add possibility to change the Logo */}
@@ -86,7 +85,7 @@ const HeaderLaptop = () => {
         <Navigation />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HeaderLaptop;
+export default HeaderLaptop

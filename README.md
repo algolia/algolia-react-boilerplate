@@ -5,6 +5,7 @@
 - [Get started](#️-get-started)
 - [Structure](#️-structure)
 - [Features Config](#-features-config)
+  - [ Predict](#--predict)
   - [ Redirects](#--redirects)
   - [ Federated Search](#--federated-search)
   - [ Voice Search](#--voice-search)
@@ -131,6 +132,16 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 🔮 Predict</h3>
+
+The app has access to predict through the PredictUserProfileProvider component, found in `./src/components/predict`.
+
+In order for predict to function, it must have a predict App ID, API key and region set in algoliaEnvConfig, found in `./src/config`. Please contact Algolia if you are not sure what values they should have.
+
+You must also adjust the values found in `src/config/predictConfig`. We store a default value for `predictUserIdAtom` to ensure the app works with the default demo flow, but you should replace it with your own predict user ID for your own demo purposes.
+
+You can feel free to keep the default values for all of these atoms and configurations, and follow the default demo flow outlined below (TBD).
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Demo Tour</h3>
 
 This app offers the ability to present a guided tour to the user, highlighting different elements and explaining them. The feature is currently in BETA, and is subject to change. It is on by default; it can be turned off by going to `config/demoTourConfig` and setting the `default` value of `shouldShowDemoTour` to `false`.
@@ -224,6 +235,13 @@ In order to turn on this feature, go to `config/featuresConfig` and set `shouldH
 Use it by making sure you have an index per language, and that the attribute names are always in the default language, but the values change in each index according to the local language.
 
 Then, go to `config/languagesConfig` and adjust each export to what you need. Specifically, in `languageSwitchConfig` you must make sure each node has an `index` defined, and this index will be used when that language is selected.
+
+Currently in :
+
+- 🇬🇧 English
+- 🇫🇷 French
+- 🇩🇪 German
+- 🇮🇹 Italian
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Banners</h3>
 
@@ -414,7 +432,7 @@ We use the React library Suspense and lazy to load components when needed, and a
 
 We use the React library [React i18n](https://react.i18next.com/), to translate all the content code part like Button, Title,....
 And you have the Select option to switch between the languages.
-To start it's by default in english if you don't have any other language, you can just put false in the Translation Config option.
+To start it's by default in english if you don't have any other language,you can just put false in the Translation Config option.
 
 - You have to use this feature configure your others language index, and make sure you have the correct facet translation for example
 

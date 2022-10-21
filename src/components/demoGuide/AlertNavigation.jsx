@@ -1,16 +1,16 @@
-import { isRulesSwitchToggle } from '@/config/appliedRulesConfig';
-import { alertContent, isAlertOpen } from '@/config/demoGuideConfig';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { isRulesSwitchToggle } from '@/config/appliedRulesConfig'
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 //Import scope SCSS
-import './SCSS/alertNavigation.scss';
+import './SCSS/alertNavigation.scss'
 
 const AlertNavigation = () => {
-  const [alertOpen, setAlertOpen] = useRecoilState(isAlertOpen);
-  const alertContentToDisplay = useRecoilValue(alertContent);
+  const [alertOpen, setAlertOpen] = useRecoilState(isAlertOpen)
+  const alertContentToDisplay = useRecoilValue(alertContent)
 
   // Check if rules applied panel is switch on to adapt styling
-  const isRulesAppliedToggle = useRecoilValue(isRulesSwitchToggle);
+  const isRulesAppliedToggle = useRecoilValue(isRulesSwitchToggle)
 
   return (
     <div className={`${isRulesAppliedToggle ? 'wrap-up ' : ''}wrap`}>
@@ -26,7 +26,7 @@ const AlertNavigation = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default AlertNavigation;
+export default AlertNavigation
