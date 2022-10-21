@@ -67,6 +67,7 @@
       $secondary-color,
       $secondary-color
     );
+
     position: relative;
 
     &__infos {
@@ -95,10 +96,15 @@
   }
 }
 
+@media (max-width: 820px) {
+  .uic-HorizontalSlider-list {
+    grid-auto-columns: 30% !important;
+  }
 @media (max-width: 460px) {
   .uic-HorizontalSlider-list {
     grid-auto-columns: 60% !important;
   }
+}
 }
 
 .item__infos-down {

@@ -1,161 +1,79 @@
 @use '../../../scss/partials' as *;
 
-.footer-area {
-  .custom-container {
-    max-width: 1266px;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    width: 90%;
-    display: flex;
-    flex-direction: row;
-    &__mobile {
-      max-width: 1266px;
-      padding-right: 15px;
-      padding-left: 15px;
-      margin-right: auto;
-      margin-left: auto;
-      width: 90%;
-      justify-content: center;
-      align-items: flex-start;
-    }
-    &__copyright {
-      display: flex;
-      justify-content: center;
-    }
-  }
+.footer {
+  width: 100%;
+  padding: 3rem 2rem;
 
-  .columns-wrapper {
+  &__container{
     display: flex;
-    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
     width: 100%;
-    justify-content: space-around;
-    &__mobile {
-      display: none;
-    }
-  }
+    flex-wrap: wrap;
 
-  .footer-column {
-    padding: 0 1rem;
-  }
+    &-column{
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
 
-  .footer-column__company-details {
-    flex-direction: column;
-    &__mobile {
-      .footer-widget {
-        margin: 0 auto;
+      h3{
+        @include titleH3($secondary-color);
+      }
+
+      ul{
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 1rem;
+        width: fit-content
+      }
+      li, a, p{
+        @include p-text($main-color, 500);
+        font-size: 0.8rem;
+        cursor: pointer;
+        word-wrap: break-word;
+      }
+      input{
+        @include p-text($main-color, 500);
+        @include searchBoxInput($white-color, $grey-light-color-80);
+        padding: 0.4rem 1rem 0.4rem 1rem;
+        font-size: 0.8rem;
+      }
+
+      .btn-submit{
+        @include btn($secondary-color-custom-gradient, $white-color);
+        margin-top: 1rem;
       }
     }
+    // Handle specific CSS for first column (algolia's info)
+    .col1{
+     &__infos{
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+     } 
+     &__imageWp{
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 1rem;
+      width: 10rem;
+     }
+    }
   }
 
-  .footer-widget .footer-info ul li {
-    font-size: 12px;
-    color: $grey-dark-color;
-    line-height: 1;
-    margin: 0 0 9px;
+  &__bottom{
+    font-weight: 600;
+    text-align: center;
+    margin: 2rem auto 0rem auto;
   }
+}
 
-  .widget-title {
-    margin: 0 0 30px;
-  }
-
-  .footer-widget .widget-title h3 {
-    font-size: 12px;
-    font-weight: 700;
-    margin: 0;
-    color: $main-color;
-  }
-
-  .footer-widget .footer-map {
-    font-size: 12px;
-    color: $grey-dark-color;
-    text-decoration: underline;
-    transform: translate(1rem, -0.2rem);
-  }
-
-  .footer-widget .footer-list ul li {
-    margin: 0 0 17px;
-  }
-
-  .footer-widget .footer-list ul li a {
-    color: $grey-dark-color;
-    font-size: 12px;
-    display: block;
-    line-height: 1;
-    font-weight: 400;
-  }
-
-  .footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .footer-img {
-    width: 150px;
-    object-fit: cover;
-    height: 100%;
-    transform: translate(-1.5rem, -1.5rem);
-  }
-
-  .footer-bottom {
-    padding-top: 25px;
-    padding-bottom: 15px;
-  }
-
-  .footer-widget.copyright-2 {
-    align-items: center;
-  }
-  .footer-widget.copyright-2 p {
-    color: $grey-dark-color;
-    font-size: 12px;
-    margin: 0;
-  }
-
-  .payments {
-    width: 170px;
-    margin-top: -3px;
-  }
-
-  .row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: nowrap;
-    width: 100%;
-  }
-
-  .subscribe-form-2 .mc-form-2 {
-    position: relative;
-  }
-
-  .subscribe-form-2 .mc-form-2 > input {
-    background-color: transparent;
-    width: 16rem;
-    border: none;
-    border-bottom: 1px solid #e7e7e7;
-    color: $grey-dark-color;
-    padding: 5px 60px 5px 10px;
-    height: 43px;
-    font-size: 12px;
-  }
-
-  .subscribe-form-2 .mc-form-2 .clear-2 {
-    position: absolute;
-    top: 0;
-    right: 5px;
-    padding: 0;
-  }
-
-  .subscribe-form-2 .mc-form-2 .clear-2 input {
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    color: $main-color;
-    font-weight: 700;
-    font-size: 12px;
-    height: 43px;
+//MOBILE VERSION
+.footer-mobile{
+  .footer__container{
+    justify-content: flex-start;
+    .footer__container-column:nth-child(2), .footer__container-column:nth-child(3) {
+      display: none;
+    }
   }
 }

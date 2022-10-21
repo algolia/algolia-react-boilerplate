@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 import { Configure, Index, useHits } from 'react-instantsearch-hooks-web'
 
 // Recoil
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig'
 import { framerMotionTransition } from '@/config/animationConfig'
-import { hitsPerCarousel } from '@/config/carouselConfig'
+import { hitsPerCarousel, isCarouselLoaded } from '@/config/carouselConfig'
 import { personaSelectedAtom } from '@/config/personaConfig'
 import { segmentSelectedAtom } from '@/config/segmentConfig'
 
@@ -30,7 +30,8 @@ const HomeCarousel = ({ context, title }) => {
   const index = useRecoilValue(mainIndex)
   const userToken = useRecoilValue(personaSelectedAtom)
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom)
-
+  const setCarouselLoaded = useSetRecoilState(isCarouselLoaded)
+  setCarouselLoaded(true)
   return (
     <div className="home-carousel">
       <Index indexId={title} indexName={index}>
