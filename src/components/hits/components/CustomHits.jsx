@@ -39,8 +39,6 @@ function CustomHits(props) {
     else setHits(hookHits)
   }, [props])
 
-  useEffect(() => {}, [hitsState])
-
   useEffect(() => {
     if (hits.length > 0) {
       setHitsLoaded(true)

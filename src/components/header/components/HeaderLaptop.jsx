@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom'
 // Recoil State
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { navigationStateAtom } from '@/config/navigationConfig'
+
 // Import SearchBox config
 import {
   queryAtom,
@@ -22,9 +24,6 @@ import { shouldHaveVoiceSearch } from '@/config/featuresConfig'
 
 // Import applied rules config
 import { rulesAtom } from '@/config/appliedRulesConfig'
-
-//import Navigation config
-import { navigationStateAtom } from '@/config/navigationConfig'
 
 // Custom Hooks
 import useOutsideClick from '@/hooks/useOutsideClick'

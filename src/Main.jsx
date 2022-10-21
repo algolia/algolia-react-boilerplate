@@ -158,6 +158,7 @@ export const Main = () => {
               }
             />
           </Routes>
+          {/* NB disabled logic to render footer */}
           {/* To avoid CLS, load in the footer after the carousels render */}
           {carouselLoaded && <Footer />}
           {shouldShowAlertAtom && (

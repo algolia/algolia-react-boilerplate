@@ -16,7 +16,7 @@ import homepage_1 from '@/assets/homepage/homepage_1.webp'
 import homepage_2 from '@/assets/homepage/homepage_2.webp'
 
 // should carousel be shown or not and config for carousel
-import { carouselConfig } from '@/config/carouselConfig'
+import { carouselConfig, isCarouselLoaded } from '@/config/carouselConfig'
 
 import CustomHomeBanners from '@/components/banners/HomeBanners'
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
@@ -44,7 +44,8 @@ const Trending = lazy(() =>
 import './homepage.scss'
 
 const HomePage = () => {
-  const [carouselLoaded, setCarouselLoaded] = useState(false)
+  const carouselLoaded = useRecoilValue(isCarouselLoaded)
+  console.log(carouselLoaded)
 
   const [isHomepage1Loaded, setHomepage1Loaded] = useState(false)
   const [isHomepage2Loaded, setHomepage2Loaded] = useState(false)
@@ -102,7 +103,9 @@ const HomePage = () => {
         </div>
       )}
 
-      {homepage_1 && carouselLoaded && (
+      {/* Here if homepage image needs to be added to the demo */}
+
+      {/* {homepage_1 && carouselLoaded && (
         <div className="homepage__imageWrapper">
           {isHomepage1Loaded === false && <CustomSkeleton type="banner" />}
           <img
@@ -113,20 +116,7 @@ const HomePage = () => {
             onLoad={() => setHomepage1Loaded(true)}
           />
         </div>
-      )}
-
-      {homepage_2 && carouselLoaded && (
-        <div className="homepage__imageWrapper">
-          {isHomepage2Loaded === false && <CustomSkeleton type="banner" />}
-          <img
-            src={homepage_2}
-            alt="homepage1"
-            width="3014"
-            height="1324"
-            onLoad={() => setHomepage2Loaded(true)}
-          />
-        </div>
-      )}
+      )} */}
     </div>
   )
 }
