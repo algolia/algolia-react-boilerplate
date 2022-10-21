@@ -105,40 +105,7 @@
     padding: 1rem;
   }
   &__item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    width: clamp(10rem, 32%, 32%);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-      rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    transition: box-shadow 0.3s ease-in-out;
-    padding: 2rem 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    .image-wrapper {
-      max-width: 30%;
-      img {
-        width: 100%;
-      }
-    }
-    .infos {
-      .productName {
-        @include productName($grey-dark-color);
-        text-align: left;
-      }
-
-      .brand {
-        @include brand($main-color);
-        text-align: left;
-      }
-      .price {
-        @include price($secondary-color);
-        text-align: left;
-      }
-    }
-    &:hover {
-      @include hitHoverEffect();
-    }
+    @include hitHorizontalUI();
   }
 
   &__btn {

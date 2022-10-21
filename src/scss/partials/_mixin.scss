@@ -361,6 +361,58 @@
   transition: box-shadow 0.3s ease-in-out;
 }
 
+@mixin hitHorizontalUI {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: clamp(10rem, 32%, 32%);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  transition: box-shadow 0.3s ease-in-out;
+  padding: 2rem 1rem;
+  border-radius: 0.5rem;
+
+  cursor: pointer;
+  .image-wrapper {
+    max-width: 30%;
+    img {
+      width: 100%;
+    }
+  }
+  .infos {
+    .productName {
+      @include productName($grey-dark-color);
+      text-align: left;
+    }
+
+    .brand {
+      @include brand($main-color);
+      text-align: left;
+    }
+    .price {
+      @include price($secondary-color);
+    }
+
+    .size{
+      @include size($main-color);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    
+    }
+
+    .colors{
+      @include colorName($main-color);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;}
+  }
+  &:hover {
+    @include hitHoverEffect();
+  }
+}
+
 @mixin productImage {
   // width: clamp(8rem, 10rem, 12rem);
   height: 100%;
@@ -402,6 +454,12 @@
 }
 
 @mixin colorName($color-name: $main-color) {
+  font-weight: 300;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+
+@mixin size($color-name: $main-color) {
   font-weight: 300;
   font-size: 0.8rem;
   text-transform: capitalize;

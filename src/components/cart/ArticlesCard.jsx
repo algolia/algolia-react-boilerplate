@@ -1,6 +1,6 @@
 // Recoil import
 import { currencySymbolAtom } from '@/config/currencyConfig'
-import { Garbage, MinusEmptyIcon, PlusEmptyIcon } from '@/assets/svg/SvgIndex'
+import { Garbage, MinusPicto, PlusPicto } from '@/assets/svg/SvgIndex'
 import { hitsConfig } from '@/config/hitsConfig'
 import get from 'lodash/get'
 
@@ -9,17 +9,21 @@ import {
   addToCartSelector,
   cartState,
   removeToCartSelector,
+  cartOpen,
 } from '@/config/cartFunctions'
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil'
 
 //Use Translation
 import { useTranslation } from 'react-i18next'
+import { windowSize } from '@/hooks/useScreenSize'
 
 const ArticlesCard = ({ item, sendEvent }) => {
   const currencySymbol = useRecoilValue(currencySymbolAtom)
   const [cart, setCart] = useRecoilState(cartState)
+  const setCartOpen = useSetRecoilState(cartOpen)
   const setAddToCartAtom = useSetRecoilState(addToCartSelector)
   const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector)
+  const { mobile } = useRecoilValue(windowSize)
 
   // Import const translation
   // Use the translator
@@ -28,79 +32,84 @@ const ArticlesCard = ({ item, sendEvent }) => {
   })
 
   // Get hit attribute from config file
-  const { image, category, productName, brand, sizeFilter, colour } = hitsConfig
+  const { image, productName, brand, sizeFilter, colour } = hitsConfig
 
   return (
-    <div>
-      <div className="articles-card">
-        <img src={get(item, image)} alt="" />
-        <div className="articles-card__infos">
-          <h3>{get(item, category)}</h3>
-          <p>{get(item, productName)}</p>
-          <div className="articles-card__infos__details">
-            {get(item, sizeFilter) && (
-              <div className="articles-card__infos__details__size">
-                <p>
-                  {t('sizeTitle')}{' '}
-                  <span>
-                    {
-                      get(item, sizeFilter)[
-                        Math.floor(Math.random() * get(item, sizeFilter).length)
-                      ]
-                    }
-                  </span>
-                </p>
-              </div>
-            )}
-            {get(item, colour) && (
-              <div className="articles-card__infos__details__size">
-                <p>
-                  {t('colorTitle')} <span>{get(item, colour)}</span>
-                </p>
-              </div>
-            )}
-          </div>
-          <div className="articles-card__infos__qtyprice">
-            <div className="articles-card__infos__qtyprice__plus-minus">
-              <div
-                className="articles-card__infos__qtyprice__plus-minus__icons"
-                onClick={() => {
-                  if (item.qty === 1) {
-                    if (cart.length === 1) {
-                      // Remove all in local storage
-                      localStorage.removeItem('myCart')
-                    }
-                    setCart((cart) =>
-                      // Remove article in cart
-                      cart.filter((it) => it.objectID !== item.objectID)
-                    )
-                  }
-                  setRemoveToCartAtom(item)
-                }}
-              >
-                <MinusEmptyIcon />
-              </div>
-              <p>{item.qty}</p>
-              <div
-                className="articles-card__infos__qtyprice__plus-minus__icons"
-                onClick={() => {
-                  sendEvent('conversion', item, 'Cart: Add to cart')
-                  setAddToCartAtom(item)
-                }}
-              >
-                <PlusEmptyIcon />
-              </div>
+    <>
+      <div
+        className={
+          mobile ? 'articles__item articles__item-mobile' : 'articles__item'
+        }
+      >
+        <div className="image-wrapper">
+          <img
+            src={get(item, image)}
+            loading="lazy"
+            alt={get(item, productName)}
+          />
+        </div>
+
+        <div className="infos">
+          <p className="brand">{get(item, brand)}</p>
+          <p className="productName">{get(item, productName)}</p>
+          <p className="size">
+            {t('sizeTitle')}:
+            <span>
+              {
+                get(item, sizeFilter)[
+                  Math.floor(Math.random() * get(item, sizeFilter).length)
+                ]
+              }
+            </span>
+          </p>
+          {get(item, colour) && (
+            <div className="colors">
+              <p>
+                {t('colorTitle')}: <span> {get(item, colour)}</span>
+              </p>
             </div>
-            <div className="articles-card__infos__qtyprice__price">
-              <p>{currencySymbol + item.totalPrice.toFixed(2)}</p>
+          )}
+          <p className="price">{currencySymbol + item.totalPrice.toFixed(2)}</p>
+        </div>
+
+        <div className="articles__IconWrapper">
+          <div className="icons">
+            <div
+              className="minusIcon"
+              onClick={() => {
+                if (item.qty === 1) {
+                  if (cart.length === 1) {
+                    // Remove all in local storage
+                    localStorage.removeItem('myCart')
+                  }
+                  setCart((cart) =>
+                    // Remove article in cart
+                    cart.filter((it) => it.objectID !== item.objectID)
+                  )
+                }
+                setRemoveToCartAtom(item)
+              }}
+            >
+              <MinusPicto />
+            </div>
+            <p>{item.qty}</p>
+            <div
+              className="plusIcon"
+              onClick={() => {
+                sendEvent('conversion', item, 'Cart: Add to cart')
+                setAddToCartAtom(item)
+              }}
+            >
+              <PlusPicto />
             </div>
           </div>
         </div>
         <div
-          className="articles-card__remove"
+          className="articles__removeProduct"
           onClick={() => {
+            setCartOpen(true)
             setCart((cart) =>
-              // Remove all in cart
+              // Remove one product in cart
               cart.filter((it) => it.objectID !== item.objectID)
             )
             // Remove all in local storage
@@ -110,8 +119,7 @@ const ArticlesCard = ({ item, sendEvent }) => {
           <Garbage />
         </div>
       </div>
-      <div className="articles-card__line"></div>
-    </div>
+    </>
   )
 }
 
