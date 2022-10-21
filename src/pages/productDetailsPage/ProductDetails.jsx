@@ -1,6 +1,5 @@
 // Page for Product details, after clicking on an item from search
 // It contains both Recommend components
-
 import { useEffect, useState } from 'react'
 
 // Recommend
@@ -51,21 +50,15 @@ import { hitAtom, hitsConfig, PDPHitSections } from '@/config/hitsConfig'
 // Custom hooks
 import { windowSize } from '@/hooks/useScreenSize'
 
-// Send an insights event to algolia
-// import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
-
 //Import scope SCSS
 import './SCSS/productDetails.scss'
 
 // Import and use translation
 import { useTranslation } from 'react-i18next'
-import { useHits } from 'react-instantsearch-hooks-web'
 import FbtAddAll from '@/components/fbtPdp/FbtAddAll'
 import FbtItems from '@/components/recommend/fbtItems/FbtProducts'
 
 const ProductDetails = () => {
-  // const { sendEvent } = useHits()
-
   const [addToCartIsClicked, setAddToCartIsClicked] = useState(false)
 
   // location in order to access current objectID

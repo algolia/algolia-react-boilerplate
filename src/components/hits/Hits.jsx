@@ -52,10 +52,6 @@ import {
 //Import scope SCSS
 import './SCSS/hits.scss'
 
-// Used to send insights event on add to cart
-
-// import useSendAlgoliaEvent from '@/hooks/useSendAlgoliaEvent';
-
 const Hit = ({ hit, sendEvent }) => {
   const navigate = useNavigate()
   const hitState = useSetRecoilState(hitAtom)
@@ -76,15 +72,7 @@ const Hit = ({ hit, sendEvent }) => {
   const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
 
   // Get hit attribute from config file
-  const {
-    objectID,
-    image,
-    imageAlt,
-    category,
-    productName,
-    brand,
-    price: priceForTotal,
-  } = hitsConfig
+  const { objectID, image, imageAlt, category, productName, brand } = hitsConfig
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false)
 

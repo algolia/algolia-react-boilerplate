@@ -39,7 +39,7 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
     keyPrefix: 'pdp',
   })
 
-  const { orderValue, userProfile } = usePredict()
+  const { orderValue } = usePredict()
 
   useEffect(() => {
     if (checkIfUserEligible() && !isUserEligible) {
