@@ -15,16 +15,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { addToCartSelector } from '@/config/cartFunctions'
 
 const HitsCarousel = ({ hit, sendEvent }) => {
-  const {
-    objectID,
-    image,
-    productName,
-    brand,
-    sizeFilter,
-    colour,
-    colourHexa,
-    price: priceForTotal,
-  } = hitsConfig
+  const { objectID, image, productName, brand } = hitsConfig
   const [hovered, setHovered] = useState(false)
   const [cartLogoClicked, setCartLogoClicked] = useState(false)
   const setAddToCartAtom = useSetRecoilState(addToCartSelector)

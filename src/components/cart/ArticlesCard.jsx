@@ -28,17 +28,7 @@ const ArticlesCard = ({ item, sendEvent }) => {
   })
 
   // Get hit attribute from config file
-  const {
-    objectID,
-    image,
-    imageAlt,
-    category,
-    productName,
-    brand,
-    price: priceForTotal,
-    sizeFilter,
-    colour,
-  } = hitsConfig
+  const { image, category, productName, brand, sizeFilter, colour } = hitsConfig
 
   return (
     <div>

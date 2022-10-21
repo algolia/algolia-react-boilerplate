@@ -61,6 +61,3 @@ export const predictClient = algoliapredict(
   predictClientCreds.APIKey,
   predictClientCreds.region
 )
-
-// Export an active insights client
-// export const insightsClient = aa;
