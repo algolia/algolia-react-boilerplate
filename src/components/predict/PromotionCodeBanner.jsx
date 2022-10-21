@@ -5,4 +5,5 @@ function PromotionCodeBanner({ cartValue, valueToAdd }) {
     </div>
   )
 }
+
 export default PromotionCodeBanner

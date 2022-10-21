@@ -6,7 +6,7 @@ import { atom } from 'recoil'
 // This atom stores the current user profile for Predict
 export const predictUserProfileAtom = atom({
   key: 'predictUserProfileAtom', // unique ID
-  default: null, // default value
+  default: { user: 'anonymous' }, // default value
 })
 
 // This atom stores the current User ID related to Predict

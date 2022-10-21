@@ -129,6 +129,8 @@ const CartModal = () => {
             onClick={() => {
               sendEvent('conversion', cartValue, 'Cart: Checkout')
               triggerAlert('Thanks using Algolia 💙')
+              setCartValue([])
+              localStorage.removeItem('myCart')
             }}
           >
             <p>{t('checkout')}</p>

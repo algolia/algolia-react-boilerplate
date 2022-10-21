@@ -40,7 +40,6 @@ import {
   framerMotionTransition,
 } from '@/config/animationConfig'
 import { addToCartSelector } from '@/config/cartFunctions'
-
 import {
   shouldHaveFbtProducts,
   shouldHaveRelatedProducts,
@@ -56,13 +55,10 @@ import './SCSS/productDetails.scss'
 
 // Import and use translation
 import { useTranslation } from 'react-i18next'
-import { useHits } from 'react-instantsearch-hooks-web'
 import FbtAddAll from '@/components/fbtPdp/FbtAddAll'
 import FbtItems from '@/components/recommend/fbtItems/FbtProducts'
 
 const ProductDetails = () => {
-  const { sendEvent } = useHits()
-
   const [addToCartIsClicked, setAddToCartIsClicked] = useState(false)
 
   // location in order to access current objectID
@@ -119,6 +115,19 @@ const ProductDetails = () => {
   const { isDesktop } = useRecoilValue(windowSize)
 
   const setAddToCartAtom = useSetRecoilState(addToCartSelector)
+  const cartState = useRecoilValue(addToCartSelector)
+
+  // Fetch and compute the current total value of the users cart
+  const [currentCartTotal, setCurrentCartTotal] = useState(
+    cartState.reduce((acc, val) => (acc += val.unformated_price), 0)
+  )
+
+  // Adjust the current total when the state of the cart changes
+  useEffect(() => {
+    setCurrentCartTotal(
+      cartState.reduce((acc, val) => (acc += val.unformated_price), 0)
+    )
+  }, [cartState])
 
   // Get hit attribute from config file
   const { image, productName, brand, sizeFilter, colour, colourHexa } =
@@ -134,17 +143,25 @@ const ProductDetails = () => {
 
   let fbtRecommendationsProducts
   let relatedRecommendationsProducts
+  let totalFbtProductsAmount
 
   if (shouldHaveFbtProductsValue) {
     const { recommendations } = useFrequentlyBoughtTogether({
       recommendClient,
       indexName,
       objectIDs: [currentObjectID],
+      maxRecommendations: 2,
     })
-    fbtRecommendationsProducts = recommendations
-    if (recommendations.length > 0) {
-      fbtRecommendationsProducts = [hit, ...recommendations]
-    }
+
+    // Add the original product from the PDP at the start of the recommendations
+    fbtRecommendationsProducts =
+      recommendations.length > 0 ? [hit, ...recommendations] : recommendations
+
+    // Compute the total if all recommendations purchased, used for predict in addAllFbt component
+    totalFbtProductsAmount = fbtRecommendationsProducts.reduce(
+      (acc, val) => (acc += val.unformated_price),
+      0
+    )
   }
 
   if (shouldHaveRelatedProductsValue) {
@@ -284,7 +301,7 @@ const ProductDetails = () => {
                   setAddToCartIsClicked(true)
                   setTimeout(() => setAddToCartIsClicked(false), 300)
                   // Send event conversion to Algolia API
-                  sendEvent('conversion', hit, 'PDP: Add to cart')
+                  // sendEvent('conversion', hit, 'PDP: Add to cart')
                 }}
               >
                 <CartPicto />
@@ -317,7 +334,7 @@ const ProductDetails = () => {
               </div>
             )}
           {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 1 && (
-            <>
+            <div className="fbt-outer-container">
               <h3 className="title">{t('fbtTitle')}</h3>
               <div
                 className={`${
@@ -325,13 +342,17 @@ const ProductDetails = () => {
                 }`}
               >
                 <div className="fbt-container__component">
-                  {fbtRecommendationsProducts.slice(0, 3).map((item, i) => {
+                  {fbtRecommendationsProducts.map((item, i) => {
                     return <FbtItems item={item} index={i} key={i} />
                   })}
                 </div>
-                <FbtAddAll items={fbtRecommendationsProducts.slice(0, 3)} />
+                <FbtAddAll
+                  totalFbtProductsAmount={totalFbtProductsAmount}
+                  currentCartTotal={currentCartTotal}
+                  items={fbtRecommendationsProducts.slice(0, 3)}
+                />
               </div>
-            </>
+            </div>
           )}
         </div>
       )}
