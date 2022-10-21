@@ -392,6 +392,7 @@
     }
     .price {
       @include price($secondary-color);
+      margin-top: 1rem
     }
 
     .size{
@@ -405,7 +406,7 @@
     .colors{
       @include colorName($main-color);
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 0.3rem;}
   }
   &:hover {

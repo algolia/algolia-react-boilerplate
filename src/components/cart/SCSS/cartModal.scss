@@ -95,6 +95,15 @@
     @include hitHorizontalUI();
     margin: 0 auto;
     width: 80%;
+
+    .colors{
+    &__badge{
+      align-self: center;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+  }
   }
 
   &__IconWrapper{

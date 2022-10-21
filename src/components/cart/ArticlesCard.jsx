@@ -32,7 +32,8 @@ const ArticlesCard = ({ item, sendEvent }) => {
   })
 
   // Get hit attribute from config file
-  const { image, productName, brand, sizeFilter, colour } = hitsConfig
+  const { image, productName, brand, sizeFilter, colour, colourHexa } =
+    hitsConfig
 
   return (
     <>
@@ -52,21 +53,28 @@ const ArticlesCard = ({ item, sendEvent }) => {
         <div className="infos">
           <p className="brand">{get(item, brand)}</p>
           <p className="productName">{get(item, productName)}</p>
-          <p className="size">
-            {t('sizeTitle')}:
-            <span>
-              {
-                get(item, sizeFilter)[
-                  Math.floor(Math.random() * get(item, sizeFilter).length)
-                ]
-              }
-            </span>
-          </p>
+          {get(item, sizeFilter) && (
+            <p className="size">
+              {t('sizeTitle')}:
+              <span>
+                {
+                  get(item, sizeFilter)[
+                    Math.floor(Math.random() * get(item, sizeFilter).length)
+                  ]
+                }
+              </span>
+            </p>
+          )}
+
           {get(item, colour) && (
             <div className="colors">
-              <p>
-                {t('colorTitle')}: <span> {get(item, colour)}</span>
-              </p>
+              <p>{t('colorTitle')}:</p> <span>{get(item, colour)}</span>{' '}
+              {get(item, colourHexa) && (
+                <span
+                  className="colors__badge"
+                  style={{ background: get(item, colourHexa).split(';')[1] }}
+                ></span>
+              )}
             </div>
           )}
           <p className="price">{currencySymbol + item.totalPrice.toFixed(2)}</p>
