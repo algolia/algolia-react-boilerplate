@@ -127,7 +127,13 @@ function CustomSearchBox(props) {
           </div>
         )}
         {!!hasKeystroke && (
-          <div className="searchbox__btn">
+          <div
+            className={
+              pathname !== '/search'
+                ? 'searchbox__btn'
+                : 'searchbox__btn searchbox__btn-srp'
+            }
+          >
             <div
               className="closeBtn"
               onClick={() => {
@@ -138,40 +144,43 @@ function CustomSearchBox(props) {
             >
               <SimpleCloseButton />
             </div>
-            <div
-              className="submitBtn"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-              onClick={() => {
-                setQueryState(query)
-                useStoreQueryToLocalStorage(query)
-                if (query !== '') {
-                  navigate({
-                    pathname: '/search',
-                    search: `?${searchParams}`,
-                  })
-                }
-              }}
-            >
-              <p
-                className={
-                  isHovered
-                    ? 'submitBtn__text submitBtn__text-active'
-                    : 'submitBtn__text submitBtn__text-inactive'
-                }
-              >
-                {t('submit')}
-              </p>
+            {pathname !== '/search' && (
               <div
-                className={
-                  isHovered
-                    ? 'submitBtn__picto submitBtn__picto-inactive'
-                    : 'submitBtn__picto submitBtn__picto-active'
-                }
+                className="submitBtn"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onClick={() => {
+                  setQueryState(query)
+                  useStoreQueryToLocalStorage(query)
+                  if (query !== '') {
+                    navigate({
+                      pathname: '/search',
+                      search: `?${searchParams}`,
+                    })
+                  }
+                }}
               >
-                <SubmitPicto />
+                <p
+                  className={
+                    isHovered
+                      ? 'submitBtn__text submitBtn__text-active'
+                      : 'submitBtn__text submitBtn__text-inactive'
+                  }
+                >
+                  {t('submit')}
+                </p>
+
+                <div
+                  className={
+                    isHovered
+                      ? 'submitBtn__picto submitBtn__picto-inactive'
+                      : 'submitBtn__picto submitBtn__picto-active'
+                  }
+                >
+                  <SubmitPicto />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         )}
         {navigationState && isSearchInCategory && (
