@@ -29,7 +29,7 @@ function CustomHits(props) {
 
   // Decide whether to use hits from hook or props
   useEffect(() => {
-    // // Check the props for the hits
+    // Check the props for the hits
     if (props.hits != undefined) {
       setHits(props.hits)
       return
