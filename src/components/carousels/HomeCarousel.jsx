@@ -13,11 +13,6 @@ import { hitsPerCarousel, isCarouselLoaded } from '@/config/carouselConfig'
 import { personaSelectedAtom } from '@/config/personaConfig'
 import { segmentSelectedAtom } from '@/config/segmentConfig'
 
-// In case of img loading error
-
-// import Price component
-import { windowSize } from '@/hooks/useScreenSize'
-
 //Import scope SCSS
 import SkeletonLoader from '../hits/components/HitsSkeletonLoader'
 import './SCSS/carousels.scss'
@@ -31,7 +26,9 @@ const HomeCarousel = ({ context, title }) => {
   const userToken = useRecoilValue(personaSelectedAtom)
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom)
   const setCarouselLoaded = useSetRecoilState(isCarouselLoaded)
-  setCarouselLoaded(true)
+
+  useEffect(() => setCarouselLoaded(true), [])
+
   return (
     <div className="home-carousel">
       <Index indexId={title} indexName={index}>

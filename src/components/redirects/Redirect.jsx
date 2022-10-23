@@ -1,3 +1,5 @@
+import { useEffect, memo } from 'react'
+
 //Algolia's import
 import { useQueryRules } from 'react-instantsearch-hooks-web'
 
@@ -29,7 +31,12 @@ function Redirect(props) {
   let [searchParams, setSearchParams] = useSearchParams()
 
   const match = items.find((data) => Boolean(data.redirect))
-  match && match.redirect ? setIsRedirectModal(true) : setIsRedirectModal(false)
+
+  useEffect(() => {
+    match && match.redirect
+      ? setIsRedirectModal(true)
+      : setIsRedirectModal(false)
+  }, [match])
 
   if (match && match.redirect && isRedirectModal) {
     return (
@@ -73,4 +80,4 @@ function Redirect(props) {
   } else return null
 }
 
-export default Redirect
+export default memo(Redirect)
