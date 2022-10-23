@@ -47,7 +47,7 @@ const ProductDetails = lazy(() =>
   import('./pages/productDetailsPage/ProductDetails')
 )
 
-import SearchResultsPage from './pages/searchResultPage/SearchResultsPage'
+import SearchResultsPage from './pages/searchResultsPage/SearchResultsPage'
 
 import PredictUserProfileProvider from './components/predict/PredictUserProfileProvider'
 
