@@ -112,4 +112,4 @@ const NoResults = () => {
   )
 }
 
-export { NoResults }
+export default NoResults

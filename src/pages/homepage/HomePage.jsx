@@ -45,7 +45,6 @@ import './homepage.scss'
 
 const HomePage = () => {
   const carouselLoaded = useRecoilValue(isCarouselLoaded)
-  console.log(carouselLoaded)
 
   const [isHomepage1Loaded, setHomepage1Loaded] = useState(false)
   const [isHomepage2Loaded, setHomepage2Loaded] = useState(false)
