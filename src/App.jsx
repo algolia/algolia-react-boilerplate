@@ -14,6 +14,12 @@ import { Main } from './Main'
 import ScrollToTop from './config/scrollOnTop'
 
 const App = () => {
+  useEffect(() => {
+    window.process = {
+      ...window.process,
+    }
+  }, [])
+
   return (
     <RecoilRoot>
       <Router>
