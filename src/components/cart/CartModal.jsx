@@ -107,11 +107,13 @@ const CartModal = () => {
         )}
       </h3>
       <div className="modal-container__line"></div>
-      {cartValue.map((item, i) => {
-        if (item.qty !== 0) {
-          return <ArticlesCard item={item} key={i} sendEvent={sendEvent} />
-        }
-      })}
+      <div className="articles">
+        {cartValue.map((item, i) => {
+          if (item.qty !== 0) {
+            return <ArticlesCard item={item} key={i} sendEvent={sendEvent} />
+          }
+        })}
+      </div>
       {cartValue.length === 0 && <p>{t('yourCartIsEmpty')}</p>}
       {cartValue.length !== 0 && (
         <div className="modal-container__buttons">
