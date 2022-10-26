@@ -11,10 +11,10 @@ import RelatedItem from '../relatedItems/RelatedProducts'
 import { mainIndex, recommendClient } from '@/config/algoliaEnvConfig'
 import { segmentSelectedAtom } from '@/config/segmentConfig'
 import { trendingConfig } from '@/config/trendingConfig'
+import { navigationStateAtom } from '@/config/navigationConfig'
 
 //Use Translation
 import { useTranslation } from 'react-i18next'
-import { navigationStateAtom } from '@/config/navigationConfig'
 
 // Trending provides a carousel of trending products, filtered if needed by any facet
 const TrendingProducts = ({ facetName, facetValue }) => {
