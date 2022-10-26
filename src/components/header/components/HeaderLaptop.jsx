@@ -1,6 +1,3 @@
-// Render the Header component in Main.jsx, for large screen sizes
-import { useState } from 'react'
-
 // React Router
 import { Link } from 'react-router-dom'
 
@@ -28,17 +25,14 @@ import { rulesAtom } from '@/config/appliedRulesConfig'
 // Custom Hooks
 import useOutsideClick from '@/hooks/useOutsideClick'
 
-import logo from '@/assets/logo/logo.webp'
 import { AlgoliaLogo } from '@/assets/svg/SvgIndex'
 
 // Import Components
 import CustomSearchBox from '@/components/searchbox/SearchBox'
-import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
 import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch'
 import Navigation from './Navigation'
 
 const HeaderLaptop = () => {
-  const [isLogoLoaded, setIsLogoLoaded] = useState(false)
   const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom)
   const setQueryState = useSetRecoilState(queryAtom)
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch)
@@ -52,9 +46,6 @@ const HeaderLaptop = () => {
   return (
     <div className="container">
       <div className="container__header-top">
-        {/* <div className="container__header-top__title">
-          <h1>Demo BoilerPlate</h1>
-        </div> */}
         <div className="container__header-top__logo">
           <Link
             to="/"
