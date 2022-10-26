@@ -9,16 +9,15 @@ import {
 
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 //Import scope SCSS
 import './SCSS/footer.scss'
 
-import logo from '@/assets/logo/logoFooter.webp'
-
 import { windowSize } from '@/hooks/useScreenSize'
+import { AlgoliaLogo } from '@/assets/svg/SvgIndex'
 
-const Footer = (props) => {
+const Footer = () => {
   const { isDesktop } = useRecoilValue(windowSize)
 
   // Import the navigation links, as defined in the config
@@ -26,8 +25,7 @@ const Footer = (props) => {
 
   let [searchParams, setSearchParams] = useSearchParams()
 
-  const [navigationState, setNavigationState] =
-    useRecoilState(navigationStateAtom)
+  const setNavigationState = useSetRecoilState(navigationStateAtom)
 
   const navigate = useNavigate()
 
@@ -37,7 +35,7 @@ const Footer = (props) => {
         <div className="footer__container-column col1">
           <div className="col1__infos">
             <div className="col1__imageWp">
-              <img className="col1__img" src={logo} alt="logo" />
+              <AlgoliaLogo />
             </div>
 
             <ul>

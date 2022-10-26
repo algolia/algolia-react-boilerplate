@@ -166,13 +166,21 @@
     align-items: center;
     width: 70%;
     height: 100%;
+    overflow: scroll;
+    padding: 1rem 0;
+
 
   }
 
   .fbt-component__plus-icon{
     svg{
       width: 35px;
+      path{
+        fill: $secondary-color;
+      }
     }
+  
+
    
   }
 
@@ -313,13 +321,27 @@
   }
   .fbt-container__component {
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    overflow: scroll;
+    padding: 1rem;
+    
+    .fbt-component:nth-last-child(1) .fbt-component__plus-icon {
+      visibility: hidden;
+      opacity: 0;
+    }
     .fbt-component {
       display: flex;
-      flex-direction: column;
       justify-content: center;
+      min-width: clamp(15rem, 25%, 25%);
+    
       .fbt-component__plus-icon {
         margin-top: 1rem;
+        svg{
+          width: 20px;
+          path{
+            fill: $secondary-color;
+          }
+        }
       }
     }
    

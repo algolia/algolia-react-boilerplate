@@ -121,6 +121,9 @@
         justify-content: center;
         align-items: center;
         width: 25px;
+        path{
+          fill: $secondary-color;
+        }
       }
     }
   }
@@ -164,7 +167,7 @@
       $secondary-color
     );
     position: relative;
-    padding: 0;
+    width: 9rem;
     &__imgWrapper {
       margin: 0;
       &__heart {
@@ -211,6 +214,7 @@
     top: 1.2rem;
     font-weight: bold;
     color: $secondary-color;
+    cursor: pointer;
   }
 }
 

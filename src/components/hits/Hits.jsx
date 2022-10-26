@@ -11,9 +11,6 @@ import RankingIcon from './components/RankingIcon'
 // Import Badge config
 import { badgeCriteria } from '@/config/badgeConfig'
 
-// In case of img loading error
-import * as placeHolderError from '@/assets/logo/logo.webp'
-
 // Lodash function to acces to precise attribute
 import get from 'lodash/get'
 // Animations
@@ -213,7 +210,11 @@ const Hit = ({ hit, sendEvent }) => {
                   {itemQty}
                 </p>
                 <div
-                  className={cartPictoPlusClicked ? 'picto-active' : ''}
+                  className={
+                    cartPictoPlusClicked
+                      ? 'picto-active srpItem__infosDown__cart-plus'
+                      : 'srpItem__infosDown__cart-plus'
+                  }
                   onClick={() => {
                     setCartPictoPlusClicked(true)
                     setTimeout(() => setCartPictoPlusClicked(false), 300)

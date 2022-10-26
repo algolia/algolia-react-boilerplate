@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil'
 // import config file for state of facets
 import { currencySymbolAtom } from '@/config/currencyConfig'
 import { hitsConfig } from '@/config/hitsConfig'
+import { Fragment } from 'react'
 
 // Function to display the price in a right format for the currentRefinement
 const displayPrice = (i, currencySymbol, refinementPriceLabels) => {
@@ -47,7 +48,7 @@ function CurrentRefinements(props) {
       {items.map((item) => {
         if (item.attribute.includes('price')) {
           return (
-            <>
+            <Fragment key={item}>
               {item.items ? (
                 <>
                   <CurrentRefinementGeneral item={item} />
@@ -57,7 +58,7 @@ function CurrentRefinements(props) {
                   <CurrentRefinementGeneral item={item} />
                 </>
               )}
-            </>
+            </Fragment>
           )
         }
         if (item.attribute.includes(colourHexa)) {
@@ -82,7 +83,7 @@ function CurrentRefinements(props) {
           )
         }
         return (
-          <>
+          <Fragment key={item}>
             {item.items ? (
               <>
                 <CurrentRefinementGeneral item={item} />
@@ -90,7 +91,7 @@ function CurrentRefinements(props) {
             ) : (
               <CurrentRefinementGeneral item={item} />
             )}
-          </>
+          </Fragment>
         )
       })}
     </div>
