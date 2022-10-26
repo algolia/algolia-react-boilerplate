@@ -27,8 +27,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { ChevronLeft, CartPicto } from '@/assets/svg/SvgIndex'
 import Price from '@/components/hits/components/Price.jsx'
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts'
-// In case of img loading error
-import * as placeHolderError from '@/assets/logo/logo.webp'
+
 // Configuration
 import {
   mainIndex,

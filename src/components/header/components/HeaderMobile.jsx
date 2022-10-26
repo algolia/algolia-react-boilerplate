@@ -11,9 +11,6 @@ import { motion } from 'framer-motion'
 // eslint-disable-next-line import/order
 import { queryAtom } from '@/config/searchboxConfig'
 
-// Import logo URL for header
-import logoMobile from '@/assets/logo/LogoMobile.webp'
-
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
 
 //import Navigation config

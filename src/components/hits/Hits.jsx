@@ -11,9 +11,6 @@ import RankingIcon from './components/RankingIcon'
 // Import Badge config
 import { badgeCriteria } from '@/config/badgeConfig'
 
-// In case of img loading error
-import * as placeHolderError from '@/assets/logo/logo.webp'
-
 // Lodash function to acces to precise attribute
 import get from 'lodash/get'
 // Animations
