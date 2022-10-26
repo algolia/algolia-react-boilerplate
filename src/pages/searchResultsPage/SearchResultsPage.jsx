@@ -75,6 +75,7 @@ const SearchResultsPage = () => {
   }, [hits])
 
   const [showResults, setShowResults] = useState(1)
+  const [configureSetup, setConfigureSetup] = useState()
 
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners)
@@ -128,6 +129,7 @@ const SearchResultsPage = () => {
   let facetValue
 
   useEffect(() => {
+    setConfigureSetup(configureProps)
     // Trending needs to know if you are on category page
     if (
       navigationState?.type === 'filter' &&
@@ -248,7 +250,7 @@ const SearchResultsPage = () => {
                   <CustomClearRefinements />
                 </Suspense>
               </div>
-              <Configure {...configureProps} />
+              <Configure {...configureSetup} />
               {/* Render the Injected Hits component or the Standard Hits component */}
               {shouldInjectContent ? (
                 <Suspense fallback={<SkeletonLoader type={'hit'} />}>

@@ -2,7 +2,6 @@ import React, { memo } from 'react'
 
 export const AlgoliaLogo = memo(() => (
   <svg
-    class=""
     width="2197"
     height="501"
     viewBox="0 0 2197 501"

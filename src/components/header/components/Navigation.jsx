@@ -143,6 +143,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
                 type: link.type,
                 name: link.name,
                 action: action,
+                segment: link.segment,
               })
               searchParams.set('category', link.name)
               navigate({

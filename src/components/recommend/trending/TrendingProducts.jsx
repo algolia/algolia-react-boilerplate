@@ -14,6 +14,7 @@ import { trendingConfig } from '@/config/trendingConfig'
 
 //Use Translation
 import { useTranslation } from 'react-i18next'
+import { navigationStateAtom } from '@/config/navigationConfig'
 
 // Trending provides a carousel of trending products, filtered if needed by any facet
 const TrendingProducts = ({ facetName, facetValue }) => {
@@ -22,13 +23,14 @@ const TrendingProducts = ({ facetName, facetValue }) => {
   const index = useRecoilValue(mainIndex)
   const { threshold, maxProductsRecommendations } = trendingConfig
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom)
+  const { segment } = useRecoilValue(navigationStateAtom)
 
   // Import const translation
   // Use the translator
   const { t } = useTranslation('translation', {
     keyPrefix: 'srp',
   })
-
+  console.log(segment)
   return (
     <div>
       <TrendingItems
@@ -43,7 +45,11 @@ const TrendingProducts = ({ facetName, facetValue }) => {
         threshold={threshold}
         facetName={facetName}
         facetValue={facetValue}
-        queryParameters={{ optionalFilters: segmentOptionalFilters }}
+        queryParameters={{
+          optionalFilters: segmentOptionalFilters
+            ? segmentOptionalFilters
+            : segment,
+        }}
       />
     </div>
   )
