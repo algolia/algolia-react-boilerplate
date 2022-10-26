@@ -24,15 +24,15 @@
         height: 100%;
       }
       &__logo {
-        width: 100%;
+        width: 10rem;
         min-height: 7rem;
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        img {
+        svg {
           margin: 0 auto;
-          width: 90%;
+          width: 100%;
           height: 100%;
         }
       }
@@ -146,7 +146,10 @@
       }
     }
     .container__header-top__logo {
-      width: 35% !important;
+      // width: 35% !important;
+      svg{
+        width: 3rem;
+      }
     }
     .searchbox-container-mobile {
       display: flex;

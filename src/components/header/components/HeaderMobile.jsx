@@ -37,6 +37,7 @@ import { clickHamburger } from '@/config/cartFunctions'
 import { shouldHaveVoiceSearch } from '@/config/featuresConfig'
 import usePreventScrolling from '@/hooks/usePreventScrolling'
 import useOutsideClick from '@/hooks/useOutsideClick'
+import { AlgoliaLogoMobile } from '@/assets/svg/SvgIndex'
 
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
@@ -84,7 +85,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
               rulesApplied([])
             }}
           >
-            <img src={logoMobile} alt="" width="200" />
+            <AlgoliaLogoMobile />
           </Link>
         </div>
         {/* For a search box Simple center */}

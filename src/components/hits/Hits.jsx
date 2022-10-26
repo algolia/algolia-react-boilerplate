@@ -213,7 +213,11 @@ const Hit = ({ hit, sendEvent }) => {
                   {itemQty}
                 </p>
                 <div
-                  className={cartPictoPlusClicked ? 'picto-active' : ''}
+                  className={
+                    cartPictoPlusClicked
+                      ? 'picto-active srpItem__infosDown__cart-plus'
+                      : 'srpItem__infosDown__cart-plus'
+                  }
                   onClick={() => {
                     setCartPictoPlusClicked(true)
                     setTimeout(() => setCartPictoPlusClicked(false), 300)

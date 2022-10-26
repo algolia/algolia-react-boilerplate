@@ -21,7 +21,7 @@
   justify-content: center;
   align-items: center;
   background: $background;
-  border-radius: 2px;
+  border-radius: 3px;
   transition: all 0.3s ease-in-out;
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -334,6 +334,13 @@
       display: flex;
       justify-content: space-between;
       width: 40%;
+      &-plus{
+      svg{
+        path{
+          fill: $secondary-color;
+        }
+      }
+      }
       &-inactive {
         font-weight: 300 !important;
         color: $grey-light-color !important;

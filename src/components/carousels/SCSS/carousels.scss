@@ -4,10 +4,10 @@
 @use '../../../scss/partials' as *;
 
 .home-carousel {
-  margin: 2rem 4rem;
+  margin: 2rem 2rem;
 
   h3 {
-    @include titleH2($secondary-color);
+    @include titleH3($secondary-color);
   }
   .carousel {
     cursor: grab;
@@ -40,7 +40,7 @@
       gap: 1rem;
       padding: 0.5rem 0;
       .item {
-        min-width: clamp(13rem, 25%, 30%);
+        min-width: clamp(13rem, 25%, 19%);
         padding: 1rem;
         position: relative;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,

@@ -29,6 +29,7 @@ import { rulesAtom } from '@/config/appliedRulesConfig'
 import useOutsideClick from '@/hooks/useOutsideClick'
 
 import logo from '@/assets/logo/logo.webp'
+import { AlgoliaLogo } from '@/assets/svg/SvgIndex'
 
 // Import Components
 import CustomSearchBox from '@/components/searchbox/SearchBox'
@@ -51,9 +52,9 @@ const HeaderLaptop = () => {
   return (
     <div className="container">
       <div className="container__header-top">
-        <div className="container__header-top__title">
+        {/* <div className="container__header-top__title">
           <h1>Demo BoilerPlate</h1>
-        </div>
+        </div> */}
         <div className="container__header-top__logo">
           <Link
             to="/"
@@ -66,13 +67,8 @@ const HeaderLaptop = () => {
             }}
           >
             {/* Add possibility to change the Logo */}
-            <img
-              src={logo}
-              alt=""
-              onLoad={() => setIsLogoLoaded(true)}
-              width="200"
-            />
-            {isLogoLoaded === false && <CustomSkeleton type="logo" />}
+            <AlgoliaLogo />
+            {/* {isLogoLoaded === false && <CustomSkeleton type="logo" />} */}
           </Link>
         </div>
         {/* For a search box Simple center */}
