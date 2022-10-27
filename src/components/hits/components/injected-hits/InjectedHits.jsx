@@ -8,11 +8,7 @@ import { useRecoilValue } from 'recoil'
 
 import { lazy, useEffect, useState, useRef } from 'react'
 // Algolia
-import {
-  useInfiniteHits,
-  useInstantSearch,
-  useQueryRules,
-} from 'react-instantsearch-hooks-web'
+import { useInstantSearch, useQueryRules } from 'react-instantsearch-hooks-web'
 
 // Components
 import { windowSize } from '@/hooks/useScreenSize'

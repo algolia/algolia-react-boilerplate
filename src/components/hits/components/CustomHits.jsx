@@ -7,39 +7,14 @@ import { useInfiniteHits } from 'react-instantsearch-hooks-web'
 import { windowSize } from '@/hooks/useScreenSize'
 import { useRecoilValue } from 'recoil'
 
-import { hitsAtom } from '@/config/hitsConfig'
-
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
 import { Hit } from '../Hits'
 
 function CustomHits(props) {
-  // If hits were not provided via props, we will use the ones from the IS hook (see footnote)
-  const {
-    hits: hookHits,
-    isLastPage,
-    showMore,
-    sendEvent,
-  } = useInfiniteHits(props)
-
-  console.log(hookHits)
-
+  const { hits, isLastPage, showMore, sendEvent } = props
   const { mobile, tablet } = useRecoilValue(windowSize)
-  const [hits, setHits] = useState([])
-  const hitsState = useRecoilValue(hitsAtom)
-  const [hitsLoaded, setHitsLoaded] = useState(false)
+  const [hitsLoaded, setHitsLoaded] = useState(true)
   const productCard = useRef(null)
-
-  // Decide whether to use hits from hook or props
-  useEffect(() => {
-    // Check the props for the hits
-    if (props.hits != undefined) {
-      setHits(props.hits)
-      return
-    }
-
-    // Use the hook
-    else setHits(hookHits)
-  }, [props])
 
   useEffect(() => {
     if (hits.length > 0) {
