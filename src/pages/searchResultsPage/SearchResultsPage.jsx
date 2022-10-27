@@ -5,7 +5,6 @@ import { Fragment, lazy, Suspense, useEffect, useState } from 'react'
 import {
   Configure,
   Index,
-  useHits,
   useInfiniteHits,
 } from 'react-instantsearch-hooks-web'
 
@@ -16,7 +15,7 @@ import { useSearchParams } from 'react-router-dom'
 import { windowSize } from '@/hooks/useScreenSize'
 
 // State Manager Recoil
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Import Components
 import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader'
@@ -41,7 +40,7 @@ import {
   shouldHaveTrendingFacets,
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig'
-import { hitsPerPage } from '@/config/hitsConfig'
+import { setNbHitsAtom } from '@/config/hitsConfig'
 import {
   personalizationImpact,
   personaSelectedAtom,
@@ -59,8 +58,6 @@ import { FilterPicto } from '@/assets/svg/SvgIndex'
 import CustomHits from '@/components/hits/components/CustomHits'
 import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits'
 
-import NoResults from '@/components/noResults/noResults'
-
 import Banner from '@/components/banners/Banner'
 
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig'
@@ -71,13 +68,8 @@ import '@/pages/searchResultsPage/searchResultsPage.scss'
 const SearchResultsPage = () => {
   const { hits, isLastPage, showMore, sendEvent } = useInfiniteHits()
 
-  useEffect(() => {
-    if (hits.length === 0) {
-      setShowResults(false)
-    } else if (hits.length > 0 && !showResults) {
-      setShowResults(true)
-    }
-  }, [hits])
+  const setNbHit = useSetRecoilState(setNbHitsAtom)
+  setNbHit(hits.length)
 
   const [showResults, setShowResults] = useState(1)
 
@@ -99,7 +91,7 @@ const SearchResultsPage = () => {
   const { injectedContentIndex } = useRecoilValue(indexNames)
 
   // Define Stat Const
-  const { hitsPerPageNotInjected } = hitsPerPage
+  // const { hitsPerPageNotInjected } = hitsPerPage
 
   // Define Price Sort By Const
   const { labelIndex } = useRecoilValue(sortBy)
@@ -144,7 +136,7 @@ const SearchResultsPage = () => {
   }, [navigationState])
 
   let configureProps = {
-    hitsPerPage: hitsPerPageNotInjected,
+    // hitsPerPage: hitsPerPageNotInjected,
     analytics: false,
     clickAnalytics: true,
     enablePersonalization: true,
@@ -166,7 +158,7 @@ const SearchResultsPage = () => {
 
   return (
     <>
-      {!showResults && <NoResults />}
+      {/* {!showResults && <NoResults />} */}
       {shouldDisplayBanners && <Banner />}
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}

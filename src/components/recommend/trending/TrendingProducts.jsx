@@ -30,7 +30,7 @@ const TrendingProducts = ({ facetName, facetValue }) => {
   const { t } = useTranslation('translation', {
     keyPrefix: 'srp',
   })
-  console.log(segment)
+
   return (
     <div>
       <TrendingItems
