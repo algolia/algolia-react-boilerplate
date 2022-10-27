@@ -11,6 +11,7 @@ import RelatedItem from '../relatedItems/RelatedProducts'
 import { mainIndex, recommendClient } from '@/config/algoliaEnvConfig'
 import { segmentSelectedAtom } from '@/config/segmentConfig'
 import { trendingConfig } from '@/config/trendingConfig'
+import { navigationStateAtom } from '@/config/navigationConfig'
 
 //Use Translation
 import { useTranslation } from 'react-i18next'
@@ -22,13 +23,14 @@ const TrendingProducts = ({ facetName, facetValue }) => {
   const index = useRecoilValue(mainIndex)
   const { threshold, maxProductsRecommendations } = trendingConfig
   const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom)
+  const { segment } = useRecoilValue(navigationStateAtom)
 
   // Import const translation
   // Use the translator
   const { t } = useTranslation('translation', {
     keyPrefix: 'srp',
   })
-
+  console.log(segment)
   return (
     <div>
       <TrendingItems
@@ -43,7 +45,11 @@ const TrendingProducts = ({ facetName, facetValue }) => {
         threshold={threshold}
         facetName={facetName}
         facetValue={facetValue}
-        queryParameters={{ optionalFilters: segmentOptionalFilters }}
+        queryParameters={{
+          optionalFilters: segmentOptionalFilters
+            ? segmentOptionalFilters
+            : segment,
+        }}
       />
     </div>
   )

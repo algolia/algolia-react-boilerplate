@@ -8,15 +8,10 @@ import { useRecoilValue } from 'recoil'
 
 import { lazy, useEffect, useState, useRef } from 'react'
 // Algolia
-import {
-  useInfiniteHits,
-  useInstantSearch,
-  useQueryRules,
-} from 'react-instantsearch-hooks-web'
+import { useInstantSearch, useQueryRules } from 'react-instantsearch-hooks-web'
 
 // Components
 import { windowSize } from '@/hooks/useScreenSize'
-import { hitsAtom } from '@/config/hitsConfig'
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
 // Components lazy loaded
 
@@ -37,7 +32,7 @@ const contentTypeComponentMap = {
 // This component renders the custom query hits, but also injects them with content from rule data or the injection Index
 const InjectedHits = (props) => {
   // Get the regular hits
-  const { hits, isLastPage, showMore, sendEvent } = useInfiniteHits(props)
+  const { hits, isLastPage, showMore, sendEvent } = props
 
   // Get custom data from rules
   const { items: ruleData } = useQueryRules(props)
@@ -55,7 +50,6 @@ const InjectedHits = (props) => {
   const [injectedHits, setInjectedHits] = useState(hits)
 
   const { mobile, tablet } = useRecoilValue(windowSize)
-  const hitsState = useRecoilValue(hitsAtom)
   const [hitsLoaded, setHitsLoaded] = useState(false)
   const productCard = useRef(null)
 

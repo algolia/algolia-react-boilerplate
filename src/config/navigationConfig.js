@@ -24,16 +24,19 @@ export const linksHeader = atom({
       name: 'All',
       type: 'filter',
       filter: '',
+      segment: ''
     },
     {
       name: 'Mens',
       type: 'filter',
       filter: 'Mens',
+      segment: ['hierarchicalCategories.lvl0:Mens']
     },
     {
       name: 'Womens',
       type: 'filter',
       filter: 'Womens',
+      segment: ['hierarchicalCategories.lvl0:Womens']
     },
     // For an uilisation of your own made filter
     {
@@ -42,12 +45,14 @@ export const linksHeader = atom({
       filter: '',
       rawFilter:
         "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
+      segment: ['hierarchicalCategories.lvl0:Womens', 'brand:even&odd']
     },
     // This uses context from the Algolia dashboard, configured using Visual Editor
     {
       name: 'Accessories',
       type: 'context',
       context: 'accessories',
+      segment: ''
     },
   ],
 })
