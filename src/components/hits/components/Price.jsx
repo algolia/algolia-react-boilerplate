@@ -13,7 +13,7 @@ import {
   shouldDisplayCurrency,
 } from '@/config/currencyConfig'
 
-const PriceBuilder = ({ hit }) => {
+const Price = ({ hit }) => {
   const { price, onSale, onSalePrice } = hitsConfig
   const currencySymbol = useRecoilValue(currencySymbolAtom)
   const displayCurrency = useRecoilValue(shouldDisplayCurrency)
@@ -28,28 +28,36 @@ const PriceBuilder = ({ hit }) => {
   const rightCurrencies = ['€', 'kr']
 
   const isCurrencyRight = rightCurrencies.includes(currencySymbol)
+  const ShouldDisplayCurrencySymbol = displayCurrency ? currencySymbol : ''
   // Variable used to show the correct price depending on the item being 'on sale' or not
-  const userPaysPrice = isOnSale ? salePrice : hitPrice
-
+  const finalPrice = isOnSale ? salePrice : hitPrice
   return (
     <>
-      {!isCurrencyRight && displayCurrency && currencySymbol}
-      {userPaysPrice}
-      {isCurrencyRight && displayCurrency && currencySymbol}
-      {isOnSale && (
-        <s>
-          {!isCurrencyRight && currencySymbol && displayCurrency}
-          {hitPrice}
-          {isCurrencyRight && currencySymbol && displayCurrency}
-        </s>
+      {isCurrencyRight ? (
+        <>
+          <span>{finalPrice}</span>
+          <span>{ShouldDisplayCurrencySymbol}</span>
+          {isOnSale && (
+            <div>
+              <span>{hitPrice}</span>
+              <span>{ShouldDisplayCurrencySymbol}</span>
+            </div>
+          )}
+        </>
+      ) : (
+        <>
+          <span>{ShouldDisplayCurrencySymbol}</span>
+          <span>{finalPrice}</span>
+          {isOnSale && (
+            <div>
+              <span>{ShouldDisplayCurrencySymbol}</span>
+              <span>{hitPrice}</span>
+            </div>
+          )}
+        </>
       )}
     </>
   )
-}
-
-const Price = ({ hit }) => {
-  console.log(hit)
-  return <PriceBuilder hit={hit} />
 }
 
 export default Price

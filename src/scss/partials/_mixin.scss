@@ -455,6 +455,9 @@
   font-weight: 700;
   font-size: 1rem;
   margin-top: 1px;
+  span{
+    color: inherit;
+  }
   s {
     color: $grey-dark-color;
     text-decoration: line-through;
