@@ -2,6 +2,7 @@
 import { currencySymbolAtom } from '@/config/currencyConfig'
 import { Garbage, MinusPicto, PlusPicto } from '@/assets/svg/SvgIndex'
 import { hitsConfig } from '@/config/hitsConfig'
+import Price from '../hits/components/Price'
 import get from 'lodash/get'
 
 // Import cart from recoil
@@ -77,7 +78,11 @@ const ArticlesCard = ({ item, sendEvent }) => {
               )}
             </div>
           )}
-          <p className="price">{currencySymbol + item.totalPrice.toFixed(2)}</p>
+
+          <p className="price">
+            {' '}
+            <Price hit={item.totalPrice.toFixed(2)} />
+          </p>
         </div>
 
         <div className="articles__IconWrapper">
