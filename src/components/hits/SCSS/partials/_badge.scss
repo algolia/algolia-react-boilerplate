@@ -24,7 +24,12 @@
     height: 0.8rem;
     width: 0.8rem;
     border-radius: 50%;
-    border: 1px solid $secondary-color;
+
+    svg{
+      path{
+        fill: $grey-dark-color-60;
+      }
+    }
   }
   p {
     visibility: hidden;

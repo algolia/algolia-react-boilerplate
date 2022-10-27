@@ -32,6 +32,24 @@
     flex-grow: 2;
     padding: 0 1rem;
   }
+
+  &__searchInfos{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    p{
+      @include p-text($main-color, 600);
+      font-size: 1.4rem;
+        &:last-child{
+         color: $secondary-color; 
+         text-transform: capitalize
+
+      }
+    }
+  }
 }
 
 .refined-filter {

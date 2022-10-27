@@ -103,7 +103,6 @@
 @mixin titleH3($text-color: $secondary-color) {
   font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
   color: $text-color;
   text-transform: uppercase;
 }
@@ -359,6 +358,29 @@
         fill: $grey-light-color;
       }
     }
+
+    .cart {
+      background-color: $secondary-color;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg {
+        margin-top: 0.3rem;
+        width: 20px;
+        height: 100%;
+        path {
+          fill: $background-color;
+        }
+      }
+      &-active {
+        animation: bounce 0.3s ease-in-out forwards;
+      }
+    }
+
+    
   }
 }
 
@@ -647,7 +669,7 @@
 
 @mixin hamburger-menu-inactive {
   transition: 0.3s ease-in-out;
-  width: 30%;
+  width: 10rem;
   :nth-child(1) {
     transform: rotateZ(0deg);
     transform: translateY(-0.2rem);
@@ -705,4 +727,17 @@
   height: 100%;
   background: $background;
   z-index: 10;
+}
+
+
+@keyframes bounce {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

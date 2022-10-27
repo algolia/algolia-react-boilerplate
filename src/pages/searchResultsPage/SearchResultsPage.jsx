@@ -218,6 +218,13 @@ const SearchResultsPage = () => {
             </div>
 
             <div className="srp-container__hits">
+              {searchParams.get('query') !== '' && (
+                <div className="srp-container__searchInfos">
+                  <p>Showing results for: </p>
+                  <p>"{searchParams.get('query')}"</p>
+                </div>
+              )}
+
               {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
               <div className="srp-container__stats-sort">
                 {!isDesktop && (

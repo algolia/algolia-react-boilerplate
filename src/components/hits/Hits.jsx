@@ -5,7 +5,13 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import { Highlight } from 'react-instantsearch-hooks-web'
 // Import SVGs
-import { Heart, MinusPicto, PlusPicto } from '@/assets/svg/SvgIndex'
+import {
+  CartPicto,
+  Heart,
+  InfoPicto,
+  MinusPicto,
+  PlusPicto,
+} from '@/assets/svg/SvgIndex'
 import RankingIcon from './components/RankingIcon'
 
 // Import Badge config
@@ -68,6 +74,8 @@ const Hit = ({ hit, sendEvent }) => {
 
   const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
 
+  const [cartLogoClicked, setCartLogoClicked] = useState(false)
+
   // Get hit attribute from config file
   const { objectID, image, imageAlt, category, productName, brand } = hitsConfig
 
@@ -128,10 +136,9 @@ const Hit = ({ hit, sendEvent }) => {
         className="button-ranking-container"
         onClick={() => setShouldShowRankingInfo(!shouldShowRankingInfo)}
       >
-        <button
-          className="ranking-formula-button"
-          aria-label="show ranking"
-        ></button>
+        <button className="ranking-formula-button" aria-label="show ranking">
+          <InfoPicto />
+        </button>
         <p>Click to see Ranking</p>
       </div>
       <AnimatePresence>
@@ -189,6 +196,19 @@ const Hit = ({ hit, sendEvent }) => {
               <Price hit={hit} />
             </p>
             {shouldShowCartIcons && (
+              <div
+                className={cartLogoClicked ? 'cart cart-active' : 'cart'}
+                onClick={() => {
+                  setCartLogoClicked(true)
+                  setTimeout(() => setCartLogoClicked(false), 300)
+                  setAddToCartAtom(hit)
+                  sendEvent('conversion', hit, 'Homepage: Add to cart')
+                }}
+              >
+                <CartPicto />
+              </div>
+            )}
+            {/* {shouldShowCartIcons && (
               <div className="srpItem__infosDown__cart">
                 <div
                   className={`${
@@ -226,7 +246,7 @@ const Hit = ({ hit, sendEvent }) => {
                   <PlusPicto />
                 </div>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </>
