@@ -2,7 +2,12 @@
 import { Fragment, lazy, Suspense, useEffect, useState } from 'react'
 
 // eslint-disable-next-line import/order
-import { Configure, Index, useHits } from 'react-instantsearch-hooks-web'
+import {
+  Configure,
+  Index,
+  useHits,
+  useInfiniteHits,
+} from 'react-instantsearch-hooks-web'
 
 //import react router
 import { useSearchParams } from 'react-router-dom'
@@ -64,7 +69,7 @@ import { shouldHaveInjectedBanners } from '@/config/featuresConfig'
 import '@/pages/searchResultsPage/searchResultsPage.scss'
 
 const SearchResultsPage = () => {
-  const { hits } = useHits()
+  const { hits, isLastPage, showMore, sendEvent } = useInfiniteHits()
 
   useEffect(() => {
     if (hits.length === 0) {
@@ -75,7 +80,6 @@ const SearchResultsPage = () => {
   }, [hits])
 
   const [showResults, setShowResults] = useState(1)
-  const [configureSetup, setConfigureSetup] = useState()
 
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners)
@@ -129,7 +133,6 @@ const SearchResultsPage = () => {
   let facetValue
 
   useEffect(() => {
-    setConfigureSetup(configureProps)
     // Trending needs to know if you are on category page
     if (
       navigationState?.type === 'filter' &&
@@ -250,7 +253,7 @@ const SearchResultsPage = () => {
                   <CustomClearRefinements />
                 </Suspense>
               </div>
-              <Configure {...configureSetup} />
+              <Configure {...configureProps} />
               {/* Render the Injected Hits component or the Standard Hits component */}
               {shouldInjectContent ? (
                 <Suspense fallback={<SkeletonLoader type={'hit'} />}>
@@ -258,11 +261,21 @@ const SearchResultsPage = () => {
                     <Configure hitsPerPage={1} page={0} />
                   </Index>
                   {/* Injected content*/}
-                  <InjectedHits />
+                  <InjectedHits
+                    hits={hits}
+                    isLastPage={isLastPage}
+                    showMore={showMore}
+                    sendEvent={sendEvent}
+                  />
                 </Suspense>
               ) : (
                 <Suspense fallback={<SkeletonLoader type={'hit'} />}>
-                  <CustomHits />
+                  <CustomHits
+                    hits={hits}
+                    isLastPage={isLastPage}
+                    showMore={showMore}
+                    sendEvent={sendEvent}
+                  />
                 </Suspense>
               )}
             </div>
