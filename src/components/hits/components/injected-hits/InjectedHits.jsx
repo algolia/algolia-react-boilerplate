@@ -37,7 +37,7 @@ const contentTypeComponentMap = {
 // This component renders the custom query hits, but also injects them with content from rule data or the injection Index
 const InjectedHits = (props) => {
   // Get the regular hits
-  const { hits, isLastPage, showMore, sendEvent } = useInfiniteHits(props)
+  const { hits, isLastPage, showMore, sendEvent } = props
 
   // Get custom data from rules
   const { items: ruleData } = useQueryRules(props)

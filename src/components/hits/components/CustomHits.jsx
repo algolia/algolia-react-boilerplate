@@ -21,6 +21,8 @@ function CustomHits(props) {
     sendEvent,
   } = useInfiniteHits(props)
 
+  console.log(hookHits)
+
   const { mobile, tablet } = useRecoilValue(windowSize)
   const [hits, setHits] = useState([])
   const hitsState = useRecoilValue(hitsAtom)
