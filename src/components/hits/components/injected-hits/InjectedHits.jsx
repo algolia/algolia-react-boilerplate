@@ -12,7 +12,6 @@ import { useInstantSearch, useQueryRules } from 'react-instantsearch-hooks-web'
 
 // Components
 import { windowSize } from '@/hooks/useScreenSize'
-import { hitsAtom } from '@/config/hitsConfig'
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
 // Components lazy loaded
 
@@ -51,7 +50,6 @@ const InjectedHits = (props) => {
   const [injectedHits, setInjectedHits] = useState(hits)
 
   const { mobile, tablet } = useRecoilValue(windowSize)
-  const hitsState = useRecoilValue(hitsAtom)
   const [hitsLoaded, setHitsLoaded] = useState(false)
   const productCard = useRef(null)
 
