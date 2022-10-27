@@ -2,7 +2,6 @@
 
 // Import InstantSearch Functionality
 import { useEffect, useRef, useState } from 'react'
-import { useInfiniteHits } from 'react-instantsearch-hooks-web'
 
 import { windowSize } from '@/hooks/useScreenSize'
 import { useRecoilValue } from 'recoil'
