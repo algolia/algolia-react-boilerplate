@@ -3,7 +3,7 @@
 // Please ignore this configuration
 // ------------------------------------------
 
-import { atom, selector } from 'recoil'
+import { atom, selector, useSetRecoilState } from 'recoil'
 import { hitsConfig } from '@/config/hitsConfig'
 
 export const currentTotal = atom({
@@ -39,8 +39,11 @@ export const clickHamburger = atom({
 export const addToCartSelector = selector({
   key: 'addToCartSelector',
   get: ({ get }) => get(cartState),
+  get: ({get}) => get(cartOpen),
   set: ({ set, get }, newProduct) => {
     const cart = get(cartState)
+ 
+
     // Check if a there are product in the cart
     if (cart.length < 1) {
       // If no product we're storing a new one into the cart
@@ -78,6 +81,7 @@ export const addToCartSelector = selector({
         ])
       }
     }
+    set(cartOpen, true)
   },
 })
 

@@ -94,7 +94,7 @@ const CartModal = () => {
         <a
           className="modal-container-mobile__close"
           onClick={() => {
-            setShowCart(!showCart)
+            setShowCart(false)
           }}
         >
           x
