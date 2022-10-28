@@ -81,9 +81,9 @@ export const addToCartSelector = selector({
         ])
       }
     }
-    console.log(get(cartOpen))
+
     set(cartOpen, true)
-    console.log(get(cartOpen))
+
   },
 })
 
@@ -112,7 +112,6 @@ export const removeToCartSelector = selector({
           qty: oldQty.qty - 1,
           totalPrice: (oldQty.qty - 1) * items[cartItemIndex][hitsConfig.price],
         }
-        console.log('about to set open cart')
         set(openCart, !openCart)
       }
     }

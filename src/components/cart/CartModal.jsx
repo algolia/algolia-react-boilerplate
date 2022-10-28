@@ -39,7 +39,6 @@ const CartModal = () => {
   // Use ref on click modal and on cart icon + hamburger
   const cartModal = useRef()
   const cartIcon = useRecoilValue(cartClick)
-
   const { isDesktop } = useRecoilValue(windowSize)
 
   const { sendEvent } = useHits()
@@ -61,7 +60,6 @@ const CartModal = () => {
 
   //Listen for click outside the Demo Guide panel
   useOutsideClickConditional(cartModal, cartIcon, () => {
-    console.log('about to set show cart to false')
     setShowCart(false)
   })
 

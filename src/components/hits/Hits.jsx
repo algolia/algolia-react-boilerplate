@@ -39,6 +39,7 @@ import Price from '@/components/hits/components/Price.jsx'
 // Import cart from recoil(Cart state and the event if it's removed)
 import {
   addToCartSelector,
+  cartClick,
   cartOpen,
   cartState,
   removeToCartSelector,
@@ -62,6 +63,8 @@ const Hit = ({ hit, sendEvent }) => {
   const [isHovered, setIsHovered] = useState(false)
   // Qty state
   const [itemQty, setItemQty] = useState(0)
+
+  const setCartIcon = useSetRecoilState(cartClick)
 
   // Import Cart State
   const cart = useRecoilValue(cartState)
@@ -195,7 +198,9 @@ const Hit = ({ hit, sendEvent }) => {
             {shouldShowCartIcons && (
               <div
                 className={cartLogoClicked ? 'cart cart-active' : 'cart'}
-                onClick={() => {
+                ref={setCartIcon}
+                onClick={(e) => {
+                  e.stopPropagation()
                   setCartLogoClicked(true)
                   setTimeout(() => setCartLogoClicked(false), 300)
                   setAddToCartAtom(hit)

@@ -55,10 +55,6 @@ const InjectedHits = (props) => {
   const [hitsLoaded, setHitsLoaded] = useState(false)
   const productCard = useRef(null)
 
-  const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen)
-
-  useEffect(() => console.log(cartOpenValue), [cartOpenValue])
-
   useEffect(() => {
     if (productCard.current !== null) {
       const observer = new IntersectionObserver((entries) => {
