@@ -24,7 +24,7 @@ import { framerMotionHits } from '@/config/animationConfig'
 
 // Recoil import
 import { hitAtom, hitsConfig } from '@/config/hitsConfig'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // React-router import
 import { useNavigate } from 'react-router-dom'
@@ -39,6 +39,7 @@ import Price from '@/components/hits/components/Price.jsx'
 // Import cart from recoil(Cart state and the event if it's removed)
 import {
   addToCartSelector,
+  cartOpen,
   cartState,
   removeToCartSelector,
 } from '@/config/cartFunctions'
@@ -75,7 +76,8 @@ const Hit = ({ hit, sendEvent }) => {
   const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
 
   const [cartLogoClicked, setCartLogoClicked] = useState(false)
-
+  const [test, setCartOpenValue] = useRecoilState(cartOpen)
+  console.log(test)
   // Get hit attribute from config file
   const { objectID, image, imageAlt, category, productName, brand } = hitsConfig
 
@@ -203,6 +205,7 @@ const Hit = ({ hit, sendEvent }) => {
                   setTimeout(() => setCartLogoClicked(false), 300)
                   setAddToCartAtom(hit)
                   sendEvent('conversion', hit, 'Homepage: Add to cart')
+                  setCartOpenValue(!test)
                 }}
               >
                 <CartPicto />
