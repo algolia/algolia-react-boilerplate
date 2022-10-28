@@ -9,9 +9,9 @@ import '@algolia/ui-components-horizontal-slider-theme'
 import RelatedItem from '../relatedItems/RelatedProducts'
 
 import { mainIndex, recommendClient } from '@/config/algoliaEnvConfig'
+import { navigationStateAtom } from '@/config/navigationConfig'
 import { segmentSelectedAtom } from '@/config/segmentConfig'
 import { trendingConfig } from '@/config/trendingConfig'
-import { navigationStateAtom } from '@/config/navigationConfig'
 
 //Use Translation
 import { useTranslation } from 'react-i18next'
@@ -30,6 +30,7 @@ const TrendingProducts = ({ facetName, facetValue }) => {
   const { t } = useTranslation('translation', {
     keyPrefix: 'srp',
   })
+
   return (
     <div>
       <TrendingItems

@@ -29,7 +29,6 @@ import { AlgoliaLogo } from '@/assets/svg/SvgIndex'
 
 // Import Components
 import CustomSearchBox from '@/components/searchbox/SearchBox'
-import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch'
 import Navigation from './Navigation'
 
 const HeaderLaptop = () => {
@@ -57,15 +56,13 @@ const HeaderLaptop = () => {
               rulesApplied([])
             }}
           >
-            {/* Add possibility to change the Logo */}
             <AlgoliaLogo />
-            {/* {isLogoLoaded === false && <CustomSkeleton type="logo" />} */}
           </Link>
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container" ref={setSearchBoxRef}>
           <CustomSearchBox />
-          {displayVoiceSearch && <CustomVoiceSearchComponent />}
+          {/* {displayVoiceSearch && <CustomVoiceSearchComponent />} */}
         </div>
       </div>
       <div className="container__header-nav">

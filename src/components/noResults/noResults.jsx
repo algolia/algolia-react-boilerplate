@@ -4,6 +4,8 @@ import { Configure, Index } from 'react-instantsearch-hooks-web'
 // Import recoil function
 import { useRecoilValue } from 'recoil'
 
+import { useSearchParams } from 'react-router-dom'
+
 // Recommend
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts'
 import algoliarecommend from '@algolia/recommend'
@@ -17,9 +19,6 @@ const recommendClient = algoliarecommend(
   searchClientCreds.appID,
   searchClientCreds.APIKey
 )
-
-// Recoil state to directly access results
-import { queryAtom } from '@/config/searchboxConfig'
 
 // Import Components
 import QuerySuggestions from '@/components/federatedSearch/components/QuerySuggestions'
@@ -36,8 +35,9 @@ import { windowSize } from '@/hooks/useScreenSize'
 
 // This is rendered when there are no results to display
 const NoResults = () => {
+  // Handle URL search parameters through React Router
+  let [searchParams, setSearchParams] = useSearchParams()
   //Get the query
-  const getQueryState = useRecoilValue(queryAtom)
   const getSearches = localStorage.getItem('objectId')
   const cleanSearches = JSON.parse(getSearches)
   const lastId = cleanSearches?.[cleanSearches.length - 1]
@@ -51,6 +51,7 @@ const NoResults = () => {
   const shouldHaveRelatedProductsValue = useRecoilValue(
     shouldHaveRelatedProducts
   )
+
   return (
     <div className="no-results">
       <div className="no-results__infos">
@@ -59,7 +60,7 @@ const NoResults = () => {
             Sorry, we found no result for{' '}
           </span>
           <span className="no-results__titles__span-query">
-            “{getQueryState}”
+            “{searchParams.get('query')}”
           </span>
         </h4>
         <p>Try the following:</p>
@@ -88,8 +89,8 @@ const NoResults = () => {
               {lastId && (
                 <div>
                   <p className="no-results__infos__p">
-                    Customers who searched <span>{getQueryState}</span> also
-                    viewed:
+                    Customers who searched{' '}
+                    <span>{searchParams.get('query')}</span> also viewed:
                   </p>
                   {shouldHaveRelatedProductsValue && (
                     <div className="recommend">

@@ -5,7 +5,6 @@ import { Fragment, lazy, Suspense, useEffect, useState } from 'react'
 import {
   Configure,
   Index,
-  useHits,
   useInfiniteHits,
 } from 'react-instantsearch-hooks-web'
 
@@ -16,7 +15,7 @@ import { useSearchParams } from 'react-router-dom'
 import { windowSize } from '@/hooks/useScreenSize'
 
 // State Manager Recoil
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Import Components
 import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader'
@@ -41,7 +40,7 @@ import {
   shouldHaveTrendingFacets,
   shouldHaveTrendingProducts,
 } from '@/config/featuresConfig'
-import { hitsPerPage } from '@/config/hitsConfig'
+import { setNbHitsAtom } from '@/config/hitsConfig'
 import {
   personalizationImpact,
   personaSelectedAtom,
@@ -59,8 +58,6 @@ import { FilterPicto } from '@/assets/svg/SvgIndex'
 import CustomHits from '@/components/hits/components/CustomHits'
 import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits'
 
-import NoResults from '@/components/noResults/noResults'
-
 import Banner from '@/components/banners/Banner'
 
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig'
@@ -71,15 +68,8 @@ import '@/pages/searchResultsPage/searchResultsPage.scss'
 const SearchResultsPage = () => {
   const { hits, isLastPage, showMore, sendEvent } = useInfiniteHits()
 
-  useEffect(() => {
-    if (hits.length === 0) {
-      setShowResults(false)
-    } else if (hits.length > 0 && !showResults) {
-      setShowResults(true)
-    }
-  }, [hits])
-
-  const [showResults, setShowResults] = useState(1)
+  const setNbHit = useSetRecoilState(setNbHitsAtom)
+  setNbHit(hits.length)
 
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners)
@@ -97,9 +87,6 @@ const SearchResultsPage = () => {
   // Get indexes Value
   const index = useRecoilValue(mainIndex)
   const { injectedContentIndex } = useRecoilValue(indexNames)
-
-  // Define Stat Const
-  const { hitsPerPageNotInjected } = hitsPerPage
 
   // Define Price Sort By Const
   const { labelIndex } = useRecoilValue(sortBy)
@@ -144,7 +131,6 @@ const SearchResultsPage = () => {
   }, [navigationState])
 
   let configureProps = {
-    hitsPerPage: hitsPerPageNotInjected,
     analytics: false,
     clickAnalytics: true,
     enablePersonalization: true,
@@ -166,122 +152,116 @@ const SearchResultsPage = () => {
 
   return (
     <>
-      {!showResults && <NoResults />}
       {shouldDisplayBanners && <Banner />}
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
 
-      {showResults && (
-        <Fragment>
+      <Fragment>
+        <div
+          className={!isDesktop ? 'recommend recommend-mobile' : 'recommend'}
+        >
+          {shouldHaveTrendingProductsValue &&
+            queryState === '' &&
+            navigationState?.type !== 'context' && (
+              <Suspense>
+                <TrendingProducts
+                  facetName={facetName}
+                  facetValue={facetValue}
+                />
+              </Suspense>
+            )}
+        </div>
+
+        <div
+          className={` ${
+            !isDesktop ? 'srp-container-mobile' : ''
+          } srp-active srp-container`}
+        >
           <div
-            className={!isDesktop ? 'recommend recommend-mobile' : 'recommend'}
+            className={`${
+              !isDesktop
+                ? 'srp-container__facets-mobile'
+                : 'srp-container__facets'
+            } ${
+              isFacetsPanelOpen ? 'srp-container__facets-mobile-active' : ''
+            }`}
           >
-            {shouldHaveTrendingProductsValue &&
-              queryState === '' &&
-              navigationState?.type !== 'context' && (
-                <Suspense>
-                  <TrendingProducts
-                    facetName={facetName}
-                    facetValue={facetValue}
-                  />
-                </Suspense>
+            <Suspense fallback={<SkeletonLoader type={'facet'} />}>
+              {/* Render Recommend component - Trending Facets */}
+              {/* Change config in /config/trendingConfig.js */}
+              {shouldHaveTrendingFacetsValue && (
+                <WrappedTrendingFacetValues
+                  attribute="brand"
+                  facetName={'brand'}
+                  limit={500}
+                  facetValue={facetValue}
+                />
               )}
+              <GenericRefinementList />
+            </Suspense>
           </div>
 
-          <div
-            className={` ${
-              !isDesktop ? 'srp-container-mobile' : ''
-            } srp-active srp-container`}
-          >
-            <div
-              className={`${
-                !isDesktop
-                  ? 'srp-container__facets-mobile'
-                  : 'srp-container__facets'
-              } ${
-                isFacetsPanelOpen ? 'srp-container__facets-mobile-active' : ''
-              }`}
-            >
-              <Suspense fallback={<SkeletonLoader type={'facet'} />}>
-                {/* Render Recommend component - Trending Facets */}
-                {/* Change config in /config/trendingConfig.js */}
-                {shouldHaveTrendingFacetsValue && (
-                  <WrappedTrendingFacetValues
-                    attribute="brand"
-                    facetName={'brand'}
-                    limit={500}
-                    facetValue={facetValue}
-                  />
-                )}
-                <GenericRefinementList />
+          <div className="srp-container__hits">
+            {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
+            <div className="srp-container__stats-sort">
+              {!isDesktop && (
+                <div
+                  className={
+                    isFacetsPanelOpen
+                      ? 'srp-container__filterPicto-active'
+                      : 'srp-container__filterPicto'
+                  }
+                  onClick={() => setIsFacetsPanelOpen(!isFacetsPanelOpen)}
+                >
+                  <FilterPicto />
+                </div>
+              )}
+              {stats && (
+                <Suspense fallback={''}>
+                  <CustomStats />
+                </Suspense>
+              )}
+              {shouldHaveSortsAtom && (
+                <Suspense fallback={''}>
+                  <CustomSortBy items={labelIndex} defaultRefinement={index} />
+                </Suspense>
+              )}
+            </div>
+            {/* Refinements, to the left of the items, including a list of currently selected refinements */}
+            <div className="refinement-container">
+              <Suspense fallback={''}>
+                <CustomCurrentRefinements />
+                <CustomClearRefinements />
               </Suspense>
             </div>
-
-            <div className="srp-container__hits">
-              {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
-              <div className="srp-container__stats-sort">
-                {!isDesktop && (
-                  <div
-                    className={
-                      isFacetsPanelOpen
-                        ? 'srp-container__filterPicto-active'
-                        : 'srp-container__filterPicto'
-                    }
-                    onClick={() => setIsFacetsPanelOpen(!isFacetsPanelOpen)}
-                  >
-                    <FilterPicto />
-                  </div>
-                )}
-                {stats && (
-                  <Suspense fallback={''}>
-                    <CustomStats />
-                  </Suspense>
-                )}
-                {shouldHaveSortsAtom && (
-                  <Suspense fallback={''}>
-                    <CustomSortBy
-                      items={labelIndex}
-                      defaultRefinement={index}
-                    />
-                  </Suspense>
-                )}
-              </div>
-              {/* Refinements, to the left of the items, including a list of currently selected refinements */}
-              <div className="refinement-container">
-                <Suspense fallback={''}>
-                  <CustomCurrentRefinements />
-                  <CustomClearRefinements />
-                </Suspense>
-              </div>
-              <Configure {...configureProps} />
-              {/* Render the Injected Hits component or the Standard Hits component */}
-              {shouldInjectContent ? (
-                <Suspense fallback={<SkeletonLoader type={'hit'} />}>
-                  <Index indexName={injectedContentIndex}>
-                    <Configure hitsPerPage={1} page={0} />
-                  </Index>
-                  {/* Injected content*/}
-                  <InjectedHits
-                    hits={hits}
-                    isLastPage={isLastPage}
-                    showMore={showMore}
-                    sendEvent={sendEvent}
-                  />
-                </Suspense>
-              ) : (
-                <Suspense fallback={<SkeletonLoader type={'hit'} />}>
-                  <CustomHits
-                    hits={hits}
-                    isLastPage={isLastPage}
-                    showMore={showMore}
-                    sendEvent={sendEvent}
-                  />
-                </Suspense>
-              )}
-            </div>
+            <Configure {...configureProps} />
+            {/* Render the Injected Hits component or the Standard Hits component */}
+            {shouldInjectContent ? (
+              <Suspense fallback={<SkeletonLoader type={'hit'} />}>
+                <Index indexName={injectedContentIndex}>
+                  <Configure hitsPerPage={1} page={0} />
+                </Index>
+                {/* Injected content*/}
+                <InjectedHits
+                  hits={hits}
+                  isLastPage={isLastPage}
+                  showMore={showMore}
+                  sendEvent={sendEvent}
+                />
+              </Suspense>
+            ) : (
+              <Suspense fallback={<SkeletonLoader type={'hit'} />}>
+                <CustomHits
+                  hits={hits}
+                  isLastPage={isLastPage}
+                  showMore={showMore}
+                  sendEvent={sendEvent}
+                />
+              </Suspense>
+            )}
           </div>
-        </Fragment>
-      )}
+        </div>
+      </Fragment>
     </>
   )
 }

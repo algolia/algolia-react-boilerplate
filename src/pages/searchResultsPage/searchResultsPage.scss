@@ -85,9 +85,9 @@
 // ------------------------------------------
 .no-results {
   width: 95%;
-  height: 80vh;
   margin: 0rem auto;
   padding: 2rem 2rem;
+  animation: loading 0.5s forwards ease-in-out;
 
   &__titles {
     margin-bottom: 2rem;
@@ -242,5 +242,14 @@
   &__facets-mobile-active {
     transition: transform 0.3s ease-in-out;
     transform: translateX(0%);
+  }
+}
+
+
+@keyframes loading {
+  0%{opacity: 0;}
+
+  100%{
+    opacity: 1;
   }
 }

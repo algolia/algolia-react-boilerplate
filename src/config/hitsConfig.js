@@ -76,3 +76,8 @@ export const hitsNumber = atom({
   key: 'hitsNumber', // unique ID (with respect to other atoms/selectors)
   default: 1, // default value (aka initial value)
 })
+// Please ignore this atom
+export const setNbHitsAtom = atom({
+  key: 'setNbHitsAtom', // unique ID (with respect to other atoms/selectors)
+  default: 1, // default value (aka initial value)
+})

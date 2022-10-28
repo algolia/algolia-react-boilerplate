@@ -1,25 +1,23 @@
 // Recoil import
-import { currencySymbolAtom } from '@/config/currencyConfig'
 import { Garbage, MinusPicto, PlusPicto } from '@/assets/svg/SvgIndex'
 import { hitsConfig } from '@/config/hitsConfig'
-import Price from '../hits/components/Price'
 import get from 'lodash/get'
+import Price from '../hits/components/Price'
 
 // Import cart from recoil
 import {
   addToCartSelector,
+  cartOpen,
   cartState,
   removeToCartSelector,
-  cartOpen,
 } from '@/config/cartFunctions'
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 //Use Translation
-import { useTranslation } from 'react-i18next'
 import { windowSize } from '@/hooks/useScreenSize'
+import { useTranslation } from 'react-i18next'
 
 const ArticlesCard = ({ item, sendEvent }) => {
-  const currencySymbol = useRecoilValue(currencySymbolAtom)
   const [cart, setCart] = useRecoilState(cartState)
   const setCartOpen = useSetRecoilState(cartOpen)
   const setAddToCartAtom = useSetRecoilState(addToCartSelector)
@@ -78,9 +76,7 @@ const ArticlesCard = ({ item, sendEvent }) => {
               )}
             </div>
           )}
-
           <p className="price">
-            {' '}
             <Price hit={item.totalPrice.toFixed(2)} />
           </p>
         </div>

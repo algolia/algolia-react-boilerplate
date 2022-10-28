@@ -1,21 +1,29 @@
 import { useEffect } from 'react'
 
-// React router
-import { BrowserRouter as Router } from 'react-router-dom'
+//Recoil states & values
+import { useRecoilValue } from 'recoil'
 
-// Recoil State Management
-import { RecoilRoot } from 'recoil'
+// Import navigate function to route to results page on search submit
 
-// Resize component listens for screen size change to display UI accordingly
-import ScreenResizer from './utils/ScreenResizer'
+import { mainIndex } from '@/config/algoliaEnvConfig'
+import { predictUserIdAtom } from '@/config/predictConfig'
+import { searchClient } from './config/algoliaEnvConfig'
+
+// Algolia Instantsearch components
+import { InstantSearch } from 'react-instantsearch-hooks-web'
+
+//Import Predict to get user profil
+import PredictUserProfileProvider from './components/predict/PredictUserProfileProvider'
 
 // Import Components
 import { Main } from './Main'
 
-// Add function from config file to scroll on top every change of page
-import ScrollToTop from './config/scrollOnTop'
-
 const App = () => {
+  // Get userID from Predict
+  const userId = useRecoilValue(predictUserIdAtom)
+
+  // Index to make the main search queries
+  const index = useRecoilValue(mainIndex)
   useEffect(() => {
     window.process = {
       ...window.process,
@@ -23,13 +31,11 @@ const App = () => {
   }, [])
 
   return (
-    <RecoilRoot>
-      <Router>
-        <ScrollToTop />
-        <ScreenResizer />
+    <PredictUserProfileProvider userID={userId}>
+      <InstantSearch searchClient={searchClient} indexName={index}>
         <Main />
-      </Router>
-    </RecoilRoot>
+      </InstantSearch>
+    </PredictUserProfileProvider>
   )
 }
 
