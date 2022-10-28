@@ -60,7 +60,10 @@ const CartModal = () => {
   }
 
   //Listen for click outside the Demo Guide panel
-  useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false))
+  useOutsideClickConditional(cartModal, cartIcon, () => {
+    console.log('about to set show cart to false')
+    setShowCart(false)
+  })
 
   // Import const translation
   // Use the translator

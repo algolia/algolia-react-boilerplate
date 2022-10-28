@@ -39,11 +39,10 @@ export const clickHamburger = atom({
 export const addToCartSelector = selector({
   key: 'addToCartSelector',
   get: ({ get }) => get(cartState),
-  get: ({get}) => get(cartOpen),
+  get: ({ get }) => get(cartOpen),
   set: ({ set, get }, newProduct) => {
     const cart = get(cartState)
     // const openCart = get(cartOpen)
- 
 
     // Check if a there are product in the cart
     if (cart.length < 1) {
@@ -82,7 +81,9 @@ export const addToCartSelector = selector({
         ])
       }
     }
+    console.log(get(cartOpen))
     set(cartOpen, true)
+    console.log(get(cartOpen))
   },
 })
 
@@ -111,6 +112,7 @@ export const removeToCartSelector = selector({
           qty: oldQty.qty - 1,
           totalPrice: (oldQty.qty - 1) * items[cartItemIndex][hitsConfig.price],
         }
+        console.log('about to set open cart')
         set(openCart, !openCart)
       }
     }

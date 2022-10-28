@@ -73,7 +73,6 @@ const Hit = ({ hit, sendEvent }) => {
   const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
 
   const [cartLogoClicked, setCartLogoClicked] = useState(false)
-  const setCartOpenValue = useSetRecoilState(cartOpen)
 
   // Get hit attribute from config file
   const { objectID, image, imageAlt, category, productName, brand } = hitsConfig
@@ -105,7 +104,6 @@ const Hit = ({ hit, sendEvent }) => {
   }
 
   const promoted = hit?._rankingInfo?.promoted
-  console.log('render')
   // Update the qty for a product on SRP each time Cart is modified or set qty to 0
   const updateQty = (article) => {
     if (!cart.length) setItemQty(0)
