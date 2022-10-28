@@ -74,13 +74,6 @@
     // If you want display or not cross in searchbox
     display: none;
     -webkit-appearance: none;
-    // height: 1em;
-    // width: 1em;
-    // border-radius: 50em;
-    // background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
-    //   no-repeat 50% 50%;
-    // background-size: contain;
-    // cursor: pointer;
   }
 }
 
@@ -477,6 +470,9 @@
   font-weight: 700;
   font-size: 1rem;
   margin-top: 1px;
+  span{
+    color: inherit;
+  }
   s {
     color: $grey-dark-color;
     text-decoration: line-through;

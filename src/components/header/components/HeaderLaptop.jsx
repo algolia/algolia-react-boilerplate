@@ -48,7 +48,6 @@ import { Selectors } from '../../selector/Selectors'
 
 // Import Components
 import CustomSearchBox from '@/components/searchbox/SearchBox'
-import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch'
 import Navigation from './Navigation'
 import { windowSize } from '@/hooks/useScreenSize'
 
@@ -139,15 +138,13 @@ const HeaderLaptop = () => {
               rulesApplied([])
             }}
           >
-            {/* Add possibility to change the Logo */}
             <AlgoliaLogo />
-            {/* {isLogoLoaded === false && <CustomSkeleton type="logo" />} */}
           </Link>
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container" ref={setSearchBoxRef}>
           <CustomSearchBox />
-          {displayVoiceSearch && <CustomVoiceSearchComponent />}
+          {/* {displayVoiceSearch && <CustomVoiceSearchComponent />} */}
         </div>
 
         {shouldShowCartIcon && (

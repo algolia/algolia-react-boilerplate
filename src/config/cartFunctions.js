@@ -42,6 +42,7 @@ export const addToCartSelector = selector({
   get: ({get}) => get(cartOpen),
   set: ({ set, get }, newProduct) => {
     const cart = get(cartState)
+    const openCart = get(cartOpen)
  
 
     // Check if a there are product in the cart
@@ -110,7 +111,7 @@ export const removeToCartSelector = selector({
           qty: oldQty.qty - 1,
           totalPrice: (oldQty.qty - 1) * items[cartItemIndex][hitsConfig.price],
         }
-        set(cartState, items)
+        set(openCart, !openCart)
       }
     }
   },

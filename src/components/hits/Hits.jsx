@@ -73,8 +73,8 @@ const Hit = ({ hit, sendEvent }) => {
   const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
 
   const [cartLogoClicked, setCartLogoClicked] = useState(false)
-  const [test, setCartOpenValue] = useRecoilState(cartOpen)
-  console.log(test)
+  const setCartOpenValue = useSetRecoilState(cartOpen)
+
   // Get hit attribute from config file
   const { objectID, image, imageAlt, category, productName, brand } = hitsConfig
 
@@ -197,12 +197,12 @@ const Hit = ({ hit, sendEvent }) => {
             {shouldShowCartIcons && (
               <div
                 className={cartLogoClicked ? 'cart cart-active' : 'cart'}
-                onClick={(e) => {
+                onClick={() => {
                   setCartLogoClicked(true)
                   setTimeout(() => setCartLogoClicked(false), 300)
                   setAddToCartAtom(hit)
                   sendEvent('conversion', hit, 'Homepage: Add to cart')
-                  setCartOpenValue(true)
+                  // setCartOpenValue(true)
                 }}
               >
                 <CartPicto />
