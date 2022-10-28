@@ -42,7 +42,7 @@ export const addToCartSelector = selector({
   get: ({get}) => get(cartOpen),
   set: ({ set, get }, newProduct) => {
     const cart = get(cartState)
-    const openCart = get(cartOpen)
+    // const openCart = get(cartOpen)
  
 
     // Check if a there are product in the cart
