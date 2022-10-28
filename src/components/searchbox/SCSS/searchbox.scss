@@ -4,11 +4,11 @@
 @use '../../../scss/partials' as *;
 
 .searchbox-container {
-  min-width: 40%;
+  min-width: 50%;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 1rem;
   .searchbox {
     width: 80%;
@@ -32,6 +32,8 @@
     
       &__input {
         @include searchBoxInput($white-color, $grey-light-color-80);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+        rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
       }
     }
     &__btn{

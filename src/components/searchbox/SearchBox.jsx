@@ -109,7 +109,7 @@ function CustomSearchBox(props) {
           className="searchbox__form__input"
           // ref={setSearchBoxRef}
           type="search"
-          value={searchParams.get('query') ? searchParams.get('query') : query}
+          value={searchParams.get('query') ? searchParams.get('query') : ''}
           placeholder={t('placeHolder')}
           onClick={() => {
             if (pathname === '/') setIsFederatedOpen(true)

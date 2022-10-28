@@ -39,7 +39,6 @@ const CartModal = () => {
   // Use ref on click modal and on cart icon + hamburger
   const cartModal = useRef()
   const cartIcon = useRecoilValue(cartClick)
-
   const { isDesktop } = useRecoilValue(windowSize)
 
   const { sendEvent } = useHits()
@@ -60,7 +59,9 @@ const CartModal = () => {
   }
 
   //Listen for click outside the Demo Guide panel
-  useOutsideClickConditional(cartModal, cartIcon, () => setShowCart(false))
+  useOutsideClickConditional(cartModal, cartIcon, () => {
+    setShowCart(false)
+  })
 
   // Import const translation
   // Use the translator
@@ -94,7 +95,7 @@ const CartModal = () => {
         <a
           className="modal-container-mobile__close"
           onClick={() => {
-            setShowCart(!showCart)
+            setShowCart(false)
           }}
         >
           x

@@ -5,7 +5,13 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import { Highlight } from 'react-instantsearch-hooks-web'
 // Import SVGs
-import { Heart, MinusPicto, PlusPicto } from '@/assets/svg/SvgIndex'
+import {
+  CartPicto,
+  Heart,
+  InfoPicto,
+  MinusPicto,
+  PlusPicto,
+} from '@/assets/svg/SvgIndex'
 import RankingIcon from './components/RankingIcon'
 
 // Import Badge config
@@ -18,7 +24,7 @@ import { framerMotionHits } from '@/config/animationConfig'
 
 // Recoil import
 import { hitAtom, hitsConfig } from '@/config/hitsConfig'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // React-router import
 import { useNavigate } from 'react-router-dom'
@@ -33,6 +39,8 @@ import Price from '@/components/hits/components/Price.jsx'
 // Import cart from recoil(Cart state and the event if it's removed)
 import {
   addToCartSelector,
+  cartClick,
+  cartOpen,
   cartState,
   removeToCartSelector,
 } from '@/config/cartFunctions'
@@ -53,20 +61,21 @@ const Hit = ({ hit, sendEvent }) => {
   const navigate = useNavigate()
   const hitState = useSetRecoilState(hitAtom)
   const [isHovered, setIsHovered] = useState(false)
-  const [cartPictoMinusClicked, setCartPictoMinusClicked] = useState(false)
-  const [cartPictoPlusClicked, setCartPictoPlusClicked] = useState(false)
   // Qty state
   const [itemQty, setItemQty] = useState(0)
+
+  const setCartIcon = useSetRecoilState(cartClick)
 
   // Import Cart State
   const cart = useRecoilValue(cartState)
   const setAddToCartAtom = useSetRecoilState(addToCartSelector)
-  const setRemoveToCartAtom = useSetRecoilState(removeToCartSelector)
   const showPersona = useRecoilValue(shouldHavePersona)
   const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons)
   const personaFilters = useRecoilValue(personaSelectedFiltersAtom)
 
   const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
+
+  const [cartLogoClicked, setCartLogoClicked] = useState(false)
 
   // Get hit attribute from config file
   const { objectID, image, imageAlt, category, productName, brand } = hitsConfig
@@ -98,7 +107,6 @@ const Hit = ({ hit, sendEvent }) => {
   }
 
   const promoted = hit?._rankingInfo?.promoted
-
   // Update the qty for a product on SRP each time Cart is modified or set qty to 0
   const updateQty = (article) => {
     if (!cart.length) setItemQty(0)
@@ -128,10 +136,9 @@ const Hit = ({ hit, sendEvent }) => {
         className="button-ranking-container"
         onClick={() => setShouldShowRankingInfo(!shouldShowRankingInfo)}
       >
-        <button
-          className="ranking-formula-button"
-          aria-label="show ranking"
-        ></button>
+        <button className="ranking-formula-button" aria-label="show ranking">
+          <InfoPicto />
+        </button>
         <p>Click to see Ranking</p>
       </div>
       <AnimatePresence>
@@ -189,42 +196,19 @@ const Hit = ({ hit, sendEvent }) => {
               <Price hit={hit} />
             </p>
             {shouldShowCartIcons && (
-              <div className="srpItem__infosDown__cart">
-                <div
-                  className={`${
-                    itemQty === 0 && 'srpItem__infosDown__minusPicto-inactive '
-                  }${cartPictoMinusClicked && 'picto-active'}`}
-                  onClick={() => {
-                    setCartPictoMinusClicked(true)
-                    setTimeout(() => setCartPictoMinusClicked(false), 300)
-                    setRemoveToCartAtom(hit)
-                  }}
-                >
-                  <MinusPicto />
-                </div>
-                <p
-                  className={
-                    itemQty === 0 ? 'srpItem__infosDown__cart-inactive' : ''
-                  }
-                >
-                  {itemQty}
-                </p>
-                <div
-                  className={
-                    cartPictoPlusClicked
-                      ? 'picto-active srpItem__infosDown__cart-plus'
-                      : 'srpItem__infosDown__cart-plus'
-                  }
-                  onClick={() => {
-                    setCartPictoPlusClicked(true)
-                    setTimeout(() => setCartPictoPlusClicked(false), 300)
-                    setAddToCartAtom(hit)
-                    // Send event conversion to Algolia API
-                    sendEvent('conversion', hit, 'SRP: Add to cart')
-                  }}
-                >
-                  <PlusPicto />
-                </div>
+              <div
+                className={cartLogoClicked ? 'cart cart-active' : 'cart'}
+                ref={setCartIcon}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setCartLogoClicked(true)
+                  setTimeout(() => setCartLogoClicked(false), 300)
+                  setAddToCartAtom(hit)
+                  sendEvent('conversion', hit, 'Homepage: Add to cart')
+                  // setCartOpenValue(true)
+                }}
+              >
+                <CartPicto />
               </div>
             )}
           </div>
@@ -235,3 +219,46 @@ const Hit = ({ hit, sendEvent }) => {
 }
 
 export { Hit }
+
+// KEEP IT FOR NOW
+{
+  /* {shouldShowCartIcons && (
+<div className="srpItem__infosDown__cart">
+  <div
+    className={`${
+      itemQty === 0 && 'srpItem__infosDown__minusPicto-inactive '
+    }${cartPictoMinusClicked && 'picto-active'}`}
+    onClick={() => {
+      setCartPictoMinusClicked(true)
+      setTimeout(() => setCartPictoMinusClicked(false), 300)
+      setRemoveToCartAtom(hit)
+    }}
+  >
+    <MinusPicto />
+  </div>
+  <p
+    className={
+      itemQty === 0 ? 'srpItem__infosDown__cart-inactive' : ''
+    }
+  >
+    {itemQty}
+  </p>
+  <div
+    className={
+      cartPictoPlusClicked
+        ? 'picto-active srpItem__infosDown__cart-plus'
+        : 'srpItem__infosDown__cart-plus'
+    }
+    onClick={() => {
+      setCartPictoPlusClicked(true)
+      setTimeout(() => setCartPictoPlusClicked(false), 300)
+      setAddToCartAtom(hit)
+      // Send event conversion to Algolia API
+      sendEvent('conversion', hit, 'SRP: Add to cart')
+    }}
+  >
+    <PlusPicto />
+  </div>
+</div>
+)} */
+}
