@@ -39,11 +39,8 @@ export const clickHamburger = atom({
 export const addToCartSelector = selector({
   key: 'addToCartSelector',
   get: ({ get }) => get(cartState),
-  get: ({ get }) => get(cartOpen),
   set: ({ set, get }, newProduct) => {
     const cart = get(cartState)
-    // const openCart = get(cartOpen)
-
     // Check if a there are product in the cart
     if (cart.length < 1) {
       // If no product we're storing a new one into the cart
@@ -83,7 +80,6 @@ export const addToCartSelector = selector({
     }
 
     set(cartOpen, true)
-
   },
 })
 
