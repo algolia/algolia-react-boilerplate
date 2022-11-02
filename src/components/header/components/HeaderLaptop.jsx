@@ -56,7 +56,6 @@ const HeaderLaptop = () => {
   const setQueryState = useSetRecoilState(queryAtom)
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch)
   const setSbIsActive = useSetRecoilState(searchBoxIsActive)
-  const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch)
   const rulesApplied = useSetRecoilState(rulesAtom)
   const setNavigationState = useSetRecoilState(navigationStateAtom)
   const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen)
@@ -149,19 +148,6 @@ const HeaderLaptop = () => {
 
         {shouldShowCartIcon && (
           <div className="picto-cart">
-            {/* {!isDesktop ? (
-              <p
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setCartOpenValue(!cartOpenValue)
-                  {
-                    mobile && setIsMenuOpen(false)
-                  }
-                }}
-              >
-                Cart
-              </p>
-            ) : ( */}
             <div
               className={cartOpenValue && 'picto-cart__active'}
               ref={cartIcon}
