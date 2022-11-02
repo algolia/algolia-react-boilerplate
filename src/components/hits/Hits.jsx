@@ -5,13 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import { Highlight } from 'react-instantsearch-hooks-web'
 // Import SVGs
-import {
-  CartPicto,
-  Heart,
-  InfoPicto,
-  MinusPicto,
-  PlusPicto,
-} from '@/assets/svg/SvgIndex'
+import { CartPicto, Heart, InfoPicto } from '@/assets/svg/SvgIndex'
 import RankingIcon from './components/RankingIcon'
 
 // Import Badge config
@@ -24,7 +18,7 @@ import { framerMotionHits } from '@/config/animationConfig'
 
 // Recoil import
 import { hitAtom, hitsConfig } from '@/config/hitsConfig'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 // React-router import
 import { useNavigate } from 'react-router-dom'
@@ -37,13 +31,7 @@ import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage'
 import Price from '@/components/hits/components/Price.jsx'
 
 // Import cart from recoil(Cart state and the event if it's removed)
-import {
-  addToCartSelector,
-  cartClick,
-  cartOpen,
-  cartState,
-  removeToCartSelector,
-} from '@/config/cartFunctions'
+import { addToCartSelector, cartClick, cartState } from '@/config/cartFunctions'
 // Import Persona if there is
 import {
   shouldHaveCartFunctionality,

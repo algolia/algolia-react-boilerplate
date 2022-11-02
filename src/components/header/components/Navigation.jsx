@@ -3,18 +3,16 @@
 // React Router
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 // Recoil Header State
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 // Import Config for the header
 import {
   categoryPageFilterAttribute,
   linksHeader,
   navigationStateAtom,
-  selectorNavigationRef,
 } from '@/config/navigationConfig'
 
 //Import config from helped navigation
-import { cartClick } from '@/config/cartFunctions'
 import { windowSize } from '@/hooks/useScreenSize'
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {

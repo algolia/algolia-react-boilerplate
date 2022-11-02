@@ -4,17 +4,16 @@ import { Hit } from '../../Hits'
 // Import the config files we'll need to import
 import { indexNames } from '@/config/algoliaEnvConfig'
 import { queryAtom } from '@/config/searchboxConfig'
-import { useRecoilValue, useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
-import { lazy, useEffect, useState, useRef } from 'react'
+import { lazy, useEffect, useRef, useState } from 'react'
 // Algolia
 import { useInstantSearch, useQueryRules } from 'react-instantsearch-hooks-web'
 
 // Components
-import { windowSize } from '@/hooks/useScreenSize'
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
+import { windowSize } from '@/hooks/useScreenSize'
 
-import { cartOpen } from '@/config/cartFunctions'
 // Components lazy loaded
 
 const NoCtaCard = lazy(() => import('../NoCtaCard'))

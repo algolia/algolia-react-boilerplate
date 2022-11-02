@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // React Router
 import { Link } from 'react-router-dom'
@@ -30,6 +30,7 @@ import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch'
 import Navigation from './Navigation'
 
 // Custom hook to prevent body from scrolling
+import { AlgoliaLogoMobile, CartPicto } from '@/assets/svg/SvgIndex'
 import {
   cartClick,
   cartOpen,
@@ -40,9 +41,8 @@ import {
   shouldHaveCartFunctionality,
   shouldHaveVoiceSearch,
 } from '@/config/featuresConfig'
-import usePreventScrolling from '@/hooks/usePreventScrolling'
 import useOutsideClick from '@/hooks/useOutsideClick'
-import { AlgoliaLogoMobile, CartPicto } from '@/assets/svg/SvgIndex'
+import usePreventScrolling from '@/hooks/usePreventScrolling'
 
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil

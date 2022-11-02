@@ -13,17 +13,17 @@ import { CartPicto, Heart, PlusPicto } from '@/assets/svg/SvgIndex'
 import Price from '@/components/hits/components/Price.jsx'
 
 import { hitAtom } from '@/config/hitsConfig'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // React-router import
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage'
 import { useNavigate } from 'react-router-dom'
 
 //Import scope SCSS
-import '../SCSS/recommend.scss'
+import { addToCartSelector, cartOpen } from '@/config/cartFunctions'
 import { shouldHaveCartFunctionality } from '@/config/featuresConfig'
-import { addToCartSelector } from '@/config/cartFunctions'
 import { useState } from 'react'
+import '../SCSS/recommend.scss'
 
 const FbtItems = ({ item, index }) => {
   // const { sendEvent } = useHits()
@@ -35,6 +35,7 @@ const FbtItems = ({ item, index }) => {
   // display or not the cart icons
   const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
   const [cartLogoClicked, setCartLogoClicked] = useState(false)
+  const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen)
   const setAddToCartAtom = useSetRecoilState(addToCartSelector)
 
   return (
@@ -67,10 +68,12 @@ const FbtItems = ({ item, index }) => {
             {shouldShowCartIcons && (
               <div
                 className={cartLogoClicked ? 'cart cart-active' : 'cart'}
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation()
                   setCartLogoClicked(true)
-                  setTimeout(() => setCartLogoClicked(false), 300)
                   setAddToCartAtom(item)
+                  setCartOpenValue(!cartOpenValue)
+                  setTimeout(() => setCartLogoClicked(false), 300)
                   // sendEvent('conversion', item, 'FbtRelated: Add to cart')
                 }}
               >
