@@ -56,7 +56,6 @@ const HeaderLaptop = () => {
   const setQueryState = useSetRecoilState(queryAtom)
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch)
   const setSbIsActive = useSetRecoilState(searchBoxIsActive)
-  const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch)
   const rulesApplied = useSetRecoilState(rulesAtom)
   const setNavigationState = useSetRecoilState(navigationStateAtom)
   const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen)
@@ -148,42 +147,21 @@ const HeaderLaptop = () => {
         </div>
 
         {shouldShowCartIcon && (
-          <div
-            className={
-              cartOpenValue ? 'picto-cart picto-cart__active' : 'picto-cart'
-            }
-            onClick={(e) => {
-              e.stopPropagation()
-              setCartOpenValue(!cartOpenValue)
-              {
-                mobile && setIsMenuOpen(false)
-              }
-            }}
-            ref={cartIcon}
-          >
-            {!isDesktop ? (
-              <p
-                onClick={() => {
-                  setCartOpenValue(!cartOpenValue)
-                  {
-                    mobile && setIsMenuOpen(false)
-                  }
-                }}
-              >
-                Cart
-              </p>
-            ) : (
-              <div
-                onClick={() => {
-                  setCartOpenValue(!cartOpenValue)
-                  {
-                    mobile && setIsMenuOpen(false)
-                  }
-                }}
-              >
-                <CartPicto />
-              </div>
-            )}
+          <div className="picto-cart">
+            <div
+              className={cartOpenValue && 'picto-cart__active'}
+              ref={cartIcon}
+              onClick={(e) => {
+                e.stopPropagation()
+                setCartOpenValue(!cartOpenValue)
+                {
+                  mobile && setIsMenuOpen(false)
+                }
+              }}
+            >
+              <CartPicto />
+            </div>
+            {/* )} */}
             {/* Picto notification up the cart icon */}
             {showCart?.length !== 0 && (
               <div className="notification-cart">
