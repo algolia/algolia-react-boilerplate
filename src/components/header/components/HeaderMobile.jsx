@@ -113,7 +113,8 @@ const HeaderMobile = ({ mobile, tablet }) => {
             className={
               cartOpenValue ? 'picto-cart picto-cart__active' : 'picto-cart'
             }
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation()
               setCartOpenValue(!cartOpenValue)
               {
                 mobile && setIsMenuOpen(false)

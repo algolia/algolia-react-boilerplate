@@ -148,15 +148,11 @@ const HeaderLaptop = () => {
         </div>
 
         {shouldShowCartIcon && (
-          <div
-            className={
-              cartOpenValue ? 'picto-cart picto-cart__active' : 'picto-cart'
-            }
-            ref={cartIcon}
-          >
-            {!isDesktop ? (
+          <div className="picto-cart">
+            {/* {!isDesktop ? (
               <p
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation()
                   setCartOpenValue(!cartOpenValue)
                   {
                     mobile && setIsMenuOpen(false)
@@ -165,18 +161,21 @@ const HeaderLaptop = () => {
               >
                 Cart
               </p>
-            ) : (
-              <div
-                onClick={() => {
-                  setCartOpenValue(!cartOpenValue)
-                  {
-                    mobile && setIsMenuOpen(false)
-                  }
-                }}
-              >
-                <CartPicto />
-              </div>
-            )}
+            ) : ( */}
+            <div
+              className={cartOpenValue && 'picto-cart__active'}
+              ref={cartIcon}
+              onClick={(e) => {
+                e.stopPropagation()
+                setCartOpenValue(!cartOpenValue)
+                {
+                  mobile && setIsMenuOpen(false)
+                }
+              }}
+            >
+              <CartPicto />
+            </div>
+            {/* )} */}
             {/* Picto notification up the cart icon */}
             {showCart?.length !== 0 && (
               <div className="notification-cart">
