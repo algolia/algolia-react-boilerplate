@@ -152,6 +152,13 @@ const HeaderLaptop = () => {
             className={
               cartOpenValue ? 'picto-cart picto-cart__active' : 'picto-cart'
             }
+            onClick={(e) => {
+              e.stopPropagation()
+              setCartOpenValue(!cartOpenValue)
+              {
+                mobile && setIsMenuOpen(false)
+              }
+            }}
             ref={cartIcon}
           >
             {!isDesktop ? (
