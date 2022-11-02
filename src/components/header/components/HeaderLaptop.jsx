@@ -161,7 +161,29 @@ const HeaderLaptop = () => {
             }}
             ref={cartIcon}
           >
-            {!isDesktop ? <p>Cart</p> : <CartPicto />}
+            {!isDesktop ? (
+              <p
+                onClick={() => {
+                  setCartOpenValue(!cartOpenValue)
+                  {
+                    mobile && setIsMenuOpen(false)
+                  }
+                }}
+              >
+                Cart
+              </p>
+            ) : (
+              <div
+                onClick={() => {
+                  setCartOpenValue(!cartOpenValue)
+                  {
+                    mobile && setIsMenuOpen(false)
+                  }
+                }}
+              >
+                <CartPicto />
+              </div>
+            )}
             {/* Picto notification up the cart icon */}
             {showCart?.length !== 0 && (
               <div className="notification-cart">

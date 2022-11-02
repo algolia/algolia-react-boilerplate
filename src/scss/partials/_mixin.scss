@@ -326,12 +326,12 @@
       display: flex;
       justify-content: space-between;
       width: 40%;
-      &-plus{
-      svg{
-        path{
-          fill: $secondary-color;
+      &-plus {
+        svg {
+          path {
+            fill: $secondary-color;
+          }
         }
-      }
       }
       &-inactive {
         font-weight: 300 !important;
@@ -372,8 +372,6 @@
         animation: bounce 0.3s ease-in-out forwards;
       }
     }
-
-    
   }
 }
 
@@ -414,22 +412,22 @@
     }
     .price {
       @include price($secondary-color);
-      margin-top: 1rem
+      margin-top: 1rem;
     }
 
-    .size{
+    .size {
       @include size($main-color);
       display: flex;
       align-items: center;
       gap: 0.3rem;
-    
     }
 
-    .colors{
+    .colors {
       @include colorName($main-color);
       display: flex;
       align-items: flex-start;
-      gap: 0.3rem;}
+      gap: 0.3rem;
+    }
   }
   &:hover {
     @include hitHoverEffect();
@@ -452,6 +450,7 @@
   text-transform: capitalize;
   .ais-Highlight-nonHighlighted {
     color: $productName-color;
+    font-size: 0.6rem;
   }
   .ais-Highlight-highlighted {
     @include highlight($secondary-color);
@@ -470,7 +469,7 @@
   font-weight: 700;
   font-size: 1rem;
   margin-top: 1px;
-  span{
+  span {
     color: inherit;
   }
   s {
@@ -724,7 +723,6 @@
   background: $background;
   z-index: 10;
 }
-
 
 @keyframes bounce {
   0% {
