@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react'
-import get from 'lodash/get'
-import { hitsConfig } from '@/config/hitsConfig'
+import { addToCartSelector, cartOpen } from '@/config/cartFunctions'
 import { currencySymbolAtom } from '@/config/currencyConfig'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { addToCartSelector } from '@/config/cartFunctions'
+import { hitsConfig } from '@/config/hitsConfig'
+import get from 'lodash/get'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { CartPicto } from '@/assets/svg/SvgIndex'
 import { PredictZone, usePredict } from '@algolia/predict-react'
 import PromotionCodeBanner from '../predict/PromotionCodeBanner'
-import { CartPicto } from '@/assets/svg/SvgIndex'
 
 const computePriceTotal = (items) => {
   const { price } = hitsConfig
@@ -34,6 +34,7 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
   const [priceTotal, setPriceTotal] = useState(0)
   const [isUserEligible, setIsUserEligible] = useState(false)
   const [addToCartIsClicked, setAddToCartIsClicked] = useState(false)
+  const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen)
 
   useEffect(() => setPriceTotal(computePriceTotal(items)), [items])
 
@@ -113,11 +114,13 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
             : 'fbt-infos__btn'
         }
         // className="fbt-infos__btn"
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation()
           items.map((item) => {
             return setAddToCartAtom(item)
           })
           setAddToCartIsClicked(true)
+          setCartOpenValue(!cartOpenValue)
           setTimeout(() => setAddToCartIsClicked(false), 300)
         }}
       >

@@ -34,7 +34,6 @@ import {
   shouldHaveLanguages,
   shouldHavePersona,
   shouldHaveSegments,
-  shouldHaveVoiceSearch,
 } from '@/config/featuresConfig'
 
 // Import applied rules config
@@ -48,8 +47,8 @@ import { Selectors } from '../../selector/Selectors'
 
 // Import Components
 import CustomSearchBox from '@/components/searchbox/SearchBox'
-import Navigation from './Navigation'
 import { windowSize } from '@/hooks/useScreenSize'
+import Navigation from './Navigation'
 
 const HeaderLaptop = () => {
   const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom)
@@ -149,7 +148,7 @@ const HeaderLaptop = () => {
         {shouldShowCartIcon && (
           <div className="picto-cart">
             <div
-              className={cartOpenValue && 'picto-cart__active'}
+              className={cartOpenValue ? 'picto-cart__active' : ''}
               ref={cartIcon}
               onClick={(e) => {
                 e.stopPropagation()

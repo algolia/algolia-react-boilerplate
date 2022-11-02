@@ -24,7 +24,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // SVG & components
-import { ChevronLeft, CartPicto } from '@/assets/svg/SvgIndex'
+import { CartPicto, ChevronLeft } from '@/assets/svg/SvgIndex'
 import Price from '@/components/hits/components/Price.jsx'
 import RelatedItem from '@/components/recommend/relatedItems/RelatedProducts'
 
@@ -38,7 +38,7 @@ import {
   framerMotionPage,
   framerMotionTransition,
 } from '@/config/animationConfig'
-import { addToCartSelector } from '@/config/cartFunctions'
+import { addToCartSelector, cartOpen } from '@/config/cartFunctions'
 import {
   shouldHaveFbtProducts,
   shouldHaveRelatedProducts,
@@ -53,9 +53,9 @@ import { windowSize } from '@/hooks/useScreenSize'
 import './SCSS/productDetails.scss'
 
 // Import and use translation
-import { useTranslation } from 'react-i18next'
 import FbtAddAll from '@/components/fbtPdp/FbtAddAll'
 import FbtItems from '@/components/recommend/fbtItems/FbtProducts'
+import { useTranslation } from 'react-i18next'
 
 const ProductDetails = () => {
   const [addToCartIsClicked, setAddToCartIsClicked] = useState(false)
@@ -68,6 +68,8 @@ const ProductDetails = () => {
 
   // access the hit component from recoil state
   const [hit, setHit] = useRecoilState(hitAtom)
+
+  const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen)
 
   const [readyToLoad, setReadyToLoad] = useState(false)
 
@@ -295,9 +297,11 @@ const ProductDetails = () => {
                     ? 'add-to-cart add-to-cart-active'
                     : 'add-to-cart'
                 }
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation()
                   setAddToCartAtom(hit)
                   setAddToCartIsClicked(true)
+                  setCartOpenValue(!cartOpenValue)
                   setTimeout(() => setAddToCartIsClicked(false), 300)
                   // Send event conversion to Algolia API
                   // sendEvent('conversion', hit, 'PDP: Add to cart')

@@ -1,5 +1,5 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { Fragment, lazy, Suspense, useEffect, useState } from 'react'
+import { Fragment, lazy, Suspense, useEffect } from 'react'
 
 // eslint-disable-next-line import/order
 import {
