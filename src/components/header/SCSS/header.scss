@@ -10,18 +10,18 @@
   background-color: $background-color;
   .container {
     margin: 0 auto;
-    .container__header-top{
+    .container__header-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100vw;
       padding: 0.6rem 3rem;
       background-color: $tertiary-color;
-      .title{
+      .title {
         display: flex;
         align-items: center;
         justify-content: center;
-        h3{
+        h3 {
           @include titleH3($white-color);
           text-transform: capitalize;
         }
@@ -32,16 +32,15 @@
         align-items: center;
         gap: 2rem;
         margin-right: 2rem;
-        button{
-          svg{
-            path{
+        button {
+          svg {
+            path {
               fill: $white-color;
             }
           }
-          p{
+          p {
             @include p-text($white-color);
             font-size: 0.8rem;
-           
           }
         }
       }
@@ -70,20 +69,20 @@
           height: 100%;
         }
       }
-      .picto-cart{
+      .picto-cart {
         position: relative;
         width: 10rem;
         display: flex;
         justify-content: flex-end;
-        cursor: pointer;
-        svg{
+        svg {
+          cursor: pointer;
           width: 32px;
         }
         &__active {
           animation: bounce 0.3s ease-in-out forwards;
         }
 
-        .notification-cart{
+        .notification-cart {
           position: absolute;
           top: -0.5rem;
           right: -0.5rem;
@@ -95,7 +94,7 @@
           align-items: center;
           justify-content: center;
 
-          span{
+          span {
             @include p-text($white-color);
             font-size: 0.8rem;
           }
@@ -112,9 +111,8 @@
         gap: clamp(0.5rem, -1.12rem + 4.13vw, 2rem);
         li {
           z-index: 50;
-          &:last-child{
-            p{
-
+          &:last-child {
+            p {
               color: $secondary-color;
             }
           }
@@ -151,7 +149,7 @@
     }
     .container__header-mid__logo {
       // width: 35% !important;
-      svg{
+      svg {
         width: 3rem;
       }
     }
