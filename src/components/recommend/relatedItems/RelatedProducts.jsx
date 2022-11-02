@@ -20,10 +20,10 @@ import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage'
 import { useNavigate } from 'react-router-dom'
 
 //Import scope SCSS
-import '../SCSS/recommend.scss'
+import { addToCartSelector, cartClick } from '@/config/cartFunctions'
 import { shouldHaveCartFunctionality } from '@/config/featuresConfig'
-import { addToCartSelector } from '@/config/cartFunctions'
 import { useState } from 'react'
+import '../SCSS/recommend.scss'
 
 const RelatedItem = ({ item }) => {
   const navigate = useNavigate()
@@ -35,6 +35,8 @@ const RelatedItem = ({ item }) => {
   const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
   const [cartLogoClicked, setCartLogoClicked] = useState(false)
   const setAddToCartAtom = useSetRecoilState(addToCartSelector)
+
+  const setCartIcon = useSetRecoilState(cartClick)
 
   return (
     <div className="relatedItem">
@@ -65,8 +67,10 @@ const RelatedItem = ({ item }) => {
           {shouldShowCartIcons && (
             <div
               className={cartLogoClicked ? 'cart cart-active' : 'cart'}
-              onClick={() => {
-                setCartLogoClicked(true)
+              ref={setCartIcon}
+              onClick={(e) => {
+                e.stopPropagation()
+                setCartLogoClicked(false)
                 setTimeout(() => setCartLogoClicked(false), 300)
                 setAddToCartAtom(item)
               }}
