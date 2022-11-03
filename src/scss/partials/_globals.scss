@@ -23,6 +23,10 @@ body {
   overflow-y: auto;
   background-color: $background-color;
   font-family: $main-font;
+
+}
+
+.mainWrapper{
   margin: 0 auto;
   max-width: 1600px;
 }

@@ -102,27 +102,29 @@ const HeaderLaptop = () => {
   return (
     <div className="container">
       <div className="container__header-top">
-        <div className="title">
-          <h3>Demo</h3>
+        <div className="container__header-top-inner">
+          <div className="title">
+            <h3>Demo</h3>
+          </div>
+          <ul className="selector-list" ref={selectorsNavigation}>
+            {shouldShowPersonasAtom && (
+              <li>
+                <Selectors props={personaConfig} />
+              </li>
+            )}
+            {shouldShowSegmentsAtom && (
+              <li>
+                <Selectors props={segmentConfig} />
+              </li>
+            )}
+            {/* Display the language select component */}
+            {shouldShowLanguageSelected && (
+              <li>
+                <Selectors props={languagesConfig} />
+              </li>
+            )}
+          </ul>
         </div>
-        <ul className="selector-list" ref={selectorsNavigation}>
-          {shouldShowPersonasAtom && (
-            <li>
-              <Selectors props={personaConfig} />
-            </li>
-          )}
-          {shouldShowSegmentsAtom && (
-            <li>
-              <Selectors props={segmentConfig} />
-            </li>
-          )}
-          {/* Display the language select component */}
-          {shouldShowLanguageSelected && (
-            <li>
-              <Selectors props={languagesConfig} />
-            </li>
-          )}
-        </ul>
       </div>
       <div className="container__header-mid">
         <div className="container__header-mid__logo">
