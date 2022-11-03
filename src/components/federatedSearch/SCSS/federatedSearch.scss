@@ -106,6 +106,9 @@
   }
   &__item {
     @include hitHorizontalUI();
+    .ais-Highlight-highlighted{
+      font-size: 0.6rem;
+    }
   }
 
   &__btn {
