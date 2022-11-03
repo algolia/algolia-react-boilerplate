@@ -1,36 +1,35 @@
-import { memo } from 'react';
+import { memo } from 'react'
 
 // Algolia's imports
-import { useHits } from 'react-instantsearch-hooks-web';
+import { useHits } from 'react-instantsearch-hooks-web'
 
 // Component import
-import { ChevronRight } from '@/assets/svg/SvgIndex';
-import Price from '@/components/hits/components/Price.jsx';
+import { ChevronRight } from '@/assets/svg/SvgIndex'
+import Price from '@/components/hits/components/Price.jsx'
 
 // Recoil import
-import { hitAtom } from '@/config/hitsConfig';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { hitsConfig } from '@/config/hitsConfig';
-import { personaSelectedAtom } from '@/config/personaConfig';
-import { queryAtom } from '@/config/searchboxConfig';
+import { hitAtom, hitsConfig } from '@/config/hitsConfig'
+import { personaSelectedAtom } from '@/config/personaConfig'
+import { queryAtom } from '@/config/searchboxConfig'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 // React-router import
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
-import get from 'lodash/get';
+import get from 'lodash/get'
 
 function Products(props) {
-  const { hits } = useHits(props);
-  const navigate = useNavigate();
-  const hitState = useSetRecoilState(hitAtom);
+  const { hits } = useHits(props)
+  const navigate = useNavigate()
+  const hitState = useSetRecoilState(hitAtom)
 
-  const personaSelected = useRecoilValue(personaSelectedAtom);
-  const query = useRecoilValue(queryAtom);
+  const personaSelected = useRecoilValue(personaSelectedAtom)
+  const query = useRecoilValue(queryAtom)
 
   //Get title, props
-  const { products, productsBefore, buttonShowAll, noResults } = props;
+  const { products, productsBefore, buttonShowAll, noResults } = props
   // Get hit attribute from config file
-  const { objectID, image, productName, brand } = hitsConfig;
+  const { objectID, image, productName, brand } = hitsConfig
 
   return (
     <div className="products">
@@ -49,8 +48,8 @@ function Products(props) {
                 <div
                   className="image-wrapper"
                   onClick={() => {
-                    hitState(hit);
-                    navigate(`/search/product/${hit[objectID]}`);
+                    hitState(hit)
+                    navigate(`/search/product/${hit[objectID]}`)
                   }}
                 >
                   <img
@@ -67,7 +66,7 @@ function Products(props) {
                   </p>
                 </div>
               </li>
-            );
+            )
           })
         ) : (
           <span className="no-results__infos">{noResults}</span>
@@ -78,7 +77,7 @@ function Products(props) {
         <p onClick={() => navigate('/search')}>{buttonShowAll}</p>
       </div>
     </div>
-  );
+  )
 }
 
-export default memo(Products);
+export default memo(Products)

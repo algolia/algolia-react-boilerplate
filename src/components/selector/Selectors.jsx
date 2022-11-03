@@ -1,54 +1,64 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from 'react'
 
 // React-router
-import { createSearchParams, useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom'
 
 // import Recoil States
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 //import configuration
 import {
   personaSelectedAtom,
   personaSelectedFiltersAtom,
   personaSelectedName,
-} from '@/config/personaConfig';
-import { queryAtom } from '@/config/searchboxConfig';
-import { segmentSelectedAtom } from '@/config/segmentConfig';
+} from '@/config/personaConfig'
+import { queryAtom } from '@/config/searchboxConfig'
+import { segmentSelectedAtom } from '@/config/segmentConfig'
 // Changing index & currency through the app
-import { currencySymbolAtom } from '@/config/currencyConfig';
-import { linksHeader } from '@/config/navigationConfig';
-import { languageSwitchConfig } from '@/config/languagesConfig';
+import { currencySymbolAtom } from '@/config/currencyConfig'
+import { languageSwitchConfig } from '@/config/languagesConfig'
+import { linksHeader } from '@/config/navigationConfig'
 
 // handle Alert config
 import {
   alertContent as alertContentAtom,
   isAlertOpen,
-} from '@/config/demoGuideConfig';
+} from '@/config/demoGuideConfig'
 
 // Import index to handle language changes
-import { mainIndex } from '@/config/algoliaEnvConfig';
+import { mainIndex } from '@/config/algoliaEnvConfig'
 
 // Import components
-import { ChevronDown } from '@/assets/svg/SvgIndex';
+import { ChevronDown } from '@/assets/svg/SvgIndex'
 
 // import Custom Hook
-import useOutsideClick from '@/hooks/useOutsideClick';
+import useOutsideClick from '@/hooks/useOutsideClick'
 
 // import scoped CSS
-import './selectors.scss';
+import './selectors.scss'
+
+import { windowSize } from '@/hooks/useScreenSize'
 
 //Use Translation
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 export const Selectors = ({ props }) => {
-  const [menuActive, setMenuActive] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(props[0].label);
-  const selectorBtn = useRef();
+  const [menuActive, setMenuActive] = useState(false)
+  const [selectedValue, setSelectedValue] = useState(props[0].label)
+  const selectorBtn = useRef()
 
-  useOutsideClick(selectorBtn.current, () => setMenuActive(false));
+  const { isDesktop } = useRecoilValue(windowSize)
+
+  useOutsideClick(selectorBtn.current, () => setMenuActive(false))
 
   return (
-    <div className="selectorsWrapper">
+    <div
+      className={
+        isDesktop
+          ? 'selectorsWrapper'
+          : 'selectorsWrapper selectorsWrapper-mobile'
+      }
+    >
       <button
         className="selectorsWrapper__btn"
         onClick={() => setMenuActive(!menuActive)}
@@ -77,8 +87,8 @@ export const Selectors = ({ props }) => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
 const SelectItem = ({
   label,
@@ -88,57 +98,63 @@ const SelectItem = ({
   setSelectedValue,
   personalizationFilters,
 }) => {
-  const setSegmentSelect = useSetRecoilState(segmentSelectedAtom);
-  const setPersonaSelect = useSetRecoilState(personaSelectedAtom);
-  const setPersonaSelectedName = useSetRecoilState(personaSelectedName);
+  const setSegmentSelect = useSetRecoilState(segmentSelectedAtom)
+  const setPersonaSelect = useSetRecoilState(personaSelectedAtom)
+  const setPersonaSelectedName = useSetRecoilState(personaSelectedName)
   const setPersonaSelectedFilters = useSetRecoilState(
     personaSelectedFiltersAtom
-  );
+  )
   // Recoil State - update query in searchBar
-  const setQueryState = useSetRecoilState(queryAtom);
+  const setQueryState = useSetRecoilState(queryAtom)
   // Get index & currency atom to use it in the switch statement
-  const setCurrency = useSetRecoilState(currencySymbolAtom);
-  const index = useSetRecoilState(mainIndex);
-  const navigationLinks = useSetRecoilState(linksHeader);
+  const setCurrency = useSetRecoilState(currencySymbolAtom)
+  const index = useSetRecoilState(mainIndex)
+  const navigationLinks = useSetRecoilState(linksHeader)
 
   // Recoil state for alert
-  const setAlert = useSetRecoilState(alertContentAtom);
-  const setAlertOpen = useSetRecoilState(isAlertOpen);
+  const setAlert = useSetRecoilState(alertContentAtom)
+  const setAlertOpen = useSetRecoilState(isAlertOpen)
 
   // Use the translator
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation()
 
   const handleChangeOfLanguage = (e) => {
     switch (e) {
       case 'English':
-        index(languageSwitchConfig.EN.index);
-        setCurrency(languageSwitchConfig.EN.currency);
-        navigationLinks(languageSwitchConfig.EN.linksHeader);
-        i18n.changeLanguage('en');
-        break;
+        index(languageSwitchConfig.EN.index)
+        setCurrency(languageSwitchConfig.EN.currency)
+        navigationLinks(languageSwitchConfig.EN.linksHeader)
+        i18n.changeLanguage('en')
+        break
       case 'French':
-        index(languageSwitchConfig.FR.index);
-        setCurrency(languageSwitchConfig.FR.currency);
-        navigationLinks(languageSwitchConfig.FR.linksHeader);
-        i18n.changeLanguage('fr');
-        break;
+        index(languageSwitchConfig.FR.index)
+        setCurrency(languageSwitchConfig.FR.currency)
+        navigationLinks(languageSwitchConfig.FR.linksHeader)
+        i18n.changeLanguage('fr')
+        break
       case 'German':
-        index(languageSwitchConfig.GER.index);
-        setCurrency(languageSwitchConfig.GER.currency);
-        navigationLinks(languageSwitchConfig.GER.linksHeader);
-        i18n.changeLanguage('ger');
-        break;
+        index(languageSwitchConfig.GER.index)
+        setCurrency(languageSwitchConfig.GER.currency)
+        navigationLinks(languageSwitchConfig.GER.linksHeader)
+        i18n.changeLanguage('ger')
+        break
+      case 'Italian':
+        index(languageSwitchConfig.IT.index)
+        setCurrency(languageSwitchConfig.IT.currency)
+        navigationLinks(languageSwitchConfig.IT.linksHeader)
+        i18n.changeLanguage('it')
+        break
     }
-  };
+  }
 
   const triggerAlert = (content) => {
-    setAlertOpen(true);
-    setAlert(content);
-    setTimeout(() => setAlertOpen(false), 5000);
-  };
+    setAlertOpen(true)
+    setAlert(content)
+    setTimeout(() => setAlertOpen(false), 5000)
+  }
 
   // router hook to navigate using a function
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleClick = (
     label,
@@ -149,16 +165,16 @@ const SelectItem = ({
   ) => {
     switch (type) {
       case 'segment':
-        setSegmentSelect(value);
-        break;
+        setSegmentSelect(value)
+        break
       case 'persona':
-        setPersonaSelect(value);
-        setPersonaSelectedFilters(personalizationFilters);
-        setPersonaSelectedName(label);
-        break;
+        setPersonaSelect(value)
+        setPersonaSelectedFilters(personalizationFilters)
+        setPersonaSelectedName(label)
+        break
       case 'language':
-        handleChangeOfLanguage(value);
-        break;
+        handleChangeOfLanguage(value)
+        break
       case 'dynamic filters':
       case 'injected content':
       case 'redirect':
@@ -168,25 +184,25 @@ const SelectItem = ({
           navigate({
             pathname: '/search',
             search: `?${createSearchParams({ query: value })}`,
-          });
-          setQueryState(value);
-          triggerAlert(alertContent);
+          })
+          setQueryState(value)
+          triggerAlert(alertContent)
         }
-        break;
+        break
       default:
-        break;
+        break
     }
-  };
+  }
 
   return (
     <li
       className="selectorsWrapper__listItem"
       onClick={() => {
-        handleClick(label, type, value, alertContent, personalizationFilters);
-        setSelectedValue(label);
+        handleClick(label, type, value, alertContent, personalizationFilters)
+        setSelectedValue(label)
       }}
     >
       {label}
     </li>
-  );
-};
+  )
+}

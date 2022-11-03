@@ -1,0 +1,228 @@
+// ------------------------------------------
+// Cart Modal
+// ------------------------------------------
+@use '../../../scss/partials' as *;
+
+.cartModal-wp {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 999;
+  animation: opacity 0.2s ease-in-out;
+}
+
+.modal-container {
+  z-index: 1000;
+  position: absolute;
+  background-color: $white-color;
+  // top: calc(13rem);
+  right: 0;
+  width: clamp(30rem, 23.38rem + 12.9vw, 35rem);
+  height: 100vh;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 0.2rem 0 0 0.2rem;
+  padding: 1.5rem 2rem;
+  overflow: scroll;
+  opacity: 0;
+
+  &__title {
+    @include titleH3();
+  }
+  &__line {
+    border-bottom: 1px solid #d9d9d9;
+    width: 80%;
+    margin: 30px auto;
+  }
+  &__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem
+  }
+  &__emptyCart {
+    @include btn($white-color, $main-color);
+    border: 1px solid $secondary-color;
+    width: 100%;
+    &:hover {
+      @include btn-hover($secondary-color, $white-color);
+    }
+  }
+  &__checkout {
+    @include btn($secondary-color-custom-gradient, $white-color);
+    border: 1px solid transparent;
+    width: 100%;
+    gap: 1rem;
+    p {
+      transition: all 0.3s ease-in-out;
+    }
+    svg {
+      margin-top: 2px;
+      width: 8px;
+      transition: all 0.3s ease-in-out;
+      path {
+        fill: $white-color;
+      }
+    }
+    &:hover {
+      @include btn-hover($secondary-color-custom-gradient, $white-color);
+      p {
+        transform: translateX(-0.5rem);
+        transition: all 0.3s ease-in-out;
+      }
+      svg {
+        transform: translateX(0.5rem);
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+}
+
+.modal-container::-webkit-scrollbar {
+  display: none;
+}
+
+.articles{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  &__item{
+    @include hitHorizontalUI();
+    margin: 0 auto;
+    width: 80%;
+
+    .colors{
+    &__badge{
+      align-self: center;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+  }
+  }
+
+  &__IconWrapper{
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+
+    .icons{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      svg{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 25px;
+        path{
+          fill: $secondary-color;
+        }
+      }
+    }
+  }
+
+  &__removeProduct{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  //MOBILE
+  &__item-mobile{
+    width: 100%;
+  }
+}
+
+.recommend-cart {
+  margin: 3rem 0;
+  .title {
+    @include titleH3($secondary-color);
+    margin-bottom: 1rem;
+  }
+  .uic-HorizontalSlider-container {
+    display: flex;
+  }
+  .uic-HorizontalSlider-list {
+    gap: 1rem;
+    grid-auto-columns: 19%;
+    display: flex;
+  }
+
+  .uic-HorizontalSlider-navigation {
+    display: none;
+  }
+
+  .relatedItem {
+    @include hit(
+      $main-color,
+      $secondary-color,
+      $secondary-color,
+      $secondary-color
+    );
+    position: relative;
+    width: 9rem;
+    &__imgWrapper {
+      margin: 0;
+      &__heart {
+        display: none;
+      }
+    }
+
+    &__infos {
+      @include productName($grey-dark-color);
+
+      .brand {
+        @include brand($main-color);
+        text-align: center;
+      }
+      .price {
+        @include price($secondary-color);
+        text-align: center;
+        font-size: 0.9rem;
+      }
+      .relatedItem__infosUp {
+        .productName {
+          text-align: center;
+          span {
+            font-size: 0.7rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ------------------------------------------
+// MOBILE
+// ------------------------------------------
+.modal-container-mobile {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  &__close {
+    position: absolute;
+    right: 1rem;
+    font-size: 1.5rem;
+    top: 1.2rem;
+    font-weight: bold;
+    color: $secondary-color;
+    cursor: pointer;
+  }
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

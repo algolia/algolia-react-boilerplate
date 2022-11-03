@@ -1,101 +1,195 @@
-import { useState, useEffect } from 'react';
+import { lazy, memo, Suspense, useEffect } from 'react'
 
-import { Configure, InstantSearch } from 'react-instantsearch-hooks-web';
+// Algolia Instantsearch components
+import { useInstantSearch } from 'react-instantsearch-hooks-web'
 
-// application state from config file
-import { searchClient } from './config/algoliaEnvConfig';
+// Algolia API client
+
+import { InsightsMiddleware } from './config/algoliaInsightEvents'
 
 // Framer-Motion
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion'
 
 // React router
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useSearchParams } from 'react-router-dom'
 
 //Recoil states & values
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 // Import help navigation state & config
-import { mainIndex } from './config/algoliaEnvConfig';
-import { isRulesSwitchToggle } from './config/appliedRulesConfig';
-import { queryAtom } from './config/searchboxConfig';
 import {
   isDemoGuideOpen,
   shouldShowAlert,
   showNetworkErorrs,
-} from '@/config/demoGuideConfig';
-import { shouldHaveDemoGuide } from '@/config/featuresConfig';
-import { isCarouselLoaded } from './config/carouselConfig';
+} from '@/config/demoGuideConfig'
+import {
+  shouldHaveCartFunctionality,
+  shouldHaveDemoGuide,
+} from '@/config/featuresConfig'
+
+import { isRulesSwitchToggle } from '@/config/appliedRulesConfig'
+import { isCarouselLoaded } from '@/config/carouselConfig'
 
 // Import Pages and static components
-import AlertNavigation from '@/components/demoGuide/AlertNavigation';
-import DemoGuide from '@/components/demoGuide/DemoGuide';
-import Header from '@/components/header/Header';
-import CustomAppliedRules from './components/appliedRules/AppliedRules';
-import Footer from './components/footer/Footer';
-import { DemoGuideOpener } from './components/header/components/DemoGuideOpener';
-import HomePage from './pages/homepage/HomePage';
-import ProductDetails from './pages/productDetailsPage/ProductDetails';
-import SearchResultsPage from './pages/searchResultPage/SearchResultsPage';
+import AlertNavigation from '@/components/demoGuide/AlertNavigation'
+
+import DemoGuide from '@/components/demoGuide/DemoGuide'
+import Header from '@/components/header/Header'
+import Redirect from '@/components/redirects/Redirect'
+import CustomAppliedRules from './components/appliedRules/AppliedRules'
+
+import Footer from './components/footer/Footer'
+import { DemoGuideOpener } from './components/header/components/DemoGuideOpener'
+const HomePage = lazy(() => import('./pages/homepage/HomePage'))
+const ProductDetails = lazy(() =>
+  import('./pages/productDetailsPage/ProductDetails')
+)
+
+import SearchResultsPage from './pages/searchResultsPage/SearchResultsPage'
+
+const CartModal = lazy(() => import('./components/cart/CartModal'))
 
 // Custom hook to prevent body from scrolling
-import usePreventScrolling from './hooks/usePreventScrolling';
-import SearchErrorToast from './utils/ErrorHandler';
+import usePreventScrolling from './hooks/usePreventScrolling'
 
-export const Main = () => {
-  const index = useRecoilValue(mainIndex);
+// Error handler for network errors
+import Loader from './components/loader/Loader'
+import SearchErrorToast from './utils/ErrorHandler'
 
-  const location = useLocation();
+import NoResults from './components/noResults/noResults'
+import { cartOpen } from './config/cartFunctions'
 
-  const queryState = useRecoilValue(queryAtom);
+export const Main = memo(() => {
+  const { setIndexUiState, indexUiState, results } = useInstantSearch()
+
+  // Handle URL search parameters through React Router
+  let [searchParams, setSearchParams] = useSearchParams()
+
+  // Setting the query to the state with the URL
+  // Allow to load query when loading the page and update results if needed
+  // Allow to handle no result on refresh if there are nos result for this query
+  useEffect(() => {
+    setIndexUiState((prevUiState) => {
+      if (searchParams.get('query')) {
+        return {
+          ...prevUiState,
+          query: searchParams.get('query'),
+        }
+      }
+    })
+  }, [searchParams, indexUiState.query])
+
+  // Current location from react Router
+  const location = useLocation()
 
   // Check if Carousels are ready & loaded on the homepage
-  const carouselLoaded = useRecoilValue(isCarouselLoaded);
+  const carouselLoaded = useRecoilValue(isCarouselLoaded)
 
   // Should the alert badges for the demo guide be shown
-  const shouldShowAlertAtom = useRecoilValue(shouldShowAlert);
+  const shouldShowAlertAtom = useRecoilValue(shouldShowAlert)
 
-  // Show rules applied panel when switch on in the demo guide panel
-  const isRulesSwitchToggleChecked = useRecoilValue(isRulesSwitchToggle);
+  // Should the currently applied Algolia rules be shown
+  const shouldShowAppliedRules = useRecoilValue(isRulesSwitchToggle)
 
-  // Show guided panel for SE
-  const shouldHaveDemoGuideAtom = useRecoilValue(shouldHaveDemoGuide);
+  // Should the demo guide panel be shown
+  const shouldHaveDemoGuideAtom = useRecoilValue(shouldHaveDemoGuide)
 
-  // Show/hide the panel if click on the guide btn
-  const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen);
-
+  // State to control the Showing/hiding of the demo guide panel
+  const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen)
   // Value that shows Network Errors to Guide you to the correct Configuration
-  const isNetworkErorrs = useRecoilValue(showNetworkErorrs);
+  const shouldShowNetworkErrors = useRecoilValue(showNetworkErorrs)
+
+  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality)
+  const showCart = useRecoilValue(cartOpen)
 
   // Prevent body from scrolling when panel is open
-  usePreventScrolling(showDemoGuide);
+  usePreventScrolling(showDemoGuide)
 
   return (
-    <InstantSearch searchClient={searchClient} indexName={index}>
-      {isNetworkErorrs && <SearchErrorToast />}
+    <>
+      <InsightsMiddleware />
+      {shouldShowNetworkErrors && <SearchErrorToast />}
+      <Header />
+      {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
 
-      <div className="visible">
-        <Configure query={queryState} />
-        <Header />
-        {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
+      <div className="mainWrapper">
+        {/* TODO: Check if this configure is used for anything */}
+        <Redirect />
         <AnimatePresence>
-          {showDemoGuide && <DemoGuide setshowDemoGuide={setshowDemoGuide} />}
+          {showDemoGuide && (
+            <div className="demoGuide-wp">
+              <DemoGuide setshowDemoGuide={setshowDemoGuide} />
+            </div>
+          )}
+          {shouldShowCartIcon && showCart && (
+            <Suspense fallback={''}>
+              <div className="cartModal-wp">
+                <CartModal />
+              </div>
+            </Suspense>
+          )}
         </AnimatePresence>
-        <AnimatePresence initial={true}>
-          <Routes key={location.pathname} location={location}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/search" element={<SearchResultsPage />} />
-            <Route path="/search/:categories" element={<SearchResultsPage />} />
-            {/* objectID is the unique identifier for an algolia record */}
+        <Routes key={location.pathname} location={location}>
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<Loader />}>
+                <HomePage />
+              </Suspense>
+            }
+          />
+          {results.nbHits === 0 && searchParams.get('query') !== '' && (
             <Route
-              path="/search/product/:objectID"
-              element={<ProductDetails />}
+              path="/search"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <NoResults />
+                </Suspense>
+              }
             />
-          </Routes>
-          {carouselLoaded && <Footer />}
-        </AnimatePresence>
-        {shouldShowAlertAtom && <AlertNavigation />}
-        {isRulesSwitchToggleChecked && <CustomAppliedRules />}
+          )}
+
+          <Route
+            path="/search"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SearchResultsPage />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/search/:categories"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SearchResultsPage />
+              </Suspense>
+            }
+          />
+          {/* objectID is the unique identifier for an algolia record */}
+          <Route
+            path="/search/product/:objectID"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ProductDetails />
+              </Suspense>
+            }
+          />
+        </Routes>
+        {/* NB disabled logic to render footer */}
+        {/* To avoid CLS, load in the footer after the carousels render */}
+        {carouselLoaded && <Footer />}
+        {shouldShowAlertAtom && (
+          <Suspense fallback={''}>
+            <AlertNavigation />
+          </Suspense>
+        )}
+        {shouldShowAppliedRules && (
+          <Suspense fallback={''}>
+            <CustomAppliedRules />
+          </Suspense>
+        )}
       </div>
-    </InstantSearch>
-  );
-};
+    </>
+  )
+})

@@ -1,0 +1,16 @@
+// ------------------------------------------
+// Promotion code banner
+// ------------------------------------------
+@use '../../../scss/partials/' as *;
+
+.promotionCodeBanner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    p{
+        @include titleH3($main-color);
+        text-transform: capitalize;
+    }
+}

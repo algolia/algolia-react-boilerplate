@@ -3,35 +3,33 @@
 // ------------------------------------------
 @use '../../../scss/partials' as *;
 
-.voiceSearch{
-    &__inactive{
-        width: 12px;
-        path{
-           
-           fill: $main-color;
-           transition: all 0.3s ease-in-out;
-        }
+.voiceSearch {
+  &__inactive {
+    width: 12px;
+    path {
+      fill: $main-color;
+      transition: all 0.3s ease-in-out;
     }
+  }
 
-    &__active{
-        width: 12px;
-        path{
-            animation: blink 2s infinite ease-in-out;
-            // fill: $second-color;
-            transition: all 0.3s ease-in-out;
-        }
+  &__active {
+    width: 12px;
+    path {
+      animation: blink 2s infinite ease-in-out;
+      // fill: $secondary-color;
+      transition: all 0.3s ease-in-out;
     }
+  }
 }
 
 @keyframes blink {
-    0%{
-        fill: $main-color;
-    }
-    50%{
-        fill: $second-color;
-    }
-    100%{
-        fill: $main-color;
-    }
-    
+  0% {
+    fill: $main-color;
+  }
+  50% {
+    fill: $secondary-color;
+  }
+  100% {
+    fill: $main-color;
+  }
 }

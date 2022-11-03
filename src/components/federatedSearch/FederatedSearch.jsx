@@ -1,16 +1,17 @@
-import { memo, useEffect } from 'react';
+import { memo, useEffect } from 'react'
 
 // Algolias's import
-import { Configure, Index } from 'react-instantsearch-hooks-web';
+import { Configure, Index } from 'react-instantsearch-hooks-web'
 
 // framer motion
-import { framerMotionFederatedContainer } from '@/config/animationConfig';
+import { motion } from 'framer-motion'
+import { framerMotionFederatedContainer } from '@/config/animationConfig'
 
 // import from Recoil
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Config
-import { indexNames, searchClient } from '@/config/algoliaEnvConfig';
+import { indexNames, searchClient } from '@/config/algoliaEnvConfig'
 
 // Show or unshow sections in federated (product, suggestions, categories, articles, recent searches)
 // categories import is here to choose which attribute you want to show as category
@@ -19,69 +20,72 @@ import {
   federatedRef,
   federatedSearchConfig,
   shouldHaveOpenFederatedSearch,
-} from '@/config/federatedConfig';
+} from '@/config/federatedConfig'
 
 // Sharing query to general state
-import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig';
+import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig'
 
 // Import Persona State from recoil
-import { personalizationImpact, personaSelectedAtom, personaSelectedFiltersAtom } from '@/config/personaConfig';
+import {
+  personalizationImpact,
+  personaSelectedAtom,
+  personaSelectedFiltersAtom,
+} from '@/config/personaConfig'
 
 // Import Segment State from recoil
-import { segmentSelectedAtom } from '@/config/segmentConfig';
+import { segmentSelectedAtom } from '@/config/segmentConfig'
 
 // Import refs for modal closing functionality
-import { selectorNavigationRef } from '@/config/navigationConfig';
+import { selectorNavigationRef } from '@/config/navigationConfig'
 
 // hook import
 // Check if user is clecking outside an element
-import useOutsideClickTwoConditionals from '@/hooks/useOutsideClickTwoConditions';
+import useOutsideClickTwoConditionals from '@/hooks/useOutsideClickTwoConditions'
 // Check screensize for responsiveness
-import { windowSize } from '@/hooks/useScreenSize';
+import { windowSize } from '@/hooks/useScreenSize'
 
 //Use Translation
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 // Components imports
-import Redirect from '@/components/redirects/Redirect';
-import Articles from './components/BlogPost';
-import Category from './components/Category';
-import Products from './components/Products';
-import QuerySuggestions from './components/QuerySuggestions';
-import RecentSearches from './components/RecentSearches';
+import { ChevronLeft } from '@/assets/svg/SvgIndex'
+import Articles from './components/BlogPost'
+import Category from './components/Category'
+import Products from './components/Products'
+import QuerySuggestions from './components/QuerySuggestions'
+import RecentSearches from './components/RecentSearches'
 
 //Import scope SCSS
-import './SCSS/federatedSearch.scss';
+import './SCSS/federatedSearch.scss'
 
 const FederatedSearch = () => {
   // Persona
-  const personaSelect = useRecoilValue(personaSelectedAtom);
-  const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom);
+  const personaSelect = useRecoilValue(personaSelectedAtom)
+  const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom)
 
-
-  const segmentSelect = useRecoilValue(segmentSelectedAtom);
-  const setIsFederated = useSetRecoilState(shouldHaveOpenFederatedSearch);
-  const searchboxRef = useRecoilValue(searchBoxAtom);
-  const query = useRecoilValue(queryAtom);
+  const segmentSelect = useRecoilValue(segmentSelectedAtom)
+  const setIsFederated = useSetRecoilState(shouldHaveOpenFederatedSearch)
+  const searchboxRef = useRecoilValue(searchBoxAtom)
+  const query = useRecoilValue(queryAtom)
 
   //Get reference for dropdowns in Navigation
-  const selector = useRecoilValue(selectorNavigationRef);
+  const selector = useRecoilValue(selectorNavigationRef)
 
   // Get Indexes Name
-  const { suggestionsIndex, articlesIndex } = useRecoilValue(indexNames);
+  const { suggestionsIndex, articlesIndex } = useRecoilValue(indexNames)
 
   // const containerFederated = useRef('');
   const [containerFederated, setContainerFederated] =
-    useRecoilState(federatedRef);
+    useRecoilState(federatedRef)
 
   // Get screen size
-  const { mobile, tablet } = useRecoilValue(windowSize);
+  const { mobile, tablet, isDesktop } = useRecoilValue(windowSize)
 
   // Import const translation
   // Use the translator
   const { t } = useTranslation('translation', {
     keyPrefix: 'federated',
-  });
+  })
 
   // Custom hook
   useOutsideClickTwoConditionals(
@@ -89,15 +93,13 @@ const FederatedSearch = () => {
     searchboxRef,
     selector,
     () => setIsFederated(false)
-  );
+  )
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
     return () => {
-      document.body.style.overflow = 'auto';
-      setIsFederated(false);
-    };
-  }, []);
+      setIsFederated(false)
+    }
+  }, [])
 
   // Federated search configuration
   const {
@@ -106,12 +108,13 @@ const FederatedSearch = () => {
     showCategories,
     showBlogPosts,
     showProducts,
-  } = federatedSearchConfig;
+  } = federatedSearchConfig
 
   return (
-    <div
-      className={`${mobile || tablet ? 'federatedSearch-mobile' : 'federatedSearch'
-        }`}
+    <motion.div
+      className={`${
+        mobile || tablet ? 'federatedSearch-mobile' : 'federatedSearch'
+      }`}
       ref={setContainerFederated}
       variants={framerMotionFederatedContainer}
       initial={framerMotionFederatedContainer.initial}
@@ -119,14 +122,17 @@ const FederatedSearch = () => {
       exit={framerMotionFederatedContainer.exit}
       transition={framerMotionFederatedContainer.transition}
     >
-      <span className="closeFederated" onClick={() => setIsFederated(false)}>
-        &lsaquo; {t('buttonReturn')}
-      </span>
+      {!isDesktop && (
+        <div className="closeFederated" onClick={() => setIsFederated(false)}>
+          <ChevronLeft /> <p>{t('buttonReturn')}</p>
+        </div>
+      )}
       <div
-        className={`${mobile || tablet
-          ? 'federatedSearch__wrapper-mobile'
-          : 'federatedSearch__wrapper'
-          }`}
+        className={`${
+          mobile || tablet
+            ? 'federatedSearch__wrapper-mobile'
+            : 'federatedSearch__wrapper'
+        }`}
       >
         <div className="federatedSearch__left">
           {/* If don't want this sections go into config file  */}
@@ -160,7 +166,7 @@ const FederatedSearch = () => {
           <div className="federatedSearch__middle">
             <Configure
               filters=""
-              hitsPerPage={6}
+              hitsPerPage={isDesktop ? 6 : 3}
               enablePersonalization={true}
               userToken={personaSelect}
               personalizationImpact={personalizationImpact}
@@ -186,9 +192,8 @@ const FederatedSearch = () => {
           </div>
         )}
       </div>
-      <Redirect />
-    </div>
-  );
-};
+    </motion.div>
+  )
+}
 
-export default memo(FederatedSearch);
+export default memo(FederatedSearch)

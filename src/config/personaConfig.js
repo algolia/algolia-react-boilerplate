@@ -1,9 +1,9 @@
 // ------------------------------------------
 // Configuration for personalisation accross the application
 // ------------------------------------------
-import { atom } from 'recoil';
+import { atom } from 'recoil'
 
-export const personalizationImpact = 98;
+export const personalizationImpact = 98
 
 // ------------------------------------------
 // This const defines the personas available for personalisation
@@ -17,6 +17,8 @@ export const personaConfig = [
   {
     value: 'anon',
     label: 'No Persona',
+    labelFr: 'Pas de persona',
+    labelGer: 'Keine persönlichkeit',
     description: 'Anonymous user',
     type: 'persona',
     personalizationFilters: [],
@@ -43,27 +45,33 @@ export const personaConfig = [
       "hierarchicalCategories.lvl2:'Womens > Clothing > Dresses'<score=1>",
     ],
   },
-];
+]
+
+// This atom will display ranking icons on SRP based on Persona Impact
+export const shouldDisplayRankingIcons = atom({
+  key: 'shouldDisplayRankingIcons', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
 
 // Please ignore this atom
 export const personaSelectedAtom = atom({
   key: 'personaSelected', // unique ID (with respect to other atoms/selectors)
   default: personaConfig[0].value, // default value (aka initial value)
-});
+})
 
 // Please ignore this atom
 export const personaSelectedName = atom({
   key: 'personaSelectedName', // unique ID (with respect to other atoms/selectors)
   default: '', // default value (aka initial value)
-});
+})
 
 export const personaSelectedFiltersAtom = atom({
   key: 'personaFiltersSelected', // unique ID (with respect to other atoms/selectors)
   default: personaConfig[0].personalizationFilters, // default value (aka initial value)
-});
+})
 
 // Please ignore this atom
 export const isPersonaMenuOpen = atom({
   key: 'isPersonaMenuOpen', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
-});
+})

@@ -1,69 +1,85 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
 
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react'
 
 // Algolia Import
-import { useSearchBox } from 'react-instantsearch-hooks-web';
+import { useSearchBox } from 'react-instantsearch-hooks-web'
 
 // Import navigate function to route to results page on search submit
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 // Import Recoil
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Import SVG from file as a component
-import { Glass } from '@/assets/svg/SvgIndex';
-import SearchInCategory from './components/SearchInCategory';
+import { Glass, SimpleCloseButton, SubmitPicto } from '@/assets/svg/SvgIndex'
+import SearchInCategory from './components/SearchInCategory'
 
-import { rulesAtom } from '@/config/appliedRulesConfig';
+import { rulesAtom } from '@/config/appliedRulesConfig'
 import {
   isSearchInCategory,
   queryAtom,
-  searchBoxAtom,
   searchBoxIsActive,
-} from '@/config/searchboxConfig';
+} from '@/config/searchboxConfig'
 
-import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+import { navigationStateAtom } from '@/config/navigationConfig'
+
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
 
 //Use Translation
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 // Custom Hooks
-import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage';
-import useOutsideClick from '@/hooks/useOutsideClick';
+import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage'
+
 //Import scope SCSS
-import './SCSS/searchbox.scss';
+import './SCSS/searchbox.scss'
 
 function CustomSearchBox(props) {
-  const { query } = useSearchBox(props);
+  const navigationState = useRecoilValue(navigationStateAtom)
+  // Handle URL search parameters through React Router
+  let [searchParams, setSearchParams] = useSearchParams()
+
+  const [hasKeystroke, setHasKeystroke] = useState(false)
+
+  const { query, refine } = useSearchBox(props)
 
   // Recoil State
-  const [queryState, setQueryState] = useRecoilState(queryAtom);
-  const [sbIsActive, setSbIsActive] = useRecoilState(searchBoxIsActive);
+  const [queryState, setQueryState] = useRecoilState(queryAtom)
+
+  const [sbIsActive, setSbIsActive] = useRecoilState(searchBoxIsActive)
+
+  const [tooltip, setTooltip] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
   // const setSearchBoxRef = useSetRecoilState(searchBoxAtom);
-  const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch);
+  const setIsFederatedOpen = useSetRecoilState(shouldHaveOpenFederatedSearch)
 
   // router hook to navigate using a function
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   // Get states of React Router
-  const { state } = useLocation();
+  const { state, pathname } = useLocation()
 
   // Get array of rules from Recoil
-  const rulesApplied = useSetRecoilState(rulesAtom);
+  const rulesApplied = useSetRecoilState(rulesAtom)
 
-  // Import const translation
-  // Use the translator
+  // Import and use translation
   const { t } = useTranslation('translation', {
     keyPrefix: 'searchBox',
-  });
+  })
 
   const refineFunction = (query) => {
-    // Empty array of rules on each Keystrokes
-    rulesApplied([]);
     // Refine query in all the app through recoil
-    setQueryState(query);
-  };
+    setQueryState(query)
+    // Empty array of rules on each Keystrokes
+    rulesApplied([])
+    searchParams.set('query', query)
+    setSearchParams(searchParams)
+  }
+
+  useEffect(() => {
+    queryState === '' ? setHasKeystroke(false) : setHasKeystroke(true)
+  }, [queryState])
 
   return (
     <div
@@ -77,31 +93,103 @@ function CustomSearchBox(props) {
         role="search"
         autoComplete="off"
         onSubmit={(event) => {
-          event.preventDefault();
-          setQueryState(query);
-          useStoreQueryToLocalStorage(query);
-          navigate('/search');
+          event.preventDefault()
+          setQueryState(query)
+          useStoreQueryToLocalStorage(query)
+          if (query === '') setTooltip(true)
+          if (query !== '') {
+            navigate({
+              pathname: '/search',
+              search: `?${searchParams}`,
+            })
+          }
         }}
       >
         <input
           className="searchbox__form__input"
           // ref={setSearchBoxRef}
           type="search"
-          value={queryState ? queryState : ''}
+          value={searchParams.get('query') ? searchParams.get('query') : ''}
           placeholder={t('placeHolder')}
           onClick={() => {
-            setIsFederatedOpen(true);
-            setSbIsActive(true);
+            if (pathname === '/') setIsFederatedOpen(true)
+            setSbIsActive(true)
           }}
           onChange={(event) => {
-            refineFunction(event.currentTarget.value);
+            refineFunction(event.currentTarget.value)
+            refine(event.currentTarget.value)
+            setTooltip(false)
           }}
         />
-        {state && isSearchInCategory && <SearchInCategory state={state} />}
+        {!!tooltip && (
+          <div className="searchbox__tooltip">
+            <p>{t('tooltip')}</p>
+          </div>
+        )}
+        {!!hasKeystroke && (
+          <div
+            className={
+              pathname !== '/search'
+                ? 'searchbox__btn'
+                : 'searchbox__btn searchbox__btn-srp'
+            }
+          >
+            <div
+              className="closeBtn"
+              onClick={() => {
+                setQueryState('')
+                searchParams.set('query', '')
+                setSearchParams(searchParams)
+              }}
+            >
+              <SimpleCloseButton />
+            </div>
+            {pathname !== '/search' && (
+              <div
+                className="submitBtn"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onClick={() => {
+                  setQueryState(query)
+                  useStoreQueryToLocalStorage(query)
+                  if (query !== '') {
+                    navigate({
+                      pathname: '/search',
+                      search: `?${searchParams}`,
+                    })
+                  }
+                }}
+              >
+                <p
+                  className={
+                    isHovered
+                      ? 'submitBtn__text submitBtn__text-active'
+                      : 'submitBtn__text submitBtn__text-inactive'
+                  }
+                >
+                  {t('submit')}
+                </p>
+
+                <div
+                  className={
+                    isHovered
+                      ? 'submitBtn__picto submitBtn__picto-inactive'
+                      : 'submitBtn__picto submitBtn__picto-active'
+                  }
+                >
+                  <SubmitPicto />
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+        {navigationState && isSearchInCategory && (
+          <SearchInCategory state={state} />
+        )}
         <Glass />
       </form>
     </div>
-  );
+  )
 }
 
-export default memo(CustomSearchBox);
+export default memo(CustomSearchBox)
