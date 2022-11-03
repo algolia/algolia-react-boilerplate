@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 // Algolia's imports
-import { useHits } from 'react-instantsearch-hooks-web'
+import { useHits, Highlight } from 'react-instantsearch-hooks-web'
 
 // Component import
 import { ChevronRight } from '@/assets/svg/SvgIndex'
@@ -60,7 +60,9 @@ function Products(props) {
                 </div>
                 <div className="infos">
                   <p className="brand">{get(hit, brand)}</p>
-                  <p className="productName">{get(hit, productName)}</p>
+                  <p className="productName">
+                    <Highlight hit={hit} attribute={productName} />
+                  </p>
                   <p className="price">
                     <Price hit={hit} />
                   </p>
