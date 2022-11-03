@@ -5,6 +5,7 @@
 - [Get started](#️-get-started)
 - [Structure](#️-structure)
 - [Features Config](#-features-config)
+  - [ Predict](#--predict)
   - [ Redirects](#--redirects)
   - [ Federated Search](#--federated-search)
   - [ Voice Search](#--voice-search)
@@ -26,6 +27,7 @@
     - [From Main Index](#from-main-index)
     - [From Seperate Index](#from-seperate-index)
   - [ Icons](#-icons)
+  - [ Cart](#-cart)
 - [Dependencies](#️-dependencies)
   - [State Manager](#-state-manager)
   - [Router](#-router)
@@ -43,8 +45,6 @@ Before proceeding, please make sure you have the following:
 
 - Node v16.0.0+ installed
 - Yarn installed
-
-
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
 
@@ -75,23 +75,26 @@ Before proceeding, please make sure you have the following:
 Index.jsx
 
 - entry point to the application
+- wraps child components with Recoil, React Router
+  - [React router](https://reactrouter.com/docs/en/v6/getting-started/overview)
+  - [Recoil state management](https://recoiljs.org/)
+- includes a screen resizer component
 - renders App.js into #root element in DOM
 - #root is defined in index.html
 
 App.jsx
 
 - called by Index.jsx
-- wraps child components with key functionality including:
-  - [React router](https://reactrouter.com/docs/en/v6/getting-started/overview)
-  - [Algolia instantsearch](https://github.com/algolia/react-instantsearch)
-  - [Recoil state management](https://recoiljs.org/)
 - calls Main.jsx
+- Wraps child components in Algolia Predict and Algolia Instantsearch
+  - [Algolia instantsearch](https://github.com/algolia/react-instantsearch)
+  - [Algolia predict](https://www.algolia.com/doc/ui-libraries/predict/api-reference/predict-react/Predict/)
 
 Main.jsx
 
 - contains static elements like header and footer (found in `./components`)
+- contains some helper components used to display things like the applied rules
 - contains routes for each page (found in `./pages`)
-- wraps pages in AnimatePresence from [Framer Motion](https://www.framer.com/docs/animate-presence/), which helps animate loading of pages
 - it loads a single route (page), depending on the current URL
 
 Homepage.jsx
@@ -131,6 +134,16 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
   - Frequently Bought Together
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 🔮 Predict</h3>
+
+The app has access to predict through the PredictUserProfileProvider component, found in `./src/components/predict`.
+
+In order for predict to function, it must have a predict App ID, API key and region set in algoliaEnvConfig, found in `./src/config`. Please contact Algolia if you are not sure what values they should have.
+
+You must also adjust the values found in `src/config/predictConfig`. We store a default value for `predictUserIdAtom` to ensure the app works with the default demo flow, but you should replace it with your own predict user ID for your own demo purposes.
+
+You can feel free to keep the default values for all of these atoms and configurations, and follow the default demo flow outlined below (TBD).
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Demo Tour</h3>
 
@@ -225,6 +238,13 @@ In order to turn on this feature, go to `config/featuresConfig` and set `shouldH
 Use it by making sure you have an index per language, and that the attribute names are always in the default language, but the values change in each index according to the local language.
 
 Then, go to `config/languagesConfig` and adjust each export to what you need. Specifically, in `languageSwitchConfig` you must make sure each node has an `index` defined, and this index will be used when that language is selected.
+
+Currently in :
+
+- 🇬🇧 English
+- 🇫🇷 French
+- 🇩🇪 German
+- 🇮🇹 Italian
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Banners</h3>
 
@@ -370,6 +390,10 @@ This project comes with fontawesome added by default so you can adjust or add ic
 
 It is then as simple as adding in your HTML the correct fontawesome tags i.e. `<i className="fa-solid fa-shopping-cart"></i>`
 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🛒 Cart</h3>
+
+This project comes with Cart feature based on what you'll put into it and it stores in Local Storage to have always your cart. It's linked to event sending [Insights](https://www.algolia.com/doc/rest-api/insights/)
+
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🚌 Tour</h3>
@@ -411,7 +435,7 @@ We use the React library Suspense and lazy to load components when needed, and a
 
 We use the React library [React i18n](https://react.i18next.com/), to translate all the content code part like Button, Title,....
 And you have the Select option to switch between the languages.
-To start it's by default in english if you don't have any other language, you can just put false in the Translation Config option.
+To start it's by default in english if you don't have any other language,you can just put false in the Translation Config option.
 
 - You have to use this feature configure your others language index, and make sure you have the correct facet translation for example
 
@@ -437,7 +461,8 @@ brew install git-flow-avh
 git flow init
 ```
 
-The repository is working around 3 branches : 
+The repository is working around 3 branches :
+
 - `main` branch, this branch is created for you to be able to fork the project with features turned off
 - `develop` branch, this branch is our feature branch where we're adding new feature before pushing it into production
 - `production`branch, this branch is our stable production branch

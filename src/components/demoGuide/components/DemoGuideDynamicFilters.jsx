@@ -1,9 +1,7 @@
-import React from 'react';
-
-import { Selectors } from '@/components/selector/Selectors';
+import { Selectors } from '@/components/selector/Selectors'
 
 // Import configuration
-import { DemoGuideDynamicFiltersConfig } from '@/config/demoGuideConfig';
+import { DemoGuideDynamicFiltersConfig } from '@/config/demoGuideConfig'
 
 const DemoGuideDynamicFilters = () => {
   return (
@@ -16,12 +14,12 @@ const DemoGuideDynamicFilters = () => {
               <span>{item.label}:</span>
               <p>{item.details}</p>
             </div>
-          );
+          )
         })}
       </div>
       <Selectors props={DemoGuideDynamicFiltersConfig} />
     </div>
-  );
-};
+  )
+}
 
-export default DemoGuideDynamicFilters;
+export default DemoGuideDynamicFilters

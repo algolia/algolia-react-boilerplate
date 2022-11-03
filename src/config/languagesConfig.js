@@ -2,7 +2,7 @@
 // Configuration for languages switch across the application
 // NB this isn't functional on the flagship index as we only have one language
 // ------------------------------------------
-import { atom } from 'recoil';
+import { atom } from 'recoil'
 
 // Define what values are going to be displayed in the language selector
 export const languagesConfig = [
@@ -17,7 +17,12 @@ export const languagesConfig = [
     label: 'French',
     type: 'language',
   },
-];
+  {
+    value: 'Italian',
+    label: 'Italian',
+    type: 'language',
+  },
+]
 
 // Define index by languages & currency.
 // Change if necessary
@@ -35,26 +40,64 @@ export const languageSwitchConfig = {
       {
         name: 'Mens',
         type: 'filter',
-        filter: 'Men',
+        filter: 'Mens',
         url: '/mens',
       },
       {
         name: 'Womens',
         type: 'filter',
-        filter: 'Women',
+        filter: 'Womens',
         url: '/womens',
       },
+      // For an uilisation of your own made filter
       {
-        name: 'Home',
+        name: 'Womens accessories by Even & Odd',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+          "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
+      },
+      // This uses context from the Algolia dashboard, configured using Visual Editor
+      {
+        name: 'Accessories',
+        type: 'context',
+        context: 'accessories',
+      },
+    ],
+  },
+  IT: {
+    index: 'off_white_custom_demo_italian',
+    currency: '€',
+    linksHeader: [
+      {
+        name: 'Tutto',
         type: 'filter',
-        filter: 'Home',
-        url: '/home',
+        filter: '',
+        url: '/search',
       },
       {
-        name: 'Summer 22 Collection',
+        name: 'Uomo',
+        type: 'filter',
+        filter: 'Mens',
+        url: '/Uomo',
+      },
+      {
+        name: 'Donna',
+        type: 'filter',
+        filter: 'Womens',
+        url: '/Donna',
+      },
+      {
+        name: 'Accessori da donna di Even & Odd',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+          "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
+      },
+      {
+        name: 'Accessori',
         type: 'context',
-        context: 'Summer 22 Collection',
-        url: '/summer-22-collection',
+        context: 'accessories',
       },
     ],
   },
@@ -71,26 +114,28 @@ export const languageSwitchConfig = {
       {
         name: 'Hommes',
         type: 'filter',
-        filter: 'Hommes',
+        filter: 'Mens',
         url: '/hommes',
       },
       {
         name: 'Femmes',
         type: 'filter',
-        filter: 'Femmes',
+        filter: 'Womens',
         url: '/femmes',
       },
+      // For an uilisation of your own made filter
       {
-        name: 'La Maison',
-        type: 'filter',
-        filter: 'La Maison',
-        url: '/la-maison',
+        name: 'Femmes et Accessoires by Even & Odd',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+          "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
       },
+      // This uses context from the Algolia dashboard, configured using Visual Editor
       {
-        name: 'Collection été 2022',
+        name: 'Accessoires',
         type: 'context',
-        context: 'Collection été 2022',
-        url: '/collection-ete-2022',
+        context: 'accessories',
       },
     ],
   },
@@ -107,33 +152,35 @@ export const languageSwitchConfig = {
       {
         name: 'Herren',
         type: 'filter',
-        filter: 'Herren',
+        filter: 'Mens',
         url: '/herren',
       },
       {
         name: 'Damen',
         type: 'filter',
-        filter: 'Damen',
+        filter: 'Womens',
         url: '/damen',
       },
+      // For an uilisation of your own made filter
       {
-        name: 'Home',
-        type: 'filter',
-        filter: 'Home',
-        url: '/home',
+        name: 'Damen Zubehör Even & Odd',
+        type: 'rawFilter',
+        filter: '',
+        rawFilter:
+          "hierarchicalCategories.lvl0:'Womens' AND hierarchicalCategories.lvl1:'Womens > Accessories' AND brand:'even&odd'",
       },
+      // This uses context from the Algolia dashboard, configured using Visual Editor
       {
-        name: 'Summer 22 Collection',
+        name: 'Zubehör',
         type: 'context',
-        context: 'Summer 22 Collection',
-        url: '/summer-22-collection',
+        context: 'accessories',
       },
     ],
   },
-};
+}
 
 // Please ignore this atom - DO NOT TOUCH
 export const LanguageSelectedAtom = atom({
   key: 'LanguageSelected', // unique ID (with respect to other atoms/selectors)
   default: 'English', // default value (aka initial value)
-});
+})

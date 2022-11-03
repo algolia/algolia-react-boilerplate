@@ -1,22 +1,27 @@
-import { memo } from 'react';
+import { memo } from 'react'
 
 // React Router import
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 // Algolia's imports
-import { useRefinementList } from 'react-instantsearch-hooks-web';
+import { useRefinementList } from 'react-instantsearch-hooks-web'
 
 // component import
-import { ChevronRight } from '@/assets/svg/SvgIndex';
+import { ChevronRight } from '@/assets/svg/SvgIndex'
 
-import { federatedCategoriesAttribute } from '@/config/federatedConfig';
+import { federatedCategoriesAttribute } from '@/config/federatedConfig'
 
 function Category(props) {
-  const { items } = useRefinementList(props);
+  const { items } = useRefinementList(props)
   //Get title
-  const { title } = props;
+  const { title } = props
   // router hook to navigate using a function
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+
+  const slugify = (label) => {
+    const slug = label.replace(/>/g, '-').split(' ').join('')
+    return slug
+  }
   return (
     <div className="categories">
       <h3 className="categories__title">{title}</h3>
@@ -27,23 +32,23 @@ function Category(props) {
               <li
                 key={hit.label}
                 onClick={() => {
-                  navigate('/search', {
+                  navigate(`/search/${slugify(hit.label)}`, {
                     state: {
                       type: 'filter',
                       action: `${federatedCategoriesAttribute}:"${hit.label}"`,
                     },
-                  });
+                  })
                 }}
               >
                 <ChevronRight />
                 <p>{hit.label.split('>').pop()}</p>
               </li>
-            );
+            )
           })}
         </ul>
       </div>
     </div>
-  );
+  )
 }
 
-export default memo(Category);
+export default memo(Category)

@@ -1,16 +1,27 @@
 // ------------------------------------------
 // Configuration for refinements/facets
 // ------------------------------------------
-import { atom } from 'recoil';
-import { hitsConfig } from './hitsConfig';
+import { atom } from 'recoil'
+import { hitsConfig } from './hitsConfig'
 
 // This const defines the refinements to be shown
 // There are five possible types: hierarchical, price, colour, size, list
 // Generally you should use type list if you are adding a new facet here
 export const refinements = [
   {
+    type: 'price',
+    label: 'Price',
+    labelFrench: 'Prix',
+    labelGerman: 'Preis',
+    options: {
+      attribute: hitsConfig.price,
+    },
+  },
+  {
     type: 'hierarchical',
     label: 'Category',
+    labelFrench: 'Catégorie',
+    labelGerman: 'Kategorie',
     options: {
       attribute: [
         hitsConfig.hierarchicalCategoriesLvl0,
@@ -22,15 +33,10 @@ export const refinements = [
     },
   },
   {
-    type: 'price',
-    label: 'Price',
-    options: {
-      attribute: hitsConfig.price,
-    },
-  },
-  {
     type: 'list',
     label: 'Brand',
+    labelFrench: 'Marque',
+    labelGerman: 'Markieren',
     options: {
       attribute: hitsConfig.brand,
       // when searchable is enabled, you can search for a specific value of that facet. Ex: Here you can search for a specific brand
@@ -43,6 +49,8 @@ export const refinements = [
   {
     type: 'colour',
     label: 'Colour',
+    labelFrench: 'Couleur',
+    labelGerman: 'Farbe',
     options: {
       attribute: hitsConfig.colourHexa,
     },
@@ -50,6 +58,8 @@ export const refinements = [
   {
     type: 'list',
     label: 'Gender',
+    labelFrench: 'Genre',
+    labelFrench: 'Geschlecht',
     options: {
       attribute: hitsConfig.genderFilter,
     },
@@ -57,6 +67,7 @@ export const refinements = [
   {
     type: 'size',
     label: 'Size',
+    labelFrench: 'Taille',
     options: {
       attribute: hitsConfig.sizeFilter,
       limit: 8,
@@ -64,21 +75,21 @@ export const refinements = [
       showMoreFunction: false,
     },
   },
-];
+]
 
 // This const defines the labels used in price refinements
 export const refinementPriceLabels = {
   moreThan: 'More than',
   lessThan: 'Less than',
-};
+}
 
 export const refinementsAtom = atom({
   key: 'refinementsAtom', // unique ID (with respect to other atoms/selectors)
   default: [], // default value (aka initial value)
-});
+})
 
 // State to open facet panel on mobile
 export const isFacetPanelOpen = atom({
   key: 'isFacetPanelOpen', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
-});
+})

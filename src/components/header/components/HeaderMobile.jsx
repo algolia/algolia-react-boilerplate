@@ -1,98 +1,171 @@
-// Render the Header component in Main.jsx, for small screen sizes
-
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react'
 
 // React Router
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 // Recoil Header State
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+
+import { motion } from 'framer-motion'
 
 // eslint-disable-next-line import/order
-import { queryAtom } from '@/config/searchboxConfig';
+import { queryAtom } from '@/config/searchboxConfig'
 
-// Import logo URL for header
-import logo from '@/assets/logo/logo.webp';
+import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
 
-import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig';
+//import Navigation config
+import { navigationStateAtom } from '@/config/navigationConfig'
+
+// Import Rules config
+import { rulesAtom } from '@/config/appliedRulesConfig'
 
 // Import framer motion
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion'
 
 // Import SearchBox
 // eslint-disable-next-line import/order
-import CustomSearchBox from '@/components/searchbox/SearchBox';
+import CustomSearchBox from '@/components/searchbox/SearchBox'
+import CustomVoiceSearchComponent from '@/components/voicesearch/VoiceSearch'
 
-import Navigation from './Navigation';
+import Navigation from './Navigation'
 
 // Custom hook to prevent body from scrolling
-import usePreventScrolling from '@/hooks/usePreventScrolling';
+import { AlgoliaLogoMobile, CartPicto } from '@/assets/svg/SvgIndex'
+import {
+  cartClick,
+  cartOpen,
+  cartState,
+  clickHamburger,
+} from '@/config/cartFunctions'
+import {
+  shouldHaveCartFunctionality,
+  shouldHaveVoiceSearch,
+} from '@/config/featuresConfig'
+import useOutsideClick from '@/hooks/useOutsideClick'
+import usePreventScrolling from '@/hooks/usePreventScrolling'
 
 const HeaderMobile = ({ mobile, tablet }) => {
   // Import configuration from Recoil
-  const setQueryState = useSetRecoilState(queryAtom);
-  const federated = useSetRecoilState(shouldHaveOpenFederatedSearch);
+  const setQueryState = useSetRecoilState(queryAtom)
+  const federated = useSetRecoilState(shouldHaveOpenFederatedSearch)
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const displayVoiceSearch = useRecoilValue(shouldHaveVoiceSearch)
+
+  const hamburger = useSetRecoilState(clickHamburger)
+
+  const setNavigationState = useSetRecoilState(navigationStateAtom)
+
+  const rulesApplied = useSetRecoilState(rulesAtom)
+
+  // CART
+  const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality)
+  const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen)
+  const cartIcon = useSetRecoilState(cartClick)
+  const [showCart, setShowCart] = useRecoilState(cartState)
+
+  const sumAllArticles = (cart) => {
+    let x = 0
+    cart.map((i, index) => {
+      x += i.qty
+    })
+    return x
+  }
 
   // Prevent body from scrolling when panel is open
-  usePreventScrolling(isMenuOpen);
+  usePreventScrolling(isMenuOpen)
 
   return (
     <div className="container container-mobile">
-      <div className="container__header-top">
+      <div className="container__header-mid">
         {/* Hamburger button to open or close the menu dropdown */}
         <div
-          className={`${isMenuOpen ? 'hamburger-active' : 'hamburger-inactive'
-            } hamburger`}
+          className={`${
+            isMenuOpen ? 'hamburger-active' : 'hamburger-inactive'
+          } hamburger`}
           onClick={() => {
-            setIsMenuOpen(!isMenuOpen);
+            setIsMenuOpen(!isMenuOpen)
           }}
         >
-          <span className="hamburger__line"></span>
+          <span ref={hamburger} className="hamburger__line"></span>
           <span className="hamburger__line"></span>
           <span className="hamburger__line"></span>
         </div>
         {/* Logo, which returns to the homepage on click */}
-        <div className="container__header-top__logo">
+        <div className="container__header-mid__logo">
           <Link
             to="/"
+            aria-label="Back to homepage"
             onClick={() => {
-              setQueryState('');
-              federated(false);
+              setQueryState('')
+              setNavigationState({})
+              federated(false)
+              rulesApplied([])
             }}
           >
-            <img src={logo} alt="" />
+            <AlgoliaLogoMobile />
           </Link>
         </div>
         {/* For a search box Simple center */}
-        <div className="container__header-top__title">
-          <h1>Demo BoilerPlate</h1>
-        </div>
+        {shouldShowCartIcon && (
+          <div
+            className={
+              cartOpenValue ? 'picto-cart picto-cart__active' : 'picto-cart'
+            }
+            onClick={(e) => {
+              e.stopPropagation()
+              setCartOpenValue(!cartOpenValue)
+              {
+                mobile && setIsMenuOpen(false)
+              }
+            }}
+            ref={cartIcon}
+          >
+            <CartPicto />
+            {/* Picto notification up the cart icon */}
+            {showCart?.length !== 0 && (
+              <div className="notification-cart">
+                <span>{sumAllArticles(showCart)}</span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="searchbox-container searchbox-container-mobile">
         <CustomSearchBox />
         {/* Display voicesearch if the  displayVoiceSearch config is set to true */}
-        {/* {displayVoiceSearch && <CustomVoiceSearchComponent />} */}
+        {displayVoiceSearch && <CustomVoiceSearchComponent />}
       </div>
       <AnimatePresence>
         {isMenuOpen && (
-          <CategoriesMobile
-            isMenuOpen={isMenuOpen}
-            setIsMenuOpen={setIsMenuOpen}
-            mobile={mobile}
-            tablet={tablet}
-          />
+          <div className="container-mobile__navigation-wp">
+            <CategoriesMobile
+              isMenuOpen={isMenuOpen}
+              setIsMenuOpen={setIsMenuOpen}
+              mobile={mobile}
+              tablet={tablet}
+            />
+          </div>
         )}
       </AnimatePresence>
     </div>
-  );
-};
+  )
+}
 
 const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
+  const navigationMobile = useRef(null)
+  const [navigationComponentRef, setNavigationComponentRef] = useState(null)
+
+  useEffect(() => {
+    setNavigationComponentRef(navigationMobile.current)
+  }, [])
+  useOutsideClick(navigationComponentRef, () => setIsMenuOpen(false))
+
   return (
-    <div
+    <motion.div
+      ref={navigationMobile}
       className="container-mobile__navList"
       initial={{ opacity: 0, x: -100 }}
       animate={{ opacity: 1, x: 0 }}
@@ -104,8 +177,8 @@ const CategoriesMobile = ({ isMenuOpen, setIsMenuOpen, mobile, tablet }) => {
         mobile={mobile}
         tablet={tablet}
       />
-    </div>
-  );
-};
+    </motion.div>
+  )
+}
 
-export default HeaderMobile;
+export default HeaderMobile

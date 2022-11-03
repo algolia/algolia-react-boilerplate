@@ -9,50 +9,62 @@
 // .btn--big {}
 // Main Styling
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-  }
-  html {
-    // overflow-x: hidden !important;
-    // overflow: auto;
-    font-size: 16px;
-  }
-  body {
-    overflow: auto;
-    background-color: $background-color;
-    font-family: $main-font;
-  }
-  
-  h1,
-  h2,
-  h3,
-  h4,
-  p,
-  span,
-  input,
-  input::placeholder,
-  span {
-    font-family: $main-font;
-    color: $main-color;
-  }
-  
-  a {
-    text-decoration: none;
-  }
-  
-  li,
-  ul {
-    list-style: none;
-    color: $main-color;
-    font-family: $main-font;
-  }
-  
-  .hidden{
-    @include hidden;
-  }
-  
-  .visible{
-    @include visible
-  }
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+html {
+  overflow-x: hidden;
+  font-size: 16px;
+}
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: $background-color;
+  font-family: $main-font;
+
+}
+
+.mainWrapper{
+  margin: 0 auto;
+  max-width: 1600px;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span,
+input,
+input::placeholder,
+span {
+  font-family: $main-font;
+  color: $main-color;
+}
+
+a {
+  text-decoration: none;
+}
+
+li,
+ul {
+  list-style: none;
+  color: $main-color;
+  font-family: $main-font;
+}
+
+.hidden {
+  @include hidden;
+}
+
+.visible {
+  @include visible;
+}
+
+.mainWrapper {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}

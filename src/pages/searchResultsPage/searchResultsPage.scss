@@ -1,7 +1,7 @@
 // ------------------------------------------
 // Search Results Page
 // ------------------------------------------
-@use '../../../scss/partials' as *;
+@use '../../scss/partials' as *;
 
 // ------------------------------------------
 // Container
@@ -32,10 +32,28 @@
     flex-grow: 2;
     padding: 0 1rem;
   }
+
+  &__searchInfos{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    p{
+      @include p-text($main-color, 600);
+      font-size: 1.4rem;
+        &:last-child{
+         color: $secondary-color; 
+         text-transform: capitalize
+
+      }
+    }
+  }
 }
 
 .refined-filter {
-  @include btn-hover($second-color, $white-color);
+  @include btn-hover($secondary-color, $white-color);
 
   p,
   span {
@@ -52,7 +70,7 @@
   justify-content: space-between;
 
   .stats-infos {
-    @include stats($second-color);
+    @include stats($secondary-color);
   }
 
   select {
@@ -67,7 +85,7 @@
 .ais-Pagination {
   display: flex;
   justify-content: center;
-  @include pagination($second-color-custom-gradient);
+  @include pagination($secondary-color-custom-gradient);
 }
 
 // ------------------------------------------
@@ -85,22 +103,22 @@
 // ------------------------------------------
 .no-results {
   width: 95%;
-  height: 80vh;
   margin: 0rem auto;
   padding: 2rem 2rem;
+  animation: loading 0.5s forwards ease-in-out;
 
   &__titles {
     margin-bottom: 2rem;
 
     &__span-query {
-      color: $second-color;
+      color: $secondary-color;
       font-weight: 900;
     }
   }
 
   &__infos {
     &__span {
-      color: $second-color;
+      color: $secondary-color;
     }
 
     .query-suggestion {
@@ -132,7 +150,13 @@
       margin-top: 1rem;
       span {
         font-weight: 700;
-        color: $second-color;
+        color: $secondary-color;
+      }
+    }
+    .recommend {
+      margin: 2rem 0;
+      .auc-Recommend-item {
+        width: 40%;
       }
     }
   }
@@ -158,7 +182,8 @@
 // MOBILE
 // ------------------------------------------
 
-.srp-container-mobile, .srp-container{
+.srp-container-mobile,
+.srp-container {
   position: relative;
   width: 95%;
   height: 100%;
@@ -166,64 +191,61 @@
   display: flex;
   gap: 3rem;
 
-  &__filterPicto{
+  &__filterPicto {
     position: relative;
     z-index: 901;
     cursor: pointer;
-    svg{
+    svg {
       width: 20px;
       height: auto;
     }
-    #ball1__wp{
+    #ball1__wp {
       transition: all 0.3s ease-in-out;
-     
     }
-    #ball2__wp{
+    #ball2__wp {
       transition: all 0.3s ease-in-out;
-    
     }
-    #ball3__wp{
+    #ball3__wp {
       transition: all 0.3s ease-in-out;
     }
   }
 
-  &__filterPicto-active{
+  &__filterPicto-active {
     position: relative;
     z-index: 901;
     cursor: pointer;
-    svg{
+    svg {
       width: 20px;
       height: auto;
 
-      #ball1__wp{
+      #ball1__wp {
         transition: all 0.3s ease-in-out;
         transform: translateX(10px);
-        path{
+        path {
           transition: all 0.3s ease-in-out;
-          fill: $second-color
+          fill: $secondary-color;
         }
       }
-      #ball2__wp{
+      #ball2__wp {
         transition: all 0.3s ease-in-out;
         transform: translateX(-10px);
-        path{
+        path {
           transition: all 0.3s ease-in-out;
-          fill: $second-color
+          fill: $secondary-color;
         }
-       
       }
-      #ball3__wp{
+      #ball3__wp {
         transition: all 0.3s ease-in-out;
         transform: translateX(10px);
-        path{
+        path {
           transition: all 0.3s ease-in-out;
-          fill: $second-color
+          fill: $secondary-color;
         }
       }
     }
-    }
+  }
 
-  &__facets-mobile{
+  &__facets-mobile {
     position: absolute;
     top: 0;
     left: 0;
@@ -235,20 +257,17 @@
     transition: transform 0.3s ease-in-out;
     transform: translateX(-100%);
   }
-  &__facets-mobile-active{
+  &__facets-mobile-active {
     transition: transform 0.3s ease-in-out;
     transform: translateX(0%);
-
- 
   }
 }
 
-@media only screen and (max-width: 480px) {
-  .uic-HorizontalSlider-list {
-    gap: 6.5rem !important;
 
-    li {
-      width: fit-content;
-    }
+@keyframes loading {
+  0%{opacity: 0;}
+
+  100%{
+    opacity: 1;
   }
 }

@@ -1,56 +1,76 @@
 @use '../../scss/partials/' as *;
 
+.selectorsWrapper {
+  position: relative;
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 
-
-.selectorsWrapper{
-    position: relative;
-    &__btn{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 1rem;
-
-        svg{
-            fill: $main-color;
-            width: 12px;
-        }
+    svg {
+      fill: $main-color;
+      width: 12px;
     }
+  }
 
-    &__list{
-        position: absolute;
-        top: 2.5rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        background-color: $white-color;
-        width: 100%;
-        gap: 0.5rem;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-        border-radius: 0.5rem;
-        opacity: 0;
-        pointer-events: none;
-        z-index: 99;
-        transition: all 0.2s ease-in-out;
-    }
- 
-    .active{
-        pointer-events: all;
-        opacity: 1;
-        top: 3rem;
-        transition: all 0.3s ease-in-out;
-    }
+  &__list {
+    position: absolute;
+    top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: $white-color;
+    width: 100%;
+    gap: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+      rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 0.5rem;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 99;
+    transition: all 0.2s ease-in-out;
+  }
 
-    &__listItem{
+  .active {
+    display: flex;
+    padding: 0.5rem;
+    width: fit-content;
+    pointer-events: all;
+    opacity: 1;
+    top: 3rem;
+
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__listItem {
+    text-align: left;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: clamp(0.6rem, 0.07rem + 1.03vw, 1rem);
+    border-radius: 0.2rem;
+    cursor: pointer;
+
+    &:hover {
+      @include btn-hover($secondary-color, $white-color);
+      color: $white-color;
+    }
+  }
+}
+
+// MOBILE
+
+.selectorsWrapper-mobile {
+  .selectorsWrapper__btn {
+    p {
       text-align: left;
-      width: 100%;
-      padding: 0.5rem;
-      border-radius: 0.2rem;
-      cursor: pointer;
-
-      &:hover{
-        @include btn-hover($second-color, $white-color)
-      }
     }
+  }
+  .selectorsWrapper__list {
+    top: 2rem;
+    margin-top: 0rem;
+    padding: 0.3rem;
+    width: fit-content;
+  }
 }

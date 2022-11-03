@@ -4,11 +4,15 @@
 // SalesCard
 // ------------------------------------------
 .image-wrapper-sales {
-    @include salesCard($white-color);
+  @include salesCard($white-color);
+}
+.image-wrapper-sales {
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
-  .image-wrapper-sales {
-    .infos_influencer {
-      @include infosSalesCard($white-color);
-    }
+  .infos_influencer {
+    @include infosSalesCard($white-color);
   }
-  
+}

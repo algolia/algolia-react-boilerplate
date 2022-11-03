@@ -13,20 +13,24 @@
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 1rem;
     grid-row-gap: 1rem;
+    li {
+      cursor: pointer;
+    }
     .srpItem {
       position: relative;
+      cursor: pointer;
       @include hit(
         $main-color,
-        $second-color,
-        $second-color,
-        $second-color
+        $secondary-color,
+        $secondary-color,
+        $secondary-color
       );
 
       .productName {
         @include productName();
       }
       .price {
-        @include price($second-color);
+        @include price($secondary-color);
       }
       .brand {
         @include brand($main-color);
@@ -38,10 +42,13 @@
         width: 100%;
         margin-left: 0.5rem;
         p {
-          @include p-text($second-color);
+          @include p-text($secondary-color);
           font-size: 0.6rem;
           margin-top: 0.2rem;
         }
+      }
+      .picto-active {
+        animation: bounce 0.3s ease-in-out forwards;
       }
     }
 
@@ -51,18 +58,42 @@
         rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     }
   }
-
-  .ais-InfiniteHits-list-mobile {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .ais-InfiniteHits-list-tablet {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 .hit-list {
   img {
     height: 100%;
+  }
+}
+
+@media only screen and (max-width: 1274px) {
+  .ais-InfiniteHits-list {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media only screen and (max-width: 975px) {
+  .ais-InfiniteHits-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+.ais-InfiniteHits-list-mobile {
+  grid-template-columns: repeat(1, 1fr) !important;
+}
+
+.ais-InfiniteHits-list-tablet {
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
   }
 }

@@ -9,9 +9,9 @@
 
 .recommend {
   margin: 2rem 2rem;
-
-  .title{
-    @include titleH3($second-color)
+  position: relative;
+  .title {
+    @include titleH3($secondary-color);
   }
 
   .auc-Recommend-list {
@@ -22,6 +22,32 @@
     list-style-type: none;
     align-items: center;
     justify-content: center;
+  }
+
+  .uic-HorizontalSlider-navigation {
+    align-items: center;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.44);
+    color: $secondary-color;
+    cursor: pointer;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    outline-color: transparent;
+    padding: 0;
+    position: absolute;
+    top: 35%;
+    transition: opacity 0.15s;
+    width: 32px;
+    z-index: 1;
+  }
+
+  .uic-HorizontalSlider-list {
+    padding: 1rem 1rem;
+    gap: 1rem;
+    grid-auto-columns: clamp(13rem, 25%, 19%);
   }
 
   .auc-Recommend-title {
@@ -35,26 +61,173 @@
   }
 
   .relatedItem {
-    @include hit($main-color,
-      $second-color,
-      $second-color,
-      $second-color );
+    @include hit(
+      $main-color,
+      $secondary-color,
+      $secondary-color,
+      $secondary-color
+    );
 
-      &__infos{
-        @include productName($grey-dark-color);
+    position: relative;
 
-        .brand{
-          @include brand($main-color);
-        }
-        .price {
-          @include price($second-color)
-        }
+    &__infos {
+      @include productName($grey-dark-color);
+
+      .brand {
+        @include brand($main-color);
       }
+      .price {
+        @include price($secondary-color);
+      }
+    }
+    .price {
+      @include price($secondary-color);
+    }
   }
+
+  &__hideTrendingItemBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    cursor: pointer;
+    margin: 1rem 0;
+
+    &:hover {
+      p {
+        transform: translateY(-0.1rem);
+        transition: all 0.3s ease-in-out;
+      }
+      svg {
+        transform: translateY(-0.25rem) rotate(-90deg);
+        transition: all 0.3s ease-in-out;
+      }
+    }
+
+    p {
+      @include p-text($main-color, 300);
+      font-size: 0.8rem;
+      transition: all 0.2s ease-in-out;
+    }
+    svg {
+      margin-top: 1px;
+      width: 8px;
+      transform: rotate(-90deg);
+      transition: all 0.2s ease-in-out;
+      path {
+        fill: $secondary-color;
+      }
+    }
+  }
+
+  // &__hideTrendingItemBtn-active{
+  //   display: flex;
+  //   align-items: center;
+  //   gap: 0.5rem;
+  //   width: fit-content;
+  //   cursor: pointer;
+  //   margin: 1rem 0;
+
+  //   &:hover {
+  //     p {
+  //       transform: translateY(-0.1rem);
+  //       transition: transform 0.3s ease-in-out;
+  //     }
+  //     svg {
+  //       transform: translateY(-0.1rem);
+  //       transition: transform 0.3s ease-in-out;
+  //     }
+  //   }
+
+  //   p {
+  //     @include p-text($main-color, 300);
+  //     font-size: 0.8rem;
+  //     transition: transform 0.1s ease-in-out;
+  //   }
+  //   svg {
+  //     margin-top: 2px;
+  //     width: 8px;
+  //     transform: rotate(90deg);
+  //     transition: transform 0.1s ease-in-out;
+  //     path {
+  //       fill: $secondary-color;
+  //     }
+  //   }
+  // }
 }
 
 // ------------------------------------------
-// TRENDING
+// MOBILE
 // ------------------------------------------
+
+.recommend-mobile {
+  .uic-HorizontalSlider-list {
+    grid-auto-columns: 45%;
+  }
+}
+
+.item__infos-down {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+  .cart {
+    background-color: $secondary-color;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      margin-top: 0.3rem;
+      width: 20px;
+      height: 100%;
+      path {
+        fill: $background-color;
+      }
+    }
+    &-active {
+      animation: bounce 0.3s ease-in-out forwards;
+    }
+  }
+}
+
+.fbt-component {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-width: clamp(16rem, 25%, 25%);
+  &__plus-icon {
+    svg {
+      width: 3rem;
+      margin: 0 1rem;
+    }
+  }
+  .cart {
+    background-color: $secondary-color;
+    border-radius: 50%;
+    // width: 1.7rem;
+    // height: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      margin-top: 0.3rem;
+      // width: 1.2rem;
+      height: 100%;
+      path {
+        fill: $background-color;
+      }
+    }
+    &-active {
+      animation: bounce 0.3s ease-in-out forwards;
+    }
+  }
+}
 
 

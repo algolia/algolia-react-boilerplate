@@ -4,11 +4,11 @@
 @use '../../../scss/partials' as *;
 
 .searchbox-container {
-  min-width: 40%;
+  min-width: 50%;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 1rem;
   .searchbox {
     width: 80%;
@@ -19,7 +19,7 @@
       width: 100%;
       display: flex;
       position: relative;
-      svg {
+      .glass {
         width: 30px;
         left: 1rem;
         top: 0rem;
@@ -29,8 +29,93 @@
           fill: $main-color;
         }
       }
+    
       &__input {
         @include searchBoxInput($white-color, $grey-light-color-80);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+        rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+      }
+    }
+    &__btn{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: absolute;
+      right: 0rem;
+      top: 50%;
+      height: 100%;
+      transform: translateY(-50%);
+      animation: fadeIn 0.3s forwards ease-in-out;
+
+      // translate the close btn only when we're on SRP 
+      &-srp{
+        right: 2rem;
+      }
+
+      .closeBtn {
+        width: 10px;
+        cursor: pointer;
+      }
+
+      .submitBtn{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $secondary-color-custom-reverse-gradient;
+        border-radius: 0 3rem 3rem 0;
+        width: 4rem;
+        height: 100%;
+        cursor: pointer;
+
+        &__text{
+          position: absolute;
+          @include p-text($main-color, 500);
+          font-size: 0.6rem;
+          transition: all 0.2s ease-in-out;
+            &-active{
+              opacity: 1;
+              transform: translateX(0);
+              transition: all 0.2s ease-in-out;
+            }
+            &-inactive{
+              opacity: 0;
+              transform: translateX(-1.5rem);
+              transition: all 0.2s ease-in-out;
+            }
+        }
+        
+        &__picto{
+            transition: all 0.2s ease-in-out;
+            &-active{
+              opacity: 1;
+              transform: translateX(0);
+              transition: all 0.2s ease-in-out;
+            }
+            &-inactive{
+              opacity: 0;
+              transform: translateX(1.5rem);
+              transition: all 0.2s ease-in-out;
+            }
+          }
+        
+        
+
+        svg{
+          width: 8px;
+          font-size: 10px;
+        }
+
+        .active{
+          opacity: 1;
+          transform: translateX(0);
+          transition: all 0.2s ease-in-out;
+        }
+        .inactive{
+          opacity: 0;
+          transform: translateX(-30%);
+          transition: all 0.2s ease-in-out;
+        }
       }
     }
     &__category {
@@ -41,7 +126,7 @@
       right: 0rem;
       border-radius: 2px 3rem 3rem 2px;
       padding: 0.4rem 1rem;
-      background: $second-color-custom-gradient;
+      background: $secondary-color-custom-gradient;
       display: flex;
       justify-content: center;
       gap: 0.5rem;
@@ -56,8 +141,8 @@
         font-size: clamp(0.5rem, 0.17rem + 0.64vw, 0.75rem);
       }
       svg {
-        border: 1px solid #000000;
-        background-color: #000000;
+        // border: 1px solid #000000;
+        background: $background-color;
         width: 20px;
         height: 20px;
         border-radius: 10px;
@@ -66,7 +151,26 @@
       &__close-btn {
         position: absolute;
         top: -5px;
-        right: 30px;
+        right: -5px;
+      }
+    }
+    &__category-raw {
+      width: 60%;
+    }
+
+    &__tooltip {
+      position: absolute;
+      top: -2rem;
+      left: 0;
+      padding: 0.3rem 0.5rem;
+      background: $secondary-color-custom-gradient;
+      opacity: 1;
+      border-radius: 0.2rem;
+      transition: opacity 0.3s ease-in-out;
+
+      p {
+        @include p-text($white-color, 300);
+        font-size: 0.5rem;
       }
     }
     &__category-raw{
@@ -85,4 +189,16 @@
   .searchbox-category {
     width: 80%;
   }
+}
+
+
+// ANIMATIONS
+@keyframes fadeIn {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+
 }

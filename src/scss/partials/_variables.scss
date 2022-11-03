@@ -1,7 +1,8 @@
 // MAIN COLORS
 // Colors
 $main-color: rgb(0, 0, 0);
-$second-color: rgb(	85, 104, 248);
+$secondary-color: rgb(0,61,255);
+$tertiary-color: rgb(5, 13, 35);
 
 // Background Color:
 $background-color: rgb(249, 249, 249);
@@ -27,28 +28,23 @@ $grey-light-color-60: rgba($grey-light-color, 0.6);
 $grey-light-color-40: rgba($grey-light-color, 0.4);
 $grey-light-color-20: rgba($grey-light-color, 0.2);
 
-
 //_______________________________________________________________________
 // GRADIENTS
-$second-color-custom-gradient: linear-gradient(
+$secondary-color-custom-gradient: linear-gradient(
   60deg,
-  rgba(85, 104, 254, 1) 0%,
-  rgba(131, 145, 255, 1) 100%
+  rgb(0,61,255) 0%,
+  rgb(7,56,210) 100%
 );
-$second-color-custom-reverse-gradient: linear-gradient(
-  99deg,
-  rgba(84, 104, 255, 0.3) 31%,
-  rgba(255, 255, 255, 1) 100%
-);
-$second-color-custom-reverse-gradient-30: linear-gradient(
+$secondary-color-custom-reverse-gradient: linear-gradient(99deg, rgba(249,249,249,0.1) 0%, rgba(85,104,254,0.4) 100%);
+$secondary-color-custom-reverse-gradient-30: linear-gradient(
   99deg,
   rgba(84, 104, 255, 0.3) 31%,
   rgba(255, 255, 255, 0.3) 100%
 );
-$second-color-custom-gradient-overlay: linear-gradient(
+$secondary-color-custom-gradient-overlay: linear-gradient(
   60deg,
-  rgba(85, 104, 254, 0.5) 0%,
-  rgba(131, 145, 255, 0.3) 100%
+  rgba(0,61,255, 0.6) 0%,
+  rgba(7,56,210,0.9) 100%
 );
 
 //_______________________________________________________________________
