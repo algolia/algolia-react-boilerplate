@@ -110,11 +110,11 @@ export const Main = memo(() => {
       <InsightsMiddleware />
       {shouldShowNetworkErrors && <SearchErrorToast />}
       <Header />
+      {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
 
       <div className="mainWrapper">
         {/* TODO: Check if this configure is used for anything */}
         <Redirect />
-        {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
         <AnimatePresence>
           {showDemoGuide && (
             <div className="demoGuide-wp">
