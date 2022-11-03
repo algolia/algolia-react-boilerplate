@@ -1,5 +1,5 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { Fragment, lazy, Suspense, useEffect } from 'react'
+import { Fragment, lazy, Suspense, useEffect, useState } from 'react'
 
 // eslint-disable-next-line import/order
 import {
@@ -53,7 +53,7 @@ import { sortBy } from '@/config/sortByConfig'
 
 import { navigationStateAtom } from '@/config/navigationConfig'
 // SVG
-import { FilterPicto } from '@/assets/svg/SvgIndex'
+import { ChevronLeft, FilterPicto } from '@/assets/svg/SvgIndex'
 
 import CustomHits from '@/components/hits/components/CustomHits'
 import InjectedHits from '@/components/hits/components/injected-hits/InjectedHits'
@@ -64,6 +64,7 @@ import { shouldHaveInjectedBanners } from '@/config/featuresConfig'
 
 //Import scope SCSS
 import '@/pages/searchResultsPage/searchResultsPage.scss'
+import { useTranslation } from 'react-i18next'
 
 const SearchResultsPage = () => {
   const { hits, isLastPage, showMore, sendEvent } = useInfiniteHits()
@@ -73,6 +74,8 @@ const SearchResultsPage = () => {
 
   // Do you want to show banner on SRP? This boolean tells us yes or no
   const shouldDisplayBanners = useRecoilValue(shouldHaveInjectedBanners)
+
+  const [isTrendingItems, setIsTrendingItems] = useState(true)
 
   // Recoil & React states
   const stats = useRecoilValue(shouldHaveStats)
@@ -111,6 +114,12 @@ const SearchResultsPage = () => {
   // Handle the facet panel on mobile
   const [isFacetsPanelOpen, setIsFacetsPanelOpen] =
     useRecoilState(isFacetPanelOpen)
+
+  // Import const translation
+  // Use the translator
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'srp',
+  })
 
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams()
@@ -161,6 +170,25 @@ const SearchResultsPage = () => {
           className={!isDesktop ? 'recommend recommend-mobile' : 'recommend'}
         >
           {shouldHaveTrendingProductsValue &&
+            queryState === '' &&
+            navigationState?.type !== 'context' && (
+              <div
+                className="recommend__hideTrendingItemBtn"
+                onClick={() => {
+                  setIsTrendingItems(!isTrendingItems)
+                }}
+              >
+                <ChevronLeft />
+                {isTrendingItems ? (
+                  <p>{t('hideTrendingItems')}</p>
+                ) : (
+                  <p>{t('showTrendingItems')}</p>
+                )}
+              </div>
+            )}
+
+          {shouldHaveTrendingProductsValue &&
+            isTrendingItems &&
             queryState === '' &&
             navigationState?.type !== 'context' && (
               <Suspense>

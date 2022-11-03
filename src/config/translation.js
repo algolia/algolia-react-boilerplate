@@ -27,6 +27,8 @@ const resources = {
         titleTrendingFacets: 'Trending Brands',
         stats: 'results found in',
         searchInCategory: 'Search in',
+        hideTrendingItems: 'Hide trending products',
+        showTrendingItems: 'Show trending products'
       },
       pdp: {
         fbtTitle: 'Frequently Bought Together',
@@ -84,6 +86,8 @@ const resources = {
         titleTrendingFacets: 'Marchi di tendenza',
         stats: 'Risultati trovati in',
         searchInCategory: 'Cerca nel',
+        hideTrendingItems: 'Nascondi i prodotti di tendenza',
+        showTrendingItems: 'Mostra i prodotti di tendenza'
       },
       pdp: {
         fbtTitle: 'Acquistati frequentemente insieme',
@@ -140,6 +144,8 @@ const resources = {
         titleTrendingFacets: 'Marques Tendances',
         stats: 'résultats trouvé en',
         searchInCategory: 'Recherche dans',
+        hideTrendingItems: 'Cacher les tendances',
+        showTrendingItems: 'Révéler les tendances'
       },
       pdp: {
         fbtTitle: 'Fréquemment acheté ensemble',
@@ -199,6 +205,8 @@ const resources = {
         titleTrendingFacets: 'Trendige Marken',
         stats: 'ergebnisse gefunden in',
         searchInCategory: 'Suchen in',
+        hideTrendingItems: 'Trendprodukte ausblenden',
+        showTrendingItems: 'Trendprodukte anzeigen'
       },
       pdp: {
         fbtTitle: 'Wird oft zusammen gekauft',

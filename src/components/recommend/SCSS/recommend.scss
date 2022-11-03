@@ -9,7 +9,7 @@
 
 .recommend {
   margin: 2rem 2rem;
-
+  position: relative;
   .title {
     @include titleH3($secondary-color);
   }
@@ -84,6 +84,76 @@
       @include price($secondary-color);
     }
   }
+
+  &__hideTrendingItemBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    cursor: pointer;
+    margin: 1rem 0;
+
+    &:hover {
+      p {
+        transform: translateY(-0.1rem);
+        transition: all 0.3s ease-in-out;
+      }
+      svg {
+        transform: translateY(-0.25rem) rotate(-90deg);
+        transition: all 0.3s ease-in-out;
+      }
+    }
+
+    p {
+      @include p-text($main-color, 300);
+      font-size: 0.8rem;
+      transition: all 0.2s ease-in-out;
+    }
+    svg {
+      margin-top: 1px;
+      width: 8px;
+      transform: rotate(-90deg);
+      transition: all 0.2s ease-in-out;
+      path {
+        fill: $secondary-color;
+      }
+    }
+  }
+
+  // &__hideTrendingItemBtn-active{
+  //   display: flex;
+  //   align-items: center;
+  //   gap: 0.5rem;
+  //   width: fit-content;
+  //   cursor: pointer;
+  //   margin: 1rem 0;
+
+  //   &:hover {
+  //     p {
+  //       transform: translateY(-0.1rem);
+  //       transition: transform 0.3s ease-in-out;
+  //     }
+  //     svg {
+  //       transform: translateY(-0.1rem);
+  //       transition: transform 0.3s ease-in-out;
+  //     }
+  //   }
+
+  //   p {
+  //     @include p-text($main-color, 300);
+  //     font-size: 0.8rem;
+  //     transition: transform 0.1s ease-in-out;
+  //   }
+  //   svg {
+  //     margin-top: 2px;
+  //     width: 8px;
+  //     transform: rotate(90deg);
+  //     transition: transform 0.1s ease-in-out;
+  //     path {
+  //       fill: $secondary-color;
+  //     }
+  //   }
+  // }
 }
 
 // ------------------------------------------
