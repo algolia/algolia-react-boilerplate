@@ -11,12 +11,16 @@
   .container {
     margin: 0 auto;
     .container__header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       width: 100%;
       padding: 0.6rem 3rem;
       background-color: $tertiary-color;
+      &-inner{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1600px;
+        margin: 0 auto;
+      }
       .title {
         display: flex;
         align-items: center;
@@ -51,6 +55,8 @@
       padding: 0 2rem;
       display: flex;
       justify-content: space-between;
+      max-width: 1600px;
+      margin: 0 auto;
       a {
         position: relative;
         width: 100%;
