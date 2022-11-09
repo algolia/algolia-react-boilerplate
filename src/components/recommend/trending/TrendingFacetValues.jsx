@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useTrendingFacets } from '@algolia/recommend-react'
 import { useRefinementList } from 'react-instantsearch-hooks-web'
 
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { mainIndex, recommendClient } from '@/config/algoliaEnvConfig'
 import '@algolia/ui-components-horizontal-slider-theme'
@@ -11,6 +11,9 @@ import '@algolia/ui-components-horizontal-slider-theme'
 import TrendingFacetsItem from '@/components/recommend/trending/TrendingFacetsItem'
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
 import { trendingConfig } from '@/config/trendingConfig'
+
+// Import recoile atom
+import { isFacetPanelOpen } from '@/config/refinementsConfig'
 
 //Use Translation
 import { useTranslation } from 'react-i18next'
@@ -22,6 +25,9 @@ function WrappedTrendingFacetValues(props) {
   const index = useRecoilValue(mainIndex)
   const { facetValuesAttribute, maxFacetValuesRecommendations } = trendingConfig
 
+  // Check if facets are deployed
+  const [isFacetsPanelOpen, setIsFacetsPanelOpen] =
+    useRecoilState(isFacetPanelOpen)
   // Hook which receives a list of trending facet values
   const { recommendations } = useTrendingFacets({
     recommendClient,
@@ -41,7 +47,13 @@ function WrappedTrendingFacetValues(props) {
   }, [recommendations])
 
   return (
-    <div className="trending-facet-container">
+    <div
+      className={`${
+        isFacetsPanelOpen
+          ? 'filters-container__title_deployed'
+          : 'filters-container__title'
+      }`}
+    >
       {recommendations.length > 0 && (
         <div className="filters-container">
           {recommendationsLoaded && (
