@@ -32,6 +32,21 @@
       cursor: pointer;
     }
   }
+  &__title_deployed {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+
+    h3 {
+      @include facetsTitle($main-color);
+    }
+
+    svg {
+      width: 25px;
+      cursor: pointer;
+    }
+  }
 
   &__list {
     margin: 0.8rem 0;
