@@ -8,7 +8,6 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig'
-import { framerMotionTransition } from '@/config/animationConfig'
 import { hitsPerCarousel, isCarouselLoaded } from '@/config/carouselConfig'
 import { personaSelectedAtom } from '@/config/personaConfig'
 import { segmentSelectedAtom } from '@/config/segmentConfig'
@@ -18,6 +17,10 @@ import SkeletonLoader from '../hits/components/HitsSkeletonLoader'
 import './SCSS/carousels.scss'
 
 // Import cart from recoil
+import {
+  ChevronLeftCarousel,
+  ChevronRightCarousel,
+} from '@/assets/svg/SvgIndex'
 import HitsCarousel from './HitsCarousel'
 
 // Build the Carousel for use on the Homepage
@@ -50,17 +53,23 @@ const HomeCarousel = ({ context, title }) => {
 function Carousel(props) {
   const { hits, sendEvent } = useHits(props)
   const { title } = props
-  const [width, setWidth] = useState(0)
+  // const [width, setWidth] = useState(0)
+  const [containerCarouselWidth, setContainerCarouselWidth] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   // Get the main index
   const index = useRecoilValue(mainIndex)
 
   const carousel = useRef()
+  const innerCarousel = useRef()
+  console.log(innerCarousel)
 
   useEffect(() => {
-    !isLoading &&
-      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
-  }, [hits, isLoading])
+    if (!isLoading) {
+      setContainerCarouselWidth(
+        carousel.current.scrollWidth - carousel.current.offsetWidth
+      )
+    }
+  }, [innerCarousel])
 
   useEffect(() => {
     if (hits.length > 0) setIsLoading(false)
@@ -73,30 +82,16 @@ function Carousel(props) {
       {isLoading ? (
         <SkeletonLoader type="carousel" />
       ) : (
-        <motion.div
-          ref={carousel}
-          className="carousel"
-          whileTap={{ cursor: 'grabbing' }}
-        >
-          {/* This div declares the parameters for the carousel dragging effect */}
-          <motion.div
-            // ADD THAT TO NEW FILE ABOUT ANIMATION IN CONFIG
-            draggable
-            drag="x"
-            dragConstraints={{ right: 0, left: -width }}
-            dragTransition={
-              ({
-                min: 0,
-                max: 100,
-                velocity: 0,
-                power: 1,
-                bounceStiffness: 10,
-                bounceDamping: 1,
-              },
-              framerMotionTransition)
-            }
-            className="inner-carousel"
+        <motion.div ref={carousel} className="carousel">
+          <div
+            className="prevBtn"
+            onClick={() => {
+              innerCarousel.current.scrollLeft = 0
+            }}
           >
+            <ChevronLeftCarousel />
+          </div>
+          <motion.div className="inner-carousel" ref={innerCarousel}>
             {/* Display the hits in the carousel */}
             {hits.map((hit, i) => {
               return (
@@ -109,6 +104,15 @@ function Carousel(props) {
               )
             })}
           </motion.div>
+          <div
+            className="nextBtn"
+            onClick={() => {
+              innerCarousel.current.scrollLeft =
+                innerCarousel.current.scrollWidth
+            }}
+          >
+            <ChevronRightCarousel />
+          </div>
         </motion.div>
       )}
     </>

@@ -10,121 +10,53 @@
     @include titleH3($secondary-color);
   }
   .carousel {
-    cursor: grab;
-    overflow: scroll;
-
-    &__imageWrapper {
-      max-width: 60%;
-      display: flex;
-      justify-content: center;
-      margin: 0 auto;
-      overflow: hidden;
-      img {
-        width: 100%;
-        height: 70%;
-        margin: 0 auto;
-        pointer-events: none;
-        object-fit: cover;
-        transition: transform 0.2s ease-in-out;
-      }
-    }
-    .hovered {
-      img {
-        transition: transform 0.2s ease-in-out;
-        transform: scale(1.1);
-      }
-    }
+    position: relative;
 
     .inner-carousel {
-      display: flex;
+      display: grid;
       gap: 1rem;
-      padding: 0.5rem 0;
-      .item {
-        min-width: clamp(13rem, 25%, 19%);
-        padding: 1rem;
-        position: relative;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-          rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-        transition: box-shadow 0.3s ease-in-out;
-        padding: 1rem;
-        border-radius: 0.5rem;
+      list-style: none;
+      margin: 0;
+      outline-offset: 0.5rem;
+      scroll-behavior: smooth;
+      scroll-snap-type: x proximity;
+      grid-auto-columns: 42%;
+      grid-auto-flow: column;
+      overflow-x: auto;
+      padding: 1rem 1rem;
+      grid-auto-columns: clamp(13rem, 25%, 19%);
+      @include scrollBar();
 
+      &__imageWrapper {
+        overflow: hidden;
+        margin: 1rem;
+        cursor: pointer;
+      }
+
+      .item {
+        @include hit(
+          $main-color,
+          $secondary-color,
+          $secondary-color,
+          $secondary-color
+        );
+        
+        position: relative;
+    
         &__infos {
-          display: flex;
-          position: relative;
-          flex-direction: column;
-          align-items: center;
-          justify-content: space-between;
-          cursor: pointer;
-          margin-top: 1rem;
-          width: 100%;
-          padding: 1rem;
-          // height: 6rem;
-          .name {
-            @include productName($grey-dark-color);
+          @include productName($grey-dark-color);
+          font-size: 0.6rem;
+          height: 7rem;
+    
+          .brand {
+            @include brand($main-color);
           }
           .price {
             @include price($secondary-color);
           }
-          .brand {
-            @include brand($main-color);
-            margin-top: 1rem;
-          }
-          .cart {
-            background-color: $secondary-color;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            svg {
-              margin-top: 0.3rem;
-              width: 20px;
-              height: 100%;
-              path {
-                fill: $background-color;
-              }
-            }
-            &-active {
-              animation: bounce 0.3s ease-in-out forwards;
-            }
-          }
         }
-        &__infos-up {
-          width: 100%;
-        }
-        &__infos-down {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-          margin-top: 1rem;
-        }
-        &__button {
-          z-index: 1000;
-          justify-content: center;
-          align-items: center;
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%) translateX(-50%);
-          left: 50%;
-          cursor: pointer;
-          p {
-            border: 1px solid $secondary-color;
-            padding: 0.7rem;
-            border-radius: 8px;
-            text-align: center;
-            background-color: $white-color;
-            font-weight: 600;
-            font-size: 0.8rem;
-          }
-          &:hover {
-            p {
-              background-color: $secondary-color;
-              color: $white-color;
-            }
-          }
+        .price {
+          @include price($secondary-color);
         }
       }
 
@@ -133,11 +65,35 @@
         border: none;
       }
     }
-  }
-}
 
-.carousel::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+    .prevBtn, .nextBtn{
+      position: absolute;
+      top: 35%;
+      align-items: center;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      box-shadow: 0 2px 6px rgb(255 255 255 / 44%);
+      cursor: pointer;
+      display: flex;
+      height: 40px;
+      justify-content: center;
+      outline-color: transparent;
+      padding: 0;
+      transition: opacity 0.15s;
+      width: 32px;
+      z-index: 1;
+      svg, path{
+        fill: $secondary-color;
+      }
+    }
+    .nextBtn{
+      right: 0;
+    }
+    .leftBtn{
+      left: 0;
+    }
+  }
 }
 
 @keyframes bounce {
