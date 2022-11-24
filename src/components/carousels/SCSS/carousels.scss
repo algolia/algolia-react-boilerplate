@@ -71,18 +71,16 @@
       top: 35%;
       align-items: center;
       background: transparent;
-      border: 1px solid transparent;
-      border-radius: 2px;
-      box-shadow: 0 2px 6px rgb(255 255 255 / 44%);
       cursor: pointer;
       display: flex;
       height: 40px;
       justify-content: center;
       outline-color: transparent;
       padding: 0;
-      transition: opacity 0.15s;
       width: 32px;
+      opacity: 0;
       z-index: 1;
+      transition: opacity 0.2s ease-in-out;
       svg, path{
         fill: $secondary-color;
       }
@@ -92,6 +90,13 @@
     }
     .leftBtn{
       left: 0;
+    }
+
+    &:hover{
+      .prevBtn, .nextBtn{
+        opacity: 1;
+        transition: opacity 0.2s ease-in-out;
+      }
     }
   }
 }
