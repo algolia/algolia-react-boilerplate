@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil'
 import DemoGuideDynamicFilters from './components/DemoGuideDynamicFilters'
 import DemoGuideInjectedContent from './components/DemoGuideInjectedContent'
 import DemoGuideRedirect from './components/DemoGuideRedirect'
+import DemoGuideLandingPage from './components/DemoGuideLandingPage'
 import DemoGuideRulesApplied from './components/DemoGuideRulesApplied'
 import SearchBanners from './components/SearchBanners'
 import SearchPersona from './components/SearchPersona'
@@ -28,6 +29,7 @@ import {
   shouldShowPersonas,
   shouldShowRedirects,
   shouldShowSearchTerms,
+  shouldShowLandingPages,
 } from '@/config/demoGuideConfig'
 
 //Import scope SCSS
@@ -37,6 +39,7 @@ const DemoGuide = ({ setshowDemoGuide }) => {
   //Select Panel wrapper
   const demoGuide = useRef()
 
+  const shouldShowLandingPagesAtom = useRecoilValue(shouldShowLandingPages)
   const shouldShowPersonasAtom = useRecoilValue(shouldShowPersonas)
   const shouldShowSearchTermsAtom = useRecoilValue(shouldShowSearchTerms)
   const shouldShowInjectedContentAtom = useRecoilValue(
@@ -77,6 +80,12 @@ const DemoGuide = ({ setshowDemoGuide }) => {
         {shouldShowRulesAppliedAtom && (
           <li className="container-nav-help__items ">
             <DemoGuideRulesApplied />
+            <hr />
+          </li>
+        )}
+        {shouldShowLandingPagesAtom && (
+          <li className="container-nav-help__items ">
+            <DemoGuideLandingPage />
             <hr />
           </li>
         )}

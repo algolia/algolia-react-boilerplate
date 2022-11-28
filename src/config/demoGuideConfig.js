@@ -53,6 +53,28 @@ export const alertContent = atom({
 })
 
 // ------------------------------------------
+// Search Landing Page Config
+// ------------------------------------------
+
+// Should we show the landing page section in the demo guide
+export const shouldShowLandingPages = atom({
+  key: 'shouldShowLandingPages',
+  default: true,
+})
+
+// Configuration for custom landing page via rules
+export const landingPageConfig = [
+  { value: '', label: 'Choose', type: 'landing page' },
+  {
+    value: 'my-landing-page',
+    label: 'My Landing Page',
+    alertContent: 'SRP now has a custom landing page format',
+    details: 'Injects a banner, title and text into the SRP',
+    type: 'landing page',
+  },
+]
+
+// ------------------------------------------
 // Search Terms Config
 // ------------------------------------------
 export const searchTermsConfig = [
