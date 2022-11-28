@@ -13,9 +13,11 @@ const SearchInCategory = () => {
     useRecoilState(navigationStateAtom)
 
   // navigate is used by React Router
+
   const navigate = useNavigate()
 
   // Import and use translation
+
   const { t } = useTranslation('translation', {
     keyPrefix: 'srp',
   })

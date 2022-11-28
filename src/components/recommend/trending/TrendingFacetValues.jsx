@@ -12,7 +12,6 @@ import TrendingFacetsItem from '@/components/recommend/trending/TrendingFacetsIt
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
 import { trendingConfig } from '@/config/trendingConfig'
 
-// Import recoile atom
 import { isFacetPanelOpen } from '@/config/refinementsConfig'
 
 //Use Translation
@@ -28,6 +27,7 @@ function WrappedTrendingFacetValues(props) {
   // Check if facets are deployed
   const [isFacetsPanelOpen, setIsFacetsPanelOpen] =
     useRecoilState(isFacetPanelOpen)
+
   // Hook which receives a list of trending facet values
   const { recommendations } = useTrendingFacets({
     recommendClient,
@@ -57,7 +57,13 @@ function WrappedTrendingFacetValues(props) {
       {recommendations.length > 0 && (
         <div className="filters-container">
           {recommendationsLoaded && (
-            <div className="filters-container__title">
+            <div
+              className={`${
+                isFacetsPanelOpen
+                  ? 'filters-container__title_deployed'
+                  : 'filters-container__title'
+              }`}
+            >
               <h3>{t('titleTrendingFacets')}</h3>
             </div>
           )}

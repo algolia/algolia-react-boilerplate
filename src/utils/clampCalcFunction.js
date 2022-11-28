@@ -12,3 +12,4 @@ function clamp(minFontSizeRem, maxFontSizeRem, minScreenSize, maxScreenSize) {
 }
 
 export default clamp
+
