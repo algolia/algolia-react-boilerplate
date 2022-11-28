@@ -65,6 +65,17 @@ export const Main = memo(() => {
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams()
 
+  // Remove extra context from URl when a query or category is present
+  useEffect(() => {
+    if (
+      (searchParams.has('query') || searchParams.has('category')) &&
+      searchParams.has('context')
+    ) {
+      searchParams.delete('context')
+      setSearchParams(searchParams)
+    }
+  }, [searchParams])
+
   // Setting the query to the state with the URL
   // Allow to load query when loading the page and update results if needed
   // Allow to handle no result on refresh if there are nos result for this query
