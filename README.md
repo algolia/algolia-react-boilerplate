@@ -5,6 +5,7 @@
 - [Get started](#️-get-started)
 - [Structure](#️-structure)
 - [Features Config](#-features-config)
+  - [ Landing Pages](#--landing-pages)
   - [ Predict](#--predict)
   - [ Redirects](#--redirects)
   - [ Federated Search](#--federated-search)
@@ -134,6 +135,24 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
   - Frequently Bought Together
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 📄 Landing Pages</h3>
+
+The search results page has the ability to turn itself into a custom landing page, using Algolia rules. You must first set up a rule with a context trigger, and the JSON response of:
+
+```
+{
+  "type": "LandingPageHeader",
+  "title": "Title of your landing page",
+  "text": "Any text description to display on the landing page",
+  "banner": "image link to show as the banner",
+  "link": "link to visit when the banner is clicked on"
+}
+```
+
+You can then, on the SRP, add `context=?your-context-trigger-here` to the end of the URL, and this should trigger your landing page header.
+
+You can text an example on the deployed version of this repository by adding `?context=my-landing-page`
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 🔮 Predict</h3>
 

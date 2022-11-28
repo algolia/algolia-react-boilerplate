@@ -18,6 +18,7 @@ import { windowSize } from '@/hooks/useScreenSize'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Import Components
+import LandingPageHeader from '@/components/landingPage/LandingPageHeader'
 import SkeletonLoader from '@/components/hits/components/HitsSkeletonLoader'
 import WrappedTrendingFacetValues from '@/components/recommend/trending/TrendingFacetValues'
 import TrendingProducts from '@/components/recommend/trending/TrendingProducts'
@@ -67,6 +68,9 @@ import '@/pages/searchResultsPage/searchResultsPage.scss'
 import { useTranslation } from 'react-i18next'
 
 const SearchResultsPage = () => {
+  // state to hold any context passed in as a URL param
+  const [extraContext, setExtraContext] = useState('')
+
   const { hits, isLastPage, showMore, sendEvent } = useInfiniteHits()
 
   const setNbHit = useSetRecoilState(setNbHitsAtom)
@@ -139,6 +143,26 @@ const SearchResultsPage = () => {
     }
   }, [navigationState])
 
+  // Extract extra context if passed in from the URL
+  useEffect(() => {
+    for (const [key, value] of searchParams.entries()) {
+      if (key === 'context' && extraContext !== value) {
+        setExtraContext(value)
+      } else {
+        setExtraContext('')
+      }
+    }
+  }, [searchParams])
+
+  // Handle the possible combination of rule contexts
+  const buildRuleContexts = () => {
+    if (navigationState?.type === 'context' && extraContext === '') {
+      return navigationState.action
+    } else if (extraContext !== '') {
+      return extraContext
+    }
+  }
+
   let configureProps = {
     analytics: false,
     clickAnalytics: true,
@@ -153,18 +177,21 @@ const SearchResultsPage = () => {
         ? navigationState.action
         : '',
     optionalFilters: segmentOptionalFilters,
-    ruleContexts:
-      navigationState?.type === 'context' ? navigationState.action : '',
+    ruleContexts: buildRuleContexts(),
     query: searchParams.get('query') === null ? '' : searchParams.get('query'),
     getRankingInfo: true,
   }
 
   return (
     <>
-      {shouldDisplayBanners && <Banner />}
+      {/* if context is passed in from the URL, expect to build a landing page header */}
+      {extraContext !== '' && <LandingPageHeader />}
+
+      {/* if banners are turned on, and there is no landing page, try to render a banner if an algolia rule requests */}
+      {shouldDisplayBanners && extraContext === '' && <Banner />}
+
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
-
       <Fragment>
         <div
           className={!isDesktop ? 'recommend recommend-mobile' : 'recommend'}

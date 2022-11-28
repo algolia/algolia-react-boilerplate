@@ -47,7 +47,13 @@ function WrappedTrendingFacetValues(props) {
   }, [recommendations])
 
   return (
-    <div className="trending-facet-container">
+    <div
+      className={`${
+        isFacetsPanelOpen
+          ? 'filters-container__title_deployed'
+          : 'filters-container__title'
+      }`}
+    >
       {recommendations.length > 0 && (
         <div className="filters-container">
           {recommendationsLoaded && (
