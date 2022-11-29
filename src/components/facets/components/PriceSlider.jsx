@@ -52,8 +52,9 @@ function PriceSlider(props) {
   // Reset function of refinement with condition and refine
   useEffect(() => {
     if (maxSlider - 2 <= minSlider) {
-      setMaxSlider(minSlider + 2)
     } else {
+      // When you remove the value in the slider input, it prevents the fact if it's not a number it forces to be at 0
+      isNaN(maxSlider) && setMaxSlider(minSlider)
       const isErrorsOn = networkErrors
       isErrorsOn && setNetworkErrors(false)
 
@@ -69,8 +70,6 @@ function PriceSlider(props) {
   // Reset function of refinement with condition and refine
   useEffect(() => {
     if (minSlider + 2 >= maxSlider) {
-      const newMax = minSlider + 2
-      setMaxSlider(newMax)
     } else {
       const isErrorsOn = networkErrors
       isErrorsOn && setNetworkErrors(false)
@@ -103,10 +102,9 @@ function PriceSlider(props) {
             {!isCurrencyRight && <span>{currency}</span>}
             <input
               type="text"
-              placeholder={0}
-              value={isNaN(minSlider) ? 2 : minSlider}
+              // When you remove the value in the slider input, it prevents the fact if it's not a number it forces to be at 0
+              value={isNaN(minSlider) ? 0 : minSlider}
               onChange={(e) => {
-                if (isNaN(maxSlider)) setMaxSlider(2)
                 setMinSlider(parseInt(e.target.value))
               }}
             />
@@ -116,10 +114,8 @@ function PriceSlider(props) {
             {!isCurrencyRight && <span>{currency}</span>}
             <input
               type="text"
-              placeholder={100}
-              value={isNaN(maxSlider) ? minSlider + 2 : maxSlider}
+              value={maxSlider}
               onChange={(e) => {
-                if (isNaN(maxSlider)) setMaxSlider(minSlider + 2)
                 setMaxSlider(parseInt(e.target.value))
               }}
             />
