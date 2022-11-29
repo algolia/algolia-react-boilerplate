@@ -18,17 +18,15 @@ export const shouldHaveDemoGuide = atom({
 // Should the segment selector be displayed on the screen
 export const shouldHaveSegments = atom({
   key: 'shouldHaveSegments', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
+  default: true, // default value (aka initial value)
 })
-
 
 // Make sure to go into languageConfig.js to set everything up
 // Should the language selector be displayed on the screen
 export const shouldHaveLanguages = atom({
   key: 'shouldHaveLanguages', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
+  default: true, // default value (aka initial value)
 })
-
 
 // Make sure to create replicas in the dashboard
 export const shouldHaveSorts = atom({
@@ -51,28 +49,25 @@ export const shouldHaveStats = atom({
   default: true,
 })
 
-// Make sure you create a rule in the dahsboard before turn it on 
+// Make sure you create a rule in the dahsboard before turn it on
 export const shouldHaveInjectedBanners = atom({
   key: 'shouldHaveInjectedBanners',
-  default: false,
-});
-
+  default: true,
+})
 
 // Make sure your sending event and create userToken before turn it on
 // You can set up personas details in personaConfig.js
 export const shouldHavePersona = atom({
   key: 'shouldHavePersona',
-  default: false,
-});
-
+  default: true,
+})
 
 // Make sure you create the injected content in rules or through another index before turning this on, to avoid errors
 // Please see https://github.com/algolia/algolia-react-boilerplate#--injected-content for more info on injected content
 export const shouldHaveInjectedHits = atom({
   key: 'shouldHaveInjectedHits',
-  default: false,
-});
-
+  default: true,
+})
 
 export const shouldHaveFederatedSearch = atom({
   key: 'shouldHaveFederatedSearch', // unique ID (with respect to other atoms/selectors)
@@ -83,17 +78,15 @@ export const shouldHaveFederatedSearch = atom({
 // Make sure you trained the models into the dashboards first
 export const shouldHaveRelatedProducts = atom({
   key: 'shouldHaveRelatedProductsAtom', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
-});
-
+  default: true, // default value (aka initial value)
+})
 
 // RECOMMEND
 // Make sure you trained the models into the dashboards first
 export const shouldHaveFbtProducts = atom({
   key: 'shouldHaveFbtProducts', // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
-});
-
+  default: true, // default value (aka initial value)
+})
 
 // RECOMMEND
 // Make sure you trained the models into the dashboards first
