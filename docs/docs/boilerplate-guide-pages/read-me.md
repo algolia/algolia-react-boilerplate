@@ -1,7 +1,5 @@
 # Full ReadMe
 
-[![Deploy To Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/algolia/algolia-react-boilerplate)
-
 - [Get started](#️-get-started)
 - [Structure](#️-structure)
 - [Features Config](#-features-config)
@@ -49,9 +47,7 @@ Before proceeding, please make sure you have the following:
 
 ## ⭐️ Get started
 
-[There are more visual step by step guides here](https://drive.google.com/drive/folders/19Bb4EPT7IMG8ziDUJlu3TG31KanSCJ0T?usp=sharing)
-
-1. Clone this repo under a new name for your own demo. You can use the `main` branch that has some features turned off for easier integration
+1. Clone the parent repo under a new name for your own demo. You can use the `main` branch that has some features turned off for easier integration
 
 2. Run `yarn` in the root directory and `yarn start` to view your project on [http://localhost:5173](http://localhost:5173/)
 
@@ -67,7 +63,7 @@ Before proceeding, please make sure you have the following:
 
 8. In the `src/scss` folder, adjust any styling you need to based on what you see.
 
-9. Preferrably you can use Netlify to deploy your project, but you can use other deployment tools.
+9. Preferably you can use Netlify to deploy your project, but you can use other deployment tools.
 
 10. Log into Netlify on the Algolia Demos team (again ask #help-demos if you don't have access) and deploy your demo from Github, making sure to password protect it!
 
@@ -256,7 +252,7 @@ There are two types of banners in this demo - Homepage banners and Search Result
 How Configure it 👇
 
 - In rules Section in the Dashboard, you have 2 'HomeBanner' rules without query conditions.
-- You can edit or duplicate one of these, and personalise the differrent fields:
+- You can edit or duplicate one of these, and personalise the different fields:
   - Images (For the background, or for the thumbnails)
   - Link or Text for the buttons
   - Titles and Subtitles
@@ -269,9 +265,9 @@ How Configure it 👇
   - title
   - banner: this is an image url
 
-You can find an example of a bannersrp rule by searching for `qr-1634719042792` in `rules/example-rules.json`.
+You can find an example of a 'bannersrp' rule by searching for `qr-1634719042792` in `rules/example-rules.json`.
 
-You can find an example of a homeBannerTwo rule by searching for `qr-1645197289062` in `rules/example-rules.json`.
+You can find an example of a 'homeBannerTwo' rule by searching for `qr-1645197289062` in `rules/example-rules.json`.
 
 ### 👀 Segments
 
@@ -344,7 +340,7 @@ We use the [Magazine Layout](https://github.com/algolia/magazine-layout)
 There are two kinds of injected content:
 
 1. Using rules in the main index
-2. Using a seperate index
+2. Using a separate index
 
 ### From Main Index
 
@@ -362,7 +358,7 @@ You can find an example of this injected content rule by searching for `qr-16445
 
 You can find an example of this injected content rule by searching for `qr-1649055462539` in `rules/example-rules.json`.
 
-### From Seperate Index
+### From Separate Index
 
 - You can edit the displayed hit by going to `/components/hits/InfluencerCard.js`
 
