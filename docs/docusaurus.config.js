@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Boilerplate Documentation',
   tagline: 'Egg',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://monumental-melba-89d587.netlify.app',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
