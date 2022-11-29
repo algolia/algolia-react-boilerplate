@@ -53,6 +53,7 @@ function PriceSlider(props) {
   useEffect(() => {
     if (maxSlider - 2 <= minSlider) {
     } else {
+      // When you remove the value in the slider input, it prevents the fact if it's not a number it forces to be at 0
       isNaN(maxSlider) && setMaxSlider(minSlider)
       const isErrorsOn = networkErrors
       isErrorsOn && setNetworkErrors(false)
