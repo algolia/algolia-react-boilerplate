@@ -102,6 +102,7 @@ function PriceSlider(props) {
             {!isCurrencyRight && <span>{currency}</span>}
             <input
               type="text"
+              // When you remove the value in the slider input, it prevents the fact if it's not a number it forces to be at 0
               value={isNaN(minSlider) ? 0 : minSlider}
               onChange={(e) => {
                 setMinSlider(parseInt(e.target.value))
