@@ -1,6 +1,0 @@
-import { createContext } from 'react';
-export var InstantSearchContext = /*#__PURE__*/createContext(null);
-
-if (process.env.NODE_ENV !== 'production') {
-  InstantSearchContext.displayName = 'InstantSearch';
-}
