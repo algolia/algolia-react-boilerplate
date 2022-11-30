@@ -1,4 +1,5 @@
 // Render the navigation menu in the header
+import { useState } from 'react'
 
 // React Router
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
@@ -14,6 +15,7 @@ import {
 
 //Import config from helped navigation
 import { windowSize } from '@/hooks/useScreenSize'
+import { useEffect } from 'react'
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
   const { isDesktop } = useRecoilValue(windowSize)
@@ -49,6 +51,22 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
   const [navigationState, setNavigationState] =
     useRecoilState(navigationStateAtom)
 
+  useEffect(() => {
+    // remove the nav state if a query in a context page
+    if (
+      navigationState.type === 'context' &&
+      searchParams.get('query') !== null &&
+      searchParams.get('query') !== ''
+    ) {
+      setNavigationState({})
+
+      searchParams.delete('category')
+      searchParams.set('query', '')
+      console.log('set new params')
+      setSearchParams(searchParams)
+    }
+  }, [navigationState, searchParams])
+
   return (
     <ul
       className={`${
@@ -76,7 +94,6 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
               ) {
                 action = `${link.rawFilter}`
               }
-
               setNavigationState({
                 type: link.type,
                 name: link.name,
