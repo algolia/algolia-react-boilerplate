@@ -59,10 +59,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
       searchParams.get('query') !== ''
     ) {
       setNavigationState({})
-
       searchParams.delete('category')
-      searchParams.set('query', '')
-      console.log('set new params')
       setSearchParams(searchParams)
     }
   }, [navigationState, searchParams])
