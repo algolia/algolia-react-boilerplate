@@ -54,10 +54,10 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: 'Boilerplate Docs',
         logo: {
           alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          src: 'algolia-logo.svg',
         },
         items: [
           {
@@ -66,13 +66,19 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
+          // {
+          //   type: 'category',
+          //   id: 'boilerplate-guide-pages',
+          //   label: 'Boilerplate Guide Docs',
+          //   position: 'left',
+          // },
 
           {
             type: 'doc',
             docId: 'read-me',
             // href: 'https://github.com/facebook/docusaurus',
             label: 'Full README',
-            
+
             position: 'left',
           },
         ],
