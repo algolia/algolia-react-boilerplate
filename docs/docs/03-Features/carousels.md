@@ -2,9 +2,13 @@
 sidebar_position: 3
 ---
 
-# Configuring the Carousels
+# Carousels
 
-Inside `featuresConfig.js`, allow the _shouldHaveCarousels_ const to be true.
+Carousels are configured using [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#using-context). You can configure your carousels by going to `config/carouselConfig` and adjusting the values for each `context`. You must ensure you have a rule in the algolia dashboard for each context, which pins products as this is what powers the carousels.
+
+You can find an example carousel rule by searching for `qr-1651497727816` in `rules/example-rules.json`.
+
+Inside `featuresConfig.js`, allow the `shouldHaveCarousels` const to be `true`.
 That should get the carousels showing on the homepage of the app.
 ![Image](./media/carousel1.png)
 

@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
 ---
 
-# Configuring the Hits
+# Hits
 
 Now that you have the application details correct, we can go ahead and correctly display the hits across the app.
 

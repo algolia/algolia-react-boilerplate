@@ -1,8 +1,8 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 ---
 
-# Configuring the ENV
+# ENV
 
 After cloning the Boilerplate into your own IDE, open up `src > config > algoliaEnvConfig.js`
 

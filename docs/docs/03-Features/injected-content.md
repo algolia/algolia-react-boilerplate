@@ -1,11 +1,13 @@
-# Configuring Injected Content
+# Injected Content
 
-Here is some documentation on Injected Content that might also help you:
+Here is some documentation on Injected Content that might help you:
 https://github.com/algolia/algolia-react-boilerplate#--injected-content
 
 https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/injecting-content/react/
 
-This guide will help you change the cards (or 'injected content') that you see on the search results page, like this Nike card:
+### From Main Index
+
+This is for changing the cards (or 'injected content') that you see on the Search Results Page, like this Nike card:
 
 ![nikecard](./media/ij1.png)
 
@@ -34,6 +36,8 @@ Component to build the hit for items on sale
 It’s very similar to the NoCtaCard, with the addition of some text in the JSON:
 
 ![nikecard](./media/ij4.png)
+
+### From Separate Index
 
 `InfluencerCard.jsx`
 

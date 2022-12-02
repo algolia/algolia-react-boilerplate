@@ -1,4 +1,4 @@
-# Configuring Sort By
+# Sorts
 
 Open the dashboard in your browser and make sure you’re in the main index of your application.
 
@@ -17,6 +17,7 @@ You can edit the values of the sortBy selectors if you want to name the index di
 ![Image](./media/sortby1.png)
 
 After creating your Replica Index, navigate into it and open the Configuration tab and open Relevant Sort. This is where you can edit the ranking of your sort attributes. In this case we want to sort by price descending, so we’re putting a price attribute at the top of the list.
+**NB** You can sort by any other attribute here, eg, `bestsellers`, or `discount`.
 
 ![gif](./media/sortbyconfig.gif)
 

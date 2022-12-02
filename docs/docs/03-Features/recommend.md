@@ -1,4 +1,4 @@
-# Configuring Recommend
+# Recommend
 
 For **Frequently Bought Together**, **Related Items**, **Trending Items** & **Trending Facet Values**
 
@@ -7,7 +7,18 @@ Read about Recommend here:
 
 In order to generate (fake) the data for a Demo, we use a tool called **FIG**.
 
-## FIG
+Use FIG to generate the CSVs needed for Recommend, which you can then upload to the dashboard, and following this, enable FBT and Related in the appropriate config of this application.
+
+We wrote a Gdoc to detail how use [FIG](https://github.com/algolia/fake-insights-generator). You can find it [here](https://docs.google.com/document/d/1T8ClZX5I06D-NpV9ZehFCXA_yx095cCFd7P2e3VeM5U/edit?usp=sharing).
+
+Recommend is present in this app on the homepage, search results page, product details page, and also on the NoResultsPage.
+
+Homepage: Trending products
+Results Page: Trending products and trending facet values
+PDP: Related and FBT
+NRP: Related
+
+## Using FIG
 
 You will want to use this documentation:
 

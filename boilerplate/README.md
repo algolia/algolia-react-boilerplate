@@ -145,23 +145,23 @@ You must also adjust the values found in `src/config/predictConfig`. We store a 
 
 You can feel free to keep the default values for all of these atoms and configurations, and follow the default demo flow outlined below (TBD).
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Demo Tour</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Demo Tour</h3>
 
 This app offers the ability to present a guided tour to the user, highlighting different elements and explaining them. The feature is currently in BETA, and is subject to change. It is on by default; it can be turned off by going to `config/demoTourConfig` and setting the `default` value of `shouldShowDemoTour` to `false`.
 
 You can configure your tour by adjusting the `steps` const, also found in `config/demoTourConfig`.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Network Error Messages</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Network Error Messages</h3>
 
 This feature will guide you to see what in the configuration is failing. We render the InstantSearch api errors in a modal.
 
 You can turn this feature off by switching `showNetworkErorrs` default value to `false` in `config/demoGuideConfig`.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Insights</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Insights</h3>
 
 On the product details page, if you have chosen not to show the size filter, you will see an add to cart button. By clicking this button, an event will be sent to algolia using the Insights API and an alert will be shown to the user.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Redirects</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Redirects</h3>
 
 Redirects are already activated in the application. In order to trigger one, simply create a rule in the dashboard where the consequence is:
 
@@ -174,15 +174,15 @@ Redirects are already activated in the application. In order to trigger one, sim
 
 You can find an example redirect rule by searching for `qr-1634733813616` in `rules/example-rules.json`
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Federated Search</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Federated Search</h3>
 
 You can turn on federated search in `config/featuresConfig` by setting the `default` value of `shouldHaveFederatedSearch` to true. You can then define which sections are shown by going to `config/federatedConfig`.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Voice Search</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Voice Search</h3>
 
 You can turn on voice search by going to `config/featuresConfig` and setting the `default` value of `shouldHaveVoiceSearch` to true.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Sorts</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Sorts</h3>
 
 You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveSorts` to true.
 
@@ -190,7 +190,7 @@ You can then define your sorts by going to `config/sortByConfig` and adjusting t
 
 To sort by Price ascending or descending please configure the dashboard by creating a new virtual replica and name it exactly like the main index name and add `_price_asc` or `_price_desc`. Please see `config/sortByConfig`
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Carousels</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Carousels</h3>
 
 You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveCarousels` to true.
 
@@ -198,7 +198,7 @@ Carousels are configured using [rule contexts](https://www.algolia.com/doc/guide
 
 You can find an example carousel rule by searching for `qr-1651497727816` in `rules/example-rules.json`.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Recommend</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Recommend</h3>
 
 Use FIG to generate the CSVs needed for Recommend, which you can then upload to the dashboard, and following this, enable FBT and Related in the appropriate config of this application.
 
@@ -211,11 +211,11 @@ Results Page: Trending products and trending facet values
 PDP: Related and FBT
 NRP: Related
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Styling</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Styling</h3>
 
 You can adjust all of the styling of this application by adjusting anything found in the `scss` folder. It is recommended to start with the `mixin` folder.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Demo Guide</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Demo Guide</h3>
 
 The demo guide is opened by clicking on the three dots in the top right of the application and serves to guide the user through the features available in the app.
 
@@ -231,7 +231,7 @@ You can change description of the rules directly in the dashboard under the rule
 
 You might notice `config/appliedRulesConfig` file, please ignore it.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Languages</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Languages</h3>
 
 In order to turn on this feature, go to `config/featuresConfig` and set `shouldHaveLanguages` to true.
 
@@ -246,7 +246,7 @@ Currently in :
 - 🇩🇪 German
 - 🇮🇹 Italian
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Banners</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Banners</h3>
 
 https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/add-banners/
 
@@ -272,7 +272,7 @@ You can find an example of a bannersrp rule by searching for `qr-1634719042792` 
 
 You can find an example of a homeBannerTwo rule by searching for `qr-1645197289062` in `rules/example-rules.json`.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Segments</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Segments</h3>
 
 You can add segments to the application to represent algolia being told that the current user has certain characteristics. It is not 1:1 personalisation and would be fed in by an external system such as Dynamic Yield.
 
@@ -280,7 +280,7 @@ These "segments" are sent to Algolia as [optional filters](https://www.algolia.c
 
 Use this feature by adjusting `config/segmentConfig` and turn on or off this feature in `config/featuresConfig`.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Badges</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Badges</h3>
 
 You can dynamically add badges based on any condition for an attribute returned in a hit.
 
@@ -288,13 +288,13 @@ There are two examples already defined in `/config/badgesConfig`, please follow 
 
 When two triggers are matched, the one found first in the configuration array will be the one which is shown, more than one badge is not currently supported.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Facet Display</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Facet Display</h3>
 
 [Facet Display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react/)
 
 The ability to control the facets which get displayed including their order. When adding your facets inside this app via `config/refinementsConfig`, you _must_ ensure those facets are also added in the dashboard not just in the Facets section, but also in the Facet Display section, otherwise they will not show.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Category Pages</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Category Pages</h3>
 
 In order to configure Category Pages, go to `config/navigationConfig`.
 
@@ -302,13 +302,13 @@ Edit the value for `categoryPageFilterAttribute`. This represents the attribute 
 
 Then you can adjust the linksHeader atom. The value for `filter` must match the value of the category you are filtering on to create the resulting page.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Collection Pages</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   Collection Pages</h3>
 
 In order to configure Collection Pages, go in `config/headerConfig`. From there you can add links to the Navigation tab. Collection pages are powered by rule contexts. In order for this to work, you must set the type to `context` and make sure that you have a rule set up in the Algolia dashboard matching the context trigger which you define as the value of `context`.
 
 You can find an example of a collection page rule by searching for `qr-1651145630794` in `rules/example-rules.json`.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 No Results Page</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">   No Results Page</h3>
 
 To have the best UI, we defined the no results page with 3 parts:
 
