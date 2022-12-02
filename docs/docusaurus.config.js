@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Boilerplate Documentation',
-  tagline: 'Egg',
+  title: 'Algolia Boilerplate',
+  tagline: 'Built and maintained by Demo Engineering',
   url: 'https://monumental-melba-89d587.netlify.app',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -57,7 +57,7 @@ const config = {
         title: 'Boilerplate Docs',
         logo: {
           alt: 'My Site Logo',
-          src: 'algolia-logo.svg',
+          src: 'https://www.gartner.com/pi/vendorimages/algolia_digital-commerce-search_1667487335343.png',
         },
         items: [
           {
@@ -73,6 +73,12 @@ const config = {
           //   position: 'left',
           // },
 
+          {
+            type: 'doc',
+            docId: 'Getting Started/getting-started',
+            label: 'Getting Started'
+
+          },
           {
             type: 'doc',
             docId: 'read-me',

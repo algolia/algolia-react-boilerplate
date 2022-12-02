@@ -8,8 +8,8 @@ const FeatureList = [
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        The Boilerplate was designed from the ground up by Demo Engineering to be easily installed and
+        used to show Algolia's best features using your own index.
       </>
     ),
   },
@@ -18,13 +18,13 @@ const FeatureList = [
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        The Boilerplate lets you focus on showcasing Algolia's amazing features, and most of the app is written for you. Go
+        into the <code>docs</code> directory to explore how to get up and running in next to no time. 
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Powered by React and InstantSearch',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
