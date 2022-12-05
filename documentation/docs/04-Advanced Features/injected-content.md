@@ -9,7 +9,7 @@ https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/injecti
 
 This is for changing the cards (or 'injected content') that you see on the Search Results Page, like this Nike card:
 
-![nikecard](./media/ij1.png)
+![nikecard](../media/ij1.png)
 
 `NoCtaCard.jsx`
 Component to build the hit for simple injected hit cards, eg Free Returns
@@ -17,15 +17,15 @@ Component to build the hit for simple injected hit cards, eg Free Returns
 To edit the _NoCtaCard_, head over to the dashboard and head to the Rules section of your main index.
 Search for noCta and you’ll see the rule:
 
-![nikecard](./media/ij2.png)
+![nikecard](../media/ij2.png)
 
 Here you can edit the JSON. Changing the image urls and the position is all you should need to do in this case. `‘position’` is where the card will be placed in the hits list.
 
-![nikecard](./media/ij3.png)
+![nikecard](../media/ij3.png)
 
 Here’s an example of how quickly you can change the card, just by altering the image url:
 
-![gif](./media/noctarules.gif)
+![gif](../media/noctarules.gif)
 
 You can also edit the component by opening:
 `src > components > hits > components > injected-hits > NoCta.jsx`
@@ -35,7 +35,7 @@ Component to build the hit for items on sale
 
 It’s very similar to the NoCtaCard, with the addition of some text in the JSON:
 
-![nikecard](./media/ij4.png)
+![nikecard](../media/ij4.png)
 
 ### From Separate Index
 

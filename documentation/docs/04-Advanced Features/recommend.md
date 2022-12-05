@@ -31,7 +31,7 @@ We will be using the `fig recommend` command to generate some CSV files. These f
 
 In order to do this you’ll want to open up the FIG file in your IDE and open `recommend.json` where you will configure the output of the recommend generator.
 
-![Image](./media/recommend1.png)
+![Image](../media/recommend1.png)
 
 We have the sections `trendingFacetValues`, `trendingItems` and `FBT` (frequently bought together).
 There is `facetName` which is the attribute on which you are training the model.
@@ -39,4 +39,4 @@ You can edit the objects to train the model with items and their related purchas
 
 Trending facet values are the facets that will appear in the Trending Facets Component on the Boilerplate. In this example the component is named ‘Trending Brands’ in `src > config > translations.js`
 
-![image](./media/recommend2.png)
+![image](../media/recommend2.png)

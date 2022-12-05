@@ -10,19 +10,19 @@ The Boilerplate is built to take \_price_desc or \_price_asc as a suffix. You ca
 
 **\*NB** this example names the replica differently because the `flagship_fashion_price_desc` index already exists\*
 
-![gif](./media/sortbyreplica.gif)
+![gif](../media/sortbyreplica.gif)
 
 You can edit the values of the sortBy selectors if you want to name the index differently. Just make sure it matches the index name on the dashboard!
 
-![Image](./media/sortby1.png)
+![Image](../media/sortby1.png)
 
 After creating your Replica Index, navigate into it and open the Configuration tab and open Relevant Sort. This is where you can edit the ranking of your sort attributes. In this case we want to sort by price descending, so we’re putting a price attribute at the top of the list.
 **NB** You can sort by any other attribute here, eg, `bestsellers`, or `discount`.
 
-![gif](./media/sortbyconfig.gif)
+![gif](../media/sortbyconfig.gif)
 
 The frontend code already exists in the Boilerplate. In `src > config > featuresConfig.js` check that `shouldhaveSorts` is true
 
 You should now see the sort by widget on the search results page:
 
-![Image](./media/sortby2.png)
+![Image](../media/sortby2.png)

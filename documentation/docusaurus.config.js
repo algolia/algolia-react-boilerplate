@@ -128,12 +128,12 @@ const config = {
               // },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/algolia/algolia-react-boilerplate/',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Algolia Demo Engineering, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
