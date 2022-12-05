@@ -7,15 +7,14 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 // Used for avoiding duplicates
 import { uniq } from 'lodash'
 
-import useDebounce from '@/hooks/useDebounce'
-
 import { isRulesSwitchToggle } from '@/config/appliedRulesConfig'
 
 // Config import
-import { mainIndex, searchClient } from '@/config/algoliaEnvConfig'
-import { rulesAtom } from '@/config/appliedRulesConfig'
+import { rulesAtom, rulesIdsAtom } from '@/config/appliedRulesConfig'
 import { scorePersonadAtom } from '@/config/demoGuideConfig'
 import { personaSelectedName } from '@/config/personaConfig'
+
+import FetchAndFormatAlgoliaRules from '@/hooks/useFetchAndFormatAlgoliaRules'
 
 //Import scope SCSS
 import './SCSS/appliedRules.scss'
@@ -27,6 +26,7 @@ function CustomAppliedRules(props) {
   const { results } = useInstantSearch(props)
 
   const [rules, setRules] = useRecoilState(rulesAtom)
+  const [rulesIds, setRulesIds] = useRecoilState(rulesIdsAtom)
 
   //Get score from Persona
   const resultsScore = useRecoilValue(scorePersonadAtom)
@@ -34,34 +34,31 @@ function CustomAppliedRules(props) {
 
   const setIsSwitchToggle = useSetRecoilState(isRulesSwitchToggle)
 
-  // Init API request to get rules by their IDs
-  const indexName = useRecoilValue(mainIndex)
-  const index = searchClient.initIndex(indexName)
+  const trim = (values) => values.slice(0, 5)
 
-  // Get rules from Search result state
-  // Store it in an array handled by recoil
   useEffect(() => {
-    let rulesStorage = []
-    if (results?.appliedRules !== null) {
+    const fetchRuleDetails = async (rulesIds) => {
+      const results = await FetchAndFormatAlgoliaRules(rulesIds)
+      setRules(results)
+      return
+    }
+
+    // if there are applied rules and they don't equal to what's stored
+    if (results?.appliedRules !== null && rulesIds !== results.appliedRules) {
+      // Assign rules applied to a variable
       let rulesApplied = results?.appliedRules
-      if (rulesApplied) {
-        rulesApplied.map((rule) => {
-          index.getRule(rule.objectID).then((e) => {
-            rulesStorage.push(e.description)
-            setRules((previousRules) => [...previousRules, e.description])
-          })
-        })
-      }
+
+      // Set the rules applied inside an atom
+      setRulesIds(rulesApplied)
+
+      // will update rules atom to hold the details of currently applied rules
+      fetchRuleDetails(rulesApplied)
     }
   }, [results, results.appliedRules])
 
-  // Create an array without duplicates
-  const uniqRules = uniq(rules)
-  const debouncedRules = useDebounce(uniqRules, 300)
-
   return (
     <div className="appliedRules">
-      {debouncedRules.length > 0 ? (
+      {rules.length > 0 ? (
         <div className="appliedRules__wp">
           <span
             className="appliedRules__closeBtn"
@@ -76,9 +73,48 @@ function CustomAppliedRules(props) {
             />
           )}
           <ul className="appliedRules__list">
-            {debouncedRules.map((rule, i) => (
-              <li key={i}>{rule}</li>
-            ))}
+            {rules.map((rule, i) => {
+              console.log(rule)
+              return (
+                <div key={rule.name} className="single-rule">
+                  {/* Is rule a manual or visual editor one? */}
+                  <div className="type">
+                    <span className="material-icons-round">
+                      {rule.tags?.includes('visual-editor') ? 'web' : 'tune'}
+                    </span>
+                    {rule.tags?.includes('visual-editor') ? 'Visual' : 'Manual'}
+                  </div>
+                  {/* Name of the rule */}
+                  <h3>{rule.name}</h3>
+                  {/* Description of the rule */}
+                  <p>{rule.description}</p>
+                  {/* Triggers of the rule */}
+                  <div className="rule-triggers-container">
+                    {rule.triggers?.length
+                      ? rule.triggers?.map((trigger, i) => {
+                          return trigger.map(
+                            (innerTrigger, i) =>
+                              `${innerTrigger.label} : ${innerTrigger.value}`
+                          )
+                        })
+                      : 'Conditionless rule'}
+                  </div>
+                  {/* Strategy of the rule */}
+                  <div className="rule-strategy-container">
+                    {rule.strategies?.map((strategy, i) => {
+                      return (
+                        <>
+                          <span className="label">{strategy.label}</span>
+                          {strategy.multiple && (
+                            <p>{JSON.stringify(trim(strategy.value))}</p>
+                          )}
+                        </>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })}
           </ul>
         </div>
       ) : (

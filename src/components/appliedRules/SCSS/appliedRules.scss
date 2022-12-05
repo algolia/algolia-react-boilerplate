@@ -3,6 +3,12 @@
 // ------------------------------------------
 @use '../../../scss/partials' as *;
 
+.single-rule {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
 .appliedRules {
   position: fixed;
   animation: 0.5s showRules ease-in forwards;

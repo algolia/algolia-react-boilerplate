@@ -3,10 +3,15 @@
 // ------------------------------------------
 import { atom } from 'recoil'
 
-// Gather rules from Search result state of IS
-// Please ignore
+// Gather rules from Search result state of IS, please ignore
 export const rulesAtom = atom({
   key: 'rulesAtom', // unique ID (with respect to other atoms/selectors)
+  default: [], // default value (aka initial value)
+})
+
+// Stores currently applied rules IDs, please ignore
+export const rulesIdsAtom = atom({
+  key: 'rulesIdsAtom', // unique ID (with respect to other atoms/selectors)
   default: [], // default value (aka initial value)
 })
 
