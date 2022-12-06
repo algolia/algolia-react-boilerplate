@@ -6,8 +6,6 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { isRulesSwitchToggle } from '@/config/appliedRulesConfig'
-
 // Config import
 import { rulesAtom, rulesIdsAtom } from '@/config/appliedRulesConfig'
 import { scorePersonadAtom } from '@/config/demoGuideConfig'
@@ -30,8 +28,6 @@ function CustomAppliedRules(props) {
   //Get score from Persona
   const resultsScore = useRecoilValue(scorePersonadAtom)
   const personaName = useRecoilValue(personaSelectedName)
-
-  const setIsSwitchToggle = useSetRecoilState(isRulesSwitchToggle)
 
   const trim = (values) => values.slice(0, 5)
 
@@ -64,12 +60,6 @@ function CustomAppliedRules(props) {
               ' rule' +
               (rules.length > 1 ? 's' : '') +
               ' applied'}
-          </span>
-          <span
-            className="appliedRules__closeBtn"
-            onClick={() => setIsSwitchToggle(false)}
-          >
-            x
           </span>
           {resultsScore && personaName !== 'No Persona' && (
             <PersonaScore
@@ -133,12 +123,6 @@ function CustomAppliedRules(props) {
         </div>
       ) : (
         <div className="appliedRules__wp">
-          <span
-            className="appliedRules__closeBtn"
-            onClick={() => setIsSwitchToggle(false)}
-          >
-            x
-          </span>
           <p className="appliedRules__noResult">No rules are applied</p>
         </div>
       )}

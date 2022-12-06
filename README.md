@@ -240,15 +240,11 @@ The demo guide is opened by clicking on the three dots in the top right of the a
 
 It is all defined and adjusted in `config/demoGuideConfig` and is self described.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 🧱 Rules Applied Mode</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 🧱 Algolia Explain</h3>
 
-In order to turn on this feature, go to `config/demoGuideConfig` and set `shouldShowAppliedRulesSwitcher` to true.
+You will find this feature in the Demo Guide panel, toggle it on to activate it.
 
-If turn to true you will find this feature in the Demo Guide panel.
-Switch on, you will find at the bottom of your screen information about the rules that are applied live while you are browsing the app. Switch off, no information will be disclosed.
-You can change description of the rules directly in the dashboard under the rule description input.
-
-You might notice `config/appliedRulesConfig` file, please ignore it.
+It will provide information about the rules currently being applied, the facet ordering applied, and any other behind the scenes information being returned by the API.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Languages</h3>
 

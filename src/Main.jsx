@@ -27,7 +27,7 @@ import {
   shouldHaveDemoGuide,
 } from '@/config/featuresConfig'
 
-import { isRulesSwitchToggle } from '@/config/appliedRulesConfig'
+import { algoliaExplainToggle } from '@/config/algoliaExplainConfig'
 import { isCarouselLoaded } from '@/config/carouselConfig'
 
 // Import Pages and static components
@@ -100,7 +100,7 @@ export const Main = memo(() => {
   const shouldShowAlertAtom = useRecoilValue(shouldShowAlert)
 
   // Should the currently applied Algolia rules be shown
-  const shouldShowAppliedRules = useRecoilValue(isRulesSwitchToggle)
+  const isAlgoliaExplainActive = useRecoilValue(algoliaExplainToggle)
 
   // Should the demo guide panel be shown
   const shouldHaveDemoGuideAtom = useRecoilValue(shouldHaveDemoGuide)
@@ -195,7 +195,7 @@ export const Main = memo(() => {
             <AlertNavigation />
           </Suspense>
         )}
-        {shouldShowAppliedRules && (
+        {isAlgoliaExplainActive && (
           <Suspense fallback={''}>
             <CustomAppliedRules />
           </Suspense>
