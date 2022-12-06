@@ -13,6 +13,7 @@ const resources = {
         facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
         colourRefinementList:
           'Uses the Instantsearch colour refinement list widget',
+        contextLink: 'this link uses context, not a filter',
       },
       homePage: {
         titleCarousels: ['Our Bags Collection', 'Our Best Hoodies'],
@@ -79,6 +80,7 @@ const resources = {
         facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
         colourRefinementList:
           'Uses the Instantsearch colour refinement list widget',
+        contextLink: 'this link uses context, not a filter',
       },
       homePage: {
         titleCarousels: [
@@ -148,6 +150,7 @@ const resources = {
         facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
         colourRefinementList:
           'Uses the Instantsearch colour refinement list widget',
+        contextLink: 'this link uses context, not a filter',
       },
       homePage: {
         titleCarousels: ['Notre collection de sacs', 'Nos plus beaux sweat'],
@@ -213,6 +216,7 @@ const resources = {
         facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
         colourRefinementList:
           'Uses the Instantsearch colour refinement list widget',
+        contextLink: 'this link uses context, not a filter',
       },
       homePage: {
         titleCarousels: [
