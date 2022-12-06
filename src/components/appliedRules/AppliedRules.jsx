@@ -18,12 +18,18 @@ import './SCSS/appliedRules.scss'
 
 //Import PersonaScore Component
 import PersonaScore from './PersonaScore'
+import { ChevronDown } from '@/assets/svg/SvgIndex'
+import { algoliaExplainToggle } from '@/config/algoliaExplainConfig'
 
 function CustomAppliedRules(props) {
   const { results } = useInstantSearch(props)
 
   const [rules, setRules] = useRecoilState(rulesAtom)
   const [rulesIds, setRulesIds] = useRecoilState(rulesIdsAtom)
+
+  // Show or hide applied rules panel
+  const [algoliaExplainSwitch, setAlgoliaExplainSwitch] =
+    useRecoilState(algoliaExplainToggle)
 
   //Get score from Persona
   const resultsScore = useRecoilValue(scorePersonadAtom)
@@ -55,12 +61,23 @@ function CustomAppliedRules(props) {
     <div className="appliedRules">
       {rules.length > 0 ? (
         <div className="appliedRules__wp">
-          <span>
-            {rules.length +
-              ' rule' +
-              (rules.length > 1 ? 's' : '') +
-              ' applied'}
-          </span>
+          <div className="rule-top">
+            <div className="rules-number">
+              <p>
+                {rules.length +
+                  ' rule' +
+                  (rules.length > 1 ? 's' : '') +
+                  ' applied'}
+              </p>
+            </div>
+            <div
+              className="rule-minimiseBtn"
+              onClick={() => setAlgoliaExplainSwitch(!algoliaExplainSwitch)}
+            >
+              <ChevronDown />
+              <p>Minimise Panel</p>
+            </div>
+          </div>
           {resultsScore && personaName !== 'No Persona' && (
             <PersonaScore
               resultsScore={resultsScore}
@@ -80,18 +97,22 @@ function CustomAppliedRules(props) {
                 <div key={rule.name} className="single-rule">
                   {/* Is rule a manual or visual editor one? */}
                   <div className="rule-type">
-                    <span className="rule-icon">
-                      {rule.tags?.includes('visual-editor') ? (
-                        <FontAwesomeIcon className="icon" icon="desktop" />
-                      ) : (
-                        <FontAwesomeIcon className="icon" icon="sliders" />
-                      )}
-                    </span>
-                    {rule.tags?.includes('visual-editor') ? 'Visual' : 'Manual'}
+                    {rule.tags?.includes('visual-editor') ? (
+                      <FontAwesomeIcon className="icon" icon="desktop" />
+                    ) : (
+                      <FontAwesomeIcon className="icon" icon="sliders" />
+                    )}
+                    <p>
+                      {rule.tags?.includes('visual-editor')
+                        ? 'Visual'
+                        : 'Manual'}
+                    </p>
                   </div>
 
                   {/* Description of the rule */}
-                  <p>{rule.description}</p>
+                  <div className="rule-description">
+                    <p>{rule.description}</p>
+                  </div>
                   {/* Triggers of the rule */}
                   <div className="rule-triggers-container">
                     {rule.triggers?.length
