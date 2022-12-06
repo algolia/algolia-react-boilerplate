@@ -193,6 +193,7 @@ const Facets = () => {
       {facets?.length > 0 && (
         <>
           {isAlgoliaExplainActive && (
+            // translation key found in src/config/translation.js
             <AlgoliaExplainBox translationKey="facetOrdering" />
           )}
           <DynamicWidgets maxValuesPerFacet={500}>

@@ -70,6 +70,7 @@ function WrappedTrendingFacetValues(props) {
                   : 'filters-container__title'
               }`}
             >
+              {/* translation key found in src/config/translation.js */}
               <WithToolTip translationKey="trendingFacets">
                 <h3>{t('titleTrendingFacets')}</h3>
               </WithToolTip>
