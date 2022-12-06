@@ -78,6 +78,12 @@ function CustomAppliedRules(props) {
             />
           )}
           <ul className="appliedRules__list">
+            <div className="rules-headers">
+              <h3>Type</h3>
+              <h3>Description</h3>
+              <h3>Triggers</h3>
+              <h3>Consequences</h3>
+            </div>
             {rules.map((rule, i) => {
               console.log(rule)
               return (
@@ -93,8 +99,7 @@ function CustomAppliedRules(props) {
                     </span>
                     {rule.tags?.includes('visual-editor') ? 'Visual' : 'Manual'}
                   </div>
-                  {/* Name of the rule */}
-                  <h3>{rule.name}</h3>
+
                   {/* Description of the rule */}
                   <p>{rule.description}</p>
                   {/* Triggers of the rule */}

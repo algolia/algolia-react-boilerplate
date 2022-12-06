@@ -3,10 +3,22 @@
 // ------------------------------------------
 @use '../../../scss/partials' as *;
 
+.rules-headers {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 2fr;
+  margin: 1rem 0;
+  text-align: center;
+  font-weight: bold;
+}
+
 .single-rule {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 2fr;
+  margin: 1rem 0;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  border: #f9faff solid 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .rule-icon {
@@ -34,7 +46,7 @@
   bottom: 0;
   left: 50%;
   transform: translate(-50%, -1rem);
-  width: 80%;
+  width: 90%;
   &__wp {
     display: flex;
     flex-direction: column;
