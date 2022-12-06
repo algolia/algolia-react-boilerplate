@@ -10,6 +10,7 @@ import '@algolia/ui-components-horizontal-slider-theme'
 
 import TrendingFacetsItem from '@/components/recommend/trending/TrendingFacetsItem'
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
+import WithToolTip from '@/components/tooltip/WithTooltip'
 import { trendingConfig } from '@/config/trendingConfig'
 
 import { isFacetPanelOpen } from '@/config/refinementsConfig'
@@ -41,6 +42,11 @@ function WrappedTrendingFacetValues(props) {
     keyPrefix: 'srp',
   })
 
+  // Import and use translation
+  const { t: explainTranslations } = useTranslation('translation', {
+    keyPrefix: 'explain',
+  })
+
   // Control state so we can render the recommend component only when we have received the recommendations
   useEffect(() => {
     setRecommendationsLoaded(recommendations.length > 0)
@@ -64,7 +70,9 @@ function WrappedTrendingFacetValues(props) {
                   : 'filters-container__title'
               }`}
             >
-              <h3>{t('titleTrendingFacets')}</h3>
+              <WithToolTip text={explainTranslations('trendingFacets')}>
+                <h3>{t('titleTrendingFacets')}</h3>
+              </WithToolTip>
             </div>
           )}
           <div className="filters-container__list"></div>
