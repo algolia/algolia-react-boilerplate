@@ -167,6 +167,7 @@ const SearchResultsPage = () => {
   }
 
   let configureProps = {
+    explain: '*',
     analytics: false,
     clickAnalytics: true,
     enablePersonalization: true,

@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import './SCSS/algoliaExplainBox.scss'
 
 function AlgoliaExplainBox({ translationKey }) {
-  // Import and use translation
   const { t: explainTranslations } = useTranslation('translation', {
     keyPrefix: 'explain',
   })
