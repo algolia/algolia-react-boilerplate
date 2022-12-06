@@ -33,6 +33,7 @@ const CustomCurrentRefinements = lazy(() =>
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'))
 
 // Configuration
+import { algoliaExplainToggle } from '@/config/algoliaExplainConfig'
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig'
 import {
   shouldHaveInjectedHits,
@@ -68,6 +69,8 @@ import '@/pages/searchResultsPage/searchResultsPage.scss'
 import { useTranslation } from 'react-i18next'
 
 const SearchResultsPage = () => {
+  // is algolia explain active?
+  const isAlgoliaExplainActivated = useRecoilValue(algoliaExplainToggle)
   // state to hold any context passed in as a URL param
   const [extraContext, setExtraContext] = useState('')
 
@@ -164,6 +167,7 @@ const SearchResultsPage = () => {
   }
 
   let configureProps = {
+    explain: '*',
     analytics: false,
     clickAnalytics: true,
     enablePersonalization: true,
@@ -245,12 +249,14 @@ const SearchResultsPage = () => {
               {/* Render Recommend component - Trending Facets */}
               {/* Change config in /config/trendingConfig.js */}
               {shouldHaveTrendingFacetsValue && (
-                <WrappedTrendingFacetValues
-                  attribute="brand"
-                  facetName={'brand'}
-                  limit={500}
-                  facetValue={facetValue}
-                />
+                <>
+                  <WrappedTrendingFacetValues
+                    attribute="brand"
+                    facetName={'brand'}
+                    limit={500}
+                    facetValue={facetValue}
+                  />
+                </>
               )}
               <GenericRefinementList />
             </Suspense>
