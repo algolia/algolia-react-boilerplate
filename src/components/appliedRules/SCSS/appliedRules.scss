@@ -9,6 +9,25 @@
   justify-content: space-around;
 }
 
+.rule-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.rule-type {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background-color: #939393;
+  color: #f5f5f5;
+  border-radius: 20px;
+  padding: 0.2rem 0.5rem;
+}
+
+.icon {
+  color: white;
+}
+
 .appliedRules {
   position: fixed;
   animation: 0.5s showRules ease-in forwards;

@@ -4,8 +4,7 @@ import { useInstantSearch } from 'react-instantsearch-hooks-web'
 
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-// Used for avoiding duplicates
-import { uniq } from 'lodash'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { isRulesSwitchToggle } from '@/config/appliedRulesConfig'
 
@@ -60,6 +59,12 @@ function CustomAppliedRules(props) {
     <div className="appliedRules">
       {rules.length > 0 ? (
         <div className="appliedRules__wp">
+          <span>
+            {rules.length +
+              ' rule' +
+              (rules.length > 1 ? 's' : '') +
+              ' applied'}
+          </span>
           <span
             className="appliedRules__closeBtn"
             onClick={() => setIsSwitchToggle(false)}
@@ -78,9 +83,13 @@ function CustomAppliedRules(props) {
               return (
                 <div key={rule.name} className="single-rule">
                   {/* Is rule a manual or visual editor one? */}
-                  <div className="type">
-                    <span className="material-icons-round">
-                      {rule.tags?.includes('visual-editor') ? 'web' : 'tune'}
+                  <div className="rule-type">
+                    <span className="rule-icon">
+                      {rule.tags?.includes('visual-editor') ? (
+                        <FontAwesomeIcon className="icon" icon="desktop" />
+                      ) : (
+                        <FontAwesomeIcon className="icon" icon="sliders" />
+                      )}
                     </span>
                     {rule.tags?.includes('visual-editor') ? 'Visual' : 'Manual'}
                   </div>

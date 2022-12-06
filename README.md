@@ -405,9 +405,14 @@ Here is a sample record structure which is expected for records in the index to 
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> Icons</h3>
 
-This project comes with fontawesome added by default so you can adjust or add icons at will. It has been installed by being added in `/src/assets/fontawesome/js/all.js` and linked in the head tag of `index.html`
+This project comes with fontawesome free solid icons added by default
 
-It is then as simple as adding in your HTML the correct fontawesome tags i.e. `<i className="fa-solid fa-shopping-cart"></i>`
+You can use an icon with the following syntax inside any component:
+
+`<FontAwesomeIcon className="your class here" icon="icon name here" />`
+
+You can find the names of the available icons here:
+https://fontawesome.com/search?o=r&m=free&s=solid
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🛒 Cart</h3>
 
