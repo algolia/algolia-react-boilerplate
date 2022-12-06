@@ -25,6 +25,7 @@ import './SCSS/facets.scss'
 import { useTranslation } from 'react-i18next'
 import { useRecoilValue } from 'recoil'
 import { algoliaExplainToggle } from '@/config/algoliaExplainConfig'
+import WithToolTip from '../algoliaExplain/tooltip/WithTooltip'
 
 // expects an attribute which is an array of items
 function GenericRefinementList(props) {
@@ -130,11 +131,13 @@ function CustomColorRefinement(props) {
 
   return (
     <div className="filters-container">
-      <div className="filters-container__title">
-        {language === 'en' && <h3>{title}</h3>}
-        {language === 'fr' && <h3>{titleFr}</h3>}
-        {language === 'ger' && <h3>{titleGer}</h3>}
-      </div>
+      <WithToolTip translationKey="colourRefinementList">
+        <div className="filters-container__title">
+          {language === 'en' && <h3>{title}</h3>}
+          {language === 'fr' && <h3>{titleFr}</h3>}
+          {language === 'ger' && <h3>{titleGer}</h3>}
+        </div>
+      </WithToolTip>
       <ul className="filters-container__content-color">
         {items.map((item) => {
           const color = item.value.split(';')[1]

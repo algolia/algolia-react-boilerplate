@@ -11,6 +11,8 @@ const resources = {
         trendingFacets:
           'Looks for facet values that recently increased in popularity.',
         facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
+        colourRefinementList:
+          'Uses the Instantsearch colour refinement list widget',
       },
       homePage: {
         titleCarousels: ['Our Bags Collection', 'Our Best Hoodies'],
@@ -75,6 +77,8 @@ const resources = {
         trendingFacets:
           'Cerca valori facet che recentemente sono aumentati di popolarità.',
         facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
+        colourRefinementList:
+          'Uses the Instantsearch colour refinement list widget',
       },
       homePage: {
         titleCarousels: [
@@ -142,6 +146,8 @@ const resources = {
         trendingFacets:
           'Recherche les valeurs de facette dont la popularité a récemment augmenté.',
         facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
+        colourRefinementList:
+          'Uses the Instantsearch colour refinement list widget',
       },
       homePage: {
         titleCarousels: ['Notre collection de sacs', 'Nos plus beaux sweat'],
@@ -205,6 +211,8 @@ const resources = {
         trendingFacets:
           'Sucht nach Facettenwerten, die in letzter Zeit an Popularität gewonnen haben.',
         facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
+        colourRefinementList:
+          'Uses the Instantsearch colour refinement list widget',
       },
       homePage: {
         titleCarousels: [
