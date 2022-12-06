@@ -10,6 +10,7 @@ const resources = {
       explain: {
         trendingFacets:
           'Looks for facet values that recently increased in popularity.',
+        facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
       },
       homePage: {
         titleCarousels: ['Our Bags Collection', 'Our Best Hoodies'],
@@ -73,6 +74,7 @@ const resources = {
       explain: {
         trendingFacets:
           'Cerca valori facet che recentemente sono aumentati di popolarità.',
+        facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
       },
       homePage: {
         titleCarousels: [
@@ -139,6 +141,7 @@ const resources = {
       explain: {
         trendingFacets:
           'Recherche les valeurs de facette dont la popularité a récemment augmenté.',
+        facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
       },
       homePage: {
         titleCarousels: ['Notre collection de sacs', 'Nos plus beaux sweat'],
@@ -201,6 +204,7 @@ const resources = {
       explain: {
         trendingFacets:
           'Sucht nach Facettenwerten, die in letzter Zeit an Popularität gewonnen haben.',
+        facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
       },
       homePage: {
         titleCarousels: [

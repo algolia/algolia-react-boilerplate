@@ -10,7 +10,7 @@ import '@algolia/ui-components-horizontal-slider-theme'
 
 import TrendingFacetsItem from '@/components/recommend/trending/TrendingFacetsItem'
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
-import WithToolTip from '@/components/tooltip/WithTooltip'
+import WithToolTip from '@/components/algoliaExplain/tooltip/WithTooltip'
 import { trendingConfig } from '@/config/trendingConfig'
 
 import { isFacetPanelOpen } from '@/config/refinementsConfig'
@@ -70,7 +70,7 @@ function WrappedTrendingFacetValues(props) {
                   : 'filters-container__title'
               }`}
             >
-              <WithToolTip text={explainTranslations('trendingFacets')}>
+              <WithToolTip translationKey="trendingFacets">
                 <h3>{t('titleTrendingFacets')}</h3>
               </WithToolTip>
             </div>
