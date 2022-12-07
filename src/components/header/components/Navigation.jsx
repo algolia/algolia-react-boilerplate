@@ -6,6 +6,8 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 // Recoil Header State
 import { useRecoilState, useRecoilValue } from 'recoil'
 
+import WithToolTip from '@/components/algoliaExplain/tooltip/WithTooltip'
+
 // Import Config for the header
 import {
   categoryPageFilterAttribute,
@@ -16,6 +18,8 @@ import {
 //Import config from helped navigation
 import { windowSize } from '@/hooks/useScreenSize'
 import { useEffect } from 'react'
+
+import ConditionalWrapper from '@/utils/ConditionalWrapper'
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
   const { isDesktop } = useRecoilValue(windowSize)
@@ -74,6 +78,12 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
     >
       {links.map((link, i) => {
         return (
+   <ConditionalWrapper
+            condition={link.type === 'context'}
+            wrapper={(children) => (
+              <WithToolTip translationKey="contextLink">{children}</WithToolTip>
+            )}
+          >
           <li
             id={link.name}
             tabIndex="0"
@@ -102,24 +112,24 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
                 pathname: '/search',
                 search: `?${searchParams}`,
               })
-
-              // Only used for Mobile view
-              if (!isDesktop) {
-                setIsMenuOpen(false)
-              }
-            }}
-          >
-            <p
-              className={
-                highlightingCat() === link.name.toLowerCase() ||
-                navigationState?.name === link.name
-                  ? 'selected'
-                  : ''
-              }
+                // Only used for Mobile view
+                if (!isDesktop) {
+                  setIsMenuOpen(false)
+                }
+              }}
             >
-              {link.name}
-            </p>
-          </li>
+              <p
+                className={
+                  highlightingCat() === link.name.toLowerCase() ||
+                  navigationState?.name === link.name
+                    ? 'selected'
+                    : ''
+                }
+              >
+                {link.name}
+              </p>
+            </li>
+          </ConditionalWrapper>
         )
       })}
     </ul>

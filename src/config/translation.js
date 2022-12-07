@@ -7,6 +7,14 @@ import { initReactI18next } from 'react-i18next'
 const resources = {
   en: {
     translation: {
+      explain: {
+        trendingFacets:
+          'Looks for facet values that recently increased in popularity.',
+        facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
+        colourRefinementList:
+          'Uses the Instantsearch colour refinement list widget',
+        contextLink: 'this link uses context, not a filter',
+      },
       homePage: {
         titleCarousels: ['Our Bags Collection', 'Our Best Hoodies'],
       },
@@ -67,6 +75,14 @@ const resources = {
   },
   it: {
     translation: {
+      explain: {
+        trendingFacets:
+          'Cerca valori facet che recentemente sono aumentati di popolarità.',
+        facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
+        colourRefinementList:
+          'Uses the Instantsearch colour refinement list widget',
+        contextLink: 'this link uses context, not a filter',
+      },
       homePage: {
         titleCarousels: [
           'La nostra collezione di borse',
@@ -129,6 +145,14 @@ const resources = {
   },
   fr: {
     translation: {
+      explain: {
+        trendingFacets:
+          'Recherche les valeurs de facette dont la popularité a récemment augmenté.',
+        facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
+        colourRefinementList:
+          'Uses the Instantsearch colour refinement list widget',
+        contextLink: 'this link uses context, not a filter',
+      },
       homePage: {
         titleCarousels: ['Notre collection de sacs', 'Nos plus beaux sweat'],
       },
@@ -187,6 +211,14 @@ const resources = {
   },
   ger: {
     translation: {
+      explain: {
+        trendingFacets:
+          'Sucht nach Facettenwerten, die in letzter Zeit an Popularität gewonnen haben.',
+        facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
+        colourRefinementList:
+          'Uses the Instantsearch colour refinement list widget',
+        contextLink: 'this link uses context, not a filter',
+      },
       homePage: {
         titleCarousels: [
           'Unsere Taschenkollektion',

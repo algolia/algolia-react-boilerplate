@@ -13,6 +13,7 @@ import { ChevronDown, ChevronUp, Glass } from '@/assets/svg/SvgIndex'
 // Import components
 import HierarchicalMenu from './components/Hierarchical'
 import PriceSlider from './components/PriceSlider'
+import AlgoliaExplainBox from '@/components/algoliaExplain/box/AlgoliaExplainBox'
 
 // Import list of Attributes/Facets
 import { refinements } from '@/config/refinementsConfig'
@@ -22,6 +23,9 @@ import './SCSS/facets.scss'
 
 //Use Translation
 import { useTranslation } from 'react-i18next'
+import { useRecoilValue } from 'recoil'
+import { algoliaExplainToggle } from '@/config/algoliaExplainConfig'
+import WithToolTip from '../algoliaExplain/tooltip/WithTooltip'
 
 // expects an attribute which is an array of items
 function GenericRefinementList(props) {
@@ -127,11 +131,13 @@ function CustomColorRefinement(props) {
 
   return (
     <div className="filters-container">
-      <div className="filters-container__title">
-        {language === 'en' && <h3>{title}</h3>}
-        {language === 'fr' && <h3>{titleFr}</h3>}
-        {language === 'ger' && <h3>{titleGer}</h3>}
-      </div>
+      <WithToolTip translationKey="colourRefinementList">
+        <div className="filters-container__title">
+          {language === 'en' && <h3>{title}</h3>}
+          {language === 'fr' && <h3>{titleFr}</h3>}
+          {language === 'ger' && <h3>{titleGer}</h3>}
+        </div>
+      </WithToolTip>
       <ul className="filters-container__content-color">
         {items.map((item) => {
           const color = item.value.split(';')[1]
@@ -173,6 +179,7 @@ function CustomColorRefinement(props) {
 const Facets = () => {
   const { results } = useInstantSearch()
   const facets = results?.renderingContent?.facetOrdering?.facets?.order
+  const isAlgoliaExplainActive = useRecoilValue(algoliaExplainToggle)
 
   return (
     <div>
@@ -187,57 +194,63 @@ const Facets = () => {
       )}
 
       {facets?.length > 0 && (
-        <DynamicWidgets maxValuesPerFacet={500}>
-          {refinements.map((e, i) => {
-            const { type, label, labelFrench, labelGerman, options } = e
-            switch (type) {
-              case 'price':
-                return (
-                  <PriceSlider
-                    attribute={options.attribute}
-                    title={label}
-                    titleFr={labelFrench}
-                    titleGer={labelGerman}
-                    key={i}
-                  />
-                )
-              case 'colour':
-                return (
-                  <CustomColorRefinement
-                    attribute={options.attribute}
-                    key={i}
-                    title={label}
-                    titleFr={labelFrench}
-                    titleGer={labelGerman}
-                  />
-                )
-              case 'hierarchical':
-                return (
-                  <HierarchicalMenu
-                    attributes={options.attribute}
-                    title={label}
-                    titleFr={labelFrench}
-                    titleGer={labelGerman}
-                    key={i}
-                  />
-                )
-              default:
-                return (
-                  <GenericRefinementList
-                    searchable={options?.searchable}
-                    key={i}
-                    limit={options?.limit}
-                    attribute={options.attribute}
-                    title={label}
-                    titleFr={labelFrench}
-                    titleGer={labelGerman}
-                    options={options}
-                    showMore={options?.showMoreFunction}
-                  />
-                )
-            }
-          })}
-        </DynamicWidgets>
+        <>
+          {isAlgoliaExplainActive && (
+            // translation key found in src/config/translation.js
+            <AlgoliaExplainBox translationKey="facetOrdering" />
+          )}
+          <DynamicWidgets maxValuesPerFacet={500}>
+            {refinements.map((e, i) => {
+              const { type, label, labelFrench, labelGerman, options } = e
+              switch (type) {
+                case 'price':
+                  return (
+                    <PriceSlider
+                      attribute={options.attribute}
+                      title={label}
+                      titleFr={labelFrench}
+                      titleGer={labelGerman}
+                      key={i}
+                    />
+                  )
+                case 'colour':
+                  return (
+                    <CustomColorRefinement
+                      attribute={options.attribute}
+                      key={i}
+                      title={label}
+                      titleFr={labelFrench}
+                      titleGer={labelGerman}
+                    />
+                  )
+                case 'hierarchical':
+                  return (
+                    <HierarchicalMenu
+                      attributes={options.attribute}
+                      title={label}
+                      titleFr={labelFrench}
+                      titleGer={labelGerman}
+                      key={i}
+                    />
+                  )
+                default:
+                  return (
+                    <GenericRefinementList
+                      searchable={options?.searchable}
+                      key={i}
+                      limit={options?.limit}
+                      attribute={options.attribute}
+                      title={label}
+                      titleFr={labelFrench}
+                      titleGer={labelGerman}
+                      options={options}
+                      showMore={options?.showMoreFunction}
+                    />
+                  )
+              }
+            })}
+          </DynamicWidgets>
+        </>
       )}
     </div>
   )

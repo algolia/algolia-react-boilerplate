@@ -1,0 +1,16 @@
+.tooltip-outer-container {
+  display: flex;
+  align-items: center;
+}
+
+.tooltip-container {
+  margin-left: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #fff;
+  border: blue solid 1px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}

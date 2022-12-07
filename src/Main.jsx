@@ -3,8 +3,7 @@ import { lazy, memo, Suspense, useEffect } from 'react'
 // Algolia Instantsearch components
 import { useInstantSearch } from 'react-instantsearch-hooks-web'
 
-// Algolia API client
-
+// Algolia Insights
 import { InsightsMiddleware } from './config/algoliaInsightEvents'
 
 // Framer-Motion
@@ -27,7 +26,10 @@ import {
   shouldHaveDemoGuide,
 } from '@/config/featuresConfig'
 
-import { isRulesSwitchToggle } from '@/config/appliedRulesConfig'
+// Import Algolia Explain config
+import { algoliaExplainToggle } from '@/config/algoliaExplainConfig'
+
+// Import Carousel config
 import { isCarouselLoaded } from '@/config/carouselConfig'
 
 // Import Pages and static components
@@ -36,7 +38,7 @@ import AlertNavigation from '@/components/demoGuide/AlertNavigation'
 import DemoGuide from '@/components/demoGuide/DemoGuide'
 import Header from '@/components/header/Header'
 import Redirect from '@/components/redirects/Redirect'
-import CustomAppliedRules from './components/appliedRules/AppliedRules'
+import CustomAppliedRules from './components/algoliaExplain/appliedRules/AppliedRules'
 
 import Footer from './components/footer/Footer'
 import { DemoGuideOpener } from './components/header/components/DemoGuideOpener'
@@ -100,7 +102,7 @@ export const Main = memo(() => {
   const shouldShowAlertAtom = useRecoilValue(shouldShowAlert)
 
   // Should the currently applied Algolia rules be shown
-  const shouldShowAppliedRules = useRecoilValue(isRulesSwitchToggle)
+  const isAlgoliaExplainActive = useRecoilValue(algoliaExplainToggle)
 
   // Should the demo guide panel be shown
   const shouldHaveDemoGuideAtom = useRecoilValue(shouldHaveDemoGuide)
@@ -195,7 +197,7 @@ export const Main = memo(() => {
             <AlertNavigation />
           </Suspense>
         )}
-        {shouldShowAppliedRules && (
+        {isAlgoliaExplainActive && (
           <Suspense fallback={''}>
             <CustomAppliedRules />
           </Suspense>

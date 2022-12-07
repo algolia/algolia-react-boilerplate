@@ -1,0 +1,14 @@
+@use '../../../../scss/partials' as *;
+
+.badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background-color: $secondary-color;
+  padding: 0 0.3rem;
+  border-radius: 0.2rem;
+  p {
+    color: $white-color;
+    font-weight: 500;
+  }
+}

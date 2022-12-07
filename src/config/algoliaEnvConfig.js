@@ -49,6 +49,9 @@ export const searchClient = algoliasearch(
   searchClientCreds.APIKey
 )
 
+// This export is a single instance of the Algolia API client linked to the main index
+export const mainIndexClient = searchClient.initIndex('flagship_fashion')
+
 export const recommendClient = algoliarecommend(
   searchClientCreds.appID,
   searchClientCreds.APIKey
