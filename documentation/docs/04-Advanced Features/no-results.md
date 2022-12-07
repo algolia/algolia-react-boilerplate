@@ -1,4 +1,4 @@
-### No Results Page
+# No Results Page
 
 To have the best UI, we defined the no results page with 3 parts:
 

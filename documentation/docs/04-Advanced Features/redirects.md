@@ -1,4 +1,4 @@
-### Redirects
+# Redirects
 
 Redirects are already activated in the application. In order to trigger one, simply create a rule in the dashboard where the consequence is:
 

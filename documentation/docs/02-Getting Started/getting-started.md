@@ -13,7 +13,7 @@ Before proceeding, please make sure you have the following:
 
 1. If you haven't already, clone the parent repo under a new name for your own demo. You should use the `main` branch that has some features turned off for easier setup.
 
-2. Run `yarn` in the root directory and `yarn start` to view your project on [http://localhost:5173](http://localhost:5173/).
+2. Run `yarn` in the **boilerplate** directory and `yarn start` to view your project on [http://localhost:5173](http://localhost:5173/).
    You may run into errors at this stage if you haven't configured `algoliaEnvConfig`. You are likely to see some more errors soon after. Visit `src/config/featuresConfig` to activate/deactivate the features you would like to see in the app.
    More details on all of these steps are laid out in these docs.
 

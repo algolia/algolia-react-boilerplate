@@ -1,4 +1,4 @@
-### 👩‍💼🧑‍💼 Personas
+# Personas
 
 [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/)
 

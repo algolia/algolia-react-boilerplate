@@ -1,4 +1,4 @@
-### Badges
+# Badges
 
 You can dynamically add badges based on any condition for an attribute returned in a hit.
 

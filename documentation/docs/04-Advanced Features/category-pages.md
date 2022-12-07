@@ -1,4 +1,4 @@
-### Category Pages
+# Category Pages
 
 In order to configure Category Pages, go to `config/navigationConfig`.
 

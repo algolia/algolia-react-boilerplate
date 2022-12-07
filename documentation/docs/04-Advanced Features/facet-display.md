@@ -1,4 +1,4 @@
-### Facet Display
+# Facet Display
 
 [Facet Display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react/)
 

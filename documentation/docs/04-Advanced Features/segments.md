@@ -1,4 +1,4 @@
-### Segments
+# Segments
 
 You can add segments to the application to represent algolia being told that the current user has certain characteristics. It is not 1:1 personalisation and would be fed in by an external system such as Dynamic Yield.
 

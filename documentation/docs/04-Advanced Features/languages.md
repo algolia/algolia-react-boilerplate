@@ -1,4 +1,4 @@
-### Languages
+# Languages
 
 In order to turn on this feature, go to `config/featuresConfig` and set `shouldHaveLanguages` to true.
 

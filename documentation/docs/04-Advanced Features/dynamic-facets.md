@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # Dynamic Facets
 
 If you don’t know what dynamic facets are, and why we use them by default, it’s because this allows you to merchandise your facets. For more info, [look here](https://www.algolia.com/doc/guides/solutions/ecommerce/business-users/ongoing-optimizations/merchandise-facets/#configure-facet-ordering).

@@ -1,4 +1,4 @@
-### Network Error Messages
+# Network Error Messages
 
 This feature will guide you to see what in the configuration is failing. We render the InstantSearch api errors in a modal.
 

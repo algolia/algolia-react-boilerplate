@@ -1,4 +1,4 @@
-### 🔮 Predict
+# Predict
 
 The app has access to predict through the PredictUserProfileProvider component, found in `./src/components/predict`.
 

@@ -52,7 +52,7 @@ Before proceeding, please make sure you have the following:
 
 1. Clone this repo under a new name for your own demo. You can use the `main` branch that has some features turned off for easier integration
 
-2. Run `yarn` in the root directory and `yarn start` to view your project on [http://localhost:5173](http://localhost:5173/)
+2. Run `yarn` in the **boilerplate** directory and `yarn start` to view your project on [http://localhost:5173](http://localhost:5173/)
 
 3. Visit `src/config` and adjust `algoliaEnvConfig` to point to your own app, indices and API keys. If you do not need an index which is present in that file i.e. for articles, please do not remove it, just leave it as is, and you can turn off the relevant feature in the next step.
 
@@ -66,7 +66,7 @@ Before proceeding, please make sure you have the following:
 
 8. In the `src/scss` folder, adjust any styling you need to based on what you see.
 
-9. Preferrably you can use Netlify to deploy your project, but you can use other deployment tools.
+9. Preferably you can use Netlify to deploy your project, but you can use other deployment tools.
 
 10. Log into Netlify on the Algolia Demos team (again ask #help-demos if you don't have access) and deploy your demo from Github, making sure to password protect it!
 

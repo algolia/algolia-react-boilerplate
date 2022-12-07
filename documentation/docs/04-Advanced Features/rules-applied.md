@@ -1,4 +1,4 @@
-### 🧱 Rules Applied Mode
+# Rules Applied Mode
 
 In order to turn on this feature, go to `config/demoGuideConfig` and set `shouldShowAppliedRulesSwitcher` to true.
 

@@ -1,4 +1,4 @@
-### Banners
+# Banners
 
 https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/add-banners/
 
