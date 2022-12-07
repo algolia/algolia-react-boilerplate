@@ -28,9 +28,7 @@ const FeatureList = [
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
-      </>
+        InstantSearch takes advantage of the unique capabilities of Algolia’s Search API to deliver best in class experiences from lightning fast search speeds to intuitive category navigation.      </>
     ),
   },
 ];
