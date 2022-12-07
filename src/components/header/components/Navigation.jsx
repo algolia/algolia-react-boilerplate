@@ -1,4 +1,5 @@
 // Render the navigation menu in the header
+import { useState } from 'react'
 
 // React Router
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
@@ -16,6 +17,7 @@ import {
 
 //Import config from helped navigation
 import { windowSize } from '@/hooks/useScreenSize'
+import { useEffect } from 'react'
 
 import ConditionalWrapper from '@/utils/ConditionalWrapper'
 
@@ -53,6 +55,19 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
   const [navigationState, setNavigationState] =
     useRecoilState(navigationStateAtom)
 
+  useEffect(() => {
+    // remove the nav state if a query in a context page
+    if (
+      navigationState.type === 'context' &&
+      searchParams.get('query') !== null &&
+      searchParams.get('query') !== ''
+    ) {
+      setNavigationState({})
+      searchParams.delete('category')
+      setSearchParams(searchParams)
+    }
+  }, [navigationState, searchParams])
+
   return (
     <ul
       className={`${
@@ -63,42 +78,40 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
     >
       {links.map((link, i) => {
         return (
-          <ConditionalWrapper
+   <ConditionalWrapper
             condition={link.type === 'context'}
             wrapper={(children) => (
               <WithToolTip translationKey="contextLink">{children}</WithToolTip>
             )}
           >
-            <li
-              id={link.name}
-              tabIndex="0"
-              key={link.name}
-              onClick={() => {
-                //Build action based on link type, then navigate
-                let action = null
-                if (link.type === 'filter' && link.filter?.length > 0) {
-                  action = `${categoryPageFilterAttribute}:'${link.filter}'`
-                } else if (link.type === 'context') {
-                  action = link.context
-                } else if (
-                  link.type === 'rawFilter' &&
-                  link.rawFilter?.length > 0
-                ) {
-                  action = `${link.rawFilter}`
-                }
-
-                setNavigationState({
-                  type: link.type,
-                  name: link.name,
-                  action: action,
-                  segment: link.segment,
-                })
-                searchParams.set('category', link.name)
-                navigate({
-                  pathname: '/search',
-                  search: `?${searchParams}`,
-                })
-
+          <li
+            id={link.name}
+            tabIndex="0"
+            key={link.name}
+            onClick={() => {
+              //Build action based on link type, then navigate
+              let action = null
+              if (link.type === 'filter' && link.filter?.length > 0) {
+                action = `${categoryPageFilterAttribute}:'${link.filter}'`
+              } else if (link.type === 'context') {
+                action = link.context
+              } else if (
+                link.type === 'rawFilter' &&
+                link.rawFilter?.length > 0
+              ) {
+                action = `${link.rawFilter}`
+              }
+              setNavigationState({
+                type: link.type,
+                name: link.name,
+                action: action,
+                segment: link.segment,
+              })
+              searchParams.set('category', link.name)
+              navigate({
+                pathname: '/search',
+                search: `?${searchParams}`,
+              })
                 // Only used for Mobile view
                 if (!isDesktop) {
                   setIsMenuOpen(false)

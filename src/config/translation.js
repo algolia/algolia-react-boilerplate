@@ -35,6 +35,7 @@ const resources = {
         titleTrendingFacets: 'Trending Brands',
         stats: 'results found in',
         searchInCategory: 'Search in',
+        searchInContext: 'Search removes context',
         hideTrendingItems: 'Hide trending products',
         showTrendingItems: 'Show trending products',
       },
