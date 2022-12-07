@@ -82,64 +82,69 @@ function CustomAppliedRules(props) {
               personaName={personaName}
             />
           )}
-          {!minimisedModal && (
-            <ul className="appliedRules__list">
-              <div className="rules-headers">
-                <h3>Type</h3>
-                <h3>Description</h3>
-                <h3>Triggers</h3>
-                <h3>Consequences</h3>
-              </div>
-              {rules.map((rule, i) => {
-                return (
-                  <div key={rule.name} className="single-rule">
-                    {/* Is rule a manual or visual editor one? */}
-                    <div className="rule-type">
-                      {rule.tags?.includes('visual-editor') ? (
-                        <FontAwesomeIcon className="icon" icon="desktop" />
-                      ) : (
-                        <FontAwesomeIcon className="icon" icon="sliders" />
-                      )}
-                      <p>
-                        {rule.tags?.includes('visual-editor')
-                          ? 'Visual'
-                          : 'Manual'}
-                      </p>
-                    </div>
 
-                    {/* Description of the rule */}
-                    <div className="rule-description">
-                      <p>{rule.description}</p>
-                    </div>
-                    {/* Triggers of the rule */}
-                    <div className="rule-triggers-container">
-                      {rule.triggers?.length
-                        ? rule.triggers?.map((trigger, i) => {
-                            return trigger.map(
-                              (innerTrigger, i) =>
-                                `${innerTrigger.label} : ${innerTrigger.value}`
-                            )
-                          })
-                        : 'Conditionless rule'}
-                    </div>
-                    {/* Strategy of the rule */}
-                    <div className="rule-strategy-container">
-                      {rule.strategies?.map((strategy, i) => {
-                        return (
-                          <>
-                            <span className="label">{strategy.label}</span>
-                            {strategy.multiple && (
-                              <p>{JSON.stringify(trim(strategy.value))}</p>
-                            )}
-                          </>
-                        )
-                      })}
-                    </div>
+          <ul
+            className={
+              minimisedModal
+                ? 'appliedRules__list appliedRules__list-inactive'
+                : 'appliedRules__list appliedRules__list-active'
+            }
+          >
+            <div className="rules-headers">
+              <h3>Type</h3>
+              <h3>Description</h3>
+              <h3>Triggers</h3>
+              <h3>Consequences</h3>
+            </div>
+            {rules.map((rule, i) => {
+              return (
+                <div key={rule.name} className="single-rule">
+                  {/* Is rule a manual or visual editor one? */}
+                  <div className="rule-type">
+                    {rule.tags?.includes('visual-editor') ? (
+                      <FontAwesomeIcon className="icon" icon="desktop" />
+                    ) : (
+                      <FontAwesomeIcon className="icon" icon="sliders" />
+                    )}
+                    <p>
+                      {rule.tags?.includes('visual-editor')
+                        ? 'Visual'
+                        : 'Manual'}
+                    </p>
                   </div>
-                )
-              })}
-            </ul>
-          )}
+
+                  {/* Description of the rule */}
+                  <div className="rule-description">
+                    <p>{rule.description}</p>
+                  </div>
+                  {/* Triggers of the rule */}
+                  <div className="rule-triggers-container">
+                    {rule.triggers?.length
+                      ? rule.triggers?.map((trigger, i) => {
+                          return trigger.map(
+                            (innerTrigger, i) =>
+                              `${innerTrigger.label} : ${innerTrigger.value}`
+                          )
+                        })
+                      : 'Conditionless rule'}
+                  </div>
+                  {/* Strategy of the rule */}
+                  <div className="rule-strategy-container">
+                    {rule.strategies?.map((strategy, i) => {
+                      return (
+                        <>
+                          <span className="label">{strategy.label}</span>
+                          {strategy.multiple && (
+                            <p>{JSON.stringify(trim(strategy.value))}</p>
+                          )}
+                        </>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })}
+          </ul>
         </div>
       ) : (
         <div className="appliedRules__wp">
