@@ -1,25 +1,40 @@
 # Banners
 
+Please read the official Algolia docs on Banners for more help:
 https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/add-banners/
 
-There are two types of banners in this demo - Homepage banners and Search Result Page banners. Check out the existing examples on the flagship fashion index to see some examples.
+There are two types of banners in this Boilerplate - **Homepage banners** and **Search Result Page banners**.
 
-How Configure it 👇
+## Configuring the banners
 
-- In rules Section in the Dashboard, you have 2 'HomeBanner' rules without query conditions.
-- You can edit or duplicate one of these, and personalise the different fields:
-  - Images (For the background, or for the thumbnails)
-  - Link or Text for the buttons
-  - Titles and Subtitles
-- In the code you have a condition, actually they are called together, but you can keep by type :
+### Homepage Banner
 
-  - HomeBannerOne or HomeBannerTwo
+To inject a banner on the homepage, you'll want to create a new Rule in the Algolia dashboard for your index. It'll be a Manual Rule that is applied without condition, and returns Custom JSON Data:
 
-- The Search Result Page banners are generally set to queries (eg 'shoes'). It'll contain:
-  - type: set this to "bannersrp"
-  - title
+![gif](../media/banner.gif)
+
+The Boilerplate is designed to receive Custom JSON from Algolia's API with `type: HomeBannerTwo`, eg:
+
+```
+{
+  "type": "HomeBannerTwo",
+  "title": "SALES DAY",
+  "subtitle": "20% OFF SITEWIDE",
+  "button1": "SHOP NOW",
+  "LinkButton1": "/search",
+  "imgUrl1Mobile": "https://res.cloudinary.com/hugo-valla/image/upload/v1663765137/BoilerPlate/mobile-home_grll2u.webp",
+  "imgUrl1": "https://res.cloudinary.com/hugo-valla/image/upload/q_20/v1657721542/BoilerPlate/Group-1-_2__exxrnm_1_mjriib.webp"
+}
+```
+
+You can change `HomeBannerTwo` to something else as long as you also change the reference to it in the BoilerPlate code in `src > components > banners > HomeBanners.jsx`
+
+You can edit or duplicate this example, and personalise the different fields.
+
+### Search Result Page Banner
+
+- The Search Result Page banners use the same Custom JSON from the Algolia dashboard, but are generally set to a query or filter (eg 'shoes'). It'll contain:
+  - type: set this to "bannerSrp"
+  - title: title text
   - banner: this is an image url
-
-You can find an example of a 'bannersrp' rule by searching for `qr-1634719042792` in `rules/example-rules.json`.
-
-You can find an example of a 'homeBannerTwo' rule by searching for `qr-1645197289062` in `rules/example-rules.json`.
+  - link: if you want to link to a url
