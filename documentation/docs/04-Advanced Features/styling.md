@@ -1,3 +1,7 @@
 # Styling
 
-You can adjust all of the styling of this application by adjusting anything found in the `scss` folder. It is recommended to start with the `mixin` folder.
+## Layout
+
+There is an SCSS folder `src > scss` that contains partials. These control some of the more general styling like fonts, colours, and reused components like buttons.
+
+Styling for each component is contained locally, ie the styling for the carousels is in `src > carousels > SCSS`. It has been built using [BEM](https://css-tricks.com/bem-101/), but you can write regular CSS if you wish, as it is compatible.
