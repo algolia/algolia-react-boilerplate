@@ -21,4 +21,4 @@ Before proceeding, please make sure you have the following:
 
 4. Run and test your app locally, if you have any questions or find any issues please raise an issue with us here https://github.com/algolia/algolia-react-boilerplate/issues.
 
-5. We recommend you use Netlify to deploy your project, but you can use other deployment tools as well if you like.
+5. We recommend you use Netlify to deploy your project, but you can use other deployment tools as well if you like. You should be using the standard react app config but make sure build command has `–force` at the end.

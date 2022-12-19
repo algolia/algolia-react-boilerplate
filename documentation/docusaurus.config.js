@@ -53,12 +53,25 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      algolia: {
+      // The application ID provided by Algolia
+      appId: '1NMSYAIOLN',
+
+      // Public API key: it is safe to commit it
+      apiKey: '2798fa06d878074ebfc175e8423ad6d9',
+
+      indexName: 'algolia-boilerplate',
+
+      // Optional: see doc section below
+      contextualSearch: true,
+        },
       navbar: {
         title: 'Boilerplate Docs',
         logo: {
           alt: 'My Site Logo',
           src: 'https://www.gartner.com/pi/vendorimages/algolia_digital-commerce-search_1667487335343.png',
         },
+        
         items: [
           {
             type: 'doc',
@@ -72,6 +85,7 @@ const config = {
           //   label: 'Boilerplate Guide Docs',
           //   position: 'left',
           // },
+          
 
           {
             type: 'doc',
