@@ -5,6 +5,7 @@
 - [Get started](#️-get-started)
 - [Structure](#️-structure)
 - [Features Config](#-features-config)
+  - [ Landing Pages](#--landing-pages)
   - [ Predict](#--predict)
   - [ Redirects](#--redirects)
   - [ Federated Search](#--federated-search)
@@ -135,6 +136,24 @@ You can define whether you want each attribute shown by adjusting `PDPHitSection
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🗳 Features Config</h2>
 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 📄 Landing Pages</h3>
+
+The search results page has the ability to turn itself into a custom landing page, using Algolia rules. You must first set up a rule with a context trigger, and the JSON response of:
+
+```
+{
+  "type": "LandingPageHeader",
+  "title": "Title of your landing page",
+  "text": "Any text description to display on the landing page",
+  "banner": "image link to show as the banner",
+  "link": "link to visit when the banner is clicked on"
+}
+```
+
+You can then, on the SRP, add `context=?your-context-trigger-here` to the end of the URL, and this should trigger your landing page header.
+
+You can text an example on the deployed version of this repository by adding `?context=my-landing-page`
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 🔮 Predict</h3>
 
 The app has access to predict through the PredictUserProfileProvider component, found in `./src/components/predict`.
@@ -221,15 +240,11 @@ The demo guide is opened by clicking on the three dots in the top right of the a
 
 It is all defined and adjusted in `config/demoGuideConfig` and is self described.
 
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 🧱 Rules Applied Mode</h3>
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 🧱 Algolia Explain</h3>
 
-In order to turn on this feature, go to `config/demoGuideConfig` and set `shouldShowAppliedRulesSwitcher` to true.
+You will find this feature in the Demo Guide panel, toggle it on to activate it.
 
-If turn to true you will find this feature in the Demo Guide panel.
-Switch on, you will find at the bottom of your screen information about the rules that are applied live while you are browsing the app. Switch off, no information will be disclosed.
-You can change description of the rules directly in the dashboard under the rule description input.
-
-You might notice `config/appliedRulesConfig` file, please ignore it.
+It will provide information about the rules currently being applied, the facet ordering applied, and any other behind the scenes information being returned by the API.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Languages</h3>
 
@@ -386,9 +401,14 @@ Here is a sample record structure which is expected for records in the index to 
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> Icons</h3>
 
-This project comes with fontawesome added by default so you can adjust or add icons at will. It has been installed by being added in `/src/assets/fontawesome/js/all.js` and linked in the head tag of `index.html`
+This project comes with fontawesome free solid icons added by default
 
-It is then as simple as adding in your HTML the correct fontawesome tags i.e. `<i className="fa-solid fa-shopping-cart"></i>`
+You can use an icon with the following syntax inside any component:
+
+`<FontAwesomeIcon className="your class here" icon="icon name here" />`
+
+You can find the names of the available icons here:
+https://fontawesome.com/search?o=r&m=free&s=solid
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🛒 Cart</h3>
 

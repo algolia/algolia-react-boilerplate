@@ -164,6 +164,15 @@ const SelectItem = ({
     personalizationFilters
   ) => {
     switch (type) {
+      case 'landing page':
+        if (value !== '') {
+          navigate({
+            pathname: '/search',
+            search: `?${createSearchParams({ context: value })}`,
+          })
+          triggerAlert(alertContent)
+        }
+        break
       case 'segment':
         setSegmentSelect(value)
         break

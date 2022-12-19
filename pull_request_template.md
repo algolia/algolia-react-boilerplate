@@ -1,3 +1,10 @@
+## CAREFUL 🚨
+Are you adding a new feature/fix/style tweak ? 
+If yes push to **develop branch** not on **main branch**
+
+## Versioning
+- [ ] Are you sure you are pushing on the right branch?
+
 ## Objective
 
 What:
@@ -27,3 +34,5 @@ Outline the approach you've taken to test the change
 
 - [ ] Have you documented in changed file using comments
 - [ ] Have you added instructions to the README if needed?
+
+

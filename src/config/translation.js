@@ -7,6 +7,14 @@ import { initReactI18next } from 'react-i18next'
 const resources = {
   en: {
     translation: {
+      explain: {
+        trendingFacets:
+          'Looks for facet values that recently increased in popularity.',
+        facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
+        colourRefinementList:
+          'Uses the Instantsearch colour refinement list widget',
+        contextLink: 'this link uses context, not a filter',
+      },
       homePage: {
         titleCarousels: ['Our Bags Collection', 'Our Best Hoodies'],
       },
@@ -27,8 +35,9 @@ const resources = {
         titleTrendingFacets: 'Trending Brands',
         stats: 'results found in',
         searchInCategory: 'Search in',
+        searchInContext: 'Search removes context',
         hideTrendingItems: 'Hide trending products',
-        showTrendingItems: 'Show trending products'
+        showTrendingItems: 'Show trending products',
       },
       pdp: {
         fbtTitle: 'Frequently Bought Together',
@@ -47,7 +56,7 @@ const resources = {
       searchBox: {
         placeHolder: 'Search...',
         tooltip: '💡 Type a query before submitting your request',
-        submit: 'Submit'
+        submit: 'Submit',
       },
       cartModal: {
         title: 'My Cart',
@@ -66,8 +75,19 @@ const resources = {
   },
   it: {
     translation: {
+      explain: {
+        trendingFacets:
+          'Cerca valori facet che recentemente sono aumentati di popolarità.',
+        facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
+        colourRefinementList:
+          'Uses the Instantsearch colour refinement list widget',
+        contextLink: 'this link uses context, not a filter',
+      },
       homePage: {
-        titleCarousels: ['La nostra collezione di borse', 'Il nostro meglio Hoodies'],
+        titleCarousels: [
+          'La nostra collezione di borse',
+          'Il nostro meglio Hoodies',
+        ],
       },
       federated: {
         recentSearches: 'Ricerche Recenti',
@@ -87,7 +107,7 @@ const resources = {
         stats: 'Risultati trovati in',
         searchInCategory: 'Cerca nel',
         hideTrendingItems: 'Nascondi i prodotti di tendenza',
-        showTrendingItems: 'Mostra i prodotti di tendenza'
+        showTrendingItems: 'Mostra i prodotti di tendenza',
       },
       pdp: {
         fbtTitle: 'Acquistati frequentemente insieme',
@@ -106,7 +126,7 @@ const resources = {
       searchBox: {
         placeHolder: 'Ricerca...',
         tooltip: '💡 Digita una query prima di inviare la richiesta',
-        submit: 'presentare'
+        submit: 'presentare',
       },
       cartModal: {
         title: 'La mia carta',
@@ -114,17 +134,25 @@ const resources = {
         sizeTitle: 'Taglia',
         colorTitle: 'Colore',
         yourCartIsEmpty: 'Il tuo carrello è vuoto',
-        checkout: 'Pagina di pagamento'
+        checkout: 'Pagina di pagamento',
       },
       priceFacet: {
-        title:'Prezzo',
+        title: 'Prezzo',
         maxPrice: 'Max Prezzo',
-        minPrice: 'Min Prezzo'
-      }
+        minPrice: 'Min Prezzo',
+      },
     },
   },
   fr: {
     translation: {
+      explain: {
+        trendingFacets:
+          'Recherche les valeurs de facette dont la popularité a récemment augmenté.',
+        facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
+        colourRefinementList:
+          'Uses the Instantsearch colour refinement list widget',
+        contextLink: 'this link uses context, not a filter',
+      },
       homePage: {
         titleCarousels: ['Notre collection de sacs', 'Nos plus beaux sweat'],
       },
@@ -145,7 +173,7 @@ const resources = {
         stats: 'résultats trouvé en',
         searchInCategory: 'Recherche dans',
         hideTrendingItems: 'Cacher les tendances',
-        showTrendingItems: 'Révéler les tendances'
+        showTrendingItems: 'Révéler les tendances',
       },
       pdp: {
         fbtTitle: 'Fréquemment acheté ensemble',
@@ -164,7 +192,7 @@ const resources = {
       searchBox: {
         placeHolder: 'Rechercher...',
         tooltip: '💡 Taper une requête avant de soumettre votre recherche',
-        submit: 'Envoyer'
+        submit: 'Envoyer',
       },
       cartModal: {
         title: 'Mon panier',
@@ -183,6 +211,14 @@ const resources = {
   },
   ger: {
     translation: {
+      explain: {
+        trendingFacets:
+          'Sucht nach Facettenwerten, die in letzter Zeit an Popularität gewonnen haben.',
+        facetOrdering: 'Order of facets chosen in the facet ordering dashboard',
+        colourRefinementList:
+          'Uses the Instantsearch colour refinement list widget',
+        contextLink: 'this link uses context, not a filter',
+      },
       homePage: {
         titleCarousels: [
           'Unsere Taschenkollektion',
@@ -206,7 +242,7 @@ const resources = {
         stats: 'ergebnisse gefunden in',
         searchInCategory: 'Suchen in',
         hideTrendingItems: 'Trendprodukte ausblenden',
-        showTrendingItems: 'Trendprodukte anzeigen'
+        showTrendingItems: 'Trendprodukte anzeigen',
       },
       pdp: {
         fbtTitle: 'Wird oft zusammen gekauft',
@@ -225,7 +261,7 @@ const resources = {
       searchBox: {
         placeHolder: 'Forschen...',
         tooltip: '💡 Geben Sie eine Abfrage ein, bevor Sie Ihre Anfrage senden',
-        submit: 'Senden'
+        submit: 'Senden',
       },
       cartModal: {
         title: 'Mein Korb',

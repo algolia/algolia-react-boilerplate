@@ -9,7 +9,7 @@ import { atom, selector } from 'recoil'
 
 // ADJUST THE APIKEY AND APPID TO YOUR OWN
 export const searchClientCreds = {
-  APIKey: 'b5fcdde4a6fd2c831a2706fec93c48b7',
+  APIKey: '1bc06bbf6de499f6b826a8a0e6902568',
   appID: '853MYZ81KY',
   // Used to get the Persona Strat and score if you haven't got one you have to create one in you API Keys
   // https://www.algolia.com/doc/rest-api/personalization/#get-the-current-personalization-strategy
@@ -48,6 +48,9 @@ export const searchClient = algoliasearch(
   searchClientCreds.appID,
   searchClientCreds.APIKey
 )
+
+// This export is a single instance of the Algolia API client linked to the main index
+export const mainIndexClient = searchClient.initIndex('flagship_fashion')
 
 export const recommendClient = algoliarecommend(
   searchClientCreds.appID,
