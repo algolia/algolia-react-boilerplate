@@ -94,12 +94,12 @@ const config = {
 
           },
           {
-            type: 'doc',
-            docId: 'read-me',
-            // href: 'https://github.com/facebook/docusaurus',
+            // type: 'doc',
+            // docId: 'read-me',
+            href: 'https://github.com/algolia/algolia-react-boilerplate/#readme',
             label: 'Full README',
 
-            position: 'left',
+            position: 'right',
           },
         ],
       },
