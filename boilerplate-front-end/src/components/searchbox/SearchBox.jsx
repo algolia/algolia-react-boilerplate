@@ -42,7 +42,8 @@ function CustomSearchBox() {
   const [searchParams, setSearchParams] = useSearchParams()
   const { query, refine } = useSearchBox()
 
-  const navigationState = useRecoilValue(navigationStateAtom)
+  const [navigationState, setNavigationState] =
+    useRecoilState(navigationStateAtom)
 
   const [hasKeystroke, setHasKeystroke] = useState(false)
 
@@ -79,6 +80,9 @@ function CustomSearchBox() {
       searchParams.delete(navigationState.type)
       searchParams.append(navigationState.type, navigationState.value)
       setSearchParams(searchParams)
+    }
+    if (navigationState.type === 'context' && event.target.value !== '') {
+      setNavigationState({})
     }
   }
 
