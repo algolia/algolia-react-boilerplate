@@ -3,12 +3,15 @@
 import { Hit } from '../../Hits'
 // Import the config files we'll need to import
 import { indexNames } from '@/config/algoliaEnvConfig'
-import { queryAtom } from '@/config/searchboxConfig'
 import { useRecoilValue } from 'recoil'
 
 import { lazy, useEffect, useRef, useState } from 'react'
 // Algolia
-import { useInstantSearch, useQueryRules } from 'react-instantsearch-hooks-web'
+import {
+  useInstantSearch,
+  useQueryRules,
+  useSearchBox,
+} from 'react-instantsearch-hooks-web'
 
 // Components
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
@@ -45,7 +48,7 @@ const InjectedHits = (props) => {
   const { injectedContentIndex } = useRecoilValue(indexNames)
 
   // Get access to current query
-  const query = useRecoilValue(queryAtom)
+  const query = useSearchBox()
 
   // Will hold the hits with injected content
   const [injectedHits, setInjectedHits] = useState(hits)
@@ -83,7 +86,7 @@ const InjectedHits = (props) => {
     let injectionIndexResults
 
     // If no query is typed, don't inject from index
-    if (query.length === 0) injectionIndexResults = []
+    if (query === '') injectionIndexResults = []
     // If there's anything at all typed, inject them
     else {
       // Gets the hits from the injection index

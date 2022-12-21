@@ -27,16 +27,7 @@ const CustomModal = (props) => {
               closeModal(e)
             }}
           >
-            <div
-              style={{
-                position: position,
-                top: top,
-                bottom: bottom,
-              }}
-              className="ModalContent"
-            >
-              {children}
-            </div>
+            {children}
           </div>
         </div>
       )}

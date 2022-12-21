@@ -7,20 +7,13 @@ import { Highlight, useHits } from 'react-instantsearch-hooks-web'
 import { ChevronRight } from '@/assets/svg/SvgIndex'
 
 // Router import
-import { createSearchParams, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-// Recoil import
-import { queryAtom } from '@/config/searchboxConfig'
-import { useSetRecoilState } from 'recoil'
-
-function QuerySuggestions(props) {
+function QuerySuggestions({ refine, title }) {
   //Get title
-  const { title } = props
-  const { hits } = useHits(props)
+  const { hits } = useHits()
   // router hook to navigate using a function
   const navigate = useNavigate()
-  // Recoil State - update query in searchBar
-  const setQueryState = useSetRecoilState(queryAtom)
   return (
     <div className="suggestions">
       <h3 className="suggestions__title">{title}</h3>
@@ -31,11 +24,10 @@ function QuerySuggestions(props) {
               key={index}
               className="suggestions__item"
               onClick={() => {
+                refine(hit.query)
                 navigate({
                   pathname: '/search',
-                  search: `?${createSearchParams({ query: hit.query })}`,
                 })
-                setQueryState(hit.query)
               }}
             >
               <ChevronRight />

@@ -8,9 +8,6 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { motion } from 'framer-motion'
 
-// eslint-disable-next-line import/order
-import { queryAtom } from '@/config/searchboxConfig'
-
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
 
 //import Navigation config
@@ -43,10 +40,11 @@ import {
 } from '@/config/featuresConfig'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import usePreventScrolling from '@/hooks/usePreventScrolling'
+import { useSearchBox } from 'react-instantsearch-hooks-web'
 
 const HeaderMobile = ({ mobile, tablet }) => {
+  const { query, refine } = useSearchBox()
   // Import configuration from Recoil
-  const setQueryState = useSetRecoilState(queryAtom)
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch)
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -98,7 +96,7 @@ const HeaderMobile = ({ mobile, tablet }) => {
             to="/"
             aria-label="Back to homepage"
             onClick={() => {
-              setQueryState('')
+              if (query !== '') refine('')
               setNavigationState({})
               federated(false)
               rulesApplied([])

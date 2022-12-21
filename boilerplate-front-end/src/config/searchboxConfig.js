@@ -7,8 +7,8 @@ import { atom } from 'recoil'
 export const isSearchInCategory = true
 
 // Please ignore this atom
-export const queryAtom = atom({
-  key: 'queryAtom', // unique ID (with respect to other atoms/selectors)
+export const localSearchQueryAtom = atom({
+  key: 'localSearchQueryAtom', // unique ID (with respect to other atoms/selectors)
   default: '', // default value (aka initial value)
 })
 

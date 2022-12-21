@@ -22,18 +22,16 @@ import {
   shouldHaveOpenFederatedSearch,
 } from '@/config/federatedConfig'
 
-// Sharing query to general state
-import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig'
+import { searchBoxAtom } from '@/config/searchboxConfig'
 
 // Import Persona State from recoil
 import {
   personalizationImpact,
-  personaSelectedAtom,
-  personaSelectedFiltersAtom,
+  personaObjectSelectedAtom,
 } from '@/config/personaConfig'
 
 // Import Segment State from recoil
-import { segmentSelectedAtom } from '@/config/segmentConfig'
+import { segmentObjectSelectedAtom } from '@/config/segmentConfig'
 
 // Import refs for modal closing functionality
 import { selectorNavigationRef } from '@/config/navigationConfig'
@@ -58,15 +56,15 @@ import RecentSearches from './components/RecentSearches'
 //Import scope SCSS
 import './SCSS/federatedSearch.scss'
 
-const FederatedSearch = () => {
-  // Persona
-  const personaSelect = useRecoilValue(personaSelectedAtom)
-  const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom)
+import { useSearchBox } from 'react-instantsearch-hooks-web'
 
-  const segmentSelect = useRecoilValue(segmentSelectedAtom)
+const FederatedSearch = ({ query, refine }) => {
+  // Persona
+  const persona = useRecoilValue(personaObjectSelectedAtom)
+
+  const segment = useRecoilValue(segmentObjectSelectedAtom)
   const setIsFederated = useSetRecoilState(shouldHaveOpenFederatedSearch)
   const searchboxRef = useRecoilValue(searchBoxAtom)
-  const query = useRecoilValue(queryAtom)
 
   //Get reference for dropdowns in Navigation
   const selector = useRecoilValue(selectorNavigationRef)
@@ -74,7 +72,6 @@ const FederatedSearch = () => {
   // Get Indexes Name
   const { suggestionsIndex, articlesIndex } = useRecoilValue(indexNames)
 
-  // const containerFederated = useRef('');
   const [containerFederated, setContainerFederated] =
     useRecoilState(federatedRef)
 
@@ -115,7 +112,7 @@ const FederatedSearch = () => {
       className={`${
         mobile || tablet ? 'federatedSearch-mobile' : 'federatedSearch'
       }`}
-      ref={setContainerFederated}
+      // ref={setContainerFederated}
       variants={framerMotionFederatedContainer}
       initial={framerMotionFederatedContainer.initial}
       animate={framerMotionFederatedContainer.animate}
@@ -137,25 +134,31 @@ const FederatedSearch = () => {
         <div className="federatedSearch__left">
           {/* If don't want this sections go into config file  */}
           {showRecentSearches && !mobile && !tablet && (
-            <RecentSearches title={t('recentSearches')} />
+            <RecentSearches
+              query={query}
+              refine={refine}
+              title={t('recentSearches')}
+            />
           )}
           {/* If don't want this sections go into config file  */}
-          {showQuerySuggestions && (
+          {/* {showQuerySuggestions && (
             <Index searchClient={searchClient} indexName={suggestionsIndex}>
               <Configure
                 hitsPerPage={3}
                 query={query}
-                userToken={personaSelect}
+                userToken={persona.value}
                 enablePersonalization={true}
                 personalizationImpact={personalizationImpact}
-                personalizationFilters={personalizationFilters}
+                personalizationFilters={persona.personalizationFilters}
               />
               <QuerySuggestions title={t('suggestions')} />
             </Index>
-          )}
+          )} */}
           {/* If don't want this sections go into config file  */}
           {showCategories && !mobile && !tablet && (
             <Category
+              query={query}
+              refine={refine}
               attribute={federatedCategoriesAttribute}
               title={t('categories')}
             />
@@ -164,17 +167,9 @@ const FederatedSearch = () => {
         {/* If don't want this sections go into config file  */}
         {showProducts && (
           <div className="federatedSearch__middle">
-            <Configure
-              filters=""
-              hitsPerPage={isDesktop ? 6 : 3}
-              enablePersonalization={true}
-              userToken={personaSelect}
-              personalizationImpact={personalizationImpact}
-              personalizationFilters={personalizationFilters}
-              optionalFilters={segmentSelect}
-              query={query}
-            />
             <Products
+              query={query}
+              refine={refine}
               products={t('products')}
               productsBefore={t('productsBefore')}
               buttonShowAll={t('buttonShowAll')}

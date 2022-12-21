@@ -10,20 +10,26 @@ import {
   selectorNavigationRef,
 } from '@/config/navigationConfig'
 
-import { languagesConfig } from '@/config/languagesConfig'
-import { personaConfig } from '@/config/personaConfig'
-import { segmentConfig } from '@/config/segmentConfig'
+import {
+  languagesConfig,
+  languageSwitchConfig,
+  languageObjectSelectedAtom,
+} from '@/config/languagesConfig'
+import {
+  personaConfig,
+  personaObjectSelectedAtom,
+} from '@/config/personaConfig'
+import {
+  segmentConfig,
+  segmentObjectSelectedAtom,
+} from '@/config/segmentConfig'
 
 import { cartClick, cartOpen, cartState } from '@/config/cartFunctions'
 
 import useStoreCartToLocalStorage from '@/hooks/useStoreCartToLocalStorage'
 
 // Import SearchBox config
-import {
-  queryAtom,
-  searchBoxAtom,
-  searchBoxIsActive,
-} from '@/config/searchboxConfig'
+import { searchBoxAtom, searchBoxIsActive } from '@/config/searchboxConfig'
 
 //Import config for federatedSearch
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
@@ -43,16 +49,25 @@ import { rulesAtom } from '@/config/appliedRulesConfig'
 import useOutsideClick from '@/hooks/useOutsideClick'
 
 import { AlgoliaLogo, CartPicto } from '@/assets/svg/SvgIndex'
-import { Selectors } from '../../selector/Selectors'
+import Selectors from '@/components/selector/Selectors'
 
 // Import Components
 import CustomSearchBox from '@/components/searchbox/SearchBox'
 import { windowSize } from '@/hooks/useScreenSize'
 import Navigation from './Navigation'
 
+import QRCodeOpener from '@/components/qrCode/QRCodeOpener'
+import { shouldHaveQRCode } from '@/config/featuresConfig'
+import { useSearchBox } from 'react-instantsearch-hooks-web'
+
+import { currencySymbolAtom } from '@/config/currencyConfig'
+import { mainIndex } from '@/config/algoliaEnvConfig'
+import { linksHeader } from '@/config/navigationConfig'
+import { useTranslation } from 'react-i18next'
+
 const HeaderLaptop = () => {
+  const { query, refine } = useSearchBox()
   const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom)
-  const setQueryState = useSetRecoilState(queryAtom)
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch)
   const setSbIsActive = useSetRecoilState(searchBoxIsActive)
   const rulesApplied = useSetRecoilState(rulesAtom)
@@ -68,10 +83,37 @@ const HeaderLaptop = () => {
   const shouldShowSegmentsAtom = useRecoilValue(shouldHaveSegments)
   const shouldShowLanguageSelected = useRecoilValue(shouldHaveLanguages)
   const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality)
+  // Should the alert badges for the demo guide be shown
+  const shouldDisplayQRCodeGenerator = useRecoilValue(shouldHaveQRCode)
 
-  const { mobile, isDesktop } = useRecoilValue(windowSize)
+  const { mobile } = useRecoilValue(windowSize)
 
   useOutsideClick(searchboxRef, () => setSbIsActive(false))
+
+  const [personaSelected, setPersonaSelected] = useRecoilState(
+    personaObjectSelectedAtom
+  )
+  const [segmentSelected, setSegmentSelected] = useRecoilState(
+    segmentObjectSelectedAtom
+  )
+
+  const [languageSelected, setLanguageSelected] = useRecoilState(
+    languageObjectSelectedAtom
+  )
+
+  const setCurrency = useSetRecoilState(currencySymbolAtom)
+  const index = useSetRecoilState(mainIndex)
+  const navigationLinks = useSetRecoilState(linksHeader)
+  const { i18n } = useTranslation()
+
+  const handleChangeOfLanguage = (language) => {
+    const code = language.code
+    setLanguageSelected(language)
+    index(languageSwitchConfig[code].index)
+    setCurrency(languageSwitchConfig[code].currency)
+    navigationLinks(languageSwitchConfig[code].linksHeader)
+    i18n.changeLanguage(code.toLowerCase())
+  }
 
   // UseEffect to store into the local storage our Cart
   useEffect(() => {
@@ -109,18 +151,30 @@ const HeaderLaptop = () => {
           <ul className="selector-list" ref={selectorsNavigation}>
             {shouldShowPersonasAtom && (
               <li>
-                <Selectors props={personaConfig} />
+                <Selectors
+                  selectedValue={personaSelected}
+                  setSelectedValue={setPersonaSelected}
+                  options={personaConfig}
+                />
               </li>
             )}
             {shouldShowSegmentsAtom && (
               <li>
-                <Selectors props={segmentConfig} />
+                <Selectors
+                  selectedValue={segmentSelected}
+                  setSelectedValue={setSegmentSelected}
+                  options={segmentConfig}
+                />
               </li>
             )}
             {/* Display the language select component */}
             {shouldShowLanguageSelected && (
               <li>
-                <Selectors props={languagesConfig} />
+                <Selectors
+                  selectedValue={languageSelected}
+                  setSelectedValue={handleChangeOfLanguage}
+                  options={languagesConfig}
+                />
               </li>
             )}
           </ul>
@@ -132,7 +186,7 @@ const HeaderLaptop = () => {
             to="/"
             aria-label="link to home"
             onClick={() => {
-              setQueryState('')
+              if (query !== '') refine()
               setNavigationState({})
               federated(false)
               rulesApplied([])
@@ -143,34 +197,36 @@ const HeaderLaptop = () => {
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container" ref={setSearchBoxRef}>
-          <CustomSearchBox />
+          <CustomSearchBox query={query} refine={refine} />
           {/* {displayVoiceSearch && <CustomVoiceSearchComponent />} */}
         </div>
-
-        {shouldShowCartIcon && (
-          <div className="picto-cart">
-            <div
-              className={cartOpenValue ? 'picto-cart__active' : ''}
-              ref={cartIcon}
-              onClick={(e) => {
-                e.stopPropagation()
-                setCartOpenValue(!cartOpenValue)
-                {
-                  mobile && setIsMenuOpen(false)
-                }
-              }}
-            >
-              <CartPicto />
-            </div>
-            {/* )} */}
-            {/* Picto notification up the cart icon */}
-            {showCart?.length !== 0 && (
-              <div className="notification-cart">
-                <span>{sumAllArticles(showCart)}</span>
+        <div className="container__header-right">
+          {shouldShowCartIcon && (
+            <div className="picto-cart">
+              <div
+                className={cartOpenValue ? 'picto-cart__active' : ''}
+                ref={cartIcon}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setCartOpenValue(!cartOpenValue)
+                  {
+                    mobile && setIsMenuOpen(false)
+                  }
+                }}
+              >
+                <CartPicto />
               </div>
-            )}
-          </div>
-        )}
+              {/* )} */}
+              {/* Picto notification up the cart icon */}
+              {showCart?.length !== 0 && (
+                <div className="notification-cart">
+                  <span>{sumAllArticles(showCart)}</span>
+                </div>
+              )}
+            </div>
+          )}
+          {shouldDisplayQRCodeGenerator && <QRCodeOpener />}
+        </div>
       </div>
       <div className="container__header-nav">
         <Navigation />

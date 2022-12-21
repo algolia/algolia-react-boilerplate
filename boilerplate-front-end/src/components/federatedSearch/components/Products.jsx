@@ -9,8 +9,7 @@ import Price from '@/components/hits/components/Price.jsx'
 
 // Recoil import
 import { hitAtom, hitsConfig } from '@/config/hitsConfig'
-import { personaSelectedAtom } from '@/config/personaConfig'
-import { queryAtom } from '@/config/searchboxConfig'
+import { personaObjectSelectedAtom } from '@/config/personaConfig'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 // React-router import
@@ -18,13 +17,12 @@ import { useNavigate } from 'react-router-dom'
 
 import get from 'lodash/get'
 
-function Products(props) {
+function Products({ query, refine }, props) {
   const { hits } = useHits(props)
   const navigate = useNavigate()
   const hitState = useSetRecoilState(hitAtom)
 
-  const personaSelected = useRecoilValue(personaSelectedAtom)
-  const query = useRecoilValue(queryAtom)
+  const persona = useRecoilValue(personaObjectSelectedAtom)
 
   //Get title, props
   const { products, productsBefore, buttonShowAll, noResults } = props
@@ -34,7 +32,7 @@ function Products(props) {
   return (
     <div className="products">
       <div className="products__header">
-        {personaSelected !== '' && query === '' ? (
+        {persona.value !== 'anon' && query === '' ? (
           <h3 className="products__title">{productsBefore}</h3>
         ) : (
           <h3 className="products__title">{products}</h3>

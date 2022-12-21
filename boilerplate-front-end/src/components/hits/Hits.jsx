@@ -38,7 +38,7 @@ import {
   shouldHavePersona,
 } from '@/config/featuresConfig'
 import {
-  personaSelectedFiltersAtom,
+  personaObjectSelectedAtom,
   shouldDisplayRankingIcons,
 } from '@/config/personaConfig'
 
@@ -59,7 +59,7 @@ const Hit = ({ hit, sendEvent }) => {
   const setAddToCartAtom = useSetRecoilState(addToCartSelector)
   const showPersona = useRecoilValue(shouldHavePersona)
   const showRankingIcons = useRecoilValue(shouldDisplayRankingIcons)
-  const personaFilters = useRecoilValue(personaSelectedFiltersAtom)
+  const persona = useRecoilValue(personaObjectSelectedAtom)
 
   const shouldShowCartIcons = useRecoilValue(shouldHaveCartFunctionality)
 
@@ -167,7 +167,7 @@ const Hit = ({ hit, sendEvent }) => {
             <Badge title={badgeCriteria(hit)} />
           )}
           <div className="srpItem__imgWrapper__heart">
-            {(personaFilters.length < 1 ||
+            {(persona.personalizationFilters.length < 1 ||
               !showPersona ||
               !showRankingIcons) && <Heart />}
           </div>

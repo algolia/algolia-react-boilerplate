@@ -35,7 +35,7 @@ function Category(props) {
                   navigate(`/search/${slugify(hit.label)}`, {
                     state: {
                       type: 'filter',
-                      action: `${federatedCategoriesAttribute}:"${hit.label}"`,
+                      value: `${federatedCategoriesAttribute}:"${hit.label}"`,
                     },
                   })
                 }}

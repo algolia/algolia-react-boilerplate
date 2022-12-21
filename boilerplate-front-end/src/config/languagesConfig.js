@@ -6,20 +6,28 @@ import { atom } from 'recoil'
 
 // Define what values are going to be displayed in the language selector
 export const languagesConfig = [
-  { value: 'English', label: 'English', type: 'language' },
+  {
+    value: 'English',
+    label: 'English',
+    code: 'EN',
+    type: 'language',
+  },
   {
     value: 'German',
     label: 'German',
+    code: 'GER',
     type: 'language',
   },
   {
     value: 'French',
     label: 'French',
+    code: 'FR',
     type: 'language',
   },
   {
     value: 'Italian',
     label: 'Italian',
+    code: 'IT',
     type: 'language',
   },
 ]
@@ -178,6 +186,11 @@ export const languageSwitchConfig = {
     ],
   },
 }
+
+export const languageObjectSelectedAtom = atom({
+  key: 'languageObjectSelectedAtom', // unique ID (with respect to other atoms/selectors)
+  default: languagesConfig[0], // default value (aka initial value)
+})
 
 // Please ignore this atom - DO NOT TOUCH
 export const LanguageSelectedAtom = atom({

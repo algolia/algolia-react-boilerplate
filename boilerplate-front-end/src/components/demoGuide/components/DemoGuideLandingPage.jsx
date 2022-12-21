@@ -1,9 +1,21 @@
-import { Selectors } from '@/components/selector/Selectors'
+import { useState } from 'react'
+import Selectors from '@/components/selector/Selectors'
 
 // Import configuration
 import { landingPageConfig } from '@/config/demoGuideConfig'
+import { useNavigate } from 'react-router-dom'
 
-const DemoGuideLandingPage = () => {
+const DemoGuideLandingPage = ({ triggerAlert, refine }) => {
+  const [selectedValue, setSelectedValue] = useState(landingPageConfig[0])
+  const navigate = useNavigate()
+
+  const handleLandingPage = (landingPage) => {
+    // Create route to trigger the context and get the right landing page
+    navigate(`/search?contextMarketingCampaign=${landingPage.value}`)
+    // Refresh the page to trigger the context (faking coming from another page)
+    // window.location.reload()
+  }
+
   return (
     <div className="demoGuideHelpers">
       <h3>Search Landing Page</h3>
@@ -17,7 +29,12 @@ const DemoGuideLandingPage = () => {
           )
         })}
       </div>
-      <Selectors props={landingPageConfig} />
+      <Selectors
+        selectedValue={selectedValue}
+        setSelectedValue={handleLandingPage}
+        refine={refine}
+        options={landingPageConfig}
+      />
     </div>
   )
 }

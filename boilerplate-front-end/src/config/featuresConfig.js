@@ -8,6 +8,11 @@ import { atom } from 'recoil'
 // TODO: add perso and other features here including what to have on federated
 // ------------------------------------------
 
+export const shouldHaveQRCode = atom({
+  key: 'shouldHaveQRCode',
+  default: true,
+})
+
 // Should we show the demo guide in this demo
 // Demo guide is here to help you demo your POC. Before turning the feature ON you can configure it in demoGuideConfig.js
 export const shouldHaveDemoGuide = atom({

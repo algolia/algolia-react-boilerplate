@@ -1,7 +1,7 @@
-import { lazy, memo, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 
 // Algolia Instantsearch components
-import { useInstantSearch } from 'react-instantsearch-hooks-web'
+import { useInstantSearch, useSearchBox } from 'react-instantsearch-hooks-web'
 
 // Algolia Insights
 import { InsightsMiddleware } from './config/algoliaInsightEvents'
@@ -13,7 +13,7 @@ import { AnimatePresence } from 'framer-motion'
 import { Route, Routes, useLocation, useSearchParams } from 'react-router-dom'
 
 //Recoil states & values
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Import help navigation state & config
 import {
@@ -24,6 +24,7 @@ import {
 import {
   shouldHaveCartFunctionality,
   shouldHaveDemoGuide,
+  shouldHaveQRCode,
 } from '@/config/featuresConfig'
 
 // Import Algolia Explain config
@@ -34,7 +35,6 @@ import { isCarouselLoaded } from '@/config/carouselConfig'
 
 // Import Pages and static components
 import AlertNavigation from '@/components/demoGuide/AlertNavigation'
-
 import DemoGuide from '@/components/demoGuide/DemoGuide'
 import Header from '@/components/header/Header'
 import Redirect from '@/components/redirects/Redirect'
@@ -61,36 +61,35 @@ import SearchErrorToast from './utils/ErrorHandler'
 import NoResults from './components/noResults/noResults'
 import { cartOpen } from './config/cartFunctions'
 
-export const Main = memo(() => {
-  const { setIndexUiState, indexUiState, results } = useInstantSearch()
+// QR code functionality
+import QRModal from '@/components/qrCode/QRModal'
+import { openQR } from '@/config/qrCodeConfig'
+import { showRedirectModal } from './config/redirectConfig'
+
+import { navigationStateAtom } from '@/config/navigationConfig'
+import {
+  segmentConfig,
+  segmentObjectSelectedAtom,
+} from '@/config/segmentConfig'
+import {
+  personaConfig,
+  personaObjectSelectedAtom,
+} from '@/config/personaConfig'
+
+const Main = () => {
+  const { results } = useInstantSearch()
+  const { query, refine } = useSearchBox()
 
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams()
 
-  // Remove extra context from URl when a query or category is present
+  // Remove extra context from URl when a query is present
   useEffect(() => {
-    if (
-      (searchParams.has('query') || searchParams.has('category')) &&
-      searchParams.has('context')
-    ) {
+    if (query !== '' && searchParams.has('context')) {
       searchParams.delete('context')
       setSearchParams(searchParams)
     }
   }, [searchParams])
-
-  // Setting the query to the state with the URL
-  // Allow to load query when loading the page and update results if needed
-  // Allow to handle no result on refresh if there are nos result for this query
-  useEffect(() => {
-    setIndexUiState((prevUiState) => {
-      if (searchParams.get('query')) {
-        return {
-          ...prevUiState,
-          query: searchParams.get('query'),
-        }
-      }
-    })
-  }, [searchParams, indexUiState.query])
 
   // Current location from react Router
   const location = useLocation()
@@ -107,6 +106,10 @@ export const Main = memo(() => {
   // Should the demo guide panel be shown
   const shouldHaveDemoGuideAtom = useRecoilValue(shouldHaveDemoGuide)
 
+  // Should the alert badges for the demo guide be shown
+  const shouldDisplayQRCodeGenerator = useRecoilValue(shouldHaveQRCode)
+  const qrOpen = useRecoilValue(openQR)
+
   // State to control the Showing/hiding of the demo guide panel
   const [showDemoGuide, setshowDemoGuide] = useRecoilState(isDemoGuideOpen)
   // Value that shows Network Errors to Guide you to the correct Configuration
@@ -115,9 +118,64 @@ export const Main = memo(() => {
   const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality)
   const showCart = useRecoilValue(cartOpen)
 
+  // Handle results routing when no results are found
+  const [hasResults, setHasResults] = useState(true)
+
+  // info for reading from URL into state
+  const setPersona = useSetRecoilState(personaObjectSelectedAtom)
+  const setSegment = useSetRecoilState(segmentObjectSelectedAtom)
+
+  const [navigationState, setNavigationState] =
+    useRecoilState(navigationStateAtom)
+
+  useEffect(() => {
+    const personaFromUrl = searchParams.get('persona')
+    if (personaFromUrl !== null) {
+      let personaToApply = personaConfig.filter((persona) => {
+        return persona.value === personaFromUrl
+      })
+
+      if (personaToApply.length > 0) {
+        setPersona(personaToApply[0])
+      }
+    }
+
+    const segmentFromUrl = searchParams.get('segment')
+    if (segmentFromUrl !== null) {
+      let segmentToApply = segmentConfig.filter((segment) => {
+        return segment.label === segmentFromUrl
+      })
+      if (segmentToApply.length > 0) {
+        setSegment(segmentToApply[0])
+      }
+    }
+
+    const context = searchParams.get('context')
+    if (context !== null) {
+      setNavigationState({
+        type: 'context',
+        name: context,
+        value: context,
+      })
+    }
+  }, [])
+
+  useEffect(() => {
+    // no results, query not empty, and app thinks it has results
+    if (results.nbHits === 0 && query !== '' && hasResults) {
+      setHasResults(false)
+      // has results, query not empty, and app thinks it has no results
+    } else if (results.nbHits > 0 && query !== '' && !hasResults) {
+      setHasResults(true)
+      // query empty and app thinks it has no results
+      // in this case there will always be results
+    } else if (query === '' && !hasResults) {
+      setHasResults(true)
+    }
+  }, [results, query])
+
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide)
-
   return (
     <>
       <InsightsMiddleware />
@@ -125,13 +183,13 @@ export const Main = memo(() => {
       <Header />
       {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
 
+      {shouldDisplayQRCodeGenerator && qrOpen && <QRModal />}
       <div className="mainWrapper">
-        {/* TODO: Check if this configure is used for anything */}
         <Redirect />
         <AnimatePresence>
           {showDemoGuide && (
             <div className="demoGuide-wp">
-              <DemoGuide setshowDemoGuide={setshowDemoGuide} />
+              <DemoGuide refine={refine} setshowDemoGuide={setshowDemoGuide} />
             </div>
           )}
           {shouldShowCartIcon && showCart && (
@@ -147,37 +205,32 @@ export const Main = memo(() => {
             path="/"
             element={
               <Suspense fallback={<Loader />}>
-                <HomePage />
+                <HomePage query={query} refine={refine} />
               </Suspense>
             }
           />
-          {results.nbHits === 0 && searchParams.get('query') !== '' && (
-            <Route
-              path="/search"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <NoResults />
-                </Suspense>
-              }
-            />
-          )}
-
           <Route
             path="/search"
             element={
-              <Suspense fallback={<Loader />}>
-                <SearchResultsPage />
-              </Suspense>
+              hasResults ? (
+                <Suspense fallback={<Loader />}>
+                  <SearchResultsPage query={query} />
+                </Suspense>
+              ) : (
+                <Suspense fallback={<Loader />}>
+                  <NoResults query={query} />
+                </Suspense>
+              )
             }
           />
-
           <Route
             path="/search/:categories"
             element={
               <Suspense fallback={<Loader />}>
-                <SearchResultsPage />
+                <SearchResultsPage query={query} />
               </Suspense>
             }
+            replace={false}
           />
           {/* objectID is the unique identifier for an algolia record */}
           <Route
@@ -205,4 +258,6 @@ export const Main = memo(() => {
       </div>
     </>
   )
-})
+}
+
+export default Main

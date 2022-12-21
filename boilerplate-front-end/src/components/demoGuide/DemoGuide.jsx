@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 //Import components
 import DemoGuideDynamicFilters from './components/DemoGuideDynamicFilters'
@@ -7,9 +7,9 @@ import DemoGuideInjectedContent from './components/DemoGuideInjectedContent'
 import DemoGuideRedirect from './components/DemoGuideRedirect'
 import DemoGuideLandingPage from './components/DemoGuideLandingPage'
 import DemoGuideAlgoliaExplain from './components/DemoGuideAlgoliaExplain'
-import SearchBanners from './components/SearchBanners'
-import SearchPersona from './components/SearchPersona'
-import SearchTerms from './components/SearchTerms'
+import SearchBanners from './components/DemoGuideSearchBanners'
+import SearchPersona from './components/DemoGuideSearchPersona'
+import SearchTerms from './components/DemoGuideSearchTerms'
 
 //Import Hooks
 import useOutsideClickConditional from '@/hooks/useOutsideClickConditional'
@@ -22,6 +22,7 @@ import { motion } from 'framer-motion'
 // Import Reference for the Button that trigger the panel
 import {
   demoGuideBtnRef,
+  shouldShowAppliedRulesSwitcher,
   shouldShowBanners,
   shouldShowDynamicFilters,
   shouldShowInjectedContent,
@@ -31,11 +32,22 @@ import {
   shouldShowLandingPages,
 } from '@/config/demoGuideConfig'
 
+import { alertContent, isAlertOpen } from '@/config/demoGuideConfig'
+
 //Import scope SCSS
 import './SCSS/demoGuide.scss'
 
-const DemoGuide = ({ setshowDemoGuide }) => {
-  //Select Panel wrapper
+const DemoGuide = ({ refine, setshowDemoGuide }) => {
+  // Recoil state for alert
+  const setAlert = useSetRecoilState(alertContent)
+  const setAlertOpen = useSetRecoilState(isAlertOpen)
+  const triggerAlert = (content) => {
+    setAlertOpen(true)
+    setAlert(content)
+    setTimeout(() => setAlertOpen(false), 5000)
+  }
+
+  // //Select Panel wrapper
   const demoGuide = useRef()
 
   const shouldShowLandingPagesAtom = useRecoilValue(shouldShowLandingPages)
@@ -47,6 +59,10 @@ const DemoGuide = ({ setshowDemoGuide }) => {
   const shouldShowDynamicFiltersAtom = useRecoilValue(shouldShowDynamicFilters)
   const shouldShowRedirectsAtom = useRecoilValue(shouldShowRedirects)
   const shouldShowBannersAtom = useRecoilValue(shouldShowBanners)
+  // Should the applied rules section shows in the demo panel
+  const shouldShowRulesAppliedAtom = useRecoilValue(
+    shouldShowAppliedRulesSwitcher
+  )
 
   // Use the reference value of the button that trigger the panel
   const demoGuideBtn = useRecoilValue(demoGuideBtnRef)
@@ -72,50 +88,57 @@ const DemoGuide = ({ setshowDemoGuide }) => {
     >
       <h2>Help Navigation Panel</h2>
       <ul className="container-nav-help">
-        <li className="container-nav-help__items ">
-          <DemoGuideAlgoliaExplain />
-          <hr />
-        </li>
-
+        {shouldShowRulesAppliedAtom && (
+          <li className="container-nav-help__items ">
+            <DemoGuideAlgoliaExplain />
+            <hr />
+          </li>
+        )}
         {shouldShowLandingPagesAtom && (
           <li className="container-nav-help__items ">
-            <DemoGuideLandingPage />
+            <DemoGuideLandingPage triggerAlert={triggerAlert} refine={refine} />
             <hr />
           </li>
         )}
         {shouldShowSearchTermsAtom && (
           <li className="container-nav-help__items ">
-            <SearchTerms />
+            <SearchTerms triggerAlert={triggerAlert} refine={refine} />
             <hr />
           </li>
         )}
         {shouldShowBannersAtom && (
           <li className="container-nav-help__items ">
-            <SearchBanners />
+            <SearchBanners triggerAlert={triggerAlert} refine={refine} />
             <hr />
           </li>
         )}
         {shouldShowPersonasAtom && (
           <li className="container-nav-help__items ">
-            <SearchPersona />
+            <SearchPersona triggerAlert={triggerAlert} refine={refine} />
             <hr />
           </li>
         )}
         {shouldShowInjectedContentAtom && (
           <li className="container-nav-help__items ">
-            <DemoGuideInjectedContent />
+            <DemoGuideInjectedContent
+              triggerAlert={triggerAlert}
+              refine={refine}
+            />
             <hr />
           </li>
         )}
         {shouldShowDynamicFiltersAtom && (
           <li className="container-nav-help__items ">
-            <DemoGuideDynamicFilters />
+            <DemoGuideDynamicFilters
+              triggerAlert={triggerAlert}
+              refine={refine}
+            />
             <hr />
           </li>
         )}
         {shouldShowRedirectsAtom && (
           <li className="container-nav-help__items ">
-            <DemoGuideRedirect />
+            <DemoGuideRedirect triggerAlert={triggerAlert} refine={refine} />
             <hr />
           </li>
         )}

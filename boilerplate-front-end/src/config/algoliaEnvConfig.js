@@ -43,6 +43,11 @@ export const indexNames = selector({
 
 /* DO NOT ADJUST ANYTHING BEYOND THIS POINT */
 
+export const url = atom({
+  key: 'url', // unique ID (with respect to other atoms/selectors)
+  default: {}, // default value (aka initial value)
+})
+
 // This export is a single instance Algolia API client
 export const searchClient = algoliasearch(
   searchClientCreds.appID,

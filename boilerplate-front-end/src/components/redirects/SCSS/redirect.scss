@@ -1,35 +1,15 @@
 @use '../../../scss/partials' as *;
 
-.redirectModal-wp {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  z-index: 999;
-}
 .redirectModal {
-  position: absolute;
-  top: 50vh;
-  left: 50vw;
-  transform: translate(-50%, -50%);
-  background: $white-color;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
-  width: 35rem;
-  height: 20rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  z-index: 999;
-  padding: 1.5rem 2rem;
-  border-radius: 0.5rem;
-  isolation: isolate;
-
   &__infos {
     margin-bottom: 2rem;
     p {
       @include p-text($main-color, 500);
       text-align: left;
+    }
+
+    span {
+      color: $secondary-color;
     }
   }
 

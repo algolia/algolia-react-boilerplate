@@ -8,7 +8,7 @@ import connectVoiceSearch from 'instantsearch.js/es/connectors/voice-search/conn
 import { useConnector } from 'react-instantsearch-hooks-web'
 
 // Import searchbox Config
-import { queryAtom, searchBoxIsActive } from '@/config/searchboxConfig'
+import { searchBoxIsActive } from '@/config/searchboxConfig'
 
 //Import scope SCSS
 import './SCSS/voicesearch.scss'
@@ -18,6 +18,7 @@ export function useVoiceSearch(props) {
 }
 
 function CustomVoiceSearchComponent(props) {
+  const { refine } = useSearchBox()
   const { isListening, toggleListening, voiceListeningState } =
     useVoiceSearch(props)
 
@@ -26,12 +27,11 @@ function CustomVoiceSearchComponent(props) {
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
-  const setQueryState = useSetRecoilState(queryAtom)
   const setSbIsActive = useSetRecoilState(searchBoxIsActive)
 
   useEffect(() => {
     if (status === 'finished') {
-      setQueryState(transcript)
+      refine(transcript)
 
       if (pathname !== '/search') {
         navigate({

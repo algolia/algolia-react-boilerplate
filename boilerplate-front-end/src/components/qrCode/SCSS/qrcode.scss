@@ -1,0 +1,44 @@
+@use '../../../scss/partials' as *;
+.qr-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+
+  p {
+    span {
+      color: $secondary-color;
+      font-weight: 600;
+    }
+  }
+
+  img {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+.qr-code-btn {
+  cursor: pointer;
+  svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.qr-code-btn-active {
+  animation: bounce 0.3s ease-in-out forwards;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

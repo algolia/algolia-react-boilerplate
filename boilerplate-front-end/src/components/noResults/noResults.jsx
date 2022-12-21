@@ -1,5 +1,5 @@
 // import IS hook
-import { Configure, Index } from 'react-instantsearch-hooks-web'
+import { Configure, Index, useSearchBox } from 'react-instantsearch-hooks-web'
 
 // Import recoil function
 import { useRecoilValue } from 'recoil'
@@ -34,9 +34,7 @@ import { shouldHaveRelatedProducts } from '@/config/featuresConfig'
 import { windowSize } from '@/hooks/useScreenSize'
 
 // This is rendered when there are no results to display
-const NoResults = () => {
-  // Handle URL search parameters through React Router
-  let [searchParams, setSearchParams] = useSearchParams()
+const NoResults = ({ query }) => {
   //Get the query
   const getSearches = localStorage.getItem('objectId')
   const cleanSearches = JSON.parse(getSearches)
@@ -59,9 +57,7 @@ const NoResults = () => {
           <span className="no-results__titles__span">
             Sorry, we found no result for{' '}
           </span>
-          <span className="no-results__titles__span-query">
-            “{searchParams.get('query')}”
-          </span>
+          <span className="no-results__titles__span-query">“{query}”</span>
         </h4>
         <p>Try the following:</p>
         <ul className="no-results__infos">
@@ -89,8 +85,7 @@ const NoResults = () => {
               {lastId && (
                 <div>
                   <p className="no-results__infos__p">
-                    Customers who searched{' '}
-                    <span>{searchParams.get('query')}</span> also viewed:
+                    Customers who searched <span>{query}</span> also viewed:
                   </p>
                   {shouldHaveRelatedProductsValue && (
                     <div className="recommend">

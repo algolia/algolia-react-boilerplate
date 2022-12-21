@@ -1,9 +1,23 @@
-import { Selectors } from '@/components/selector/Selectors'
+import { useState } from 'react'
+import { useSetRecoilState } from 'recoil'
+import Selectors from '@/components/selector/Selectors'
+
+import { localSearchQueryAtom } from '@/config/searchboxConfig'
 
 // Import configuration
 import { DemoGuideRedirectConfig } from '@/config/demoGuideConfig'
 
-const DemoGuideRedirect = () => {
+const DemoGuideRedirect = ({ triggerAlert, refine }) => {
+  const [selectedValue, setSelectedValue] = useState(DemoGuideRedirectConfig[0])
+  const setLocalSearch = useSetRecoilState(localSearchQueryAtom)
+
+  const handleRedirects = (banner) => {
+    setLocalSearch(banner.value)
+    refine(banner.value)
+    setSelectedValue(banner)
+    triggerAlert(banner.alertContent)
+  }
+
   return (
     <div className="demoGuideHelpers">
       <h3>Redirect</h3>
@@ -17,7 +31,12 @@ const DemoGuideRedirect = () => {
           )
         })}
       </div>
-      <Selectors props={DemoGuideRedirectConfig} />
+      <Selectors
+        selectedValue={selectedValue}
+        setSelectedValue={handleRedirects}
+        refine={refine}
+        options={DemoGuideRedirectConfig}
+      />
     </div>
   )
 }

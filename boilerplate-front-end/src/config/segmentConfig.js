@@ -30,9 +30,9 @@ export const segmentConfig = [
 ]
 
 // Please ignore this atom
-export const segmentSelectedAtom = atom({
-  key: 'segmentSelected', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
+export const segmentObjectSelectedAtom = atom({
+  key: 'segmentObjectSelectedAtom', // unique ID (with respect to other atoms/selectors)
+  default: segmentConfig[0], // default value (aka initial value)
 })
 
 // Please ignore this atom

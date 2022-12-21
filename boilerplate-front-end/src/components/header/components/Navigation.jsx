@@ -1,27 +1,51 @@
 // Render the navigation menu in the header
-import { useState } from 'react'
+import { useEffect } from 'react'
 
 // React Router
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 // Recoil Header State
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import WithToolTip from '@/components/algoliaExplain/tooltip/WithTooltip'
 
 // Import Config for the header
 import {
   categoryPageFilterAttribute,
+  hierarchicalPageFilterAttribute,
+  isHierarchicalFilterAttribute,
   linksHeader,
   navigationStateAtom,
 } from '@/config/navigationConfig'
 
 //Import config from helped navigation
 import { windowSize } from '@/hooks/useScreenSize'
-import { useEffect } from 'react'
 
+import {
+  useHierarchicalMenu,
+  useRefinementList,
+  useSearchBox,
+} from 'react-instantsearch-hooks-web'
+import { localSearchQueryAtom } from '@/config/searchboxConfig'
 import ConditionalWrapper from '@/utils/ConditionalWrapper'
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const { refine: refineQuery } = useSearchBox()
+  const setLocalQuery = useSetRecoilState(localSearchQueryAtom)
+  let refine = null
+
+  if (isHierarchicalFilterAttribute) {
+    const { refine: hierarchicalRefine } = useHierarchicalMenu({
+      attributes: [hierarchicalPageFilterAttribute],
+    })
+    refine = hierarchicalRefine
+  } else {
+    const { refine: normalRefine } = useRefinementList({
+      attribute: categoryPageFilterAttribute,
+    })
+    refine = normalRefine
+  }
+
   const { isDesktop } = useRecoilValue(windowSize)
 
   // navigate is used by React Router
@@ -29,9 +53,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
   const { state } = useLocation()
 
   const highlightingCat = () => {
-    if (state?.action !== null) {
+    if (state?.value !== null) {
       if (state?.type === 'filter') {
-        return state.action
+        return state.value
           .split(':')[1]
           .split('>')
           .pop()
@@ -39,7 +63,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
           .slice(0, -1)
           .toLowerCase()
       } else if (state?.type === 'context') {
-        return state?.action.toLowerCase()
+        return state?.value.toLowerCase()
       } else {
         null
       }
@@ -50,10 +74,50 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
   // Import the navigation links, as defined in the config
   const links = useRecoilValue(linksHeader)
 
-  let [searchParams, setSearchParams] = useSearchParams()
-
   const [navigationState, setNavigationState] =
     useRecoilState(navigationStateAtom)
+
+  const handleLinkClick = (link) => {
+    //1 - refine by the value, category, filter or context
+    if (link.type !== 'context') {
+      searchParams.delete('context')
+      refine(link.value)
+    }
+    // set internal state for the application
+    setNavigationState({
+      type: link.type,
+      name: link.name,
+      value: link.value,
+    })
+
+    //2 - check if there are any other search params and delete them if there are in double
+    for (const key of searchParams.keys()) {
+      if (key === link.type) {
+        searchParams.delete(key)
+      }
+    }
+
+    //3 - set the new search params
+    if (link.type === 'context') {
+      // Refine the refinements
+      refine('')
+      // Refine the query
+      refineQuery('')
+      // Change Query Value in SearchBox component
+      setLocalQuery('')
+      // Set the context in URL
+      searchParams.append(link.type, link.value)
+      setSearchParams(searchParams)
+    }
+    //4 - navigate to the search page
+    // define the navigation params
+    const navigationParams = {
+      pathname: '/search',
+      search: `?${searchParams}`,
+    }
+    // navigate to the search page
+    navigate(navigationParams)
+  }
 
   useEffect(() => {
     // remove the nav state if a query in a context page
@@ -78,40 +142,19 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
     >
       {links.map((link, i) => {
         return (
-   <ConditionalWrapper
+          <ConditionalWrapper
             condition={link.type === 'context'}
             wrapper={(children) => (
               <WithToolTip translationKey="contextLink">{children}</WithToolTip>
             )}
           >
-          <li
-            id={link.name}
-            tabIndex="0"
-            key={link.name}
-            onClick={() => {
-              //Build action based on link type, then navigate
-              let action = null
-              if (link.type === 'filter' && link.filter?.length > 0) {
-                action = `${categoryPageFilterAttribute}:'${link.filter}'`
-              } else if (link.type === 'context') {
-                action = link.context
-              } else if (
-                link.type === 'rawFilter' &&
-                link.rawFilter?.length > 0
-              ) {
-                action = `${link.rawFilter}`
-              }
-              setNavigationState({
-                type: link.type,
-                name: link.name,
-                action: action,
-                segment: link.segment,
-              })
-              searchParams.set('category', link.name)
-              navigate({
-                pathname: '/search',
-                search: `?${searchParams}`,
-              })
+            <li
+              id={link.name}
+              tabIndex="0"
+              key={link.name}
+              onClick={() => {
+                handleLinkClick(link)
+
                 // Only used for Mobile view
                 if (!isDesktop) {
                   setIsMenuOpen(false)
