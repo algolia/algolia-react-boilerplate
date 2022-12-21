@@ -1,7 +1,7 @@
 import { openQR } from '@/config/qrCodeConfig'
 import { useSetRecoilState } from 'recoil'
 import { QrCodePicto } from '@/assets/svg/SvgIndex'
-import './SCSS/qrCode.scss'
+import './SCSS/qrcode.scss'
 import { useState } from 'react'
 
 const QRCodeOpener = () => {
