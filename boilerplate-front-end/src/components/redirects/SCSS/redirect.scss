@@ -1,0 +1,49 @@
+@use '../../../scss/partials' as *;
+
+.redirectModal {
+  &__infos {
+    margin-bottom: 2rem;
+    p {
+      @include p-text($main-color, 500);
+      text-align: left;
+    }
+
+    span {
+      color: $secondary-color;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    &-ok {
+      @include btn($secondary-color-custom-gradient, $white-color);
+      border: 1px solid transparent;
+      width: 100%;
+      gap: 1rem;
+      &:hover {
+        @include btn-hover($secondary-color-custom-gradient, $white-color);
+      }
+    }
+
+    &-no {
+      @include btn($white-color, $main-color);
+      border: 1px solid $secondary-color;
+      width: 100%;
+      &:hover {
+        @include btn-hover($secondary-color, $white-color);
+      }
+    }
+  }
+}
+
+//__________________________________________________
+// MOBILE
+//__________________________________________________
+
+.redirectModal-mobile {
+  width: 90vw;
+  height: 60vh;
+}

@@ -1,0 +1,281 @@
+@use '../../../scss/partials' as *;
+
+// ------------------------------------------
+// Header
+// ------------------------------------------
+.header {
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  padding: 0 0 2rem 0;
+  background-color: $background-color;
+  .container {
+    margin: 0 auto;
+    .container__header-top {
+      width: 100%;
+      padding: 0.6rem 3rem;
+      background-color: $tertiary-color;
+      &-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        h3 {
+          @include titleH3($white-color);
+          text-transform: capitalize;
+        }
+      }
+      .selector-list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        margin-right: 2rem;
+        button {
+          svg {
+            path {
+              fill: $white-color;
+            }
+          }
+          p {
+            @include p-text($white-color);
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+    .container__header-mid {
+      position: relative;
+      align-items: center;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1600px;
+      margin: 0 auto;
+      a {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      &__logo {
+        width: 10rem;
+        min-height: 7rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        svg {
+          margin: 0 auto;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .container__header-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
+      width: 10rem;
+
+      .picto-cart {
+        position: relative;
+        display: flex;
+        align-items: center;
+        svg {
+          cursor: pointer;
+          width: 32px;
+          margin-top: 6px;
+        }
+        &__active {
+          animation: bounce 0.3s ease-in-out forwards;
+        }
+
+        .notification-cart {
+          position: absolute;
+          top: -0.5rem;
+          right: -0.5rem;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background-color: $secondary-color;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          span {
+            @include p-text($white-color);
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+    .container__header-nav {
+      width: 100%;
+      &__links {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+        gap: clamp(0.5rem, -1.12rem + 4.13vw, 2rem);
+        li {
+          z-index: 50;
+          &:last-child {
+            p {
+              color: $secondary-color;
+            }
+          }
+          cursor: pointer;
+          p {
+            position: relative;
+            transition: 0.2 ease-in-out;
+            @include p-text($main-color, 800);
+            font-size: clamp(0.6rem, 0.07rem + 1.03vw, 1rem);
+            @include underliningAnimation($secondary-color);
+          }
+          .selected {
+            @include selectedNavItem($secondary-color);
+          }
+        }
+      }
+    }
+  }
+}
+
+// MOBILE & TABLET
+.header {
+  .container-mobile {
+    .container__header-mid {
+      margin-top: 1rem;
+      padding: 0 1rem;
+
+      &__title {
+        width: 30%;
+        h1 {
+          display: none;
+        }
+      }
+    }
+    .container__header-mid__logo {
+      // width: 35% !important;
+      svg {
+        width: 3rem;
+      }
+    }
+    .searchbox-container-mobile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin: 0 1rem;
+
+      .ais-VoiceSearch {
+        right: 8%;
+      }
+    }
+
+    &__navigation-wp {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      z-index: 994;
+      animation: opacity 0.2s ease-in-out;
+    }
+
+    &__navList {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 60vw;
+      height: 100vh;
+      z-index: 994;
+      background-color: $background-color;
+
+      &-items {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1.5rem;
+        margin-top: 8rem;
+        padding: 1rem 2.5rem;
+
+        li {
+          cursor: pointer;
+          text-align: left;
+          p {
+            position: relative;
+            @include p-text($main-color, 500);
+            font-size: 0.8rem;
+          }
+        }
+        .selected {
+          &::before {
+            content: '';
+            position: absolute;
+            background-color: $grey-dark-color;
+            height: 1px;
+            width: 100%;
+            bottom: -0.5rem;
+            transform: scaleX(1);
+          }
+        }
+      }
+    }
+    .picto-cart {
+      display: flex;
+      .notification-cart {
+        margin-left: 1rem;
+        background-color: $secondary-color;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          color: $background-color;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+  .hamburger {
+    @include hamburger-menu;
+  }
+  .hamburger-active {
+    @include hamburger-menu-active;
+  }
+  .hamburger-inactive {
+    @include hamburger-menu-inactive;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

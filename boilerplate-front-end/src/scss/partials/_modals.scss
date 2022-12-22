@@ -1,0 +1,66 @@
+// @use '../../scss/partials/' as *;
+
+.error-modal-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-modal-content {
+  width: 80%;
+}
+
+.error-modal-content > h5 {
+  text-align: center;
+  font-size: 18px;
+  color: red;
+}
+
+.Overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 999;
+  z-index: 900;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.Modal {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
+  background-color: white;
+  width: 35rem;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 999;
+  padding: 1.5rem 2rem;
+  border-radius: 0.5rem;
+  isolation: isolate;
+}
+
+.ModalContent {
+}
+
+@media only screen and (min-width: 800px) {
+  .ModalContent {
+    width: 660px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
