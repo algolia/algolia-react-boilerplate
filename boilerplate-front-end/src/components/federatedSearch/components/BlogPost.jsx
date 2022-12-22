@@ -13,7 +13,7 @@ import get from 'lodash/get'
 function Articles(props) {
   const { hits } = useHits(props)
   const { image, date, title, headings } = useRecoilValue(contentArticlesConfig)
-  //get title
+  //get title from props
   const { titleArticles } = props
 
   return (
