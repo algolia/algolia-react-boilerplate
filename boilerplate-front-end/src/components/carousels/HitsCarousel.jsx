@@ -70,7 +70,8 @@ const HitsCarousel = ({ hit, sendEvent }) => {
           {shouldShowCartIcons && (
             <div
               className={cartLogoClicked ? 'cart cart-active' : 'cart'}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation()
                 setCartLogoClicked(true)
                 setTimeout(() => setCartLogoClicked(false), 300)
                 setAddToCartAtom(hit)
