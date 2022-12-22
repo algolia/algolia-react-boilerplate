@@ -1,0 +1,1 @@
+import{j as a,a1 as t,aF as s}from"./index.84b31f96.js";const r=({hit:i})=>a(t.div,{variants:s,initial:"hidden",animate:"show",className:"hit-list",children:a("img",{src:i.image.desktop_url,loading:"lazy",alt:""})});export{r as default};
