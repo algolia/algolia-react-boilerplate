@@ -1,11 +1,11 @@
-import { personaSelectedFiltersAtom } from '@/config/personaConfig'
+import { personaObjectSelectedAtom } from '@/config/personaConfig'
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import '../SCSS/ranking.scss'
 
 const RankingIcon = (props) => {
   const { hit } = props
-  const personaFilters = useRecoilValue(personaSelectedFiltersAtom)
+  const persona = useRecoilValue(personaObjectSelectedAtom)
 
   const [icon, setIcon] = useState(null)
 
@@ -36,7 +36,7 @@ const RankingIcon = (props) => {
     }
   }, [hit])
 
-  if (!icon || personaFilters.length < 1) return null
+  if (!icon || persona.personalizationFilters.length < 1) return null
 
   return (
     <div className={`ranking-bg ${icon.color}`}>

@@ -96,6 +96,23 @@ export const searchTermsConfig = [
 ]
 
 // ------------------------------------------
+// Applied Rules
+// Will show the rules applied in the app while browsing
+// ------------------------------------------
+// Should we show the applied rules Switcher
+export const shouldShowAppliedRulesSwitcher = atom({
+  key: 'shouldShowAppliedRulesSwitcher',
+  default: true,
+})
+// What should be the information showed to the user
+export const appliedRulesInformations = [
+  {
+    span: 'Rules On',
+    details: 'The rules that are apply will be shown live',
+  },
+]
+
+// ------------------------------------------
 // Search Persona Guide Config
 // Persona in demo guide allow to select a persona and
 // showcase a personalised Search experience
@@ -234,8 +251,8 @@ export const isPersonnaEventToggle = atom({
 })
 
 // Please ignore this atom - DON'T TOUCH THIS
-export const searchPersonaSelectedAtom = atom({
-  key: 'searchPersonaSelectedAtom', // unique ID (with respect to other atoms/selectors)
+export const searchpersonaObjectSelectedAtom = atom({
+  key: 'searchpersonaObjectSelectedAtom', // unique ID (with respect to other atoms/selectors)
   default: '', // default value (aka initial value)
 })
 

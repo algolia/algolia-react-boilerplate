@@ -1,54 +1,35 @@
-import { useRef, useState } from 'react'
+// external libs
+import { useRecoilValue } from 'recoil'
+import { useState, useRef } from 'react'
+import PropTypes from 'prop-types'
 
-// React-router
-import { createSearchParams, useNavigate } from 'react-router-dom'
-
-// import Recoil States
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-
-//import configuration
-import {
-  personaSelectedAtom,
-  personaSelectedFiltersAtom,
-  personaSelectedName,
-} from '@/config/personaConfig'
-import { queryAtom } from '@/config/searchboxConfig'
-import { segmentSelectedAtom } from '@/config/segmentConfig'
-// Changing index & currency through the app
-import { currencySymbolAtom } from '@/config/currencyConfig'
-import { languageSwitchConfig } from '@/config/languagesConfig'
-import { linksHeader } from '@/config/navigationConfig'
-
-// handle Alert config
-import {
-  alertContent as alertContentAtom,
-  isAlertOpen,
-} from '@/config/demoGuideConfig'
-
-// Import index to handle language changes
-import { mainIndex } from '@/config/algoliaEnvConfig'
-
-// Import components
-import { ChevronDown } from '@/assets/svg/SvgIndex'
-
-// import Custom Hook
+// local hooks
+import { windowSize } from '@/hooks/useScreenSize'
 import useOutsideClick from '@/hooks/useOutsideClick'
 
-// import scoped CSS
+// SVGs
+import { ChevronDown } from '@/assets/svg/SvgIndex'
+
+// local components
+import SelectorOption from './SelectorOption'
+
+// local styles
 import './selectors.scss'
 
-import { windowSize } from '@/hooks/useScreenSize'
-
-//Use Translation
-import { useTranslation } from 'react-i18next'
-
-export const Selectors = ({ props }) => {
+// Selectors takes an array of options and renders a list of SelectItems to choose from those options
+// It also takes the currently selected value and a function to set the selected value
+// Each option is expected to have a label and a value, but can have more
+function Selectors({ options, selectedValue, setSelectedValue }) {
+  // state to control the menu being open
   const [menuActive, setMenuActive] = useState(false)
-  const [selectedValue, setSelectedValue] = useState(props[0].label)
-  const selectorBtn = useRef()
 
+  // checks if the screen is desktop size
   const { isDesktop } = useRecoilValue(windowSize)
 
+  // ref for the button
+  const selectorBtn = useRef()
+
+  // close the menu when clicking outside of it
   useOutsideClick(selectorBtn.current, () => setMenuActive(false))
 
   return (
@@ -59,12 +40,13 @@ export const Selectors = ({ props }) => {
           : 'selectorsWrapper selectorsWrapper-mobile'
       }
     >
+      {/* button to open/close the menu */}
       <button
         className="selectorsWrapper__btn"
         onClick={() => setMenuActive(!menuActive)}
         ref={selectorBtn}
       >
-        <p>{selectedValue}</p>
+        <p>{selectedValue?.label}</p>
         <ChevronDown />
       </button>
       <ul
@@ -74,14 +56,11 @@ export const Selectors = ({ props }) => {
             : 'selectorsWrapper__list'
         }
       >
-        {props.map((item) => (
-          <SelectItem
-            label={item.label}
-            value={item.value}
-            type={item.type}
-            key={item.label}
-            alertContent={item.alertContent}
-            personalizationFilters={item.personalizationFilters}
+        {/* map through the options and render a SelectorOption for each one */}
+        {options.map((option) => (
+          <SelectorOption
+            key={option.label}
+            option={option}
             setSelectedValue={setSelectedValue}
           />
         ))}
@@ -90,128 +69,21 @@ export const Selectors = ({ props }) => {
   )
 }
 
-const SelectItem = ({
-  label,
-  value,
-  type,
-  alertContent,
-  setSelectedValue,
-  personalizationFilters,
-}) => {
-  const setSegmentSelect = useSetRecoilState(segmentSelectedAtom)
-  const setPersonaSelect = useSetRecoilState(personaSelectedAtom)
-  const setPersonaSelectedName = useSetRecoilState(personaSelectedName)
-  const setPersonaSelectedFilters = useSetRecoilState(
-    personaSelectedFiltersAtom
-  )
-  // Recoil State - update query in searchBar
-  const setQueryState = useSetRecoilState(queryAtom)
-  // Get index & currency atom to use it in the switch statement
-  const setCurrency = useSetRecoilState(currencySymbolAtom)
-  const index = useSetRecoilState(mainIndex)
-  const navigationLinks = useSetRecoilState(linksHeader)
+const optionProps = PropTypes.shape({
+  label: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+    PropTypes.array,
+  ]),
+})
 
-  // Recoil state for alert
-  const setAlert = useSetRecoilState(alertContentAtom)
-  const setAlertOpen = useSetRecoilState(isAlertOpen)
-
-  // Use the translator
-  const { i18n } = useTranslation()
-
-  const handleChangeOfLanguage = (e) => {
-    switch (e) {
-      case 'English':
-        index(languageSwitchConfig.EN.index)
-        setCurrency(languageSwitchConfig.EN.currency)
-        navigationLinks(languageSwitchConfig.EN.linksHeader)
-        i18n.changeLanguage('en')
-        break
-      case 'French':
-        index(languageSwitchConfig.FR.index)
-        setCurrency(languageSwitchConfig.FR.currency)
-        navigationLinks(languageSwitchConfig.FR.linksHeader)
-        i18n.changeLanguage('fr')
-        break
-      case 'German':
-        index(languageSwitchConfig.GER.index)
-        setCurrency(languageSwitchConfig.GER.currency)
-        navigationLinks(languageSwitchConfig.GER.linksHeader)
-        i18n.changeLanguage('ger')
-        break
-      case 'Italian':
-        index(languageSwitchConfig.IT.index)
-        setCurrency(languageSwitchConfig.IT.currency)
-        navigationLinks(languageSwitchConfig.IT.linksHeader)
-        i18n.changeLanguage('it')
-        break
-    }
-  }
-
-  const triggerAlert = (content) => {
-    setAlertOpen(true)
-    setAlert(content)
-    setTimeout(() => setAlertOpen(false), 5000)
-  }
-
-  // router hook to navigate using a function
-  const navigate = useNavigate()
-
-  const handleClick = (
-    label,
-    type,
-    value,
-    alertContent,
-    personalizationFilters
-  ) => {
-    switch (type) {
-      case 'landing page':
-        if (value !== '') {
-          navigate({
-            pathname: '/search',
-            search: `?${createSearchParams({ context: value })}`,
-          })
-          triggerAlert(alertContent)
-        }
-        break
-      case 'segment':
-        setSegmentSelect(value)
-        break
-      case 'persona':
-        setPersonaSelect(value)
-        setPersonaSelectedFilters(personalizationFilters)
-        setPersonaSelectedName(label)
-        break
-      case 'language':
-        handleChangeOfLanguage(value)
-        break
-      case 'dynamic filters':
-      case 'injected content':
-      case 'redirect':
-      case 'banner':
-      case 'search terms':
-        if (value !== '') {
-          navigate({
-            pathname: '/search',
-            search: `?${createSearchParams({ query: value })}`,
-          })
-          setQueryState(value)
-          triggerAlert(alertContent)
-        }
-        break
-      default:
-        break
-    }
-  }
-
-  return (
-    <li
-      className="selectorsWrapper__listItem"
-      onClick={() => {
-        handleClick(label, type, value, alertContent, personalizationFilters)
-        setSelectedValue(label)
-      }}
-    >
-      {label}
-    </li>
-  )
+Selectors.propTypes = {
+  options: PropTypes.arrayOf(optionProps),
+  selectedValue: optionProps,
+  setSelectedValue: PropTypes.func,
 }
+
+export default Selectors

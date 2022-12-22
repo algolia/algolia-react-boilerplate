@@ -3,8 +3,6 @@ import { useEffect } from 'react'
 //Recoil states & values
 import { useRecoilValue } from 'recoil'
 
-// Import navigate function to route to results page on search submit
-
 import { mainIndex } from '@/config/algoliaEnvConfig'
 import { predictUserIdAtom } from '@/config/predictConfig'
 import { searchClient } from './config/algoliaEnvConfig'
@@ -16,7 +14,7 @@ import { InstantSearch } from 'react-instantsearch-hooks-web'
 import PredictUserProfileProvider from './components/predict/PredictUserProfileProvider'
 
 // Import Components
-import { Main } from './Main'
+import Main from './Main'
 
 // Import fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -24,22 +22,28 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
 const App = () => {
-  // Add the icons you need to the library
-  library.add(fas)
-  // Get userID from Predict
-  const userId = useRecoilValue(predictUserIdAtom)
 
   // Index to make the main search queries
   const index = useRecoilValue(mainIndex)
+  
+  // Add the icons you need to the library
+  library.add(fas)
+
+  // Get userID from Predict
+  const userId = useRecoilValue(predictUserIdAtom)
+
   useEffect(() => {
     window.process = {
       ...window.process,
     }
   }, [])
-
   return (
     <PredictUserProfileProvider userID={userId}>
-      <InstantSearch searchClient={searchClient} indexName={index}>
+      <InstantSearch
+        searchClient={searchClient}
+        indexName={index}
+        routing={true}
+      >
         <Main />
       </InstantSearch>
     </PredictUserProfileProvider>

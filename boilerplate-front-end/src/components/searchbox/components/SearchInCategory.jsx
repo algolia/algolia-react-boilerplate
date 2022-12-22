@@ -5,8 +5,17 @@ import { CloseButton } from '@/assets/svg/SvgIndex'
 //Use Translation
 import { useTranslation } from 'react-i18next'
 
-import { navigationStateAtom } from '@/config/navigationConfig'
+import {
+  categoryPageFilterAttribute,
+  hierarchicalPageFilterAttribute,
+  isHierarchicalFilterAttribute,
+  navigationStateAtom,
+} from '@/config/navigationConfig'
 import { useRecoilState } from 'recoil'
+import {
+  useHierarchicalMenu,
+  useRefinementList,
+} from 'react-instantsearch-hooks-web'
 
 // React router
 import { useSearchParams } from 'react-router-dom'
@@ -22,12 +31,28 @@ const SearchInCategory = () => {
   const navigate = useNavigate()
 
   // Import and use translation
-
   const { t } = useTranslation('translation', {
     keyPrefix: 'srp',
   })
 
-  if (navigationState?.type === 'filter' && navigationState?.action !== null) {
+  let refine = null
+
+  if (isHierarchicalFilterAttribute) {
+    const { refine: hierarchicalRefine } = useHierarchicalMenu({
+      attributes: [hierarchicalPageFilterAttribute],
+    })
+    refine = hierarchicalRefine
+  } else {
+    const { refine: normalRefine } = useRefinementList({
+      attribute: categoryPageFilterAttribute,
+    })
+    refine = normalRefine
+  }
+
+  if (
+    navigationState?.type === 'category' ||
+    navigationState?.type === 'filter'
+  ) {
     return (
       <div className="searchbox__category">
         <p>
@@ -36,6 +61,7 @@ const SearchInCategory = () => {
         <span
           onClick={() => {
             setNavigationState({})
+            refine('')
             navigate('/search')
           }}
           className="searchbox__category__close-btn"
@@ -54,6 +80,7 @@ const SearchInCategory = () => {
         <p>{t('searchInContext')}</p>
         <span
           onClick={() => {
+            refine('')
             setNavigationState({})
             navigate('/search')
           }}

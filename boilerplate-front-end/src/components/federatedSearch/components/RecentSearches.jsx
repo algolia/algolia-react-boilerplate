@@ -3,19 +3,13 @@ import { memo } from 'react'
 // components import
 import { ChevronRight } from '@/assets/svg/SvgIndex'
 
-import { useNavigate, createSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-// recoil import
-import { useSetRecoilState } from 'recoil'
-import { queryAtom } from '@/config/searchboxConfig'
-
-const RecentSearches = memo(({ title }) => {
+const RecentSearches = ({ title, query, refine }) => {
   const getSearches = localStorage.getItem('recentSearches')
   const cleanSearches = JSON.parse(getSearches)
   // router hook to navigate using a function
   const navigate = useNavigate()
-  // update query in searchBar
-  const setQueryState = useSetRecoilState(queryAtom)
 
   if (cleanSearches && cleanSearches.length !== 0) {
     return (
@@ -29,11 +23,11 @@ const RecentSearches = memo(({ title }) => {
               return (
                 <li
                   onClick={() => {
+                    refine(search)
                     navigate({
                       pathname: '/search',
-                      search: `?${createSearchParams({ query: search })}`,
+                      replace: false,
                     })
-                    setQueryState(search)
                   }}
                   key={index}
                 >
@@ -48,6 +42,6 @@ const RecentSearches = memo(({ title }) => {
   } else {
     return null
   }
-})
+}
 
-export default RecentSearches
+export default memo(RecentSearches)

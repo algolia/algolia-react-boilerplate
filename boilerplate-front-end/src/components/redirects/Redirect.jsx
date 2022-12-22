@@ -1,81 +1,74 @@
-import { useEffect, memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 //Algolia's import
 import { useQueryRules } from 'react-instantsearch-hooks-web'
 
 // Import Recoil
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 // Import React router
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-// Import Config
+import CustomModal from '@/components/modals/CustomModal'
+
 import { showRedirectModal } from '@/config/redirectConfig'
-import { queryAtom } from '@/config/searchboxConfig'
-
-import { windowSize } from '@/hooks/useScreenSize'
 
 //importing CSS
 import './SCSS/redirect.scss'
 
-function Redirect(props) {
-  const { items } = useQueryRules(props)
-  const [isRedirectModal, setIsRedirectModal] =
+const Redirect = () => {
+  const { items } = useQueryRules()
+  const [urlToRedirectTo, setUrlToRedirectTo] = useState('')
+  const [redirectRulePresent, setRedirectRulePresent] = useState(false)
+  const [shouldShowRedirectModal, setShouldShowRedirectModal] =
     useRecoilState(showRedirectModal)
 
-  const setQuery = useSetRecoilState(queryAtom)
-
-  const { isDesktop } = useRecoilValue(windowSize)
-
-  // Handle URL search parameters through React Router
-  let [searchParams, setSearchParams] = useSearchParams()
-
-  const match = items.find((data) => Boolean(data.redirect))
-
   useEffect(() => {
-    match && match.redirect
-      ? setIsRedirectModal(true)
-      : setIsRedirectModal(false)
-  }, [match])
+    let matches = items.filter((item) => item.type === 'redirect')
+    if (matches.length > 0) {
+      setUrlToRedirectTo(matches[0].redirect)
+      setRedirectRulePresent(true)
+      setShouldShowRedirectModal(true)
+    }
+  }, [items])
 
-  if (match && match.redirect && isRedirectModal) {
+  const navigate = useNavigate()
+
+  if (redirectRulePresent && shouldShowRedirectModal) {
     return (
-      <div className="redirectModal-wp">
-        <div
-          className={
-            isDesktop ? 'redirectModal' : 'redirectModal redirectModal-mobile'
-          }
-        >
-          <div className="redirectModal__infos">
-            <p>This query will take you to Algolia's Homepage</p>
-            <p>Do you wish to be redirected ? </p>
-          </div>
-          <div className="redirectModal__buttons">
-            <a
-              href="#"
-              className="redirectModal__buttons-ok"
-              onClick={() => {
-                window.location.href = match.redirect
-                setIsRedirectModal(false)
-              }}
-            >
-              <p>Yes I want to be redirected</p>
-            </a>
-            <a
-              href="#"
-              className="redirectModal__buttons-no"
-              onClick={() => {
-                setQuery('')
-                searchParams.set('query', '')
-                setSearchParams(searchParams)
-                setIsRedirectModal(false)
-              }}
-            >
-              <p>No I want to stay on this demo</p>
-            </a>
-          </div>
+      <CustomModal
+        isActive={shouldShowRedirectModal}
+        setActive={setShouldShowRedirectModal}
+      >
+        <div className="redirectModal__infos">
+          <p>
+            This query will take you to <span>Algolia's Homepage</span>
+          </p>
+          <p>Do you wish to be redirected ? </p>
         </div>
-      </div>
+        <div className="redirectModal__buttons">
+          <a
+            className="redirectModal__buttons-ok"
+            onClick={() => {
+              window.location.replace(urlToRedirectTo)
+              setShouldShowRedirectModal(false)
+            }}
+          >
+            <p>Yes I want to be redirected</p>
+          </a>
+          <a
+            className="redirectModal__buttons-no"
+            onClick={() => {
+              setShouldShowRedirectModal(false)
+              navigate({
+                pathname: '/search',
+              })
+            }}
+          >
+            <p>No I want to stay on this demo</p>
+          </a>
+        </div>
+      </CustomModal>
     )
   } else return null
 }

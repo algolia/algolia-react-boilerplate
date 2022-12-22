@@ -1,9 +1,25 @@
-import { Selectors } from '@/components/selector/Selectors'
+import { useState } from 'react'
+import { useSetRecoilState } from 'recoil'
+import Selectors from '@/components/selector/Selectors'
+
+import { localSearchQueryAtom } from '@/config/searchboxConfig'
 
 // Import configuration
 import { DemoGuideInjectedContentConfig } from '@/config/demoGuideConfig'
 
-const DemoGuideInjectedContent = () => {
+const DemoGuideInjectedContent = ({ triggerAlert, refine }) => {
+  const [selectedValue, setSelectedValue] = useState(
+    DemoGuideInjectedContentConfig[0]
+  )
+  const setLocalSearch = useSetRecoilState(localSearchQueryAtom)
+
+  const handleInjectedContent = (injectedContent) => {
+    setLocalSearch(injectedContent.value)
+    refine(injectedContent.value)
+    setSelectedValue(injectedContent)
+    triggerAlert(injectedContent.alertContent)
+  }
+
   return (
     <div className="demoGuideHelpers">
       <h3>Injected Content</h3>
@@ -17,7 +33,12 @@ const DemoGuideInjectedContent = () => {
           )
         })}
       </div>
-      <Selectors props={DemoGuideInjectedContentConfig} />
+      <Selectors
+        selectedValue={selectedValue}
+        setSelectedValue={handleInjectedContent}
+        refine={refine}
+        options={DemoGuideInjectedContentConfig}
+      />
     </div>
   )
 }

@@ -29,6 +29,29 @@ const Footer = () => {
 
   const navigate = useNavigate()
 
+  const handleLinkClick = (link) => {
+    setNavigationState({
+      type: link.type,
+      name: link.name,
+      value: link.value,
+    })
+
+    for (const key of searchParams.keys()) {
+      searchParams.delete(key)
+    }
+
+    searchParams.set(link.type, link.value)
+
+    setSearchParams(searchParams)
+
+    const navigationParams = {
+      pathname: '/search',
+      search: `?${searchParams}`,
+    }
+
+    navigate(navigationParams)
+  }
+
   return (
     <footer className={isDesktop ? 'footer' : 'footer footer-mobile'}>
       <div className="footer__container">
@@ -99,28 +122,7 @@ const Footer = () => {
                   tabIndex="0"
                   key={link.name}
                   onClick={() => {
-                    //Build action based on link type, then navigate
-                    let action = null
-                    if (link.type === 'filter' && link.filter?.length > 0) {
-                      action = `${categoryPageFilterAttribute}:'${link.filter}'`
-                    } else if (link.type === 'context') {
-                      action = link.context
-                    } else if (
-                      link.type === 'rawFilter' &&
-                      link.rawFilter?.length > 0
-                    ) {
-                      action = `${link.rawFilter}`
-                    }
-                    setNavigationState({
-                      type: link.type,
-                      name: link.name,
-                      action: action,
-                    })
-                    searchParams.set('category', link.name)
-                    navigate({
-                      pathname: '/search',
-                      search: `?${searchParams}`,
-                    })
+                    handleLinkClick(link)
                   }}
                 >
                   <p>{link.name}</p>

@@ -14,7 +14,7 @@
       width: 100%;
       padding: 0.6rem 3rem;
       background-color: $tertiary-color;
-      &-inner{
+      &-inner {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -75,14 +75,22 @@
           height: 100%;
         }
       }
+    }
+    .container__header-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
+      width: 10rem;
+
       .picto-cart {
         position: relative;
-        width: 10rem;
         display: flex;
-        justify-content: flex-end;
+        align-items: center;
         svg {
           cursor: pointer;
           width: 32px;
+          margin-top: 6px;
         }
         &__active {
           animation: bounce 0.3s ease-in-out forwards;

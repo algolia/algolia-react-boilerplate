@@ -1,11 +1,14 @@
 // This is the Search Results Page that you'll see on a normal computer screen
-import { Fragment, lazy, Suspense, useEffect, useState } from 'react'
+import { Fragment, lazy, Suspense, useEffect, useState, memo } from 'react'
 
 // eslint-disable-next-line import/order
 import {
   Configure,
   Index,
   useInfiniteHits,
+  useInstantSearch,
+  useHierarchicalMenu,
+  useRefinementList,
 } from 'react-instantsearch-hooks-web'
 
 //import react router
@@ -33,7 +36,6 @@ const CustomCurrentRefinements = lazy(() =>
 const GenericRefinementList = lazy(() => import('@/components/facets/Facets'))
 
 // Configuration
-import { algoliaExplainToggle } from '@/config/algoliaExplainConfig'
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig'
 import {
   shouldHaveInjectedHits,
@@ -45,15 +47,13 @@ import {
 import { setNbHitsAtom } from '@/config/hitsConfig'
 import {
   personalizationImpact,
-  personaSelectedAtom,
-  personaSelectedFiltersAtom,
+  personaObjectSelectedAtom,
 } from '@/config/personaConfig'
 import { isFacetPanelOpen } from '@/config/refinementsConfig'
-import { queryAtom } from '@/config/searchboxConfig'
-import { segmentSelectedAtom } from '@/config/segmentConfig'
+
+import { segmentObjectSelectedAtom } from '@/config/segmentConfig'
 import { sortBy } from '@/config/sortByConfig'
 
-import { navigationStateAtom } from '@/config/navigationConfig'
 // SVG
 import { ChevronLeft, FilterPicto } from '@/assets/svg/SvgIndex'
 
@@ -68,9 +68,17 @@ import { shouldHaveInjectedBanners } from '@/config/featuresConfig'
 import '@/pages/searchResultsPage/searchResultsPage.scss'
 import { useTranslation } from 'react-i18next'
 
-const SearchResultsPage = () => {
-  // is algolia explain active?
-  const isAlgoliaExplainActivated = useRecoilValue(algoliaExplainToggle)
+import {
+  hierarchicalPageFilterAttribute,
+  categoryPageFilterAttribute,
+  isHierarchicalFilterAttribute,
+  navigationStateAtom,
+} from '@/config/navigationConfig'
+
+const SearchResultsPage = ({ query }) => {
+  let [categoryPageId, setCategoryPageId] = useState('')
+  const { indexUiState } = useInstantSearch()
+
   // state to hold any context passed in as a URL param
   const [extraContext, setExtraContext] = useState('')
 
@@ -86,12 +94,10 @@ const SearchResultsPage = () => {
 
   // Recoil & React states
   const stats = useRecoilValue(shouldHaveStats)
-  const queryState = useRecoilValue(queryAtom)
   const { isDesktop } = useRecoilValue(windowSize)
   const navigationState = useRecoilValue(navigationStateAtom)
 
   // Should show injected content or not
-  // Defined in config file
   const shouldInjectContent = useRecoilValue(shouldHaveInjectedHits)
 
   // Get indexes Value
@@ -104,11 +110,10 @@ const SearchResultsPage = () => {
   const shouldHaveSortsAtom = useRecoilValue(shouldHaveSorts)
 
   // Persona
-  const userToken = useRecoilValue(personaSelectedAtom)
-  const personalizationFilters = useRecoilValue(personaSelectedFiltersAtom)
+  const persona = useRecoilValue(personaObjectSelectedAtom)
 
   // Segments
-  const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom)
+  const segment = useRecoilValue(segmentObjectSelectedAtom)
 
   // Trending
   const shouldHaveTrendingProductsValue = useRecoilValue(
@@ -131,24 +136,50 @@ const SearchResultsPage = () => {
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams()
 
-  // Related to next conditional
-  let facetName
-  let facetValue
-
+  // Set the IS state for the category page filter attribute into local state for recommend
   useEffect(() => {
-    // Trending needs to know if you are on category page
+    let hierarchicalWidget = 'hierarchicalMenu'
+    let normalWidget = 'refinementList'
+
+    let widgetToUse = isHierarchicalFilterAttribute
+      ? hierarchicalWidget
+      : normalWidget
+
     if (
-      navigationState?.type === 'filter' &&
-      navigationState?.action !== null
+      indexUiState[widgetToUse]?.[hierarchicalPageFilterAttribute] !== undefined
     ) {
-      facetName = navigationState.action.split(':')[0]
-      facetValue = navigationState.action.split(':')[1].replace(/['"]+/g, '')
+      setCategoryPageId(
+        indexUiState[widgetToUse][hierarchicalPageFilterAttribute][0]
+      )
+    } else {
+      setCategoryPageId('')
     }
-  }, [navigationState])
+  }, [indexUiState])
+
+  let refine = null
+
+  // Must use different IS widget if category page attribute is hierarchical
+  if (isHierarchicalFilterAttribute) {
+    const { refine: hierarchicalRefine } = useHierarchicalMenu({
+      attributes: [hierarchicalPageFilterAttribute],
+    })
+    refine = hierarchicalRefine
+  } else {
+    const { refine: normalRefine } = useRefinementList({
+      attribute: categoryPageFilterAttribute,
+    })
+    refine = normalRefine
+  }
 
   // Extract extra context if passed in from the URL
   useEffect(() => {
     for (const [key, value] of searchParams.entries()) {
+      if (key === 'category') {
+        refine(value)
+      } else if (key === 'filter') {
+        refine('')
+      }
+
       if (key === 'context' && extraContext !== value) {
         setExtraContext(value)
       } else {
@@ -167,22 +198,18 @@ const SearchResultsPage = () => {
   }
 
   let configureProps = {
-    explain: '*',
     analytics: false,
     clickAnalytics: true,
     enablePersonalization: true,
-    userToken: userToken,
+    userToken: persona.value,
     personalizationImpact: personalizationImpact,
-    personalizationFilters: personalizationFilters,
+    personalizationFilters: persona.personalizationFilters,
     filters:
-      (navigationState?.type === 'filter' ||
-        navigationState?.type === 'rawFilter') &&
-      navigationState?.action !== null
-        ? navigationState.action
+      navigationState?.type === 'filter' && navigationState?.value !== null
+        ? navigationState.value
         : '',
-    optionalFilters: segmentOptionalFilters,
+    optionalFilters: segment.value,
     ruleContexts: buildRuleContexts(),
-    query: searchParams.get('query') === null ? '' : searchParams.get('query'),
     getRankingInfo: true,
   }
 
@@ -201,7 +228,7 @@ const SearchResultsPage = () => {
           className={!isDesktop ? 'recommend recommend-mobile' : 'recommend'}
         >
           {shouldHaveTrendingProductsValue &&
-            queryState === '' &&
+            query === '' &&
             navigationState?.type !== 'context' && (
               <div
                 className="recommend__hideTrendingItemBtn"
@@ -220,13 +247,18 @@ const SearchResultsPage = () => {
 
           {shouldHaveTrendingProductsValue &&
             isTrendingItems &&
-            queryState === '' &&
-            navigationState?.type !== 'context' && (
+            query === '' &&
+            navigationState?.type !== 'context' &&
+            navigationState?.type !== 'filter' && (
               <Suspense>
-                <TrendingProducts
-                  facetName={facetName}
-                  facetValue={facetValue}
-                />
+                {categoryPageId !== '' ? (
+                  <TrendingProducts
+                    facetName={categoryPageFilterAttribute}
+                    facetValue={categoryPageId}
+                  />
+                ) : (
+                  <TrendingProducts />
+                )}
               </Suspense>
             )}
         </div>
@@ -245,31 +277,25 @@ const SearchResultsPage = () => {
               isFacetsPanelOpen ? 'srp-container__facets-mobile-active' : ''
             }`}
           >
-            <Suspense fallback={<SkeletonLoader type={'facet'} />}>
-              {/* Render Recommend component - Trending Facets */}
-              {/* Change config in /config/trendingConfig.js */}
-              {shouldHaveTrendingFacetsValue && (
-                <>
-                  <WrappedTrendingFacetValues
-                    attribute="brand"
-                    facetName={'brand'}
-                    limit={500}
-                    facetValue={facetValue}
-                  />
-                </>
-              )}
-              <GenericRefinementList />
-            </Suspense>
+            {/* Render Recommend component - Trending Facets */}
+            {/* Change config in /config/trendingConfig.js */}
+            {shouldHaveTrendingFacetsValue && (
+              <WrappedTrendingFacetValues
+                attribute="brand"
+                facetName="brand"
+                limit={500}
+              />
+            )}
+            <GenericRefinementList />
           </div>
 
           <div className="srp-container__hits">
-            {searchParams.get('query') &&
-              searchParams.get('query').trim() !== '' && (
-                <div className="srp-container__searchInfos">
-                  <p>Showing results for: </p>
-                  <p>"{searchParams.get('query')}"</p>
-                </div>
-              )}
+            {query && query.trim() !== '' && (
+              <div className="srp-container__searchInfos">
+                <p>Showing results for: </p>
+                <p>"{query}"</p>
+              </div>
+            )}
             {/* This is above the items and shows the Algolia search speed and the sorting options (eg. price asc) */}
             <div className="srp-container__stats-sort">
               {!isDesktop && (
@@ -302,7 +328,6 @@ const SearchResultsPage = () => {
                 <CustomClearRefinements />
               </Suspense>
             </div>
-
             <Configure {...configureProps} />
             {/* Render the Injected Hits component or the Standard Hits component */}
             {shouldInjectContent ? (
@@ -335,4 +360,4 @@ const SearchResultsPage = () => {
   )
 }
 
-export default SearchResultsPage
+export default memo(SearchResultsPage)

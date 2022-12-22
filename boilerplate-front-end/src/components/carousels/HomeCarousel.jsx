@@ -9,8 +9,8 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 // Import configuration
 import { mainIndex } from '@/config/algoliaEnvConfig'
 import { hitsPerCarousel, isCarouselLoaded } from '@/config/carouselConfig'
-import { personaSelectedAtom } from '@/config/personaConfig'
-import { segmentSelectedAtom } from '@/config/segmentConfig'
+import { personaObjectSelectedAtom } from '@/config/personaConfig'
+import { segmentObjectSelectedAtom } from '@/config/segmentConfig'
 
 //Import scope SCSS
 import SkeletonLoader from '../hits/components/HitsSkeletonLoader'
@@ -26,8 +26,8 @@ import HitsCarousel from './HitsCarousel'
 // Build the Carousel for use on the Homepage
 const HomeCarousel = ({ context, title }) => {
   const index = useRecoilValue(mainIndex)
-  const userToken = useRecoilValue(personaSelectedAtom)
-  const segmentOptionalFilters = useRecoilValue(segmentSelectedAtom)
+  const persona = useRecoilValue(personaObjectSelectedAtom)
+  const segment = useRecoilValue(segmentObjectSelectedAtom)
   const setCarouselLoaded = useSetRecoilState(isCarouselLoaded)
 
   useEffect(() => setCarouselLoaded(true), [])
@@ -38,8 +38,8 @@ const HomeCarousel = ({ context, title }) => {
         <Configure
           hitsPerPage={hitsPerCarousel}
           ruleContexts={context}
-          optionalFilters={segmentOptionalFilters}
-          userToken={userToken}
+          optionalFilters={segment.value}
+          userToken={persona.value}
           query={''}
         />
         <Carousel title={title} />
@@ -61,7 +61,6 @@ function Carousel(props) {
 
   const carousel = useRef()
   const innerCarousel = useRef()
-  console.log(innerCarousel)
 
   useEffect(() => {
     if (!isLoading) {
