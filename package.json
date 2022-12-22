@@ -1,0 +1,10 @@
+{
+	"scripts": {
+	"build": "vite build",
+	"lint": "tsc"
+  },
+	"devDependencies": {
+		"turbo": "^1.6.3"
+	}
+	
+}
