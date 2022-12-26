@@ -1,0 +1,12 @@
+{
+	"scripts": {
+	"build": "turbo run build --parallel",
+	"start": "turbo run start --parallel",
+	"start:front": "turbo run start --filter=./apps/boilerplate-front-end",
+	"start:docs": "turbo run start --filter=./apps/boilerplate-documentation"
+  },
+	"devDependencies": {
+		"turbo": "^1.6.3"
+	}
+	
+}
