@@ -2,10 +2,10 @@
 
 # dependencies
 
-/node_modules
-/package-lock.json
-/pnpm-lock.yaml
-/yarn.lock
+node_modules
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
 .yarn/*
 
 apps/boilerplate-front-end/node_modules
@@ -16,8 +16,8 @@ apps/boilerplate-documentation/node_modules
 /coverage
 
 # production
-/build
-/dist
+build
+dist
 apps/boilerplate-front-end/build
 apps/boilerplate-front-end/dist
 apps/boilerplate-documentation/build
