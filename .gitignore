@@ -13,10 +13,10 @@
 # production
 /build
 /dist
-boilerplate-front-end/build
-boilerplate-front-end//dist
-boilerplate-documentation/build
-boilerplate-documentation//dist
+apps/boilerplate-front-end/build
+apps/boilerplate-front-end//dist
+apps/boilerplate-documentation/build
+apps/boilerplate-documentation//dist
 
 
 # misc
