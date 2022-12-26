@@ -13,6 +13,11 @@
 # production
 /build
 /dist
+boilerplate-front-end/build
+boilerplate-front-end//dist
+boilerplate-documentation/build
+boilerplate-documentation//dist
+
 
 # misc
 .DS_Store
