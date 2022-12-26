@@ -19,9 +19,9 @@ apps/boilerplate-documentation/node_modules
 /build
 /dist
 apps/boilerplate-front-end/build
-apps/boilerplate-front-end//dist
+apps/boilerplate-front-end/dist
 apps/boilerplate-documentation/build
-apps/boilerplate-documentation//dist
+apps/boilerplate-documentation/dist
 
 
 # misc
