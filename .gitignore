@@ -1,11 +1,16 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/package-lock.json
-/pnpm-lock.yaml
-/yarn.lock
+
+*/node_modules
+*/package-lock.json
+*/pnpm-lock.yaml
+*/yarn.lock
 .yarn/*
+
+apps/boilerplate-front-end/node_modules
+apps/boilerplate-documentation/node_modules
+
 
 # testing
 /coverage
@@ -37,3 +42,4 @@ yarn-error.log*
 
 # turborepo Config
 .turbo
+node_modules
