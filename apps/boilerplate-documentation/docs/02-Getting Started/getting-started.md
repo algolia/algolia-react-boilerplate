@@ -6,8 +6,8 @@ sidebar_position: 1
 
 Before proceeding, please make sure you have the following:
 
-- Node v16.0.0+ installed
-- Yarn installed
+- Node v16.14+ installed
+- pnpm installed [here](https://pnpm.io/).
 
 ## Installing and initial setup
 
