@@ -24,7 +24,7 @@ This repository is using _Workspaces/Monorepo_ with _TurboRepo_.
 Before proceeding, please make sure you have the following:
 
 - Node v16.14+ installed
-- pnpm install [here](https://pnpm.io/).
+- pnpm installed [here](https://pnpm.io/).
 
 ### How to run the apps
 
@@ -32,7 +32,7 @@ To init and install dependancies please use :
 
     pnpm install
 
-To start both applications (documentation - localhost:3001 & front-end - localhost:3000) please use
+To start both applications (documentation - localhost:3001 & front-end - localhost:3000) please use:
 
     pnpm start
 
