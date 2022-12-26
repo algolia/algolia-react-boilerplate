@@ -1,5 +1,5 @@
 {
-  "name": "algolia-react-boilerplate",
+  "name": "boilerplate-front-end",
   "version": "1.0.0",
   "description": "A boilerplate for Algolia Demos",
   "main": "index.js",
@@ -10,6 +10,7 @@
   },
   "scripts": {
     "start": "vite --port=3000",
+    "dev": "vite --port=3000",
     "build": "vite build",
     "serve": "vite --host",
     "preview": "vite preview --host",

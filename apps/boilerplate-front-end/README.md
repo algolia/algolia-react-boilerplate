@@ -44,8 +44,8 @@
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">Pre-requisites</h2>
 Before proceeding, please make sure you have the following:
 
-- Node v16.0.0+ installed
-- Yarn installed
+- Node v16.14+ installed
+- pnpm install [here](https://pnpm.io/).
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
 
@@ -53,7 +53,7 @@ Before proceeding, please make sure you have the following:
 
 1. Clone this repo under a new name for your own demo. You can use the `main` branch that has some features turned off for easier integration
 
-2. Run `yarn` in the root directory and `yarn start` to view your project on [http://localhost:5173](http://localhost:5173/)
+2. Run `pnpm install` in the root directory and `pnpm start:front` to view your project on [http://localhost:3000](http://localhost:3000/)
 
 3. Visit `src/config` and adjust `algoliaEnvConfig` to point to your own app, indices and API keys. If you do not need an index which is present in that file i.e. for articles, please do not remove it, just leave it as is, and you can turn off the relevant feature in the next step.
 
