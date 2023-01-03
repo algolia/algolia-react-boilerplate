@@ -69,7 +69,6 @@ import '@/pages/searchResultsPage/searchResultsPage.scss'
 import { useTranslation } from 'react-i18next'
 
 import {
-  hierarchicalPageFilterAttribute,
   categoryPageFilterAttribute,
   isHierarchicalFilterAttribute,
   navigationStateAtom,
@@ -146,10 +145,10 @@ const SearchResultsPage = ({ query }) => {
       : normalWidget
 
     if (
-      indexUiState[widgetToUse]?.[hierarchicalPageFilterAttribute] !== undefined
+      indexUiState[widgetToUse]?.[categoryPageFilterAttribute] !== undefined
     ) {
       setCategoryPageId(
-        indexUiState[widgetToUse][hierarchicalPageFilterAttribute][0]
+        indexUiState[widgetToUse][categoryPageFilterAttribute][0]
       )
     } else {
       setCategoryPageId('')
@@ -161,7 +160,7 @@ const SearchResultsPage = ({ query }) => {
   // Must use different IS widget if category page attribute is hierarchical
   if (isHierarchicalFilterAttribute) {
     const { refine: hierarchicalRefine } = useHierarchicalMenu({
-      attributes: [hierarchicalPageFilterAttribute],
+      attributes: [categoryPageFilterAttribute],
     })
     refine = hierarchicalRefine
   } else {
