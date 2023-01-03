@@ -8,7 +8,6 @@ import { atom } from 'recoil'
 // It will create a filter which will be used when a category page link is clicked on
 // Please refer to linksHeader to define the category page values which will be filtered
 // ------------------------------------------
-export const hierarchicalPageFilterAttribute = 'hierarchicalCategories.lvl0'
 export const categoryPageFilterAttribute = 'categories'
 
 // ------------------------------------------

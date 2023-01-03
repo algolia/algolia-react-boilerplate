@@ -11,7 +11,6 @@ import WithToolTip from '@/components/algoliaExplain/tooltip/WithTooltip'
 // Import Config for the header
 import {
   categoryPageFilterAttribute,
-  hierarchicalPageFilterAttribute,
   isHierarchicalFilterAttribute,
   linksHeader,
   navigationStateAtom,
@@ -36,7 +35,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
 
   if (isHierarchicalFilterAttribute) {
     const { refine: hierarchicalRefine } = useHierarchicalMenu({
-      attributes: [hierarchicalPageFilterAttribute],
+      attributes: [categoryPageFilterAttribute],
     })
     refine = hierarchicalRefine
   } else {
