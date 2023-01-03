@@ -6,6 +6,10 @@ sidebar_position: 4
 
 The file `Navigation.jsx` is the component file which renders your navigation headers.
 
+They will be shown on all pages of the boilerplate, like so:
+
+![Image](../media/navigation-example.png)
+
 You can edit your navigation links in `src > config > navigationConfig.js`, within the `linksHeader` variable.
 
 Each link must have a `name`, `type` and `value`.
