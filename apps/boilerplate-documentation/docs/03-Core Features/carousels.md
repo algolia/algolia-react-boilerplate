@@ -20,11 +20,31 @@ Please note that carousels can also be fully personalised, just as the result of
 
 ## How do I configure Carousels?
 
+### Merchandisers
+
+You will need to interface with your developers to configure the carousels. This is to keep things flexible. You will need to provide them with the following information:
+
+- The name of the carousel
+
+- The context in which the carousel should be shown i.e. homepage, product page, category page etc.
+
+- What you would like to show in the carousel
+
+If you would like to merchandise the carousel, rather than it being entirely powered by a query/filter etc. then you will need to create a rule in the Algolia dashboard. You should choose "context" as a trigger.
+
+This rule will then be triggered when the context is sent over in the API request. You can then configure the rule to show the products you want to show in the carousel.
+
+Your engineering team will ensure the context is sent over in the API request for the relevant page.
+
+### Developers
+
 Carousels can either be hardcoded by the frontend of your application, or they can be configured using the Algolia dashboard.
 
-For example, your frontend can send a request to Algolia with a query of `*` and a filter of `brand:Apple` and a sort of `price:asc` and a limit of `10` and instruct the results to be shown in a carousel.
+For example, your frontend can send a request to Algolia with a query of `*` and a filter of `brand:Apple` and a sort of `price:asc` and a limit of `10` and instruct the results to be shown in a carousel. This will then show the 10 cheapest Apple products in a carousel.
 
 Alternatively, you can set your frontend up to create a carousel for a rule context. This context can then be fully configured in the Algolia dashboard. For more info on rule contexts, please see [here](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#using-context).
+
+For the carousel frontend, we have provided libraries to help you get started such as: https://github.com/algolia/ui-components/tree/master/packages/horizontal-slider-react
 
 ## Boilerplate implementation of Carousels
 
