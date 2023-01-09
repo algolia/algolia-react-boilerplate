@@ -19,7 +19,7 @@ const Price = ({ hit }) => {
   const displayCurrency = useRecoilValue(shouldDisplayCurrency)
 
   // get the values from the data in hitsConfig
-  const hitPrice = get(hit, price) ? get(hit, price) : hit
+  const hitPrice = get(hit, price) ? get(hit, price) : 'unavailable price'
   const isOnSale = get(hit, onSale)
   const salePrice = get(hit, onSalePrice)
 

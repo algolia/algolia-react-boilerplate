@@ -5,7 +5,7 @@ import { createSearchParams, useLocation, useNavigate } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 
 import connectVoiceSearch from 'instantsearch.js/es/connectors/voice-search/connectVoiceSearch'
-import { useConnector } from 'react-instantsearch-hooks-web'
+import { useConnector, useSearchBox } from 'react-instantsearch-hooks-web'
 
 // Import searchbox Config
 import { searchBoxIsActive } from '@/config/searchboxConfig'

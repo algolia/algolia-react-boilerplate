@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next'
 
 import {
   categoryPageFilterAttribute,
-  hierarchicalPageFilterAttribute,
   isHierarchicalFilterAttribute,
   navigationStateAtom,
 } from '@/config/navigationConfig'
@@ -39,7 +38,7 @@ const SearchInCategory = () => {
 
   if (isHierarchicalFilterAttribute) {
     const { refine: hierarchicalRefine } = useHierarchicalMenu({
-      attributes: [hierarchicalPageFilterAttribute],
+      attributes: [categoryPageFilterAttribute],
     })
     refine = hierarchicalRefine
   } else {
