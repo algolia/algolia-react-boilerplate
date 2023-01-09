@@ -28,10 +28,6 @@ export const mainIndex = atom({
   default: 'flagship_fashion', // default value (aka initial value)
 })
 
-// ADJUST THE DEFAULT VALUE TO YOUR MAIN INDEX
-// This is used in the custom hook to fetch algolia rules which are currently being applied
-export const mainIndexClient = searchClient.initIndex('flagship_fashion')
-
 // ADJUST THE VALUES FOR EACH INDEX NAME IF YOU HAVE THEM
 // IF YOU DO NOT HAVE ONE, IGNORE THE VALUE - DO NOT CHANGE IT
 export const indexNames = selector({
@@ -69,3 +65,7 @@ export const predictClient = algoliapredict(
   predictClientCreds.APIKey,
   predictClientCreds.region
 )
+
+// ADJUST THE DEFAULT VALUE TO YOUR MAIN INDEX
+// This is used in the custom hook to fetch algolia rules which are currently being applied
+export const mainIndexClient = searchClient.initIndex('flagship_fashion')
