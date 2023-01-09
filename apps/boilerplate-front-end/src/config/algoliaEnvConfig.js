@@ -54,9 +54,6 @@ export const searchClient = algoliasearch(
   searchClientCreds.APIKey
 )
 
-// This export is a single instance of the Algolia API client linked to the main index
-export const mainIndexClient = searchClient.initIndex('flagship_fashion')
-
 export const recommendClient = algoliarecommend(
   searchClientCreds.appID,
   searchClientCreds.APIKey
@@ -68,3 +65,7 @@ export const predictClient = algoliapredict(
   predictClientCreds.APIKey,
   predictClientCreds.region
 )
+
+// ADJUST THE DEFAULT VALUE TO YOUR MAIN INDEX
+// This is used in the custom hook to fetch algolia rules which are currently being applied
+export const mainIndexClient = searchClient.initIndex('flagship_fashion')
