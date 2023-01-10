@@ -83,8 +83,8 @@
   }
 
   select {
-    font-size: 0.9rem;
-    font-family: $main-font;
+    @include p-text($main-color);
+    font-size: 0.8rem;
   }
 }
 

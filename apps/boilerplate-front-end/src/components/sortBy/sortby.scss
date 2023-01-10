@@ -1,6 +1,8 @@
+@use '../../scss/partials/' as *;
 .sort-container {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
 @media (max-width: 768px) {
@@ -16,6 +18,6 @@
 }
 
 .sort-text {
-  font-size: 0.9rem;
-  margin-right: 0.5rem;
+  @include p-text($main-color);
+  font-size: 0.8rem;
 }
