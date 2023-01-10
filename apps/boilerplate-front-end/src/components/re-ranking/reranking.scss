@@ -9,6 +9,7 @@
   justify-content: center;
   gap: 1rem;
   align-items: center;
+  min-width: 15vw;
   &__label {
     @include p-text($main-color);
     font-size: 0.8rem;
