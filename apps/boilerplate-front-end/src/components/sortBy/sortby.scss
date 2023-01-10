@@ -1,0 +1,23 @@
+@use '../../scss/partials/' as *;
+.sort-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .sort-container {
+    margin: 1rem 0;
+    justify-content: center;
+    order: 3;
+  }
+
+  .sort-text {
+    display: none;
+  }
+}
+
+.sort-text {
+  @include p-text($main-color);
+  font-size: 0.8rem;
+}

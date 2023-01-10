@@ -1,11 +1,13 @@
 // This is for displaying the SortBy widget, eg Price asc/desc
 import { useSortBy } from 'react-instantsearch-hooks-web'
+import './sortby.scss'
 
 function CustomSortBy(props) {
   const { refine } = useSortBy(props)
   const { items } = props
   return (
-    <div>
+    <div className="sort-container">
+      <p className="sort-text">Sort By: </p>
       <select
         onChange={(event) => {
           event.preventDefault()

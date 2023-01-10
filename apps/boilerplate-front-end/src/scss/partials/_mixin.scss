@@ -200,6 +200,8 @@
 // ------------------------------------------
 @mixin stats($span-color) {
   display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.8rem;
   font-style: italic;
   &__list {
