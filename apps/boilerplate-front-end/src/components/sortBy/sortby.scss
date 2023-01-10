@@ -1,0 +1,21 @@
+.sort-container {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .sort-container {
+    margin: 1rem 0;
+    justify-content: center;
+    order: 3;
+  }
+
+  .sort-text {
+    display: none;
+  }
+}
+
+.sort-text {
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}

@@ -1,0 +1,20 @@
+.drr-toggle-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.drr-switch {
+  margin-top: -0.5rem;
+}
+
+@media (max-width: 768px) {
+  .drr-toggle-container {
+    justify-content: center;
+    align-items: flex-start;
+    order: 1;
+  }
+}
+
+.drr-text {
+  font-size: 0.8rem;
+}

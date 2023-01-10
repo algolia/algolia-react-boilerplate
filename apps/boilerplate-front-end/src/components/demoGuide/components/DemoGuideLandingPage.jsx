@@ -11,7 +11,7 @@ const DemoGuideLandingPage = ({ triggerAlert, refine }) => {
 
   const handleLandingPage = (landingPage) => {
     // Create route to trigger the context and get the right landing page
-    navigate(`/search?contextMarketingCampaign=${landingPage.value}`)
+    navigate(`/search?context=${landingPage.value}`)
     // Refresh the page to trigger the context (faking coming from another page)
     // window.location.reload()
   }

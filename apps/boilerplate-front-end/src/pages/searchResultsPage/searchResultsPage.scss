@@ -33,20 +33,19 @@
     padding: 0 1rem;
   }
 
-  &__searchInfos{
+  &__searchInfos {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 1rem;
 
-    p{
+    p {
       @include p-text($main-color, 600);
       font-size: 1.4rem;
-        &:last-child{
-         color: $secondary-color; 
-         text-transform: capitalize
-
+      &:last-child {
+        color: $secondary-color;
+        text-transform: capitalize;
       }
     }
   }
@@ -68,9 +67,18 @@
 .srp-container__stats-sort {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   .stats-infos {
     @include stats($secondary-color);
+  }
+
+  @media (max-width: 768px) {
+    .stats-infos {
+      // flex: 100%;
+      margin: 1rem 0;
+      order: 2;
+    }
   }
 
   select {
@@ -263,11 +271,12 @@
   }
 }
 
-
 @keyframes loading {
-  0%{opacity: 0;}
+  0% {
+    opacity: 0;
+  }
 
-  100%{
+  100% {
     opacity: 1;
   }
 }
