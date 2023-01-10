@@ -30,6 +30,8 @@ import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage'
 // import Price component
 import Price from '@/components/hits/components/Price.jsx'
 
+import RankingFormulaOverlay from './components/Ranking'
+
 // Import cart from recoil(Cart state and the event if it's removed)
 import { addToCartSelector, cartClick, cartState } from '@/config/cartFunctions'
 // Import Persona if there is
@@ -45,7 +47,7 @@ import {
 //Import scope SCSS
 import './SCSS/hits.scss'
 
-const Hit = ({ hit, sendEvent }) => {
+const Hit = ({ hit, nextHit, sendEvent }) => {
   const navigate = useNavigate()
   const hitState = useSetRecoilState(hitAtom)
   const [isHovered, setIsHovered] = useState(false)
@@ -69,30 +71,6 @@ const Hit = ({ hit, sendEvent }) => {
   const { objectID, image, imageAlt, category, productName, brand } = hitsConfig
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false)
-
-  const RankingFormulaOverlay = ({ hit }) => {
-    return (
-      <motion.div
-        variants={framerMotionHits}
-        initial={framerMotionHits.initial}
-        exit={framerMotionHits.exit}
-        animate={framerMotionHits.animate}
-        transition={{
-          duration: 0.3,
-          delay: 0,
-          ease: [0.43, 0.13, 0.23, 0.96],
-        }}
-        className="ranking-formula"
-      >
-        {hit._rankingInfo &&
-          Object.entries(hit._rankingInfo).map((entry, i) => (
-            <p key={i}>
-              {entry[0]} {JSON.stringify(entry[1])}
-            </p>
-          ))}
-      </motion.div>
-    )
-  }
 
   const promoted = hit?._rankingInfo?.promoted
   // Update the qty for a product on SRP each time Cart is modified or set qty to 0
@@ -130,7 +108,9 @@ const Hit = ({ hit, sendEvent }) => {
         <p>Click to see Ranking</p>
       </div>
       <AnimatePresence>
-        {shouldShowRankingInfo && <RankingFormulaOverlay hit={hit} />}
+        {shouldShowRankingInfo && (
+          <RankingFormulaOverlay hit={hit} nextHit={nextHit} />
+        )}
       </AnimatePresence>
       <>
         <div
@@ -207,46 +187,3 @@ const Hit = ({ hit, sendEvent }) => {
 }
 
 export { Hit }
-
-// KEEP IT FOR NOW
-{
-  /* {shouldShowCartIcons && (
-<div className="srpItem__infosDown__cart">
-  <div
-    className={`${
-      itemQty === 0 && 'srpItem__infosDown__minusPicto-inactive '
-    }${cartPictoMinusClicked && 'picto-active'}`}
-    onClick={() => {
-      setCartPictoMinusClicked(true)
-      setTimeout(() => setCartPictoMinusClicked(false), 300)
-      setRemoveToCartAtom(hit)
-    }}
-  >
-    <MinusPicto />
-  </div>
-  <p
-    className={
-      itemQty === 0 ? 'srpItem__infosDown__cart-inactive' : ''
-    }
-  >
-    {itemQty}
-  </p>
-  <div
-    className={
-      cartPictoPlusClicked
-        ? 'picto-active srpItem__infosDown__cart-plus'
-        : 'srpItem__infosDown__cart-plus'
-    }
-    onClick={() => {
-      setCartPictoPlusClicked(true)
-      setTimeout(() => setCartPictoPlusClicked(false), 300)
-      setAddToCartAtom(hit)
-      // Send event conversion to Algolia API
-      sendEvent('conversion', hit, 'SRP: Add to cart')
-    }}
-  >
-    <PlusPicto />
-  </div>
-</div>
-)} */
-}
