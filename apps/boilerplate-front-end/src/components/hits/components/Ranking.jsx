@@ -37,7 +37,7 @@ const RankingFormulaOverlay = ({ hit, nextHit }) => {
             </p>
           )
         })}
-      {hit._rankingInfo && change.length === 0 && (
+      {hit._rankingInfo && changes.length === 0 && (
         <p>result is the same as the next result</p>
       )}
     </motion.div>
