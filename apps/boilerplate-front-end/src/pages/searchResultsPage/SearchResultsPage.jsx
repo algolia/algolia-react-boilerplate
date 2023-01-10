@@ -40,6 +40,7 @@ import { indexNames, mainIndex } from '@/config/algoliaEnvConfig'
 import { activateDRR } from '@/config/rerankingConfig'
 import {
   shouldHaveInjectedHits,
+  shouldHaveReRankingSwitch,
   shouldHaveSorts,
   shouldHaveStats,
   shouldHaveTrendingFacets,
@@ -108,6 +109,10 @@ const SearchResultsPage = ({ query }) => {
 
   // Define Price Sort By Const
   const { labelIndex } = useRecoilValue(sortBy)
+
+  const shouldHaveReRankingSwitchAtom = useRecoilValue(
+    shouldHaveReRankingSwitch
+  )
 
   const shouldHaveSortsAtom = useRecoilValue(shouldHaveSorts)
 
@@ -323,7 +328,7 @@ const SearchResultsPage = ({ query }) => {
                   <CustomSortBy items={labelIndex} defaultRefinement={index} />
                 </Suspense>
               )}
-              <ReRankingToggle />
+              {shouldHaveReRankingSwitchAtom && <ReRankingToggle />}
             </div>
             {/* Refinements, to the left of the items, including a list of currently selected refinements */}
             <div className="refinement-container">
