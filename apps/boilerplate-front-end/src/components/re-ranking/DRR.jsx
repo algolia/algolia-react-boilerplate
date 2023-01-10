@@ -1,4 +1,3 @@
-import Switch from '@mui/material/Switch'
 import { activateDRR } from '@/config/rerankingConfig'
 import { useRecoilState } from 'recoil'
 import './reranking.scss'
