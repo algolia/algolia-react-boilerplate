@@ -3,6 +3,11 @@ import { atom } from 'recoil'
 // import personaConfig for displaying in the guide
 import { personaConfig } from './personaConfig'
 
+export const shouldHaveAlgoliaExplain = atom({
+  key: 'shouldHaveAlgoliaExplain',
+  default: true,
+})
+
 // Should we show the network errors in the demo - might want to switch this to false when demo-ing to a client
 export const showNetworkErorrs = atom({
   key: 'showNetworkErorrs',
@@ -92,23 +97,6 @@ export const searchTermsConfig = [
     alertContent: 'The categories winter jacket and hike shoes are boosted.',
     details: 'The categories winter jacket and hike shoes will be boosted.',
     type: 'search terms',
-  },
-]
-
-// ------------------------------------------
-// Applied Rules
-// Will show the rules applied in the app while browsing
-// ------------------------------------------
-// Should we show the applied rules Switcher
-export const shouldShowAppliedRulesSwitcher = atom({
-  key: 'shouldShowAppliedRulesSwitcher',
-  default: true,
-})
-// What should be the information showed to the user
-export const appliedRulesInformations = [
-  {
-    span: 'Rules On',
-    details: 'The rules that are apply will be shown live',
   },
 ]
 
