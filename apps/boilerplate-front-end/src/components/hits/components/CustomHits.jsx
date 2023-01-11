@@ -7,7 +7,7 @@ import { windowSize } from '@/hooks/useScreenSize'
 import { useRecoilValue } from 'recoil'
 
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton'
-import { Hit } from '../Hits'
+import { Hit } from '../Hit'
 
 function CustomHits(props) {
   const { hits, isLastPage, showMore, sendEvent } = props
@@ -57,7 +57,7 @@ function CustomHits(props) {
             return (
               <li key={hit.objectID}>
                 {hitsLoaded ? (
-                  <hit._component hit={hit} />
+                  <hit._component hit={hit} nextHit={hits[index + 1]} />
                 ) : (
                   <CustomSkeleton type="hit" />
                 )}
@@ -67,7 +67,11 @@ function CustomHits(props) {
           return (
             <li key={hit.objectID}>
               {hitsLoaded ? (
-                <Hit hit={hit} sendEvent={sendEvent} />
+                <Hit
+                  hit={hit}
+                  nextHit={hits[index + 1]}
+                  sendEvent={sendEvent}
+                />
               ) : (
                 <CustomSkeleton type="hit" />
               )}

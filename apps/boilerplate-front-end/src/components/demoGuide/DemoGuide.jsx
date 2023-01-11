@@ -22,7 +22,6 @@ import { motion } from 'framer-motion'
 // Import Reference for the Button that trigger the panel
 import {
   demoGuideBtnRef,
-  shouldShowAppliedRulesSwitcher,
   shouldShowBanners,
   shouldShowDynamicFilters,
   shouldShowInjectedContent,
@@ -30,6 +29,7 @@ import {
   shouldShowRedirects,
   shouldShowSearchTerms,
   shouldShowLandingPages,
+  shouldHaveAlgoliaExplain,
 } from '@/config/demoGuideConfig'
 
 import { alertContent, isAlertOpen } from '@/config/demoGuideConfig'
@@ -50,6 +50,7 @@ const DemoGuide = ({ refine, setshowDemoGuide }) => {
   // //Select Panel wrapper
   const demoGuide = useRef()
 
+  const shouldHaveAlgoliaExplainAtom = useRecoilValue(shouldHaveAlgoliaExplain)
   const shouldShowLandingPagesAtom = useRecoilValue(shouldShowLandingPages)
   const shouldShowPersonasAtom = useRecoilValue(shouldShowPersonas)
   const shouldShowSearchTermsAtom = useRecoilValue(shouldShowSearchTerms)
@@ -59,10 +60,6 @@ const DemoGuide = ({ refine, setshowDemoGuide }) => {
   const shouldShowDynamicFiltersAtom = useRecoilValue(shouldShowDynamicFilters)
   const shouldShowRedirectsAtom = useRecoilValue(shouldShowRedirects)
   const shouldShowBannersAtom = useRecoilValue(shouldShowBanners)
-  // Should the applied rules section shows in the demo panel
-  const shouldShowRulesAppliedAtom = useRecoilValue(
-    shouldShowAppliedRulesSwitcher
-  )
 
   // Use the reference value of the button that trigger the panel
   const demoGuideBtn = useRecoilValue(demoGuideBtnRef)
@@ -88,7 +85,7 @@ const DemoGuide = ({ refine, setshowDemoGuide }) => {
     >
       <h2>Help Navigation Panel</h2>
       <ul className="container-nav-help">
-        {shouldShowRulesAppliedAtom && (
+        {shouldHaveAlgoliaExplain && (
           <li className="container-nav-help__items ">
             <DemoGuideAlgoliaExplain />
             <hr />

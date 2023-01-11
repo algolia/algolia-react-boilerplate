@@ -11,7 +11,15 @@ const criteriaConditionals = [
       // if the item is promoted by a rule
       attribute: '_rankingInfo.promoted',
       condition: true,
-      badgeTitle: 'Popular',
+      badgeTitle: 'Pinned',
+    },
+  },
+  {
+    conditional: {
+      // if the item is promoted by a rule
+      attribute: '_rankingInfo.promotedByReRanking',
+      condition: true,
+      badgeTitle: 'AI Re-Ranked',
     },
   },
   {

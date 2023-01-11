@@ -112,7 +112,7 @@ const FederatedSearch = ({ query, refine }) => {
       className={`${
         mobile || tablet ? 'federatedSearch-mobile' : 'federatedSearch'
       }`}
-      // ref={setContainerFederated}
+      ref={setContainerFederated}
       variants={framerMotionFederatedContainer}
       initial={framerMotionFederatedContainer.initial}
       animate={framerMotionFederatedContainer.animate}

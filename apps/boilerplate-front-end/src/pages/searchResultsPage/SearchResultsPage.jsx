@@ -37,8 +37,10 @@ const GenericRefinementList = lazy(() => import('@/components/facets/Facets'))
 
 // Configuration
 import { indexNames, mainIndex } from '@/config/algoliaEnvConfig'
+import { activateDRR } from '@/config/rerankingConfig'
 import {
   shouldHaveInjectedHits,
+  shouldHaveReRankingSwitch,
   shouldHaveSorts,
   shouldHaveStats,
   shouldHaveTrendingFacets,
@@ -73,8 +75,10 @@ import {
   isHierarchicalFilterAttribute,
   navigationStateAtom,
 } from '@/config/navigationConfig'
+import ReRankingToggle from '@/components/re-ranking/DRR'
 
 const SearchResultsPage = ({ query }) => {
+  const [isDRRActivated, setIsDRRActivated] = useRecoilState(activateDRR)
   let [categoryPageId, setCategoryPageId] = useState('')
   const { indexUiState } = useInstantSearch()
 
@@ -105,6 +109,10 @@ const SearchResultsPage = ({ query }) => {
 
   // Define Price Sort By Const
   const { labelIndex } = useRecoilValue(sortBy)
+
+  const shouldHaveReRankingSwitchAtom = useRecoilValue(
+    shouldHaveReRankingSwitch
+  )
 
   const shouldHaveSortsAtom = useRecoilValue(shouldHaveSorts)
 
@@ -210,6 +218,7 @@ const SearchResultsPage = ({ query }) => {
     optionalFilters: segment.value,
     ruleContexts: buildRuleContexts(),
     getRankingInfo: true,
+    enableReRanking: isDRRActivated,
   }
 
   return (
@@ -319,6 +328,7 @@ const SearchResultsPage = ({ query }) => {
                   <CustomSortBy items={labelIndex} defaultRefinement={index} />
                 </Suspense>
               )}
+              {shouldHaveReRankingSwitchAtom && <ReRankingToggle />}
             </div>
             {/* Refinements, to the left of the items, including a list of currently selected refinements */}
             <div className="refinement-container">

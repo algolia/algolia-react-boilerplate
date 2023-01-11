@@ -55,6 +55,11 @@ export const shouldHaveStats = atom({
   default: true,
 })
 
+export const shouldHaveReRankingSwitch = atom({
+  key: 'shouldHaveReRankingSwitch',
+  default: true,
+})
+
 // Make sure you create a rule in the dahsboard before turn it on
 export const shouldHaveInjectedBanners = atom({
   key: 'shouldHaveInjectedBanners',

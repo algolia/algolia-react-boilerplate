@@ -1,6 +1,6 @@
 // Import the custom hits to display in the SRP
 // import CustomHits from '../CustomHits';
-import { Hit } from '../../Hits'
+import { Hit } from '../../Hit'
 // Import the config files we'll need to import
 import { indexNames } from '@/config/algoliaEnvConfig'
 import { useRecoilValue } from 'recoil'
@@ -150,14 +150,14 @@ const InjectedHits = (props) => {
             : ''
         }`}
       >
-        {injectedHits.map((hit) => {
+        {injectedHits.map((hit, index) => {
           // Wrap the hit info in an animation, and click functionality to view the product
           if (hit._component != undefined) {
             // If the hit has a component property, use it instead of the default component
             return (
               <li key={hit.objectID}>
                 {hitsLoaded ? (
-                  <hit._component hit={hit} />
+                  <hit._component hit={hit} nextHit={hits[index + 1]} />
                 ) : (
                   <CustomSkeleton type="hit" />
                 )}
@@ -167,7 +167,11 @@ const InjectedHits = (props) => {
           return (
             <li key={hit.objectID}>
               {hitsLoaded ? (
-                <Hit hit={hit} sendEvent={sendEvent} />
+                <Hit
+                  hit={hit}
+                  nextHit={hits[index + 1]}
+                  sendEvent={sendEvent}
+                />
               ) : (
                 <CustomSkeleton type="hit" />
               )}
