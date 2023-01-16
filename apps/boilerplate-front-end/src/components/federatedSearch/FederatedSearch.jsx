@@ -167,6 +167,7 @@ const FederatedSearch = ({ query, refine }) => {
         {/* If don't want this sections go into config file  */}
         {showProducts && (
           <div className="federatedSearch__middle">
+            <Configure hitsPerPage={6} query={query} />
             <Products
               query={query}
               refine={refine}
