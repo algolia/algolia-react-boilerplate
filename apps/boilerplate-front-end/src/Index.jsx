@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import App from './App'
 // React router
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 // Recoil State Management
 import { RecoilRoot } from 'recoil'
@@ -20,10 +20,10 @@ import './scss/index.scss'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RecoilRoot>
-    <Router>
+    <BrowserRouter>
       <ScrollToTop />
       <ScreenResizer />
       <App />
-    </Router>
+    </BrowserRouter>
   </RecoilRoot>
 )

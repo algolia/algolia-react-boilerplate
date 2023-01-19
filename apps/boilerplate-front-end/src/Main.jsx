@@ -83,15 +83,15 @@ import {
 } from '@/config/personaConfig'
 
 // Okta Import for authentication
-import { Security } from '@okta/okta-react'
+import { Security, LoginCallback } from '@okta/okta-react'
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
 import config from '@/config/oktaLogin'
+import Loading from './components/oktaSecuredRoute/Loading'
+const oktaAuth = new OktaAuth(config.oidc)
 
 const Main = () => {
   const { results } = useInstantSearch()
   const { query, refine } = useSearchBox()
-  const oktaAuth = new OktaAuth(config.oidc)
-  console.log('config', config.oidc)
 
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams()
@@ -146,6 +146,10 @@ const Main = () => {
   const restoreOriginalUri = (_oktaAuth, originalUri) => {
     navigate(toRelativeUrl(originalUri || '/', window.location.origin))
   }
+
+  // useEffect(() => {
+  //   console.log('coucou', originalUri)
+  // }, [originalUri])
 
   useEffect(() => {
     const personaFromUrl = searchParams.get('persona')
@@ -259,6 +263,10 @@ const Main = () => {
                 <ProductDetails />
               </Suspense>
             }
+          />
+          <Route
+            path="login/callback"
+            element={<LoginCallback loadingElement={<Loading />} />}
           />
         </Routes>
         {/* NB disabled logic to render footer */}

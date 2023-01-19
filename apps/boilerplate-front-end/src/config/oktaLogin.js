@@ -4,15 +4,13 @@ const OKTA_TESTING_DISABLEHTTPSCHECK = import.meta.env.VITE_APP_OKTA_TESTING_DIS
 const BASENAME = ''
 const REDIRECT_URI = `${window.location.origin}${BASENAME}/login/callback`
 
-console.log(import.meta.env.VITE_APP_OKTA_BASE_URL)
-
 export default {
   oidc: {
     clientId: CLIENT_ID,
     issuer: ISSUER,
     redirectUri: REDIRECT_URI,
-    scopes: ['openid', 'profile', 'email'],
-    pkce: true,
-    disableHttpsCheck: OKTA_TESTING_DISABLEHTTPSCHECK,
+    // scopes: ['openid', 'profile', 'email'],
+    // pkce: true,
+    // disableHttpsCheck: OKTA_TESTING_DISABLEHTTPSCHECK,
   },
 }
