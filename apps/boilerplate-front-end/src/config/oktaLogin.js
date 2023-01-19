@@ -1,8 +1,10 @@
-const CLIENT_ID = process.env.REACT_APP_OKTA_CLIENT_ID
-const ISSUER = process.env.REACT_APP_OKTA_BASE_URL
-const OKTA_TESTING_DISABLEHTTPSCHECK = process.env.REACT_APP_OKTA_TESTING_DISABLEHTTPSCHECK
+const CLIENT_ID = import.meta.env.VITE_APP_OKTA_CLIENT_ID
+const ISSUER = import.meta.env.VITE_APP_OKTA_BASE_URL
+const OKTA_TESTING_DISABLEHTTPSCHECK = import.meta.env.VITE_APP_OKTA_TESTING_DISABLEHTTPSCHECK
 const BASENAME = ''
 const REDIRECT_URI = `${window.location.origin}${BASENAME}/login/callback`
+
+console.log(import.meta.env.VITE_APP_OKTA_BASE_URL)
 
 export default {
   oidc: {

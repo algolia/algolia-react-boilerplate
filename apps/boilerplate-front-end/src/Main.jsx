@@ -85,13 +85,13 @@ import {
 // Okta Import for authentication
 import { Security } from '@okta/okta-react'
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
-import config from '@/config/oktaConfig'
-
-const oktaAuth = new OktaAuth(config.oidc)
+import config from '@/config/oktaLogin'
 
 const Main = () => {
   const { results } = useInstantSearch()
   const { query, refine } = useSearchBox()
+  const oktaAuth = new OktaAuth(config.oidc)
+  console.log('config', config.oidc)
 
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams()
