@@ -15,7 +15,7 @@ const OktaAuth = () => {
       let name = email.split('@')[0]
       let fistName = name.split('.')[0]
       let lastName = name.split('.')[1]
-      let nameDisplayed = fistName.charAt(0).toUpperCase() + fistName.slice(1) + ' ' + lastName.charAt(0).toUpperCase() + lastName.slice(1)
+      let nameDisplayed = fistName.charAt(0).toUpperCase() + fistName.slice(1)
       return nameDisplayed
     } else {
       return null
@@ -44,7 +44,7 @@ const OktaAuth = () => {
         </>
       ) : (
         <div className='okta-logged'>
-          <p>Welcome {displayNameByEmail()}</p> <LittleAlgolia />
+          <p>Hello, {displayNameByEmail()}</p>
         </div>
       )}
     </div>
