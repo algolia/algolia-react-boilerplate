@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react'
 const OktaAuth = () => {
   const { authState, oktaAuth } = useOktaAuth()
   const handleLogin = () => oktaAuth.signInWithRedirect()
-  const handleLogout = () => oktaAuth.signOut()
+  // To use for a Logout function
+  // const handleLogout = () => oktaAuth.signOut()
   const [userEmail, setUserEmail] = useState(null)
   const [imgLink, setLinkImg] = useState(null)
   // Get info from okta on user
