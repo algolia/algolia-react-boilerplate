@@ -114,30 +114,27 @@
           }
         }
       }
-      .okta-login-button{
+      .okta-login-button {
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 0.3rem;
         border-radius: 8px;
-        svg{
+        svg {
           width: 40px;
         }
-        p{
+        p {
           @include p-text($main-color);
           font-size: 0.8rem;
           margin-left: 0.5rem;
         }
       }
-      .okta-logged{
+      .okta-logged {
         display: flex;
         align-items: center;
-        svg{
-          width: 40px;
-        }
-        p{
-          font-size: 0.8rem;
-          font-weight: 700;
+        img {
+          width: 30px;
+          border-radius: 50%;
         }
       }
     }
