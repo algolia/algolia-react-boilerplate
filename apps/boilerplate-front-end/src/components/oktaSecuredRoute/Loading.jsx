@@ -1,7 +1,11 @@
+import Loader from '../loader/Loader'
+
 const Loading = () => {
   return (
-    <h3 id='loading-icon'>Loading...</h3>
-  );
-};
+    <>
+      <Loader />
+    </>
+  )
+}
 
-export default Loading;
+export default Loading
