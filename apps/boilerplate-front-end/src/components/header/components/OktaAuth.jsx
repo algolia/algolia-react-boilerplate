@@ -6,41 +6,21 @@ const OktaAuth = () => {
   const { authState, oktaAuth } = useOktaAuth()
   const handleLogin = () => oktaAuth.signInWithRedirect()
   const handleLogout = () => oktaAuth.signOut()
-  const [userInfo, setUserInfo] = useState(null)
+  const [userEmail, setUserEmail] = useState(null)
+  const [imgLink, setLinkImg] = useState(null)
+  // Get info from okta on user
   const user = oktaAuth.token
     .getUserInfo()
     .then(function (user) {
       // user has details about the user
-      // console.log(user)
+      setUserEmail(user.email)
     })
     .catch(function (err) {
       console.log(err)
       // handle OAuthError or AuthSdkError (AuthSdkError will be thrown if app is in OAuthCallback state)
     })
 
-  // Little function to display the user name
-  const displayNameByEmail = () => {
-    if (authState?.accessToken?.claims?.sub) {
-      let email = authState.accessToken.claims.sub
-      let name = email.split('@')[0]
-      let fistName = name.split('.')[0]
-      let lastName = name.split('.')[1]
-      let nameDisplayed = fistName.charAt(0).toUpperCase() + fistName.slice(1)
-      return nameDisplayed
-    } else {
-      return null
-    }
-  }
-
-  // Get the user info from Okta and store it in state
-  useEffect(() => {
-    if (authState?.accessToken?.claims?.sub) {
-      setUserInfo(authState.accessToken.claims.sub)
-    } else {
-      null
-    }
-  }, [authState])
-
+  // Hash function to use email on Gravatar API to have an img
   function get_gravatar(email, size) {
     // MD5 (Message-Digest Algorithm) by WebToolkit
     //
@@ -255,8 +235,17 @@ const OktaAuth = () => {
 
     var size = size || 80
 
-    return 'http://www.gravatar.com/avatar/' + MD5(email) + '.jpg?s=' + size
+    setLinkImg(
+      'http://www.gravatar.com/avatar/' + MD5(email) + '.jpg?s=' + size
+    )
   }
+
+  // Set it do display in an img tag
+  useEffect(() => {
+    if (userEmail !== null) {
+      get_gravatar(userEmail, 50)
+    }
+  }, [userEmail])
 
   return (
     <div>
@@ -272,7 +261,7 @@ const OktaAuth = () => {
         </>
       ) : (
         <div className="okta-logged">
-          <img src={get_gravatar('matthew.foyle@algolia.com', 50)} />
+          <img src={imgLink} />
         </div>
       )}
     </div>
