@@ -180,6 +180,12 @@ const Main = () => {
   }, [])
 
   useEffect(() => {
+    if (window.location.hostname === '127.0.0.1') {
+      window.location.hostname = 'localhost'
+    }
+  }, [])
+
+  useEffect(() => {
     // no results, query not empty, and app thinks it has results
     if (results.nbHits === 0 && query !== '' && hasResults) {
       setHasResults(false)
