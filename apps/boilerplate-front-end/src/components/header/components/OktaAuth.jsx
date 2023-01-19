@@ -8,6 +8,7 @@ const OktaAuth = () => {
   const handleLogout = () => oktaAuth.signOut()
   const [userInfo, setUserInfo] = useState(null)
 
+  // Little function to display the user name
   const displayNameByEmail = () =>
   {
     if (authState?.accessToken?.claims?.sub) {
@@ -22,10 +23,7 @@ const OktaAuth = () => {
     }
   }
 
-  useEffect(() => {
-    console.log(authState)
-  }, [authState])
-
+  // Get the user info from Okta and store it in state
   useEffect(() => {
     if (authState?.accessToken?.claims?.sub) {
       setUserInfo(authState.accessToken.claims.sub)

@@ -147,10 +147,6 @@ const Main = () => {
     navigate(toRelativeUrl(originalUri || '/', window.location.origin))
   }
 
-  // useEffect(() => {
-  //   console.log('coucou', originalUri)
-  // }, [originalUri])
-
   useEffect(() => {
     const personaFromUrl = searchParams.get('persona')
     if (personaFromUrl !== null) {
@@ -200,6 +196,10 @@ const Main = () => {
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide)
   return (
+    // Okta Route reminder than to add secure route you have to add the following
+    //       <Route path='/protected' element={<RequiredAuth />}>
+    //          <Route path='' element={<Protected />} />
+    //       </Route>
     <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>
       <InsightsMiddleware />
       {shouldShowNetworkErrors && <SearchErrorToast />}
