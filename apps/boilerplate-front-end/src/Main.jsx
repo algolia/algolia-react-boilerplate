@@ -10,7 +10,13 @@ import { InsightsMiddleware } from './config/algoliaInsightEvents'
 import { AnimatePresence } from 'framer-motion'
 
 // React router
-import { Route, Routes, useLocation, useSearchParams } from 'react-router-dom'
+import {
+  Route,
+  Routes,
+  useLocation,
+  useSearchParams,
+  useNavigate,
+} from 'react-router-dom'
 
 //Recoil states & values
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -76,6 +82,13 @@ import {
   personaObjectSelectedAtom,
 } from '@/config/personaConfig'
 
+// Okta Import for authentication
+import { Security } from '@okta/okta-react'
+import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
+import config from '@/config/oktaConfig'
+
+const oktaAuth = new OktaAuth(config.oidc)
+
 const Main = () => {
   const { results } = useInstantSearch()
   const { query, refine } = useSearchBox()
@@ -128,6 +141,12 @@ const Main = () => {
   const [navigationState, setNavigationState] =
     useRecoilState(navigationStateAtom)
 
+  // Create a callback authentication with OKTA
+  const navigate = useNavigate()
+  const restoreOriginalUri = (_oktaAuth, originalUri) => {
+    navigate(toRelativeUrl(originalUri || '/', window.location.origin))
+  }
+
   useEffect(() => {
     const personaFromUrl = searchParams.get('persona')
     if (personaFromUrl !== null) {
@@ -177,7 +196,7 @@ const Main = () => {
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide)
   return (
-    <>
+    <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>
       <InsightsMiddleware />
       {shouldShowNetworkErrors && <SearchErrorToast />}
       <Header />
@@ -256,7 +275,7 @@ const Main = () => {
           </Suspense>
         )}
       </div>
-    </>
+    </Security>
   )
 }
 
