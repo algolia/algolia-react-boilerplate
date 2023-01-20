@@ -18,6 +18,7 @@ const OktaAuth = () => {
     })
     .catch(function (err) {
       console.log(err)
+      alert(`Error getting user info : ${err}`)
       // handle OAuthError or AuthSdkError (AuthSdkError will be thrown if app is in OAuthCallback state)
     })
 
