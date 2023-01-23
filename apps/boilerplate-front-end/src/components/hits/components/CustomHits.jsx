@@ -50,7 +50,7 @@ function CustomHits(props) {
             : ''
         }`}
       >
-        {hits.map((hit) => {
+        {hits.map((hit, index) => {
           // Wrap the hit info in an animation, and click functionality to view the product
           if (hit._component != undefined) {
             // If the hit has a component property, use it instead of the default component
