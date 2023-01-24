@@ -34,7 +34,10 @@ import {
 import { segmentObjectSelectedAtom } from '@/config/segmentConfig'
 
 // Import refs for modal closing functionality
-import { selectorNavigationRef } from '@/config/navigationConfig'
+import {
+  navigationStateAtom,
+  selectorNavigationRef,
+} from '@/config/navigationConfig'
 
 // hook import
 // Check if user is clecking outside an element
