@@ -10,9 +10,13 @@ import { useRefinementList } from 'react-instantsearch-hooks-web'
 import { ChevronRight } from '@/assets/svg/SvgIndex'
 
 import { federatedCategoriesAttribute } from '@/config/federatedConfig'
+import { navigationStateAtom } from '@/config/navigationConfig'
+import { useSetRecoilState } from 'recoil'
 
 function Category(props) {
   const { items } = useRefinementList(props)
+
+  const setNavigationState = useSetRecoilState(navigationStateAtom)
   //Get title
   const { title } = props
   // router hook to navigate using a function
@@ -32,11 +36,11 @@ function Category(props) {
               <li
                 key={hit.label}
                 onClick={() => {
-                  navigate(`/search/${slugify(hit.label)}`, {
-                    state: {
-                      type: 'filter',
-                      value: `${federatedCategoriesAttribute}:"${hit.label}"`,
-                    },
+                  navigate(`/search/${slugify(hit.label)}`)
+                  setNavigationState({
+                    type: 'filter',
+                    name: hit.label.split('>').pop(),
+                    value: `${federatedCategoriesAttribute}:"${hit.label}"`,
                   })
                 }}
               >
