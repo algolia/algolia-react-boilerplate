@@ -36,7 +36,7 @@ const contentTypeComponentMap = {
 // This component renders the custom query hits, but also injects them with content from rule data or the injection Index
 const InjectedHits = (props) => {
   // Get the regular hits
-  const { hits, isLastPage, showMore, sendEvent } = props
+  const { hits, isLastPage, showMore, sendEvent, query } = props
 
   // Get custom data from rules
   const { items: ruleData } = useQueryRules(props)
@@ -48,7 +48,7 @@ const InjectedHits = (props) => {
   const { injectedContentIndex } = useRecoilValue(indexNames)
 
   // Get access to current query
-  const query = useSearchBox()
+  // const { query } = useSearchBox()
 
   // Will hold the hits with injected content
   const [injectedHits, setInjectedHits] = useState(hits)

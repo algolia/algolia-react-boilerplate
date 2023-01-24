@@ -24,10 +24,10 @@ const RecentSearches = ({ title, query, refine }) => {
                 <li
                   onClick={() => {
                     refine(search)
-                    navigate({
-                      pathname: '/search',
-                      replace: false,
-                    })
+                    // navigate({
+                    //   pathname: '/search',
+                    //   replace: false,
+                    // })
                   }}
                   key={index}
                 >

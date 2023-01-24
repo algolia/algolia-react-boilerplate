@@ -38,9 +38,9 @@ import { useSearchBox } from 'react-instantsearch-hooks-web'
 
 import { useSearchParams } from 'react-router-dom'
 
-function CustomSearchBox() {
+function CustomSearchBox({ refine, query }) {
   const [searchParams, setSearchParams] = useSearchParams()
-  const { query, refine } = useSearchBox()
+  // const { query, refine, clear } = useSearchBox()
 
   const [navigationState, setNavigationState] =
     useRecoilState(navigationStateAtom)
@@ -70,8 +70,9 @@ function CustomSearchBox() {
   }, [query])
 
   const searchOnChangeHandler = (event) => {
-    setLocalQuery(event.target.value)
-    debouncedSearchInputHandler(event.target.value)
+    // setLocalQuery(event.target.value)
+    refine(event.target.value)
+    // debouncedSearchInputHandler(event.target.value)
     setTooltip(false)
   }
 
@@ -86,10 +87,14 @@ function CustomSearchBox() {
     }
   }
 
-  const debouncedSearchInputHandler = useMemo(
-    () => debounce((value) => refine(value), 300),
-    []
-  )
+  // const debouncedSearchInputHandler = useMemo(
+  //   () =>
+  //     debounce((value) => {
+  //       clear()
+  //       refine(value)
+  //     }, 300),
+  //   []
+  // )
 
   // on page refresh, local query is null but URL might have one, so read from URL just in case
   useEffect(() => {
@@ -122,7 +127,7 @@ function CustomSearchBox() {
         }}
       >
         <input
-          value={localQuery}
+          value={query}
           className="searchbox__form__input"
           type="search"
           placeholder={t('placeHolder')}
@@ -131,6 +136,7 @@ function CustomSearchBox() {
             setSbIsActive(true)
           }}
           onChange={(event) => {
+            // refine(event.target.value)
             searchOnChangeHandler(event)
             setTimeout(() => handleContextInUrl(event), 1000)
           }}
