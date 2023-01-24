@@ -9,8 +9,8 @@
     }
   },
   "scripts": {
-    "start": "vite --port=5173",
-    "dev": "vite --port=5173",
+    "start": "vite --port=3000",
+    "dev": "vite --port=3000",
     "build": "vite build",
     "serve": "vite --host",
     "preview": "vite preview --host",

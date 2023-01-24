@@ -219,7 +219,6 @@ const SearchResultsPage = ({ query }) => {
     ruleContexts: buildRuleContexts(),
     getRankingInfo: true,
     enableReRanking: isDRRActivated,
-    hitsPerPage: 20,
   }
 
   return (
