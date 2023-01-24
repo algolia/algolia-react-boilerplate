@@ -38,7 +38,7 @@ import { useSearchBox } from 'react-instantsearch-hooks-web'
 
 import { useSearchParams } from 'react-router-dom'
 
-function CustomSearchBox({ refine, query }) {
+function CustomSearchBox({ refine, query, clear }) {
   const [searchParams, setSearchParams] = useSearchParams()
   // const { query, refine, clear } = useSearchBox()
 
@@ -157,7 +157,7 @@ function CustomSearchBox({ refine, query }) {
             <div
               className="closeBtn"
               onClick={() => {
-                if (query !== '') refine('')
+                if (query !== '') clear()
               }}
             >
               <SimpleCloseButton />

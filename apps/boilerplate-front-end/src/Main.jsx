@@ -91,7 +91,7 @@ const oktaAuth = new OktaAuth(config.oidc)
 
 const Main = () => {
   const { results } = useInstantSearch()
-  const { query, refine } = useSearchBox()
+  const { query, refine, clear } = useSearchBox()
 
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams()
@@ -209,7 +209,7 @@ const Main = () => {
     <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>
       <InsightsMiddleware />
       {shouldShowNetworkErrors && <SearchErrorToast />}
-      <Header />
+      <Header clear={clear} refine={refine} query={query} />
       {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
 
       {shouldDisplayQRCodeGenerator && qrOpen && <QRModal />}

@@ -66,8 +66,8 @@ import { currencySymbolAtom } from '@/config/currencyConfig'
 import { linksHeader } from '@/config/navigationConfig'
 import { useTranslation } from 'react-i18next'
 
-const HeaderLaptop = () => {
-  const { query, refine } = useSearchBox()
+const HeaderLaptop = ({ query, refine, clear }) => {
+  // const { query, refine } = useSearchBox()
   const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom)
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch)
   const setSbIsActive = useSetRecoilState(searchBoxIsActive)
@@ -198,7 +198,7 @@ const HeaderLaptop = () => {
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container" ref={setSearchBoxRef}>
-          <CustomSearchBox query={query} refine={refine} />
+          <CustomSearchBox query={query} refine={refine} clear={clear} />
           {/* {displayVoiceSearch && <CustomVoiceSearchComponent />} */}
         </div>
         <div className="container__header-right">

@@ -14,7 +14,7 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
 import usePreventScrolling from '@/hooks/usePreventScrolling'
 import './SCSS/header.scss'
 
-const Header = () => {
+const Header = ({ clear, refine, query }) => {
   // Handle screen sizing & responsiveness with this hook
   const { isDesktop, tablet, mobile } = useRecoilValue(windowSize)
   const isFederatedOpen = useRecoilValue(shouldHaveOpenFederatedSearch)
@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <header className="header">
       {isDesktop ? (
-        <HeaderLaptop />
+        <HeaderLaptop clear={clear} refine={refine} query={query} />
       ) : (
         <HeaderMobile tablet={tablet} mobile={mobile} />
       )}
