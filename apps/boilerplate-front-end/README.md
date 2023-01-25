@@ -29,6 +29,7 @@
     - [From Seperate Index](#from-seperate-index)
   - [ Icons](#-icons)
   - [ Cart](#-cart)
+  - [ OKTA](#-okta)
 - [Dependencies](#️-dependencies)
   - [State Manager](#-state-manager)
   - [Router](#-router)
@@ -413,6 +414,10 @@ https://fontawesome.com/search?o=r&m=free&s=solid
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🛒 Cart</h3>
 
 This project comes with Cart feature based on what you'll put into it and it stores in Local Storage to have always your cart. It's linked to event sending [Insights](https://www.algolia.com/doc/rest-api/insights/)
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🔒 Okta</h3>
+
+This project comes with Okta Log in feature based on okta react app [Okta-React-App](https://github.com/okta/okta-react)
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
 

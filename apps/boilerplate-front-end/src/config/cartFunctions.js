@@ -108,7 +108,7 @@ export const removeToCartSelector = selector({
           qty: oldQty.qty - 1,
           totalPrice: (oldQty.qty - 1) * items[cartItemIndex][hitsConfig.price],
         }
-        set(openCart, !openCart)
+        set(cartState, items)
       }
     }
   },
