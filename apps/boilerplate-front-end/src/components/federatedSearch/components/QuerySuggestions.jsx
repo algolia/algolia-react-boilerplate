@@ -28,7 +28,7 @@ function QuerySuggestions({ refine, title }) {
       navigate({
         pathname: '/search',
       })
-    }, 300)
+    }, 500)
   )
 
   return (
