@@ -10,7 +10,13 @@ import { InsightsMiddleware } from './config/algoliaInsightEvents'
 import { AnimatePresence } from 'framer-motion'
 
 // React router
-import { Route, Routes, useLocation, useSearchParams } from 'react-router-dom'
+import {
+  Route,
+  Routes,
+  useLocation,
+  useSearchParams,
+  useNavigate,
+} from 'react-router-dom'
 
 //Recoil states & values
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -76,9 +82,16 @@ import {
   personaObjectSelectedAtom,
 } from '@/config/personaConfig'
 
+// Okta Import for authentication
+import { Security, LoginCallback } from '@okta/okta-react'
+import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
+import config from '@/config/oktaLogin'
+import Loading from './components/oktaSecuredRoute/Loading'
+const oktaAuth = new OktaAuth(config.oidc)
+
 const Main = () => {
   const { results } = useInstantSearch()
-  const { query, refine } = useSearchBox()
+  const { query, refine, clear } = useSearchBox()
 
   // Handle URL search parameters through React Router
   let [searchParams, setSearchParams] = useSearchParams()
@@ -128,6 +141,12 @@ const Main = () => {
   const [navigationState, setNavigationState] =
     useRecoilState(navigationStateAtom)
 
+  // Create a callback authentication with OKTA
+  const navigate = useNavigate()
+  const restoreOriginalUri = (_oktaAuth, originalUri) => {
+    navigate(toRelativeUrl(originalUri || '/', window.location.origin))
+  }
+
   useEffect(() => {
     const personaFromUrl = searchParams.get('persona')
     if (personaFromUrl !== null) {
@@ -161,6 +180,12 @@ const Main = () => {
   }, [])
 
   useEffect(() => {
+    if (window.location.hostname === '127.0.0.1') {
+      window.location.hostname = 'localhost'
+    }
+  }, [])
+
+  useEffect(() => {
     // no results, query not empty, and app thinks it has results
     if (results.nbHits === 0 && query !== '' && hasResults) {
       setHasResults(false)
@@ -177,10 +202,14 @@ const Main = () => {
   // Prevent body from scrolling when panel is open
   usePreventScrolling(showDemoGuide)
   return (
-    <>
+    // Okta Route reminder than to add secure route you have to add the following
+    //       <Route path='/protected' element={<RequiredAuth />}>
+    //          <Route path='' element={<Protected />} />
+    //       </Route>
+    <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>
       <InsightsMiddleware />
       {shouldShowNetworkErrors && <SearchErrorToast />}
-      <Header />
+      <Header clear={clear} refine={refine} query={query} />
       {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
 
       {shouldDisplayQRCodeGenerator && qrOpen && <QRModal />}
@@ -241,6 +270,10 @@ const Main = () => {
               </Suspense>
             }
           />
+          <Route
+            path="login/callback"
+            element={<LoginCallback loadingElement={<Loading />} />}
+          />
         </Routes>
         {/* NB disabled logic to render footer */}
         {/* To avoid CLS, load in the footer after the carousels render */}
@@ -256,7 +289,7 @@ const Main = () => {
           </Suspense>
         )}
       </div>
-    </>
+    </Security>
   )
 }
 

@@ -13,7 +13,7 @@ import {
   shouldDisplayCurrency,
 } from '@/config/currencyConfig'
 
-const Price = ({ hit }) => {
+const Price = ({ hit, totalPrice }) => {
   const { price, onSale, onSalePrice } = hitsConfig
   const currencySymbol = useRecoilValue(currencySymbolAtom)
   const displayCurrency = useRecoilValue(shouldDisplayCurrency)
@@ -31,6 +31,23 @@ const Price = ({ hit }) => {
   const ShouldDisplayCurrencySymbol = displayCurrency ? currencySymbol : ''
   // Variable used to show the correct price depending on the item being 'on sale' or not
   const finalPrice = isOnSale ? salePrice : hitPrice
+  if (totalPrice) {
+    return (
+      <>
+        {isCurrencyRight ? (
+          <>
+            <span>{totalPrice}</span>
+            <span>{ShouldDisplayCurrencySymbol}</span>
+          </>
+        ) : (
+          <>
+            <span>{ShouldDisplayCurrencySymbol}</span>
+            <span>{totalPrice}</span>
+          </>
+        )}
+      </>
+    )
+  }
   return (
     <>
       {isCurrencyRight ? (

@@ -11,9 +11,9 @@ import {
 } from '@/config/navigationConfig'
 
 import {
-  languagesConfig,
-  languageSwitchConfig,
   languageObjectSelectedAtom,
+  languageSwitchConfig,
+  languagesConfig,
 } from '@/config/languagesConfig'
 import {
   personaConfig,
@@ -55,18 +55,19 @@ import Selectors from '@/components/selector/Selectors'
 import CustomSearchBox from '@/components/searchbox/SearchBox'
 import { windowSize } from '@/hooks/useScreenSize'
 import Navigation from './Navigation'
+import OktaAuthComponent from '@/components/header/components/OktaAuth'
 
 import QRCodeOpener from '@/components/qrCode/QRCodeOpener'
 import { shouldHaveQRCode } from '@/config/featuresConfig'
 import { useSearchBox } from 'react-instantsearch-hooks-web'
 
-import { currencySymbolAtom } from '@/config/currencyConfig'
 import { mainIndex } from '@/config/algoliaEnvConfig'
+import { currencySymbolAtom } from '@/config/currencyConfig'
 import { linksHeader } from '@/config/navigationConfig'
 import { useTranslation } from 'react-i18next'
 
-const HeaderLaptop = () => {
-  const { query, refine } = useSearchBox()
+const HeaderLaptop = ({ query, refine, clear }) => {
+  // const { query, refine } = useSearchBox()
   const [searchboxRef, setSearchBoxRef] = useRecoilState(searchBoxAtom)
   const federated = useSetRecoilState(shouldHaveOpenFederatedSearch)
   const setSbIsActive = useSetRecoilState(searchBoxIsActive)
@@ -197,7 +198,7 @@ const HeaderLaptop = () => {
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container" ref={setSearchBoxRef}>
-          <CustomSearchBox query={query} refine={refine} />
+          <CustomSearchBox query={query} refine={refine} clear={clear} />
           {/* {displayVoiceSearch && <CustomVoiceSearchComponent />} */}
         </div>
         <div className="container__header-right">
@@ -226,6 +227,7 @@ const HeaderLaptop = () => {
             </div>
           )}
           {shouldDisplayQRCodeGenerator && <QRCodeOpener />}
+          <OktaAuthComponent />
         </div>
       </div>
       <div className="container__header-nav">

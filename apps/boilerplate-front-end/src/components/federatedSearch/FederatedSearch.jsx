@@ -34,7 +34,10 @@ import {
 import { segmentObjectSelectedAtom } from '@/config/segmentConfig'
 
 // Import refs for modal closing functionality
-import { selectorNavigationRef } from '@/config/navigationConfig'
+import {
+  navigationStateAtom,
+  selectorNavigationRef,
+} from '@/config/navigationConfig'
 
 // hook import
 // Check if user is clecking outside an element
@@ -141,19 +144,20 @@ const FederatedSearch = ({ query, refine }) => {
             />
           )}
           {/* If don't want this sections go into config file  */}
-          {/* {showQuerySuggestions && (
+          {showQuerySuggestions && (
             <Index searchClient={searchClient} indexName={suggestionsIndex}>
               <Configure
                 hitsPerPage={3}
-                query={query}
+                // query={query}
+
                 userToken={persona.value}
                 enablePersonalization={true}
                 personalizationImpact={personalizationImpact}
                 personalizationFilters={persona.personalizationFilters}
               />
-              <QuerySuggestions title={t('suggestions')} />
+              <QuerySuggestions title={t('suggestions')} refine={refine} />
             </Index>
-          )} */}
+          )}
           {/* If don't want this sections go into config file  */}
           {showCategories && !mobile && !tablet && (
             <Category
@@ -167,6 +171,7 @@ const FederatedSearch = ({ query, refine }) => {
         {/* If don't want this sections go into config file  */}
         {showProducts && (
           <div className="federatedSearch__middle">
+            <Configure hitsPerPage={6} />
             <Products
               query={query}
               refine={refine}

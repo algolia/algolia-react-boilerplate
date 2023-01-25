@@ -219,6 +219,8 @@ const SearchResultsPage = ({ query }) => {
     ruleContexts: buildRuleContexts(),
     getRankingInfo: true,
     enableReRanking: isDRRActivated,
+    hitsPerPage: 20,
+    query: query,
   }
 
   return (
@@ -346,6 +348,7 @@ const SearchResultsPage = ({ query }) => {
                 </Index>
                 {/* Injected content*/}
                 <InjectedHits
+                  query={query}
                   hits={hits}
                   isLastPage={isLastPage}
                   showMore={showMore}

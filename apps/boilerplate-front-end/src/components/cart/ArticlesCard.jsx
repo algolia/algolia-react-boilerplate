@@ -77,7 +77,7 @@ const ArticlesCard = ({ item, sendEvent }) => {
             </div>
           )}
           <p className="price">
-            <Price hit={item.totalPrice.toFixed(2)} />
+            <Price hit={item} totalPrice={item.totalPrice.toFixed(2)} />
           </p>
         </div>
 
