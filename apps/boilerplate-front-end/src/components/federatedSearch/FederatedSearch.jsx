@@ -144,11 +144,11 @@ const FederatedSearch = ({ query, refine }) => {
             />
           )}
           {/* If don't want this sections go into config file  */}
-          {/* {showQuerySuggestions && (
+          {showQuerySuggestions && (
             <Index searchClient={searchClient} indexName={suggestionsIndex}>
               <Configure
                 hitsPerPage={3}
-                query={query}
+                // query={query}
                 userToken={persona.value}
                 enablePersonalization={true}
                 personalizationImpact={personalizationImpact}
@@ -156,7 +156,7 @@ const FederatedSearch = ({ query, refine }) => {
               />
               <QuerySuggestions title={t('suggestions')} />
             </Index>
-          )} */}
+          )}
           {/* If don't want this sections go into config file  */}
           {showCategories && !mobile && !tablet && (
             <Category
