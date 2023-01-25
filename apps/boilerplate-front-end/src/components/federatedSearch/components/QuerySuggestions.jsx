@@ -25,9 +25,9 @@ function QuerySuggestions({ refine, title }) {
               className="suggestions__item"
               onClick={() => {
                 refine(hit.query)
-                navigate({
-                  pathname: '/search',
-                })
+                // navigate({
+                //   pathname: '/search',
+                // })
               }}
             >
               <ChevronRight />

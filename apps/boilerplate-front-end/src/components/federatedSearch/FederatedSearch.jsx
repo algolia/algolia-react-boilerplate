@@ -149,12 +149,13 @@ const FederatedSearch = ({ query, refine }) => {
               <Configure
                 hitsPerPage={3}
                 // query={query}
+
                 userToken={persona.value}
                 enablePersonalization={true}
                 personalizationImpact={personalizationImpact}
                 personalizationFilters={persona.personalizationFilters}
               />
-              <QuerySuggestions title={t('suggestions')} />
+              <QuerySuggestions title={t('suggestions')} refine={refine} />
             </Index>
           )}
           {/* If don't want this sections go into config file  */}
