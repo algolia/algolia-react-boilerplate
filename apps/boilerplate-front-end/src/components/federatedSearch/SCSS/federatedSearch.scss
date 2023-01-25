@@ -106,7 +106,7 @@
   }
   &__item {
     @include hitHorizontalUI();
-    .ais-Highlight-highlighted{
+    .ais-Highlight-highlighted {
       font-size: 0.6rem;
     }
   }
@@ -158,16 +158,18 @@
     .title {
       @include p-text($main-color);
       font-size: 0.8rem;
+      text-align: left;
     }
     .date {
       @include p-text($main-color);
       font-size: 0.6rem;
     }
     .subtitle {
-      @include p-text($grey-light-color);
+      @include p-text($grey-dark-color);
       @include truncateText(3, 2);
       font-size: 0.8rem;
       font-weight: 300;
+      text-align: left;
     }
   }
 }

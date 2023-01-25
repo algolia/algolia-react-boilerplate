@@ -1,4 +1,7 @@
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
+
+// debounce import
+import { debounce } from 'lodash'
 
 // components import
 import { ChevronRight } from '@/assets/svg/SvgIndex'
@@ -10,6 +13,19 @@ const RecentSearches = ({ title, query, refine }) => {
   const cleanSearches = JSON.parse(getSearches)
   // router hook to navigate using a function
   const navigate = useNavigate()
+
+  const handleClick = (query) => {
+    refine(query)
+    debouncedSearchInputHandler()
+  }
+
+  const debouncedSearchInputHandler = useMemo(() =>
+    debounce(() => {
+      navigate({
+        pathname: '/search',
+      })
+    }, 300)
+  )
 
   if (cleanSearches && cleanSearches.length !== 0) {
     return (
@@ -23,11 +39,7 @@ const RecentSearches = ({ title, query, refine }) => {
               return (
                 <li
                   onClick={() => {
-                    refine(search)
-                    navigate({
-                      pathname: '/search',
-                      replace: false,
-                    })
+                    handleClick(search)
                   }}
                   key={index}
                 >
