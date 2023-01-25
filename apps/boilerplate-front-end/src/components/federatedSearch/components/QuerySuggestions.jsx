@@ -1,4 +1,7 @@
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
+
+// debounce import
+import { debounce } from 'lodash'
 
 // Algolia's imports
 import { Highlight, useHits } from 'react-instantsearch-hooks-web'
@@ -14,6 +17,20 @@ function QuerySuggestions({ refine, title }) {
   const { hits } = useHits()
   // router hook to navigate using a function
   const navigate = useNavigate()
+
+  const handleClick = (query) => {
+    refine(query)
+    debouncedSearchInputHandler()
+  }
+
+  const debouncedSearchInputHandler = useMemo(() =>
+    debounce(() => {
+      navigate({
+        pathname: '/search',
+      })
+    }, 300)
+  )
+
   return (
     <div className="suggestions">
       <h3 className="suggestions__title">{title}</h3>
@@ -24,10 +41,7 @@ function QuerySuggestions({ refine, title }) {
               key={index}
               className="suggestions__item"
               onClick={() => {
-                refine(hit.query)
-                // navigate({
-                //   pathname: '/search',
-                // })
+                handleClick(hit.query)
               }}
             >
               <ChevronRight />
