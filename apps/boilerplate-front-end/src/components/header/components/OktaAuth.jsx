@@ -11,18 +11,22 @@ const OktaAuth = () => {
   const [userEmail, setUserEmail] = useState(null)
   const [imgLink, setLinkImg] = useState(null)
   // Get info from okta on user
-  if (authState?.isAuthenticated) {
-    const user = oktaAuth?.token
-      .getUserInfo()
-      .then(function (user) {
-        // user has details about the user
-        setUserEmail(user.email)
-      })
-      .catch(function (err) {
-        alert(`Error getting user info : ${err}`)
-        // handle OAuthError or AuthSdkError (AuthSdkError will be thrown if app is in OAuthCallback state)
-      })
-  }
+  // Put in a useEffect to avoid too many calls
+
+  useEffect(() => {
+    if (authState?.isAuthenticated) {
+      const user = oktaAuth?.token
+        .getUserInfo()
+        .then(function (user) {
+          // user has details about the user
+          setUserEmail(user.email)
+        })
+        .catch(function (err) {
+          alert(`Error getting user info : ${err}`)
+          // handle OAuthError or AuthSdkError (AuthSdkError will be thrown if app is in OAuthCallback state)
+        })
+    }
+  }, [authState])
 
   // Hash function to use email on Gravatar API to have an img
   function get_gravatar(email, size) {
