@@ -15,8 +15,14 @@ export const federatedSearchConfig = {
   showCategories: true,
   showProducts: true,
   showBlogPosts: true,
-  showQueryCat: true
+  showQueryCat: true,
 }
+
+// Change here your probability to show the query category by default prediction score > 60 will be display
+export const probabilityToShowQueryCat = atom({
+  key: 'shouldHaveOpenFederatedSearch', // unique ID (with respect to other atoms/selectors)
+  default: 0.6, // default value (aka initial value)
+})
 
 // Please ignore
 export const shouldHaveOpenFederatedSearch = atom({

@@ -5,8 +5,14 @@ import { useNavigate } from 'react-router-dom'
 // Import recoil state for navigation
 import { navigationStateAtom } from '@/config/navigationConfig'
 import { useSetRecoilState } from 'recoil'
+import { probabilityToShowQueryCat } from '@/config/federatedConfig'
 
-const QueryCat = ({ queryCategorization, query }) => {
+const QueryCat = ({
+  queryCategorization,
+  query,
+  setProbability,
+  probability,
+}) => {
   // Define a type variable to check if the query is ambiguous or not
   const type = queryCategorization.type
   // Set states
@@ -16,6 +22,9 @@ const QueryCat = ({ queryCategorization, query }) => {
 
   // Import the state from recoil and navigation function
   const setNavigationState = useSetRecoilState(navigationStateAtom)
+
+  // Get the probability
+  const probabilityValue = useRecoilValue(probabilityToShowQueryCat)
 
   // router hook to navigate using a function
   const navigate = useNavigate()
@@ -31,11 +40,15 @@ const QueryCat = ({ queryCategorization, query }) => {
     if (type === 'ambiguous') {
       setCategoryAmbiguous(queryCategorization?.categories)
     } else {
+      // Set the category state
       setCategory(
         queryCategorization?.categories[0]?.hierarchyPath[
           queryCategorization?.categories[0]?.hierarchyPath.length - 1
         ].facetValue
       )
+      // Set the probability state
+      setProbability(queryCategorization?.categories[0].probability)
+      // Set the facetName state
       setFacetName(
         queryCategorization?.categories[0]?.hierarchyPath[
           queryCategorization?.categories[0]?.hierarchyPath.length - 1
@@ -48,41 +61,44 @@ const QueryCat = ({ queryCategorization, query }) => {
   const renderAmbiguous = (categoryAmbiguous) => {
     {
       return categoryAmbiguous.map((category) => {
-        return (
-          <div className="query-cat-container__result__return">
-            <Return />
-            <p
-              onClick={() => {
-                navigate(
-                  `/search/${slugify(
-                    category?.hierarchyPath[category.hierarchyPath.length - 1]
-                      .facetValue
-                  )}`
-                )
-                setNavigationState({
-                  type: 'filter',
-                  name: category?.hierarchyPath[
-                    category.hierarchyPath.length - 1
-                  ].facetValue
-                    .split('>')
-                    .pop(),
-                  value: `${
-                    category?.hierarchyPath[category.hierarchyPath.length - 1]
-                      .facetName
-                  }:"${
-                    category?.hierarchyPath[category.hierarchyPath.length - 1]
-                      .facetValue
-                  }"`,
-                })
-              }}
-            >
-              {
-                category?.hierarchyPath[category.hierarchyPath.length - 1]
-                  .facetValue
-              }
-            </p>
-          </div>
-        )
+        if (category.probability > probabilityValue) {
+          setProbability(category.probability)
+          return (
+            <div className="query-cat-container__result__return">
+              <Return />
+              <p
+                onClick={() => {
+                  navigate(
+                    `/search/${slugify(
+                      category?.hierarchyPath[category.hierarchyPath.length - 1]
+                        .facetValue
+                    )}`
+                  )
+                  setNavigationState({
+                    type: 'filter',
+                    name: category?.hierarchyPath[
+                      category.hierarchyPath.length - 1
+                    ].facetValue
+                      .split('>')
+                      .pop(),
+                    value: `${
+                      category?.hierarchyPath[category.hierarchyPath.length - 1]
+                        .facetName
+                    }:"${
+                      category?.hierarchyPath[category.hierarchyPath.length - 1]
+                        .facetValue
+                    }"`,
+                  })
+                }}
+              >
+                {
+                  category?.hierarchyPath[category.hierarchyPath.length - 1]
+                    .facetValue
+                }
+              </p>
+            </div>
+          )
+        }
       })
     }
   }
