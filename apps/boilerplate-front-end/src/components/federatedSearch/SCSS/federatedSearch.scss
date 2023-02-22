@@ -195,9 +195,15 @@
     p {
       margin-left: 0.5rem;
     }
-    &__return{
+    &__return {
       display: flex;
       margin: 0.7rem 0 0 1rem;
+      p {
+        cursor: pointer;
+        &:hover {
+          color: $secondary-color;
+        }
+      }
     }
   }
 }
