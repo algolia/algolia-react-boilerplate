@@ -20,7 +20,7 @@ import {
   federatedRef,
   federatedSearchConfig,
   shouldHaveOpenFederatedSearch,
-  probabilityToShowQueryCat
+  probabilityToShowQueryCat,
 } from '@/config/federatedConfig'
 
 import { searchBoxAtom } from '@/config/searchboxConfig'
@@ -66,7 +66,7 @@ import QueryCat from './components/QueryCat'
 const FederatedSearch = ({ query, refine, results }) => {
   // Define Query Categ answer
   const queryCategorization = results.extensions?.queryCategorization
-  console.log(queryCategorization)
+
   // Probability for display or not query cat
   const [probability, setProbability] = useState(null)
 
@@ -184,16 +184,14 @@ const FederatedSearch = ({ query, refine, results }) => {
         {showProducts && (
           <div className="federatedSearch__middle">
             {/* If don't want this sections go into config file  */}
-            {showQueryCat &&
-              Object.keys(queryCategorization).length !== 0 &&
-              probability > probabilityValue && (
-                <QueryCat
-                  queryCategorization={queryCategorization}
-                  query={query}
-                  setProbability={setProbability}
-                  probability={probability}
-                />
-              )}
+            {showQueryCat && Object.keys(queryCategorization).length !== 0 && (
+              <QueryCat
+                queryCategorization={queryCategorization}
+                query={query}
+                setProbability={setProbability}
+                probability={probability}
+              />
+            )}
             <Configure hitsPerPage={6} />
             <Products
               query={query}

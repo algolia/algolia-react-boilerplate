@@ -204,7 +204,6 @@ const SearchResultsPage = ({ query }) => {
     }
   }
 
-  console.log(navigationState)
 
   let configureProps = {
     analytics: false,

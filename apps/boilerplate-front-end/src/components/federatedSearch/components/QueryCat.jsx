@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { navigationStateAtom } from '@/config/navigationConfig'
 import { useSetRecoilState } from 'recoil'
 import { probabilityToShowQueryCat } from '@/config/federatedConfig'
+import { useRecoilValue } from 'recoil'
 
 const QueryCat = ({
   queryCategorization,
@@ -18,6 +19,7 @@ const QueryCat = ({
   // Set states
   const [category, setCategory] = useState(null)
   const [categoryAmbiguous, setCategoryAmbiguous] = useState([])
+  const [ambiguousHigherProba, setAmbiguousHigherProba] = useState([])
   const [facetName, setFacetName] = useState(null)
 
   // Import the state from recoil and navigation function
@@ -37,8 +39,20 @@ const QueryCat = ({
 
   // Set the state of the category in case the query is not ambiguous or not
   useEffect(() => {
+    // if the query result in an ambiguous query cat
     if (type === 'ambiguous') {
       setCategoryAmbiguous(queryCategorization?.categories)
+      // Filter the categories with a probability higher than the probability value
+      // And define it in a const
+      const sortArray = categoryAmbiguous.sort(
+        (a, b) => b.probability - a.probability
+      )
+      // Set those with probability higher than the probability value
+      const arrayWithProbSupValue = sortArray.filter(
+        (obj) => obj.probability > probabilityValue
+      )
+      // in a new array in the state
+      setAmbiguousHigherProba(arrayWithProbSupValue)
     } else {
       // Set the category state
       setCategory(
@@ -57,7 +71,6 @@ const QueryCat = ({
     }
   }, [queryCategorization])
 
-  // If the category is ambiguous, render the list of categories
   const renderAmbiguous = (categoryAmbiguous) => {
     {
       return categoryAmbiguous.map((category) => {
@@ -103,17 +116,16 @@ const QueryCat = ({
     }
   }
 
-  return (
-    <div className="query-cat-container">
-      <h2 className="query-cat-container__title">Popular Searches</h2>
-      <div className="query-cat-container__search">
-        <Glass />
-        <p>{query}</p>
-      </div>
-      <div className="query-cat-container__result">
-        {type === 'ambiguous' ? (
-          <p>{renderAmbiguous(categoryAmbiguous)}</p>
-        ) : (
+  // If the probability is higher than 0.6 and the type is not ambiguous
+  if (probability > 0.6 && type !== 'ambiguous') {
+    return (
+      <div className="query-cat-container">
+        <h2 className="query-cat-container__title">Popular Searches</h2>
+        <div className="query-cat-container__search">
+          <Glass />
+          <p>{query}</p>
+        </div>
+        <div className="query-cat-container__result">
           <div className="query-cat-container__result__return">
             <Return />
             <p
@@ -129,10 +141,27 @@ const QueryCat = ({
               {category}
             </p>
           </div>
-        )}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+  // If the probability is higher than 0.6 and the type is ambiguous
+  if (type === 'ambiguous' && ambiguousHigherProba.length > 0) {
+    return (
+      <div className="query-cat-container">
+        <h2 className="query-cat-container__title">Popular Searches</h2>
+        <div className="query-cat-container__search">
+          <Glass />
+          <p>{query}</p>
+        </div>
+        <div className="query-cat-container__result">
+          <p>{renderAmbiguous(ambiguousHigherProba)}</p>
+        </div>
+      </div>
+    )
+  } else {
+    return null
+  }
 }
 
 export default QueryCat
