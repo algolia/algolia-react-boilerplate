@@ -30,6 +30,7 @@
   - [ Icons](#-icons)
   - [ Cart](#-cart)
   - [ OKTA](#-okta)
+  - [ Query Categorization](#-QueryCategorization)
 - [Dependencies](#️-dependencies)
   - [State Manager](#-state-manager)
   - [Router](#-router)
