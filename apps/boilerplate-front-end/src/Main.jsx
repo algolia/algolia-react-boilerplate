@@ -234,7 +234,7 @@ const Main = () => {
             path="/"
             element={
               <Suspense fallback={<Loader />}>
-                <HomePage query={query} refine={refine} />
+                <HomePage query={query} refine={refine} results={results} />
               </Suspense>
             }
           />

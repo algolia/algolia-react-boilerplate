@@ -60,8 +60,15 @@ import RecentSearches from './components/RecentSearches'
 import './SCSS/federatedSearch.scss'
 
 import { useSearchBox } from 'react-instantsearch-hooks-web'
+import QueryCat from './components/QueryCat'
 
-const FederatedSearch = ({ query, refine }) => {
+const FederatedSearch = ({ query, refine, results }) => {
+  // Define Query Categ answer
+  const queryCategorization = results.extensions?.queryCategorization
+  useEffect(() => {
+    console.log(queryCategorization)
+  }, [queryCategorization])
+
   // Persona
   const persona = useRecoilValue(personaObjectSelectedAtom)
 
@@ -108,6 +115,7 @@ const FederatedSearch = ({ query, refine }) => {
     showCategories,
     showBlogPosts,
     showProducts,
+    showQueryCat,
   } = federatedSearchConfig
 
   return (
@@ -171,6 +179,10 @@ const FederatedSearch = ({ query, refine }) => {
         {/* If don't want this sections go into config file  */}
         {showProducts && (
           <div className="federatedSearch__middle">
+            {/* If don't want this sections go into config file  */}
+            {showQueryCat && Object.keys(queryCategorization).length !== 0 && (
+              <QueryCat queryCategorization={queryCategorization} />
+            )}
             <Configure hitsPerPage={6} />
             <Products
               query={query}
