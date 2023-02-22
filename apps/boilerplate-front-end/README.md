@@ -419,6 +419,10 @@ This project comes with Cart feature based on what you'll put into it and it sto
 
 This project comes with Okta Log in feature based on okta react app [Okta-React-App](https://github.com/okta/okta-react)
 
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">📈 Query Categorization</h3>
+
+This project comes with Query Categorization feature [Query Categorization](https://algolia.atlassian.net/wiki/spaces/GR/pages/3931537871/Query+Categorization)
+
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🚌 Tour</h3>
