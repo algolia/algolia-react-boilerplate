@@ -176,6 +176,7 @@
 
 // Query Cat
 .query-cat-container {
+  margin-bottom: 1rem;
   &__title {
     @include titleH3($secondary-color);
   }
@@ -190,10 +191,13 @@
     align-items: center;
   }
   &__result {
-    margin: 0.7rem 0 0 1rem;
     display: flex;
     p {
       margin-left: 0.5rem;
+    }
+    &__return{
+      display: flex;
+      margin: 0.7rem 0 0 1rem;
     }
   }
 }
