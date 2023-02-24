@@ -43,7 +43,7 @@ const Trending = lazy(() =>
 // Import scoped SCSS
 import './homepage.scss'
 
-const HomePage = ({ query, refine }) => {
+const HomePage = ({ query, refine, results }) => {
   const carouselLoaded = useRecoilValue(isCarouselLoaded)
 
   const [isHomepage1Loaded, setHomepage1Loaded] = useState(false)
@@ -73,7 +73,7 @@ const HomePage = ({ query, refine }) => {
       {isFederated && isFederatedOpen && (
         <Suspense>
           <AnimatePresence>
-            <FederatedSearch query={query} refine={refine} />
+            <FederatedSearch query={query} refine={refine} results={results}/>
           </AnimatePresence>
         </Suspense>
       )}

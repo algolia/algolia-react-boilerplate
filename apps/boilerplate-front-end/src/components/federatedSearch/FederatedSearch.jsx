@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 // Algolias's import
 import { Configure, Index } from 'react-instantsearch-hooks-web'
@@ -20,6 +20,7 @@ import {
   federatedRef,
   federatedSearchConfig,
   shouldHaveOpenFederatedSearch,
+  probabilityToShowQueryCat,
 } from '@/config/federatedConfig'
 
 import { searchBoxAtom } from '@/config/searchboxConfig'
@@ -60,14 +61,24 @@ import RecentSearches from './components/RecentSearches'
 import './SCSS/federatedSearch.scss'
 
 import { useSearchBox } from 'react-instantsearch-hooks-web'
+import QueryCat from './components/QueryCat'
 
-const FederatedSearch = ({ query, refine }) => {
+const FederatedSearch = ({ query, refine, results }) => {
+  // Define Query Categ answer
+  const queryCategorization = results.extensions?.queryCategorization
+
+  // Probability for display or not query cat
+  const [probability, setProbability] = useState(null)
+
   // Persona
   const persona = useRecoilValue(personaObjectSelectedAtom)
 
   const segment = useRecoilValue(segmentObjectSelectedAtom)
   const setIsFederated = useSetRecoilState(shouldHaveOpenFederatedSearch)
   const searchboxRef = useRecoilValue(searchBoxAtom)
+
+  // Get the probability for display query cat
+  const probabilityValue = useRecoilValue(probabilityToShowQueryCat)
 
   //Get reference for dropdowns in Navigation
   const selector = useRecoilValue(selectorNavigationRef)
@@ -108,6 +119,7 @@ const FederatedSearch = ({ query, refine }) => {
     showCategories,
     showBlogPosts,
     showProducts,
+    showQueryCat,
   } = federatedSearchConfig
 
   return (
@@ -171,6 +183,15 @@ const FederatedSearch = ({ query, refine }) => {
         {/* If don't want this sections go into config file  */}
         {showProducts && (
           <div className="federatedSearch__middle">
+            {/* If don't want this sections go into config file  */}
+            {showQueryCat && Object.keys(queryCategorization).length !== 0 && (
+              <QueryCat
+                queryCategorization={queryCategorization}
+                query={query}
+                setProbability={setProbability}
+                probability={probability}
+              />
+            )}
             <Configure hitsPerPage={6} />
             <Products
               query={query}

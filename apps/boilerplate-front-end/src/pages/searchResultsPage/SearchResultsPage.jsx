@@ -204,6 +204,7 @@ const SearchResultsPage = ({ query }) => {
     }
   }
 
+
   let configureProps = {
     analytics: false,
     clickAnalytics: true,
