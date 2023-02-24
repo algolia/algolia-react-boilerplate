@@ -189,21 +189,32 @@
   &__search {
     display: flex;
     align-items: center;
+    margin-top: 0.5rem;
+    p {
+      font-weight: 300;
+      font-size: 0.8rem;
+    }
   }
   &__result {
     display: flex;
     p {
       margin-left: 0.5rem;
+      @include p-text-federated($main-color);
     }
     &__return {
       display: flex;
+      align-items: center;
       margin: 0.7rem 0 0 1rem;
       p {
         cursor: pointer;
+        @include p-text-federated($main-color);
         &:hover {
           color: $secondary-color;
         }
       }
+    }
+    svg {
+      width: 10px;
     }
   }
 }
