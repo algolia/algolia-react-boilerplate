@@ -208,9 +208,6 @@
       p {
         cursor: pointer;
         @include p-text-federated($main-color);
-        &:hover {
-          color: $secondary-color;
-        }
       }
     }
     svg {
