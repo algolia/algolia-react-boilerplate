@@ -148,6 +148,15 @@ const FederatedSearch = ({ query, refine, results }) => {
       >
         <div className="federatedSearch__left">
           {/* If don't want this sections go into config file  */}
+          {showQueryCat && Object.keys(queryCategorization).length !== 0 && (
+            <QueryCat
+              queryCategorization={queryCategorization}
+              query={query}
+              setProbability={setProbability}
+              probability={probability}
+            />
+          )}
+          {/* If don't want this sections go into config file  */}
           {showRecentSearches && !mobile && !tablet && (
             <RecentSearches
               query={query}
@@ -183,15 +192,6 @@ const FederatedSearch = ({ query, refine, results }) => {
         {/* If don't want this sections go into config file  */}
         {showProducts && (
           <div className="federatedSearch__middle">
-            {/* If don't want this sections go into config file  */}
-            {showQueryCat && Object.keys(queryCategorization).length !== 0 && (
-              <QueryCat
-                queryCategorization={queryCategorization}
-                query={query}
-                setProbability={setProbability}
-                probability={probability}
-              />
-            )}
             <Configure hitsPerPage={6} />
             <Products
               query={query}
