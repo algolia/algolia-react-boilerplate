@@ -164,19 +164,33 @@ In order for predict to function, it must have a predict App ID, API key and reg
 
 You must also adjust the values found in `src/config/predictConfig`. We store a default value for `predictUserIdAtom` to ensure the app works with the default demo flow, but you should replace it with your own predict user ID for your own demo purposes.
 
+```
+// ADJUST YOUR VALUES
+export const predictUserProfileAtom = atom({
+  key: 'predictUserProfileAtom', // unique ID
+  default: { user: 'anonymous' }, // default value
+})
+export const predictUserIdAtom = atom({
+  key: 'predictUserIdAtom', // unique ID
+  default: '100023285.994839327', // default value
+})
+```
+
 You can feel free to keep the default values for all of these atoms and configurations, and follow the default demo flow outlined below (TBD).
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Demo Tour</h3>
-
-This app offers the ability to present a guided tour to the user, highlighting different elements and explaining them. The feature is currently in BETA, and is subject to change. It is on by default; it can be turned off by going to `config/demoTourConfig` and setting the `default` value of `shouldShowDemoTour` to `false`.
-
-You can configure your tour by adjusting the `steps` const, also found in `config/demoTourConfig`.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Network Error Messages</h3>
 
 This feature will guide you to see what in the configuration is failing. We render the InstantSearch api errors in a modal.
 
 You can turn this feature off by switching `showNetworkErorrs` default value to `false` in `config/demoGuideConfig`.
+
+```
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+export const showNetworkErorrs = atom({
+  key: 'showNetworkErorrs',
+  default: true,
+})
+```
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Insights</h3>
 
@@ -199,29 +213,135 @@ You can find an example redirect rule by searching for `qr-1634733813616` in `ru
 
 You can turn on federated search in `config/featuresConfig` by setting the `default` value of `shouldHaveFederatedSearch` to true. You can then define which sections are shown by going to `config/federatedConfig`.
 
+```
+// config/featuresConfig
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+export const shouldHaveFederatedSearch = atom({
+  key: 'shouldHaveFederatedSearch', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
+
+//config/federatedConfig
+// ADJUST YOUR VALUE
+// This const defines the attribute used to show category suggestions if turned on
+export const federatedCategoriesAttribute = 'hierarchicalCategories.lvl2'
+
+// This const defines what sections should be shown in federated search or not
+// Adjust each value to true or false depending on what you wish to show
+// Do not delete anything from this object please.
+export const federatedSearchConfig = {
+  showRecentSearches: true,
+  showQuerySuggestions: true,
+  showCategories: true,
+  showProducts: true,
+  showBlogPosts: true,
+  showQueryCat: true,
+}
+
+// Change here your probability to show the query category by default prediction score > 60 will be display
+export const probabilityToShowQueryCat = atom({
+  key: 'probabilityToShowQueryCat', // unique ID (with respect to other atoms/selectors)
+  default: 0.6, // default value (aka initial value)
+})
+
+// Please ignore
+export const shouldHaveOpenFederatedSearch = atom({
+  key: 'shouldHaveOpenFederatedSearch', // unique ID (with respect to other atoms/selectors)
+  default: false, // default value (aka initial value)
+})
+
+// Please ignore
+export const federatedRef = atom({
+  key: 'federatedRef', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+})
+```
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Voice Search</h3>
 
 You can turn on voice search by going to `config/featuresConfig` and setting the `default` value of `shouldHaveVoiceSearch` to true.
+
+```
+// config/featuresConfig
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+export const shouldHaveVoiceSearch = atom({
+  key: 'shouldHaveVoiceSearch',
+  default: true,
+})
+```
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Sorts</h3>
 
 You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveSorts` to true.
 
+```
+// config/featuresConfig
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+export const shouldHaveSorts = atom({
+  key: 'shouldHaveSorts', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
+```
+
 You can then define your sorts by going to `config/sortByConfig` and adjusting the values in the export called `sortBy`.
 
 To sort by Price ascending or descending please configure the dashboard by creating a new virtual replica and name it exactly like the main index name and add `_price_asc` or `_price_desc`. Please see `config/sortByConfig`
+
+```
+// config/sortByConfig
+// ADJUST YOUR VALUES
+// This const defines the indices for sorts, please add or remove from the array as needed
+// The values for each index use the prefix of the main index for convenience
+export const sortBy = selector({
+  key: 'sortBy', // unique ID (with respect to other atoms/selectors)
+  get: ({ get }) => {
+    return {
+      value: true,
+      labelIndex: [
+        { value: get(mainIndex), label: 'All' },
+        { value: `${get(mainIndex)}_price_desc`, label: 'Price Desc' },
+        { value: `${get(mainIndex)}_price_asc`, label: 'Price Asc' },
+      ],
+    }
+  },
+})
+```
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Carousels</h3>
 
 You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveCarousels` to true.
 
+```
+// config/featuresConfig
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+export const shouldHaveCarousels = atom({
+  key: 'shouldHaveCarousels', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
+```
+
 Carousels are configured using [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#using-context). You can configure your carousels by going to `config/carouselConfig` and adjusting the values for each `context`. You must ensure you have a rule in the algolia dashboard for each context, which pins products as this is what powers the carousels.
+
+```
+// config/carouselConfig
+// ADJUST YOUR VALUES
+export const carouselConfig = [
+  {
+    context: 'homepage-carousel-one',
+  },
+  {
+    context: 'homepage-carousel-two',
+  },
+]
+// Indicates how many records should be shown in an individual carousel
+export const hitsPerCarousel = 8
+```
 
 You can find an example carousel rule by searching for `qr-1651497727816` in `rules/example-rules.json`.
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Recommend</h3>
 
-Use FIG to generate the CSVs needed for Recommend, which you can then upload to the dashboard, and following this, enable FBT and Related in the appropriate config of this application.
+Use [FIG](https://github.com/algolia/fake-insights-generator) to generate the CSVs needed for Recommend, which you can then upload to the dashboard, and following this, enable FBT and Related in the appropriate config of this application.
 
 We wrote a Gdoc to detail how use [FIG](https://github.com/algolia/fake-insights-generator). You can find it [here](https://docs.google.com/document/d/1T8ClZX5I06D-NpV9ZehFCXA_yx095cCFd7P2e3VeM5U/edit?usp=sharing).
 
@@ -231,6 +351,39 @@ Homepage: Trending products
 Results Page: Trending products and trending facet values
 PDP: Related and FBT
 NRP: Related
+
+You can turn on Recommend features by going to `config/featuresConfig`.
+
+```
+// config/featuresConfig
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+
+// Make sure you trained the models into the dashboards first
+export const shouldHaveRelatedProducts = atom({
+  key: 'shouldHaveRelatedProductsAtom', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
+
+// Make sure you trained the models into the dashboards first
+export const shouldHaveFbtProducts = atom({
+  key: 'shouldHaveFbtProducts', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
+
+// Make sure you trained the models into the dashboards first
+// this feature will be visible on home, results and category pages if activated -> (activated by default)
+export const shouldHaveTrendingProducts = atom({
+  key: 'shouldHaveTrendingProductsAtom', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
+
+// Make sure you trained the models into the dashboards first
+// this feature will be visible on home, results and category pages if activated -> (activated by default)
+export const shouldHaveTrendingFacets = atom({
+  key: 'shouldHaveTrendingFacetsAtom', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
+```
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Styling</h3>
 
@@ -242,6 +395,17 @@ The demo guide is opened by clicking on the three dots in the top right of the a
 
 It is all defined and adjusted in `config/demoGuideConfig` and is self described.
 
+You can turn on the demo guide by going to `config/featuresConfig
+
+```
+// config/featuresConfig
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+export const shouldHaveDemoGuide = atom({
+  key: 'shouldHaveDemoGuide',
+  default: true,
+})
+```
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 🧱 Algolia Explain</h3>
 
 You will find this feature in the Demo Guide panel, toggle it on to activate it.
@@ -251,6 +415,15 @@ It will provide information about the rules currently being applied, the facet o
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Languages</h3>
 
 In order to turn on this feature, go to `config/featuresConfig` and set `shouldHaveLanguages` to true.
+
+```
+// config/featuresConfig
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+export const shouldHaveLanguages = atom({
+  key: 'shouldHaveLanguages', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
+```
 
 Use it by making sure you have an index per language, and that the attribute names are always in the default language, but the values change in each index according to the local language.
 
@@ -289,6 +462,17 @@ You can find an example of a bannersrp rule by searching for `qr-1634719042792` 
 
 You can find an example of a homeBannerTwo rule by searching for `qr-1645197289062` in `rules/example-rules.json`.
 
+You can turn on Banners by going to `config/featuresConfig`.
+
+```
+// config/featuresConfig
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+export const shouldHaveInjectedBanners = atom({
+  key: 'shouldHaveInjectedBanners',
+  default: true,
+})
+```
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Segments</h3>
 
 You can add segments to the application to represent algolia being told that the current user has certain characteristics. It is not 1:1 personalisation and would be fed in by an external system such as Dynamic Yield.
@@ -297,11 +481,57 @@ These "segments" are sent to Algolia as [optional filters](https://www.algolia.c
 
 Use this feature by adjusting `config/segmentConfig` and turn on or off this feature in `config/featuresConfig`.
 
+```
+// config/featuresConfig
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+export const shouldHaveSegments = atom({
+  key: 'shouldHaveSegments', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
+```
+
+```
+// config/segmentConfig
+export const segmentConfig = [
+  {
+    value: '',
+    label: 'No Segment',
+    labelFr: 'Pas de segment',
+    labelGer: 'Kein abschnitt',
+    type: 'segment',
+  },
+  {
+    value: ['hierarchicalCategories.lvl0:Womens'],
+    label: 'Female Segment',
+    type: 'segment',
+  },
+  {
+    value: ['hierarchicalCategories.lvl0:Mens'],
+    label: 'Male Segment',
+    type: 'segment',
+  },
+]
+```
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Badges</h3>
 
 You can dynamically add badges based on any condition for an attribute returned in a hit.
 
 There are two examples already defined in `/config/badgesConfig`, please follow the same example by adjusting that file.
+
+```
+// /config/badgesConfig
+// ADJUST YOUR VALUES
+const criteriaConditionals = [
+  {
+    conditional: {
+      // if the item is promoted by a rule
+      attribute: '_rankingInfo.promoted',
+      condition: true,
+      badgeTitle: 'Pinned',
+    },
+  }]
+```
 
 When two triggers are matched, the one found first in the configuration array will be the one which is shown, more than one badge is not currently supported.
 
@@ -311,17 +541,64 @@ When two triggers are matched, the one found first in the configuration array wi
 
 The ability to control the facets which get displayed including their order. When adding your facets inside this app via `config/refinementsConfig`, you _must_ ensure those facets are also added in the dashboard not just in the Facets section, but also in the Facet Display section, otherwise they will not show.
 
+You can turn on Facet Display by going to `config/featuresConfig
+
+```
+// config/featuresConfig
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+export const shouldHaveDynamicFacet = atom({
+  key: 'shouldHaveDynamicFacet', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
+```
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Category Pages</h3>
 
 In order to configure Category Pages, go to `config/navigationConfig`.
 
 Edit the value for `categoryPageFilterAttribute`. This represents the attribute you will filter on to create your individual category pages.
 
-Then you can adjust the linksHeader atom. The value for `filter` must match the value of the category you are filtering on to create the resulting page.
+```
+// config/navigationConfig
+// EDIT THE VALUE
+export const categoryPageFilterAttribute = 'categories'
+```
+
+Then you can adjust the linksHeader atom. The value for `value` must match the value of the category you are filtering on to create the resulting page.
+
+```
+// config/navigationConfig
+// EXAMPLE
+export const linksHeader = atom({
+  key: 'linksHeader', // unique ID (with respect to other atoms/selectors)
+  default: [
+    {
+      name: 'All',
+      type: '',
+      value: '',
+    }
+  ]
+})
+```
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Collection Pages</h3>
 
-In order to configure Collection Pages, go in `config/headerConfig`. From there you can add links to the Navigation tab. Collection pages are powered by rule contexts. In order for this to work, you must set the type to `context` and make sure that you have a rule set up in the Algolia dashboard matching the context trigger which you define as the value of `context`.
+In order to configure Collection Pages, go in `config/navigationConfig`. From there you can add links to the Navigation tab. Collection pages are powered by rule contexts. In order for this to work, you must set the type to `context` and make sure that you have a rule set up in the Algolia dashboard matching the context trigger which you define as the value of `context`.
+
+```
+// config/navigationConfig
+// EXAMPLE
+export const linksHeader = atom({
+  key: 'linksHeader', // unique ID (with respect to other atoms/selectors)
+  default: [
+    {
+      name: 'Accessories',
+      type: 'context',
+      value: 'accessories',
+    },
+  ]
+})
+```
 
 You can find an example of a collection page rule by searching for `qr-1651145630794` in `rules/example-rules.json`.
 
@@ -341,7 +618,28 @@ To configure personalisation please first make sure you have the Personalization
 
 Then, you can visit `config/personaConfig` and update the `value`s to match the user tokens you need to send, and update the personalizationFilters array to contain the attributes and values you want to boost for each persona. The `description` will also show up in the demo guide component.
 
+```
+// config/personaConfig
+// EXAMPLE
+export const personaConfig = [
+  {
+    value: 'anon',
+    label: 'No Persona',
+    labelFr: 'Pas de persona',
+    labelGer: 'Keine persönlichkeit',
+    description: 'Anonymous user',
+    type: 'persona',
+    personalizationFilters: [],
+  }]
+```
+
 You can also adjust the personalizationImpact number in `config/personaConfig` to control how much personalization applies to the results where personalization is turned on.
+
+```
+// config/personaConfig
+// EXAMPLE
+export const personalizationImpact = 98
+```
 
 Personalization is currently active by default in the search results page, and in the main section (normally products) of the federated search.
 
@@ -416,6 +714,17 @@ https://fontawesome.com/search?o=r&m=free&s=solid
 
 This project comes with Cart feature based on what you'll put into it and it stores in Local Storage to have always your cart. It's linked to event sending [Insights](https://www.algolia.com/doc/rest-api/insights/)
 
+You can turn on the Cart feature by going to `config/featuresConfig
+
+```
+// config/featuresConfig
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+export const shouldHaveCartFunctionality = atom({
+  key: 'shouldHaveCartFunctionality', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
+```
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🔒 Okta</h3>
 
 This project comes with Okta Log in feature based on okta react app [Okta-React-App](https://github.com/okta/okta-react)
@@ -425,10 +734,6 @@ This project comes with Okta Log in feature based on okta react app [Okta-React-
 This project comes with Query Categorization feature [Query Categorization](https://algolia.atlassian.net/wiki/spaces/GR/pages/3931537871/Query+Categorization)
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Dependencies</h2>
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🚌 Tour</h3>
-
-[Reactour](https://reactour.js.org/)
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">💻 State Manager</h3>
 
