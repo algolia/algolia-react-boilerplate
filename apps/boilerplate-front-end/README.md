@@ -238,7 +238,7 @@ export const federatedSearchConfig = {
   showQueryCat: true,
 }
 
-// Change here your probability to show the query category by default prediction score > 60 will be display
+// Change here your probability to show the query category by default prediction score > 60 will be displayed
 export const probabilityToShowQueryCat = atom({
   key: 'probabilityToShowQueryCat', // unique ID (with respect to other atoms/selectors)
   default: 0.6, // default value (aka initial value)
