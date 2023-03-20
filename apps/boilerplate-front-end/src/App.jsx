@@ -16,18 +16,9 @@ import PredictUserProfileProvider from './components/predict/PredictUserProfileP
 // Import Components
 import Main from './Main'
 
-// Import fontawesome
-import { library } from '@fortawesome/fontawesome-svg-core'
-// Import the icons you need
-import { fas } from '@fortawesome/free-solid-svg-icons'
-
 const App = () => {
-
   // Index to make the main search queries
   const index = useRecoilValue(mainIndex)
-  
-  // Add the icons you need to the library
-  library.add(fas)
 
   // Get userID from Predict
   const userId = useRecoilValue(predictUserIdAtom)
