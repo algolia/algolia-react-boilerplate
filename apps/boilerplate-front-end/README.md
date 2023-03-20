@@ -403,14 +403,17 @@ Here is a sample record structure which is expected for records in the index to 
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> Icons</h3>
 
-This project comes with fontawesome free solid icons added by default
+This project comes with react-icons free solid icons added by default
 
 You can use an icon with the following syntax inside any component:
 
-`<FontAwesomeIcon className="your class here" icon="icon name here" />`
+```
+import { FaBeer } from 'react-icons/fa';
+<h3> Lets go for a <FaBeer />? </h3>
+```
 
 You can find the names of the available icons here:
-https://fontawesome.com/search?o=r&m=free&s=solid
+https://react-icons.github.io/react-icons/
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🛒 Cart</h3>
 
