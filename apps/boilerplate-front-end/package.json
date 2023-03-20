@@ -64,7 +64,6 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^11.17.4",
     "react-instantsearch-hooks-web": "^6.25.0",
-    "react-refresh": "^0.14.0",
     "react-router-dom": "6.3.0",
     "recoil": "^0.7.4",
     "sass": "^1.49.0",
