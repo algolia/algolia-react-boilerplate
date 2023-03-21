@@ -40,8 +40,8 @@
   - [Debounce](#-debounce)
   - [Lazy Loading](#-lazy-loading)
   - [React i18](#-Translation)
-- [Develop on this project](#️-develop-on-this-project)
   - [Before use please install](#-before-use-please-install)
+- [How to Contribute](#-how-to-contribute-)
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">Pre-requisites</h2>
 Before proceeding, please make sure you have the following:
