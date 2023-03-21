@@ -1,17 +1,19 @@
 // Import framer-motion for animation on hits
 import { motion } from 'framer-motion'
 
-import * as _ from 'lodash'
+import toPairs from 'lodash/toPairs'
+import isEqual from 'lodash/isEqual'
+import differenceWith from 'lodash/differenceWith'
 
 import { framerMotionHits } from '@/config/animationConfig'
 
 const RankingFormulaOverlay = ({ hit, nextHit }) => {
   if (nextHit === undefined) return <p>Scroll to load more results</p>
 
-  const changes = _.differenceWith(
-    _.toPairs(nextHit._rankingInfo),
-    _.toPairs(hit._rankingInfo),
-    _.isEqual
+  const changes = differenceWith(
+    toPairs(nextHit._rankingInfo),
+    toPairs(hit._rankingInfo),
+    isEqual
   )
 
   return (
@@ -29,9 +31,9 @@ const RankingFormulaOverlay = ({ hit, nextHit }) => {
     >
       {hit._rankingInfo &&
         changes.length &&
-        changes.map((change) => {
+        changes.map((change, i) => {
           return (
-            <p>
+            <p key={i}>
               {change[0]} of {JSON.stringify(hit._rankingInfo[change[0]])} vs{' '}
               {JSON.stringify(nextHit._rankingInfo[change[0]])}
             </p>
