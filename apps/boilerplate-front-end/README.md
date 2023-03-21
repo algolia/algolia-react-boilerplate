@@ -807,7 +807,7 @@ The repository is working around 3 branches :
 npx husky install
 ```
 
-<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🤝 How to contribute ?</h2>
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">🤝 How to contribute</h2>
 
 # Welcome to Algolia Boilerplate contributing guide
 
