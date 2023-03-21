@@ -858,7 +858,7 @@ Scan through our [existing issues](https://github.com/algolia/algolia-react-boil
 
 ### Commit your update
 
-Commit the changes once you are happy with them. Don't forget to fill up the [PR template](./pull_request_template.md)
+Commit the changes once you are happy with them. Don't forget to fill in the [PR template](./pull_request_template.md)
 
 ### Pull Request
 
