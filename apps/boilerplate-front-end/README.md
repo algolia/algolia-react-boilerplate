@@ -42,6 +42,7 @@
   - [React i18](#-Translation)
   - [Before use please install](#-before-use-please-install)
 - [How to Contribute](#-how-to-contribute-)
+- [Troubleshooting](#️-troubleshooting)
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">Pre-requisites</h2>
 Before proceeding, please make sure you have the following:
@@ -875,3 +876,32 @@ When you're finished with the changes, create a pull request, also known as a PR
 Congratulations :tada::tada: The Algolia Demo team thanks you :sparkles:.
 
 Once your PR is merged, your contributions will be publicly visible on the [BP docs](https://boilerplate-docs.netlify.app/).
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⛑️ Troubleshooting</h3>
+
+If you encounter any issues while working with the Algolia React Boilerplate, the following troubleshooting guide may help you resolve them.
+
+### Node.js version
+
+One common issue is related to the Node.js version used by the project. The Algolia React Boilerplate requires Node.js version 14 or higher. To check the version of Node.js installed on your machine, run the following command in your terminal:
+
+```
+node -v
+```
+
+If your version is lower than 14, you can download the latest version from the [official Node.js website](https://nodejs.org/).
+
+To update the Node.js version used by the project, you can use a version manager such as [nvm](https://github.com/nvm-sh/nvm). Once installed, you can run the following commands to install and use Node.js version 14:
+
+```
+nvm install 14
+nvm use 14
+```
+
+### Other Issues
+
+If you encounter other issues while working with the Algolia React Boilerplate, please check the [project's issues page](https://github.com/algolia/algolia-react-boilerplate/issues) to see if your issue has already been reported. If not, feel free to open a new issue with a detailed description of the problem and steps to reproduce it.
+
+If you have any questions or need further assistance, please don't hesitate to reach out to our support team.
+
+We appreciate your help in improving the Algolia React Boilerplate and making it a better tool for everyone.
