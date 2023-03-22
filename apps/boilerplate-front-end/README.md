@@ -42,7 +42,7 @@
   - [React i18](#-Translation)
   - [Before use please install](#-before-use-please-install)
 - [How to Contribute](#-how-to-contribute-)
-- [Troubleshooting](#️-get-started)
+- [Troubleshooting](#️-troubleshooting)
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">Pre-requisites</h2>
 Before proceeding, please make sure you have the following:
