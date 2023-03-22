@@ -42,6 +42,7 @@
   - [React i18](#-Translation)
   - [Before use please install](#-before-use-please-install)
 - [How to Contribute](#-how-to-contribute-)
+- [Troubleshooting](#️-troubleshooting)
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">Pre-requisites</h2>
 Before proceeding, please make sure you have the following:
@@ -57,13 +58,13 @@ Before proceeding, please make sure you have the following:
 
 2. Run `pnpm install` in the root directory and `pnpm start:front` to view your project on [http://localhost:3000](http://localhost:3000/)
 
-3. Visit `src/config` and adjust `algoliaEnvConfig` to point to your own app, indices and API keys. If you do not need an index which is present in that file i.e. for articles, please do not remove it, just leave it as is, and you can turn off the relevant feature in the next step.
+3. Visit [src/config](./src/config/) and adjust [algoliaEnvConfig](./src/config/algoliaEnvConfig.js) to point to your own app, indices and API keys. If you do not need an index which is present in that file i.e. for articles, please do not remove it, just leave it as is, and you can turn off the relevant feature in the next step.
 
-4. Visit `src/config` and adjust `featuresConfig` to activate/deactivate the features you would like to see in the app.
+4. Visit [src/config](./src/config/) and adjust [featuresConfig](./src/config/featuresConfig.js) to activate/deactivate the features you would like to see in the app.
 
-5. Go through the other files in `src/config` and adjust them according to your own data and requirements, each file describes itself.
+5. Go through the other files in [src/config](./src/config/) and adjust them according to your own data and requirements, each file describes itself.
 
-6. In `src/config` , pay particular attention to `hitsConfig` as this is where we map your own attribute names to those used in the app. You should never adjust the attributes used in the app itself, only this map.
+6. In [src/config](./src/config/) , pay particular attention to [hitsConfig](./src/config/hitsConfig.js) as this is where we map your own attribute names to those used in the app. You should never adjust the attributes used in the app itself, only this map.
 
 7. Run and test your app locally, if you have any questions or find any issues please raise an issue with us here https://github.com/algolia/algolia-react-boilerplate/issues.
 
@@ -130,7 +131,7 @@ ProductDetails.jsx
   - Price
     - The price should display correctly according to the currency. Please check the price component file where you can change the decimals as well.
 
-You can define whether you want each attribute shown by adjusting `PDPHitSections` in `/config/hitsConfig`
+You can define whether you want each attribute shown by adjusting `PDPHitSections` in [hitsConfig](./src/config/hitsConfig.js)
 
 - Recommend components
   - Related Products
@@ -160,9 +161,9 @@ You can text an example on the deployed version of this repository by adding `?c
 
 The app has access to predict through the PredictUserProfileProvider component, found in `./src/components/predict`.
 
-In order for predict to function, it must have a predict App ID, API key and region set in algoliaEnvConfig, found in `./src/config`. Please contact Algolia if you are not sure what values they should have.
+In order for predict to function, it must have a predict App ID, API key and region set in algoliaEnvConfig, found in [algoliaEnvConfig](./src/config/algoliaEnvConfig.js). Please contact Algolia if you are not sure what values they should have.
 
-You must also adjust the values found in `src/config/predictConfig`. We store a default value for `predictUserIdAtom` to ensure the app works with the default demo flow, but you should replace it with your own predict user ID for your own demo purposes.
+You must also adjust the values found in [predictConfig](./src/config/predictConfig.js). We store a default value for `predictUserIdAtom` to ensure the app works with the default demo flow, but you should replace it with your own predict user ID for your own demo purposes.
 
 ```
 // ADJUST YOUR VALUES
@@ -182,7 +183,7 @@ You can feel free to keep the default values for all of these atoms and configur
 
 This feature will guide you to see what in the configuration is failing. We render the InstantSearch api errors in a modal.
 
-You can turn this feature off by switching `showNetworkErorrs` default value to `false` in `config/demoGuideConfig`.
+You can turn this feature off by switching `showNetworkErorrs` default value to `false` in [demoGuideConfig](./src/config/demoGuideConfig.js).
 
 ```
 // ADJUST YOUR VALUES TO TRUE OR FALSE
@@ -211,7 +212,7 @@ You can find an example redirect rule by searching for `qr-1634733813616` in `ru
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Federated Search</h3>
 
-You can turn on federated search in `config/featuresConfig` by setting the `default` value of `shouldHaveFederatedSearch` to true. You can then define which sections are shown by going to `config/federatedConfig`.
+You can turn on federated search in [featuresConfig](./src/config/featuresConfig.js) by setting the `default` value of `shouldHaveFederatedSearch` to true. You can then define which sections are shown by going to [federatedConfig](./src/config/federatedConfig.js).
 
 ```
 // config/featuresConfig
@@ -259,7 +260,7 @@ export const federatedRef = atom({
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Voice Search</h3>
 
-You can turn on voice search by going to `config/featuresConfig` and setting the `default` value of `shouldHaveVoiceSearch` to true.
+You can turn on voice search by going to [featuresConfig](./src/config/featuresConfig.js) and setting the `default` value of `shouldHaveVoiceSearch` to true.
 
 ```
 // config/featuresConfig
@@ -272,7 +273,7 @@ export const shouldHaveVoiceSearch = atom({
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Sorts</h3>
 
-You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveSorts` to true.
+You can turn on sorts by going to [featuresConfig](./src/config/featuresConfig.js) and setting the `default` value of `shouldHaveSorts` to true.
 
 ```
 // config/featuresConfig
@@ -283,9 +284,9 @@ export const shouldHaveSorts = atom({
 })
 ```
 
-You can then define your sorts by going to `config/sortByConfig` and adjusting the values in the export called `sortBy`.
+You can then define your sorts by going to [sortByConfig](./src/config/sortByConfig.js) and adjusting the values in the export called `sortBy`.
 
-To sort by Price ascending or descending please configure the dashboard by creating a new virtual replica and name it exactly like the main index name and add `_price_asc` or `_price_desc`. Please see `config/sortByConfig`
+To sort by Price ascending or descending please configure the dashboard by creating a new virtual replica and name it exactly like the main index name and add `_price_asc` or `_price_desc`. Please see [sortByConfig](./src/config/sortByConfig.js)
 
 ```
 // config/sortByConfig
@@ -309,7 +310,7 @@ export const sortBy = selector({
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Carousels</h3>
 
-You can turn on sorts by going to `config/featuresConfig` and setting the `default` value of `shouldHaveCarousels` to true.
+You can turn on sorts by going to [featuresConfig](./src/config/featuresConfig.js) and setting the `default` value of `shouldHaveCarousels` to true.
 
 ```
 // config/featuresConfig
@@ -320,7 +321,7 @@ export const shouldHaveCarousels = atom({
 })
 ```
 
-Carousels are configured using [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#using-context). You can configure your carousels by going to `config/carouselConfig` and adjusting the values for each `context`. You must ensure you have a rule in the algolia dashboard for each context, which pins products as this is what powers the carousels.
+Carousels are configured using [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#using-context). You can configure your carousels by going to [carouselConfig](./src/config/carouselConfig.js) and adjusting the values for each `context`. You must ensure you have a rule in the algolia dashboard for each context, which pins products as this is what powers the carousels.
 
 ```
 // config/carouselConfig
@@ -352,7 +353,7 @@ Results Page: Trending products and trending facet values
 PDP: Related and FBT
 NRP: Related
 
-You can turn on Recommend features by going to `config/featuresConfig`.
+You can turn on Recommend features by going to [featuresConfig](./src/config/featuresConfig.js).
 
 ```
 // config/featuresConfig
@@ -393,9 +394,9 @@ You can adjust all of the styling of this application by adjusting anything foun
 
 The demo guide is opened by clicking on the three dots in the top right of the application and serves to guide the user through the features available in the app.
 
-It is all defined and adjusted in `config/demoGuideConfig` and is self described.
+It is all defined and adjusted in [demoGuideConfig](./src/config/demoGuideConfig.js) and is self described.
 
-You can turn on the demo guide by going to `config/featuresConfig
+You can turn on the demo guide by going to [featuresConfig](./src/config/featuresConfig.js)
 
 ```
 // config/featuresConfig
@@ -414,7 +415,7 @@ It will provide information about the rules currently being applied, the facet o
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Languages</h3>
 
-In order to turn on this feature, go to `config/featuresConfig` and set `shouldHaveLanguages` to true.
+In order to turn on this feature, go to [featuresConfig](./src/config/featuresConfig.js) and set `shouldHaveLanguages` to true.
 
 ```
 // config/featuresConfig
@@ -427,7 +428,7 @@ export const shouldHaveLanguages = atom({
 
 Use it by making sure you have an index per language, and that the attribute names are always in the default language, but the values change in each index according to the local language.
 
-Then, go to `config/languagesConfig` and adjust each export to what you need. Specifically, in `languageSwitchConfig` you must make sure each node has an `index` defined, and this index will be used when that language is selected.
+Then, go to [languagesConfig](./src/config/languagesConfig.js) and adjust each export to what you need. Specifically, in `languageSwitchConfig` you must make sure each node has an `index` defined, and this index will be used when that language is selected.
 
 Currently in :
 
@@ -462,7 +463,7 @@ You can find an example of a bannersrp rule by searching for `qr-1634719042792` 
 
 You can find an example of a homeBannerTwo rule by searching for `qr-1645197289062` in `rules/example-rules.json`.
 
-You can turn on Banners by going to `config/featuresConfig`.
+You can turn on Banners by going to [featuresConfig](./src/config/featuresConfig.js).
 
 ```
 // config/featuresConfig
@@ -479,7 +480,7 @@ You can add segments to the application to represent algolia being told that the
 
 These "segments" are sent to Algolia as [optional filters](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/how-to-promote-with-optional-filters/), which are used to boost hits that match those filters.
 
-Use this feature by adjusting `config/segmentConfig` and turn on or off this feature in `config/featuresConfig`.
+Use this feature by adjusting [segmentConfig](./src/config/segmentConfig.js) and turn on or off this feature in [featuresConfig](./src/config/featuresConfig.js).
 
 ```
 // config/featuresConfig
@@ -517,7 +518,7 @@ export const segmentConfig = [
 
 You can dynamically add badges based on any condition for an attribute returned in a hit.
 
-There are two examples already defined in `/config/badgesConfig`, please follow the same example by adjusting that file.
+There are two examples already defined in [badgesConfig](./src/config/badgeConfig.js), please follow the same example by adjusting that file.
 
 ```
 // /config/badgesConfig
@@ -539,9 +540,9 @@ When two triggers are matched, the one found first in the configuration array wi
 
 [Facet Display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/react/)
 
-The ability to control the facets which get displayed including their order. When adding your facets inside this app via `config/refinementsConfig`, you _must_ ensure those facets are also added in the dashboard not just in the Facets section, but also in the Facet Display section, otherwise they will not show.
+The ability to control the facets which get displayed including their order. When adding your facets inside this app via [refinementsConfig](./src/config/refinementsConfig.js), you _must_ ensure those facets are also added in the dashboard not just in the Facets section, but also in the Facet Display section, otherwise they will not show.
 
-You can turn on Facet Display by going to `config/featuresConfig
+You can turn on Facet Display by going to [featuresConfig](./src/config/featuresConfig.js).
 
 ```
 // config/featuresConfig
@@ -554,7 +555,7 @@ export const shouldHaveDynamicFacet = atom({
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Category Pages</h3>
 
-In order to configure Category Pages, go to `config/navigationConfig`.
+In order to configure Category Pages, go to [navigationConfig](./src/config/navigationConfig.js).
 
 Edit the value for `categoryPageFilterAttribute`. This represents the attribute you will filter on to create your individual category pages.
 
@@ -583,7 +584,7 @@ export const linksHeader = atom({
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Collection Pages</h3>
 
-In order to configure Collection Pages, go in `config/navigationConfig`. From there you can add links to the Navigation tab. Collection pages are powered by rule contexts. In order for this to work, you must set the type to `context` and make sure that you have a rule set up in the Algolia dashboard matching the context trigger which you define as the value of `context`.
+In order to configure Collection Pages, go in [navigationConfig](./src/config/navigationConfig.js). From there you can add links to the Navigation tab. Collection pages are powered by rule contexts. In order for this to work, you must set the type to `context` and make sure that you have a rule set up in the Algolia dashboard matching the context trigger which you define as the value of `context`.
 
 ```
 // config/navigationConfig
@@ -616,7 +617,7 @@ To have the best UI, we defined the no results page with 3 parts:
 
 To configure personalisation please first make sure you have the Personalization feature enabled on your plan, and that you have the correct strategy created. For example, if you want to boost colour: blue for a persona, you need to make sure that colour is in your strategy as a facet.
 
-Then, you can visit `config/personaConfig` and update the `value`s to match the user tokens you need to send, and update the personalizationFilters array to contain the attributes and values you want to boost for each persona. The `description` will also show up in the demo guide component.
+Then, you can visit [personaConfig](./src/config/personaConfig.js) and update the `value`s to match the user tokens you need to send, and update the personalizationFilters array to contain the attributes and values you want to boost for each persona. The `description` will also show up in the demo guide component.
 
 ```
 // config/personaConfig
@@ -633,7 +634,7 @@ export const personaConfig = [
   }]
 ```
 
-You can also adjust the personalizationImpact number in `config/personaConfig` to control how much personalization applies to the results where personalization is turned on.
+You can also adjust the personalizationImpact number in [personaConfig](./src/config/personaConfig.js) to control how much personalization applies to the results where personalization is turned on.
 
 ```
 // config/personaConfig
@@ -680,7 +681,7 @@ You can find an example of this injected content rule by searching for `qr-16490
 
 - You can edit the displayed hit by going to `/components/hits/InfluencerCard.js`
 
-For this we define a new index in `algoliaEnvConfig.js` called `injectedContentIndex` and if there is a result in this index, we inject it as a result into the Hits.
+For this we define a new index in [algoliaEnvConfig](./src/config/algoliaEnvConfig.js) called `injectedContentIndex` and if there is a result in this index, we inject it as a result into the Hits.
 
 Here is a sample record structure which is expected for records in the index to inject:
 
@@ -717,7 +718,7 @@ https://react-icons.github.io/react-icons/
 
 This project comes with Cart feature based on what you'll put into it and it stores in Local Storage to have always your cart. It's linked to event sending [Insights](https://www.algolia.com/doc/rest-api/insights/)
 
-You can turn on the Cart feature by going to `config/featuresConfig
+You can turn on the Cart feature by going to [featuresConfig](./src/config/featuresConfig.js)
 
 ```
 // config/featuresConfig
@@ -875,3 +876,32 @@ When you're finished with the changes, create a pull request, also known as a PR
 Congratulations :tada::tada: The Algolia Demo team thanks you :sparkles:.
 
 Once your PR is merged, your contributions will be publicly visible on the [BP docs](https://boilerplate-docs.netlify.app/).
+
+<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⛑️ Troubleshooting</h3>
+
+If you encounter any issues while working with the Algolia React Boilerplate, the following troubleshooting guide may help you resolve them.
+
+### Node.js version
+
+One common issue is related to the Node.js version used by the project. The Algolia React Boilerplate requires Node.js version 14 or higher. To check the version of Node.js installed on your machine, run the following command in your terminal:
+
+```
+node -v
+```
+
+If your version is lower than 14, you can download the latest version from the [official Node.js website](https://nodejs.org/).
+
+To update the Node.js version used by the project, you can use a version manager such as [nvm](https://github.com/nvm-sh/nvm). Once installed, you can run the following commands to install and use Node.js version 14:
+
+```
+nvm install 14
+nvm use 14
+```
+
+### Other Issues
+
+If you encounter other issues while working with the Algolia React Boilerplate, please check the [project's issues page](https://github.com/algolia/algolia-react-boilerplate/issues) to see if your issue has already been reported. If not, feel free to open a new issue with a detailed description of the problem and steps to reproduce it.
+
+If you have any questions or need further assistance, please don't hesitate to reach out to our support team.
+
+We appreciate your help in improving the Algolia React Boilerplate and making it a better tool for everyone.
