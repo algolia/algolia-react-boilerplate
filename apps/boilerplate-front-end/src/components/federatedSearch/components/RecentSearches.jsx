@@ -29,7 +29,7 @@ const RecentSearches = ({ title, query, refine }) => {
 
   if (cleanSearches && cleanSearches.length !== 0) {
     return (
-      <div className="recentSearches">
+      <section className="recentSearches">
         <h3 className="recentSearches__title">{title}</h3>
         <ul className="recentSearches__items">
           {cleanSearches
@@ -49,7 +49,7 @@ const RecentSearches = ({ title, query, refine }) => {
               )
             })}
         </ul>
-      </div>
+      </section>
     )
   } else {
     return null

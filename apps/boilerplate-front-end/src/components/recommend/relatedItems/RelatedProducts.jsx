@@ -65,7 +65,8 @@ const RelatedItem = ({ item }) => {
             <Price hit={item} />
           </p>
           {shouldShowCartIcons && (
-            <div
+            <button
+              type="button"
               className={cartLogoClicked ? 'cart cart-active' : 'cart'}
               ref={setCartIcon}
               onClick={(e) => {
@@ -76,7 +77,7 @@ const RelatedItem = ({ item }) => {
               }}
             >
               <CartPicto />
-            </div>
+            </button>
           )}
         </div>
       </div>

@@ -123,7 +123,7 @@ const FederatedSearch = ({ query, refine, results }) => {
   } = federatedSearchConfig
 
   return (
-    <motion.div
+    <motion.aside
       className={`${
         mobile || tablet ? 'federatedSearch-mobile' : 'federatedSearch'
       }`}
@@ -213,7 +213,7 @@ const FederatedSearch = ({ query, refine, results }) => {
           </div>
         )}
       </div>
-    </motion.div>
+    </motion.aside>
   )
 }
 

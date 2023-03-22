@@ -33,7 +33,7 @@ const HomeCarousel = ({ context, title }) => {
   useEffect(() => setCarouselLoaded(true), [])
 
   return (
-    <div className="home-carousel">
+    <section className="home-carousel">
       <Index indexId={title} indexName={index}>
         <Configure
           hitsPerPage={hitsPerCarousel}
@@ -44,7 +44,7 @@ const HomeCarousel = ({ context, title }) => {
         />
         <Carousel title={title} />
       </Index>
-    </div>
+    </section>
   )
 }
 

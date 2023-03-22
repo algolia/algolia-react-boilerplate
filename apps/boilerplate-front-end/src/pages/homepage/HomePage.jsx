@@ -73,7 +73,7 @@ const HomePage = ({ query, refine, results }) => {
       {isFederated && isFederatedOpen && (
         <Suspense>
           <AnimatePresence>
-            <FederatedSearch query={query} refine={refine} results={results}/>
+            <FederatedSearch query={query} refine={refine} results={results} />
           </AnimatePresence>
         </Suspense>
       )}
@@ -93,13 +93,13 @@ const HomePage = ({ query, refine, results }) => {
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       {carouselLoaded && (
-        <div className="recommend">
+        <section className="recommend">
           {shouldHaveTrendingProductsValue && (
             <Suspense>
               <Trending filter={null} />
             </Suspense>
           )}
-        </div>
+        </section>
       )}
 
       {/* Here if homepage image needs to be added to the demo */}
