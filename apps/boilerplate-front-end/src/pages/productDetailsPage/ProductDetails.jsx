@@ -184,7 +184,9 @@ const ProductDetails = () => {
       exit={framerMotionPage.exit}
       transition={framerMotionPage.transition}
     >
-      <div className={`${!isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'}`}>
+      <section
+        className={`${!isDesktop ? 'pdp-mobile__wrapper' : 'pdp__wrapper'}`}
+      >
         <div
           className={`${!isDesktop ? 'pdp-mobile__backBtn' : 'pdp__backBtn'}`}
           onClick={() => {
@@ -313,7 +315,7 @@ const ProductDetails = () => {
             )}
           </div>
         </div>
-      </div>
+      </section>
       {/* Render two Recommend components - Related Products, Frequently Bought Together */}
       {readyToLoad && (
         <div
@@ -328,35 +330,36 @@ const ProductDetails = () => {
         >
           {shouldHaveRelatedProductsValue &&
             relatedRecommendationsProducts.length > 0 && (
-              <div>
+              <section>
                 <h3 className="title">{t('relatedTitle')}</h3>
                 <HorizontalSlider
                   itemComponent={RelatedItem}
                   items={relatedRecommendationsProducts}
                 />
-              </div>
+              </section>
             )}
-          {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 1 && (
-            <div className="fbt-outer-container">
-              <h3 className="title">{t('fbtTitle')}</h3>
-              <div
-                className={`${
-                  !isDesktop ? 'fbt-container-mobile' : 'fbt-container'
-                }`}
-              >
-                <div className="fbt-container__component">
-                  {fbtRecommendationsProducts.map((item, i) => {
-                    return <FbtItems item={item} index={i} key={i} />
-                  })}
+          {shouldHaveFbtProductsValue &&
+            fbtRecommendationsProducts.length > 1 && (
+              <section className="fbt-outer-container">
+                <h3 className="title">{t('fbtTitle')}</h3>
+                <div
+                  className={`${
+                    !isDesktop ? 'fbt-container-mobile' : 'fbt-container'
+                  }`}
+                >
+                  <div className="fbt-container__component">
+                    {fbtRecommendationsProducts.map((item, i) => {
+                      return <FbtItems item={item} index={i} key={i} />
+                    })}
+                  </div>
+                  <FbtAddAll
+                    totalFbtProductsAmount={totalFbtProductsAmount}
+                    currentCartTotal={currentCartTotal}
+                    items={fbtRecommendationsProducts.slice(0, 3)}
+                  />
                 </div>
-                <FbtAddAll
-                  totalFbtProductsAmount={totalFbtProductsAmount}
-                  currentCartTotal={currentCartTotal}
-                  items={fbtRecommendationsProducts.slice(0, 3)}
-                />
-              </div>
-            </div>
-          )}
+              </section>
+            )}
         </div>
       )}
     </div>

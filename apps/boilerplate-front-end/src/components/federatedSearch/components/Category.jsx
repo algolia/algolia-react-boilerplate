@@ -27,7 +27,7 @@ function Category(props) {
     return slug
   }
   return (
-    <div className="categories">
+    <section className="categories">
       <h3 className="categories__title">{title}</h3>
       <div className="categories__wrapper">
         <ul className="categories__items">
@@ -51,7 +51,7 @@ function Category(props) {
           })}
         </ul>
       </div>
-    </div>
+    </section>
   )
 }
 

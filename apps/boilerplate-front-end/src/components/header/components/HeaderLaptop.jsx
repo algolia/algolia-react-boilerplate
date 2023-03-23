@@ -204,7 +204,8 @@ const HeaderLaptop = ({ query, refine, clear }) => {
         <div className="container__header-right">
           {shouldShowCartIcon && (
             <div className="picto-cart">
-              <div
+              <button
+                type="button"
                 className={cartOpenValue ? 'picto-cart__active' : ''}
                 ref={cartIcon}
                 onClick={(e) => {
@@ -216,7 +217,7 @@ const HeaderLaptop = ({ query, refine, clear }) => {
                 }}
               >
                 <CartPicto />
-              </div>
+              </button>
               {/* )} */}
               {/* Picto notification up the cart icon */}
               {showCart?.length !== 0 && (
@@ -230,9 +231,9 @@ const HeaderLaptop = ({ query, refine, clear }) => {
           <OktaAuthComponent />
         </div>
       </div>
-      <div className="container__header-nav">
+      <nav className="container__header-nav">
         <Navigation />
-      </div>
+      </nav>
     </div>
   )
 }

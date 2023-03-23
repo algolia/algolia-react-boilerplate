@@ -204,7 +204,6 @@ const SearchResultsPage = ({ query }) => {
     }
   }
 
-
   let configureProps = {
     analytics: false,
     clickAnalytics: true,
@@ -235,7 +234,7 @@ const SearchResultsPage = ({ query }) => {
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       <Fragment>
-        <div
+        <section
           className={!isDesktop ? 'recommend recommend-mobile' : 'recommend'}
         >
           {shouldHaveTrendingProductsValue &&
@@ -272,14 +271,14 @@ const SearchResultsPage = ({ query }) => {
                 )}
               </Suspense>
             )}
-        </div>
+        </section>
 
         <div
           className={` ${
             !isDesktop ? 'srp-container-mobile' : ''
           } srp-active srp-container`}
         >
-          <div
+          <section
             className={`${
               !isDesktop
                 ? 'srp-container__facets-mobile'
@@ -298,9 +297,9 @@ const SearchResultsPage = ({ query }) => {
               />
             )}
             <GenericRefinementList />
-          </div>
+          </section>
 
-          <div className="srp-container__hits">
+          <section className="srp-container__hits">
             {query && query.trim() !== '' && (
               <div className="srp-container__searchInfos">
                 <p>Showing results for: </p>
@@ -366,7 +365,7 @@ const SearchResultsPage = ({ query }) => {
                 />
               </Suspense>
             )}
-          </div>
+          </section>
         </div>
       </Fragment>
     </>

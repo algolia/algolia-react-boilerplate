@@ -107,7 +107,8 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
         </p>
       </div>
 
-      <a
+      <button
+        type="button"
         className={
           addToCartIsClicked
             ? 'fbt-infos__btn fbt-infos__btn-active'
@@ -126,7 +127,7 @@ const FbtAddAll = ({ items, currentCartTotal, totalFbtProductsAmount }) => {
       >
         <CartPicto />
         <p>{numberOfHits(items)}</p>
-      </a>
+      </button>
     </div>
   )
 }

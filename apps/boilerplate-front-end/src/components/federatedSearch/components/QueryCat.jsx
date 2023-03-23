@@ -119,7 +119,7 @@ const QueryCat = ({
   // If the probability is higher than 0.6 and the type is not ambiguous
   if (probability > 0.6 && type !== 'ambiguous') {
     return (
-      <div className="query-cat-container">
+      <section className="query-cat-container">
         <h2 className="query-cat-container__title">Popular Searches</h2>
         <div className="query-cat-container__search">
           <Glass />
@@ -142,7 +142,7 @@ const QueryCat = ({
             </p>
           </div>
         </div>
-      </div>
+      </section>
     )
   }
   // If the probability is higher than 0.6 and the type is ambiguous

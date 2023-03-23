@@ -54,7 +54,7 @@ function CustomAppliedRules(props) {
   }, [results, results.appliedRules])
 
   return (
-    <div className="appliedRules">
+    <aside className="appliedRules">
       {rules.length > 0 ? (
         <div className="appliedRules__wp">
           <div className="rule-top">
@@ -144,7 +144,7 @@ function CustomAppliedRules(props) {
           <p className="appliedRules__noResult">No rules are applied</p>
         </div>
       )}
-    </div>
+    </aside>
   )
 }
 

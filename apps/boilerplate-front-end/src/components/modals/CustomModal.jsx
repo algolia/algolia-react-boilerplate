@@ -18,7 +18,7 @@ const CustomModal = (props) => {
   }
 
   return (
-    <div>
+    <aside>
       {isActive && (
         <div className="Overlay" onClick={() => setActive(false)}>
           <div
@@ -31,7 +31,7 @@ const CustomModal = (props) => {
           </div>
         </div>
       )}
-    </div>
+    </aside>
   )
 }
 

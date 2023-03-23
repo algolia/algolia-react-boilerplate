@@ -213,19 +213,19 @@ const Main = () => {
       {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
 
       {shouldDisplayQRCodeGenerator && qrOpen && <QRModal />}
-      <div className="mainWrapper">
+      <main className="mainWrapper">
         <Redirect />
         <AnimatePresence>
           {showDemoGuide && (
-            <div className="demoGuide-wp">
+            <aside className="demoGuide-wp">
               <DemoGuide refine={refine} setshowDemoGuide={setshowDemoGuide} />
-            </div>
+            </aside>
           )}
           {shouldShowCartIcon && showCart && (
             <Suspense fallback={''}>
-              <div className="cartModal-wp">
+              <aside className="cartModal-wp">
                 <CartModal />
-              </div>
+              </aside>
             </Suspense>
           )}
         </AnimatePresence>
@@ -288,7 +288,7 @@ const Main = () => {
             <CustomAppliedRules />
           </Suspense>
         )}
-      </div>
+      </main>
     </Security>
   )
 }
