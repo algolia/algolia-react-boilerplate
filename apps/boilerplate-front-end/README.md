@@ -898,6 +898,12 @@ nvm install 14
 nvm use 14
 ```
 
+### Sass - Scss compiler
+
+If you are unable to install sass library or you simply don't want to use it whithin the app, we are providing in each folder in a `compiled CSS` subfolder the compiled and the minified CSS of our Scss files.
+
+Feel free to use it.
+
 ### Other Issues
 
 If you encounter other issues while working with the Algolia React Boilerplate, please check the [project's issues page](https://github.com/algolia/algolia-react-boilerplate/issues) to see if your issue has already been reported. If not, feel free to open a new issue with a detailed description of the problem and steps to reproduce it.
