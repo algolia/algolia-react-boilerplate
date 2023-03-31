@@ -8,7 +8,7 @@ import { predictUserIdAtom } from '@/config/predictConfig'
 import { searchClient } from './config/algoliaEnvConfig'
 
 // Algolia Instantsearch components
-import { InstantSearch, useSearchBox } from 'react-instantsearch-hooks-web'
+import { InstantSearch } from 'react-instantsearch-hooks-web'
 
 //Import Predict to get user profil
 import PredictUserProfileProvider from './components/predict/PredictUserProfileProvider'

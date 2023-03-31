@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 // React Router
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 // Recoil State
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -186,6 +186,7 @@ const HeaderLaptop = ({ query, refine, clear }) => {
       <div className="container__header-mid">
         <div className="container__header-mid__logo">
           <a
+            href="#"
             aria-label="link to home"
             onClick={(e) => {
               e.preventDefault()
