@@ -138,7 +138,7 @@ function CustomSearchBox({ refine, query, clear }) {
           onChange={(event) => {
             // refine(event.target.value)
             searchOnChangeHandler(event)
-            // setTimeout(() => handleContextInUrl(event), 1000)
+            setTimeout(() => handleContextInUrl(event), 1000)
           }}
         />
         {!!tooltip && (

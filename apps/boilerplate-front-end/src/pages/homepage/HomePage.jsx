@@ -1,6 +1,6 @@
 // This is the homepage, which you see when you first visit the site.
 // By default it contains some banners and carousels
-import { lazy, Suspense, useRef, useState, useEffect } from 'react'
+import { lazy, Suspense, useRef, useState } from 'react'
 
 // Fetch values from state
 import { useRecoilValue } from 'recoil'
