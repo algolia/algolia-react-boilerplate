@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 // React Router
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 // Recoil State
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -59,7 +59,7 @@ import OktaAuthComponent from '@/components/header/components/OktaAuth'
 
 import QRCodeOpener from '@/components/qrCode/QRCodeOpener'
 import { shouldHaveQRCode } from '@/config/featuresConfig'
-import { useSearchBox } from 'react-instantsearch-hooks-web'
+import { useInstantSearch } from 'react-instantsearch-hooks-web'
 
 import { mainIndex } from '@/config/algoliaEnvConfig'
 import { currencySymbolAtom } from '@/config/currencyConfig'
@@ -76,6 +76,8 @@ const HeaderLaptop = ({ query, refine, clear }) => {
   const [cartOpenValue, setCartOpenValue] = useRecoilState(cartOpen)
   const [showCart, setShowCart] = useRecoilState(cartState)
   const cartIcon = useSetRecoilState(cartClick)
+
+  const navigate = useNavigate()
 
   // Get references for dropdowns in Navigation
   const selectorsNavigation = useSetRecoilState(selectorNavigationRef)
@@ -183,18 +185,21 @@ const HeaderLaptop = ({ query, refine, clear }) => {
       </div>
       <div className="container__header-mid">
         <div className="container__header-mid__logo">
-          <Link
-            to="/"
+          <a
+            href="#"
             aria-label="link to home"
-            onClick={() => {
-              if (query !== '') refine()
+            onClick={(e) => {
+              e.preventDefault()
+              refine('')
+              clear()
               setNavigationState({})
               federated(false)
               rulesApplied([])
+              navigate('/')
             }}
           >
             <AlgoliaLogo />
-          </Link>
+          </a>
         </div>
         {/* For a search box Simple center */}
         <div className="searchbox-container" ref={setSearchBoxRef}>

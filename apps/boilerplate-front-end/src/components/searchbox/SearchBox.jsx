@@ -70,8 +70,8 @@ function CustomSearchBox({ refine, query, clear }) {
   }, [query])
 
   const searchOnChangeHandler = (event) => {
-    // setLocalQuery(event.target.value)
     refine(event.target.value)
+
     // debouncedSearchInputHandler(event.target.value)
     setTooltip(false)
   }
