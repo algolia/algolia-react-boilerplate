@@ -32,7 +32,7 @@ function QuerySuggestions({ refine, title }) {
   )
 
   return (
-    <div className="suggestions">
+    <section className="suggestions">
       <h3 className="suggestions__title">{title}</h3>
       <ul className="suggestions__items">
         {hits.map((hit, index) => {
@@ -52,7 +52,7 @@ function QuerySuggestions({ refine, title }) {
           )
         })}
       </ul>
-    </div>
+    </section>
   )
 }
 

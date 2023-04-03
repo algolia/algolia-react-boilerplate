@@ -48,6 +48,10 @@ To build both applications please use:
 
     pnpm build
 
+If you get an error during the installation about the package turbo-darwin-64, please install the package separately :
+
+    pnpm install turbo-darwin-64
+
 ## 👌 What is the Boilerplate?
 
 The Boilerplate is a tool built by the Demo Engineering team of Algolia to help build neat, reliable and fast custom demos that showcase most of the features of Algolia.

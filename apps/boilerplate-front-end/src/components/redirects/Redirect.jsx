@@ -47,7 +47,8 @@ const Redirect = () => {
           <p>Do you wish to be redirected ? </p>
         </div>
         <div className="redirectModal__buttons">
-          <a
+          <button
+            type="button"
             className="redirectModal__buttons-ok"
             onClick={() => {
               window.location.replace(urlToRedirectTo)
@@ -55,8 +56,9 @@ const Redirect = () => {
             }}
           >
             <p>Yes I want to be redirected</p>
-          </a>
-          <a
+          </button>
+          <button
+            type="button"
             className="redirectModal__buttons-no"
             onClick={() => {
               setShouldShowRedirectModal(false)
@@ -66,7 +68,7 @@ const Redirect = () => {
             }}
           >
             <p>No I want to stay on this demo</p>
-          </a>
+          </button>
         </div>
       </CustomModal>
     )

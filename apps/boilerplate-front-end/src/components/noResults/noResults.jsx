@@ -72,7 +72,7 @@ const NoResults = ({ query }) => {
                   Or check our suggestions below 👇
                 </span>
               </li>
-              <div className="query-suggestion">
+              <section className="query-suggestion">
                 <Index
                   indexId="suggestions-no-results"
                   indexName={suggestionsIndex}
@@ -81,9 +81,9 @@ const NoResults = ({ query }) => {
                   <QuerySuggestions />
                 </Index>
                 {/* Add this searchBox Invisible to refine when we click on a suggestion */}
-              </div>
+              </section>
               {lastId && (
-                <div>
+                <section>
                   <p className="no-results__infos__p">
                     Customers who searched <span>{query}</span> also viewed:
                   </p>
@@ -98,7 +98,7 @@ const NoResults = ({ query }) => {
                       />
                     </div>
                   )}
-                </div>
+                </section>
               )}
             </>
           )}

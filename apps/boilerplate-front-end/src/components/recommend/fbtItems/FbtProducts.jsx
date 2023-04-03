@@ -66,7 +66,8 @@ const FbtItems = ({ item, index }) => {
               <Price hit={item} />
             </p>
             {shouldShowCartIcons && (
-              <div
+              <button
+                type="button"
                 className={cartLogoClicked ? 'cart cart-active' : 'cart'}
                 onClick={(e) => {
                   e.stopPropagation()
@@ -78,7 +79,7 @@ const FbtItems = ({ item, index }) => {
                 }}
               >
                 <CartPicto />
-              </div>
+              </button>
             )}
           </div>
         </div>

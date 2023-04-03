@@ -1,0 +1,526 @@
+@charset "UTF-8";
+@keyframes fadeInImage {
+  0% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOutImage {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+@keyframes bounce {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/*─────────────────────────────────────────────────────────────────────────────────────────────────*/
+/*─────────────────────────────────────────────────────────────────────────────────────────────────*/
+/*─
+/*─                                                                                      RESET
+/*─
+/*─────────────────────────────────────────────────────────────────────────────────────────────────*/
+/*─────────────────────────────────────────────────────────────────────────────────────────────────*/
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: none; /*─ Debug font size on iphone when landscape orientation ─*/
+  -webkit-font-smoothing: subpixel-antialiased; /*─ Debug safari font weight when fixed element on the page ─*/
+  -webkit-font-smoothing: antialiased; /*─ idem : Debug safari font weight when fixed element on the page ─*/
+}
+
+html,
+body,
+nav,
+header,
+footer,
+div,
+span,
+h1,
+h2,
+h3,
+p,
+a,
+img,
+ul,
+li,
+table,
+form,
+label,
+input,
+textarea,
+select,
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+input,
+textarea,
+select,
+button {
+  display: block;
+  box-sizing: border-box;
+  border-radius: 0;
+  outline: none;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+input[type=submit]:hover,
+button:hover {
+  cursor: pointer;
+}
+
+input::-ms-clear {
+  display: none; /*─ IE11 → remove cross to close ─*/
+}
+
+textarea {
+  overflow: auto; /*─ Hide scroll bar on IE ─*/
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video,
+svg,
+picture {
+  display: block;
+}
+
+img,
+video {
+  width: 100%;
+  height: auto;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Block component */
+/* Element that depends upon the block */
+/* Modifier that changes the style of the block */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+html {
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgb(249, 249, 249);
+  font-family: "Poppins", sans-serif;
+}
+
+.mainWrapper {
+  margin: 0 auto;
+  max-width: 1600px;
+}
+
+input::-moz-placeholder {
+  font-family: "Poppins", sans-serif;
+  color: rgb(0, 0, 0);
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span,
+input,
+input::placeholder,
+span {
+  font-family: "Poppins", sans-serif;
+  color: rgb(0, 0, 0);
+}
+
+a {
+  text-decoration: none;
+}
+
+li,
+ul {
+  list-style: none;
+  color: rgb(0, 0, 0);
+  font-family: "Poppins", sans-serif;
+}
+
+.hidden {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.visible {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.mainWrapper {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.error-modal-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-modal-content {
+  width: 80%;
+}
+
+.error-modal-content > h5 {
+  text-align: center;
+  font-size: 18px;
+  color: red;
+}
+
+.Overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 999;
+  z-index: 900;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.Modal {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
+  background-color: white;
+  width: 35rem;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 999;
+  padding: 1.5rem 2rem;
+  border-radius: 0.5rem;
+  isolation: isolate;
+}
+
+@media only screen and (min-width: 800px) {
+  .ModalContent {
+    width: 660px;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.home-carousel {
+  margin: 2rem 2rem;
+}
+.home-carousel h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: rgb(0, 61, 255);
+  text-transform: uppercase;
+}
+.home-carousel .carousel {
+  position: relative;
+}
+.home-carousel .carousel .inner-carousel {
+  display: grid;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  outline-offset: 0.5rem;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  grid-auto-columns: 42%;
+  grid-auto-flow: column;
+  overflow-x: auto;
+  padding: 1rem 1rem;
+  grid-auto-columns: clamp(13rem, 25%, 19%);
+}
+.home-carousel .carousel .inner-carousel::-webkit-scrollbar {
+  background-color: rgb(221, 221, 221);
+  box-shadow: inset 0px 28px 0px rgb(249, 249, 249);
+  width: 100%;
+  height: 30px;
+  cursor: pointer;
+}
+.home-carousel .carousel .inner-carousel::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background-color: rgb(0, 0, 0);
+  box-shadow: inset 0px 28px 0px rgb(249, 249, 249);
+}
+.home-carousel .carousel .inner-carousel__imageWrapper {
+  overflow: hidden;
+  margin: 1rem;
+  cursor: pointer;
+}
+.home-carousel .carousel .inner-carousel .item {
+  width: 100%;
+  height: 100%;
+  display: block;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  transition: box-shadow 0.3s ease-in-out;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  position: relative;
+}
+.home-carousel .carousel .inner-carousel .item__imgWrapper,
+.home-carousel .carousel .inner-carousel .item .image-wrapper {
+  overflow: hidden;
+  margin: 1rem;
+  cursor: pointer;
+}
+.home-carousel .carousel .inner-carousel .item__imgWrapper img,
+.home-carousel .carousel .inner-carousel .item .image-wrapper img {
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  cursor: pointer;
+}
+.home-carousel .carousel .inner-carousel .item__imgWrapper__heart,
+.home-carousel .carousel .inner-carousel .item .image-wrapper__heart {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.home-carousel .carousel .inner-carousel .item__imgWrapper__heart svg,
+.home-carousel .carousel .inner-carousel .item .image-wrapper__heart svg {
+  cursor: pointer;
+  width: 0.8rem;
+}
+.home-carousel .carousel .inner-carousel .item__imgWrapper__heart svg path,
+.home-carousel .carousel .inner-carousel .item .image-wrapper__heart svg path {
+  fill: rgb(0, 61, 255);
+}
+.home-carousel .carousel .inner-carousel .item__imgWrapper .mainImage-opacity,
+.home-carousel .carousel .inner-carousel .item .image-wrapper .mainImage-opacity {
+  animation: fadeOutImage 0.7s forwards ease-in-out;
+}
+.home-carousel .carousel .inner-carousel .item__imgWrapper .mainImage-visible,
+.home-carousel .carousel .inner-carousel .item .image-wrapper .mainImage-visible {
+  animation: fadeInImage 0.9s forwards ease-in-out;
+}
+.home-carousel .carousel .inner-carousel .item__infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 7rem;
+  width: 100%;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+.home-carousel .carousel .inner-carousel .item__infosUp {
+  gap: 0.1rem;
+}
+.home-carousel .carousel .inner-carousel .item__infosDown {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0 0 0;
+}
+.home-carousel .carousel .inner-carousel .item__infosDown__cart {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+}
+.home-carousel .carousel .inner-carousel .item__infosDown__cart-plus svg path {
+  fill: rgb(0, 61, 255);
+}
+.home-carousel .carousel .inner-carousel .item__infosDown__cart-inactive {
+  font-weight: 300 !important;
+  color: rgb(221, 221, 221) !important;
+}
+.home-carousel .carousel .inner-carousel .item__infosDown__cart p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+}
+.home-carousel .carousel .inner-carousel .item__infosDown__cart svg {
+  width: 2rem;
+}
+.home-carousel .carousel .inner-carousel .item__infosDown__minusPicto-inactive {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.home-carousel .carousel .inner-carousel .item__infosDown__minusPicto-inactive path {
+  fill: rgb(221, 221, 221);
+}
+.home-carousel .carousel .inner-carousel .item__infosDown .cart {
+  background-color: rgb(0, 61, 255);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-carousel .carousel .inner-carousel .item__infosDown .cart svg {
+  margin-top: 0.3rem;
+  width: 20px;
+  height: 100%;
+}
+.home-carousel .carousel .inner-carousel .item__infosDown .cart svg path {
+  fill: rgb(249, 249, 249);
+}
+.home-carousel .carousel .inner-carousel .item__infosDown .cart-active {
+  animation: bounce 0.3s ease-in-out forwards;
+}
+.home-carousel .carousel .inner-carousel .item__infos {
+  font-weight: 300;
+  font-size: 0.8rem;
+  margin: 0 auto;
+  text-transform: capitalize;
+  font-size: 0.6rem;
+  height: 7rem;
+}
+.home-carousel .carousel .inner-carousel .item__infos .ais-Highlight-nonHighlighted {
+  color: rgb(102, 102, 102);
+  font-size: 0.6rem;
+}
+.home-carousel .carousel .inner-carousel .item__infos .ais-Highlight-highlighted {
+  color: rgb(0, 61, 255);
+  font-style: normal;
+  font-weight: 600;
+}
+.home-carousel .carousel .inner-carousel .item__infos .brand {
+  color: rgb(0, 0, 0);
+  font-weight: 700;
+  font-size: 0.6rem;
+  text-transform: capitalize;
+}
+.home-carousel .carousel .inner-carousel .item__infos .price {
+  color: rgb(0, 61, 255);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 1px;
+}
+.home-carousel .carousel .inner-carousel .item__infos .price span {
+  color: inherit;
+}
+.home-carousel .carousel .inner-carousel .item__infos .price s {
+  color: rgb(102, 102, 102);
+  text-decoration: line-through;
+}
+.home-carousel .carousel .inner-carousel .item .price {
+  color: rgb(0, 61, 255);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 1px;
+}
+.home-carousel .carousel .inner-carousel .item .price span {
+  color: inherit;
+}
+.home-carousel .carousel .inner-carousel .item .price s {
+  color: rgb(102, 102, 102);
+  text-decoration: line-through;
+}
+.home-carousel .carousel .inner-carousel .carousel-loader {
+  box-shadow: none;
+  border: none;
+}
+.home-carousel .carousel .prevBtn, .home-carousel .carousel .nextBtn {
+  position: absolute;
+  top: 35%;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  outline-color: transparent;
+  padding: 0;
+  width: 32px;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+.home-carousel .carousel .prevBtn svg, .home-carousel .carousel .prevBtn path, .home-carousel .carousel .nextBtn svg, .home-carousel .carousel .nextBtn path {
+  fill: rgb(0, 61, 255);
+}
+.home-carousel .carousel .nextBtn {
+  right: 0;
+}
+.home-carousel .carousel .leftBtn {
+  left: 0;
+}
+.home-carousel .carousel:hover .prevBtn, .home-carousel .carousel:hover .nextBtn {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}/*# sourceMappingURL=carousels.css.map */

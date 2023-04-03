@@ -30,7 +30,7 @@ function Products({ query, refine }, props) {
   const { objectID, image, productName, brand } = hitsConfig
 
   return (
-    <div className="products">
+    <section className="products">
       <div className="products__header">
         {persona.value !== 'anon' && query === '' ? (
           <h3 className="products__title">{productsBefore}</h3>
@@ -76,7 +76,7 @@ function Products({ query, refine }, props) {
         <ChevronRight />
         <p onClick={() => navigate('/search')}>{buttonShowAll}</p>
       </div>
-    </div>
+    </section>
   )
 }
 

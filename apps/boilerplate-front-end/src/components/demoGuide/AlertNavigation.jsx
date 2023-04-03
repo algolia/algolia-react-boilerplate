@@ -17,12 +17,13 @@ const AlertNavigation = () => {
       {alertOpen && (
         <div className="demoGuide__alert">
           <div>{alertContentToDisplay}</div>
-          <div
+          <button
+            type="button"
             className="demoGuide__alert-close"
             onClick={(e) => setAlertOpen(false)}
           >
             X
-          </div>
+          </button>
         </div>
       )}
     </div>

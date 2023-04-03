@@ -17,7 +17,7 @@ function Articles(props) {
   const { titleArticles } = props
 
   return (
-    <div className="articles__wrapper">
+    <section className="articles__wrapper">
       <h3 className="articles__title">{titleArticles}</h3>
       {hits.map((hit, index) => {
         return (
@@ -35,7 +35,7 @@ function Articles(props) {
           </div>
         )
       })}
-    </div>
+    </section>
   )
 }
 

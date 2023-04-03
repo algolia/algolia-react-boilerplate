@@ -8,7 +8,8 @@ const QRCodeOpener = () => {
   const setQROpen = useSetRecoilState(openQR)
   const [qrCodePictoClicked, setQrCodePictoClicked] = useState(false)
   return (
-    <div
+    <button
+      type="button"
       className={`${
         qrCodePictoClicked ? 'qr-code-btn-active ' : ''
       }qr-code-btn`}
@@ -20,7 +21,7 @@ const QRCodeOpener = () => {
       }}
     >
       <QrCodePicto />
-    </div>
+    </button>
   )
 }
 
