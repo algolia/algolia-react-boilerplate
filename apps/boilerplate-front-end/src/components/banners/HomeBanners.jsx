@@ -28,7 +28,7 @@ function CustomHomeBanners(props) {
     ) => {
       if (type === 'HomeBannerTwo') {
         return (
-          <div className="homeBanner" key={title}>
+          <section className="homeBanner" key={title}>
             <HomeBannerComponent
               imgUrl1={imgUrl1}
               imgUrl1Mobile={imgUrl1Mobile}
@@ -37,7 +37,7 @@ function CustomHomeBanners(props) {
               LinkButton1={LinkButton1}
               button1={button1}
             />
-          </div>
+          </section>
         )
       }
     }

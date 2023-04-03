@@ -1,0 +1,303 @@
+@charset "UTF-8";
+@keyframes fadeInImage {
+  0% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOutImage {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+@keyframes bounce {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/*─────────────────────────────────────────────────────────────────────────────────────────────────*/
+/*─────────────────────────────────────────────────────────────────────────────────────────────────*/
+/*─
+/*─                                                                                      RESET
+/*─
+/*─────────────────────────────────────────────────────────────────────────────────────────────────*/
+/*─────────────────────────────────────────────────────────────────────────────────────────────────*/
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: none; /*─ Debug font size on iphone when landscape orientation ─*/
+  -webkit-font-smoothing: subpixel-antialiased; /*─ Debug safari font weight when fixed element on the page ─*/
+  -webkit-font-smoothing: antialiased; /*─ idem : Debug safari font weight when fixed element on the page ─*/
+}
+
+html,
+body,
+nav,
+header,
+footer,
+div,
+span,
+h1,
+h2,
+h3,
+p,
+a,
+img,
+ul,
+li,
+table,
+form,
+label,
+input,
+textarea,
+select,
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+input,
+textarea,
+select,
+button {
+  display: block;
+  box-sizing: border-box;
+  border-radius: 0;
+  outline: none;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+input[type=submit]:hover,
+button:hover {
+  cursor: pointer;
+}
+
+input::-ms-clear {
+  display: none; /*─ IE11 → remove cross to close ─*/
+}
+
+textarea {
+  overflow: auto; /*─ Hide scroll bar on IE ─*/
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video,
+svg,
+picture {
+  display: block;
+}
+
+img,
+video {
+  width: 100%;
+  height: auto;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Block component */
+/* Element that depends upon the block */
+/* Modifier that changes the style of the block */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+html {
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgb(249, 249, 249);
+  font-family: "Poppins", sans-serif;
+}
+
+.mainWrapper {
+  margin: 0 auto;
+  max-width: 1600px;
+}
+
+input::-moz-placeholder {
+  font-family: "Poppins", sans-serif;
+  color: rgb(0, 0, 0);
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span,
+input,
+input::placeholder,
+span {
+  font-family: "Poppins", sans-serif;
+  color: rgb(0, 0, 0);
+}
+
+a {
+  text-decoration: none;
+}
+
+li,
+ul {
+  list-style: none;
+  color: rgb(0, 0, 0);
+  font-family: "Poppins", sans-serif;
+}
+
+.hidden {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.visible {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.mainWrapper {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.error-modal-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-modal-content {
+  width: 80%;
+}
+
+.error-modal-content > h5 {
+  text-align: center;
+  font-size: 18px;
+  color: red;
+}
+
+.Overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 999;
+  z-index: 900;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.Modal {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
+  background-color: white;
+  width: 35rem;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 999;
+  padding: 1.5rem 2rem;
+  border-radius: 0.5rem;
+  isolation: isolate;
+}
+
+@media only screen and (min-width: 800px) {
+  .ModalContent {
+    width: 660px;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.voiceSearch__inactive {
+  width: 12px;
+}
+.voiceSearch__inactive path {
+  fill: rgb(0, 0, 0);
+  transition: all 0.3s ease-in-out;
+}
+.voiceSearch__active {
+  width: 12px;
+}
+.voiceSearch__active path {
+  animation: blink 2s infinite ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes blink {
+  0% {
+    fill: rgb(0, 0, 0);
+  }
+  50% {
+    fill: rgb(0, 61, 255);
+  }
+  100% {
+    fill: rgb(0, 0, 0);
+  }
+}/*# sourceMappingURL=voicesearch.css.map */

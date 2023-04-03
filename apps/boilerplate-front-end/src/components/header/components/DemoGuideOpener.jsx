@@ -23,7 +23,8 @@ export const DemoGuideOpener = () => {
     useRecoilState(isFacetPanelOpen)
 
   return (
-    <div
+    <button
+      type="button"
       ref={demoGuideBtn}
       className={`${
         showDemoGuide ? 'optionDots__wrapper-active' : ''
@@ -35,6 +36,6 @@ export const DemoGuideOpener = () => {
     >
       <p>Guide</p>
       <OptionDots />
-    </div>
+    </button>
   )
 }

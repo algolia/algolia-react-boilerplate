@@ -4,8 +4,6 @@ import { useInstantSearch } from 'react-instantsearch-hooks-web'
 
 import { useRecoilState, useRecoilValue } from 'recoil'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 // Config import
 import { rulesAtom, rulesIdsAtom } from '@/config/appliedRulesConfig'
 import { scorePersonadAtom } from '@/config/demoGuideConfig'
@@ -56,7 +54,7 @@ function CustomAppliedRules(props) {
   }, [results, results.appliedRules])
 
   return (
-    <div className="appliedRules">
+    <aside className="appliedRules">
       {rules.length > 0 ? (
         <div className="appliedRules__wp">
           <div className="rule-top">
@@ -101,11 +99,6 @@ function CustomAppliedRules(props) {
                 <div key={rule.name} className="single-rule">
                   {/* Is rule a manual or visual editor one? */}
                   <div className="rule-type">
-                    {rule.tags?.includes('visual-editor') ? (
-                      <FontAwesomeIcon className="icon" icon="desktop" />
-                    ) : (
-                      <FontAwesomeIcon className="icon" icon="sliders" />
-                    )}
                     <p>
                       {rule.tags?.includes('visual-editor')
                         ? 'Visual'
@@ -151,7 +144,7 @@ function CustomAppliedRules(props) {
           <p className="appliedRules__noResult">No rules are applied</p>
         </div>
       )}
-    </div>
+    </aside>
   )
 }
 

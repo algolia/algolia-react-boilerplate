@@ -108,17 +108,18 @@ const CartModal = () => {
         )}
       </h3>
       <div className="modal-container__line"></div>
-      <div className="articles">
+      <section className="articles">
         {cartValue.map((item, i) => {
           if (item.qty !== 0) {
             return <ArticlesCard item={item} key={i} sendEvent={sendEvent} />
           }
         })}
-      </div>
+      </section>
       {cartValue.length === 0 && <p>{t('yourCartIsEmpty')}</p>}
       {cartValue.length !== 0 && (
         <div className="modal-container__buttons">
-          <a
+          <button
+            type="button"
             className="modal-container__emptyCart"
             onClick={() => {
               setCartValue([])
@@ -126,8 +127,9 @@ const CartModal = () => {
             }}
           >
             <p>{t('emptyCart')}</p>
-          </a>
-          <a
+          </button>
+          <button
+            type="button"
             className="modal-container__checkout"
             onClick={() => {
               sendEvent('conversion', cartValue, 'Cart: Checkout')
@@ -138,16 +140,16 @@ const CartModal = () => {
           >
             <p>{t('checkout')}</p>
             <ChevronRight />
-          </a>
+          </button>
         </div>
       )}
-      <div className="modal-container__recommend">
+      <section className="modal-container__recommend">
         {shouldHaveRelatedProductsValue &&
           objectIds &&
           cartValue.length !== 0 && (
             <RelatedProductsCart objectIds={objectIds} />
           )}
-      </div>
+      </section>
     </motion.div>
   )
 }

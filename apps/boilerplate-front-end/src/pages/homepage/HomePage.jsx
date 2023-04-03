@@ -43,7 +43,7 @@ const Trending = lazy(() =>
 // Import scoped SCSS
 import './homepage.scss'
 
-const HomePage = ({ query, refine }) => {
+const HomePage = ({ query, refine, results }) => {
   const carouselLoaded = useRecoilValue(isCarouselLoaded)
 
   const [isHomepage1Loaded, setHomepage1Loaded] = useState(false)
@@ -73,7 +73,7 @@ const HomePage = ({ query, refine }) => {
       {isFederated && isFederatedOpen && (
         <Suspense>
           <AnimatePresence>
-            <FederatedSearch query={query} refine={refine} />
+            <FederatedSearch query={query} refine={refine} results={results} />
           </AnimatePresence>
         </Suspense>
       )}
@@ -93,13 +93,13 @@ const HomePage = ({ query, refine }) => {
       {/* Render Recommend component - Trending Products Slider */}
       {/* Change header and maxRecommendations in /config/trendingConfig.js */}
       {carouselLoaded && (
-        <div className="recommend">
+        <section className="recommend">
           {shouldHaveTrendingProductsValue && (
             <Suspense>
               <Trending filter={null} />
             </Suspense>
           )}
-        </div>
+        </section>
       )}
 
       {/* Here if homepage image needs to be added to the demo */}

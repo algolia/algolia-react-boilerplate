@@ -83,7 +83,8 @@ const ArticlesCard = ({ item, sendEvent }) => {
 
         <div className="articles__IconWrapper">
           <div className="icons">
-            <div
+            <button
+              type="button"
               className="minusIcon"
               onClick={() => {
                 if (item.qty === 1) {
@@ -100,9 +101,10 @@ const ArticlesCard = ({ item, sendEvent }) => {
               }}
             >
               <MinusPicto />
-            </div>
+            </button>
             <p>{item.qty}</p>
-            <div
+            <button
+              type="button"
               className="plusIcon"
               onClick={() => {
                 sendEvent('conversion', item, 'Cart: Add to cart')
@@ -110,10 +112,11 @@ const ArticlesCard = ({ item, sendEvent }) => {
               }}
             >
               <PlusPicto />
-            </div>
+            </button>
           </div>
         </div>
-        <div
+        <button
+          type="button"
           className="articles__removeProduct"
           onClick={() => {
             setCartOpen(true)
@@ -126,7 +129,7 @@ const ArticlesCard = ({ item, sendEvent }) => {
           }}
         >
           <Garbage />
-        </div>
+        </button>
       </div>
     </>
   )

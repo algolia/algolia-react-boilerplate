@@ -1,7 +1,11 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 
 // Algolia Instantsearch components
-import { useInstantSearch, useSearchBox } from 'react-instantsearch-hooks-web'
+import {
+  useInstantSearch,
+  useSearchBox,
+  Configure,
+} from 'react-instantsearch-hooks-web'
 
 // Algolia Insights
 import { InsightsMiddleware } from './config/algoliaInsightEvents'
@@ -209,32 +213,38 @@ const Main = () => {
     <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>
       <InsightsMiddleware />
       {shouldShowNetworkErrors && <SearchErrorToast />}
+      <Configure query={query} />
       <Header clear={clear} refine={refine} query={query} />
       {shouldHaveDemoGuideAtom && <DemoGuideOpener />}
 
       {shouldDisplayQRCodeGenerator && qrOpen && <QRModal />}
-      <div className="mainWrapper">
+      <main className="mainWrapper">
         <Redirect />
         <AnimatePresence>
           {showDemoGuide && (
-            <div className="demoGuide-wp">
+            <aside className="demoGuide-wp">
               <DemoGuide refine={refine} setshowDemoGuide={setshowDemoGuide} />
-            </div>
+            </aside>
           )}
           {shouldShowCartIcon && showCart && (
             <Suspense fallback={''}>
-              <div className="cartModal-wp">
+              <aside className="cartModal-wp">
                 <CartModal />
-              </div>
+              </aside>
             </Suspense>
           )}
         </AnimatePresence>
-        <Routes key={location.pathname} location={location}>
+        <Routes>
           <Route
             path="/"
             element={
               <Suspense fallback={<Loader />}>
-                <HomePage query={query} refine={refine} />
+                <HomePage
+                  clear={clear}
+                  query={query}
+                  refine={refine}
+                  results={results}
+                />
               </Suspense>
             }
           />
@@ -288,7 +298,7 @@ const Main = () => {
             <CustomAppliedRules />
           </Suspense>
         )}
-      </div>
+      </main>
     </Security>
   )
 }

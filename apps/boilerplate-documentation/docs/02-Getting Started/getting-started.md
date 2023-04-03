@@ -13,7 +13,11 @@ Before proceeding, please make sure you have the following:
 
 1. For using the Boilerplate for your own project, use a template of the repo under a new name for your own demo. You should use the `main` branch that has some features turned off for easier setup.
 
-2. Run `pnpm install` in the **boilerplate root** directory and `pnpm start:front` to view your project on [http://localhost:3000](http://localhost:3000/).
+2. Run `pnpm install` in the **boilerplate root** directory (**algolia-react-boilerplate**) and `pnpm start:front` to view your project on [http://localhost:3000](http://localhost:3000/).
+   If you get an error during the installation about the package turbo-darwin-64, please install the package separately :
+
+   pnpm install turbo-darwin-64
+
    You may run into errors at this stage if you haven't configured `algoliaEnvConfig`. You are likely to see some more errors soon after. Visit `src/config/featuresConfig` to activate/deactivate the features you would like to see in the app.
    More details on all of these steps are laid out in these docs.
 
