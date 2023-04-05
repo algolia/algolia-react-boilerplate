@@ -70,7 +70,8 @@ function CurrentRefinementGeneral({ item, colourHexa, refine }) {
             <a
               onClick={(event) => {
                 event.preventDefault()
-
+                // If user is clicking on this "filter" handled by the navigationState
+                // It will reset the navigationState
                 if (
                   event.target.innerText.toLowerCase() ===
                   navigationState.name.toLowerCase()
