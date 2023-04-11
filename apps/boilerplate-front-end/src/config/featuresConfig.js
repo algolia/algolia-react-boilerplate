@@ -23,14 +23,14 @@ export const shouldHaveDemoGuide = atom({
 // Should the segment selector be displayed on the screen
 export const shouldHaveSegments = atom({
   key: 'shouldHaveSegments', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 })
 
 // Make sure to go into languageConfig.js to set everything up
 // Should the language selector be displayed on the screen
 export const shouldHaveLanguages = atom({
   key: 'shouldHaveLanguages', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 })
 
 // Make sure to create replicas in the dashboard
@@ -69,14 +69,14 @@ export const shouldHaveInjectedBanners = atom({
 // You can set up personas details in personaConfig.js
 export const shouldHavePersona = atom({
   key: 'shouldHavePersona',
-  default: true,
+  default: false,
 })
 
 // Make sure you create the injected content in rules or through another index before turning this on, to avoid errors
 // Please see https://github.com/algolia/algolia-react-boilerplate#--injected-content for more info on injected content
 export const shouldHaveInjectedHits = atom({
   key: 'shouldHaveInjectedHits',
-  default: true,
+  default: false,
 })
 
 export const shouldHaveFederatedSearch = atom({
@@ -88,14 +88,14 @@ export const shouldHaveFederatedSearch = atom({
 // Make sure you trained the models into the dashboards first
 export const shouldHaveRelatedProducts = atom({
   key: 'shouldHaveRelatedProductsAtom', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 })
 
 // RECOMMEND
 // Make sure you trained the models into the dashboards first
 export const shouldHaveFbtProducts = atom({
   key: 'shouldHaveFbtProducts', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 })
 
 // RECOMMEND
@@ -103,7 +103,7 @@ export const shouldHaveFbtProducts = atom({
 // this feature will be visible on home, results and category pages if activated -> (activated by default)
 export const shouldHaveTrendingProducts = atom({
   key: 'shouldHaveTrendingProductsAtom', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 })
 
 // RECOMMEND
@@ -111,12 +111,12 @@ export const shouldHaveTrendingProducts = atom({
 // this feature will be visible on home, results and category pages if activated -> (activated by default)
 export const shouldHaveTrendingFacets = atom({
   key: 'shouldHaveTrendingFacetsAtom', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 })
 
 export const shouldHaveDynamicFacet = atom({
   key: 'shouldHaveDynamicFacet', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 })
 
 // Make sure to create a rule in the dashboard to make it work
