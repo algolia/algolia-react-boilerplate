@@ -38,6 +38,7 @@ import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
 import {
   shouldHaveCartFunctionality,
   shouldHaveLanguages,
+  shouldHaveOktaLogin,
   shouldHavePersona,
   shouldHaveSegments,
 } from '@/config/featuresConfig'
@@ -52,14 +53,13 @@ import { AlgoliaLogo, CartPicto } from '@/assets/svg/SvgIndex'
 import Selectors from '@/components/selector/Selectors'
 
 // Import Components
+import OktaAuthComponent from '@/components/header/components/OktaAuth'
 import CustomSearchBox from '@/components/searchbox/SearchBox'
 import { windowSize } from '@/hooks/useScreenSize'
 import Navigation from './Navigation'
-import OktaAuthComponent from '@/components/header/components/OktaAuth'
 
 import QRCodeOpener from '@/components/qrCode/QRCodeOpener'
 import { shouldHaveQRCode } from '@/config/featuresConfig'
-import { useInstantSearch } from 'react-instantsearch-hooks-web'
 
 import { mainIndex } from '@/config/algoliaEnvConfig'
 import { currencySymbolAtom } from '@/config/currencyConfig'
@@ -86,6 +86,7 @@ const HeaderLaptop = ({ query, refine, clear }) => {
   const shouldShowSegmentsAtom = useRecoilValue(shouldHaveSegments)
   const shouldShowLanguageSelected = useRecoilValue(shouldHaveLanguages)
   const shouldShowCartIcon = useRecoilValue(shouldHaveCartFunctionality)
+  const shouldHaveLoginWithOkta = useRecoilValue(shouldHaveOktaLogin)
   // Should the alert badges for the demo guide be shown
   const shouldDisplayQRCodeGenerator = useRecoilValue(shouldHaveQRCode)
 
@@ -233,7 +234,7 @@ const HeaderLaptop = ({ query, refine, clear }) => {
             </div>
           )}
           {shouldDisplayQRCodeGenerator && <QRCodeOpener />}
-          <OktaAuthComponent />
+          {shouldHaveLoginWithOkta && <OktaAuthComponent />}
         </div>
       </div>
       <nav className="container__header-nav">

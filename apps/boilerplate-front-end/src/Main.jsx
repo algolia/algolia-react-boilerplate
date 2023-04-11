@@ -1,10 +1,13 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 
+import { LoginCallback } from '@okta/okta-react'
+import Loading from './components/oktaSecuredRoute/Loading'
+
 // Algolia Instantsearch components
 import {
+  Configure,
   useInstantSearch,
   useSearchBox,
-  Configure,
 } from 'react-instantsearch-hooks-web'
 
 // Algolia Insights
@@ -14,13 +17,7 @@ import { InsightsMiddleware } from './config/algoliaInsightEvents'
 import { AnimatePresence } from 'framer-motion'
 
 // React router
-import {
-  Route,
-  Routes,
-  useLocation,
-  useSearchParams,
-  useNavigate,
-} from 'react-router-dom'
+import { Route, Routes, useSearchParams } from 'react-router-dom'
 
 //Recoil states & values
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -74,24 +71,16 @@ import { cartOpen } from './config/cartFunctions'
 // QR code functionality
 import QRModal from '@/components/qrCode/QRModal'
 import { openQR } from '@/config/qrCodeConfig'
-import { showRedirectModal } from './config/redirectConfig'
 
 import { navigationStateAtom } from '@/config/navigationConfig'
-import {
-  segmentConfig,
-  segmentObjectSelectedAtom,
-} from '@/config/segmentConfig'
 import {
   personaConfig,
   personaObjectSelectedAtom,
 } from '@/config/personaConfig'
-
-// Okta Import for authentication
-import { Security, LoginCallback } from '@okta/okta-react'
-import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
-import config from '@/config/oktaLogin'
-import Loading from './components/oktaSecuredRoute/Loading'
-const oktaAuth = new OktaAuth(config.oidc)
+import {
+  segmentConfig,
+  segmentObjectSelectedAtom,
+} from '@/config/segmentConfig'
 
 const Main = () => {
   const { results } = useInstantSearch()
@@ -107,9 +96,6 @@ const Main = () => {
       setSearchParams(searchParams)
     }
   }, [searchParams])
-
-  // Current location from react Router
-  const location = useLocation()
 
   // Check if Carousels are ready & loaded on the homepage
   const carouselLoaded = useRecoilValue(isCarouselLoaded)
@@ -144,12 +130,6 @@ const Main = () => {
 
   const [navigationState, setNavigationState] =
     useRecoilState(navigationStateAtom)
-
-  // Create a callback authentication with OKTA
-  const navigate = useNavigate()
-  const restoreOriginalUri = (_oktaAuth, originalUri) => {
-    navigate(toRelativeUrl(originalUri || '/', window.location.origin))
-  }
 
   useEffect(() => {
     const personaFromUrl = searchParams.get('persona')
@@ -210,7 +190,7 @@ const Main = () => {
     //       <Route path='/protected' element={<RequiredAuth />}>
     //          <Route path='' element={<Protected />} />
     //       </Route>
-    <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>
+    <>
       <InsightsMiddleware />
       {shouldShowNetworkErrors && <SearchErrorToast />}
       <Configure query={query} />
@@ -299,7 +279,7 @@ const Main = () => {
           </Suspense>
         )}
       </main>
-    </Security>
+    </>
   )
 }
 

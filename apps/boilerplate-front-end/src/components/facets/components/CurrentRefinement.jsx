@@ -1,11 +1,11 @@
 // Component that renders the Current Refinements (icons above the products)
 import { useCurrentRefinements } from 'react-instantsearch-hooks-web'
 // Recoil State
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 // import config file for state of facets
-import { currencySymbolAtom } from '@/config/currencyConfig'
 import { hitsConfig } from '@/config/hitsConfig'
-import { Fragment } from 'react'
+
+import { navigationStateAtom } from '@/config/navigationConfig'
 
 // Function to display the price in a right format for the currentRefinement
 const displayPrice = (i, currencySymbol, refinementPriceLabels) => {
@@ -41,66 +41,27 @@ const displayColor = (i) => {
 function CurrentRefinements(props) {
   const { items, refine, createURL } = useCurrentRefinements(props)
   const { colourHexa } = hitsConfig
-  const currencySymbol = useRecoilValue(currencySymbolAtom)
 
   return (
     <div className="refinement-container__refinements">
-      {items.map((item) => {
-        if (item.attribute.includes('price')) {
-          return (
-            <Fragment key={item}>
-              {item.items ? (
-                <>
-                  <CurrentRefinementGeneral item={item} />
-                </>
-              ) : (
-                <>
-                  <CurrentRefinementGeneral item={item} />
-                </>
-              )}
-            </Fragment>
-          )
-        }
-        if (item.attribute.includes(colourHexa)) {
-          return (
-            <li key={item.label}>
-              {item.refinements ? (
-                <>
-                  <CurrentRefinementGeneral item={item} colourHexa={true} />
-                </>
-              ) : (
-                <a
-                  href={createURL(item.value)}
-                  onClick={(event) => {
-                    event.preventDefault()
-                    refine(item.value)
-                  }}
-                >
-                  <p>{displayColor(item)}</p>
-                </a>
-              )}
-            </li>
-          )
-        }
+      {items.map((item, index) => {
         return (
-          <Fragment key={item}>
-            {item.items ? (
-              <>
-                <CurrentRefinementGeneral item={item} />
-              </>
-            ) : (
-              <CurrentRefinementGeneral item={item} />
-            )}
-          </Fragment>
+          <CurrentRefinementGeneral
+            key={index}
+            colourHexa={colourHexa}
+            item={item}
+            refine={refine}
+          />
         )
       })}
     </div>
   )
 }
 
-function CurrentRefinementGeneral(props) {
-  const { refine } = useCurrentRefinements(props)
-  const { item, colourHexa } = props
+function CurrentRefinementGeneral({ item, colourHexa, refine }) {
+  const [navigationState, setNavigationState] =
+    useRecoilState(navigationStateAtom)
+
   return (
     <ul className="refinement-container__refinementsInner">
       {item.refinements.map((nested) => {
@@ -109,10 +70,24 @@ function CurrentRefinementGeneral(props) {
             <a
               onClick={(event) => {
                 event.preventDefault()
+                // If user is clicking on this "filter" handled by the navigationState
+                // It will reset the navigationState
+                if (
+                  event.target.innerText.toLowerCase() ===
+                  navigationState.name.toLowerCase()
+                ) {
+                  setNavigationState({})
+                }
                 refine(nested)
               }}
             >
-              <p>{colourHexa ? displayColor(nested.label) : nested.label}</p>
+              {navigationState.value === nested.label ? (
+                <p>{navigationState.name}</p>
+              ) : colourHexa ? (
+                <p>{displayColor(nested.label)}</p>
+              ) : (
+                <p>{nested.label}</p>
+              )}
             </a>
           </li>
         )
