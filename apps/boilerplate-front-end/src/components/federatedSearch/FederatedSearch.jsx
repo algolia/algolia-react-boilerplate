@@ -193,6 +193,7 @@ const FederatedSearch = ({ query, refine, results }) => {
         {showProducts && (
           <div className="federatedSearch__middle">
             <Configure hitsPerPage={6} />
+
             <Products
               query={query}
               refine={refine}

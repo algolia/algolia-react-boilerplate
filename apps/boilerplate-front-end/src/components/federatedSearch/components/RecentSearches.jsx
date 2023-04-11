@@ -24,7 +24,7 @@ const RecentSearches = ({ title, query, refine }) => {
       navigate({
         pathname: '/search',
       })
-    }, 300)
+    }, 500)
   )
 
   if (cleanSearches && cleanSearches.length !== 0) {

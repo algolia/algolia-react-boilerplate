@@ -1,7 +1,7 @@
 import { OktaLogo } from '@/assets/svg/SvgIndex'
+import { MD5 } from '@/config/md5'
 import { useOktaAuth } from '@okta/okta-react'
 import { useEffect, useState } from 'react'
-import { MD5 } from '@/config/md5'
 
 const OktaAuth = () => {
   const { authState, oktaAuth } = useOktaAuth()
@@ -11,7 +11,7 @@ const OktaAuth = () => {
   const [userEmail, setUserEmail] = useState(null)
   const [imgLink, setLinkImg] = useState(null)
   const [displayLogout, setDisplayLogout] = useState(false)
-  
+
   // Get info from okta on user
   // Put in a useEffect to avoid too many calls
   useEffect(() => {
@@ -28,7 +28,6 @@ const OktaAuth = () => {
         })
     }
   }, [authState])
-
 
   // Hash function to use email on Gravatar API to have an img
   function get_gravatar(email, size) {
@@ -70,7 +69,7 @@ const OktaAuth = () => {
             }}
           />
           {displayLogout && (
-            <div className='okta-logged__logout'>
+            <div className="okta-logged__logout">
               <p
                 onClick={() => {
                   handleLogout()
