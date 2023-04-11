@@ -48,7 +48,7 @@
 Before proceeding, please make sure you have the following:
 
 - Node v16.14+ installed
-- pnpm install [here](https://pnpm.io/).
+- pnpm install < v8.0.0 [here](https://pnpm.io/).
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
 
@@ -733,6 +733,25 @@ export const shouldHaveCartFunctionality = atom({
 
 This project comes with Okta Log in feature based on okta react app [Okta-React-App](https://github.com/okta/okta-react)
 
+You can turn on Okta in [featuresConfig](./src/config/featuresConfig.js) by setting the `default` value of `shouldHaveOktaLogin` to true.
+
+```
+// config/featuresConfig
+// ADJUST YOUR VALUES TO TRUE OR FALSE
+export const shouldHaveOktaLogin = atom({
+  key: 'shouldHaveOktaLogin', // unique ID (with respect to other atoms/selectors)
+  default: true, // default value (aka initial value)
+})
+```
+
+Once it is switch to true you'll need to set up your environment variables in a .env file :
+
+```
+VITE_APP_OKTA_BASE_URL='your base url'
+VITE_APP_OKTA_CLIENT_ID='your client ID'
+VITE_APP_OKTA_TESTING_DISABLEHTTPSCHECK= 'true or false'
+```
+
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">📈 QueryCategorization</h3>
 
 This project comes with Query Categorization feature [Query Categorization](https://algolia.atlassian.net/wiki/spaces/GR/pages/3931537871/Query+Categorization)
@@ -897,6 +916,13 @@ To update the Node.js version used by the project, you can use a version manager
 nvm install 14
 nvm use 14
 ```
+
+### pnpm version
+
+Your pnpm version should be lower than 8.0.0 to avoid any dependancy issue with InstantSearch Hooks package.
+We're currently working on fix to be able to use the latest version of pnpm.
+
+To downgrade your pnpm version please check [official pnpm website](https://pnpm.io/).
 
 ### Sass - Scss compiler
 
