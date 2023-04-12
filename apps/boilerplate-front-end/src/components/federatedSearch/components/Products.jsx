@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 // Algolia's imports
-import { useHits, Highlight } from 'react-instantsearch-hooks-web'
+import { Highlight, useHits } from 'react-instantsearch-hooks-web'
 
 // Component import
 import { ChevronRight } from '@/assets/svg/SvgIndex'
@@ -17,15 +17,15 @@ import { useNavigate } from 'react-router-dom'
 
 import get from 'lodash/get'
 
-function Products({ query, refine }, props) {
-  const { hits } = useHits(props)
+function Products({ ...props }) {
+  const { hits } = useHits()
   const navigate = useNavigate()
   const hitState = useSetRecoilState(hitAtom)
 
   const persona = useRecoilValue(personaObjectSelectedAtom)
-
   //Get title, props
-  const { products, productsBefore, buttonShowAll, noResults } = props
+  const { query, products, productsBefore, buttonShowAll, noResults } = props
+
   // Get hit attribute from config file
   const { objectID, image, productName, brand } = hitsConfig
 
