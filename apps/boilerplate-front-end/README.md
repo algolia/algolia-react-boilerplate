@@ -56,7 +56,7 @@ Before proceeding, please make sure you have the following:
 
 1. Clone this repo under a new name for your own demo. You can use the `main` branch that has some features turned off for easier integration
 
-2. Run `pnpm install` in the root directory and `pnpm start:front` to view your project on [http://localhost:3000](http://localhost:3000/)
+2. Run `pnpm install` in the root directory and `pnpm start:front` to view your project on [http://localhost:3000](http://localhost:3000/).If you get any issue at this point please go to our [Troubleshooting](#️-troubleshooting) section.
 
 3. Visit [src/config](./src/config/) and adjust [algoliaEnvConfig](./src/config/algoliaEnvConfig.js) to point to your own app, indices and API keys. If you do not need an index which is present in that file i.e. for articles, please do not remove it, just leave it as is, and you can turn off the relevant feature in the next step.
 
@@ -923,6 +923,14 @@ Your pnpm version should be lower than 8.0.0 to avoid any dependancy issue with 
 We're currently working on fix to be able to use the latest version of pnpm.
 
 To downgrade your pnpm version please check [official pnpm website](https://pnpm.io/).
+
+If you still get any issue using pnpm you can try using `yarn` or `npm`. You might also want to try with `npm install --force`
+
+### package issue
+
+If you encounter an issue with the package react-instantsearch-hooks-web please try to install the dependancies with npm or yarn as mentionned above.
+
+If you encounter an issue with turbo-darwin-64 please install the package in the front-end folder with your package manager of choice.
 
 ### Sass - Scss compiler
 
