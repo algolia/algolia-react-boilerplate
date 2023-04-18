@@ -197,8 +197,8 @@
 .header {
   .container-mobile {
     .container__header-mid {
-      margin-top: 1rem;
-      padding: 0 1rem;
+      margin-top: 2rem;
+      padding: 0 2rem;
 
       &__title {
         width: 30%;
@@ -277,8 +277,15 @@
     }
     .picto-cart {
       display: flex;
+      position: relative;
+      cursor: pointer;
+      svg {
+        width: 32px;
+      }
       .notification-cart {
-        margin-left: 1rem;
+        position: absolute;
+        top: -1rem;
+        right: -0.5rem;
         background-color: $secondary-color;
         border-radius: 50%;
         width: 25px;
@@ -323,5 +330,13 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .optionDots__wrapper > p,
+  .optionDots__wrapper > svg path {
+    color: $secondary-color;
+    fill: $secondary-color;
   }
 }
