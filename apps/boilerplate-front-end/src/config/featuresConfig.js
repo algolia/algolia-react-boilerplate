@@ -46,7 +46,7 @@ export const shouldHaveCarousels = atom({
 
 export const shouldHaveVoiceSearch = atom({
   key: 'shouldHaveVoiceSearch',
-  default: true,
+  default: false,
 })
 
 export const shouldHaveStats = atom({
@@ -56,13 +56,13 @@ export const shouldHaveStats = atom({
 
 export const shouldHaveReRankingSwitch = atom({
   key: 'shouldHaveReRankingSwitch',
-  default: true,
+  default: false,
 })
 
 // Make sure you create a rule in the dahsboard before turn it on
 export const shouldHaveInjectedBanners = atom({
   key: 'shouldHaveInjectedBanners',
-  default: true,
+  default: false,
 })
 
 // Make sure your sending event and create userToken before turn it on
@@ -122,12 +122,12 @@ export const shouldHaveDynamicFacet = atom({
 // Make sure to create a rule in the dashboard to make it work
 export const shouldHaveRedirect = atom({
   key: 'shouldHaveRedirect', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 })
 
 export const shouldHaveCartFunctionality = atom({
   key: 'shouldHaveCartFunctionality', // unique ID (with respect to other atoms/selectors)
-  default: true, // default value (aka initial value)
+  default: false, // default value (aka initial value)
 })
 
 export const shouldHaveOktaLogin = atom({
