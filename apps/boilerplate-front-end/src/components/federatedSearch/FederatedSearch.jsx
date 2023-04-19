@@ -97,7 +97,7 @@ const FederatedSearch = ({ query, refine, results }) => {
   const { t } = useTranslation('translation', {
     keyPrefix: 'federated',
   })
-  console.log(t('buttonShowAll'))
+
   // Custom hook
   useOutsideClickTwoConditionals(
     containerFederated,
