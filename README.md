@@ -11,6 +11,7 @@ This folder contain everything you need to know about the boilerplate applicatio
 
 **2/ boilerplate-front-end**
 This folder contains the front-end code itself. If you wish to use the boilerplate as a template this is the folder you want to modify. You can find every details about how to modify this template the way you want in the boilerplate documentation [here](https://boilerplate-docs.netlify.app/).
+You can also find all the details in the readMe [here](https://github.com/algolia/algolia-react-boilerplate/tree/main/apps/boilerplate-front-end).
 Without any modification from you, you'll be able to find the front-end [here](https://algolia-react-boilerplate.netlify.app/).
 
 ## 🚀 Quick get started
