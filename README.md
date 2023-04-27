@@ -62,3 +62,4 @@ The Boilerplate is highly scalable, and customizable. It is made with ReactInsta
 By following the steps described in this documentation you will be able to build your own Algolia application in matter of minutes.
 
 Happy Coding!
+# boilerplate-demo-with-neural
