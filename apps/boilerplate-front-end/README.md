@@ -47,7 +47,7 @@
 Before proceeding, please make sure you have the following:
 
 - Node v16.14+ installed
-- pnpm install < v8.0.0 [here](https://pnpm.io/).
+- pnpm install > v8.0.0 [here](https://pnpm.io/).
 
 <h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
 
@@ -895,10 +895,7 @@ nvm use 14
 
 ### pnpm version
 
-Your pnpm version should be lower than 8.0.0 to avoid any dependancy issue with InstantSearch Hooks package.
-We're currently working on fix to be able to use the latest version of pnpm.
-
-To downgrade your pnpm version please check [official pnpm website](https://pnpm.io/).
+Your pnpm version should higher than 8.0.0 to avoid any dependancy issue with InstantSearch Hooks package.
 
 If you still get any issue using pnpm you can try using `yarn` or `npm`. You might also want to try with `npm install --force`
 
