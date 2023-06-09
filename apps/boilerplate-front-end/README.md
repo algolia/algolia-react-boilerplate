@@ -6,7 +6,6 @@
 - [Structure](#️-structure)
 - [Features Config](#-features-config)
   - [ Landing Pages](#--landing-pages)
-  - [ Predict](#--predict)
   - [ Redirects](#--redirects)
   - [ Federated Search](#--federated-search)
   - [ Voice Search](#--voice-search)
@@ -90,9 +89,8 @@ App.jsx
 
 - called by Index.jsx
 - calls Main.jsx
-- Wraps child components in Algolia Predict and Algolia Instantsearch
+- Wraps child components in Algolia Instantsearch
   - [Algolia instantsearch](https://github.com/algolia/react-instantsearch)
-  - [Algolia predict](https://www.algolia.com/doc/ui-libraries/predict/api-reference/predict-react/Predict/)
 
 Main.jsx
 
@@ -156,28 +154,6 @@ The search results page has the ability to turn itself into a custom landing pag
 You can then, on the SRP, add `context=?your-context-trigger-here` to the end of the URL, and this should trigger your landing page header.
 
 You can text an example on the deployed version of this repository by adding `?context=my-landing-page`
-
-<h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 🔮 Predict</h3>
-
-The app has access to predict through the PredictUserProfileProvider component, found in `./src/components/predict`.
-
-In order for predict to function, it must have a predict App ID, API key and region set in algoliaEnvConfig, found in [algoliaEnvConfig](./src/config/algoliaEnvConfig.js). Please contact Algolia if you are not sure what values they should have.
-
-You must also adjust the values found in [predictConfig](./src/config/predictConfig.js). We store a default value for `predictUserIdAtom` to ensure the app works with the default demo flow, but you should replace it with your own predict user ID for your own demo purposes.
-
-```
-// ADJUST YOUR VALUES
-export const predictUserProfileAtom = atom({
-  key: 'predictUserProfileAtom', // unique ID
-  default: { user: 'anonymous' }, // default value
-})
-export const predictUserIdAtom = atom({
-  key: 'predictUserIdAtom', // unique ID
-  default: '100023285.994839327', // default value
-})
-```
-
-You can feel free to keep the default values for all of these atoms and configurations, and follow the default demo flow outlined below (TBD).
 
 <h3 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;"> 👀 Network Error Messages</h3>
 

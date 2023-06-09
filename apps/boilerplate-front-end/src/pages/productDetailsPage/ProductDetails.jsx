@@ -157,12 +157,6 @@ const ProductDetails = () => {
     // Add the original product from the PDP at the start of the recommendations
     fbtRecommendationsProducts =
       recommendations.length > 0 ? [hit, ...recommendations] : recommendations
-
-    // Compute the total if all recommendations purchased, used for predict in addAllFbt component
-    totalFbtProductsAmount = fbtRecommendationsProducts.reduce(
-      (acc, val) => (acc += val.unformated_price),
-      0
-    )
   }
 
   if (shouldHaveRelatedProductsValue) {
@@ -338,28 +332,27 @@ const ProductDetails = () => {
                 />
               </section>
             )}
-          {shouldHaveFbtProductsValue &&
-            fbtRecommendationsProducts.length > 1 && (
-              <section className="fbt-outer-container">
-                <h3 className="title">{t('fbtTitle')}</h3>
-                <div
-                  className={`${
-                    !isDesktop ? 'fbt-container-mobile' : 'fbt-container'
-                  }`}
-                >
-                  <div className="fbt-container__component">
-                    {fbtRecommendationsProducts.map((item, i) => {
-                      return <FbtItems item={item} index={i} key={i} />
-                    })}
-                  </div>
-                  <FbtAddAll
-                    totalFbtProductsAmount={totalFbtProductsAmount}
-                    currentCartTotal={currentCartTotal}
-                    items={fbtRecommendationsProducts.slice(0, 3)}
-                  />
+          {shouldHaveFbtProductsValue && fbtRecommendationsProducts.length > 1 && (
+            <section className="fbt-outer-container">
+              <h3 className="title">{t('fbtTitle')}</h3>
+              <div
+                className={`${
+                  !isDesktop ? 'fbt-container-mobile' : 'fbt-container'
+                }`}
+              >
+                <div className="fbt-container__component">
+                  {fbtRecommendationsProducts.map((item, i) => {
+                    return <FbtItems item={item} index={i} key={i} />
+                  })}
                 </div>
-              </section>
-            )}
+                <FbtAddAll
+                  // totalFbtProductsAmount={totalFbtProductsAmount}
+                  currentCartTotal={currentCartTotal}
+                  items={fbtRecommendationsProducts.slice(0, 3)}
+                />
+              </div>
+            </section>
+          )}
         </div>
       )}
     </div>
