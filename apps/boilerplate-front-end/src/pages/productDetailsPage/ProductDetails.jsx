@@ -346,7 +346,6 @@ const ProductDetails = () => {
                   })}
                 </div>
                 <FbtAddAll
-                  // totalFbtProductsAmount={totalFbtProductsAmount}
                   currentCartTotal={currentCartTotal}
                   items={fbtRecommendationsProducts.slice(0, 3)}
                 />
