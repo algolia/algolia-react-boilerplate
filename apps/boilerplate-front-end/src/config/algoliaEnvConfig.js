@@ -3,7 +3,7 @@
 // ------------------------------------------
 
 import algoliarecommend from '@algolia/recommend'
-import { predictClient as algoliapredict } from '@algolia/predict'
+
 import algoliasearch from 'algoliasearch'
 import { atom, selector } from 'recoil'
 
@@ -14,12 +14,6 @@ export const searchClientCreds = {
   // Used to get the Persona Strat and score if you haven't got one you have to create one in you API Keys
   // https://www.algolia.com/doc/rest-api/personalization/#get-the-current-personalization-strategy
   personaStrategyAPIKey: '4983f1e3449111609c1e7688209b787b',
-}
-
-export const predictClientCreds = {
-  APIKey: '7fee4f66e56070c0c1635e8be18381e5',
-  appID: 'YCWMGWBZQ0',
-  region: 'eu',
 }
 
 // ADJUST THE DEFAULT VALUE TO YOUR MAIN INDEX
@@ -57,13 +51,6 @@ export const searchClient = algoliasearch(
 export const recommendClient = algoliarecommend(
   searchClientCreds.appID,
   searchClientCreds.APIKey
-)
-
-// This export is a single instanc of the Algolia Predict API client
-export const predictClient = algoliapredict(
-  predictClientCreds.appID,
-  predictClientCreds.APIKey,
-  predictClientCreds.region
 )
 
 // ADJUST THE DEFAULT VALUE TO YOUR MAIN INDEX

@@ -1,14 +1,13 @@
 {
 	"scripts": {
-	"build": "turbo run build --parallel",
-	"build:front": "turbo run build --filter=./apps/boilerplate-front-end",
-	"build:docs": "turbo run build --filter=./apps/boilerplate-documentation",
-	"start": "turbo run start --parallel",
-	"start:front": "turbo run start --filter=./apps/boilerplate-front-end",
-	"start:docs": "turbo run start --filter=./apps/boilerplate-documentation"
-  },
+		"build": "turbo run build --parallel",
+		"build:front": "turbo run build --filter=./apps/boilerplate-front-end",
+		"build:docs": "turbo run build --filter=./apps/boilerplate-documentation",
+		"start": "turbo run start --parallel",
+		"start:front": "turbo run start --filter=./apps/boilerplate-front-end",
+		"start:docs": "turbo run start --filter=./apps/boilerplate-documentation"
+	},
 	"devDependencies": {
-		"turbo": "^1.6.3"
+		"turbo": "^1.10.2"
 	}
-	
 }

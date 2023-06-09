@@ -18,9 +18,8 @@ sidebar_position: 2
 
 - called by Index.jsx
 - calls Main.jsx
-- Wraps child components in Algolia Predict and Algolia Instantsearch
+- Wraps child components in Algolia Instantsearch
   - [Algolia instantsearch](https://github.com/algolia/react-instantsearch)
-  - [Algolia predict](https://www.algolia.com/doc/ui-libraries/predict/api-reference/predict-react/Predict/)
 
 ### Main.jsx
 
