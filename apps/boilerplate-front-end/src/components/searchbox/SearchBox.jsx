@@ -1,7 +1,7 @@
 // This SearchBox is with a magnifying glass inside
 // but simple it means with only a glass simple effect
 
-import { memo, useEffect, useState, useMemo } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import debounce from 'lodash.debounce'
 
@@ -9,7 +9,7 @@ import debounce from 'lodash.debounce'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 // Import Recoil
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 // Import SVG from file as a component
 import { Glass, SimpleCloseButton, SubmitPicto } from '@/assets/svg/SvgIndex'
@@ -34,13 +34,11 @@ import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage'
 //Import scope SCSS
 import './SCSS/searchbox.scss'
 
-import { useSearchBox } from 'react-instantsearch-hooks-web'
-
 import { useSearchParams } from 'react-router-dom'
 
 function CustomSearchBox({ refine, query, clear }) {
   const [searchParams, setSearchParams] = useSearchParams()
-  // const { query, refine, clear } = useSearchBox()
+  const [inputText, setInputText] = useState('')
 
   const [navigationState, setNavigationState] =
     useRecoilState(navigationStateAtom)
@@ -70,8 +68,7 @@ function CustomSearchBox({ refine, query, clear }) {
   }, [query])
 
   const searchOnChangeHandler = (event) => {
-    refine(event.target.value)
-
+    setInputText(event.target.value)
     // debouncedSearchInputHandler(event.target.value)
     setTooltip(false)
   }
@@ -87,21 +84,16 @@ function CustomSearchBox({ refine, query, clear }) {
     }
   }
 
-  // const debouncedSearchInputHandler = useMemo(
-  //   () =>
-  //     debounce((value) => {
-  //       clear()
-  //       refine(value)
-  //     }, 300),
-  //   []
-  // )
-
   // on page refresh, local query is null but URL might have one, so read from URL just in case
   useEffect(() => {
     if (localQuery === '' && query !== null) {
       setLocalQuery(query)
     }
   }, [])
+
+  useEffect(() => {
+    refine(event.target.value)
+  }, [inputText])
 
   return (
     <div
@@ -127,7 +119,7 @@ function CustomSearchBox({ refine, query, clear }) {
         }}
       >
         <input
-          value={query}
+          value={inputText}
           className="searchbox__form__input"
           type="search"
           placeholder={t('placeHolder')}
