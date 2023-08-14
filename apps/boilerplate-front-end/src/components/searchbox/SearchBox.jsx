@@ -92,7 +92,7 @@ function CustomSearchBox({ refine, query, clear }) {
   }, [])
 
   useEffect(() => {
-    refine(event.target.value)
+    refine(inputText)
   }, [inputText])
 
   return (
