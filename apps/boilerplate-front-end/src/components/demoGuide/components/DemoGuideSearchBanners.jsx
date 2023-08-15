@@ -4,17 +4,20 @@ import Selectors from '@/components/selector/Selectors'
 
 // Import configuration
 import { searchBannersConfig } from '@/config/demoGuideConfig'
-import { localSearchQueryAtom } from '@/config/searchboxConfig'
+import { localSearchQueryAtom, inputTextAtom } from '@/config/searchboxConfig'
 
 const SearchBanners = ({ triggerAlert, refine }) => {
   const [selectedValue, setSelectedValue] = useState(searchBannersConfig[0])
   const setLocalSearch = useSetRecoilState(localSearchQueryAtom)
+  const setInputText = useSetRecoilState(inputTextAtom)
 
   const handleSearchBanners = (banner) => {
     setLocalSearch(banner.value)
     refine(banner.value)
     setSelectedValue(banner)
     triggerAlert(banner.alertContent)
+    setInputText(banner.value)
+
     navigate('/search ')
   }
 

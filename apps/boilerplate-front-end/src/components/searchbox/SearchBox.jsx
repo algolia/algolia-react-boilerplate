@@ -22,6 +22,7 @@ import {
 } from '@/config/searchboxConfig'
 
 import { navigationStateAtom } from '@/config/navigationConfig'
+import { inputTextAtom } from '@/config/searchboxConfig'
 
 import { shouldHaveOpenFederatedSearch } from '@/config/federatedConfig'
 
@@ -38,7 +39,7 @@ import { useSearchParams } from 'react-router-dom'
 
 function CustomSearchBox({ refine, query, clear }) {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [inputText, setInputText] = useState('')
+  const [inputText, setInputText] = useRecoilState(inputTextAtom)
 
   const [navigationState, setNavigationState] =
     useRecoilState(navigationStateAtom)
