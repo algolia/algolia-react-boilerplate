@@ -22,8 +22,3 @@ export const searchBoxIsActive = atom({
   key: 'searchBoxIsActive', // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
 })
-
-export const inputTextAtom = atom({
-  key: 'inputText', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
-})
