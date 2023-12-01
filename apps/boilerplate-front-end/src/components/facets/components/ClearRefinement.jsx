@@ -2,7 +2,7 @@
 
 import { navigationStateAtom } from '@/config/navigationConfig'
 import { useEffect } from 'react'
-import { useClearRefinements } from 'react-instantsearch-hooks-web'
+import { useClearRefinements } from 'react-instantsearch'
 import { useSearchParams } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 

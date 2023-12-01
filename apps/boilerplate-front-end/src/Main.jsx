@@ -8,7 +8,7 @@ import {
   Configure,
   useInstantSearch,
   useSearchBox,
-} from 'react-instantsearch-hooks-web'
+} from 'react-instantsearch'
 
 // Algolia Insights
 import { InsightsMiddleware } from './config/algoliaInsightEvents'

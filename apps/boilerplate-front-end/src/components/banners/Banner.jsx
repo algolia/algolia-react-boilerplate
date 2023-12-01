@@ -2,7 +2,7 @@
 // The queryRuleCustomData widget displays custom data from Rules.
 // You use this widget to display banners or recommendations returned by Rules, and that match search parameters.
 
-import { useQueryRules } from 'react-instantsearch-hooks-web'
+import { useQueryRules } from 'react-instantsearch'
 
 //SCSS import
 import './SCSS/banner.scss'

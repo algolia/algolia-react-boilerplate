@@ -19,7 +19,7 @@ sidebar_position: 2
 - called by Index.jsx
 - calls Main.jsx
 - Wraps child components in Algolia Instantsearch
-  - [Algolia instantsearch](https://github.com/algolia/react-instantsearch)
+  - [Algolia React InstantSearch](https://github.com/algolia/instantsearch)
 
 ### Main.jsx
 

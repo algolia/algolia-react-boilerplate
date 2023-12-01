@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from 'react'
 
 //Algolia's import
-import { useQueryRules } from 'react-instantsearch-hooks-web'
+import { useQueryRules } from 'react-instantsearch'
 
 // Import Recoil
 import { useRecoilState } from 'recoil'

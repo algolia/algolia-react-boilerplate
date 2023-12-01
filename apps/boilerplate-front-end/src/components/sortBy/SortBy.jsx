@@ -1,5 +1,5 @@
 // This is for displaying the SortBy widget, eg Price asc/desc
-import { useSortBy } from 'react-instantsearch-hooks-web'
+import { useSortBy } from 'react-instantsearch'
 import './sortby.scss'
 
 function CustomSortBy(props) {

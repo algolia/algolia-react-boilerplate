@@ -1,5 +1,5 @@
 // Renders the Hierarchical facets
-import { useHierarchicalMenu } from 'react-instantsearch-hooks-web'
+import { useHierarchicalMenu } from 'react-instantsearch'
 
 //Use Translation
 import { useTranslation } from 'react-i18next'

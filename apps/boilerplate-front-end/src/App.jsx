@@ -8,7 +8,7 @@ import { mainIndex } from '@/config/algoliaEnvConfig'
 import { searchClient } from './config/algoliaEnvConfig'
 
 // Algolia Instantsearch components
-import { InstantSearch } from 'react-instantsearch-hooks-web'
+import { InstantSearch } from 'react-instantsearch'
 
 // Import Components
 import Main from './Main'

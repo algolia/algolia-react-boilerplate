@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 // Algolia imports
-import { useHits } from 'react-instantsearch-hooks-web'
+import { useHits } from 'react-instantsearch'
 
 //Use Translation
 import { useTranslation } from 'react-i18next'

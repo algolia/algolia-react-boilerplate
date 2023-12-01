@@ -1,5 +1,5 @@
 // Component that renders the Current Refinements (icons above the products)
-import { useCurrentRefinements } from 'react-instantsearch-hooks-web'
+import { useCurrentRefinements } from 'react-instantsearch'
 // Recoil State
 import { useRecoilState } from 'recoil'
 // import config file for state of facets

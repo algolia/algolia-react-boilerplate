@@ -4,7 +4,7 @@ import { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // Algolia's imports
-import { useRefinementList } from 'react-instantsearch-hooks-web'
+import { useRefinementList } from 'react-instantsearch'
 
 // component import
 import { ChevronRight } from '@/assets/svg/SvgIndex'

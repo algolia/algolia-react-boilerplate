@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 // Import the range function from IS hook
-import { useRange } from 'react-instantsearch-hooks-web'
+import { useRange } from 'react-instantsearch'
 // import Currency from recoil
 import { currencySymbolAtom } from '@/config/currencyConfig'
 import { showNetworkErorrs } from '@/config/demoGuideConfig'

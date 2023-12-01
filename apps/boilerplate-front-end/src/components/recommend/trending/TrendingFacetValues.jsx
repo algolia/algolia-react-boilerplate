@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { useTrendingFacets } from '@algolia/recommend-react'
-import { useRefinementList } from 'react-instantsearch-hooks-web'
+import { useRefinementList } from 'react-instantsearch'
 
 import { useRecoilState, useRecoilValue } from 'recoil'
 

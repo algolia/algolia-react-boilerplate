@@ -1,5 +1,5 @@
 // import IS hook
-import { Configure, Index, useSearchBox } from 'react-instantsearch-hooks-web'
+import { Configure, Index, useSearchBox } from 'react-instantsearch'
 
 // Import recoil function
 import { useRecoilValue } from 'recoil'

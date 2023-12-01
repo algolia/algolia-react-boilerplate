@@ -1,6 +1,6 @@
 // This is for building the stats info that is displayed above the items in the search results page
 import connectStats from 'instantsearch.js/es/connectors/stats/connectStats'
-import { useConnector } from 'react-instantsearch-hooks-web'
+import { useConnector } from 'react-instantsearch'
 
 //Use Translation
 import { useTranslation } from 'react-i18next'
