@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
 // This component will be wrapped in connectQueryRules (https://www.algolia.com/doc/api-reference/widgets/query-rule-custom-data/react/#connector)
-import { useQueryRules } from 'react-instantsearch-hooks-web'
+import { useQueryRules } from 'react-instantsearch'
 
 // Imports from router
 import { Link } from 'react-router-dom'

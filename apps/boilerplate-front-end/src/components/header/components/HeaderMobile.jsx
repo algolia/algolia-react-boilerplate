@@ -40,7 +40,7 @@ import {
 } from '@/config/featuresConfig'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import usePreventScrolling from '@/hooks/usePreventScrolling'
-import { useSearchBox } from 'react-instantsearch-hooks-web'
+import { useSearchBox } from 'react-instantsearch'
 
 const HeaderMobile = ({ mobile, tablet }) => {
   const { query, refine } = useSearchBox()

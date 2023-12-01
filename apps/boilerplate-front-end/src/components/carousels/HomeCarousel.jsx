@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { motion } from 'framer-motion'
-import { Configure, Index, useHits } from 'react-instantsearch-hooks-web'
+import { Configure, Index, useHits } from 'react-instantsearch'
 
 // Recoil
 import { useRecoilValue, useSetRecoilState } from 'recoil'

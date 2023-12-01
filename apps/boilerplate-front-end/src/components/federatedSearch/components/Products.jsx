@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 // Algolia's imports
-import { Highlight, useHits } from 'react-instantsearch-hooks-web'
+import { Highlight, useHits } from 'react-instantsearch'
 
 // Component import
 import { ChevronRight } from '@/assets/svg/SvgIndex'

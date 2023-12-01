@@ -9,7 +9,7 @@ import {
   useInstantSearch,
   useHierarchicalMenu,
   useRefinementList,
-} from 'react-instantsearch-hooks-web'
+} from 'react-instantsearch'
 
 //import react router
 import { useSearchParams } from 'react-router-dom'

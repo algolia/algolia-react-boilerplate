@@ -23,7 +23,7 @@ import {
   useHierarchicalMenu,
   useRefinementList,
   useSearchBox,
-} from 'react-instantsearch-hooks-web'
+} from 'react-instantsearch'
 import { localSearchQueryAtom } from '@/config/searchboxConfig'
 import ConditionalWrapper from '@/utils/ConditionalWrapper'
 

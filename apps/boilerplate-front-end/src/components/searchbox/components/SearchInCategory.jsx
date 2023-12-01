@@ -14,7 +14,7 @@ import { useRecoilState } from 'recoil'
 import {
   useHierarchicalMenu,
   useRefinementList,
-} from 'react-instantsearch-hooks-web'
+} from 'react-instantsearch'
 
 // React router
 import { useSearchParams } from 'react-router-dom'

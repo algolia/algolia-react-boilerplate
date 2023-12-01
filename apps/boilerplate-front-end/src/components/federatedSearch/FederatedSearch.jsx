@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from 'react'
 
 // Algolias's import
-import { Configure, Index } from 'react-instantsearch-hooks-web'
+import { Configure, Index } from 'react-instantsearch'
 
 // framer motion
 import { motion } from 'framer-motion'
@@ -60,7 +60,7 @@ import RecentSearches from './components/RecentSearches'
 //Import scope SCSS
 import './SCSS/federatedSearch.scss'
 
-import { useSearchBox } from 'react-instantsearch-hooks-web'
+import { useSearchBox } from 'react-instantsearch'
 import QueryCat from './components/QueryCat'
 
 const FederatedSearch = ({ query, refine, results }) => {

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import CustomModal from '@/components/modals/CustomModal'
-import { useInstantSearch } from 'react-instantsearch-hooks-web'
+import { useInstantSearch } from 'react-instantsearch'
 
 // This component listens for instantSearch API errors and logs them in a modal
 function SearchErrorToast() {
-  const { use } = useInstantSearch()
+  const { addMiddlewares } = useInstantSearch()
   const [error, setError] = useState(null)
   const [modalActive, setModalActive] = useState(false)
 
@@ -24,8 +24,8 @@ function SearchErrorToast() {
       }
     }
 
-    return use(middleware)
-  }, [use])
+    return addMiddlewares(middleware)
+  }, [addMiddlewares])
 
   useEffect(() => {
     ;(function (open) {

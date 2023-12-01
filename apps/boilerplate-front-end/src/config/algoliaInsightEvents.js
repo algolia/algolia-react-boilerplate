@@ -4,10 +4,10 @@ import { personaObjectSelectedAtom } from './personaConfig'
 import aa from 'search-insights'
 import { createInsightsMiddleware } from 'instantsearch.js/es/middlewares'
 import { useLayoutEffect } from 'react'
-import { useInstantSearch } from 'react-instantsearch-hooks-web'
+import { useInstantSearch } from 'react-instantsearch'
 
 export function InsightsMiddleware() {
-  const { use } = useInstantSearch()
+  const { addMiddlewares } = useInstantSearch()
   const persona = useRecoilValue(personaObjectSelectedAtom)
 
   useLayoutEffect(() => {
@@ -22,8 +22,8 @@ export function InsightsMiddleware() {
     // and attaches the `userToken` to search calls onwards.
     aa('setUserToken', userToken)
 
-    return use(middleware)
-  }, [use])
+    return addMiddlewares(middleware)
+  }, [addMiddlewares])
 
   return null
 }

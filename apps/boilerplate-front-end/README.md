@@ -90,7 +90,7 @@ App.jsx
 - called by Index.jsx
 - calls Main.jsx
 - Wraps child components in Algolia Instantsearch
-  - [Algolia instantsearch](https://github.com/algolia/react-instantsearch)
+  - [Algolia React InstantSearch](https://github.com/algolia/instantsearch)
 
 Main.jsx
 
@@ -848,7 +848,7 @@ Scan through our [existing issues](https://github.com/algolia/algolia-react-boil
 - Using the command line:
   - [Fork the repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#fork-an-example-repository) so that you can make your changes without affecting the original project until you're ready to merge them.
 
-2. Install or update all the needed dependancies. You can do so by following our [Getting started Section](#️-get-started)
+2. Install or update all the needed dependencies. You can do so by following our [Getting started Section](#️-get-started)
 
 3. Create a working branch and start with your changes!
 
@@ -895,19 +895,19 @@ nvm use 14
 
 ### pnpm version
 
-Your pnpm version should higher than 8.0.0 to avoid any dependancy issue with InstantSearch Hooks package.
+Your pnpm version should higher than 8.0.0 to avoid any dependency issue with InstantSearch Hooks package.
 
 If you still get any issue using pnpm you can try using `yarn` or `npm`. You might also want to try with `npm install --force`
 
 ### package issue
 
-If you encounter an issue with the package react-instantsearch-hooks-web please try to install the dependancies with npm or yarn as mentionned above.
+If you encounter an issue with the package react-instantsearch please try to install the dependencies with npm or yarn as mentioned above.
 
 If you encounter an issue with turbo-darwin-64 please install the package in the front-end folder with your package manager of choice.
 
 ### Sass - Scss compiler
 
-If you are unable to install sass library or you simply don't want to use it whithin the app, we are providing in each folder in a `compiled CSS` subfolder the compiled and the minified CSS of our Scss files.
+If you are unable to install sass library or you simply don't want to use it within the app, we are providing in each folder in a `compiled CSS` subfolder the compiled and the minified CSS of our Scss files.
 
 Feel free to use it.
 

@@ -5,7 +5,7 @@ import {
   DynamicWidgets,
   useRefinementList,
   useInstantSearch,
-} from 'react-instantsearch-hooks-web'
+} from 'react-instantsearch'
 
 // Import magnifying glass svg, and price slider component
 import { ChevronDown, ChevronUp, Glass } from '@/assets/svg/SvgIndex'

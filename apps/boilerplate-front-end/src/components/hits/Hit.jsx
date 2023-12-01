@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 // Import framer-motion for animation on hits
 import { AnimatePresence, motion } from 'framer-motion'
 
-import { Highlight } from 'react-instantsearch-hooks-web'
+import { Highlight } from 'react-instantsearch'
 // Import SVGs
 import { CartPicto, Heart, InfoPicto } from '@/assets/svg/SvgIndex'
 import RankingIcon from './components/RankingIcon'

@@ -29,7 +29,7 @@ Before proceeding, please make sure you have the following:
 
 ### How to run the apps
 
-To init and install dependancies please use :
+To init and install dependencies please use :
 
     pnpm install
 
@@ -62,4 +62,5 @@ The Boilerplate is highly scalable, and customizable. It is made with ReactInsta
 By following the steps described in this documentation you will be able to build your own Algolia application in matter of minutes.
 
 Happy Coding!
+
 # boilerplate-demo-with-neural

@@ -4,7 +4,7 @@ import { memo, useMemo } from 'react'
 import { debounce } from 'lodash'
 
 // Algolia's imports
-import { Highlight, useHits } from 'react-instantsearch-hooks-web'
+import { Highlight, useHits } from 'react-instantsearch'
 
 // components import
 import { ChevronRight } from '@/assets/svg/SvgIndex'

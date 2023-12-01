@@ -2,7 +2,7 @@
 import { memo } from 'react'
 
 // Algolia
-import { useHits } from 'react-instantsearch-hooks-web'
+import { useHits } from 'react-instantsearch'
 
 import { useRecoilValue } from 'recoil'
 

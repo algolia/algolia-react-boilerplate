@@ -11,7 +11,7 @@ import {
   useInstantSearch,
   useQueryRules,
   useSearchBox,
-} from 'react-instantsearch-hooks-web'
+} from 'react-instantsearch'
 
 // Components
 import CustomSkeleton from '@/components/skeletons/CustomSkeleton'

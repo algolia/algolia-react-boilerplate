@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { useInstantSearch } from 'react-instantsearch-hooks-web'
+import { useInstantSearch } from 'react-instantsearch'
 
 import { useRecoilState, useRecoilValue } from 'recoil'
 

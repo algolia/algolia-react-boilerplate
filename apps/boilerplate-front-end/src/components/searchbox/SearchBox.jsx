@@ -34,7 +34,7 @@ import useStoreQueryToLocalStorage from '@/hooks/useStoreStringToLocalStorage'
 //Import scope SCSS
 import './SCSS/searchbox.scss'
 
-import { useSearchBox } from 'react-instantsearch-hooks-web'
+import { useSearchBox } from 'react-instantsearch'
 
 import { useSearchParams } from 'react-router-dom'
 
